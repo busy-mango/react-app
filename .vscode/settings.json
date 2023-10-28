@@ -1,0 +1,9 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.associations": {
+    "*.env": "ini",
+    "assets/index.html": "ejs",
+    ".stylelintrc": "json"
+  },
+  "git.ignoreLimitWarning": true,
+}

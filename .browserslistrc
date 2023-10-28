@@ -1,0 +1,12 @@
+[production staging]
+Chrome > 65
+Edge > 79
+Firefox > 52
+Safari > 10.1
+
+[development]
+# last 9 version
+Chrome > 65
+Edge > 79
+Firefox > 52
+Safari > 10.1

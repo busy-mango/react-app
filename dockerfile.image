@@ -1,0 +1,9 @@
+FROM nginx:mainline-alpine-slim
+
+COPY ./etc /etc
+
+COPY ./dist .
+
+EXPOSE 80
+
+EXPOSE 443

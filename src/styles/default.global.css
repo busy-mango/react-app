@@ -1,0 +1,37 @@
+/* 默认样式 */
+
+#root {
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --font-size-mini: 9px;
+  --font-size-smaller: 11px;
+  --font-size-small: 12px;
+  --font-size-normal: 14px;
+  --font-size-medium: 15px;
+  --font-size-bold: 16px;
+  /* large larger */
+  --font-size-huge: 32px;
+
+  width: 100%;
+  min-height: 100%;
+
+  /* 页面布局 TODO: 沉淀为组件 */
+  display: grid;
+  font-family: MonoLisa Variable, PingFangHK-Regular, MicrosoftYaHei;
+  grid-template-rows: /* 页头 */
+    [header] min-content
+    /* 挂轴 */
+    [hanging] 0
+    /* 页面内容 */
+    [content] auto
+    /* 页脚 */
+    [footer] min-content;
+}
+
+#root * {
+  box-sizing: border-box;
+}

@@ -1,0 +1,98 @@
+{
+  "display": "apc@paamc",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compileOnSave": true,
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json, https://www.typescriptlang.org/tsconfig to read more about this file */
+
+    /* Projects */
+    /* Language and Environment */
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    /* Visit https://zh-hans.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html to read more about react-jsx */
+    "jsx": "react-jsx",
+    "experimentalDecorators": false,
+    "useDefineForClassFields": true,
+
+    /* Modules */
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    /* https://github.com/microsoft/TypeScript/issues/26859 */
+    "paths": {
+      /* porject */
+      "@assets/*": ["assets/*"],
+      /* app */
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@constants/*": ["src/constants/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@images/*": ["src/images/*"],
+      "@models/*": ["src/models/*"],
+      "@icons/*": ["src/icons/*"],
+      "@pages/*": ["src/pages/*"],
+      "@routers/*": ["src/routers/*"],
+      "@service/*": ["src/service/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"]
+    },
+    "resolveJsonModule": true,
+    "allowJs": true,
+    
+    /* Emit */
+    "sourceMap": true,
+    "removeComments": true,
+    "noEmit": true,
+    "importHelpers": true,
+    "allowArbitraryExtensions": true,
+    "allowImportingTsExtensions": true,
+    "noEmitOnError": false,
+    "preserveConstEnums": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    
+    /* Completeness */
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    
+    /* Plugins */
+    "plugins": [
+      {
+        /* Visit https://github.com/mrmckeb/typescript-plugin-css-modules to read more about this plugin*/
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "classnameTransform": "camelCaseOnly",
+          "customMatcher": "\\.(c|le|sa|sc)ss$"
+        }
+      }
+    ]
+  },
+  "include": [
+    "config/**/*",
+    "script/**/*",
+    "src/**/*",
+    "test/**/*",
+    "types/**/*",
+    "utils/**/*",
+    "global.d.ts",
+    "script"
+  ],
+  /* See https://typestrong.org/ts-node/docs/swc/. */
+  "ts-node": {
+    "swc": true,
+    "esm": true,
+    "transpileOnly": true
+  }
+}
