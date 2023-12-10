@@ -2,7 +2,7 @@
  * @author 徐子梁
  */
 
-import { ReactAction } from './common';
+import type { ReactAction } from './react';
 
 export interface AppContextVal {
   theme?: string;

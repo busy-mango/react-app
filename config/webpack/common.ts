@@ -3,36 +3,36 @@
  * @description 通用配置
  */
 
-import type { Configuration } from 'webpack';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import type { Configuration } from 'webpack';
 
-import { dir } from '../index.ts';
+import { app, dir } from '../index.ts';
 
 const config: Configuration = {
+  cache: false,
   devtool: false,
   mode: 'production',
+  stats: 'errors-warnings',
   entry: {
-    main: './src/~app.tsx',
+    main: './src/app.tsx',
+  },
+  output: {
+    clean: true,
+    path: dir.dist,
+    filename: `static/[name].${app.version}.js`,
+    chunkFilename: 'static/[contenthash].js',
+    assetModuleFilename: 'assets/[name][ext]',
   },
   performance: {
     hints: false,
   },
   optimization: {
+    minimize: true,
     runtimeChunk: {
       name: 'runtime',
     },
     splitChunks: {
       chunks: 'async',
-      // cacheGroups: {
-      //   vendor: {
-      //     test: /[\\/]node_modules[\\/]/,
-      //     name: ({ context }: { context: string | null }) => {
-      //       const regexp = /[\\/]node_modules[\\/](.*?)([\\/]|$)/;
-      //       const [name] = context?.match?.(regexp) ?? [];
-      //       return name?.replace('/node_modules/', 'vendor/');
-      //     },
-      //   },
-      // },
     },
   },
   resolve: {

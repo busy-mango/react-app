@@ -5,13 +5,14 @@
  * @description webpack build
  */
 
-import fs from 'fs';
 import date from 'dayjs';
-import webpack from 'webpack';
+import { readdirSync } from 'fs';
 import { resolve } from 'path';
+import webpack from 'webpack';
 
 import { dir } from '../config/index.ts';
 import config from '../config/webpack/product.ts';
+import { copy } from './helpers/folder.ts';
 
 const time = () => date().format('YYYY-MM-DD HH:mm:ss');
 
@@ -19,30 +20,26 @@ const info = (message: string) => {
   console.info('>', '[webpack]', time(), message);
 };
 
-info('start build single page application');
+info('Start build single page application');
 
 (async function main() {
   webpack(config, (error, stats) => {
     if (error ?? stats?.hasErrors()) {
-      throw new Error([
-        'single page application failed to build',
-        error?.message ?? stats?.toString(),
-      ].join('\n'));
+      info('Single page application failed to build');
+      throw new Error(error?.message ?? stats?.toString());
     }
 
-    // 把themes文件夹copy到打包结果中
-    info('copy themes to current dir');
-    const target = resolve(dir.dist, 'themes');
-    const origin = resolve(dir.static, 'themes');
-    if (!fs.existsSync(target)) fs.mkdirSync(target);
-
-    fs.readdirSync(origin).forEach((name) => {
-      fs.copyFileSync(
-        resolve(origin, name),
-        resolve(target, name),
-      );
+    // 把`assets`下的文件夹复制到`dist`中
+    readdirSync(dir.static, {
+      withFileTypes: true,
+    }).forEach((dirent) => {
+      const { name } = dirent;
+      if (dirent.isDirectory()) {
+        copy(resolve(dir.static, name), resolve(dir.dist, name));
+        info(`Copy ${name} to current dir success`);
+      }
     });
 
-    info('single page application success to build');
+    info('Single page application success to build');
   });
 })();

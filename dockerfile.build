@@ -12,14 +12,6 @@ COPY ./ /usr/src/app
 
 RUN npm config set registry https://registry.npmmirror.com/
 
-RUN npm install -g pnpm && pnpm install && pnpm build
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
-FROM nginx:1.25.3
-
-COPY --from=builder /usr/src/app/etc /etc
-
-COPY --from=builder /usr/src/app/dist .
-
-# RUN useradd -s /bin/false nginx
-
-EXPOSE 80
+CMD pnpm build

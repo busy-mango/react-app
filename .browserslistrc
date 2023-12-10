@@ -1,12 +1,5 @@
 [production staging]
-Chrome > 65
-Edge > 79
-Firefox > 52
-Safari > 10.1
+fully supports abortcontroller and fully supports proxy and fully supports same-site-cookie-attribute and fully supports resizeobserver and fully supports css-sticky
 
 [development]
-# last 9 version
-Chrome > 65
-Edge > 79
-Firefox > 52
-Safari > 10.1
+last 2 Chrome versions

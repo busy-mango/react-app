@@ -3,31 +3,24 @@
  * @description 应用初始化
  */
 
-import { dom } from '@busymango/utils';
-import Cookie from 'js-cookie';
 import dayjs from 'dayjs';
+import Cookie from 'js-cookie';
 
-import { caniuse } from './~caniuse';
+import { isNonEmptyString } from '@busymango/is-esm';
+import { dom } from '@busymango/utils';
 
 import 'dayjs/locale/zh-cn';
-import { isNonEmptyString } from '@busymango/is-esm';
 
 dayjs.locale('zh-cn');
-
-/** 浏览器兼容性检查 */
-if (!caniuse.test(navigator.userAgent)) {
-  throw new Error('暂不支持当前版本浏览器');
-}
 
 /** 环境枚举 */
 export const enum AppEnv {
   Dev = 'development',
+  Sit = 'testing',
   Prod = 'production',
 }
 
-const meta = document.querySelector<HTMLMetaElement>(
-  'meta[name="version"]',
-);
+const meta = document.querySelector<HTMLMetaElement>('meta[name="version"]');
 
 /** 环境变量 */
 export const env = {
@@ -65,14 +58,22 @@ Object.values(theme).forEach((val) => {
 });
 
 /** 创建主题样式标签 */
-export const style = dom.create('link', {
-  href: `themes/${theme.default}.css`,
-  title: theme.title!,
-  rel: 'stylesheet',
-}, document.head);
+export const style = dom.create(
+  'link',
+  {
+    href: `themes/${theme.default}.css`,
+    title: theme.title,
+    rel: 'stylesheet',
+  },
+  document.head
+);
 
 /** 创建应用容器 */
-export const container = dom.create('div', {
-  id: env.root!,
-  class: theme.default,
-}, document.body);
+export const container = dom.create(
+  'div',
+  {
+    id: env.root,
+    class: theme.default,
+  },
+  document.body
+);

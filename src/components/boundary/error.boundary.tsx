@@ -5,10 +5,10 @@
 
 import { Component } from 'react';
 
-import { catchMsg } from '@utils/index';
+import { catchMsg } from '@/utils';
 
-import { FallbackProvider} from './context';
-import { ErrorBoundaryProps, ErrorBoundaryState } from './models';
+import { FallbackProvider } from './context';
+import type { ErrorBoundaryProps, ErrorBoundaryState } from './models';
 
 const initial: ErrorBoundaryState = {
   error: null,
@@ -43,15 +43,13 @@ export class ErrorBoundary extends Component<
     const { reset } = this;
     const { error, isCaught } = this.state;
     const { children, fallback } = this.props;
-    
+
     return isCaught ? (
-      <FallbackProvider
-        reset={reset}
-        error={error}
-        isCaught={isCaught}
-      >
+      <FallbackProvider error={error} isCaught={isCaught} reset={reset}>
         {fallback ?? <h1>{catchMsg(error) ?? 'something was error'}</h1>}
       </FallbackProvider>
-    ) : children;
+    ) : (
+      children
+    );
   }
 }

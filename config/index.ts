@@ -34,7 +34,7 @@ export const app = {
 const cwd = process.cwd() ?? INIT_CWD ?? PWD;
 
 if (typeof cwd !== 'string') {
-  throw new Error('can\'t find dirname');
+  throw new Error("can't find dirname");
 }
 
 /** 项目所在路径 */

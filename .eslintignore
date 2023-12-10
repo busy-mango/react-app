@@ -1,0 +1,11 @@
+es/
+lib/
+demo/
+dist/
+test/
+tests/
+build/
+coverage/
+node_modules/
+
+src/**/*.js

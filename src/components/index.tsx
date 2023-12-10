@@ -1,3 +1,2 @@
-export * from './boundary/index';
-export * from './configure/index';
-export * from './error-page/index';
+export * from './boundary';
+export * from './error-page';

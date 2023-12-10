@@ -37,7 +37,7 @@ const CssLoader: RuleSetUseItem = {
       getLocalIdent: (
         context: LoaderContext<unknown>,
         _: string,
-        name: string,
+        name: string
       ) => {
         const { resourcePath } = context;
         const relative = path.relative(dirname, resourcePath);
@@ -61,11 +61,13 @@ export const LessRule: RuleSetRule = {
 
 export const SVGRule: RuleSetRule = {
   test: /\.svg$/i,
-  issuer: /\.[jt]sx$/,
-  use: [{
-    loader: '@svgr/webpack',
-    options: { icon: true, typescript: true },
-  }],
+  // issuer: /\.[jt]sx$/,
+  use: [
+    {
+      loader: '@svgr/webpack',
+      options: { icon: true, typescript: true },
+    },
+  ],
 };
 
 export const FontRule: RuleSetRule = {
@@ -83,10 +85,12 @@ export const TSDevRule: RuleSetRule = {
   loader: 'swc-loader',
   exclude: /node_modules/,
   options: {
+    minify: false,
     jsc: {
       transform: {
         react: {
           refresh: true,
+          development: true,
           runtime: 'automatic',
         },
       },

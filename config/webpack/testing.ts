@@ -1,6 +1,6 @@
 /**
  * @author mango
- * @description 生产环境配置
+ * @description 测试环境配置
  */
 
 import DotenvWebpackPlugin from 'dotenv-webpack';
@@ -11,14 +11,19 @@ import type { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import ProgressBarWebpackPlugin from 'webpackbar';
 
-import { app, dir } from '../index.ts';
+import { app, dir, dirconfs } from '../index.ts';
 import common from './common.ts';
 import * as rules from './rules.ts';
 
 const config: Configuration = {
-  cache: false,
   devtool: false,
   mode: 'production',
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: dirconfs,
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: app.name,
@@ -30,7 +35,7 @@ const config: Configuration = {
       },
     }),
     new DotenvWebpackPlugin({
-      path: resolve(dir.env, 'pro.env'),
+      path: resolve(dir.env, 'sit.env'),
     }),
     new ProgressBarWebpackPlugin(),
     new ForkTSCheckerWebpackPlugin(),

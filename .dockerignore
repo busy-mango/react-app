@@ -1,0 +1,14 @@
+.git
+.vscode
+.gitignore
+
+run
+logs
+dist
+docs
+documents
+node_modules
+
+**/*.md
+**/*.mk
+**/*.log

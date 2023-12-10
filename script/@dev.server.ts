@@ -5,11 +5,11 @@
  * @description webpack-dev-server
  */
 
-import { watch } from 'fs';
 import { exec } from 'child_process';
+import { watch } from 'fs';
 import webpack from 'webpack';
-import Server from 'webpack-dev-server';
 import type { Configuration } from 'webpack-dev-server';
+import Server from 'webpack-dev-server';
 
 import { dir, dirconfs } from '../config/index.ts';
 import config from '../config/webpack/develop.ts';
