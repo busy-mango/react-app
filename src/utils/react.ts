@@ -1,5 +1,5 @@
 import type { ReactTargetType } from '@/models';
-import { isFunction, isHTMLElement, isNull } from '@busymango/is-esm';
+import { isFunction, isHTMLElement, isNull, isTrue } from '@busymango/is-esm';
 
 /** 转HTMLElement */
 export function toHTMLElement(target?: ReactTargetType) {
@@ -10,9 +10,11 @@ export function toHTMLElement(target?: ReactTargetType) {
 }
 
 /** 防止冒泡 */
-export function prevent(event?: React.UIEvent) {
-  event?.stopPropagation();
-  event?.preventDefault();
+export function propagation(event?: React.UIEvent, stop = true) {
+  if (isTrue(stop)) {
+    event?.stopPropagation();
+    event?.preventDefault();
+  }
 }
 
 /** 创建回车事件 */

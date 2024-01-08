@@ -5,11 +5,8 @@
 
 import FetchDriver from '@busymango/fetch-driver';
 
-import { exception, common } from './middlewares';
+import { common, exception } from './middlewares';
 
-const { drive, request } = new FetchDriver([
-  common,
-  exception,
-]);
+const { drive, request } = new FetchDriver([common, exception]);
 
 export { drive, request };

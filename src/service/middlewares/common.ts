@@ -3,7 +3,8 @@
  * @description 公共请求头中间件
  */
 
-import { DriveMiddleware } from '@busymango/fetch-driver';
+import type { DriveMiddleware } from '@busymango/fetch-driver';
+import { isFalse, isUndefined } from '@busymango/is-esm';
 
 const html = document.querySelector('html');
 
@@ -12,9 +13,15 @@ function theLanguage() {
 }
 
 export const common: DriveMiddleware = async (context, next) => {
-  const { headers } = context.options;
+  const { headers, credentials } = context.options;
 
-  headers.set('Accept-Language', theLanguage());
+  if (isUndefined(credentials)) {
+    context.options.credentials = 'same-origin';
+  }
+
+  if (isFalse(headers.has('Accept-Language'))) {
+    headers.set('Accept-Language', theLanguage());
+  }
 
   await next();
 };

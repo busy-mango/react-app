@@ -1,6 +1,5 @@
 /**
- * @author 徐子梁
- * @description 通用配置
+ * @description 公共配置
  */
 
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';

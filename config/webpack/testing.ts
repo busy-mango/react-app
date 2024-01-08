@@ -1,5 +1,4 @@
 /**
- * @author mango
  * @description 测试环境配置
  */
 

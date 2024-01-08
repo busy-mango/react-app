@@ -23,3 +23,8 @@ export type HTMLEventListener<T extends keyof HTMLElementEventMap> = (
   this: HTMLElement,
   event: HTMLElementEventMap[T]
 ) => void;
+
+/** 始祖函数 */
+export interface ConstrainedFunc<T extends (...args: any[]) => ReturnType<T>> {
+  (...args: any[]): ReturnType<T>;
+}

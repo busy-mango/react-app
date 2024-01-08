@@ -1,15 +1,19 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@busymango/fetch-driver':
-    specifier: ^0.1.13
-    version: 0.1.13(@busymango/is-esm@0.1.5)(mime@4.0.0)
+    specifier: ^0.1.15
+    version: 0.1.15(@busymango/is-esm@0.1.8)(mime@4.0.0)
   '@busymango/is-esm':
-    specifier: ^0.1.5
-    version: 0.1.5
+    specifier: ^0.1.8
+    version: 0.1.8
   '@busymango/utils':
-    specifier: ^0.0.8
-    version: 0.0.8(@busymango/is-esm@0.1.5)
+    specifier: ^0.0.11
+    version: 0.0.11(@busymango/is-esm@0.1.8)
   '@tanstack/react-query':
     specifier: ^5.13.4
     version: 5.13.4(react@18.2.0)
@@ -1467,26 +1471,26 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@busymango/fetch-driver@0.1.13(@busymango/is-esm@0.1.5)(mime@4.0.0):
-    resolution: {integrity: sha512-/zxKEG+1djZ5HRGPcq8G4DW9CffhC8jN/82x8AgCVRmI4/+LLl3H5O3FB3p3DycT4sRBa/Htf8+V8wv+XZ8eyg==}
+  /@busymango/fetch-driver@0.1.15(@busymango/is-esm@0.1.8)(mime@4.0.0):
+    resolution: {integrity: sha512-86iqUnyBmi67qm+raKFLvRISZzmXKMJBqUO92MIFA3kNzvo7RL4ONA75WktMIeWjmeZ+H+dlKTQI07yLKC0L3g==}
     peerDependencies:
       '@busymango/is-esm': '>=0.1.1'
       mime: '>3.0.0'
     dependencies:
-      '@busymango/is-esm': 0.1.5
+      '@busymango/is-esm': 0.1.8
       mime: 4.0.0
     dev: false
 
-  /@busymango/is-esm@0.1.5:
-    resolution: {integrity: sha512-UQ6EBhSHWQjw01+zkHZUU0Gpwe7GnmtvvFKwrNTE1zNdXmGr8jC9KOwUmlaj6Txr3FJsse7D9SBQkNM1LbJ0YA==}
+  /@busymango/is-esm@0.1.8:
+    resolution: {integrity: sha512-S+m7Yz6X/ql5cbYMKWS7FRaD7RBcRzVOl5y7zQ3K7qCFqyp0koDP8IKO/CBgvwk2vuHx0PIc0xNtyrxJYmKWaA==}
     dev: false
 
-  /@busymango/utils@0.0.8(@busymango/is-esm@0.1.5):
-    resolution: {integrity: sha512-sv4XvX6tkqL52eZSZRmf0nXoX4uh96KmAymEfda/HTrLkUqv/5PsFwUR+QTOGi2kQjehhjBgFc8wk4ePcFKJBw==}
+  /@busymango/utils@0.0.11(@busymango/is-esm@0.1.8):
+    resolution: {integrity: sha512-wXefuIEbNHDRUGtQTQ5bP0qJWl4Du0llp/1he7gGc3CFGjHSf694tlROY0gG6u37DGxcVBwFTs7vDs1Uzix2ZQ==}
     peerDependencies:
-      '@busymango/is-esm': '>=0.1.5'
+      '@busymango/is-esm': '>=0.1.7'
     dependencies:
-      '@busymango/is-esm': 0.1.5
+      '@busymango/is-esm': 0.1.8
     dev: false
 
   /@cspotcode/source-map-support@0.8.1:
@@ -2983,6 +2987,7 @@ packages:
   /clone@1.0.4:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -3303,6 +3308,7 @@ packages:
 
   /defaults@1.0.4:
     resolution: {integrity: sha512-eFuaLoy/Rxalv2kr+lqMlUnrDWV+3j4pljOIJgLIhI058IQfWJ7vXhyEIHu+HtC738klGALYxOKDO0bQP3tg8A==}
+    requiresBuild: true
     dependencies:
       clone: 1.0.4
     dev: true
@@ -4482,6 +4488,7 @@ packages:
   /iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dependencies:
       safer-buffer: 2.1.2
     dev: true
@@ -5478,6 +5485,7 @@ packages:
   /pify@4.0.1:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -5613,6 +5621,7 @@ packages:
 
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -5958,6 +5967,7 @@ packages:
 
   /sax@1.3.0:
     resolution: {integrity: sha512-0s+oAmw9zLl1V1cS9BtZN7JAd0cW5e0QH4W3LWEK6a4LaLEA2OTpGYWDY+6XasBLtz6wkm3u1xRw95mRuJ59WA==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -6000,6 +6010,7 @@ packages:
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
+    requiresBuild: true
     dev: true
     optional: true
 

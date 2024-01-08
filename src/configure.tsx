@@ -3,7 +3,7 @@
  * @description react app configuration
  */
 
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import {
   QueryCache,
@@ -11,6 +11,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
+import { useAppAction } from './hooks/app';
+import { useMemoFunc } from './hooks/memo.func';
 import { QueryBoundary } from './components';
 import type { ReactComponentFC } from './models';
 import { catchMsg } from './utils';
@@ -41,6 +43,21 @@ export const client = new QueryClient({
 /** APP config provider */
 export const Configure: ReactComponentFC = (props) => {
   const { children } = props;
+
+  const { set } = useAppAction();
+
+  const listener = useMemoFunc(() => {
+    set({ isDocumentVisible: document.visibilityState === 'visible' });
+  });
+
+  useEffect(() => {
+    const type = 'visibilitychange';
+    document.addEventListener(type, listener);
+    return () => {
+      document.removeEventListener(type, listener);
+    };
+  }, [listener]);
+
   return (
     <QueryBoundary>
       <Suspense>

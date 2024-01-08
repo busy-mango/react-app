@@ -1,11 +1,4 @@
-/**
- * @author 徐子梁
- * @description ErrorBoundary models
- */
-
-/**
- * ErrorBoundary state define
- */
+/** ErrorBoundary state define */
 export interface ErrorBoundaryState {
   /** 是否捕获到异常 */
   isCaught: boolean;
@@ -13,18 +6,15 @@ export interface ErrorBoundaryState {
   error: unknown;
 }
 
-/**
- * ErrorBoundary props define
- */
+/** ErrorBoundary props define */
 export interface ErrorBoundaryProps {
+  /** 回滚状态下的UI */
   fallback?: React.ReactNode;
   onReset?: (...args: unknown[]) => void;
   onError?: (error: Error, info: React.ErrorInfo) => void;
 }
 
-/**
- *  Fallback Component context value define
- */
+/** Fallback Component context value define */
 export interface FallbackContextVal extends ErrorBoundaryState {
   reset: ErrorBoundaryProps['onReset'];
 }

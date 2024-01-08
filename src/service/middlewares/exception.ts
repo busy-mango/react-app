@@ -3,8 +3,9 @@
  * @description 异常处理中间件
  */
 
+import type { DriveMiddleware } from '@busymango/fetch-driver';
+import { FetchError } from '@busymango/fetch-driver';
 import { isTrue } from '@busymango/is-esm';
-import { DriveMiddleware, FetchError } from '@busymango/fetch-driver';
 
 export const exception: DriveMiddleware = async (context, next) => {
   await next();

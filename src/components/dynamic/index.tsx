@@ -5,7 +5,7 @@
 
 import { useLocation } from 'react-router-dom';
 
-import { WidgetLoader } from '../loader-widget';
+import { SuspenseWidget } from '../suspense';
 import { useLazyComponent, useLazyIcon } from './hooks';
 
 export const Loadable: React.FC<{
@@ -26,9 +26,9 @@ export const DynamicIcon: React.FC<{
   const { SVGComponent, isFetching } = useLazyIcon(path);
 
   return (
-    <WidgetLoader isLoading={isFetching}>
+    <SuspenseWidget isLoading={isFetching}>
       {SVGComponent && <SVGComponent />}
-    </WidgetLoader>
+    </SuspenseWidget>
   );
 };
 
