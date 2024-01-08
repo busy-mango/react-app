@@ -5,7 +5,7 @@ export type RectSize = {
 };
 
 /** 控件交互方式 */
-export type ControlPattern =
+export type ControlPatternType =
   | 'disabled'
   | 'editable'
   | 'readOnly'
