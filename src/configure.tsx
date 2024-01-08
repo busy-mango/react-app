@@ -1,5 +1,4 @@
 /**
- * @author 徐子梁
  * @description react app configuration
  */
 

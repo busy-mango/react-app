@@ -1,7 +1,6 @@
 #! /usr/bin/env ts-node
 
 /**
- * @author 徐子梁
  * @description webpack build
  */
 

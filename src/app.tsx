@@ -1,5 +1,4 @@
 /**
- * @author 徐子梁
  * @description 应用渲染
  */
 

@@ -1,5 +1,5 @@
 /**
- * @author 徐子梁
+ * @description App Contants
  */
 
 export * from './app';
