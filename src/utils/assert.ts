@@ -1,4 +1,4 @@
-import { isValidElement } from 'react';
+import { Children, isValidElement } from 'react';
 
 import type { ReactTargetType } from '@/models';
 import { isFinite, isHTMLElement, isNil, isString } from '@busymango/is-esm';
@@ -16,6 +16,13 @@ export function isScrollable(target?: ReactTargetType) {
     const { scrollHeight, clientHeight } = element;
     return scrollHeight > clientHeight;
   }
+}
+
+/**
+ * 断言目标变量为React子组件
+ */
+export function isReactChildren(source?: unknown) {
+  return Children.count(source) > 0;
 }
 
 /**
