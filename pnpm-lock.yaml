@@ -7,13 +7,13 @@ settings:
 dependencies:
   '@busymango/fetch-driver':
     specifier: ^0.1.15
-    version: 0.1.15(@busymango/is-esm@0.1.8)(mime@4.0.0)
+    version: 0.1.15(@busymango/is-esm@0.1.9)(mime@4.0.0)
   '@busymango/is-esm':
-    specifier: ^0.1.8
-    version: 0.1.8
+    specifier: ^0.1.9
+    version: 0.1.9
   '@busymango/utils':
     specifier: ^0.0.11
-    version: 0.0.11(@busymango/is-esm@0.1.8)
+    version: 0.0.11(@busymango/is-esm@0.1.9)
   '@tanstack/react-query':
     specifier: ^5.13.4
     version: 5.13.4(react@18.2.0)
@@ -1471,26 +1471,26 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@busymango/fetch-driver@0.1.15(@busymango/is-esm@0.1.8)(mime@4.0.0):
+  /@busymango/fetch-driver@0.1.15(@busymango/is-esm@0.1.9)(mime@4.0.0):
     resolution: {integrity: sha512-86iqUnyBmi67qm+raKFLvRISZzmXKMJBqUO92MIFA3kNzvo7RL4ONA75WktMIeWjmeZ+H+dlKTQI07yLKC0L3g==}
     peerDependencies:
       '@busymango/is-esm': '>=0.1.1'
       mime: '>3.0.0'
     dependencies:
-      '@busymango/is-esm': 0.1.8
+      '@busymango/is-esm': 0.1.9
       mime: 4.0.0
     dev: false
 
-  /@busymango/is-esm@0.1.8:
-    resolution: {integrity: sha512-S+m7Yz6X/ql5cbYMKWS7FRaD7RBcRzVOl5y7zQ3K7qCFqyp0koDP8IKO/CBgvwk2vuHx0PIc0xNtyrxJYmKWaA==}
+  /@busymango/is-esm@0.1.9:
+    resolution: {integrity: sha512-t1muSMe2klHIXC5GovcbNXVP0yzL24mVyhgi4HuTgY2rc0bzZVGrgScSCciR7J5DCGwwNMF67hjK9n9auDoUZQ==}
     dev: false
 
-  /@busymango/utils@0.0.11(@busymango/is-esm@0.1.8):
+  /@busymango/utils@0.0.11(@busymango/is-esm@0.1.9):
     resolution: {integrity: sha512-wXefuIEbNHDRUGtQTQ5bP0qJWl4Du0llp/1he7gGc3CFGjHSf694tlROY0gG6u37DGxcVBwFTs7vDs1Uzix2ZQ==}
     peerDependencies:
       '@busymango/is-esm': '>=0.1.7'
     dependencies:
-      '@busymango/is-esm': 0.1.8
+      '@busymango/is-esm': 0.1.9
     dev: false
 
   /@cspotcode/source-map-support@0.8.1:
