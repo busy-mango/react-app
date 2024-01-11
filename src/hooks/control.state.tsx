@@ -7,18 +7,21 @@ export interface ControlComponentProps<T> {
   onChange?: (value?: T) => void;
 }
 
-export function useControlState<T = unknown>(props: ControlComponentProps<T>) {
-  const { value: control, onChange: change } = props;
-
-  const isControl = 'value' in props;
+export function useControlState<T = unknown>(
+  props: ControlComponentProps<T>,
+  params: {
+    isControl?: boolean;
+  } = {}
+) {
+  const { isControl = false } = params;
 
   const [inner, setInner] = useState<T>();
 
-  const value = isControl ? control : inner;
+  const { value: control, onChange: onControl } = props;
 
   const onChange = useMemoFunc((current?: T) => {
-    isControl ? change?.(current) : setInner(current);
+    isControl ? onControl?.(current) : setInner(current);
   });
 
-  return { isControl, value, onChange };
+  return [isControl ? control : inner, onChange] as const;
 }

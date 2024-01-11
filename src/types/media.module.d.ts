@@ -19,6 +19,6 @@ declare module '*.webp' {
 }
 
 declare module '*.svg' {
-  const SVG: React.VFV<React.SVGProps<SVGAElement>>;
+  const SVG: React.FC<React.SVGProps<SVGAElement>>;
   export default SVG;
 }
