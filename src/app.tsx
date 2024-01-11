@@ -17,7 +17,9 @@ import '@/styles/atom.global.scss';
 
 const root = createRoot(container);
 
-if (caniuse.test(navigator.userAgent)) {
+if (!caniuse.test(navigator.userAgent)) {
+  root.render('暂不支持当前版本浏览器');
+} else {
   // 主题文件加载完成后再渲染应用
   style.onload = () => {
     root.render(
@@ -32,8 +34,6 @@ if (caniuse.test(navigator.userAgent)) {
   };
 
   style.onerror = () => {
-    console.error('主题样式加载失败');
+    root.render('主题样式加载失败, 请刷新重试');
   };
-} else {
-  root.render('暂不支持当前浏览器');
 }

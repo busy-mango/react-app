@@ -60,7 +60,7 @@ Object.values(theme).forEach((val) => {
 export const style = dom.create(
   'link',
   {
-    href: `themes/${theme.default}.css`,
+    href: `/themes/${theme.default}.css`,
     title: theme.title,
     rel: 'stylesheet',
   },
