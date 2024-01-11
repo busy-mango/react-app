@@ -32,10 +32,10 @@ export type AppAction = {
 };
 
 export const useAppState = create<AppState & AppAction>((set) => ({
-  theme: intial.default,
   isDocumentVisible: document.visibilityState === 'visible',
   isLoadable: false,
   collapsed: false,
+  theme: intial.default,
   action: {
     set,
   },
@@ -43,15 +43,27 @@ export const useAppState = create<AppState & AppAction>((set) => ({
 
 export const useAppAction = () => useAppState((ref) => ref.action);
 
-/** 获取APP当前主题样式名称 */
-export const useAppTheme = () => useAppState((ref) => ref.theme);
-
 /** 获取APP是否可见 */
 export const useAppIsVisible = () =>
   useAppState((ref) => ref.isDocumentVisible);
 
+/** 获取APP当前主题样式名称 */
+export const useAppTheme = (state?: string) => {
+  const { set } = useAppAction();
+
+  const dispatch = useMemoFunc((theme: string) => {
+    set({ theme });
+  });
+
+  useEffect(() => {
+    isNonEmptyString(state) && dispatch(state);
+  }, [state, dispatch]);
+
+  return useAppState((ref) => ref.theme);
+};
+
 /** 获取APP当前页面标题 */
-export const useAppTitle = (state: string) => {
+export const useAppTitle = (state?: string) => {
   const { set } = useAppAction();
 
   const dispatch = useMemoFunc(() => {
