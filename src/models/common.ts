@@ -25,6 +25,8 @@ export type HTMLEventListener<T extends keyof HTMLElementEventMap> = (
 ) => void;
 
 /** 始祖函数 */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ConstrainedFunc<T extends (...args: any[]) => ReturnType<T>> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (...args: any[]): ReturnType<T>;
 }

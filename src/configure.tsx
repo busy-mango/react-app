@@ -2,7 +2,7 @@
  * @description react app configuration
  */
 
-import { Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 
 import {
   QueryCache,
@@ -13,8 +13,16 @@ import {
 import { useAppAction } from './hooks/app';
 import { useMemoFunc } from './hooks/memo.func';
 import { QueryBoundary } from './components';
+import { AppEnv, env } from './init';
 import type { ReactComponentFC } from './models';
 import { catchMsg } from './utils';
+
+const ReactQueryDevtools =
+  env.name !== AppEnv.Prod &&
+  lazy(async () => ({
+    default: (await import('@tanstack/react-query-devtools'))
+      .ReactQueryDevtools,
+  }));
 
 export const client = new QueryClient({
   queryCache: new QueryCache({}),
@@ -27,6 +35,7 @@ export const client = new QueryClient({
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       retry: (count: number, error: unknown) => {
+        console.warn(catchMsg(error));
         return count <= 2;
       },
     },
@@ -60,7 +69,10 @@ export const Configure: ReactComponentFC = (props) => {
   return (
     <QueryBoundary>
       <Suspense>
-        <QueryClientProvider client={client}>{children}</QueryClientProvider>
+        <QueryClientProvider client={client}>
+          {children}
+          {ReactQueryDevtools && <ReactQueryDevtools />}
+        </QueryClientProvider>
       </Suspense>
     </QueryBoundary>
   );

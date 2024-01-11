@@ -23,7 +23,7 @@ export const FallbackProvider: React.FC<
           error,
           isCaught,
         }),
-        [error, isCaught]
+        [error, reset, isCaught]
       )}
     >
       {children}

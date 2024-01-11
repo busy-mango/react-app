@@ -21,11 +21,14 @@ export const exception: DriveMiddleware = async (context, next) => {
     throw new FetchError('登录态已过期', { context });
   }
 
-  if (status === 503) {
+  if (status === 503 || status === 504) {
     throw new FetchError('服务端维护中', { context });
   }
 
   if (!isTrue(ok)) {
+    console.info(headers);
     throw new FetchError('网络异常', { context });
   }
+
+  console.dir(body);
 };
