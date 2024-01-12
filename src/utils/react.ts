@@ -19,7 +19,10 @@ export function propagation(event?: React.UIEvent, stop = true) {
 
 /** 创建回车事件 */
 export const createPressEvent =
-  (func?: (event?: React.KeyboardEvent) => void) =>
-  (event?: React.KeyboardEvent) => {
-    event?.code === 'Enter' && func?.(event);
+  <T extends Element = Element>(
+    func?: (event: React.KeyboardEvent<T>) => void,
+    onKeyDown?: (event: React.KeyboardEvent<T>) => void
+  ) =>
+  (event: React.KeyboardEvent<T>) => {
+    event?.code === 'Enter' ? func?.(event) : onKeyDown?.(event);
   };
