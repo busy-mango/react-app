@@ -12,7 +12,7 @@ import styles from './index.scss';
 /** Boundary HOC */
 export function boundary<P extends object>(
   Component: React.ComponentType<P>,
-  boundaryProps: ErrorBoundaryProps
+  boundaryProps: ErrorBoundaryProps = {}
 ): React.FC<P> {
   const BoundaryComponent: React.FC<P> = (props) => {
     return (

@@ -32,8 +32,6 @@ export const DynamicIcon: React.FC<{
   );
 };
 
-export const DynamicPage: React.FC = () => {
-  const { pathname } = useLocation();
-
-  return <Loadable route={pathname} />;
-};
+export const DynamicPage: React.FC = () => (
+  <Loadable route={useLocation().pathname} />
+);

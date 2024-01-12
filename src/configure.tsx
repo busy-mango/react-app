@@ -14,7 +14,7 @@ import { useAppAction } from './hooks/app';
 import { useMemoFunc } from './hooks/memo.func';
 import { QueryBoundary } from './components';
 import { AppEnv, env } from './init';
-import type { ReactComponentFC } from './models';
+import type { ReactCFC } from './models';
 import { catchMsg } from './utils';
 
 const ReactQueryDevtools =
@@ -49,7 +49,7 @@ export const client = new QueryClient({
 });
 
 /** APP config provider */
-export const Configure: ReactComponentFC = (props) => {
+export const Configure: ReactCFC = (props) => {
   const { children } = props;
 
   const { set } = useAppAction();

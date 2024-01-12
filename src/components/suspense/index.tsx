@@ -2,7 +2,7 @@ import type { SuspenseProps } from 'react';
 import { Suspense } from 'react';
 
 import Loader from '@/icons/loader.svg';
-import type { ReactComponentFC } from '@/models';
+import type { ReactCFC } from '@/models';
 import { isTrue } from '@busymango/is-esm';
 
 export const fallback = <Loader className="animate-spin" />;
@@ -22,7 +22,7 @@ export function suspense<P extends object>(
   return SuspenseComponent;
 }
 
-export const SuspenseWidget: ReactComponentFC<{
+export const SuspenseWidget: ReactCFC<{
   isLoading?: boolean;
 }> = suspense(
   (props) => {

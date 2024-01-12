@@ -27,9 +27,7 @@ export type WrapperProps<T extends HTMLElement = HTMLDivElement> =
   React.HTMLAttributes<T>;
 
 /** React FC with children */
-export type ReactComponentFC<T = unknown> = React.FC<
-  React.PropsWithChildren<T>
->;
+export type ReactCFC<T = unknown> = React.FC<React.PropsWithChildren<T>>;
 
 /** React target ref function */
 export interface ReactTargetFunc {

@@ -1,6 +1,6 @@
-import { catchMsg } from '@/utils';
-import { isNotFoundErrorMsg } from '@/utils/assert';
+import { isNotFoundError } from '@/utils/assert';
+import { isFalse } from '@busymango/is-esm';
 
 export function retry(count: number, error: unknown) {
-  return isNotFoundErrorMsg(catchMsg(error)) || count < 2;
+  return isFalse(isNotFoundError(error)) && count < 2;
 }

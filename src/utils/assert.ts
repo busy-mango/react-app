@@ -2,7 +2,6 @@ import { Children, isValidElement } from 'react';
 
 import type { ReactTargetType } from '@/models';
 import { isFinite, isHTMLElement, isNil, isString } from '@busymango/is-esm';
-import { or } from '@busymango/utils';
 
 import { catchMsg } from './catch';
 import { toHTMLElement } from './react';
@@ -45,11 +44,14 @@ export function isReactNode(source: unknown): source is React.ReactNode {
   return false;
 }
 
-export function isNotFoundError(source: unknown) {
-  return isNotFoundErrorMsg(catchMsg(source));
+export function isNotFoundError(error: unknown) {
+  return isLoadingChunkFailed(error) || isNotFoundModule(error);
 }
 
-export function isNotFoundErrorMsg(msg?: string): boolean {
-  const words = ['Cannot', 'Loading', 'module', 'chunk', 'not found'];
-  return isString(msg) && or(words, (word) => msg?.includes(word));
+export function isNotFoundModule(error: unknown) {
+  return catchMsg(error)?.startsWith('Cannot find module');
+}
+
+export function isLoadingChunkFailed(error: unknown): boolean {
+  return /^Loading chunk.*failed$/.test(catchMsg(error) ?? '');
 }
