@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import { isHTMLElement } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
@@ -9,7 +9,7 @@ import { toHTMLElement } from '@/utils';
 import useFrameState from './frame.state';
 
 export function useResize(target: ReactTargetType, enabled = true) {
-  const element = useMemo(() => toHTMLElement(target), [target]);
+  const element = toHTMLElement(target);
 
   const [size, setSize] = useFrameState<RectSize | undefined>(() =>
     ifnot<RectSize>(
@@ -24,6 +24,7 @@ export function useResize(target: ReactTargetType, enabled = true) {
     if (enabled && isHTMLElement(element)) {
       const observer = new ResizeObserver((entries) => {
         entries.forEach(({ target }) => {
+          if (target !== element) return;
           const { clientWidth, clientHeight } = target;
           setSize({ width: clientWidth, height: clientHeight });
         });

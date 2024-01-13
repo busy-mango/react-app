@@ -9,10 +9,11 @@ import { toHTMLElement } from '@/utils';
 import useFrameState from './frame.state';
 
 export function useInView(target?: ReactTargetType, enabled = true) {
+  const element = toHTMLElement(target);
+
   const [isInView, setInView] = useFrameState(false);
 
   useEffect(() => {
-    const element = toHTMLElement(target);
     if (isTrue(enabled) && isHTMLElement(element)) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -29,7 +30,7 @@ export function useInView(target?: ReactTargetType, enabled = true) {
         observer.disconnect();
       };
     }
-  }, [target, enabled, setInView]);
+  }, [element, enabled, setInView]);
 
   return ifnot(isTrue(enabled) && isInView);
 }
