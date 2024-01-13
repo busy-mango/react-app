@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { create } from 'zustand';
 
-import { theme as intial } from '@/init';
 import {
   isBoolean,
   isFalse,
   isNonEmptyString,
   isTrue,
 } from '@busymango/is-esm';
+
+import { theme as intial } from '@/init';
 
 import { useEffectOnce } from './effect.once';
 import { useMemoFunc } from './memo.func';

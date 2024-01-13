@@ -1,7 +1,8 @@
 import { Children, isValidElement } from 'react';
 
-import type { ReactTargetType } from '@/models';
 import { isFinite, isHTMLElement, isNil, isString } from '@busymango/is-esm';
+
+import type { ReactTargetType } from '@/models';
 
 import { catchMsg } from './catch';
 import { toHTMLElement } from './react';

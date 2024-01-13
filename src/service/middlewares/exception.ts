@@ -26,9 +26,8 @@ export const exception: DriveMiddleware = async (context, next) => {
   }
 
   if (!isTrue(ok)) {
+    console.dir(body);
     console.info(headers);
     throw new FetchError('网络异常', { context });
   }
-
-  console.dir(body);
 };

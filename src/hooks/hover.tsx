@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
+import { isHTMLElement } from '@busymango/is-esm';
+
 import type { ReactTargetType } from '@/models';
 import { toHTMLElement } from '@/utils';
-import { isHTMLElement } from '@busymango/is-esm';
 
 import { useToggle } from './toggle';
 

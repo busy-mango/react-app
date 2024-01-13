@@ -61,9 +61,13 @@
             "^\\w+",
             "^use"
           ],
-          // core alias
+          // scope
           [
-            "^@\/?\\w"
+            "^@"
+          ],
+          // alias
+          [
+            "^@\/"
           ],
           [
             // parent imports. put `..` last

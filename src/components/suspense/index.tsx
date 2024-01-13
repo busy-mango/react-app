@@ -1,9 +1,10 @@
 import type { SuspenseProps } from 'react';
 import { Suspense } from 'react';
 
+import { isTrue } from '@busymango/is-esm';
+
 import Loader from '@/icons/loader.svg';
 import type { ReactCFC } from '@/models';
-import { isTrue } from '@busymango/is-esm';
 
 export const fallback = <Loader className="animate-spin" />;
 

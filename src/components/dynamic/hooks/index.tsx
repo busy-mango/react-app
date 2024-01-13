@@ -1,8 +1,9 @@
-import { ICON_LOADER_KEY, PAGE_LOADER_KEY } from '@/constants';
-import { env } from '@/init';
-import { iconAsync, routeAsync } from '@/utils/import';
 import { isNil, isNonEmptyString } from '@busymango/is-esm';
 import { useQuery } from '@tanstack/react-query';
+
+import { ICON_LOADER_KEY, PAGE_LOADER_KEY } from '@/constants';
+import { env } from '@/init';
+import { iconAsync, routeAsync } from '@/utils';
 
 import { retry } from '../helpers';
 

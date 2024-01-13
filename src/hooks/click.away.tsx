@@ -4,10 +4,11 @@
 
 import { useEffect } from 'react';
 
-import type { ReactTargetType } from '@/models';
-import { toHTMLElement } from '@/utils';
 import { isArray, isHTMLElement, isNil, isTrue } from '@busymango/is-esm';
 import { compact } from '@busymango/utils';
+
+import type { ReactTargetType } from '@/models';
+import { toHTMLElement } from '@/utils';
 
 import { useMemoFunc } from './memo.func';
 

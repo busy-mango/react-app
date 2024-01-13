@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { toParentCrumbs } from '@/utils/route';
+import { toParentCrumbs } from '@/utils';
 
 import { useMemoFunc } from './memo.func';
 

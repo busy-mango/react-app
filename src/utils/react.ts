@@ -1,5 +1,6 @@
-import type { ReactTargetType } from '@/models';
 import { isFunction, isHTMLElement, isNull, isTrue } from '@busymango/is-esm';
+
+import type { ReactTargetType } from '@/models';
 
 /** 转HTMLElement */
 export function toHTMLElement(target?: ReactTargetType) {

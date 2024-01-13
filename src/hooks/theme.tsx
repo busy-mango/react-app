@@ -5,10 +5,11 @@
 import { useEffect } from 'react';
 import Cookie from 'js-cookie';
 
-import { container, theme } from '@/init';
-import { drive } from '@/service';
 import { isCSSStyleRule, isCSSStyleSheet, isNil } from '@busymango/is-esm';
 import { useMutation } from '@tanstack/react-query';
+
+import { container, theme } from '@/init';
+import { drive } from '@/service';
 
 function themeSheet() {
   const sheets = Array.from(document.styleSheets);

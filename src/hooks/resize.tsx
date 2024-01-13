@@ -1,13 +1,14 @@
 import { useEffect, useMemo } from 'react';
 
-import type { ReactTargetType, RectSize } from '@/models';
-import { toHTMLElement } from '@/utils';
 import { isHTMLElement } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
 
+import type { ReactTargetType, RectSize } from '@/models';
+import { toHTMLElement } from '@/utils';
+
 import useFrameState from './frame.state';
 
-export function useResize(target: ReactTargetType, enabled: boolean) {
+export function useResize(target: ReactTargetType, enabled = true) {
   const element = useMemo(() => toHTMLElement(target), [target]);
 
   const [size, setSize] = useFrameState<RectSize | undefined>(() =>

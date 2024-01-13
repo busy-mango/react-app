@@ -4,7 +4,7 @@
 
 import { useRef } from 'react';
 
-import type { ConstrainedFunc } from '@/models/common';
+import type { ConstrainedFunc } from '@/models';
 
 export function useMemoFunc<T extends ConstrainedFunc<T>>(func: T) {
   const memo = useRef<T>(function (this: unknown, ...args) {

@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
-import type { ReactTargetType } from '@/models';
-import { toHTMLElement } from '@/utils';
 import { isHTMLElement, isTrue } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
+
+import type { ReactTargetType } from '@/models';
+import { toHTMLElement } from '@/utils';
 
 import useFrameState from './frame.state';
 
