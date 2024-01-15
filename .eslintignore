@@ -5,6 +5,7 @@ dist/
 test/
 tests/
 build/
+vendors/
 coverage/
 node_modules/
 

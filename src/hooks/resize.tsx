@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { isHTMLElement } from '@busymango/is-esm';
+import { isHTMLElement, isTrue } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
 
 import type { ReactTargetType, RectSize } from '@/models';
@@ -21,16 +21,22 @@ export function useResize(target: ReactTargetType, enabled = true) {
   );
 
   useEffect(() => {
-    if (enabled && isHTMLElement(element)) {
-      const observer = new ResizeObserver((entries) => {
-        entries.forEach(({ target }) => {
-          if (target !== element) return;
-          const { clientWidth, clientHeight } = target;
-          setSize({ width: clientWidth, height: clientHeight });
+    if (isTrue(enabled)) {
+      !isHTMLElement(element) && setSize({ width: 0, height: 0 });
+
+      if (isHTMLElement(element)) {
+        const observer = new ResizeObserver((entries) => {
+          entries.forEach(({ target }) => {
+            if (target !== element) return;
+            const { clientWidth, clientHeight } = target;
+            setSize({ width: clientWidth, height: clientHeight });
+          });
         });
-      });
-      observer.observe(element);
-      return observer.disconnect;
+        observer.observe(element);
+        return () => {
+          observer.disconnect();
+        };
+      }
     }
   }, [enabled, element, setSize]);
 
