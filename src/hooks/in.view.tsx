@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { isHTMLElement, isTrue } from '@busymango/is-esm';
+import { isFalse, isHTMLElement, isTrue } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
@@ -33,4 +33,16 @@ export function useInView(target?: ReactTargetType, enabled = true) {
   }, [element, enabled, setInView]);
 
   return ifnot(isTrue(enabled) && isInView);
+}
+
+export function useLazyInView(target?: ReactTargetType, enabled = true) {
+  const [isMount, setIsMount] = useState(false);
+
+  const isInView = useInView(target, enabled && isFalse(isMount));
+
+  useEffect(() => {
+    isFalse(isMount) && isTrue(isInView) && setIsMount(true);
+  }, [isInView, isMount]);
+
+  return isMount;
 }

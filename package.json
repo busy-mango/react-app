@@ -76,6 +76,7 @@
     "react-dom": "^18.2.0",
     "react-image": "^4.1.0",
     "react-router-dom": "^6.17.0",
+    "smooth-scroll-into-view-if-needed": "^2.0.2",
     "zustand": "^4.4.7"
   }
 }
