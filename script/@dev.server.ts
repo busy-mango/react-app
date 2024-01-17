@@ -18,7 +18,7 @@ import config from '../config/webpack/develop.ts';
  * TODO: 放到 webpack plugin 中
  */
 watch(dir.browserslistrc, () => {
-  exec('pnpm browsers');
+  exec('pnpm caniuse');
 });
 
 const options: Configuration = {

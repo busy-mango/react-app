@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "pnpm caniuse && ts-node ./script/@build.ts",
     "eslint": "eslint --fix --ext .ts,.tsx ./",
-    "caniuse": "echo \"/** caniuse-regexp */\nexport const caniuse = $(browserslist-useragent-regexp --allowHigherVersions);\" > src/~caniuse.tsx"
+    "caniuse": "echo \"/** caniuse-regexp */\nexport const caniuse = $(browserslist-useragent-regexp --allowHigherVersions);\" > src/caniuse.tsx"
   },
   "keywords": [],
   "author": "",
