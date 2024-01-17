@@ -26,6 +26,9 @@ dependencies:
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
+  immer:
+    specifier: ^10.0.3
+    version: 10.0.3
   js-cookie:
     specifier: ^3.0.5
     version: 3.0.5
@@ -55,7 +58,7 @@ dependencies:
     version: 2.0.2
   zustand:
     specifier: ^4.4.7
-    version: 4.4.7(@types/react@18.2.31)(react@18.2.0)
+    version: 4.4.7(@types/react@18.2.31)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
   '@pmmmwh/react-refresh-webpack-plugin':
@@ -4618,6 +4621,10 @@ packages:
     dev: true
     optional: true
 
+  /immer@10.0.3:
+    resolution: {integrity: sha512-pwupu3eWfouuaowscykeckFmVTpqbzW+rXFCX8rQLkZzM9ftBmU/++Ra+o+L27mz03zJTlyV4UUr+fdKNffo4A==}
+    dev: false
+
   /immutable@4.3.4:
     resolution: {integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==}
     dev: true
@@ -7129,7 +7136,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zustand@4.4.7(@types/react@18.2.31)(react@18.2.0):
+  /zustand@4.4.7(@types/react@18.2.31)(immer@10.0.3)(react@18.2.0):
     resolution: {integrity: sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -7145,6 +7152,7 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.2.31
+      immer: 10.0.3
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false

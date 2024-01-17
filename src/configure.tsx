@@ -52,10 +52,10 @@ export const client = new QueryClient({
 export const Configure: ReactCFC = (props) => {
   const { children } = props;
 
-  const { set } = useAppAction();
+  const set = useAppAction();
 
   const listener = useMemoFunc(() => {
-    set({ isDocumentVisible: document.visibilityState === 'visible' });
+    set({ display: document.visibilityState });
   });
 
   useEffect(() => {

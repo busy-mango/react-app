@@ -1,81 +1,64 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { produce } from 'immer';
+import type { StoreApi } from 'zustand';
 import { create } from 'zustand';
 
-import {
-  isBoolean,
-  isFalse,
-  isNonEmptyString,
-  isTrue,
-} from '@busymango/is-esm';
+import { isBoolean, isFalse, isString, isTrue } from '@busymango/is-esm';
 
 import { theme as intial } from '@/init';
 
 import { useEffectOnce } from './effect.once';
 import { useMemoFunc } from './memo.func';
 
+type DocumentState = {
+  /** 页面标题 */
+  title?: string;
+  /** 是否正在请求页面 */
+  isLoadable?: boolean;
+};
+
 export type AppState = {
   /** 主题样式 */
   theme: string;
   /** 边栏是否收起 */
   collapsed: boolean;
-  /** 是否正在请求页面Chunk */
-  isLoadable: boolean;
   /** 页面是否可见 */
-  isDocumentVisible: boolean;
-  /** 页面标题 */
-  title?: React.ReactNode;
+  display: DocumentVisibilityState;
+  /** 页面状态(和路由地址一一对应) */
+  document: Record<string, DocumentState>;
 };
 
-export type AppAction = {
-  action: {
-    set: (state: Partial<AppState>, replace?: boolean) => void;
-  };
+export type AppSetStateAction = StoreApi<AppState>['setState'];
+
+export type AppStoreAction = {
+  set: AppSetStateAction;
 };
 
-export const useAppState = create<AppState & AppAction>((set) => ({
-  isDocumentVisible: document.visibilityState === 'visible',
-  isLoadable: false,
-  collapsed: false,
+export const useAppStore = create<AppState & AppStoreAction>((set) => ({
+  display: document.visibilityState,
   theme: intial.default,
-  action: {
-    set,
-  },
+  collapsed: false,
+  document: {},
+  set,
 }));
 
-export const useAppAction = () => useAppState((ref) => ref.action);
+export const useAppAction = () => useAppStore(({ set }) => set);
 
 /** 获取APP是否可见 */
-export const useAppIsVisible = () =>
-  useAppState((ref) => ref.isDocumentVisible);
+export const useAppDisplay = () => useAppStore(({ display }) => display);
 
 /** 获取APP当前主题样式名称 */
-export const useAppTheme = (state?: string) => {
-  const { set } = useAppAction();
+export const useAppTheme = (source?: string) => {
+  const setState = useAppAction();
 
-  const dispatch = useMemoFunc((theme: string) => {
-    set({ theme });
-  });
+  const dispatch = useMemoFunc((theme: string) => setState({ theme }));
 
   useEffect(() => {
-    isNonEmptyString(state) && dispatch(state);
-  }, [state, dispatch]);
+    isString(source) && dispatch(source);
+  }, [source, dispatch]);
 
-  return useAppState((ref) => ref.theme);
-};
-
-/** 获取APP当前页面标题 */
-export const useAppTitle = (state?: string) => {
-  const { set } = useAppAction();
-
-  const dispatch = useMemoFunc(() => {
-    set({ title: state });
-  });
-
-  useEffect(() => {
-    isNonEmptyString(state) && dispatch();
-  }, [state, dispatch]);
-
-  return useAppState((ref) => ref.title);
+  return useAppStore(({ theme }) => theme);
 };
 
 export const useAppCollapsed = (
@@ -84,17 +67,43 @@ export const useAppCollapsed = (
   /** 是否仅执行一次 */
   once = false
 ) => {
-  const { set } = useAppAction();
+  const set = useAppAction();
 
-  const dispatch = useMemoFunc(() => {
-    set({ collapsed: state });
+  const dispatch = useMemoFunc((collapsed: boolean) => {
+    set({ collapsed });
   });
 
   useEffect(() => {
-    isFalse(once) && isBoolean(state) && dispatch();
+    isFalse(once) && isBoolean(state) && dispatch(state);
   }, [once, state, dispatch]);
 
-  useEffectOnce(() => dispatch(), isTrue(once) && isBoolean(state));
+  useEffectOnce(() => dispatch(false), isTrue(once) && isBoolean(state));
 
-  return useAppState((ref) => ref.collapsed);
+  return useAppStore(({ collapsed }) => collapsed);
+};
+
+/** 获取APP当前页面的标题 */
+export const useDocumentTitle = (state?: string) => {
+  const setState = useAppAction();
+
+  const { pathname } = useLocation();
+
+  const dispatch = useMemoFunc((title: string) => {
+    document.title = title;
+    setState(
+      produce(({ document }: AppState) => {
+        if (document[pathname]) {
+          document[pathname].title = title;
+        } else {
+          document[pathname] = { title };
+        }
+      })
+    );
+  });
+
+  useEffect(() => {
+    isString(state) && dispatch(state);
+  }, [state, dispatch]);
+
+  return useAppStore(({ document }) => document[pathname]?.title);
 };

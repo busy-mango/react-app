@@ -68,6 +68,7 @@
     "@tanstack/react-query-devtools": "^5.17.9",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.10",
+    "immer": "^10.0.3",
     "js-cookie": "^3.0.5",
     "mime": "^4.0.0",
     "nanoid": "^5.0.2",
