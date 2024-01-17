@@ -7,6 +7,8 @@ import type { Configuration } from 'webpack';
 
 import { app, dir } from '../index.ts';
 
+const { version = '0.0.0' } = app;
+
 const config: Configuration = {
   cache: false,
   devtool: false,
@@ -18,9 +20,9 @@ const config: Configuration = {
   output: {
     clean: true,
     path: dir.dist,
-    filename: `static/[name].${app.version}.js`,
-    chunkFilename: 'static/[contenthash].js',
-    assetModuleFilename: 'assets/[name][ext]',
+    filename: `static/[name].${version}.js`,
+    chunkFilename: `static/${version}/[name].js`,
+    assetModuleFilename: 'assets/[name].[contenthash].[ext]',
   },
   performance: {
     hints: false,

@@ -1,5 +1,5 @@
 [production staging]
-fully supports abortcontroller and fully supports proxy and fully supports same-site-cookie-attribute and fully supports resizeobserver and fully supports css-sticky
+Chrome 65
 
 [development]
-last 2 Chrome versions
+fully supports abortcontroller and fully supports proxy and fully supports same-site-cookie-attribute and fully supports resizeobserver and fully supports css-sticky

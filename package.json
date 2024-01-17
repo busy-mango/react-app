@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "dev": "ts-node ./script/@dev.server.ts",
+    "caniuse": "ts-node ./script/@caniuse.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "pnpm caniuse && ts-node ./script/@build.ts",
-    "eslint": "eslint --fix --ext .ts,.tsx ./",
-    "caniuse": "echo \"/** caniuse-regexp */\nexport const caniuse = $(browserslist-useragent-regexp --allowHigherVersions);\" > src/caniuse.tsx"
+    "eslint": "eslint --fix --ext .ts,.tsx ./"
   },
   "keywords": [],
   "author": "",
