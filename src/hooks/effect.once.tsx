@@ -1,16 +1,15 @@
 import { useEffect, useRef } from 'react';
 
-export function useEffectOnce(
-  callback: React.EffectCallback,
-  enabled: boolean
-) {
+import { isTrue } from '@busymango/is-esm';
+import { and } from '@busymango/utils';
+
+export function useEffectOnce(callback: React.EffectCallback, enabled = true) {
   const once = useRef(true);
 
   useEffect(() => {
-    if (!enabled) return;
-    if (once.current) {
+    if (and([once.current, enabled], isTrue)) {
       once.current = false;
-      callback();
+      return callback();
     }
   }, [callback, enabled]);
 }
