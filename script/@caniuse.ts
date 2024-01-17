@@ -6,7 +6,13 @@ import { writeFileSync } from 'fs';
 try {
   writeFileSync(
     'src/caniuse.tsx',
-    `/** caniuse-regexp */\n\nexport const caniuse =\n  ${getUserAgentRegex()};\n`,
+    `/** caniuse-regexp */\n\nexport const caniuse =\n  ${getUserAgentRegex({
+      ignoreMinor: true,
+      ignorePatch: true,
+      allowHigherVersions: true,
+      allowZeroSubversions: true,
+      ignoreUnknownVersions: true,
+    })};\n`,
     { encoding: 'utf-8' }
   );
 
