@@ -104,8 +104,8 @@ devDependencies:
     specifier: ^4.22.1
     version: 4.22.1
   browserslist-useragent-regexp:
-    specifier: ^4.1.0
-    version: 4.1.0(browserslist@4.22.1)
+    specifier: ^4.1.1
+    version: 4.1.1(browserslist@4.22.1)
   core-js:
     specifier: ^3.33.1
     version: 3.33.1
@@ -2952,8 +2952,8 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /browserslist-useragent-regexp@4.1.0(browserslist@4.22.1):
-    resolution: {integrity: sha512-ob2n92QgGEsI1Vfly4U4gfIyfTk7FA7znPXMuNgFE7opaML+TS+cciBMP0IkTSI0NomhyGdxUAt7dd3yNPIEwA==}
+  /browserslist-useragent-regexp@4.1.1(browserslist@4.22.1):
+    resolution: {integrity: sha512-/OBUauhHZ6YmB1cBmXK7Qbkj3kgdxympkERsyNkCfTAJUCt/5acZ6ANmjBZeaUmE0qjl8uGpkOXdyMe9Q7lijA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     peerDependencies:
@@ -2964,7 +2964,7 @@ packages:
       easy-table: 1.2.0
       picocolors: 1.0.0
       regexp-tree: 0.1.27
-      ua-regexes-lite: 1.1.5
+      ua-regexes-lite: 1.2.1
     dev: true
 
   /browserslist@4.22.1:
@@ -6760,8 +6760,8 @@ packages:
     hasBin: true
     dev: true
 
-  /ua-regexes-lite@1.1.5:
-    resolution: {integrity: sha512-RoqnqXhegm2XT7rYYL21P7bAlIcpMJ2usoG4c/pekB5iajO+l81qliCTvmCENfe1suTaMGjpuQh8frjBnb4sCA==}
+  /ua-regexes-lite@1.2.1:
+    resolution: {integrity: sha512-ling4WX4ZtxXjmSMHzuI8PGos2brw/6gG3YuVWn5RunHoQjeCokpFeMe/ti+R8E7kOTLE2FqBG4bMdFQLFwcJQ==}
     engines: {node: '>=14'}
     dev: true
 
