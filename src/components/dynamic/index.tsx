@@ -5,8 +5,9 @@
 
 import { useLocation } from 'react-router-dom';
 
-import { SuspenseWidget } from '../suspense';
 import { useLazyComponent, useLazyIcon } from './hooks';
+
+const placeholder = <svg height="1em" width="1em" />;
 
 export const Loadable: React.FC<{
   route?: string;
@@ -23,13 +24,9 @@ export const DynamicIcon: React.FC<{
 }> = (props) => {
   const { path } = props;
 
-  const { SVGComponent, isFetching } = useLazyIcon(path);
+  const { SVGComponent } = useLazyIcon(path);
 
-  return (
-    <SuspenseWidget isLoading={isFetching}>
-      {SVGComponent && <SVGComponent />}
-    </SuspenseWidget>
-  );
+  return SVGComponent ? <SVGComponent /> : placeholder;
 };
 
 export const DynamicPage: React.FC = () => (
