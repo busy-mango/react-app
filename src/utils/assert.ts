@@ -1,6 +1,18 @@
+/**
+ * @description 断言工具函数
+ */
+
 import { Children, isValidElement } from 'react';
 
-import { isFinite, isHTMLElement, isNil, isString } from '@busymango/is-esm';
+import {
+  isEmptyArray,
+  isFinite,
+  isHTMLElement,
+  isNaN,
+  isNil,
+  isString,
+} from '@busymango/is-esm';
+import { or, parse } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
 
@@ -45,14 +57,48 @@ export function isReactNode(source: unknown): source is React.ReactNode {
   return false;
 }
 
+/**
+ * 断言是否资源404异常
+ */
 export function isNotFoundError(error: unknown) {
   return isLoadingChunkFailed(error) || isNotFoundModule(error);
 }
 
+/**
+ * 断言是否资源404异常
+ */
 export function isNotFoundModule(error: unknown) {
   return catchMsg(error)?.startsWith('Cannot find module');
 }
 
+/**
+ * 断言是否异步加载抛出的`Loading chunk ${route} failed`异常
+ */
 export function isLoadingChunkFailed(error: unknown): boolean {
   return /^Loading chunk.*failed$/.test(catchMsg(error) ?? '');
+}
+
+/**
+ * 断言是否空字符串
+ */
+function isEmptyString(source: unknown) {
+  return isString(source) && source.trim() === '';
+}
+
+/**
+ * 断言是否空对象
+ */
+function isEmptyObject(source: unknown) {
+  return parse.json(JSON.stringify(source)) === '{}';
+}
+
+/**
+ * 断言是否空值
+ * `''`, `NaN`, `{}`, `[]`, `null`, `undefined`均为空值
+ */
+export function isEmptyValue(source: unknown) {
+  return or(
+    [isNil, isNaN, isEmptyArray, isEmptyObject, isEmptyString],
+    (assert) => assert(source)
+  );
 }

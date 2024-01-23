@@ -29,7 +29,7 @@ export function useLazyIcon(route?: string) {
     queryFn: async () => {
       const chunk = await iconAsync(route!);
       if (!isNil(chunk.default)) return chunk.default;
-      throw new Error(`Icon ${route} is not found`);
+      throw new Error(`Loading icon ${route} failed`);
     },
     ...options,
     enabled,
@@ -46,7 +46,7 @@ export function useLazyComponent(route?: string) {
     queryFn: async () => {
       const chunk = await routeAsync(route!);
       if (!isNil(chunk.default)) return chunk.default;
-      throw new Error(`Chunk ${route} is not found`);
+      throw new Error(`Loading chunk ${route} failed`);
     },
     ...options,
     enabled,
