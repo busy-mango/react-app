@@ -1,5 +1,4 @@
 /**
- * @author mango
  * @description 动态路由
  */
 
