@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import Refresh from '@/icons/refresh.svg';
 import { catchMsg } from '@/utils';
 
 import { useFallbackContext } from '../boundary/hooks';
@@ -25,11 +26,16 @@ export function boundary<P extends object>(
 }
 
 export const FallbackWidget: React.FC = () => {
-  const { error } = useFallbackContext();
+  const { error, reset } = useFallbackContext();
 
   const msg = useMemo(() => catchMsg(error), [error]);
 
-  return msg;
+  return (
+    <span className={styles.widget}>
+      <input readOnly title={msg} value={msg} />
+      <Refresh onClick={reset} />
+    </span>
+  );
 };
 
 export const FallbackCard: React.FC = () => {

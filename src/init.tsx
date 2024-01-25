@@ -76,3 +76,7 @@ export const container = dom.create(
   },
   document.body
 );
+
+export const domain = process.env.SERVER_DOMAIN ?? '';
+
+export const prefix = process.env.SERVER_PREFIX ?? '';

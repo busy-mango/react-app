@@ -10,8 +10,10 @@ import { resolve } from 'path';
 import webpack from 'webpack';
 
 import { dir } from '../config/index.ts';
-import config from '../config/webpack/product.ts';
-import { copy } from './helpers/folder.ts';
+import prod from '../config/webpack/product.ts';
+import { copy, toWebpackConfig } from './helpers';
+
+const config = toWebpackConfig() ?? prod;
 
 const time = () => date().format('YYYY-MM-DD HH:mm:ss');
 

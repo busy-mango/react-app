@@ -11,7 +11,8 @@ import type { Configuration } from 'webpack-dev-server';
 import Server from 'webpack-dev-server';
 
 import { dir, dirconfs } from '../config/index.ts';
-import config from '../config/webpack/develop.ts';
+import develop from '../config/webpack/develop.ts';
+import { toWebpackConfig } from './helpers';
 
 /**
  * 监听`browserslistrc`改动以生成对应正则
@@ -22,13 +23,13 @@ watch(dir.browserslistrc, () => {
 });
 
 const options: Configuration = {
+  hot: true,
   port: 8080,
   https: false,
   compress: true,
   host: '0.0.0.0',
   allowedHosts: 'all',
   static: dir.static,
-  hot: true,
   watchFiles: dirconfs,
   historyApiFallback: true,
   server: { type: 'http' },
@@ -36,7 +37,7 @@ const options: Configuration = {
   headers: { 'Access-Control-Allow-Origin': '*' },
 };
 
-const compiler = webpack(config);
+const compiler = webpack(toWebpackConfig() ?? develop);
 
 const server = new Server(options, compiler);
 

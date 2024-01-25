@@ -20,7 +20,8 @@ export function useControlState<T = unknown>(
   const { value: control, onChange: onControl } = props;
 
   const onChange = useMemoFunc((current?: T) => {
-    isControl ? onControl?.(current) : setInner(current);
+    setInner(current);
+    onControl?.(current);
   });
 
   return [isControl ? control : inner, onChange] as const;
