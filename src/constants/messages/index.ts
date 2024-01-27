@@ -1,5 +1,5 @@
 /**
- * @description 项目提示信息
+ * @description 应用消息文案
  */
 
 export const CANCEL_SUCCESS_MSG = '取消成功';

@@ -8,8 +8,7 @@ import { isBoolean, isFalse, isString, isTrue } from '@busymango/is-esm';
 
 import { theme as intial } from '@/init';
 
-import { useEffectOnce } from './effect.once';
-import { useMemoFunc } from './memo.func';
+import { useEffectOnce, useMemoFunc } from '../basic';
 
 type DocumentState = {
   /** 页面标题 */

@@ -2,7 +2,7 @@
  * @description react app configuration
  */
 
-import { lazy, Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import {
   QueryCache,
@@ -10,19 +10,10 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-import { useAppAction } from './hooks/app';
-import { useMemoFunc } from './hooks/memo.func';
-import { QueryBoundary } from './components';
-import { AppEnv, env } from './init';
-import type { ReactCFC } from './models';
-import { catchMsg } from './utils';
-
-const ReactQueryDevtools =
-  env.name !== AppEnv.Prod &&
-  lazy(async () => ({
-    default: (await import('@tanstack/react-query-devtools'))
-      .ReactQueryDevtools,
-  }));
+import { QueryBoundary, ReactQueryDevtools } from '@/components';
+import { useAppAction, useMemoFunc } from '@/hooks';
+import type { ReactCFC } from '@/models';
+import { catchMsg } from '@/utils';
 
 export const client = new QueryClient({
   queryCache: new QueryCache({}),

@@ -25,7 +25,7 @@ export function boundary<P extends object>(
   return BoundaryComponent;
 }
 
-export const FallbackWidget: React.FC = () => {
+export const BoundaryFallbackWidget: React.FC = () => {
   const { error, reset } = useFallbackContext();
 
   const msg = useMemo(() => catchMsg(error), [error]);
@@ -38,7 +38,7 @@ export const FallbackWidget: React.FC = () => {
   );
 };
 
-export const FallbackCard: React.FC = () => {
+export const BoundaryFallbackCard: React.FC = () => {
   const { error } = useFallbackContext();
 
   const msg = useMemo(() => catchMsg(error), [error]);
