@@ -3,6 +3,8 @@
 }
 
 .widget {
+  max-width: 100%;
+
   gap: 4px;
   display: flex;
   width: max-content;
@@ -17,17 +19,20 @@
   transition-duration: var(--ant-motion-duration-fast);
   transition-timing-function: var(--ant-motion-ease-in-out-circ);
 
-  & > input {
+  &:not(.auto-size) > input {
     // 控制input宽度和`ant-input`组件的最小宽度保持一致:
     --input-min-width: calc(11em - var(--ant-line-height) * 1em + 18px);
+
+    width: var(--input-min-width);
+  }
+
+  & > input {
+    max-width: calc(100% - 2em);
 
     outline: none;
     border: unset;
     margin: unset;
     padding: unset;
-
-    width: var(--input-min-width);
-    min-width: var(--input-min-width);
 
     color: inherit;
     background-color: inherit;
@@ -38,7 +43,7 @@
   & > svg {
     cursor: pointer;
     transform: scale(0.64);
-    color: var(--ant-color-icon);
+    color: var(--ant-color-error-text);
     font-size: calc(var(--ant-line-height) * 1em);
     transition-duration: inherit;
     transition-timing-function: inherit;
@@ -50,7 +55,7 @@
 
     & > svg {
       transform: scale(0.8);
-      color: var(--ant-color-icon-hover);
+      color: var(--ant-color-error-text-hover);
     }
   }
 }

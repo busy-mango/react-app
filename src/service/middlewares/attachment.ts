@@ -12,6 +12,7 @@ import { ifnot } from '@busymango/utils';
 const type = mime.getType('bin')!;
 
 export const attachment: DriveMiddleware = async (context, next) => {
+  // 请求开始前
   await next();
 
   const { api, response } = context;

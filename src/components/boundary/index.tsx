@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import classNames from 'classnames';
 
 import Refresh from '@/icons/refresh.svg';
 import { catchMsg } from '@/utils';
@@ -25,13 +26,17 @@ export function boundary<P extends object>(
   return BoundaryComponent;
 }
 
-export const BoundaryFallbackWidget: React.FC = () => {
+export const BoundaryFallbackWidget: React.FC<{
+  autoSize?: boolean;
+}> = (props) => {
+  const { autoSize } = props;
+
   const { error, reset } = useFallbackContext();
 
   const msg = useMemo(() => catchMsg(error), [error]);
 
   return (
-    <span className={styles.widget}>
+    <span className={classNames(styles.widget, autoSize && styles.autoSize)}>
       <input readOnly title={msg} value={msg} />
       <Refresh onClick={reset} />
     </span>
@@ -46,7 +51,7 @@ export const BoundaryFallbackCard: React.FC = () => {
   return <div className={styles.card}>{msg}</div>;
 };
 
-export const FallbackPage: React.FC = () => (
+export const BoundaryFallbackPage: React.FC = () => (
   <div className={styles.wrapper}>{useErrorContent()}</div>
 );
 

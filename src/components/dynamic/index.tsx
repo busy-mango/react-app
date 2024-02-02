@@ -22,14 +22,16 @@ export const Loadable: React.FC<{
   return Component && <Component />;
 };
 
-export const DynamicIcon: React.FC<{
+export interface DynamicIconProps extends React.SVGProps<SVGAElement> {
   path?: string;
-}> = (props) => {
-  const { path } = props;
+}
+
+export const DynamicIcon: React.FC<DynamicIconProps> = (props) => {
+  const { path, ...others } = props;
 
   const { SVGComponent } = useLazyIcon(path);
 
-  return SVGComponent ? <SVGComponent /> : placeholder;
+  return SVGComponent ? <SVGComponent {...others} /> : placeholder;
 };
 
 export const DynamicPage: React.FC = () => (

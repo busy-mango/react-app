@@ -10,7 +10,7 @@ export function iconAsync(route: string) {
   return import(`../icons${route}`) as Promise<ReactComponentAsync>;
 }
 
-/** 动态导入图标chunk */
+/** 动态导入ReactQueryDevtools */
 export const devtoolAsync = async () => {
   const component = import('@tanstack/react-query-devtools');
   return { default: (await component).ReactQueryDevtools };
