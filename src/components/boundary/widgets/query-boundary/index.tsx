@@ -7,8 +7,8 @@ import {
   useQueryErrorResetBoundary,
 } from '@tanstack/react-query';
 
-import { ErrorBoundary } from './error.boundary';
-import type { ErrorBoundaryProps } from './models';
+import type { ErrorBoundaryProps } from '../../models';
+import { ErrorBoundary } from '../error-boundary';
 
 const ErrorResetBoundary: React.FC<
   React.PropsWithChildren<ErrorBoundaryProps>

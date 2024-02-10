@@ -4,6 +4,8 @@ export interface ErrorBoundaryState {
   isCaught: boolean;
   /** 捕获到的异常实例 */
   error: unknown;
+  /** 错误详情 */
+  info?: React.ErrorInfo;
 }
 
 /** ErrorBoundary props define */

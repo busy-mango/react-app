@@ -18,20 +18,20 @@ const options = {
   refetchOnReconnect: false,
   refetchOnWindowFocus: false,
   refetchIntervalInBackground: false,
-  throwOnError: true,
 } as const;
 
 export function useLazyIcon(route?: string) {
   const enabled = isNonEmptyString(route);
 
   const { data: SVGComponent, isFetching } = useQuery({
+    ...options,
     queryKey: [ICON_LOADER_KEY, env.version, route],
     queryFn: async () => {
       const chunk = await iconAsync(route!);
       if (!isNil(chunk.default)) return chunk.default;
       throw new Error(`Loading icon ${route} failed`);
     },
-    ...options,
+    throwOnError: false,
     enabled,
   });
 
@@ -42,13 +42,14 @@ export function useLazyComponent(route?: string) {
   const enabled = isNonEmptyString(route);
 
   const { data: Component } = useQuery({
+    ...options,
     queryKey: [PAGE_LOADER_KEY, env.version, route],
     queryFn: async () => {
       const chunk = await routeAsync(route!);
       if (!isNil(chunk.default)) return chunk.default;
       throw new Error(`Loading chunk ${route} failed`);
     },
-    ...options,
+    throwOnError: true,
     enabled,
   });
 

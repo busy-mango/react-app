@@ -5,12 +5,11 @@
 import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import Picture from '@/icons/picture.svg';
 import { AppEnv, env } from '@/init';
 import { devtoolAsync } from '@/utils';
 
 import { useLazyComponent, useLazyIcon } from './hooks';
-
-const placeholder = <svg height="1em" width="1em" />;
 
 export const Loadable: React.FC<{
   route?: string;
@@ -31,12 +30,15 @@ export const DynamicIcon: React.FC<DynamicIconProps> = (props) => {
 
   const { SVGComponent } = useLazyIcon(path);
 
-  return SVGComponent ? <SVGComponent {...others} /> : placeholder;
+  return SVGComponent ? <SVGComponent {...others} /> : <Picture {...others} />;
 };
 
-export const DynamicPage: React.FC = () => (
-  <Loadable route={useLocation().pathname} />
-);
+export const DynamicPage: React.FC = () => {
+  const { pathname } = useLocation();
 
-export const ReactQueryDevtools =
-  env.name !== AppEnv.Prod && lazy(devtoolAsync);
+  return <Loadable route={pathname} />;
+};
+
+const isAllowDebug = env.name !== AppEnv.Prod;
+
+export const ReactQueryDevtools = isAllowDebug && lazy(devtoolAsync);

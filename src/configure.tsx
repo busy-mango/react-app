@@ -2,7 +2,7 @@
  * @description react app configuration
  */
 
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import {
   QueryCache,
@@ -10,7 +10,11 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-import { QueryBoundary, ReactQueryDevtools } from '@/components';
+import {
+  QueryBoundary,
+  ReactQueryDevtools,
+  SuspenseModule,
+} from '@/components';
 import { useAppAction, useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { catchMsg } from '@/utils';
@@ -58,13 +62,11 @@ export const Configure: ReactCFC = (props) => {
   }, [listener]);
 
   return (
-    <QueryBoundary>
-      <Suspense>
-        <QueryClientProvider client={client}>
-          {children}
-          {ReactQueryDevtools && <ReactQueryDevtools />}
-        </QueryClientProvider>
-      </Suspense>
-    </QueryBoundary>
+    <QueryClientProvider client={client}>
+      <QueryBoundary>
+        <SuspenseModule>{children}</SuspenseModule>
+      </QueryBoundary>
+      {ReactQueryDevtools && <ReactQueryDevtools />}
+    </QueryClientProvider>
   );
 };

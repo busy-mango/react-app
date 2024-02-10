@@ -6,6 +6,7 @@ import { Children, isValidElement } from 'react';
 
 import {
   isEmptyArray,
+  isFalse,
   isFinite,
   isHTMLElement,
   isNaN,
@@ -54,7 +55,8 @@ export function isReactNode(source: unknown): source is React.ReactNode {
   if (isFinite(source)) return true;
   if (isString(source)) return true;
   if (isValidElement(source)) return true;
-  return false;
+  if (isNil(source) || isFalse(source)) return false;
+  return isReactChildren(source);
 }
 
 /**

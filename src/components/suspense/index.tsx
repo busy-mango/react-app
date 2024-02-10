@@ -1,17 +1,11 @@
 import type { SuspenseProps } from 'react';
 import { Suspense } from 'react';
-import classNames from 'classnames';
 
 import { isTrue } from '@busymango/is-esm';
 
-import Loader from '@/icons/loader.svg';
 import type { ReactCFC } from '@/models';
 
-import styles from './index.scss';
-
-const fallback = (
-  <Loader className={classNames(styles.loader, 'animate-spin')} />
-);
+import { SuspenseFallbackModule, SuspenseFallbackWidget } from './widgets';
 
 /** Suspense HOC */
 export function suspense<P extends object>(
@@ -28,14 +22,24 @@ export function suspense<P extends object>(
   return SuspenseComponent;
 }
 
-export const SuspenseFallbackWidget: React.FC = () => fallback;
-
 export const SuspenseWidget: ReactCFC<{
   isLoading?: boolean;
 }> = suspense(
   (props) => {
     const { children, isLoading = false } = props;
-    return isTrue(isLoading) ? fallback : children;
+    return isTrue(isLoading) ? <SuspenseFallbackWidget /> : children;
   },
-  { fallback }
+  { fallback: <SuspenseFallbackWidget /> }
 );
+
+export const SuspenseModule: ReactCFC<{
+  isLoading?: boolean;
+}> = suspense(
+  (props) => {
+    const { children, isLoading = false } = props;
+    return isTrue(isLoading) ? <SuspenseFallbackModule /> : children;
+  },
+  { fallback: <SuspenseFallbackModule /> }
+);
+
+export * from './widgets';
