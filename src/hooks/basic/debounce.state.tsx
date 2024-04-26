@@ -3,13 +3,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { debounce } from '@busymango/utils';
 
 export function useDebounceState<T = unknown>(state?: T, wait = 300) {
-  const [memo, setMemo] = useState<T | undefined>(state);
+  const [iState, setMemoState] = useState<T | undefined>(state);
 
-  const debounced = useMemo(() => debounce(setMemo, wait), [wait, setMemo]);
+  const func = useMemo(() => debounce(setMemoState, wait), [wait]);
 
   useEffect(() => {
-    debounced.starer(state);
-  }, [state, debounced]);
+    func.starer(state);
+  }, [state, func]);
 
-  return memo;
+  return iState;
 }

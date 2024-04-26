@@ -2,4 +2,4 @@
  * @description UI组件
  */
 
-export {};
+export * from './iflex';

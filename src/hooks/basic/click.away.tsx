@@ -8,7 +8,7 @@ import { isArray, isHTMLElement, isNil, isTrue } from '@busymango/is-esm';
 import { compact } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
-import { toHTMLElement } from '@/utils';
+import { iFindElement } from '@/utils';
 
 import { useMemoFunc } from './memo.func';
 
@@ -28,7 +28,7 @@ export function useClickAway(
     const current = e.target;
     if (isHTMLElement(current)) {
       const targets = isArray(target) ? target : [target];
-      const elements = compact(targets.map(toHTMLElement));
+      const elements = compact(targets.map(iFindElement));
       const parent = elements.find((item) => item.contains?.(current));
       isNil(parent) && event?.(e);
     }

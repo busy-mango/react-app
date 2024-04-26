@@ -2,18 +2,20 @@
  * @description 保持函数引用不变
  */
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import type { ConstrainedFunc } from '@/models';
 
 export function useMemoFunc<T extends ConstrainedFunc<T>>(func: T) {
-  const memo = useRef<T>(function (this: unknown, ...args) {
-    return ref.current!.call(this, ...args);
+  const ref = useRef<T>(func);
+
+  useEffect(() => {
+    ref.current = func;
+  });
+
+  const { current } = useRef(function (this: unknown, ...args) {
+    return ref.current.call(this, ...args);
   } as T);
 
-  const ref = useRef<T>();
-
-  ref.current = func;
-
-  return memo.current;
+  return current;
 }

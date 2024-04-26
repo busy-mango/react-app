@@ -1,11 +1,11 @@
 /* 通用样式 */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
 
 .transition {
   transition-duration: var(--duration-150);
   transition-timing-function: var(--ease-in-out);
-  transition-property: color, fill, stroke, opacity, border-color, background-color, text-decoration-color, box-shadow, transform, filter;
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
+  transition-property: color, fill, stroke, opacity, border-color, background-color, text-decoration-color, box-shadow,
+    transform, filter;
 }

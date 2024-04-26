@@ -9,4 +9,7 @@ vendors/
 coverage/
 node_modules/
 
+.husky
+.vscode
+
 src/**/*.js

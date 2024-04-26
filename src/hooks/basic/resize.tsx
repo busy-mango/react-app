@@ -4,12 +4,12 @@ import { isHTMLElement, isTrue } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
 
 import type { ReactTargetType, RectSize } from '@/models';
-import { toHTMLElement } from '@/utils';
+import { iFindElement } from '@/utils';
 
 import useFrameState from './frame.state';
 
 export function useResize(target: ReactTargetType, enabled = true) {
-  const element = toHTMLElement(target);
+  const element = iFindElement(target);
 
   const [size, setSize] = useFrameState<RectSize | undefined>(() =>
     ifnot<RectSize>(

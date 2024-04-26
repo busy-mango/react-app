@@ -1,9 +1,14 @@
-import { isObject, isString, isValidKey } from '@busymango/is-esm';
+import { isNumber, isObject, isString, isValidKey } from '@busymango/is-esm';
 
-const isStringKey = <T extends string>(
+export const isStringKey = <T extends string>(
   key: T,
   source: object
 ): source is Record<T, string> => isValidKey(key, source, isString);
+
+export const isNumberKey = <T extends string>(
+  key: T,
+  source: object
+): source is Record<T, string> => isValidKey(key, source, isNumber);
 
 export function catchMsg(error: unknown) {
   if (isString(error)) return error;

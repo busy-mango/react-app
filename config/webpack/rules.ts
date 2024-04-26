@@ -101,4 +101,9 @@ export const TSRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'swc-loader',
   exclude: /node_modules/,
+  include: [
+    /node_modules[\\/]@?mime/,
+    /node_modules[\\/]@?immer/,
+    /node_modules[\\/]@?tanstack/,
+  ],
 };

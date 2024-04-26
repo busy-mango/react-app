@@ -1,0 +1,38 @@
+.wrap {
+  display: flex;
+  flex-direction: unset;
+
+  &.gap {
+    --i-flex-gap-size: 0px;
+
+    & > * {
+      margin-right: var(--i-flex-gap-size);
+      margin-bottom: var(--i-flex-gap-size);
+    }
+
+    margin-right: calc(0 - var(--i-flex-gap-size));
+    margin-bottom: calc(0 - var(--i-flex-gap-size));
+  }
+
+  &.reverse {
+    &.vertical {
+      flex-direction: column;
+      flex-direction: column-reverse;
+    }
+    &.horizontal {
+      flex-direction: row;
+    }
+  }
+  &:not(.reverse) {
+    &.vertical {
+      flex-direction: column-reverse;
+    }
+    &.horizontal {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &:empty {
+    display: none;
+  }
+}

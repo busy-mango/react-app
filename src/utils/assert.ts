@@ -5,26 +5,23 @@
 import { Children, isValidElement } from 'react';
 
 import {
-  isEmptyArray,
   isFalse,
   isFinite,
   isHTMLElement,
-  isNaN,
   isNil,
   isString,
 } from '@busymango/is-esm';
-import { or, parse } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
 
 import { catchMsg } from './catch';
-import { toHTMLElement } from './react';
+import { iFindElement } from './react';
 
 /**
  * 断言目标元素是否处于可滚动状态
  */
 export function isScrollable(target?: ReactTargetType) {
-  const element = toHTMLElement(target);
+  const element = iFindElement(target);
   if (isHTMLElement(element)) {
     const { scrollHeight, clientHeight } = element;
     return scrollHeight > clientHeight;
@@ -42,7 +39,7 @@ export function isReactChildren(source?: unknown) {
  * 断言目标元素子元素是否溢出
  */
 export function isOverflow(target?: ReactTargetType) {
-  const element = toHTMLElement(target);
+  const element = iFindElement(target);
   if (isNil(element)) return false;
   const { offsetWidth, scrollWidth } = element;
   return offsetWidth < scrollWidth;
@@ -78,29 +75,4 @@ export function isNotFoundModule(error: unknown) {
  */
 export function isLoadingChunkFailed(error: unknown): boolean {
   return /^Loading chunk.*failed$/.test(catchMsg(error) ?? '');
-}
-
-/**
- * 断言是否空字符串
- */
-function isEmptyString(source: unknown) {
-  return isString(source) && source.trim() === '';
-}
-
-/**
- * 断言是否空对象
- */
-function isEmptyObject(source: unknown) {
-  return parse.json(JSON.stringify(source)) === '{}';
-}
-
-/**
- * 断言是否空值
- * `''`, `NaN`, `{}`, `[]`, `null`, `undefined`均为空值
- */
-export function isEmptyValue(source: unknown) {
-  return or(
-    [isNil, isNaN, isEmptyArray, isEmptyObject, isEmptyString],
-    (assert) => assert(source)
-  );
 }

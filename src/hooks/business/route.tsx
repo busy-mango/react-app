@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { toParentCrumbs } from '@/utils';
+import { findParentCrumbs } from '@/helpers';
 
 import { useMemoFunc } from '../basic';
 
@@ -10,7 +10,7 @@ export function useCloseCurrentRoute() {
   const { pathname } = useLocation();
 
   return useMemoFunc(() => {
-    const parent = toParentCrumbs(pathname);
+    const parent = findParentCrumbs(pathname);
     navigate(parent ?? '/');
   });
 }

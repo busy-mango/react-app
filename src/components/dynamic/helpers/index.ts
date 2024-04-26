@@ -1,7 +1,21 @@
-import { isFalse } from '@busymango/is-esm';
+import { UPDATE_RETRY_COUNT } from '@/constants';
 
-import { isNotFoundError } from '@/utils';
+const { location, localStorage } = window;
 
-export function retry(count: number, error: unknown) {
-  return isFalse(isNotFoundError(error)) && count < 2;
-}
+/** 版本更新 */
+export const reset = () => {
+  localStorage.removeItem(UPDATE_RETRY_COUNT);
+};
+
+/** 版本更新 */
+export const update = () => {
+  const val = localStorage.getItem(UPDATE_RETRY_COUNT);
+  const count = Number(val ?? 0);
+  const current = (count + 1).toString();
+  if (count < 3) {
+    localStorage.setItem(UPDATE_RETRY_COUNT, current);
+    location.reload();
+  } else {
+    throw new Error('版本更新失败，请手动刷新重试');
+  }
+};

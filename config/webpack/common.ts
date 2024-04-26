@@ -16,6 +16,7 @@ const config: Configuration = {
   stats: 'errors-warnings',
   entry: {
     main: './src/app.tsx',
+    version: './src/version.ts',
   },
   output: {
     clean: true,

@@ -4,9 +4,10 @@
 
 import { Component } from 'react';
 
+import { COMPONENT_CRASHES_MSG } from '@/constants';
 import { catchMsg } from '@/utils';
 
-import { FallbackProvider } from '../../context';
+import { FallbackProvider } from '../../hooks';
 import type { ErrorBoundaryProps, ErrorBoundaryState } from '../../models';
 
 const initial: ErrorBoundaryState = {
@@ -27,8 +28,8 @@ export class ErrorBoundary extends Component<
   });
 
   componentDidCatch = (error: Error, info: React.ErrorInfo) => {
-    this.setState({ info });
     this.props.onError?.(error, info);
+    this.setState({ error, info, isCaught: true });
   };
 
   reset: ErrorBoundaryProps['onReset'] = (...args: unknown[]) => {
@@ -45,6 +46,7 @@ export class ErrorBoundary extends Component<
     const { reset } = this;
     const { children, fallback } = this.props;
     const { error, info, isCaught } = this.state;
+    const message = catchMsg(error) ?? COMPONENT_CRASHES_MSG;
 
     if (isCaught) {
       return (
@@ -54,7 +56,7 @@ export class ErrorBoundary extends Component<
           isCaught={isCaught}
           reset={reset}
         >
-          {fallback ?? <h1>{catchMsg(error) ?? 'something was error'}</h1>}
+          {fallback ?? <p>{message}</p>}
         </FallbackProvider>
       );
     }

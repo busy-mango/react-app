@@ -1,0 +1,13 @@
+.wrap {
+  display: initial;
+  display: -webkit-box;
+
+  width: max-content;
+  height: max-content;
+
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  -webkit-box-orient: vertical;
+}

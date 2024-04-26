@@ -10,11 +10,11 @@ function toValidDayjs(source: Dayjs) {
   return ifnot(source.isValid() && source);
 }
 
-export function toDayjs(
+export function iDayjs(
   /** 时间戳或字符串或dayjs对象 */
   source: string | number | undefined | Dayjs | Date | null,
   /** 指定字符串处理格式 */
-  format: string = DateFormatEn.DateTime
+  format: string = DateFormatEn.DateSec
 ) {
   // 处理字符串
   if (isDayjs(source)) {

@@ -9,7 +9,7 @@ import { isTrue } from '@busymango/is-esm';
 export const exception: DriveMiddleware = async (context, next) => {
   await next();
 
-  const { response, body } = context;
+  const { api, response, body } = context;
 
   if (!response) {
     throw new FetchError('服务端失去响应', { context });
@@ -19,6 +19,12 @@ export const exception: DriveMiddleware = async (context, next) => {
 
   if (status === 401) {
     throw new FetchError('登录态已过期', { context });
+  }
+
+  if (status === 405) {
+    const { method } = context.options;
+    const instruction = `[${method}@${api}]`;
+    throw new FetchError(`请求方式异常: ${instruction}`, { context });
   }
 
   if (status === 503 || status === 504) {

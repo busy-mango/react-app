@@ -3,13 +3,13 @@
  */
 
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Configure } from '@/configure';
 import { container, style } from '@/init';
 
-import { DynamicPage } from './components/dynamic';
 import { caniuse } from './caniuse';
+import { IRoutes } from './routes';
 
 import 'normalize.css';
 import '@/styles/animate.global.scss';
@@ -25,9 +25,7 @@ if (!caniuse.test(navigator.userAgent)) {
     root.render(
       <BrowserRouter>
         <Configure>
-          <Routes>
-            <Route element={<DynamicPage />} path="*" />
-          </Routes>
+          <IRoutes />
         </Configure>
       </BrowserRouter>
     );

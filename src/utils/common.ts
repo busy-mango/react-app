@@ -1,29 +1,17 @@
-import { isArray, isHTMLElement } from '@busymango/is-esm';
-
-import type { ReactTargetType } from '@/models';
-
-import { isScrollable } from './assert';
-import { toHTMLElement } from './react';
+import { isArray, isPlainObject, isString } from '@busymango/is-esm';
 
 export type WrapperDirectionType = 'inline' | 'vertical' | 'horizontal';
 
-export function toArray<T = unknown>(source: T[] | T) {
+export function iArray<T = unknown>(source: T[] | T) {
   return isArray(source) ? source : [source];
 }
 
-export function stopPropagation(event?: React.UIEvent) {
-  event?.stopPropagation();
-  event?.preventDefault();
-}
-
-export function queryScrollContainer(
-  target: ReactTargetType
-): HTMLElement | undefined {
-  const element = toHTMLElement(target);
-  const { parentElement } = element ?? {};
-  if (isHTMLElement(parentElement)) {
-    return isScrollable(parentElement)
-      ? parentElement
-      : queryScrollContainer(parentElement);
-  }
-}
+/** 查询变量长度、大小 */
+export const sizeOf = (source: unknown) => {
+  if (isArray(source)) return source.length;
+  if (isString(source)) return source.length;
+  if (source instanceof Map) return source.size;
+  if (source instanceof Set) return source.size;
+  if (isPlainObject(source)) return Object.keys(source).length;
+  return 0;
+};
