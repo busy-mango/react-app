@@ -101,6 +101,11 @@ export const TSRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'swc-loader',
   exclude: /node_modules/,
+};
+
+export const CompatibleRule: RuleSetRule = {
+  test: /\.(m?js|tsx?|jsx?)$/,
+  loader: 'swc-loader',
   include: [
     /node_modules[\\/]@?mime/,
     /node_modules[\\/]@?immer/,

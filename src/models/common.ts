@@ -18,6 +18,9 @@ export type ControlVaildateStatus =
   | 'warning'
   | 'success';
 
+/** 控件排版方向 */
+export type ControlDirection = 'horizontal' | 'vertical';
+
 /** HTML 元素事件监听器 */
 export type HTMLEventListener<T extends keyof HTMLElementEventMap> = (
   this: HTMLElement,

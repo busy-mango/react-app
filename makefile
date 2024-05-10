@@ -16,15 +16,15 @@ tag ?= ${host}/${namespace}/${name}:${version}
 echo:
 	$(info current is ${tag})
 
-clean: echo
+clean: 
+	$(info current is temporary)
 	rm -rf dist
 
 # 使用 docker 构建前端项目静态资源并输出到当前目录dist文件夹下
-build: clean
-	$(info client build ${tag})
-	docker image build -f dockerfile.build -t ${tag} .
-	docker run -it -v ./dist:/usr/src/app/dist --rm ${tag}
-	docker rmi ${tag}
+dist: clean
+	docker image build -f dockerfile.build -t temporary .
+	docker run -it -v ./dist:/usr/src/app/dist --rm temporary
+	docker rmi temporary
 
 docker: echo
 	yes | docker image prune -a

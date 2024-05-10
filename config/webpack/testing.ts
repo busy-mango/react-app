@@ -45,6 +45,7 @@ const config: Configuration = {
       rules.LessRule,
       rules.SVGRule,
       rules.AssetsRule,
+      rules.CompatibleRule,
       rules.TSRule,
     ],
   },

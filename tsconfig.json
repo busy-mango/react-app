@@ -71,14 +71,13 @@
     ]
   },
   "include": [
+    "scripts/**/*",
     "config/**/*",
-    "script/**/*",
     "src/**/*",
     "test/**/*",
     "types/**/*",
     "utils/**/*",
-    "global.d.ts",
-    "script"
+    "global.d.ts"
   ],
   /* See https://typestrong.org/ts-node/docs/swc/. */
   "ts-node": {

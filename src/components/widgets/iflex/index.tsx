@@ -37,10 +37,10 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
         style={useMemo(
           () => ({
             ...style,
-            flex: flex,
-            flexWrap: wrap,
-            justify: justify,
+            flex,
+            justify,
             alignItems: align,
+            flexWrap: isTrue(wrap) ? 'wrap' : wrap,
             ['--i-flex-gap-size']: gap,
           }),
           [style, flex, align, justify, wrap, gap]
