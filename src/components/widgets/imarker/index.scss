@@ -1,0 +1,19 @@
+.wrap {
+  position: relative;
+
+  &::before {
+    top: 0;
+    right: calc(100% + 0.15em);
+    position: absolute;
+
+    content: "*";
+    color: red;
+    opacity: 0;
+  }
+
+  &.required {
+    &::before {
+      opacity: 1;
+    }
+  }
+}

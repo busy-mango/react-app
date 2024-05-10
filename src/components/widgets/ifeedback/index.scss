@@ -1,0 +1,22 @@
+.wrap {
+  z-index: 0;
+
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  .content {
+    width: 100%;
+    padding: 2px 0;
+    font-size: 12px;
+    white-space: wrap;
+    height: max-content;
+  }
+
+  &.error,
+  &.warning,
+  &.success,
+  &.waiting {
+    font-size: inherit;
+  }
+}
