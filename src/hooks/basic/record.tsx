@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-export function usePrevious<T>(state?: T) {
+export function useRecord<T>(state?: T, changeable: boolean = true) {
   const ref = useRef(state);
 
   useEffect(() => {
-    ref.current = state;
+    if (changeable) {
+      ref.current = state;
+    }
   });
 
   return ref.current;

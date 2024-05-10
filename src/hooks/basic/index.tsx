@@ -6,6 +6,6 @@ export * from './frame.state';
 export * from './hover';
 export * from './in.view';
 export * from './memo.func';
-export * from './previous';
+export * from './record';
 export * from './resize';
 export * from './toggle';

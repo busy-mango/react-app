@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-import { usePrevious, useResize } from '@/hooks';
+import { useRecord, useResize } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { isReactNode } from '@/utils';
 
@@ -24,9 +24,9 @@ export const Feedback: ReactCFC<FeedbackProps> = (props) => {
     ...others
   } = props;
 
-  const record = usePrevious(children);
-
   const visible = isReactNode(children);
+
+  const record = useRecord(children, visible);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -35,7 +35,7 @@ export const Feedback: ReactCFC<FeedbackProps> = (props) => {
   return (
     <motion.div
       animate={{
-        opacity: 1,
+        opacity: visible ? 1 : 0,
         height: visible ? height : 0,
       }}
       className={classNames(styles.wrap, styles[status], wrapClassName)}
@@ -48,7 +48,7 @@ export const Feedback: ReactCFC<FeedbackProps> = (props) => {
         style={style}
         {...others}
       >
-        {children ?? record}
+        {children || record}
       </div>
     </motion.div>
   );

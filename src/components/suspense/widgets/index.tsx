@@ -1,13 +1,11 @@
-import classNames from 'classnames';
-
-import Loader from '@/icons/loader.svg';
+import { IClipSpinner } from '@/components/widgets';
 
 import styles from './index.scss';
 
-const fallback = <Loader className={classNames(styles.icon, 'animate-spin')} />;
-
-export const SuspenseFallbackWidget: React.FC = () => fallback;
+export const SuspenseFallbackWidget = IClipSpinner;
 
 export const SuspenseFallbackModule: React.FC = () => (
-  <div className={styles.module}>{fallback}</div>
+  <div className={styles.module}>
+    <IClipSpinner />
+  </div>
 );
