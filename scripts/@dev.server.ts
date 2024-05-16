@@ -5,25 +5,16 @@
  */
 
 import { exec } from 'child_process';
-import { program } from 'commander';
 import { watch } from 'fs';
 import webpack from 'webpack';
 import type { Configuration } from 'webpack-dev-server';
 import Server from 'webpack-dev-server';
 
 import { dir, dirconfs } from '../config/index.ts';
-import develop from '../config/webpack/develop.ts';
-import { iUsablePort } from './helpers/port.ts';
-import { toWebpackConfig } from './helpers';
+import dev from '../config/webpack/develop.ts';
+import { define, iUsablePort } from './helpers';
 
-const opts = program
-  .option('-h, --host <char>', 'DevServer的域名', '0.0.0.0')
-  .option('-p, --port <number>', 'DevServer的端口号', (8080).toString())
-  .parse()
-  .opts<{
-    port: string;
-    host: string;
-  }>();
+const { opts, config } = define();
 
 const port = await iUsablePort(
   parseInt(opts.port),
@@ -54,7 +45,7 @@ const options: Configuration = {
   headers: { 'Access-Control-Allow-Origin': '*' },
 };
 
-const compiler = webpack(toWebpackConfig() ?? develop);
+const compiler = webpack(config ?? dev);
 
 const server = new Server(options, compiler);
 

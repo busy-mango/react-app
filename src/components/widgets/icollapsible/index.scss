@@ -1,0 +1,47 @@
+.group {
+  & > .wrap {
+    &:not(:first-of-type) {
+      margin-top: var(--gap-2);
+    }
+  }
+}
+
+.wrap {
+  background-color: rgb(var(--comp-bg-color));
+}
+
+.header,
+.content {
+  padding-left: var(--gap-5);
+  padding-right: var(--gap-5);
+}
+
+.trigger {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.header {
+  position: relative;
+  padding-top: var(--gap-5);
+  padding-bottom: var(--gap-5);
+
+  .title {
+    font-weight: 500;
+    font-size: var(--font-size-6);
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    content: "";
+    position: absolute;
+
+    pointer-events: none;
+
+    border-bottom: 1px solid rgb(var(--page-bg-color));
+  }
+}

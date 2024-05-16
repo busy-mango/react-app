@@ -2,9 +2,16 @@
  * @description UI组件
  */
 
-export * from './ifeedback';
+export * from './ibutton';
+export * from './icollapsible';
 export * from './iflex';
 export * from './iform-field';
+export * from './iform-field-wrap';
+export * from './iform-wrap';
+export * from './iinput';
 export * from './imarker';
+export * from './imotion-panel';
 export * from './ioverflow';
+export * from './ipage';
+export * from './ipopover';
 export * from './ispinners';

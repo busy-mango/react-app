@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 
-import type { ControlPatternType } from '@/models';
+import type { ControlUIPattern } from '@/components';
 
-export function useControlPatternAssert(
-  pattern: ControlPatternType = 'editable'
-) {
-  return useMemo(
+export const useControlPatternAssert = (
+  pattern: ControlUIPattern = 'editable'
+) =>
+  useMemo(
     () => ({
       isEditable: pattern === 'editable',
       isReadOnly: pattern === 'readOnly',
@@ -14,4 +14,3 @@ export function useControlPatternAssert(
     }),
     [pattern]
   );
-}

@@ -11,9 +11,9 @@ import webpack from 'webpack';
 
 import { dir } from '../config/index.ts';
 import prod from '../config/webpack/product.ts';
-import { copy, toWebpackConfig } from './helpers';
+import { copy, define } from './helpers';
 
-const config = toWebpackConfig() ?? prod;
+const { config } = define();
 
 const time = () => date().format('YYYY-MM-DD HH:mm:ss');
 
@@ -24,7 +24,7 @@ const info = (message: string) => {
 info('Start build single page application');
 
 (async function main() {
-  webpack(config, (error, stats) => {
+  webpack(config ?? prod, (error, stats) => {
     if (error ?? stats?.hasErrors()) {
       info('Single page application failed to build');
       throw new Error(error?.message ?? stats?.toString());

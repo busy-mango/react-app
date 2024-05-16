@@ -1,20 +1,25 @@
 import { createContext, useContext, useMemo } from 'react';
 
-import type { PartialPick } from '@busymango/utils';
-
 import type { ReactCFC } from '@/models';
 
-import type { IFieldGridProps } from '../models';
-
-interface IFieldGridContextVal extends PartialPick<IFieldGridProps, 'mode'> {}
+import type { IFieldGridContextVal } from '../models';
 
 const IFieldGridContext = createContext<IFieldGridContextVal>(null!);
 
 export const IFieldGridProvider: ReactCFC<IFieldGridContextVal> = ({
+  forceRenderTitle,
   children,
+  margin,
   mode,
+  size,
+  colon,
 }) => (
-  <IFieldGridContext.Provider value={useMemo(() => ({ mode }), [mode])}>
+  <IFieldGridContext.Provider
+    value={useMemo(
+      () => ({ size, colon, mode, margin, forceRenderTitle }),
+      [colon, size, mode, margin, forceRenderTitle]
+    )}
+  >
     {children}
   </IFieldGridContext.Provider>
 );

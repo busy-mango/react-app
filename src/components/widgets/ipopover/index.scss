@@ -1,0 +1,15 @@
+.wrap {
+  &.tip,
+  &.over,
+  &.confirm {
+    border-radius: var(--border-radius-2);
+  }
+
+  &.tip {
+    word-break: break-all;
+    font-size: var(--font-size-3);
+    color: var(--font-color-b8);
+    padding: var(--gap-2) var(--gap-3);
+    background-color: rgb(var(--tip-bg-color) / 0.8);
+  }
+}

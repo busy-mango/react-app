@@ -18,6 +18,20 @@ import { catchMsg } from './catch';
 import { iFindElement } from './react';
 
 /**
+ * 判断当前UserAgent是否移动端
+ */
+export function isMobile(ua: string = navigator.userAgent.toLowerCase()) {
+  return /Mobile\/\w+/.test(ua);
+}
+
+/**
+ * 判断当前UserAgent是否IOS系统
+ */
+export function isIOS(ua: string = navigator.userAgent.toLowerCase()): boolean {
+  return /ios|iphone|ipad|ipod/.test(ua);
+}
+
+/**
  * 断言目标元素是否处于可滚动状态
  */
 export function isScrollable(target?: ReactTargetType) {

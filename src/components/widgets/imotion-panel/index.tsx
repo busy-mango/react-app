@@ -8,25 +8,23 @@ import { motion } from 'framer-motion';
 
 import { useRecord, useResize } from '@/hooks';
 import type { ReactCFC } from '@/models';
-import { isReactNode } from '@/utils';
 
-import type { FeedbackProps } from './models';
+import type { IMotionPanelProps } from './models';
 
 import styles from './index.scss';
 
-export const Feedback: ReactCFC<FeedbackProps> = (props) => {
+export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
   const {
     style,
     children,
     className,
+    visible = true,
+    ghosting = true,
     wrapClassName,
-    status = 'error',
     ...others
   } = props;
 
-  const visible = isReactNode(children);
-
-  const record = useRecord(children, visible);
+  const record = useRecord(children, visible && ghosting);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -38,9 +36,9 @@ export const Feedback: ReactCFC<FeedbackProps> = (props) => {
         opacity: visible ? 1 : 0,
         height: visible ? height : 0,
       }}
-      className={classNames(styles.wrap, styles[status], wrapClassName)}
+      className={classNames(styles.wrap, wrapClassName)}
       initial={{ opacity: 0, height: 0 }}
-      transition={{ ease: 'easeInOut' }}
+      transition={{ ease: 'easeOut' }}
     >
       <div
         ref={ref}

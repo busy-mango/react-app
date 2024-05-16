@@ -6,3 +6,12 @@
   transition-property: color, fill, stroke, opacity, border-color, background-color, text-decoration-color, box-shadow,
     transform, filter;
 }
+
+.sticky-bottom-wrap {
+  bottom: 0;
+  width: 100%;
+  position: sticky;
+  box-sizing: border-box;
+  padding: var(--gap-2);
+  background-color: rgb(var(--comp-bg-color));
+}

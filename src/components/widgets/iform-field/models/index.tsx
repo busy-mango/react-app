@@ -1,26 +1,29 @@
-import type { OmitOf } from '@busymango/utils';
+import type { OmitOf, PartialPick } from '@busymango/utils';
 
-import type { ControlDirection, ControlPatternType } from '@/models';
+import type {
+  ControlUIDirection,
+  ControlUIPattern,
+  ControlUISize,
+} from '@/components/models';
 
-import type { FeedbackStatus } from '../../ifeedback';
 import type { IFlexProps } from '../../iflex/models';
 
+export type IFieldStatus = 'error' | 'success' | 'warning';
+
 export type IFieldGridMode =
-  | ControlDirection
+  | ControlUIDirection
+  | 'between'
   | 'single'
   | 'double'
   | 'triple'
   | 'quadruple';
 
-export interface IFieldGridProps extends IFlexProps {
-  mode?: IFieldGridMode;
-}
-
-export interface IFieldCellProps extends OmitOf<IFlexProps, 'title'> {
+export interface IFieldCellProps
+  extends OmitOf<IFlexProps, 'title' | 'children'> {
   /** 字段标题对齐方式 */
   align?: 'start' | 'end';
   /** 是否开启外间距 */
-  margin?: boolean;
+  margin?: boolean | 'feedback';
   /** 是否显示必填标识 */
   required?: boolean;
   /** 是否强制渲染标题元素，如果为true，即使title不存在也会占用空间 */
@@ -46,7 +49,17 @@ export interface IFieldCellProps extends OmitOf<IFlexProps, 'title'> {
   /** 字段绝对路径（浏览器通过此属性查询字段Dom位置） */
   address?: string;
   /** 字段交互方式 */
-  pattern: ControlPatternType;
+  pattern?: ControlUIPattern;
   /** 字段校验状态 */
-  status?: FeedbackStatus;
+  status?: IFieldStatus;
+  /** 字段UI大小 */
+  size?: ControlUISize;
 }
+
+export interface IFieldGridContextVal
+  extends PartialPick<
+    IFieldCellProps,
+    'size' | 'colon' | 'mode' | 'margin' | 'forceRenderTitle'
+  > {}
+
+export interface IFieldGridProps extends IFlexProps, IFieldGridContextVal {}

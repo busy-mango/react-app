@@ -2,4 +2,4 @@
  * @description 业务组件
  */
 
-export {};
+export * from './product-field-card';

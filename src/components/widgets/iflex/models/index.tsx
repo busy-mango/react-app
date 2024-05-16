@@ -4,6 +4,7 @@ export interface IFlexProps extends WrapperProps<HTMLElement> {
   children: React.ReactNode;
   vertical?: boolean;
   reverse?: boolean;
+  centered?: boolean;
   gap?: React.CSSProperties['gap'];
   flex?: React.CSSProperties['flex'];
   wrap?: React.CSSProperties['flexWrap'] | true;

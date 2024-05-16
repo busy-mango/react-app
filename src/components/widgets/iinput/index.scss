@@ -1,0 +1,37 @@
+.input {
+  border: none;
+  outline: none;
+
+  margin: unset;
+  padding: unset;
+
+  background: transparent;
+  background-color: unset;
+
+  min-width: 0;
+
+  width: max-content;
+  height: max-content;
+
+  font-size: inherit;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  // https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete
+  &:-webkit-autofill {
+    -webkit-background-clip: text;
+  }
+
+  &.editable,
+  &.disabled,
+  &.read-only,
+  &.read-pretty {
+    font-family: inherit;
+  }
+
+  &.read-pretty {
+    width: min-content;
+  }
+}

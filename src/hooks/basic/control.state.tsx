@@ -4,7 +4,7 @@ import { useMemoFunc } from './memo.func';
 
 export interface ControlComponentProps<T> {
   value?: T;
-  onChange?: (value?: T) => void;
+  onChange?: (value: T) => void;
 }
 
 export function useControlState<T = unknown>(
@@ -19,7 +19,7 @@ export function useControlState<T = unknown>(
 
   const { value: control, onChange: onControl } = props;
 
-  const onChange = useMemoFunc((current?: T) => {
+  const onChange = useMemoFunc((current: T) => {
     setInner(current);
     onControl?.(current);
   });

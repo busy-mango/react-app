@@ -8,22 +8,39 @@ import NoteSVG from '@/icons/note.svg';
 import type { ReactCFC } from '@/models';
 import { isReactChildren, isReactNode } from '@/utils';
 
-import { Feedback } from '../ifeedback';
 import { IFlex } from '../iflex';
 import { IMarker } from '../imarker';
+import { IMotionPanel } from '../imotion-panel';
 import { IFieldGridProvider, useIFieldGridContext } from './hooks';
 import type { IFieldCellProps, IFieldGridProps } from './models';
 
 import styles from './index.scss';
 
 export const IFieldGrid: ReactCFC<IFieldGridProps> = ({
+  size,
   mode,
+  colon,
+  margin,
   children,
   className,
+  forceRenderTitle,
   ...others
 }) => (
-  <IFlex wrap className={classNames(styles.wrap, className)} {...others}>
-    <IFieldGridProvider mode={mode}>{children}</IFieldGridProvider>
+  <IFlex
+    vertical
+    wrap
+    className={classNames(styles.wrap, className)}
+    {...others}
+  >
+    <IFieldGridProvider
+      colon={colon}
+      forceRenderTitle={forceRenderTitle}
+      margin={margin}
+      mode={mode}
+      size={size}
+    >
+      {children}
+    </IFieldGridProvider>
   </IFlex>
 );
 
@@ -40,14 +57,15 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     required,
     className,
     description,
-    colon = ':',
     column = 1,
-    margin = true,
     align = 'start',
-    forceRenderTitle,
     status = 'success',
     pattern = 'editable',
+    colon = ctx?.colon ?? ':',
+    size = ctx?.size ?? 'normal',
+    margin = ctx?.margin ?? true,
     mode = ctx?.mode ?? 'vertical',
+    forceRenderTitle = ctx?.forceRenderTitle,
     children,
     ...others
   } = props;
@@ -59,9 +77,10 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
       <div
         className={classNames(
           styles.cell,
+          styles[size],
           styles[status],
           {
-            [styles.margin]: margin,
+            [styles.margin]: isTrue(margin),
             [styles.showTitle]: showTitle,
             [styles.readPretty]: pattern === 'readPretty',
           },
@@ -79,7 +98,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
         >
           {showTitle && (
             <IFlex
-              align="flex-start"
+              align="center"
               className={styles.title}
               justify={`flex-${align}`}
             >
@@ -91,8 +110,23 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
           )}
           {isReactChildren(children) && (
             <IFlex vertical className={styles.control}>
-              <div className={styles.wrapper}>{children}</div>
-              <Feedback status={status}>{feedback}</Feedback>
+              <IFlex
+                vertical
+                align={mode === 'between' ? 'flex-end' : 'flex-start'}
+                className={styles.wrapper}
+                justify="center"
+              >
+                {children}
+              </IFlex>
+              <IMotionPanel
+                visible={isReactChildren(feedback)}
+                wrapClassName={classNames(
+                  styles.feedback,
+                  margin === 'feedback' && styles.withMargin
+                )}
+              >
+                {feedback}
+              </IMotionPanel>
             </IFlex>
           )}
         </div>

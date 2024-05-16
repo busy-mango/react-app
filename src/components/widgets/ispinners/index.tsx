@@ -9,11 +9,10 @@ export const IClipSpinner: React.FC = () => (
     animate={{
       rotate: 360,
       transition: {
-        duration: 1,
+        duration: 0.64,
         repeat: Infinity,
         ease: 'linear',
       },
-      transformOrigin: 'center center',
     }}
     className={styles.icon}
   >
