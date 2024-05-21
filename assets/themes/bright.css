@@ -48,9 +48,16 @@
   --z-index-badge: auto;
   --z-index-fixed: 990;
 
+  --box-shadow-opacity: 0.04;
+
+  --box-shadow-color: 0 0 0;
+
+  --chip-bg-color: 242 243 245;
   --main-bg-color: 232 240 255;
   --comp-bg-color: 255 255 255;
   --page-bg-color: 242 243 245;
+
+  --error-color: 245 66 77;
 
   --wave-color: 82 11 239;
   --main-color: 47 84 235;
@@ -61,4 +68,8 @@
 #root {
   color: var(--font-color-8);
   font-size: var(--font-size-4);
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }

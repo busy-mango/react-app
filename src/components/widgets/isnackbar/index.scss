@@ -1,0 +1,53 @@
+.snackbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  cursor: pointer;
+  pointer-events: initial;
+
+  margin-top: var(--gap-4);
+  padding: var(--gap-2) var(--gap-3);
+
+  border-radius: var(--border-radius-2);
+
+  -webkit-box-pack: start;
+  -webkit-box-align: center;
+
+  box-shadow:
+    rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
+    rgba(0, 0, 0, 0.14) 0px 3px 4px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+}
+
+.overlay {
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+
+  z-index: var(--z-index-toast);
+  pointer-events: none;
+
+  &.sm {
+    & > .snackbar {
+      // inset: 0.5rem;
+      margin-top: var(--gap-3);
+      padding: var(--gap-1) var(--gap-2);
+    }
+  }
+  &.md {
+    & > .snackbar {
+      margin-top: var(--gap-4);
+      padding: var(--gap-2) var(--gap-3);
+    }
+  }
+  &.lg {
+    & > .snackbar {
+      margin-top: var(--gap-5);
+      padding: var(--gap-3) var(--gap-4);
+    }
+  }
+}

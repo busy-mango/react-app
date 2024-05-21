@@ -11,7 +11,6 @@ import { container, style } from '@/init';
 
 import { caniuse } from './caniuse';
 import { IRoutes } from './routes';
-import { isMobile } from './utils';
 
 import 'normalize.css';
 import '@/styles/atom.global.scss';
@@ -20,7 +19,7 @@ const root = createRoot(container);
 
 const { userAgent } = window.navigator;
 
-if (isMobile(userAgent) || caniuse.test(userAgent)) {
+if (caniuse.test(userAgent)) {
   // 主题文件加载完成后再渲染应用
   style.onload = () => {
     root.render(

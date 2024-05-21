@@ -1,17 +1,15 @@
 /* 通用样式 */
-
-.transition {
-  transition-duration: var(--duration-150);
-  transition-timing-function: var(--ease-in-out);
-  transition-property: color, fill, stroke, opacity, border-color, background-color, text-decoration-color, box-shadow,
-    transform, filter;
-}
-
-.sticky-bottom-wrap {
+.sticky-wrap,
+.sticky-shadow-wrap {
   bottom: 0;
   width: 100%;
   position: sticky;
-  box-sizing: border-box;
   padding: var(--gap-2);
+  box-sizing: border-box;
+  z-index: var(--z-index-fixed);
+}
+
+.sticky-shadow-wrap {
   background-color: rgb(var(--comp-bg-color));
+  box-shadow: 0px -12px 16px 0px rgba(var(--box-shadow-color), var(--box-shadow-opacity));
 }

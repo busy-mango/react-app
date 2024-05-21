@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-query';
 
 import {
+  ISnackbarPortal,
   QueryBoundary,
   ReactQueryDevtools,
   SuspenseModule,
@@ -66,6 +67,7 @@ export const Configure: ReactCFC = (props) => {
       <QueryBoundary>
         <SuspenseModule>{children}</SuspenseModule>
       </QueryBoundary>
+      <ISnackbarPortal />
       {ReactQueryDevtools && <ReactQueryDevtools />}
     </QueryClientProvider>
   );

@@ -1,0 +1,36 @@
+.overlay {
+  background-color: rgb(0 0 0 / 0.6);
+  .wrap {
+    background-color: rgb(var(--comp-bg-color));
+  }
+}
+
+.container {
+  width: 100%;
+  height: calc(64 * 5px);
+
+  .colum {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    scroll-snap-type: y mandatory;
+
+    .option {
+      width: 100%;
+      height: 64px;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+
+      scroll-snap-stop: normal;
+      scroll-snap-align: center;
+    }
+  }
+}

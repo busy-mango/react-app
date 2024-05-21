@@ -1,12 +1,15 @@
-import { IFieldCell, IFieldGrid } from '@/components';
-import { IInput } from '@/components/widgets/iinput';
+import { IAttachmentGroup } from '@/components';
 
-export const ProductMeetingDocumentation: React.FC = () => {
-  return (
-    <IFieldGrid colon={false} margin={false} mode="between">
-      <IFieldCell title="会议标题">
-        <IInput style={{ width: 'max-content', minWidth: 0 }} />
-      </IFieldCell>
-    </IFieldGrid>
-  );
-};
+import styles from './index.scss';
+
+export const ProductMeetingDocumentation: React.FC = () => (
+  <IAttachmentGroup
+    className={styles.wrap}
+    items={[
+      {
+        id: 'asdas',
+        name: 'asdsad',
+      },
+    ]}
+  />
+);

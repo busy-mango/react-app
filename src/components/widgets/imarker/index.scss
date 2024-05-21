@@ -1,19 +1,24 @@
 .wrap {
   position: relative;
+  height: max-content;
+}
 
-  &::before {
-    top: 0;
-    right: calc(100% + 0.15em);
-    position: absolute;
+.marker {
+  top: calc(var(--gap-1) / 2);
+  bottom: calc(var(--gap-1) / 2);
+  height: calc(100% - var(--gap-1));
+  position: absolute;
+}
 
-    content: "*";
-    color: red;
-    opacity: 0;
-  }
+.part {
+  width: var(--gap-2);
+  right: calc(100% + 0.3em);
 
-  &.required {
-    &::before {
-      opacity: 1;
-    }
-  }
+  border-radius: var(--border-radius-2);
+  background-color: rgb(var(--main-color));
+}
+
+.required {
+  right: calc(100% + 0.15em);
+  color: rgb(var(--error-color));
 }

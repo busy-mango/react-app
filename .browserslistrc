@@ -1,5 +1,5 @@
 [production staging]
-Chrome > 65, Firefox > 87, Safari > 10, Safari 11
+Chrome > 65, Firefox > 87, iOS >= 11
 
 [development]
 fully supports abortcontroller and fully supports proxy and fully supports same-site-cookie-attribute and fully supports resizeobserver and fully supports css-sticky

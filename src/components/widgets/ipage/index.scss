@@ -1,6 +1,11 @@
 .page {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
+
+  z-index: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   display: flex;
   align-items: center;
@@ -8,6 +13,7 @@
   flex-direction: column;
 
   position: relative;
+  box-sizing: border-box;
   background-color: rgb(var(--page-bg-color) / 1);
 
   & > .background {
@@ -21,10 +27,11 @@
     position: absolute;
     box-sizing: border-box;
 
+    z-index: -1;
+
     & > img {
       width: 100%;
       height: 100%;
-
       object-fit: cover;
     }
 

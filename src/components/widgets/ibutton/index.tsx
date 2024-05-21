@@ -14,15 +14,6 @@ import { IWave } from '../iwave';
 
 import styles from './index.scss';
 
-export interface IButtonProps extends ReactMotionDomProps<ReactButtonProps> {
-  icon?: React.ReactNode;
-  isLoading?: boolean;
-  isFullWidth?: boolean;
-  debounce?: boolean | number;
-  size?: ControlUISize;
-  variant?: 'filled' | 'bordered' | 'text';
-}
-
 const IconWrap: ReactCFC = ({ children }) => (
   <motion.span
     animate={{ opacity: 1, width: '1em' }}
@@ -35,6 +26,22 @@ const IconWrap: ReactCFC = ({ children }) => (
   </motion.span>
 );
 
+export interface IButtonProps extends ReactMotionDomProps<ReactButtonProps> {
+  icon?: React.ReactNode;
+  isLoading?: boolean;
+  isFullWidth?: boolean;
+  debounce?: boolean | number;
+  size?: ControlUISize;
+  variant?: 'filled' | 'bordered' | 'text';
+}
+
+const iTapBackground = (params: { variant: IButtonProps['variant'] }) => {
+  const { variant } = params;
+  if (variant === 'text') {
+    return 'rgb(0 0 0 / 0.06)';
+  }
+};
+
 export const IButton: React.FC<IButtonProps> = (props) => {
   const {
     icon,
@@ -44,7 +51,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
     className,
     isLoading,
     isFullWidth,
-    size = 'normal',
+    size = 'medium',
     variant = 'bordered',
     onPointerDownCapture,
     onClick,
@@ -83,6 +90,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
       disabled={disabled}
       whileTap={{
         scale: [null, 0.96],
+        backgroundColor: iTapBackground({ variant }),
       }}
       onClick={onTap}
       onPointerDownCapture={(event) => {

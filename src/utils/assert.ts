@@ -28,7 +28,7 @@ export function isMobile(ua: string = navigator.userAgent.toLowerCase()) {
  * 判断当前UserAgent是否IOS系统
  */
 export function isIOS(ua: string = navigator.userAgent.toLowerCase()): boolean {
-  return /ios|iphone|ipad|ipod/.test(ua);
+  return /iP(hone|ad|od)|iOS/.test(ua);
 }
 
 /**
@@ -52,11 +52,15 @@ export function isReactChildren(source?: unknown) {
 /**
  * 断言目标元素子元素是否溢出
  */
-export function isOverflow(target?: ReactTargetType) {
+export function isOverflow(target?: ReactTargetType, tolerance = 2) {
   const element = iFindElement(target);
   if (isNil(element)) return false;
-  const { offsetWidth, scrollWidth } = element;
-  return offsetWidth < scrollWidth;
+  const { offsetWidth, scrollWidth, offsetHeight, scrollHeight } = element;
+  console.log(offsetHeight, scrollHeight);
+  return (
+    offsetWidth + tolerance < scrollWidth ||
+    offsetHeight + tolerance < scrollHeight
+  );
 }
 
 /**

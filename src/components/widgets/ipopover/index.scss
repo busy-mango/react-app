@@ -1,4 +1,6 @@
 .wrap {
+  box-sizing: border-box;
+
   &.tip,
   &.over,
   &.confirm {

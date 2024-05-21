@@ -4,8 +4,11 @@
 }
 
 .form {
+  flex-grow: 1;
+
   width: 100%;
-  height: 100%;
   background: unset;
   background-color: unset;
+
+  margin: var(--gap-3) 0;
 }

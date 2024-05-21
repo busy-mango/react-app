@@ -6,9 +6,9 @@ import { IMobilePage } from '@/components';
 import {
   PRODUCT_MEETING_RESOLVE_DEFINE_KEY,
   PRODUCT_MEETING_VOTE_DEFINE_KEY,
+  server,
   SYSTEM_USER_TODO_LIST_API,
-} from '@/constants';
-import { server } from '@/service';
+} from '@/service';
 
 import { ProcessTodoCard } from './widgets';
 

@@ -1,0 +1,72 @@
+.chip {
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: unset;
+  border: unset;
+  outline: none;
+  text-decoration: none;
+
+  flex-grow: 0;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+
+  /** variant */
+  &.filled {
+    color: rgb(var(--main-color));
+    background-color: rgb(var(--chip-bg-color));
+  }
+  &.outlined {
+    border: 1px solid rgb(var(--main-color));
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+  &.clickable {
+    cursor: pointer;
+  }
+
+  /** size */
+  &.mini {
+    font-size: var(--font-size-3);
+    height: var(--control-height-5);
+    border-radius: var(--border-radius-2);
+    padding: 0 var(--gap-5);
+  }
+  &.medium {
+    padding: 0 var(--gap-5);
+    height: var(--control-height-5);
+
+    font-size: var(--font-size-4);
+
+    border-radius: var(--border-radius-3);
+  }
+  &.huge {
+    font-size: var(--font-size-3);
+    height: var(--control-height-5);
+    padding: 0 var(--gap-5);
+  }
+
+  .icon,
+  .close {
+    display: flex;
+    width: max-content;
+    height: max-content;
+  }
+
+  .icon {
+    margin-left: -0.3em;
+    margin-right: 0.3em;
+  }
+
+  .close {
+    cursor: pointer;
+    margin-left: 0.3em;
+    margin-right: -0.3em;
+  }
+}

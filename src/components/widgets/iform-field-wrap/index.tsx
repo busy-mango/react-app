@@ -23,7 +23,7 @@ export const IFieldWrap: ReactCFC<IFieldWrapProps> = ({
   prefix,
   suffix,
   children,
-  size = 'normal',
+  size = 'medium',
   variant = 'standard',
 }) => {
   const target = useRef<HTMLDivElement>(null);
@@ -37,12 +37,7 @@ export const IFieldWrap: ReactCFC<IFieldWrapProps> = ({
   return (
     <motion.div
       ref={target}
-      className={classNames(
-        styles.wrap,
-        styles[size],
-        styles.normal,
-        styles[variant]
-      )}
+      className={classNames(styles.wrap, styles[size], styles[variant])}
     >
       <AnimatePresence>
         {prefix && (

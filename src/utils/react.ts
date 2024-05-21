@@ -1,5 +1,6 @@
 import type { PlainObject } from '@busymango/is-esm';
 import { isFunction, isHTMLElement, isNull, isTrue } from '@busymango/is-esm';
+import { includes } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
 
@@ -38,6 +39,28 @@ export const iPressEvent =
   ) =>
   (event: React.KeyboardEvent<T>) => {
     event?.code === 'Enter' ? func?.(event) : onKeyDown?.(event);
+  };
+
+/** 从键盘敲击事件中创建删除敲击事件 */
+export const iEscapeEvent =
+  <T extends Element = Element>(
+    func?: (event: React.KeyboardEvent<T>) => void,
+    onKeyDown?: (event: React.KeyboardEvent<T>) => void
+  ) =>
+  (event: React.KeyboardEvent<T>) => {
+    event?.code === 'Escape' ? func?.(event) : onKeyDown?.(event);
+  };
+
+/** 从键盘敲击事件中创建删除敲击事件 */
+export const iDeleteEvent =
+  <T extends Element = Element>(
+    func?: (event: React.KeyboardEvent<T>) => void,
+    onKeyDown?: (event: React.KeyboardEvent<T>) => void
+  ) =>
+  (event: React.KeyboardEvent<T>) => {
+    includes(['Backspace', 'Delete'], (e) => e === event?.code)
+      ? func?.(event)
+      : onKeyDown?.(event);
   };
 
 /** 从滚动事件中创建滚动到底部的事件回调 */

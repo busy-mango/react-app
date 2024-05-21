@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
@@ -7,6 +9,9 @@ import type { ReactCFC, WrapperProps } from '@/models';
 import type { IFlexProps } from '../iflex';
 import { IFlex } from '../iflex';
 import { IFieldGrid } from '../iform-field';
+import { IMarker } from '../imarker';
+
+import styles from './index.scss';
 
 export interface IFormWrapProps
   extends OmitOf<
@@ -34,15 +39,13 @@ export interface IFormPartProps extends React.PropsWithChildren {
   title?: React.ReactNode;
 }
 
-export const IFormPart: React.FC<IFormPartProps> = ({ title }) => (
-  <IFlex vertical>
-    <IFlex>
-      <div>{title}</div>
+export const IFormPart: ReactCFC<IFormPartProps> = ({ title, children }) => (
+  <Fragment>
+    <IFlex align="center" className={styles.partTitle}>
+      <IMarker part>{title}</IMarker>
     </IFlex>
-    <IFlex vertical>
-      <div></div>
-    </IFlex>
-  </IFlex>
+    {children}
+  </Fragment>
 );
 
 export interface IFormCardProps
@@ -55,13 +58,16 @@ export const IFormCard: ReactCFC<IFormCardProps> = ({
   title,
   parts,
   children,
+  className,
   ...others
 }) => (
-  <IFlex vertical {...others}>
-    <IFlex>
-      <div>{title}</div>
-    </IFlex>
-    <IFlex vertical>
+  <IFlex vertical className={classNames(styles.card, className)} {...others}>
+    {title && (
+      <IFlex className={styles.header}>
+        <div>{title}</div>
+      </IFlex>
+    )}
+    <IFlex vertical className={styles.content}>
       {parts?.map((section, index) => <IFormPart {...section} key={index} />)}
     </IFlex>
     {children}

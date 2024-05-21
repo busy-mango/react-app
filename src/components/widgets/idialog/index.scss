@@ -1,0 +1,39 @@
+.overlay {
+  display: grid;
+  place-items: center;
+  background-color: rgb(0 0 0 / 0.5);
+
+  & > .wrap {
+    min-width: 80vw;
+    min-height: 12vh;
+
+    border-radius: var(--border-radius-3);
+
+    background-color: rgb(var(--comp-bg-color));
+
+    position: relative;
+
+    & > .close,
+    & > .header,
+    & > .footer {
+      padding: var(--gap-4) var(--gap-5);
+    }
+
+    & > .close {
+      position: absolute;
+    }
+
+    & > .header {
+    }
+
+    & > .content {
+      padding: var(--gap-6) var(--gap-5);
+    }
+
+    & > .footer {
+      & > button:not(:last-child) {
+        margin-right: var(--gap-3);
+      }
+    }
+  }
+}

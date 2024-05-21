@@ -1,5 +1,24 @@
 .card {
+  overflow: hidden;
+  border: 1px solid #dbdbdb;
+  border-radius: var(--border-radius-3);
+
+  &:not(:first-of-type) {
+    margin-top: var(--gap-5);
+  }
+
+  .header {
+    font-weight: 500;
+    padding: var(--gap-3) var(--gap-5);
+    background-color: rgb(var(--main-bg-color));
+  }
+
+  .content {
+    padding: var(--gap-2) var(--gap-5);
+  }
 }
 
-.section {
+.part-title {
+  height: var(--control-height-6);
+  font-weight: 500;
 }

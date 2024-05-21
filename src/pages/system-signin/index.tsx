@@ -9,7 +9,6 @@ import {
   IFieldGrid,
   IFieldWrap,
   IFlex,
-  IFormCard,
   IFormWrap,
   IInput,
   IMobilePage,
@@ -39,43 +38,41 @@ const SystemLoginPage: React.FC = () => {
           <IFlex centered className={styles.title}>
             <h1>欢迎登录</h1>
           </IFlex>
-          <IFormCard>
-            <IFieldGrid margin="feedback" mode="horizontal" size="huge">
-              <IFieldCell>
-                <IFieldWrap
-                  size="huge"
-                  suffix={
-                    <IPopover
-                      content={'请输入用户账户asadasdas'}
-                      render={(props) => (
-                        <div {...props}>
-                          <AccountSVG />
-                        </div>
-                      )}
-                      trigger={'click'}
-                      type="tip"
-                    />
-                  }
-                  variant="bordered"
-                >
-                  <IInput placeholder="用户账户" />
-                </IFieldWrap>
-              </IFieldCell>
-              <IFieldCell>
-                <IFieldWrap size="huge" suffix={<LockSVG />} variant="bordered">
-                  <IInput
-                    autoComplete="on"
-                    placeholder="登录密码"
-                    type="password"
+          <IFieldGrid margin="feedback" mode="horizontal" size="huge">
+            <IFieldCell>
+              <IFieldWrap
+                size="huge"
+                suffix={
+                  <IPopover
+                    content={'请输入用户账户asadasdas'}
+                    render={(props) => (
+                      <div {...props}>
+                        <AccountSVG />
+                      </div>
+                    )}
+                    trigger={'click'}
+                    type="tip"
                   />
-                </IFieldWrap>
-              </IFieldCell>
-            </IFieldGrid>
-          </IFormCard>
+                }
+                variant="bordered"
+              >
+                <IInput placeholder="用户账户" />
+              </IFieldWrap>
+            </IFieldCell>
+            <IFieldCell>
+              <IFieldWrap size="huge" suffix={<LockSVG />} variant="bordered">
+                <IInput
+                  autoComplete="on"
+                  placeholder="登录密码"
+                  type="password"
+                />
+              </IFieldWrap>
+            </IFieldCell>
+          </IFieldGrid>
           <IMotionPanel></IMotionPanel>
         </IFormWrap>
       </IFlex>
-      <IFlex className="sticky-bottom-wrap">
+      <IFlex className="sticky-wrap">
         <IButton
           isFullWidth
           isLoading={isPending}

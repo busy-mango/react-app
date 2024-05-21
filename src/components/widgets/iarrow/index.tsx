@@ -5,8 +5,8 @@ import type { ReactSvgProps } from '@/models';
 const d = {
   // up: 'M296 596 L 512 416 L 728 596',
   // down: 'M296 428 L 512 608 L 728 428',
-  up: 'M64 596 L512 256 L960 596',
-  down: 'M64 428 L512 768 L960 428',
+  up: 'M64 596 L512 224 L960 596',
+  down: 'M64 428 L512 800 L960 428',
 };
 
 export interface IArrowProps extends ReactSvgProps {

@@ -50,21 +50,15 @@
   &.filled {
     color: var(--font-color-b8);
     background-color: rgb(var(--main-color));
-    &:active {
-      // background-color: rgb(var(--main-color));
-      // color: var(--font-color-b8);
-    }
   }
   &.bordered {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(var(--main-color));
 
-    color: var(--font-color-8);
-    &:active {
-      color: var(--font-color-b8);
+    color: rgb(var(--main-color));
 
-      background-color: rgb(var(--main-color));
+    &:hover {
     }
   }
 
@@ -73,7 +67,7 @@
     font-size: var(--font-size-3);
     height: var(--control-height-4);
   }
-  &.normal {
+  &.medium {
     border-radius: var(--border-radius-3);
     height: var(--control-height-6);
     font-size: var(--font-size-4);
@@ -85,8 +79,6 @@
     padding: 0 var(--gap-6);
     font-size: var(--font-size-6);
   }
-
-  -webkit-tap-highlight-color: transparent;
 }
 
 .icon {

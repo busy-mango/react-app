@@ -1,5 +1,7 @@
+import type React from 'react';
+
 /** 控件大小 */
-export type ControlUISize = 'mini' | 'normal' | 'huge';
+export type ControlUISize = 'mini' | 'medium' | 'huge';
 
 /** 控件排版方向 */
 export type ControlUIDirection = 'horizontal' | 'vertical';
@@ -17,3 +19,22 @@ export type ControlValidationStatus =
   | 'error'
   | 'warning'
   | 'success';
+
+export interface InteractionProps {
+  ref: (node: HTMLElement | SVGElement | null) => void;
+  onBlur?(): void;
+  onFocus?(): void;
+  onClick?(): void;
+  onKeyUp?(): void;
+  onKeyDown?(): void;
+  onMouseDown?(): void;
+  onMouseMove?(): void;
+  onPointerDown?(): void;
+  onPointerEnter?(): void;
+}
+
+export type ControlOptionModel = {
+  value: React.Key;
+  label?: React.ReactNode;
+  title?: string;
+};
