@@ -5,6 +5,7 @@ import type { ReactCFC } from '@/models';
 import styles from './index.scss';
 
 export interface IPageProps {
+  isLoading?: boolean;
   background?: React.ReactNode;
 }
 

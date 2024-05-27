@@ -40,7 +40,7 @@ const ICollapsible: React.FC<ICollapsibleProps> = ({
               onArrowClick?.(name, !open);
             }}
           >
-            <IArrow type={open ? 'up' : 'down'} />
+            <IArrow type={open ? 'top' : 'bottom'} />
           </IFlex>
         )}
       </div>
@@ -56,9 +56,7 @@ const IMemoCollapsible = memo(ICollapsible, iPropsAreEqual);
 export const ICollapseGroup: React.FC<ICollapseGroupProps> = (props) => {
   const { items } = props;
 
-  const isControl = 'value' in props;
-
-  const [value, onChange] = useControlState(props, { isControl });
+  const [value, onChange] = useControlState(props);
 
   const onArrowClick = useMemoFunc((name: ICollapsibleKey, val?: boolean) => {
     const prev = value ?? [];

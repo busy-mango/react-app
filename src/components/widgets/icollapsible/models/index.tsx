@@ -17,8 +17,8 @@ export type ICollapseVisible = Partial<
 >;
 
 export interface ICollapseGroupProps {
-  value?: ICollapsibleProps['name'][];
-  defaultValue?: ICollapsibleProps['name'][];
+  value?: ICollapsibleKey[];
+  defaultValue?: ICollapsibleKey[];
   items?: OmitOf<ICollapsibleProps, 'open'>[];
-  onChange?: (openKeys: ICollapsibleProps['name'][]) => void;
+  onChange?: (openKeys?: ICollapsibleKey[]) => void;
 }

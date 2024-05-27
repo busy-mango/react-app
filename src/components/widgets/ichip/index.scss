@@ -34,13 +34,13 @@
   /** size */
   &.mini {
     font-size: var(--font-size-3);
-    height: var(--control-height-5);
+    height: var(--control-size-5);
     border-radius: var(--border-radius-2);
     padding: 0 var(--gap-5);
   }
   &.medium {
     padding: 0 var(--gap-5);
-    height: var(--control-height-5);
+    height: var(--control-size-5);
 
     font-size: var(--font-size-4);
 
@@ -48,7 +48,7 @@
   }
   &.huge {
     font-size: var(--font-size-3);
-    height: var(--control-height-5);
+    height: var(--control-size-5);
     padding: 0 var(--gap-5);
   }
 

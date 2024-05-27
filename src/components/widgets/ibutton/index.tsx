@@ -27,6 +27,7 @@ const IconWrap: ReactCFC = ({ children }) => (
 );
 
 export interface IButtonProps extends ReactMotionDomProps<ReactButtonProps> {
+  wave?: boolean;
   icon?: React.ReactNode;
   isLoading?: boolean;
   isFullWidth?: boolean;
@@ -51,6 +52,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
     className,
     isLoading,
     isFullWidth,
+    wave = true,
     size = 'medium',
     variant = 'bordered',
     onPointerDownCapture,
@@ -99,7 +101,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
       }}
       {...others}
     >
-      <IWave target={ref} />
+      {wave && <IWave target={ref} />}
       <AnimatePresence>
         {isLoading ? (
           <IconWrap>

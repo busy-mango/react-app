@@ -65,16 +65,16 @@
   /** size */
   &.mini {
     font-size: var(--font-size-3);
-    height: var(--control-height-4);
+    height: var(--control-size-4);
   }
   &.medium {
     border-radius: var(--border-radius-3);
-    height: var(--control-height-6);
+    height: var(--control-size-6);
     font-size: var(--font-size-4);
     padding: 0 var(--gap-5);
   }
   &.huge {
-    height: var(--control-height-8);
+    height: var(--control-size-8);
     border-radius: var(--border-radius-6);
     padding: 0 var(--gap-6);
     font-size: var(--font-size-6);

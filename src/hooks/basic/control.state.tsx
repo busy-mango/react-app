@@ -1,29 +1,59 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
+
+import { isFalse, isUndefined } from '@busymango/is-esm';
 
 import { useMemoFunc } from './memo.func';
+import { useRecord } from './record';
+
+type Updater<T> = (val: T) => void;
 
 export interface ControlComponentProps<T> {
   value?: T;
   defaultValue?: T;
-  onChange?: (value: T) => void;
+  onChange?: (value?: T, prevValue?: T) => void;
 }
 
-export function useControlState<T = unknown>(
-  props: ControlComponentProps<T>,
-  params: {
-    isControl?: boolean;
-  } = {}
-) {
-  const { isControl = false } = params;
+export function useControlState<T = unknown>(props: ControlComponentProps<T>) {
+  const { value, defaultValue, onChange } = props;
 
-  const { value: control, defaultValue, onChange: onControl } = props;
+  const isControl = !isUndefined(value);
 
-  const [inner, setInner] = useState<T | undefined>(defaultValue);
+  const [inner, setInner] = useState<T | undefined>(
+    isControl ? value : defaultValue
+  );
 
-  const onChange = useMemoFunc((current: T) => {
-    setInner(current);
-    onControl?.(current);
+  const control = isControl ? value : inner;
+
+  const record = useRecord(control);
+
+  const onControl = useMemoFunc(onChange);
+
+  const isFirstMount = useRef(true);
+
+  useLayoutEffect(() => {
+    isFirstMount.current = false;
+    return () => {
+      isFirstMount.current = true;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const { current } = isFirstMount;
+    if (isFalse(current) && inner !== record) {
+      onControl?.(inner, record);
+    }
+  }, [record, inner, onControl]);
+
+  useLayoutEffect(() => {
+    const { current } = isFirstMount;
+    if (isFalse(current) && isControl) {
+      setInner(value);
+    }
+  }, [value, isControl]);
+
+  const onTrigger: Updater<T> = useMemoFunc((next) => {
+    setInner(next);
   });
 
-  return [isControl ? control : inner, onChange] as const;
+  return [control, onTrigger] as const;
 }

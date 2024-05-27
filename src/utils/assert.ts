@@ -56,11 +56,47 @@ export function isOverflow(target?: ReactTargetType, tolerance = 2) {
   const element = iFindElement(target);
   if (isNil(element)) return false;
   const { offsetWidth, scrollWidth, offsetHeight, scrollHeight } = element;
-  console.log(offsetHeight, scrollHeight);
   return (
     offsetWidth + tolerance < scrollWidth ||
     offsetHeight + tolerance < scrollHeight
   );
+}
+
+/**
+ * 获取元素中心坐标
+ */
+export function iCenter(container?: ReactTargetType) {
+  const {
+    scrollTop = 0,
+    scrollLeft = 0,
+    offsetWidth = 0,
+    offsetHeight = 0,
+  } = iFindElement(container) ?? {};
+  return {
+    x: offsetWidth / 2 + scrollLeft,
+    y: offsetHeight / 2 + scrollTop,
+  };
+}
+
+/**
+ * 断言目标元素子元素是否居中在父元素
+ */
+export function isCentered(target?: unknown, parent?: unknown) {
+  if (isHTMLElement(target) && isHTMLElement(parent)) {
+    const { x, y } = iCenter(parent);
+    const {
+      offsetTop = 0,
+      offsetLeft = 0,
+      offsetWidth = 0,
+      offsetHeight = 0,
+    } = target;
+    const offsetRight = offsetLeft + offsetWidth;
+    const offsetBottom = offsetTop + offsetHeight;
+    return (
+      offsetTop < y && offsetBottom > y && offsetLeft < x && offsetRight > x
+    );
+  }
+  return false;
 }
 
 /**

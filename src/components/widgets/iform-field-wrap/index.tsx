@@ -44,7 +44,12 @@ export const IFieldWrap: ReactCFC<IFieldWrapProps> = ({
           <motion.div className={styles.iconWrap}>{prefix}</motion.div>
         )}
       </AnimatePresence>
-      <IWave placeholder={isFocus} target={target} />
+      {variant !== 'standard' && (
+        <IWave
+          placeholder={variant === 'bordered' && isFocus}
+          target={target}
+        />
+      )}
       {children}
       <AnimatePresence>
         {suffix && (

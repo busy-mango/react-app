@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-query';
 
 import {
+  BoundaryFallbackPage,
   ISnackbarPortal,
   QueryBoundary,
   ReactQueryDevtools,
@@ -64,7 +65,7 @@ export const Configure: ReactCFC = (props) => {
 
   return (
     <QueryClientProvider client={client}>
-      <QueryBoundary>
+      <QueryBoundary fallback={<BoundaryFallbackPage />}>
         <SuspenseModule>{children}</SuspenseModule>
       </QueryBoundary>
       <ISnackbarPortal />

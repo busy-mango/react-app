@@ -29,7 +29,7 @@ export const ISnackbarPortal: ReactCFC<{
   <FloatingPortal root={container}>
     <IOverlay className={styles.overlay}>
       <IFlex vertical align="center" className={styles.container}>
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {useSnackbars(({ snackbars }) => snackbars).map((rect) => (
             <ISnackbar {...rect} key={rect.id} />
           ))}

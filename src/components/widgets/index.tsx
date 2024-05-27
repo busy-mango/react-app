@@ -13,6 +13,8 @@ export * from './imarker';
 export * from './imotion-panel';
 export * from './ioverflow';
 export * from './ipage';
+export * from './ipicker';
 export * from './ipopover';
 export * from './isnackbar';
 export * from './ispinners';
+export * from './itextarea';

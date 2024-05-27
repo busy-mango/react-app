@@ -4,12 +4,15 @@ import { motion } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 
+import { useToggle } from '@/hooks';
 import type { ReactCFC, WrapperProps } from '@/models';
 
+import { IArrow } from '../iarrow';
 import type { IFlexProps } from '../iflex';
 import { IFlex } from '../iflex';
 import { IFieldGrid } from '../iform-field';
 import { IMarker } from '../imarker';
+import { IMotionPanel } from '../imotion-panel';
 
 import styles from './index.scss';
 
@@ -60,16 +63,25 @@ export const IFormCard: ReactCFC<IFormCardProps> = ({
   children,
   className,
   ...others
-}) => (
-  <IFlex vertical className={classNames(styles.card, className)} {...others}>
-    {title && (
-      <IFlex className={styles.header}>
-        <div>{title}</div>
-      </IFlex>
-    )}
-    <IFlex vertical className={styles.content}>
-      {parts?.map((section, index) => <IFormPart {...section} key={index} />)}
+}) => {
+  const [visible, { toggle }] = useToggle(true);
+
+  return (
+    <IFlex vertical className={classNames(styles.card, className)} {...others}>
+      {title && (
+        <IFlex align="center" className={styles.header} justify="space-between">
+          <div>{title}</div>
+          <IArrow type={visible ? 'top' : 'bottom'} onClick={toggle} />
+        </IFlex>
+      )}
+      <IMotionPanel visible={visible}>
+        <IFlex vertical className={styles.content}>
+          {parts?.map((section, index) => (
+            <IFormPart {...section} key={index} />
+          ))}
+        </IFlex>
+      </IMotionPanel>
+      {children}
     </IFlex>
-    {children}
-  </IFlex>
-);
+  );
+};

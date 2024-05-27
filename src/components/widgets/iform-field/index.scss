@@ -46,7 +46,7 @@
 
       & > .wrapper {
         min-width: 100%;
-        min-height: var(--control-height-6);
+        min-height: var(--control-size-6);
       }
     }
 
@@ -200,21 +200,21 @@
   &.mini {
     .feedback {
       &.with-margin {
-        min-height: var(--control-height-1);
+        min-height: var(--control-size-1);
       }
     }
   }
   &.normal {
     .feedback {
       &.with-margin {
-        min-height: var(--control-height-2);
+        min-height: var(--control-size-2);
       }
     }
   }
   &.huge {
     .feedback {
       &.with-margin {
-        min-height: var(--control-height-4);
+        min-height: var(--control-size-4);
       }
     }
   }

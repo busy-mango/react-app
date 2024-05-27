@@ -1,0 +1,75 @@
+import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
+import classNames from 'classnames';
+
+import { useControlState, useMemoFunc, useResizeObserver } from '@/hooks';
+
+import { iTextareaSize } from './helpers';
+import type { ITextAreaEvent, ITextareaProps, ITextareaRef } from './models';
+
+import styles from './index.scss';
+
+export const ITextarea = forwardRef<ITextareaRef, ITextareaProps>(
+  function TextareaAutosize(props, ref) {
+    const {
+      style,
+      className,
+      minRows = 1,
+      maxRows = 3,
+      placeholder,
+      ...other
+    } = props;
+
+    const record = useRef<string | null>(null);
+
+    const input = useRef<HTMLTextAreaElement>(null);
+
+    const shadow = useRef<HTMLTextAreaElement>(null);
+
+    useImperativeHandle(ref, () => input, [input]);
+
+    const [value, onChange] = useControlState(other);
+
+    useResizeObserver(shadow, () => {
+      const { current: iInput } = input;
+
+      const { current: iShadow } = shadow;
+
+      if (iInput && iShadow) {
+        const options = { maxRows, minRows, placeholder };
+        const { height, overflow } = iTextareaSize(iInput, iShadow, options);
+
+        if (record.current !== height) iInput.style.height = height;
+        if (record.current !== height) record.current = height;
+
+        iInput.style.overflow = overflow;
+      }
+    });
+
+    const iChange = useMemoFunc(({ target }: ITextAreaEvent) => {
+      onChange?.(target.value);
+    });
+
+    return (
+      <Fragment>
+        <textarea
+          ref={input}
+          className={classNames(styles.textarea, className)}
+          placeholder={placeholder}
+          rows={minRows}
+          style={style}
+          {...other}
+          value={value}
+          onChange={iChange}
+        />
+        <textarea
+          ref={shadow}
+          aria-hidden
+          readOnly
+          className={styles.shadow}
+          style={style}
+          tabIndex={-1}
+        />
+      </Fragment>
+    );
+  }
+);

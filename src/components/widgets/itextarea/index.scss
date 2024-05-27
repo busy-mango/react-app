@@ -1,0 +1,39 @@
+.shadow {
+  top: 0;
+  left: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  visibility: hidden;
+  transform: translateZ(0);
+
+  padding: unset !important;
+}
+
+.textarea {
+  border: none;
+  outline: none;
+
+  margin: unset;
+  padding: unset;
+
+  background: transparent;
+  background-color: unset;
+
+  min-width: 0;
+
+  width: 100%;
+  height: max-content;
+
+  font-size: inherit;
+
+  caret-color: rgb(var(--main-color));
+
+  &::placeholder {
+    color: rgb(0 0 0 / 0.45);
+  }
+
+  &:-webkit-autofill {
+    -webkit-background-clip: text;
+  }
+}

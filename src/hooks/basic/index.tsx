@@ -8,5 +8,5 @@ export * from './frame.state';
 export * from './in.view';
 export * from './memo.func';
 export * from './record';
-export * from './resize';
+export * from './resize.observer';
 export * from './toggle';

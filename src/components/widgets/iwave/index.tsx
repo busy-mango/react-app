@@ -16,14 +16,21 @@ export const IWave: React.FC<{
 
   const animation = useMemoFunc(async () => {
     memo.current = true;
-    await animate(scope.current, {
-      repeatType: 'reverse',
-      boxShadow: [
-        '0 0 0 1px rgb(var(--wave-color) / 0.05)',
-        '0 0 0 6px rgb(var(--wave-color) / 0.2)',
-        '0 0 0 12px rgb(var(--wave-color) / 0)',
-      ],
-    });
+    await animate(
+      scope.current,
+      {
+        boxShadow: [
+          '0 0 0 0px rgb(var(--wave-color) / 0.05)',
+          '0 0 0 3px rgb(var(--wave-color) / 0.2)',
+          '0 0 0 8px rgb(var(--wave-color) / 0)',
+        ],
+      },
+      {
+        duration: 0.4,
+        velocity: 100,
+        repeatType: 'reverse',
+      }
+    );
     memo.current = false;
   });
 

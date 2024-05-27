@@ -20,14 +20,14 @@
   --font-size-9: calc(24vw / 3.75);
   --font-size-10: calc(28vw / 3.75);
 
-  --control-height-1: calc(14vw / 3.75);
-  --control-height-2: calc(16vw / 3.75);
-  --control-height-3: calc(20vw / 3.75);
-  --control-height-4: calc(24vw / 3.75);
-  --control-height-5: calc(28vw / 3.75);
-  --control-height-6: calc(32vw / 3.75);
-  --control-height-7: calc(40vw / 3.75);
-  --control-height-8: calc(48vw / 3.75);
+  --control-size-1: calc(14vw / 3.75);
+  --control-size-2: calc(16vw / 3.75);
+  --control-size-3: calc(20vw / 3.75);
+  --control-size-4: calc(24vw / 3.75);
+  --control-size-5: calc(28vw / 3.75);
+  --control-size-6: calc(32vw / 3.75);
+  --control-size-7: calc(40vw / 3.75);
+  --control-size-8: calc(48vw / 3.75);
 
   --border-radius-2: calc(4vw / 3.75);
   --border-radius-3: calc(6vw / 3.75);
@@ -59,6 +59,8 @@
 
   --error-color: 245 66 77;
 
+  --border-color: 229 230 235;
+
   --wave-color: 82 11 239;
   --main-color: 47 84 235;
 
@@ -66,10 +68,14 @@
 }
 
 #root {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   color: var(--font-color-8);
   font-size: var(--font-size-4);
 
   * {
+    -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
   }
 }

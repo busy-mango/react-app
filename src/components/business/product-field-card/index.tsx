@@ -1,4 +1,10 @@
-import { IFieldCell, IFieldGrid, IFormCard } from '@/components/widgets';
+import {
+  IFieldCell,
+  IFieldGrid,
+  IFormCard,
+  IPicker,
+  ITextarea,
+} from '@/components/widgets';
 import type { ReactCFC } from '@/models';
 
 export interface ProductFormCardProps {
@@ -29,8 +35,23 @@ const parts = [
     title: '投票意见',
     children: (
       <IFieldGrid>
-        <IFieldCell title="投票意见"></IFieldCell>
-        <IFieldCell mode="vertical" title="意见反馈"></IFieldCell>
+        <IFieldCell title="投票结果">
+          <IPicker
+            columns={[
+              [
+                { label: '通过', value: 1 },
+                { label: '有条件通过', value: 2 },
+                { label: '复议', value: 3 },
+                { label: '否决', value: 4 },
+              ],
+            ]}
+            defaultValue={[2]}
+            title="投票结果"
+          />
+        </IFieldCell>
+        <IFieldCell mode="vertical" title="意见反馈">
+          <ITextarea maxRows={6} minRows={3} />
+        </IFieldCell>
       </IFieldGrid>
     ),
   },

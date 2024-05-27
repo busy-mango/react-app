@@ -44,15 +44,13 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
       ...others
     } = props;
 
-    const isControl = 'value' in props;
-
     const target = useRef<HTMLInputElement>(null);
 
     const assert = useControlPatternAssert(pattern);
 
     const { isReadOnly, isDisabled, isReadPretty } = assert;
 
-    const [value, onChange] = useControlState(props, { isControl });
+    const [value, onChange] = useControlState(props);
 
     const isComposition = useEventState({
       target,

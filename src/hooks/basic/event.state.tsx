@@ -7,12 +7,14 @@ import { iFindElement } from '@/utils';
 
 import { useToggle } from './toggle';
 
-export function useEventState(params: {
-  start: keyof HTMLElementEventMap;
-  end: keyof HTMLElementEventMap;
-  target?: ReactTargetType;
-}) {
-  const { end, start, target } = params ?? {};
+export function useEventState(
+  params: {
+    start: keyof HTMLElementEventMap;
+    end: keyof HTMLElementEventMap;
+    target?: ReactTargetType;
+  } & AddEventListenerOptions
+) {
+  const { end, start, target, passive = true, capture } = params ?? {};
 
   const [state, { on, off }] = useToggle(false);
 
@@ -20,15 +22,16 @@ export function useEventState(params: {
     const element = iFindElement(target);
 
     if (isHTMLElement(element)) {
-      element.addEventListener(end, off);
-      element.addEventListener(start, on);
+      const options = { passive, capture };
+      element.addEventListener(end, off, options);
+      element.addEventListener(start, on, options);
 
       return () => {
         element.removeEventListener(end, off);
         element.removeEventListener(start, on);
       };
     }
-  }, [target, on, off, end, start]);
+  }, [target, on, off, end, start, passive, capture]);
 
   return state;
 }

@@ -45,6 +45,6 @@ export const DynamicPage: React.FC = () => {
   );
 };
 
-const isAllowDebug = env.name !== AppEnv.Prod;
+export const isNonProd = env.name !== AppEnv.Prod;
 
-export const ReactQueryDevtools = isAllowDebug && lazy(devtoolAsync);
+export const ReactQueryDevtools = isNonProd && lazy(devtoolAsync);

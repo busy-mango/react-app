@@ -1,0 +1,27 @@
+.card {
+  box-sizing: border-box;
+
+  padding: var(--gap-7) var(--gap-5);
+}
+
+.header {
+  font-size: var(--font-size-3);
+
+  .avatar {
+    border-radius: 50%;
+    margin-right: var(--gap-2);
+
+    width: var(--control-size-3);
+    height: var(--control-size-3);
+  }
+
+  .creator {
+    flex-grow: 1;
+  }
+}
+
+.content {
+  margin-top: var(--gap-6);
+  font-size: var(--font-size-4);
+  line-height: var(--control-size-3);
+}
