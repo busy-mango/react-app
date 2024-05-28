@@ -69,6 +69,10 @@
             "^@\/" // alias
           ],
           [
+            "^@\/icons", // medias
+            "^@\/images"
+          ],
+          [
             // parent imports. put `..` last
             "^\\.\\.(?!/?$)",
             "^\\.\\./?$",

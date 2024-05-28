@@ -21,7 +21,7 @@ const children = (
 
 const Welcome: React.FC = () => {
   useEffect(() => {
-    isDev && snackbar.emit({ children });
+    isDev && snackbar.emit({ children, id: 'Welcome' });
   }, []);
 
   return (

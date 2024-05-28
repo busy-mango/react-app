@@ -6,10 +6,11 @@ import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import Picture from '@/icons/picture.svg';
 import { AppEnv, env } from '@/init';
 import type { ReactSvgProps } from '@/models';
 import { devtoolAsync } from '@/utils';
+
+import Picture from '@/icons/picture.svg';
 
 import { useLazyComponent, useLazyIcon } from './hooks';
 
@@ -39,8 +40,8 @@ export const DynamicPage: React.FC = () => {
   const { pathname } = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Loadable key={pathname} route={pathname} />
+    <AnimatePresence key={pathname} mode="wait">
+      <Loadable route={pathname} />
     </AnimatePresence>
   );
 };

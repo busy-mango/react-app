@@ -23,6 +23,7 @@ export interface ISnackbarProps
   variant?: 'filled' | 'outlined';
   /** 状态 */
   status?: 'success' | 'info' | 'error' | 'warn';
+  /** 组件卸载时的回调 */
   onExit?: (api: ISnackbarAPI) => void;
 }
 

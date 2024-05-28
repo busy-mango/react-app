@@ -16,6 +16,12 @@ export type TodoModel = {
   taskDefineKey: string;
   /** 流程实例ID */
   processInstanceId: string;
+  /** 流程发起人 */
+  processStartUserId: string;
+  /** 流程任务发起时间 */
+  processTaskStartTime: number;
+  /** 流程任务ID */
+  processTaskInstanceId: string;
 };
 
 /** 待办列表请求参数 */

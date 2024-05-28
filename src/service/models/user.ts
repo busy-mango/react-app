@@ -12,6 +12,8 @@ export type IUserModel = {
   code?: string;
   /** 用户邮箱 */
   email?: string;
+  /** 用户部门名称 */
+  deptName?: string;
   /** 用户是否在职 */
   vaildFlag?: 'Y' | 'N';
   /** 用户角色 */

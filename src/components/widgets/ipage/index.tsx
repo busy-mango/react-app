@@ -1,6 +1,8 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import type { ReactCFC } from '@/models';
+
+import { IClipSpinner } from '../ispinners';
 
 import styles from './index.scss';
 
@@ -9,7 +11,11 @@ export interface IPageProps {
   background?: React.ReactNode;
 }
 
-export const IMobilePage: ReactCFC<IPageProps> = ({ children, background }) => (
+export const IMobilePage: ReactCFC<IPageProps> = ({
+  children,
+  background,
+  isLoading,
+}) => (
   <motion.article
     animate={{ opacity: 1 }}
     className={styles.page}
@@ -18,6 +24,18 @@ export const IMobilePage: ReactCFC<IPageProps> = ({ children, background }) => (
     transition={{ duration: 0.3 }}
   >
     {background && <div className={styles.background}>{background}</div>}
-    {children}
+    <AnimatePresence>
+      {isLoading && (
+        <motion.div
+          animate={{ opacity: 1 }}
+          className={styles.spin}
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0.36 }}
+        >
+          <IClipSpinner />
+        </motion.div>
+      )}
+    </AnimatePresence>
+    {!isLoading && children}
   </motion.article>
 );

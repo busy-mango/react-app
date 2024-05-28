@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import { assign, ifnot, type OmitOf } from '@busymango/utils';
 
-import type { ControlUIPattern } from '@/components/models';
+import type { ControlUIPattern, ControlValue } from '@/components/models';
 import {
   useControlPatternAssert,
   useControlState,
@@ -15,8 +15,6 @@ import { iPressEvent, isIOS, sizeOf } from '@/utils';
 
 import styles from './index.scss';
 
-type ValueType = ReactInputProps['value'] | null;
-
 export interface IInputRef {
   clear: () => void;
   native: HTMLInputElement | null;
@@ -25,11 +23,11 @@ export interface IInputRef {
 export interface IInputProps
   extends OmitOf<ReactInputProps, 'onChange' | 'value'> {
   /** 控件值 */
-  value?: ValueType;
+  value?: ControlValue;
   /** 控件交互模式 */
   pattern?: ControlUIPattern;
   /** 输入事件 */
-  onChange?: (value?: ValueType) => void;
+  onChange?: (value?: ControlValue) => void;
   /** 回车事件 */
   onPressEnter?: ReactInputProps['onKeyDown'];
 }

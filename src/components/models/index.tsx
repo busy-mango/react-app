@@ -1,5 +1,7 @@
 import type React from 'react';
 
+import type { ReactInputProps } from '@/models';
+
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';
 
@@ -20,6 +22,14 @@ export type ControlValidationStatus =
   | 'warning'
   | 'success';
 
+export type ControlValue = ReactInputProps['value'] | null;
+
+export type ControlOptionModel = {
+  value: React.Key;
+  label?: React.ReactNode;
+  title?: string;
+};
+
 export interface InteractionProps {
   ref: (node: HTMLElement | SVGElement | null) => void;
   onBlur?(): void;
@@ -32,9 +42,3 @@ export interface InteractionProps {
   onPointerDown?(): void;
   onPointerEnter?(): void;
 }
-
-export type ControlOptionModel = {
-  value: React.Key;
-  label?: React.ReactNode;
-  title?: string;
-};

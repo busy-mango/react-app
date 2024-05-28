@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import type { AnimationProps } from 'framer-motion';
+import type { AnimationDefinition, AnimationProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 import { isNumber, isObject } from '@busymango/is-esm';
 import { isEqual } from '@busymango/utils';
 
-import { useMemoFunc } from '@/hooks';
+import { useEventState, useMemoFunc } from '@/hooks';
 
 import { useSnackbars } from './hooks';
 import type { ISnackbarProps } from './models';
@@ -23,9 +23,17 @@ export const ISnackbar: React.FC<ISnackbarProps> = (props) => {
   const { id, icon, close, duration, children, className, onExit, ...others } =
     props;
 
+  const target = useRef(null);
+
   const _destory = useSnackbars(({ destory }) => destory);
 
   const destory = useMemoFunc(() => _destory(id));
+
+  const isHover = useEventState({
+    start: 'mouseenter',
+    end: 'mouseleave',
+    target,
+  });
 
   const api = useRef({ id, destory });
 
@@ -34,14 +42,21 @@ export const ISnackbar: React.FC<ISnackbarProps> = (props) => {
   }, [id]);
 
   useEffect(() => {
-    if (isNumber(duration)) {
+    if (!isHover && isNumber(duration)) {
       const timer = setTimeout(destory, duration);
       return () => clearTimeout(timer);
     }
-  }, [duration, destory]);
+  }, [duration, isHover, destory]);
+
+  const onAnimationComplete = useMemoFunc((animation: AnimationDefinition) => {
+    if (isObject(animation) && isEqual(animation, initial)) {
+      onExit?.(api.current);
+    }
+  });
 
   return (
     <motion.div
+      ref={target}
       layout
       animate={{
         y: 0,
@@ -53,11 +68,7 @@ export const ISnackbar: React.FC<ISnackbarProps> = (props) => {
       exit={initial}
       initial={initial}
       transition={{ ease: 'easeOut', duration: 0.3 }}
-      onAnimationComplete={(animation) => {
-        if (isObject(animation) && isEqual(animation, initial)) {
-          onExit?.(api.current);
-        }
-      }}
+      onAnimationComplete={onAnimationComplete}
       {...others}
     >
       {icon && <motion.div>{icon}</motion.div>}

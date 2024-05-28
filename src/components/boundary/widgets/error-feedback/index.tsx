@@ -6,8 +6,9 @@ import { useMemo } from 'react';
 import classNames from 'classnames';
 
 import { NotFound, Unknown } from '@/components/business';
-import Refresh from '@/icons/refresh.svg';
 import { catchMsg, isNotFoundError } from '@/utils';
+
+import RefreshSVG from '@/icons/refresh.svg';
 
 import { useFallbackContext } from '../../hooks';
 
@@ -25,7 +26,7 @@ export const BoundaryFallbackWidget: React.FC<{
   return (
     <span className={classNames(styles.widget, autoSize && styles.autoSize)}>
       <input readOnly title={msg} value={msg} />
-      <Refresh onClick={reset} />
+      <RefreshSVG onClick={reset} />
     </span>
   );
 };
@@ -43,5 +44,5 @@ export const BoundaryFallbackPage: React.FC = () => {
 
   if (isNotFoundError(error)) return <NotFound />;
 
-  return <Unknown description={info?.componentStack} />;
+  return <Unknown description={info?.componentStack} title={catchMsg(error)} />;
 };

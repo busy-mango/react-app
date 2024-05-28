@@ -6,6 +6,7 @@ import type { ControlUISize } from '@/components/models';
 import { useEventState } from '@/hooks';
 import type { ReactCFC } from '@/models';
 
+import { useIFieldGridContext } from '../iform-field/hooks';
 import { IWave } from '../iwave';
 
 import styles from './index.scss';
@@ -19,13 +20,17 @@ export interface IFieldWrapProps {
   variant?: 'filled' | 'standard' | 'bordered';
 }
 
-export const IFieldWrap: ReactCFC<IFieldWrapProps> = ({
-  prefix,
-  suffix,
-  children,
-  size = 'medium',
-  variant = 'standard',
-}) => {
+export const IFieldWrap: ReactCFC<IFieldWrapProps> = (props) => {
+  const ctx = useIFieldGridContext();
+
+  const {
+    prefix,
+    suffix,
+    children,
+    variant = 'standard',
+    size = ctx?.size ?? 'medium',
+  } = props;
+
   const target = useRef<HTMLDivElement>(null);
 
   const isFocus = useEventState({

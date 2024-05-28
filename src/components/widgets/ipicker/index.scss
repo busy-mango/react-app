@@ -89,7 +89,9 @@
     justify-content: flex-start;
     flex-direction: column;
 
-    scroll-snap-type: y mandatory;
+    transform-style: preserve-3d;
+
+    // scroll-snap-type: y mandatory;
 
     -webkit-overflow-scrolling: touch;
 
@@ -104,10 +106,10 @@
       align-items: center;
       justify-content: center;
 
-      scroll-snap-stop: normal;
-      scroll-snap-align: center;
+      // scroll-snap-stop: normal;
+      // scroll-snap-align: center;
 
-      transform-style: preserve-3d;
+      // transform-style: preserve-3d;
 
       &.focus {
         color: rgb(var(--main-color));

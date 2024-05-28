@@ -3,11 +3,12 @@
  */
 
 import { IFlex } from '@/components/widgets';
+import type { ReactCFC } from '@/models';
+
 import MaintainedSVG from '@/icons/business/maintained.svg';
 import NoAuthSVG from '@/icons/business/no.auth.svg';
 import NoDataSVG from '@/icons/business/no.data.svg';
 import NotFoundSVG from '@/icons/business/not.found.svg';
-import type { ReactCFC } from '@/models';
 
 import styles from './index.scss';
 
@@ -33,10 +34,11 @@ export const NoAuth: ReactCFC<FeedbackProps> = ({ title }) => (
 );
 
 /** 资源404 */
-export const NotFound: ReactCFC<FeedbackProps> = ({ title }) => (
+export const NotFound: ReactCFC<FeedbackProps> = ({ title, children }) => (
   <IFlex centered vertical className={styles.wrap}>
     <NotFoundSVG className={styles.img} />
     <h1 className={styles.title}>{title ?? '页面不存在'}</h1>
+    {children}
   </IFlex>
 );
 

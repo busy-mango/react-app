@@ -5,6 +5,7 @@ import type {
   ControlUIPattern,
   ControlUISize,
 } from '@/components/models';
+import type { WrapperProps } from '@/models';
 
 import type { IFlexProps } from '../../iflex/models';
 
@@ -19,7 +20,7 @@ export type IFieldGridMode =
   | 'quadruple';
 
 export interface IFieldCellProps
-  extends OmitOf<IFlexProps, 'title' | 'children'> {
+  extends OmitOf<WrapperProps, 'title' | 'children'> {
   /** 字段标题对齐方式 */
   align?: 'start' | 'end';
   /** 是否开启外间距 */

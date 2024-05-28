@@ -19,6 +19,7 @@ __snapshots__/
 
 run
 .DS_Store
+.eslintcache
 npm-debug.log
 yarn-error.log
 

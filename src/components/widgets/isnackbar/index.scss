@@ -3,6 +3,11 @@
   align-items: center;
   justify-content: flex-start;
 
+  box-sizing: border-box;
+  max-width: calc(100% - 2 * var(--gap-4));
+
+  background-color: rgb(var(--comp-bg-color));
+
   cursor: pointer;
   pointer-events: initial;
 
@@ -13,6 +18,7 @@
 
   -webkit-box-pack: start;
   -webkit-box-align: center;
+  -webkit-tap-highlight-color: transparent;
 
   box-shadow:
     rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,

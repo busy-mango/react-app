@@ -65,9 +65,24 @@ const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
 
   const translateZ = useTransform(scrollYProgress, [0, 0.5, 1], [-16, 0, -16]);
 
-  const onTab = useMemoFunc(() => {
-    iScrollIntoView(target);
+  useEffect(() => {
+    const { current } = container;
+    if (current && isFocus) {
+      const iEventListener = () => {
+        iScrollIntoView(target);
+      };
+
+      current.addEventListener('scrollend', iEventListener);
+
+      return () => {
+        current.removeEventListener('scrollend', iEventListener);
+      };
+    }
   });
+
+  // const onTab = useMemoFunc(() => {
+  //   iScrollIntoView(target);
+  // });
 
   return (
     <motion.div
@@ -81,7 +96,7 @@ const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
       initial={{ opacity: 0.88 }}
       transition={{ ease: 'linear' }}
       whileInView={{ opacity: 1 }}
-      onClick={onTab}
+      // onClick={onTab}
       {...others}
     >
       {children}

@@ -7,6 +7,7 @@ import {
   IFormWrap,
   IMobilePage,
 } from '@/components';
+
 import DocumentationSVG from '@/icons/business/documentation.svg';
 import InformationSVG from '@/icons/business/information.svg';
 import StructureSVG from '@/icons/business/structure.svg';

@@ -15,6 +15,7 @@ import {
   IMotionPanel,
   IPopover,
 } from '@/components';
+
 import AccountSVG from '@/icons/account.svg';
 import LockSVG from '@/icons/lock.svg';
 import iBackgroundSrc from '@/images/page.png';

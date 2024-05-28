@@ -2,10 +2,11 @@ import classNames from 'classnames';
 
 import { isTrue } from '@busymango/is-esm';
 
-import HelperSVG from '@/icons/helper.svg';
-import NoteSVG from '@/icons/note.svg';
 import type { ReactCFC } from '@/models';
 import { isReactChildren, isReactNode } from '@/utils';
+
+import HelperSVG from '@/icons/helper.svg';
+import NoteSVG from '@/icons/note.svg';
 
 import { IFlex } from '../iflex';
 import { IMarker } from '../imarker';
@@ -62,7 +63,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     status = 'success',
     pattern = 'editable',
     colon = ctx?.colon ?? ':',
-    size = ctx?.size ?? 'normal',
+    size = ctx?.size ?? 'medium',
     margin = ctx?.margin ?? true,
     mode = ctx?.mode ?? 'vertical',
     forceRenderTitle = ctx?.forceRenderTitle,
