@@ -4,9 +4,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { isTrue } from '@busymango/is-esm';
 
+import { useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
-import { iEscapeEvent } from '@/utils';
+import { iEscapeEvent, iPropagation } from '@/utils';
 
+import { ISignLine } from '../isign';
 import { IWave } from '../iwave';
 import type { IChipProps } from './models';
 
@@ -28,6 +30,13 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
 
   const target = useRef<HTMLSpanElement>(null);
 
+  const iClose = useMemoFunc(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      iPropagation(event);
+      onClose?.(event);
+    }
+  );
+
   return (
     <motion.span
       ref={target}
@@ -46,10 +55,12 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
       {clickable && <IWave target={target} />}
       <AnimatePresence>
         {icon && <motion.div className={styles.icon}>{icon}</motion.div>}
-        <motion.span>{children}</motion.span>
+      </AnimatePresence>
+      <motion.span>{children}</motion.span>
+      <AnimatePresence>
         {close && (
-          <motion.div className={styles.close} onClick={onClose}>
-            {isTrue(close) ? 'close' : close}
+          <motion.div className={styles.close} onClick={iClose}>
+            {isTrue(close) ? <ISignLine type="cross" /> : close}
           </motion.div>
         )}
       </AnimatePresence>

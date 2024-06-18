@@ -28,10 +28,12 @@ export interface ISnackbarProps
 }
 
 export type ISnackbarStore = {
+  max?: number;
   snackbars: ISnackbarProps[];
 };
 
 export type ISnackbarActions = {
   destory: (key: React.Key) => void;
   emit: (config: OmitOf<ISnackbarProps, 'onExit'>) => Promise<void>;
+  setMaxCount: (recipe: (previous?: number) => number) => void;
 };

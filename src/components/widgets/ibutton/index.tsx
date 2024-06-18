@@ -90,6 +90,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
         className
       )}
       disabled={disabled}
+      type="button"
       whileTap={{
         scale: [null, 0.96],
         backgroundColor: iTapBackground({ variant }),

@@ -1,17 +1,22 @@
-import type { Target } from 'framer-motion';
+import type { Target, Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 import type { ReactSvgProps } from '@/models';
 
 const d = {
-  top: 'M64 596 L512 224 L960 596',
-  left: 'M596 64 L224 512 L596 960',
-  right: 'M428 64 L800 512 L428 960',
-  bottom: 'M64 428 L512 800 L960 428',
+  top: 'M128 640 L512 256 L896 640',
+  left: 'M640 128 L256 512 L640 896',
+  right: 'M384 128 L768 512 L384 944',
+  bottom: 'M128 384 L512 768 L944 384',
 };
 
 const initial: Target = {
   d: 'M512 512 L512 512 L512 512',
+};
+
+const transition: Transition = {
+  duration: 0.2,
+  ease: 'easeIn',
 };
 
 export interface IArrowProps extends ReactSvgProps {
@@ -35,10 +40,7 @@ export const IArrow: React.FC<IArrowProps> = ({ type, ...props }) => (
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="128"
-      transition={{
-        duration: 0.3,
-        ease: 'easeIn',
-      }}
+      transition={transition}
     />
   </svg>
 );

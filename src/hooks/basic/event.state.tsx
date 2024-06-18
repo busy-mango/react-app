@@ -7,13 +7,27 @@ import { iFindElement } from '@/utils';
 
 import { useToggle } from './toggle';
 
-export function useEventState(
-  params: {
-    start: keyof HTMLElementEventMap;
-    end: keyof HTMLElementEventMap;
-    target?: ReactTargetType;
-  } & AddEventListenerOptions
-) {
+export type EventStateParams = {
+  start: keyof HTMLElementEventMap;
+  end: keyof HTMLElementEventMap;
+  target?: ReactTargetType;
+} & AddEventListenerOptions;
+
+export const iHoverParams = (target: ReactTargetType): EventStateParams => ({
+  target,
+  end: 'mouseleave',
+  start: 'mouseenter',
+});
+
+export const iComposingParams = (
+  target: ReactTargetType
+): EventStateParams => ({
+  target,
+  end: 'compositionend',
+  start: 'compositionstart',
+});
+
+export function useEventState(params: EventStateParams) {
   const { end, start, target, passive = true, capture } = params ?? {};
 
   const [state, { on, off }] = useToggle(false);

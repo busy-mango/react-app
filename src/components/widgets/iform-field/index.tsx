@@ -120,11 +120,11 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
               {children}
             </IFlex>
             <IMotionPanel
-              visible={isReactChildren(feedback)}
-              wrapClassName={classNames(
+              className={classNames(
                 styles.feedback,
                 margin === 'feedback' && styles.withMargin
               )}
+              visible={isReactChildren(feedback)}
             >
               {feedback}
             </IMotionPanel>

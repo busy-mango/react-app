@@ -6,12 +6,13 @@
 
 ``` tsx
 import { IOverlay } from '@/components';
-
 ```
 
 ## Usage
 
-It renders a <div> with base styling.
+### Basic select
+
+It renders a `<div>` with base styling.
 
 ``` typescript
 function App() {
@@ -24,17 +25,13 @@ function App() {
 }
 ```
 
+### Advanced features
+
+#### Advanced scroll lock
+
+> If you need a more advanced solution, `react-remove-scroll` is a great option.
+
 ## API
-
-``` tsx
-export interface IOverlayProps {
-  scroll?: boolean;
-}
-```
-
-### `scroll`
-
-Whether the `<body>` is prevented from scrolling while the overlay is rendered. Uses a robust technique that works on iOS and handles horizontal scrolling.
 
 ``` tsx
 <IOverlay scroll={false}>
@@ -42,7 +39,9 @@ Whether the `<body>` is prevented from scrolling while the overlay is rendered. 
 </IOverlay>
 ```
 
-> If you need a more advanced solution, `react-remove-scroll` is a great option.
+| Name | Type | Default | Description |
+|-------|-------|-------|-------|
+| `scroll` | `boolean` | `true` | Whether the `<body>` is prevented from scrolling while the overlay is rendered. Uses a robust technique that works on iOS and handles horizontal scrolling. |
 
 ## Troubleshooting
 

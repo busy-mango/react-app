@@ -1,4 +1,4 @@
-import { isArray, isPlainObject, isString } from '@busymango/is-esm';
+import { isArray, isNil, isPlainObject, isString } from '@busymango/is-esm';
 
 export type WrapperDirectionType = 'inline' | 'vertical' | 'horizontal';
 
@@ -15,3 +15,7 @@ export const sizeOf = (source: unknown) => {
   if (isPlainObject(source)) return Object.keys(source).length;
   return 0;
 };
+
+export function iCompact<T = unknown>(source: (T | null | undefined)[]): T[] {
+  return source.filter((e) => !isNil(e)) as T[];
+}

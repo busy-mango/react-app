@@ -18,10 +18,11 @@ interface FeedbackProps {
 }
 
 /** 找不到数据 */
-export const NoData: ReactCFC<FeedbackProps> = ({ title }) => (
+export const NoData: ReactCFC<FeedbackProps> = ({ children, title }) => (
   <IFlex centered vertical className={styles.wrap}>
     <NoDataSVG className={styles.img} />
     <h1 className={styles.title}>{title ?? '暂无数据'}</h1>
+    {children}
   </IFlex>
 );
 

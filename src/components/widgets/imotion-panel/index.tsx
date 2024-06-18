@@ -35,8 +35,8 @@ export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
 
   const record = useRecord(children, visible && ghosting);
 
-  const iSyncHeight = useMemoFunc(({ clientHeight }: HTMLElement) => {
-    clientHeight !== height && setHeight(clientHeight);
+  const iSyncHeight = useMemoFunc(({ scrollHeight }: HTMLElement) => {
+    scrollHeight !== height && setHeight(scrollHeight);
   });
 
   useResizeObserver(target, iSyncHeight, visible);

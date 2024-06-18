@@ -6,6 +6,7 @@ import { useControlState, useMemoFunc, useResizeObserver } from '@/hooks';
 import { iTextareaSize } from './helpers';
 import type { ITextAreaEvent, ITextareaProps, ITextareaRef } from './models';
 
+import iStyles from '@/components/widgets/common.scss';
 import styles from './index.scss';
 
 export const ITextarea = forwardRef<ITextareaRef, ITextareaProps>(
@@ -65,7 +66,7 @@ export const ITextarea = forwardRef<ITextareaRef, ITextareaProps>(
           ref={shadow}
           aria-hidden
           readOnly
-          className={styles.shadow}
+          className={iStyles.shadow}
           style={style}
           tabIndex={-1}
         />

@@ -9,4 +9,5 @@ export * from './in.view';
 export * from './memo.func';
 export * from './record';
 export * from './resize.observer';
+export * from './timeout';
 export * from './toggle';

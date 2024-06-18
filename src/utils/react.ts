@@ -38,7 +38,8 @@ export const iPressEvent =
     onKeyDown?: (event: React.KeyboardEvent<T>) => void
   ) =>
   (event: React.KeyboardEvent<T>) => {
-    event?.code === 'Enter' ? func?.(event) : onKeyDown?.(event);
+    onKeyDown?.(event);
+    event?.code === 'Enter' && func?.(event);
   };
 
 /** 从键盘敲击事件中创建删除敲击事件 */

@@ -10,3 +10,20 @@ export const size2px = (px: number) => {
   const { innerWidth } = window;
   return px * (innerWidth / 375);
 };
+
+/**
+ * 从CSS长度单位字符串中获取数字（vw单位）
+ */
+export const iStyleLenValue = (string?: string, unit: 'vw' | 'px' = 'px') => {
+  // eslint-disable-next-line no-useless-escape
+  const reg = new RegExp(`(\\d+)(?=${unit})`);
+  const str = string?.match(reg)?.[1];
+  return str ? parseInt(str, 10) : undefined;
+};
+
+/**
+ * 从当前设备显示的vw尺寸转换到实际像素
+ */
+export const vw2px = (vw: number) => {
+  return vw * 3.75;
+};

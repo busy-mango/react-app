@@ -1,6 +1,8 @@
-import { AnimatePresence } from 'framer-motion';
+import { useDeferredValue, useEffect } from 'react';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { nanoid } from 'nanoid';
 
+import { isNumber } from '@busymango/is-esm';
 import { assign } from '@busymango/utils';
 import { FloatingPortal } from '@floating-ui/react';
 
@@ -25,16 +27,34 @@ export const snackbar = {
 
 export const ISnackbarPortal: ReactCFC<{
   max?: number;
-}> = ({ max = 1 }) => (
-  <FloatingPortal root={container}>
-    <IOverlay className={styles.overlay}>
-      <IFlex vertical align="center" className={styles.container}>
-        <AnimatePresence mode="popLayout">
-          {useSnackbars(({ snackbars }) => snackbars).map((rect) => (
-            <ISnackbar {...rect} key={rect.id} />
-          ))}
-        </AnimatePresence>
-      </IFlex>
-    </IOverlay>
-  </FloatingPortal>
-);
+}> = ({ max }) => {
+  const { snackbars, setMaxCount } = useSnackbars(
+    ({ snackbars, setMaxCount }) => ({ snackbars, setMaxCount })
+  );
+
+  useEffect(() => {
+    if (isNumber(max)) {
+      setMaxCount(() => max);
+    }
+  }, [max, setMaxCount]);
+
+  return (
+    <FloatingPortal root={container}>
+      <IOverlay className={styles.overlay}>
+        <IFlex vertical align="center" className={styles.container}>
+          <MotionConfig reducedMotion="never">
+            <AnimatePresence mode="sync">
+              {useDeferredValue(snackbars).map((rect, index) => (
+                <ISnackbar
+                  style={{ zIndex: -1 * index }}
+                  {...rect}
+                  key={rect.id}
+                />
+              ))}
+            </AnimatePresence>
+          </MotionConfig>
+        </IFlex>
+      </IOverlay>
+    </FloatingPortal>
+  );
+};

@@ -25,8 +25,7 @@ export type ReactComponentAsync<T = unknown> = {
 export type ReactCSSColor = React.CSSProperties['color'];
 
 /** React wrap props */
-export type WrapperProps<T extends HTMLElement = HTMLDivElement> =
-  React.HTMLAttributes<T>;
+export type WrapperProps<T extends Element = Element> = React.HTMLAttributes<T>;
 
 /** React native input props */
 export type ReactInputProps = React.DetailedHTMLProps<
