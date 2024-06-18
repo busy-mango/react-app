@@ -32,7 +32,7 @@ import {
 
 import type { ControlOptionModel, ControlValue } from '@/components/models';
 import {
-  iHoverParams,
+  iFocusParams,
   useControlState,
   useEventState,
   useMemoFunc,
@@ -40,12 +40,12 @@ import {
 import { container } from '@/init';
 import { iArray, iCompact, size2px } from '@/utils';
 
-import { IArrow } from '../iarrow';
 import { IChip } from '../ichip';
 import { IFlex } from '../iflex';
 import { IFieldWrap } from '../iform-field-wrap';
 import type { IInputRef } from '../iinput';
 import { IInput } from '../iinput';
+import type { ISignType } from '../isign';
 import { ISignLine } from '../isign';
 import { estimateSize } from './helpers';
 import type {
@@ -92,6 +92,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     const {
       clear,
       render,
+      status,
       options,
       measure,
       multiple,
@@ -99,14 +100,19 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       autoFocus,
       isLoading,
       separator,
-      iFloatingClassName,
+      placeholder,
       open: _open,
       keyword: _keyword,
+      iFloatingClassName,
       filter = true,
+      variant = 'bordered',
+      size: _size = 'medium',
       onOpenChange: _onOpenChange,
       onSearch: _onSearch,
       iFloatingRoot,
+      onFocus,
       onClick,
+      onBlur,
     } = props;
 
     const [open, onOpenChange] = useControlState({
@@ -174,8 +180,8 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       referencePress: false,
     });
 
-    const isHover = useEventState(
-      iHoverParams(refs.reference.current as HTMLDivElement)
+    const isFocus = useEventState(
+      iFocusParams(refs.reference.current as HTMLDivElement)
     );
 
     const interactions = useInteractions([click, dismiss]);
@@ -187,6 +193,8 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     const iSelectedList = iCompact(iArray(value) ?? []);
 
     const isTop = context.placement.startsWith('top');
+
+    const clearable = !isEmpty(value);
 
     const transition = useMemo(
       () => ({
@@ -287,9 +295,12 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
         );
       });
 
-    const iArrowType = context.open ? 'top' : 'bottom';
-
-    const clearable = isHover && !isEmpty(value);
+    const iSignType: ISignType =
+      isFocus && clearable
+        ? 'cross'
+        : context.open
+          ? 'arrow-top'
+          : 'arrow-bottom';
 
     return (
       <Fragment>
@@ -300,14 +311,10 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
             [styles.keyword]: isNonEmptyString(keyword),
           })}
           isLoading={isLoading}
-          suffix={
-            clearable ? (
-              <ISignLine ring type="cross" />
-            ) : (
-              <IArrow type={iArrowType} />
-            )
-          }
-          variant="bordered"
+          size={_size}
+          status={status}
+          suffix={<ISignLine ring={iSignType === 'cross'} type={iSignType} />}
+          variant={variant}
           onSuffixClick={onSuffixClick}
           {...getReferenceProps({
             onClick: iClick,
@@ -322,8 +329,11 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
               autoSize
               autoFocus={autoFocus}
               className={styles.input}
+              placeholder={placeholder}
               value={keyword}
+              onBlur={onBlur}
               onChange={iSearch}
+              onFocus={onFocus}
               onKeyDown={iKeyDown}
             />
           </motion.div>

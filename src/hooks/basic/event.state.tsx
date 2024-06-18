@@ -19,6 +19,12 @@ export const iHoverParams = (target: ReactTargetType): EventStateParams => ({
   start: 'mouseenter',
 });
 
+export const iFocusParams = (target: ReactTargetType): EventStateParams => ({
+  target,
+  end: 'focusout',
+  start: 'focusin',
+});
+
 export const iComposingParams = (
   target: ReactTargetType
 ): EventStateParams => ({
