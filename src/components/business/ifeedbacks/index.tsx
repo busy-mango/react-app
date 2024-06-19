@@ -6,8 +6,8 @@ import { IFlex } from '@/components/widgets';
 import type { ReactCFC } from '@/models';
 
 import MaintainedSVG from '@/icons/business/maintained.svg';
-import NoAuthSVG from '@/icons/business/no.auth.svg';
-import NoDataSVG from '@/icons/business/no.data.svg';
+// import NoAuthSVG from '@/icons/business/no.auth.svg';
+// import NoDataSVG from '@/icons/business/no.data.svg';
 import NotFoundSVG from '@/icons/business/not.found.svg';
 
 import styles from './index.scss';
@@ -20,7 +20,7 @@ interface FeedbackProps {
 /** 找不到数据 */
 export const NoData: ReactCFC<FeedbackProps> = ({ children, title }) => (
   <IFlex centered vertical className={styles.wrap}>
-    <NoDataSVG className={styles.img} />
+    {/* <NoDataSVG className={styles.img} /> */}
     <h1 className={styles.title}>{title ?? '暂无数据'}</h1>
     {children}
   </IFlex>
@@ -29,7 +29,7 @@ export const NoData: ReactCFC<FeedbackProps> = ({ children, title }) => (
 /** 资源403 */
 export const NoAuth: ReactCFC<FeedbackProps> = ({ title }) => (
   <IFlex centered vertical className={styles.wrap}>
-    <NoAuthSVG className={styles.img} />
+    {/* <NoAuthSVG className={styles.img} /> */}
     <h1 className={styles.title}>{title ?? '暂无权限'}</h1>
   </IFlex>
 );
