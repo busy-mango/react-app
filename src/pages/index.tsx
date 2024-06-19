@@ -2,8 +2,6 @@
  * @description 首页
  */
 
-import { useEffect } from 'react';
-
 import type { ControlOptionModel } from '@/components';
 import {
   IButton,
@@ -37,10 +35,6 @@ const options = Array.from<unknown, ControlOptionModel>(
 );
 
 const Welcome: React.FC = () => {
-  useEffect(() => {
-    isDev && snackbar.emit({ children, id: 'Welcome', duration: 0 });
-  }, []);
-
   return (
     <IMobilePage>
       <NoData title={<IOverflow maxRow={3}>{text}</IOverflow>}>

@@ -8,7 +8,7 @@ import type {
   ControlUIPattern,
   ControlValue,
 } from '@/components/models';
-import type { WrapperProps } from '@/models';
+import type { ReactTargetFunc, WrapperProps } from '@/models';
 
 import type { IFieldWrapProps } from '../../iform-field-wrap';
 import type { IInputProps } from '../../iinput';
@@ -64,6 +64,14 @@ export interface ScrollableProps {
    * 选择菜单项时触发的回调。
    */
   onChange?: (value?: React.Key[] | React.Key) => void;
+  /**
+   * 点击选项时触发的回调
+   */
+  onSelect?: (index: number, value?: React.Key[]) => void;
+  /**
+   * 滚动回调
+   */
+  onScroll?: React.UIEventHandler<HTMLDivElement>;
 }
 
 export interface ISelectorPredicate {
@@ -75,60 +83,68 @@ export type ISelectorRef = {
   reference: React.MutableRefObject<ReferenceType | null>;
 };
 
+export interface ISelectorFilterParams {
+  /** 过滤方式 */
+  predicate?: ISelectorPredicate;
+  /** 是否排序过滤结果 */
+  compare?: ((cur: ControlValue, pre: ControlValue) => number) | boolean;
+}
+
+export interface QueryFloatingRootFunc {
+  (
+    reference: React.MutableRefObject<ReferenceType | null>
+  ): ReturnType<ReactTargetFunc> | undefined;
+}
+
 export interface ISelectorProps
-  extends Pick<
+  extends Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur'>,
+    Pick<
       IFieldWrapProps,
       'suffix' | 'prefix' | 'isLoading' | 'variant' | 'size' | 'status'
     >,
-    Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur'>,
     OmitOf<
       WrapperProps,
-      'onChange' | 'defaultValue' | 'onFocus' | 'onBlur' | 'prefix'
+      | 'onChange'
+      | 'defaultValue'
+      | 'onFocus'
+      | 'onBlur'
+      | 'prefix'
+      | 'onScroll'
+      | 'onSelect'
     >,
     Pick<
       ScrollableProps,
-      'maxHeight' | 'options' | 'multiple' | 'value' | 'onChange' | 'measure'
+      | 'maxHeight'
+      | 'options'
+      | 'multiple'
+      | 'value'
+      | 'onChange'
+      | 'measure'
+      | 'onScroll'
+      | 'onSelect'
     > {
   /**
    * 是否默认获取焦点
    */
   autoFocus?: boolean;
+  /**
+   * 清除按钮的图标，默认为true显示默认图标，设置false关闭清除按钮
+   */
   clear?: React.ReactNode;
   /**
    * 默认选中的值
    */
   defaultValue?: React.Key[] | React.Key;
   /**
-   * 控制下拉选单是否展开，如果为`true`则显示下拉选单
+   * 选项过滤配置
    */
-  open?: boolean;
-  /**
-   * 控制搜索文本
-   */
-  keyword?: string;
-  /**
-   * 是否过滤选项
-   */
-  filter?:
-    | {
-        /** 过滤方式 */
-        predicate?: ISelectorPredicate;
-        /** 是否排序过滤结果 */
-        compare?: ((cur: ControlValue, pre: ControlValue) => number) | boolean;
-      }
-    | boolean;
+  filter?: ISelectorFilterParams | boolean;
   /**
    * 浮层默认渲染到 root 上，也可以使用此方法指定根节点。
    * @param reference 参数元素引用
    * @returns HTMLElement
    */
-  iFloatingRoot?: (
-    reference: React.MutableRefObject<ReferenceType | null>
-  ) =>
-    | HTMLElement
-    | React.MutableRefObject<HTMLElement | null>
-    | null
-    | undefined;
+  iFloatingRoot?: QueryFloatingRootFunc;
   /**
    * 浮层样式
    */
@@ -137,6 +153,15 @@ export interface ISelectorProps
    * 是否默认打开
    */
   initialOpen?: boolean;
+  /**
+   * 控制下拉选单是否展开，如果为`true`则显示下拉选单
+   */
+  open?: boolean;
+  /**
+   * 控制搜索文本
+   */
+  keyword?: string;
+
   /**
    * 分隔符
    */
@@ -153,8 +178,6 @@ export interface ISelectorProps
     option?: IOptionRender;
     scrollable?: (params: ScrollableProps) => React.ReactNode;
   };
-  // onScroll
-  // onSelect
   onSearch?: (value?: string) => void;
   onOpenChange?: (open?: boolean) => void;
 }

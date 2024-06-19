@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@busymango/fetch-driver':
-        specifier: ^0.1.16
-        version: 0.1.16(@busymango/is-esm@0.2.0)(mime@4.0.1)
+        specifier: ^0.2.1
+        version: 0.2.1(@busymango/is-esm@0.2.2)(@busymango/utils@0.2.2(@busymango/is-esm@0.2.2))(mime@4.0.1)
       '@busymango/is-esm':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.2.2
+        version: 0.2.2
       '@busymango/utils':
-        specifier: ^0.1.6
-        version: 0.1.6(@busymango/is-esm@0.2.0)
+        specifier: ^0.2.2
+        version: 0.2.2(@busymango/is-esm@0.2.2)
       '@floating-ui/react':
         specifier: ^0.26.15
         version: 0.26.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -866,17 +866,18 @@ packages:
     resolution: {integrity: sha512-0oIyUfKoI3mSqMvsxBdclDwxXKXAUA8v/apZbc+iSyARYou1o8ZGDxbUYyLFoW2arqS2jDGqJuZvv1d/io1axg==}
     engines: {node: '>=6.9.0'}
 
-  '@busymango/fetch-driver@0.1.16':
-    resolution: {integrity: sha512-5HYu6Ds9ub5hU0mzKrgrGa5WyQ12cK4XnI7E6opaXSGlSUs5ni5XtF4RGosl4f9ErC9VgbCFC2/ve0pgoE2jRQ==}
+  '@busymango/fetch-driver@0.2.1':
+    resolution: {integrity: sha512-O5gjyjgDeGJy0hYj4rNJNRHAxQzKjEUKkXDUDE9bat2QQ66mqbNTuvDa0+/aQXkNNrddAo/FP7e9OFWrhLObIA==}
     peerDependencies:
-      '@busymango/is-esm': '>=0.1.1'
-      mime: '>3.0.0'
+      '@busymango/is-esm': '>=0.2.2'
+      '@busymango/utils': '>=0.2.2'
+      mime: '>=4.0.0'
 
-  '@busymango/is-esm@0.2.0':
-    resolution: {integrity: sha512-X2qNT2ZftdDAN5HHjoq5zR8YwmNwt8KG886+SDBEzF6xOAp61hL5DmyuRutIGbdx21CRBzuM7QSa3qspiMqJTQ==}
+  '@busymango/is-esm@0.2.2':
+    resolution: {integrity: sha512-p9TXIFSzczjDCqNItvpckgWuo1krpCUiKJT8qK6b4BzwS5gcM5QRhtNir0V13EEQicyxJXEPk6ZHqziqkjnxjg==}
 
-  '@busymango/utils@0.1.6':
-    resolution: {integrity: sha512-mYNmGTut+/ndLEB0GYbwOojxLtblDV6jHmB4Oe7WYz97qkp0CGZyn+noYJxtM9/+3pEiXfx4Q+iZWuXJzfHtYg==}
+  '@busymango/utils@0.2.2':
+    resolution: {integrity: sha512-O+p2tRStX0dzUXI6tdYk1qjTkb+I0CDQsPXcwo74z0kcB2B0cE/rLXFzgRPZw1zNhFGbrsqNiPc1yLzFT4kS8A==}
     peerDependencies:
       '@busymango/is-esm': '>=0.1.7'
 
@@ -5153,16 +5154,17 @@ snapshots:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  '@busymango/fetch-driver@0.1.16(@busymango/is-esm@0.2.0)(mime@4.0.1)':
+  '@busymango/fetch-driver@0.2.1(@busymango/is-esm@0.2.2)(@busymango/utils@0.2.2(@busymango/is-esm@0.2.2))(mime@4.0.1)':
     dependencies:
-      '@busymango/is-esm': 0.2.0
+      '@busymango/is-esm': 0.2.2
+      '@busymango/utils': 0.2.2(@busymango/is-esm@0.2.2)
       mime: 4.0.1
 
-  '@busymango/is-esm@0.2.0': {}
+  '@busymango/is-esm@0.2.2': {}
 
-  '@busymango/utils@0.1.6(@busymango/is-esm@0.2.0)':
+  '@busymango/utils@0.2.2(@busymango/is-esm@0.2.2)':
     dependencies:
-      '@busymango/is-esm': 0.2.0
+      '@busymango/is-esm': 0.2.2
       '@ungap/structured-clone': 1.2.0
 
   '@cspotcode/source-map-support@0.8.1':

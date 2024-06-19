@@ -29,7 +29,9 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
       isPositioned,
       measure = false,
       multiple = false,
+      onSelect,
       onChange,
+      onScroll,
       render,
       ...others
     } = props;
@@ -113,10 +115,12 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
           aria-selected={isActive}
           aria-setsize={count}
           className={styles.item}
+          data-index={index}
           role="option"
           style={{ transform }}
           onClick={() => {
             iChange(index, isSelected);
+            onSelect?.(index, iSelectedList);
           }}
         >
           {render(element, { isActive, isSelected })}
@@ -126,15 +130,17 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
 
     useLayoutEffect(() => {
       if (count && isPositioned && isNumber(active)) {
-        scrollToIndex(active, { behavior: 'smooth' });
+        const behavior = measure ? 'auto' : 'smooth';
+        scrollToIndex(active, { behavior });
       }
-    }, [scrollToIndex, isPositioned, active, count]);
+    }, [scrollToIndex, isPositioned, active, count, measure]);
 
     return (
       <div
         ref={container}
         className={classNames(styles.scrollable)}
         style={{ maxHeight }}
+        onScroll={onScroll}
         {...others}
       >
         <div style={{ height: getTotalSize() }}>

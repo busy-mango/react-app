@@ -7,9 +7,8 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
-import { assign, ifnot, type OmitOf } from '@busymango/utils';
+import { assign, ifnot } from '@busymango/utils';
 
-import type { ControlUIPattern, ControlValue } from '@/components/models';
 import {
   iComposingParams,
   useControlPatternAssert,
@@ -18,31 +17,13 @@ import {
   useMemoFunc,
   useResizeObserver,
 } from '@/hooks';
-import type { ReactInputProps } from '@/models';
 import { iPressEvent, isIOS, sizeOf } from '@/utils';
 
 import { iTextSize } from './helpers';
+import type { IInputProps, IInputRef } from './models';
 
 import iStyles from '@/components/widgets/common.scss';
 import styles from './index.scss';
-
-export interface IInputRef {
-  clear: () => void;
-  native: HTMLInputElement | null;
-}
-
-export interface IInputProps
-  extends OmitOf<ReactInputProps, 'onChange' | 'value'> {
-  autoSize?: boolean;
-  /** 控件值 */
-  value?: ControlValue;
-  /** 控件交互模式 */
-  pattern?: ControlUIPattern;
-  /** 输入事件 */
-  onChange?: (value?: ControlValue) => void;
-  /** 回车事件 */
-  onPressEnter?: ReactInputProps['onKeyDown'];
-}
 
 export const IInput = forwardRef<IInputRef, IInputProps>(
   function Input(props, ref) {
@@ -128,3 +109,5 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
     );
   }
 );
+
+export * from './models';

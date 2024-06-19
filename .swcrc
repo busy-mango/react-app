@@ -1,7 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/swcrc",
+  "$schema": "https://swc.rs/schema.json",
   "env": {
     "dynamicImport": true
+  },
+  "module": {
+    "type": "nodenext"
   },
   "jsc": {
     "parser": {

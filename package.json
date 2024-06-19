@@ -5,10 +5,10 @@
   "main": "src/app.tsx",
   "type": "module",
   "scripts": {
-    "dev": "ts-node ./scripts/@dev.server.ts",
-    "caniuse": "ts-node ./scripts/@caniuse.ts",
+    "dev": "node --no-warnings=ExperimentalWarning --loader ts-node/esm ./scripts/@dev.server.ts",
+    "caniuse": "node --no-warnings=ExperimentalWarning --loader ts-node/esm ./scripts/@caniuse.ts",
+    "build": "pnpm caniuse && node --no-warnings=ExperimentalWarning --loader ts-node/esm ./scripts/@build.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "pnpm caniuse && ts-node ./scripts/@build.ts",
     "eslint": "eslint --cache --fix --ext .ts,.tsx ./"
   },
   "keywords": [
@@ -71,9 +71,9 @@
     "webpackbar": "^6.0.1"
   },
   "dependencies": {
-    "@busymango/fetch-driver": "^0.1.16",
-    "@busymango/is-esm": "^0.2.0",
-    "@busymango/utils": "^0.1.6",
+    "@busymango/fetch-driver": "^0.2.1",
+    "@busymango/is-esm": "^0.2.2",
+    "@busymango/utils": "^0.2.2",
     "@floating-ui/react": "^0.26.15",
     "@tanstack/react-query": "^5.28.6",
     "@tanstack/react-query-devtools": "^5.28.6",

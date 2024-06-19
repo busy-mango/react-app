@@ -115,14 +115,14 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       onBlur,
     } = props;
 
-    const [open, onOpenChange] = useControlState({
-      value: _open,
-      onChange: _onOpenChange,
-    });
-
     const [keyword, onSearch] = useControlState({
       value: _keyword,
       onChange: _onSearch,
+    });
+
+    const [open, onOpenChange] = useControlState({
+      value: _open,
+      onChange: _onOpenChange,
     });
 
     const predicate = useMemo<ISelectorPredicate | undefined>(() => {
