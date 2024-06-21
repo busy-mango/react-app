@@ -13,7 +13,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   isArray,
   isEmpty,
-  isNil,
   isNonEmptyString,
   isObject,
   isTrue,
@@ -60,18 +59,18 @@ import { Scrollable } from './scrollable';
 
 import styles from './index.scss';
 
-const iChipRender: IOptionRender = ({ value, label }, params) => (
+const iChipRender: IOptionRender = (option, params) => (
   <Fragment>
-    {!params?.multiple && (label ?? value?.toLocaleString())}
+    {!params?.multiple && (option?.label ?? option?.value?.toLocaleString())}
     {params?.multiple && (
       <IChip close size="mini" variant="filled" onClose={params?.onClose}>
-        {label ?? value?.toLocaleString()}
+        {option?.label ?? option?.value?.toLocaleString()}
       </IChip>
     )}
   </Fragment>
 );
 
-const iOptionRender: IOptionRender = ({ value, label }, params) => (
+const iOptionRender: IOptionRender = (option, params) => (
   <IFlex
     align="center"
     className={classNames(styles.option, {
@@ -80,7 +79,7 @@ const iOptionRender: IOptionRender = ({ value, label }, params) => (
     })}
     justify="space-between"
   >
-    {label ?? value?.toLocaleString()}
+    {option?.label ?? option?.value?.toLocaleString()}
     <AnimatePresence>
       {params?.isSelected && <ISignLine type="tick" />}
     </AnimatePresence>
@@ -288,8 +287,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
           <Fragment key={inner.toLocaleString()}>
             {index !== 0 && separator}
             <Presence className={styles.chip}>
-              {isNil(current) && inner.toLocaleString()}
-              {current && (render?.chip ?? iChipRender)(current, params)}
+              {(render?.chip ?? iChipRender)(current, params)}
             </Presence>
           </Fragment>
         );

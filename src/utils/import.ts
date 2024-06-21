@@ -10,6 +10,11 @@ export function iconAsync(route: string) {
   return import(`../icons${route}`) as Promise<ReactComponentAsync>;
 }
 
+/** 动态导入案例chunk */
+export function caseAsync(route: string) {
+  return import(`../examples${route}`) as Promise<ReactComponentAsync>;
+}
+
 /** 动态导入ReactQueryDevtools */
 export const devtoolAsync = async () => {
   const component = import('@tanstack/react-query-devtools');

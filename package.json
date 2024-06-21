@@ -5,9 +5,9 @@
   "main": "src/app.tsx",
   "type": "module",
   "scripts": {
-    "dev": "node --no-warnings=ExperimentalWarning --loader ts-node/esm ./scripts/@dev.server.ts",
-    "caniuse": "node --no-warnings=ExperimentalWarning --loader ts-node/esm ./scripts/@caniuse.ts",
-    "build": "pnpm caniuse && node --no-warnings=ExperimentalWarning --loader ts-node/esm ./scripts/@build.ts",
+    "dev": "tsx watch ./scripts/@dev.server.ts",
+    "caniuse": "tsx ./scripts/@caniuse.ts",
+    "build": "pnpm caniuse && tsx ./scripts/@build.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint --cache --fix --ext .ts,.tsx ./"
   },
@@ -61,8 +61,8 @@
     "source-map-js": "^1.2.0",
     "style-loader": "^4.0.0",
     "swc-loader": "^0.2.6",
-    "ts-node": "10.9.2",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "tsx": "^4.15.6",
     "typescript": "^5.3.3",
     "typescript-plugin-css-modules": "^5.1.0",
     "webpack": "^5.91.0",

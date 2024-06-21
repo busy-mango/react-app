@@ -15,7 +15,7 @@ import type { IInputProps } from '../../iinput';
 
 export interface IOptionRender {
   (
-    option: ControlOptionModel,
+    option?: ControlOptionModel,
     params?: {
       multiple?: boolean;
       isActive?: boolean;
