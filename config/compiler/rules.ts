@@ -3,7 +3,12 @@
  */
 
 import path from 'path';
-import type { LoaderContext, RuleSetRule, RuleSetUseItem } from 'webpack';
+
+import type {
+  RuleSetRule,
+  RuleSetUseItem,
+  SwcLoaderOptions,
+} from '@rspack/core';
 
 import { dirname } from '../index.ts';
 
@@ -33,17 +38,18 @@ const CssLoader: RuleSetUseItem = {
         if (/global.(sa|sc|c)ss$/i.test(resource)) return 'global';
         return 'local';
       },
-      getLocalIdent: (
-        context: LoaderContext<unknown>,
-        _: string,
-        name: string
-      ) => {
-        const { resourcePath } = context;
-        const relative = path.relative(dirname, resourcePath);
-        const { dir, name: filename } = path.parse(relative);
-        const prefix = dir.split(path.sep).join('_');
-        return `${prefix}_${filename}_${name}`;
-      },
+      localIdentName: '[hash:base64:5]-[local]',
+      // getLocalIdent: (
+      //   context: LoaderContext<unknown>,
+      //   _: string,
+      //   name: string
+      // ) => {
+      //   const { resourcePath } = context;
+      //   const relative = path.relative(dirname, resourcePath);
+      //   const { dir, name: filename } = path.parse(relative);
+      //   const prefix = dir.split(path.sep).join('_');
+      //   return `${prefix}_${filename}_${name}`;
+      // },
     },
   },
 };
@@ -81,7 +87,7 @@ export const AssetsRule: RuleSetRule = {
 
 export const TSDevRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
-  loader: 'swc-loader',
+  loader: 'builtin:swc-loader',
   exclude: /node_modules/,
   options: {
     minify: false,
@@ -94,18 +100,18 @@ export const TSDevRule: RuleSetRule = {
         },
       },
     },
-  },
+  } satisfies SwcLoaderOptions,
 };
 
 export const TSRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
-  loader: 'swc-loader',
+  loader: 'builtin:swc-loader',
   exclude: /node_modules/,
 };
 
 export const CompatibleRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
-  loader: 'swc-loader',
+  loader: 'builtin:swc-loader',
   include: [
     /node_modules[\\/]@?mime/,
     /node_modules[\\/]@?immer/,

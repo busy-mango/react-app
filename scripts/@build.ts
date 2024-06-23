@@ -7,10 +7,11 @@
 import date from 'dayjs';
 import { readdirSync } from 'fs';
 import { resolve } from 'path';
-import webpack from 'webpack';
 
+import { rspack } from '@rspack/core';
+
+import prod from '../config/compiler/product.ts';
 import { dir } from '../config/index.ts';
-import prod from '../config/webpack/product.ts';
 import { copy, define } from './helpers';
 
 const { config } = define();
@@ -24,7 +25,7 @@ const info = (message: string) => {
 info('Start build single page application');
 
 (async function main() {
-  webpack(config ?? prod, (error, stats) => {
+  rspack(config ?? prod, (error, stats) => {
     if (error ?? stats?.hasErrors()) {
       info('Single page application failed to build');
       throw new Error(error?.message ?? stats?.toString());

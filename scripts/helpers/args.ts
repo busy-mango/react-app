@@ -1,9 +1,10 @@
 import { program } from 'commander';
-import type { Configuration } from 'webpack';
 
-import dev from '../../config/webpack/develop.ts';
-import mock from '../../config/webpack/mock.ts';
-import prod from '../../config/webpack/product.ts';
+import type { Configuration } from '@rspack/core';
+
+import dev from '../../config/compiler/develop.ts';
+import mock from '../../config/compiler/mock.ts';
+import prod from '../../config/compiler/product.ts';
 
 export const define = () => {
   const conf = {

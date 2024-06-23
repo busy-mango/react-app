@@ -1,17 +1,16 @@
-#! /usr/bin/env ts-node
-
 /**
  * @description webpack-dev-server
  */
 
 import { exec } from 'child_process';
 import { watch } from 'fs';
-import webpack from 'webpack';
-import type { Configuration } from 'webpack-dev-server';
-import Server from 'webpack-dev-server';
 
+import { rspack } from '@rspack/core';
+import type { Configuration } from '@rspack/dev-server';
+import { RspackDevServer } from '@rspack/dev-server';
+
+import dev from '../config/compiler/develop.ts';
 import { dir, dirconfs } from '../config/index.ts';
-import dev from '../config/webpack/develop.ts';
 import { define, iUsablePort } from './helpers';
 
 const { opts, config } = define();
@@ -45,9 +44,9 @@ const options: Configuration = {
   headers: { 'Access-Control-Allow-Origin': '*' },
 };
 
-const compiler = webpack(config ?? dev);
+const compiler = rspack(config ?? dev);
 
-const server = new Server(options, compiler);
+const server = new RspackDevServer(options, compiler);
 
 process.once('exit', () => {
   server.close();

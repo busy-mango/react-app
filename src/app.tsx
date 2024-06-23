@@ -12,7 +12,6 @@ import { container, style } from '@/init';
 import { caniuse } from './caniuse';
 import { IRoutes } from './routes';
 
-import 'normalize.css';
 import '@/styles/atom.global.scss';
 
 const root = createRoot(container);
