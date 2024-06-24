@@ -16,6 +16,10 @@ const config: Configuration = {
   devtool: 'eval-cheap-module-source-map',
   optimization: {
     minimize: false,
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'async',
+    },
   },
   plugins: iPlugins(),
   module: {

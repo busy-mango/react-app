@@ -11,7 +11,7 @@ export interface IPageProps {
   background?: React.ReactNode;
 }
 
-export const IMobilePage: ReactCFC<IPageProps> = ({
+export const IPage: ReactCFC<IPageProps> = ({
   children,
   background,
   isLoading,

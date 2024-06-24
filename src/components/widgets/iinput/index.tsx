@@ -103,7 +103,7 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
           style={style}
           tabIndex={-1}
         >
-          {value?.toLocaleString() ?? placeholder}
+          {value?.toLocaleString() || placeholder}
         </span>
       </Fragment>
     );

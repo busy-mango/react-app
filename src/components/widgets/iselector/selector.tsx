@@ -17,6 +17,8 @@ import {
   isObject,
   isTrue,
 } from '@busymango/is-esm';
+import { ifnot } from '@busymango/utils';
+import type { MiddlewareState } from '@floating-ui/react';
 import {
   autoUpdate,
   flip,
@@ -142,8 +144,14 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     const [width, setWidth] = useState<number>();
 
     const apply = useMemoFunc(
-      ({ availableWidth }: { availableWidth: number }) => {
-        flushSync(() => setWidth(availableWidth));
+      ({
+        availableWidth,
+        rects: { reference },
+      }: MiddlewareState & {
+        availableWidth: number;
+        availableHeight: number;
+      }) => {
+        flushSync(() => setWidth(reference?.width ?? availableWidth));
       }
     );
 
@@ -300,13 +308,15 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
           ? 'arrow-top'
           : 'arrow-bottom';
 
+    // console.log(iSignType);
+
     return (
       <Fragment>
         <IFieldWrap
           ref={refs.setReference}
           className={classNames(styles.reference, {
             [styles.multiple]: multiple,
-            [styles.keyword]: isNonEmptyString(keyword),
+            // [styles.keyword]: isNonEmptyString(keyword),
           })}
           isLoading={isLoading}
           size={_size}
@@ -320,14 +330,14 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
         >
           <motion.div className={styles.wrap}>
             <AnimatePresence presenceAffectsLayout mode="popLayout">
-              {iChipListRender(iSelectedList)}
+              {(multiple || isEmpty(keyword)) && iChipListRender(iSelectedList)}
             </AnimatePresence>
             <IInput
               ref={input}
               autoSize
               autoFocus={autoFocus}
               className={styles.input}
-              placeholder={placeholder}
+              placeholder={ifnot(isEmpty(iSelectedList) && placeholder)}
               value={keyword}
               onBlur={onBlur}
               onChange={iSearch}

@@ -42,7 +42,10 @@
   padding: var(--gap-3) 0;
   border-radius: var(--border-radius-3);
   background-color: rgb(var(--comp-bg-color) / 1);
-  box-shadow: 20px 20px 60px 0px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
+    rgba(0, 0, 0, 0.14) 0px 3px 4px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
 }
 
 .wrap {
@@ -50,14 +53,14 @@
   flex-wrap: wrap;
   gap: var(--gap-2);
   justify-content: flex-start;
+  line-height: var(--control-size-3);
   max-width: 100%;
 }
 
 .input {
-  opacity: 0;
   min-width: 1em;
   max-width: 100%;
-  line-height: var(--control-size-3);
+  line-height: inherit;
 }
 
 .reference {
@@ -78,18 +81,12 @@
     }
 
     &.keyword {
-      .chip {
-        opacity: 0;
-      }
     }
   }
 
   &:focus-within {
     .chip {
       color: var(--font-color-2);
-    }
-    .input {
-      opacity: 1;
     }
   }
 }

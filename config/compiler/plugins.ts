@@ -23,7 +23,7 @@ type RspackPlugin =
   | RspackPluginInstance
   | RspackPluginFunction;
 
-const { HtmlRspackPlugin, ProgressPlugin, DefinePlugin } = rspack;
+const { DefinePlugin, ProgressPlugin, HtmlRspackPlugin } = rspack;
 
 export const iPlugins = (
   env: 'dev' | 'mock' | 'prod' | 'sit' = 'dev'

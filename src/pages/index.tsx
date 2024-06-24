@@ -5,8 +5,8 @@
 import type { ControlOptionModel } from '@/components';
 import {
   IButton,
-  IMobilePage,
   IOverflow,
+  IPage,
   ISelector,
   NoData,
   snackbar,
@@ -36,7 +36,7 @@ const options = Array.from<unknown, ControlOptionModel>(
 
 const Welcome: React.FC = () => {
   return (
-    <IMobilePage>
+    <IPage>
       <NoData title={<IOverflow maxRow={3}>{text}</IOverflow>}>
         <IButton
           onClick={() => {
@@ -50,7 +50,7 @@ const Welcome: React.FC = () => {
         </IButton>
         <ISelector multiple options={options} />
       </NoData>
-    </IMobilePage>
+    </IPage>
   );
 };
 

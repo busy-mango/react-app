@@ -4,7 +4,7 @@ import { Fragment } from 'react/jsx-runtime';
 import { iArray } from '@busymango/utils';
 
 import type { IOptionRender } from '@/components';
-import { ISelector } from '@/components';
+import { IPage, ISelector } from '@/components';
 import { IChip } from '@/components/widgets/ichip';
 import { useToggle } from '@/hooks';
 import { iCompact } from '@/utils';
@@ -44,18 +44,20 @@ export default function AdvancedSelector() {
   const [value, setValue] = useState<React.Key[]>(['unknown']);
 
   return (
-    <form>
-      <ISelector
-        multiple
-        open={open}
-        options={options}
-        render={{ chip: iChipRender }}
-        value={value}
-        onChange={(current) => {
-          setValue(iCompact(iArray(current)));
-        }}
-        onOpenChange={toggle}
-      />
-    </form>
+    <IPage>
+      <form>
+        <ISelector
+          multiple
+          open={open}
+          options={options}
+          render={{ chip: iChipRender }}
+          value={value}
+          onChange={(current) => {
+            setValue(iCompact(iArray(current)));
+          }}
+          onOpenChange={toggle}
+        />
+      </form>
+    </IPage>
   );
 }
