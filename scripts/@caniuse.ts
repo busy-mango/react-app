@@ -1,4 +1,4 @@
-#! /usr/bin/env ts-node
+#! /usr/bin/env tsx
 
 import { getUserAgentRegex } from 'browserslist-useragent-regexp';
 import { writeFileSync } from 'fs';

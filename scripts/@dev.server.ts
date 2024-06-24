@@ -1,23 +1,21 @@
-/**
- * @description webpack-dev-server
- */
+#! /usr/bin/env tsx
 
 import { exec } from 'child_process';
+import { dev, dir, dirconfs } from 'config';
 import { watch } from 'fs';
+import { iUsablePort } from 'helpers';
 
 import { rspack } from '@rspack/core';
 import type { Configuration } from '@rspack/dev-server';
 import { RspackDevServer } from '@rspack/dev-server';
 
-import dev from '../config/compiler/develop.ts';
-import { dir, dirconfs } from '../config/index.ts';
-import { define, iUsablePort } from './helpers';
+import { define } from './args.ts';
 
 const { opts, config } = define();
 
 const port = await iUsablePort(
-  parseInt(opts.port),
-  parseInt(opts.port) + 1000,
+  parseInt(opts.port, 10),
+  parseInt(opts.port, 10) + 1000,
   opts.host
 );
 

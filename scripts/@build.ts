@@ -1,18 +1,14 @@
-#! /usr/bin/env ts-node
+#! /usr/bin/env tsx
 
-/**
- * @description webpack build
- */
-
+import { dir, prod } from 'config';
 import date from 'dayjs';
 import { readdirSync } from 'fs';
+import { copy } from 'helpers';
 import { resolve } from 'path';
 
 import { rspack } from '@rspack/core';
 
-import prod from '../config/compiler/product.ts';
-import { dir } from '../config/index.ts';
-import { copy, define } from './helpers';
+import { define } from './args.ts';
 
 const { config } = define();
 

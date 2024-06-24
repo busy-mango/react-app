@@ -6,7 +6,8 @@ import { merge } from 'webpack-merge';
 
 import type { Configuration } from '@rspack/core';
 
-import common, { iPlugins } from './common.ts';
+import common from './common.ts';
+import { iPlugins } from './plugins.ts';
 import * as rules from './rules.ts';
 
 const config: Configuration = {

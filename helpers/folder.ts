@@ -10,13 +10,17 @@ import {
   existsSync,
   mkdirSync,
   readdirSync,
+  statSync,
 } from 'fs';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 import { isFalse } from '@busymango/is-esm';
 
 const options = { withFileTypes: true } as const;
 
+/**
+ * copy文件
+ */
 export const copy = (source: string, target: string) => {
   if (!existsSync(source)) {
     throw new Error('source is not exists');
@@ -40,3 +44,16 @@ export const copy = (source: string, target: string) => {
     }
   }
 };
+
+/**
+ * 递归获取目标路径下所有文件的路径
+ */
+export function expands(dirpath?: string): string[] {
+  if (!dirpath) return [];
+  const names = readdirSync(dirpath);
+  return names.flatMap((name) => {
+    const cur = resolve(dirpath, name);
+    const isDirectory = statSync(cur).isDirectory();
+    return isDirectory ? expands(cur) : cur;
+  });
+}
