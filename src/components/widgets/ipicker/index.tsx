@@ -30,10 +30,10 @@ import { container } from '@/init';
 import type { ReactCFC, ReactMotionDomProps, WrapperProps } from '@/models';
 import { isCentered } from '@/utils';
 
-import { IArrow } from '../iarrow';
 import { IButton } from '../ibutton';
 import { IFlex } from '../iflex';
 import { IOverlay } from '../ioverlay';
+import { ISignLine } from '../isign';
 import {
   DATA_ID_NAME,
   identified,
@@ -260,7 +260,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
         {...getReferenceProps()}
       >
         <div>{inner}</div>
-        <IArrow className={styles.arrow} type="right" />
+        <ISignLine className={styles.arrow} type="arrow-right" />
       </div>
       <FloatingPortal root={container}>
         <AnimatePresence>

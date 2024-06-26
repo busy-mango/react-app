@@ -13,14 +13,16 @@ const config: Configuration = {
   devtool: false,
   mode: 'production',
   stats: 'errors-warnings',
-  entry: {
-    main: './src/app.tsx',
-    version: './src/version.ts',
-  },
+  entry: './src/app.tsx',
+  // https://github.com/web-infra-dev/rspack/issues/5110
+  // entry: {
+  //   main: './src/app.tsx',
+  //   version: './src/version.ts',
+  // },
   output: {
     clean: true,
     path: dir.dist,
-    filename: `static/[name].${version}.js`,
+    filename: `static/${version}/[name].js`,
     chunkFilename: `static/${version}/[name].js`,
     assetModuleFilename: 'assets/[name].[contenthash].[ext]',
   },
@@ -34,6 +36,19 @@ const config: Configuration = {
     },
     splitChunks: {
       chunks: 'async',
+    },
+  },
+  module: {
+    parser: {
+      'css/module': {
+        namedExports: false,
+      },
+    },
+    generator: {
+      'css/module': {
+        exportsOnly: false,
+        exportsConvention: 'camel-case-only',
+      },
     },
   },
   resolve: {

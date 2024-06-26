@@ -2,7 +2,7 @@
  * @description Webpack loader rule
  */
 
-import path from 'path';
+import sass from 'sass-embedded';
 
 import type {
   RuleSetRule,
@@ -10,7 +10,10 @@ import type {
   SwcLoaderOptions,
 } from '@rspack/core';
 
-import { dirname } from '../index.ts';
+type SassLoaderOptions = {
+  api: string;
+  implementation: typeof sass;
+};
 
 const LessLoader: RuleSetUseItem = {
   loader: 'less-loader',
@@ -21,47 +24,28 @@ const LessLoader: RuleSetUseItem = {
   },
 };
 
-const CssLoader: RuleSetUseItem = {
-  loader: 'css-loader',
+/**
+ * 同时使用 `modern-compiler` 和 `sass-embedded` 可以显著提升构建性能
+ * 需要 `sass-loader >= 14.2.1`
+ */
+const SassLoader: RuleSetUseItem = {
+  loader: 'sass-loader',
   options: {
-    importLoaders: 1,
-    modules: {
-      exportLocalsConvention: 'camelCaseOnly',
-      auto: (resource: string) => {
-        const relative = path.relative(dirname, resource);
-        // const isGlobal = resource.endsWith('.global.scss');
-        const isModules = relative.startsWith('node_modules');
-        return !isModules;
-      },
-      mode: (resource: string) => {
-        if (/pure.(sa|sc|c)ss$/i.test(resource)) return 'pure';
-        if (/global.(sa|sc|c)ss$/i.test(resource)) return 'global';
-        return 'local';
-      },
-      localIdentName: '[hash:base64:5]-[local]',
-      // getLocalIdent: (
-      //   context: LoaderContext<unknown>,
-      //   _: string,
-      //   name: string
-      // ) => {
-      //   const { resourcePath } = context;
-      //   const relative = path.relative(dirname, resourcePath);
-      //   const { dir, name: filename } = path.parse(relative);
-      //   const prefix = dir.split(path.sep).join('_');
-      //   return `${prefix}_${filename}_${name}`;
-      // },
-    },
-  },
+    api: 'modern-compiler',
+    implementation: sass,
+  } satisfies SassLoaderOptions,
 };
 
 export const SassRule: RuleSetRule = {
   test: /\.(sa|sc|c)ss$/,
-  use: ['style-loader', CssLoader, 'sass-loader'],
+  use: SassLoader,
+  type: 'css/module',
 };
 
 export const LessRule: RuleSetRule = {
   test: /\.less?$/,
-  use: ['style-loader', CssLoader, LessLoader],
+  use: LessLoader,
+  type: 'css/module',
 };
 
 export const SVGRule: RuleSetRule = {

@@ -31,6 +31,7 @@ export const iPlugins = (
   new HtmlRspackPlugin({
     title: app.name,
     publicPath: '/',
+    excludedChunks: ['mfeBBB'],
     favicon: './assets/favicon.svg',
     template: './assets/index.html',
     templateParameters: {

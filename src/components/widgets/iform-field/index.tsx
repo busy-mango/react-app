@@ -6,11 +6,11 @@ import type { ReactCFC } from '@/models';
 import { isReactChildren, isReactNode } from '@/utils';
 
 import HelperSVG from '@/icons/helper.svg';
-import NoteSVG from '@/icons/note.svg';
 
 import { IFlex } from '../iflex';
 import { IMarker } from '../imarker';
 import { IMotionPanel } from '../imotion-panel';
+import { ISignLine } from '../isign';
 import { IFieldGridProvider, useIFieldGridContext } from './hooks';
 import type { IFieldCellProps, IFieldGridProps } from './models';
 
@@ -105,7 +105,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
           >
             <IMarker required={required}>{title}</IMarker>
             {description && <HelperSVG />}
-            {note && <NoteSVG />}
+            {note && <ISignLine ring type="info" />}
             {colon && <div className={styles.colon}>{colon}</div>}
           </IFlex>
         )}

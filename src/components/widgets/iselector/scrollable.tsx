@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 
-import { isFalse, isNumber, isTrue } from '@busymango/is-esm';
+import { isEmptyArray, isFalse, isNumber, isTrue } from '@busymango/is-esm';
 import { dedup, ifnot } from '@busymango/utils';
 import type { VirtualItem } from '@tanstack/react-virtual';
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -135,6 +135,8 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
       }
     }, [scrollToIndex, isPositioned, active, count, measure]);
 
+    const items = getVirtualItems();
+
     return (
       <div
         ref={container}
@@ -143,9 +145,8 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
         onScroll={onScroll}
         {...others}
       >
-        <div style={{ height: getTotalSize() }}>
-          {getVirtualItems().map(iRender)}
-        </div>
+        <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
+        {isEmptyArray(items) && <div>NoData</div>}
       </div>
     );
   }

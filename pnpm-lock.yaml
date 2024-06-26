@@ -126,9 +126,6 @@ importers:
       core-js:
         specifier: ^3.33.1
         version: 3.33.1
-      css-loader:
-        specifier: ^6.11.0
-        version: 6.11.0(@rspack/core@0.7.4(@swc/helpers@0.5.11))(webpack@5.91.0)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -180,15 +177,15 @@ importers:
       sass:
         specifier: ^1.75.0
         version: 1.75.0
+      sass-embedded:
+        specifier: ^1.77.5
+        version: 1.77.5
       sass-loader:
         specifier: ^14.2.1
         version: 14.2.1(@rspack/core@0.7.4(@swc/helpers@0.5.11))(sass-embedded@1.77.5)(sass@1.75.0)(webpack@5.91.0)
       source-map-js:
         specifier: ^1.2.0
         version: 1.2.0
-      style-loader:
-        specifier: ^4.0.0
-        version: 4.0.0(webpack@5.91.0)
       tsx:
         specifier: ^4.15.6
         version: 4.15.6
@@ -1942,18 +1939,6 @@ packages:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
 
-  css-loader@6.11.0:
-    resolution: {integrity: sha512-CTJ+AEQJjq5NzLga5pE39qdiSV56F8ywCIsqNIRF0r7BDgWsN25aazToqAFg7ZrtA/U016xudB3ffgweORxX7g==}
-    engines: {node: '>= 12.13.0'}
-    peerDependencies:
-      '@rspack/core': 0.x || 1.x
-      webpack: ^5.0.0
-    peerDependenciesMeta:
-      '@rspack/core':
-        optional: true
-      webpack:
-        optional: true
-
   css-select@5.1.0:
     resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
 
@@ -3359,12 +3344,6 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
 
-  postcss-modules-values@4.0.0:
-    resolution: {integrity: sha512-RDxHkAiEGI78gS2ofyvCsu7iycRv7oqw5xMWn9iMoR0N/7mf9D50ecQqUo5BZ9Zh2vH4bCUR/ktCqbB9m8vJjQ==}
-    engines: {node: ^10 || ^12 || >= 14}
-    peerDependencies:
-      postcss: ^8.1.0
-
   postcss-selector-parser@6.0.13:
     resolution: {integrity: sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==}
     engines: {node: '>=4'}
@@ -4002,12 +3981,6 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
-
-  style-loader@4.0.0:
-    resolution: {integrity: sha512-1V4WqhhZZgjVAVJyt7TdDPZoPBPNHbekX4fWnCJL1yQukhCeZhJySUL+gL9y6sNdN95uEOS83Y55SqHcP7MzLA==}
-    engines: {node: '>= 18.12.0'}
-    peerDependencies:
-      webpack: ^5.27.0
 
   stylus@0.62.0:
     resolution: {integrity: sha512-v3YCf31atbwJQIMtPNX8hcQ+okD4NQaTuKGUWfII8eaqn+3otrbttGL1zSMZAAtiPsBztQnujVBugg/cXFUpyg==}
@@ -5199,8 +5172,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  '@bufbuild/protobuf@1.10.0':
-    optional: true
+  '@bufbuild/protobuf@1.10.0': {}
 
   '@busymango/fetch-driver@0.2.3(@busymango/is-esm@0.2.2)(@busymango/utils@0.2.2(@busymango/is-esm@0.2.2))(mime@4.0.1)':
     dependencies:
@@ -6241,8 +6213,7 @@ snapshots:
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
 
-  buffer-builder@0.2.0:
-    optional: true
+  buffer-builder@0.2.0: {}
 
   buffer-from@1.1.2: {}
 
@@ -6407,20 +6378,6 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
-
-  css-loader@6.11.0(@rspack/core@0.7.4(@swc/helpers@0.5.11))(webpack@5.91.0):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.4.38)
-      postcss: 8.4.38
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.38)
-      postcss-modules-local-by-default: 4.0.5(postcss@8.4.38)
-      postcss-modules-scope: 3.2.0(postcss@8.4.38)
-      postcss-modules-values: 4.0.0(postcss@8.4.38)
-      postcss-value-parser: 4.2.0
-      semver: 7.6.0
-    optionalDependencies:
-      '@rspack/core': 0.7.4(@swc/helpers@0.5.11)
-      webpack: 5.91.0
 
   css-select@5.1.0:
     dependencies:
@@ -7980,11 +7937,6 @@ snapshots:
       postcss: 8.4.38
       postcss-selector-parser: 6.0.13
 
-  postcss-modules-values@4.0.0(postcss@8.4.38):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.4.38)
-      postcss: 8.4.38
-
   postcss-selector-parser@6.0.13:
     dependencies:
       cssesc: 3.0.0
@@ -8285,7 +8237,6 @@ snapshots:
   rxjs@7.8.1:
     dependencies:
       tslib: 2.6.2
-    optional: true
 
   safe-array-concat@1.0.1:
     dependencies:
@@ -8396,7 +8347,6 @@ snapshots:
       sass-embedded-win32-arm64: 1.77.5
       sass-embedded-win32-ia32: 1.77.5
       sass-embedded-win32-x64: 1.77.5
-    optional: true
 
   sass-loader@14.2.1(@rspack/core@0.7.4(@swc/helpers@0.5.11))(sass-embedded@1.77.5)(sass@1.75.0)(webpack@5.91.0):
     dependencies:
@@ -8683,10 +8633,6 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  style-loader@4.0.0(webpack@5.91.0):
-    dependencies:
-      webpack: 5.91.0
-
   stylus@0.62.0:
     dependencies:
       '@adobe/css-tools': 4.3.1
@@ -8970,8 +8916,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  varint@6.0.0:
-    optional: true
+  varint@6.0.0: {}
 
   vary@1.1.2: {}
 

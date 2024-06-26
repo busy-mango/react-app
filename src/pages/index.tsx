@@ -48,7 +48,7 @@ const Welcome: React.FC = () => {
         >
           消息
         </IButton>
-        <ISelector multiple options={options} />
+        <ISelector options={options} />
       </NoData>
     </IPage>
   );

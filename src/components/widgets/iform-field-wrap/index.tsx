@@ -20,9 +20,9 @@ import styles from './index.scss';
 export interface IFieldWrapProps
   extends OmitOf<ReactMotionDomProps<WrapperProps>, 'prefix'> {
   status?: ControlValidationStatus;
-
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
+  suffixClickable?: boolean;
   size?: ControlUISize;
   isLoading?: boolean;
   /** 变体 */
@@ -41,6 +41,7 @@ export const IFieldWrap = forwardRef<HTMLDivElement, IFieldWrapProps>(
       children,
       className,
       isLoading,
+      suffixClickable,
       variant = 'standard',
       size = ctx?.size ?? 'medium',
       onSuffixClick,
@@ -85,7 +86,12 @@ export const IFieldWrap = forwardRef<HTMLDivElement, IFieldWrapProps>(
         {children}
         <AnimatePresence>
           {(isLoading || suffix) && (
-            <motion.div className={styles.iconWrap} onClick={onSuffixClick}>
+            <motion.div
+              className={classNames(styles.iconWrap, {
+                [styles.clickable]: suffixClickable,
+              })}
+              onClick={onSuffixClick}
+            >
               {isLoading ? <IClipSpinner /> : suffix}
             </motion.div>
           )}

@@ -6,9 +6,9 @@ import { dedup } from '@busymango/utils';
 import { useControlState, useMemoFunc } from '@/hooks';
 import { iPropsAreEqual } from '@/utils';
 
-import { IArrow } from '../iarrow';
 import { IFlex } from '../iflex';
 import { IMotionPanel } from '../imotion-panel';
+import { ISignLine } from '../isign';
 import type {
   ICollapseGroupProps,
   ICollapsibleKey,
@@ -40,7 +40,7 @@ const ICollapsible: React.FC<ICollapsibleProps> = ({
               onArrowClick?.(name, !open);
             }}
           >
-            <IArrow type={open ? 'top' : 'bottom'} />
+            <ISignLine type={open ? 'arrow-top' : 'arrow-bottom'} />
           </IFlex>
         )}
       </div>

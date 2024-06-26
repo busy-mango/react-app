@@ -78,7 +78,8 @@
     "test/**/*",
     "types/**/*",
     "utils/**/*",
-    "global.d.ts"
+    "global.d.ts",
+    "config/compiler/.develop.ts"
   ],
   /* See https://typestrong.org/ts-node/docs/swc/. */
   "ts-node": {

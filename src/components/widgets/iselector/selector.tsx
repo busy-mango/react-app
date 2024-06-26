@@ -4,9 +4,7 @@ import {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
 } from 'react';
-import { flushSync } from 'react-dom';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -18,16 +16,10 @@ import {
   isTrue,
 } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
-import type { MiddlewareState } from '@floating-ui/react';
 import {
-  autoUpdate,
-  flip,
   FloatingPortal,
-  offset,
-  size,
   useClick,
   useDismiss,
-  useFloating,
   useInteractions,
 } from '@floating-ui/react';
 
@@ -39,16 +31,16 @@ import {
   useMemoFunc,
 } from '@/hooks';
 import { container } from '@/init';
-import { iArray, iCompact, size2px } from '@/utils';
+import { iArray, iCompact } from '@/utils';
 
 import { IChip } from '../ichip';
 import { IFlex } from '../iflex';
 import { IFieldWrap } from '../iform-field-wrap';
 import type { IInputRef } from '../iinput';
 import { IInput } from '../iinput';
-import type { ISignType } from '../isign';
 import { ISignLine } from '../isign';
 import { estimateSize } from './helpers';
+import { useIFloating, useSignType } from './hooks';
 import type {
   IOptionRender,
   ISelectorPredicate,
@@ -141,37 +133,12 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
 
     const scrollable = useRef<ScrollableRef>(null);
 
-    const [width, setWidth] = useState<number>();
-
-    const apply = useMemoFunc(
-      ({
-        availableWidth,
-        rects: { reference },
-      }: MiddlewareState & {
-        availableWidth: number;
-        availableHeight: number;
-      }) => {
-        flushSync(() => setWidth(reference?.width ?? availableWidth));
-      }
-    );
-
     const {
       refs,
       context,
       floatingStyles,
       isPositioned = false,
-    } = useFloating<HTMLDivElement>({
-      open,
-      transform: false,
-      placement: 'bottom',
-      middleware: [
-        offset(size2px(2)),
-        flip({ padding: size2px(2) }),
-        size({ apply }),
-      ],
-      onOpenChange,
-      whileElementsMounted: autoUpdate,
-    });
+    } = useIFloating({ open, onOpenChange });
 
     useImperativeHandle(ref, () => ({
       floating: refs.floating,
@@ -301,14 +268,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
         );
       });
 
-    const iSignType: ISignType =
-      isFocus && clearable
-        ? 'cross'
-        : context.open
-          ? 'arrow-top'
-          : 'arrow-bottom';
-
-    // console.log(iSignType);
+    const iSignType = useSignType(clearable, context.open, isFocus);
 
     return (
       <Fragment>
@@ -322,11 +282,10 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
           size={_size}
           status={status}
           suffix={<ISignLine ring={iSignType === 'cross'} type={iSignType} />}
+          suffixClickable={iSignType === 'cross'}
           variant={variant}
           onSuffixClick={onSuffixClick}
-          {...getReferenceProps({
-            onClick: iClick,
-          })}
+          {...getReferenceProps({ onClick: iClick })}
         >
           <motion.div className={styles.wrap}>
             <AnimatePresence presenceAffectsLayout mode="popLayout">
@@ -360,8 +319,8 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                 initial={initial}
                 transition={transition}
                 {...getFloatingProps({
+                  style: floatingStyles,
                   onKeyDown: iArrowKeyDown,
-                  style: { ...floatingStyles, width },
                   className: classNames(styles.floating, iFloatingClassName),
                 })}
               >
