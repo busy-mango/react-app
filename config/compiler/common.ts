@@ -26,6 +26,9 @@ const config: Configuration = {
     chunkFilename: `static/${version}/[name].js`,
     assetModuleFilename: 'assets/[name].[contenthash].[ext]',
   },
+  experiments: {
+    css: true,
+  },
   performance: {
     hints: false,
   },
@@ -52,7 +55,7 @@ const config: Configuration = {
     },
   },
   resolve: {
-    tsConfigPath: dir.tsconfig,
+    tsConfig: dir.tsconfig,
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.wasm'],
   },
 };

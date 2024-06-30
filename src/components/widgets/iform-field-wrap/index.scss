@@ -6,9 +6,13 @@
   box-sizing: border-box;
   transition-duration: 0.2s;
 
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  justify-content: flex-start;
+
+  & > :not(.icon-wrap) {
+    flex-grow: 1;
+  }
 
   /** variant */
   &.filled,

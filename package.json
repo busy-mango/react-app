@@ -19,9 +19,9 @@
   "author": "mango",
   "license": "ISC",
   "devDependencies": {
-    "@rspack/core": "^0.7.4",
-    "@rspack/dev-server": "^0.7.4",
-    "@rspack/plugin-react-refresh": "^0.7.4",
+    "@rspack/core": "1.0.0-alpha.0",
+    "@rspack/dev-server": "1.0.0-alpha.0",
+    "@rspack/plugin-react-refresh": "1.0.0-alpha.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
