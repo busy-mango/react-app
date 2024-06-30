@@ -1,6 +1,7 @@
 import {
   forwardRef,
   useDeferredValue,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -12,7 +13,7 @@ import type {
   Target,
   Transition,
 } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { motion, useAnimate } from 'framer-motion';
 
 import { isFinite, isObject, isTrue } from '@busymango/is-esm';
 import { isEqual } from '@busymango/utils';
@@ -30,6 +31,7 @@ import type { ISignType } from '../isign';
 import { ISignLine } from '../isign';
 import { ISVGWrap } from '../isvg-wrap';
 import { useSnackbars } from './hooks';
+import { snackbar } from './isnackbar.portal';
 import type { ISnackbarProps } from './models';
 
 import styles from './index.scss';
@@ -92,28 +94,49 @@ export const ISnackbar = forwardRef<HTMLDivElement, ISnackbarProps>(
       ...others
     } = props;
 
-    const target = useRef(null);
+    const [scope, animate] = useAnimate<HTMLDivElement>();
 
     const [height, setHeight] = useState<number>();
 
-    const isHover = useEventState(iHoverParams(target));
+    const isHover = useEventState(iHoverParams(scope));
 
     const iDestory = useSnackbars(({ destory }) => destory);
 
+    useResizeObserver(scope, ({ scrollHeight }) => {
+      if (height !== scrollHeight) setHeight(scrollHeight);
+    });
+
+    useImperativeHandle(ref, () => scope.current);
+
     const destory = useMemoFunc(() => iDestory(id));
 
-    useImperativeHandle(ref, () => target.current!);
-
-    const api = useRef({ id, destory });
-
-    useTimeout(destory, {
+    const iResetTimeout = useTimeout(destory, {
       wait: duration,
       enabled: !isHover && isFinitePositive(duration),
     });
 
-    useResizeObserver(target, ({ scrollHeight }) => {
-      if (height !== scrollHeight) setHeight(scrollHeight);
+    const iShakeAnimate = useMemoFunc(async () => {
+      await animate(
+        scope.current,
+        { rotate: [-1, 1, -0.5, 0.5, 0] },
+        {
+          duration: 0.4,
+          velocity: 100,
+          repeatType: 'reverse',
+        }
+      );
     });
+
+    const reset = useMemoFunc(() => {
+      iShakeAnimate();
+      iResetTimeout();
+    });
+
+    const api = useRef({ id, reset, destory });
+
+    useEffect(() => {
+      snackbar.apis.set(id, api.current);
+    }, [id]);
 
     const onAnimationComplete = useMemoFunc(
       (animation: AnimationDefinition) => {
@@ -125,7 +148,7 @@ export const ISnackbar = forwardRef<HTMLDivElement, ISnackbarProps>(
 
     return (
       <motion.div
-        ref={target}
+        ref={scope}
         animate={iAnimate(useDeferredValue(height))}
         className={classNames(
           styles.snackbar,

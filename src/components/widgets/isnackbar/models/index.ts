@@ -5,6 +5,7 @@ import type { ReactMotionDomProps, WrapperProps } from '@/models';
 
 export type ISnackbarAPI = {
   id: React.Key;
+  reset: () => void;
   destory: () => void;
 };
 

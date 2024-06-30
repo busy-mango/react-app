@@ -1,9 +1,7 @@
 import { useDeferredValue, useEffect } from 'react';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
-import { nanoid } from 'nanoid';
 
 import { isNumber } from '@busymango/is-esm';
-import { assign } from '@busymango/utils';
 import { FloatingPortal } from '@floating-ui/react';
 
 import { container } from '@/init';
@@ -13,17 +11,10 @@ import { IFlex } from '../iflex';
 import { IOverlay } from '../ioverlay';
 import { useSnackbars } from './hooks';
 import { ISnackbar } from './isnackbar';
-import type { ISnackbarProps } from './models';
 
 import styles from './index.scss';
 
-export const snackbar = {
-  emit: async (config: Partial<ISnackbarProps>) => {
-    const initial: ISnackbarProps = { id: nanoid(), duration: 3000 };
-    const options = assign<ISnackbarProps>(initial, config);
-    return await useSnackbars.getState().emit(options);
-  },
-};
+export { snackbar } from './hooks';
 
 export const ISnackbarPortal: ReactCFC<{
   max?: number;

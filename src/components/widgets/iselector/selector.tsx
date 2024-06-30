@@ -86,6 +86,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       clear,
       render,
       status,
+      prefix,
       options,
       measure,
       multiple,
@@ -279,6 +280,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
             // [styles.keyword]: isNonEmptyString(keyword),
           })}
           isLoading={isLoading}
+          prefix={prefix}
           size={_size}
           status={status}
           suffix={<ISignLine ring={iSignType === 'cross'} type={iSignType} />}

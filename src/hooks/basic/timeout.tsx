@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { ConstrainedFunc } from '@busymango/utils';
+
+import { useMemoFunc } from './memo.func';
 
 export const useTimeout = <T extends ConstrainedFunc<T>>(
   func?: T,
@@ -9,14 +11,20 @@ export const useTimeout = <T extends ConstrainedFunc<T>>(
     enabled?: boolean;
   }
 ) => {
+  const [key, setKey] = useState(0);
+
   const { enabled, wait } = params ?? {};
 
   useEffect(() => {
-    if (enabled && func) {
+    if (key >= 0 && enabled && func) {
       const timer = setTimeout(func, wait);
       return () => {
         clearTimeout(timer);
       };
     }
-  }, [enabled, wait, func]);
+  }, [key, enabled, wait, func]);
+
+  return useMemoFunc(() => {
+    setKey((num) => (num + 1) % 1_000);
+  });
 };

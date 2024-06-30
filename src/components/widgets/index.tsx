@@ -16,6 +16,7 @@ export * from './ipage';
 export * from './ipicker';
 export * from './ipopover';
 export * from './iselector';
+export * from './isign';
 export * from './isnackbar';
 export * from './ispinners';
 export * from './itextarea';
