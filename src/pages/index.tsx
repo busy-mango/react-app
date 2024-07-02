@@ -49,17 +49,29 @@ const Welcome: React.FC = () => {
     <IPage>
       <NoData title={<IOverflow maxRow={3}>{text}</IOverflow>}>
         <IFlex vertical gap={24}>
-          <IButton
-            onClick={() => {
-              snackbar.emit({
-                id: 'id',
-                children,
-                status: 'error',
-              });
-            }}
-          >
-            消息
-          </IButton>
+          <IFlex gap={12}>
+            <IButton
+              onClick={() => {
+                snackbar.emit({
+                  id: 'id',
+                  children,
+                });
+              }}
+            >
+              Hallo Word
+            </IButton>
+            <IButton
+              onClick={() => {
+                snackbar.emit({
+                  children: '消息2',
+                  status: 'error',
+                });
+              }}
+            >
+              消息
+            </IButton>
+          </IFlex>
+
           <ISelector
             options={[
               { value: 'info' },

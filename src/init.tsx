@@ -12,6 +12,18 @@ import 'dayjs/locale/zh-cn';
 
 dayjs.locale('zh-cn');
 
+/**
+ * 生成`Chunk`文件用以判断应用版本是否更新
+ * 见`src/components/dynamic/hooks/index.tsx`
+ */
+import(
+  /* webpackChunkName: "manifest" */
+  /* webpackPrefetch: true */
+  /* webpackPreload: true */
+  /* webpackMode: "lazy" */
+  'src/manifest'
+);
+
 /** 环境枚举 */
 export const enum AppEnv {
   Dev = 'development',

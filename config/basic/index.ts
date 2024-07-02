@@ -2,8 +2,9 @@
  * @description 项目配置
  */
 
-import { expands } from 'helpers';
 import { resolve } from 'path';
+
+import { expands } from '../../helpers';
 
 const { PWD, INIT_CWD } = process.env;
 const { npm_package_name: name } = process.env;

@@ -1,14 +1,14 @@
 #! /usr/bin/env tsx
 
 import { exec } from 'child_process';
-import { dev, dir, dirconfs } from 'config';
 import { watch } from 'fs';
-import { iUsablePort } from 'helpers';
 
 import { rspack } from '@rspack/core';
 import type { Configuration } from '@rspack/dev-server';
 import { RspackDevServer } from '@rspack/dev-server';
 
+import { dev, dir, dirconfs } from '../config';
+import { iUsablePort } from '../helpers';
 import { define } from './args.ts';
 
 const { opts, config } = define();

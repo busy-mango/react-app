@@ -80,13 +80,5 @@
     "utils/**/*",
     "global.d.ts",
     "config/compiler/.develop.ts"
-  ],
-  /* See https://typestrong.org/ts-node/docs/swc/. */
-  "ts-node": {
-    "swc": true,
-    /* See https://github.com/TypeStrong/ts-node/issues/1997 */
-    "esm": true,
-    "transpileOnly": true,
-    "experimentalSpecifierResolution": "node"
-  }
+  ]
 }

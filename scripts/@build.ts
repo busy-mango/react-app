@@ -1,13 +1,13 @@
 #! /usr/bin/env tsx
 
-import { dir, prod } from 'config';
 import date from 'dayjs';
 import { readdirSync } from 'fs';
-import { copy } from 'helpers';
 import { resolve } from 'path';
 
 import { rspack } from '@rspack/core';
 
+import { dir, prod } from '../config';
+import { copy } from '../helpers';
 import { define } from './args.ts';
 
 const { config } = define();

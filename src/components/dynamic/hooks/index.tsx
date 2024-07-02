@@ -66,8 +66,7 @@ export function useLazyComponent(route?: string) {
     queryKey: [SNIFFER_KEY, env.version],
     queryFn: async () => {
       const headers = { ['Cache-Control']: 'no-cache' };
-      // const src = `/static/${env.version}/version.js`;
-      const src = `/static/${env.version}/runtime.js`;
+      const src = `/static/${env.version}/manifest.js`;
       const res = await fetch(src, { headers });
       return res.status === 200;
     },

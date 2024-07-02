@@ -1,7 +1,8 @@
 import { program } from 'commander';
-import { dev, mock, prod, test } from 'config';
 
 import type { Configuration } from '@rspack/core';
+
+import { dev, mock, prod, test } from '../config';
 
 export const define = () => {
   const conf = { dev, mock, test, prod };
