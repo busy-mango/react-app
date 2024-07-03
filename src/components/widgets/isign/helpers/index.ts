@@ -50,7 +50,8 @@ export const initial: Target = {
 };
 
 export const transition: Transition = {
-  duration: 0.15,
+  duration: 0.2,
+  type: 'spring',
   ease: 'easeIn',
 };
 
@@ -58,32 +59,32 @@ export const iAnimateLine = (type: ISignType): Target[] => {
   switch (type) {
     case 'arrow-top':
       return [
-        { d: 'M128 640 L512 256 L896 640' },
-        { d: 'M128 640 L512 256 L896 640' },
+        { d: `M256 614.4 L512 358.4 L768 614.4` },
+        { d: `M256 614.4 L512 358.4 L768 614.4` },
       ];
     case 'arrow-left':
       return [
-        { d: 'M640 128 L256 512 L640 896' },
-        { d: 'M640 128 L256 512 L640 896' },
+        { d: 'M614.4 256 L358.4 512 L614.4 768' },
+        { d: 'M614.4 256 L358.4 512 L614.4 768' },
       ];
     case 'arrow-right':
       return [
-        { d: 'M384 128 L768 512 L384 944' },
-        { d: 'M384 128 L768 512 L384 944' },
+        { d: 'M409.6 256 L665.6 512 L409.6 768' },
+        { d: 'M409.6 256 L665.6 512 L409.6 768' },
       ];
     case 'arrow-bottom':
       return [
-        { d: 'M128 384 L512 768 L944 384' },
-        { d: 'M128 384 L512 768 L944 384' },
+        { d: 'M256 409.6 L512 665.6 L768 409.6' },
+        { d: 'M256 409.6 L512 665.6 L768 409.6' },
       ];
     case 'clock':
       return [
-        { d: 'M512 192 L512 352 L512 512' },
+        { d: 'M512 224 L512 368 L512 512' },
         {
           d: [
             'M512 512',
-            `L${512 + iTrigoAdjacent(128)} ${512 + iTrigoOpposite(128)}`,
-            `L${512 + iTrigoAdjacent(256)} ${512 + iTrigoOpposite(256)}`,
+            `L${512 + iTrigoAdjacent(112)} ${512 + iTrigoOpposite(112)}`,
+            `L${512 + iTrigoAdjacent(224)} ${512 + iTrigoOpposite(224)}`,
           ].join(' '),
         },
       ];

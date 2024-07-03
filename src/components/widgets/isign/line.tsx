@@ -8,6 +8,7 @@ import type { ISignLineProps } from './models';
 export const ISignLine: React.FC<ISignLineProps> = ({
   type,
   ring,
+  style,
   ...others
 }) => (
   <svg
@@ -17,6 +18,10 @@ export const ISignLine: React.FC<ISignLineProps> = ({
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={64}
+    style={{
+      ...style,
+      transform: `scale(${ring ? 1 : 1.5})`,
+    }}
     version="1.1"
     viewBox="0 0 1024 1024"
     width="1em"

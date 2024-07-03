@@ -71,7 +71,6 @@ const Welcome: React.FC = () => {
               消息
             </IButton>
           </IFlex>
-
           <ISelector
             options={[
               { value: 'info' },

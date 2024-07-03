@@ -13,7 +13,7 @@ import type {
   Target,
   Transition,
 } from 'framer-motion';
-import { motion, useAnimate } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { isFinite, isObject, isTrue } from '@busymango/is-esm';
 import { isEqual } from '@busymango/utils';
@@ -30,7 +30,7 @@ import type { ReactTargetType } from '@/models';
 import type { ISignType } from '../isign';
 import { ISignLine } from '../isign';
 import { ISVGWrap } from '../isvg-wrap';
-import { useSnackbars } from './hooks';
+import { useShakeAnimate, useSnackbars } from './hooks';
 import { snackbar } from './isnackbar.portal';
 import type { ISnackbarProps } from './models';
 
@@ -94,7 +94,7 @@ export const ISnackbar = forwardRef<HTMLDivElement, ISnackbarProps>(
       ...others
     } = props;
 
-    const [scope, animate] = useAnimate<HTMLDivElement>();
+    const [scope, iShakeAnimate] = useShakeAnimate();
 
     const [height, setHeight] = useState<number>();
 
@@ -113,18 +113,6 @@ export const ISnackbar = forwardRef<HTMLDivElement, ISnackbarProps>(
     const iResetTimeout = useTimeout(destory, {
       wait: duration,
       enabled: !isHover && isFinitePositive(duration),
-    });
-
-    const iShakeAnimate = useMemoFunc(async () => {
-      await animate(
-        scope.current,
-        { rotate: [-1, 1, -0.5, 0.5, 0] },
-        {
-          duration: 0.4,
-          velocity: 100,
-          repeatType: 'reverse',
-        }
-      );
     });
 
     const reset = useMemoFunc(() => {

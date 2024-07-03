@@ -1,4 +1,4 @@
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment, memo } from 'react';
 import { motion } from 'framer-motion';
 
 import {
@@ -9,7 +9,7 @@ import {
   transition,
 } from './helpers';
 
-export const IMagnifierPath: React.FC = () => (
+const MagnifierPath: React.FC = () => (
   <Fragment>
     <motion.path
       animate={{ d: iCirclePath(448, 448, 256) }}
@@ -31,3 +31,5 @@ export const IMagnifierPath: React.FC = () => (
     />
   </Fragment>
 );
+
+export const IMagnifierPath = memo(MagnifierPath, (_prev, _next) => true);

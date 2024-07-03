@@ -1,3 +1,6 @@
+import { useMemo } from 'react';
+import type { AnimationScope } from 'framer-motion';
+import { useAnimate } from 'framer-motion';
 import { produce } from 'immer';
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
@@ -5,6 +8,7 @@ import { create } from 'zustand';
 import { isNumber } from '@busymango/is-esm';
 import { assign, contains, theFirst, theLast } from '@busymango/utils';
 
+import { useMemoFunc } from '@/hooks';
 import { sizeOf } from '@/utils';
 
 import type {
@@ -73,3 +77,20 @@ export const useSnackbars = create<ISnackbarStore & ISnackbarActions>(
     },
   })
 );
+
+export const useShakeAnimate = <T extends Element = HTMLDivElement>(): [
+  AnimationScope<T>,
+  () => Promise<void>,
+] => {
+  const [scope, animate] = useAnimate<T>();
+
+  const iShakeAnimate = useMemoFunc(async () => {
+    await animate(
+      scope.current,
+      { rotate: [-1, 1, -0.6, 0.6, -0.3, 0.3, -0.1, 0.1, 0] },
+      { duration: 0.4, velocity: 100, repeatType: 'reverse' }
+    );
+  });
+
+  return useMemo(() => [scope, iShakeAnimate], [scope, iShakeAnimate]);
+};
