@@ -5,8 +5,6 @@ import { isTrue } from '@busymango/is-esm';
 import type { ReactCFC } from '@/models';
 import { isReactChildren, isReactNode } from '@/utils';
 
-import HelperSVG from '@/icons/helper.svg';
-
 import { IFlex } from '../iflex';
 import { IMarker } from '../imarker';
 import { IMotionPanel } from '../imotion-panel';
@@ -104,7 +102,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
             justify={`flex-${align}`}
           >
             <IMarker required={required}>{title}</IMarker>
-            {description && <HelperSVG />}
+            {description && <ISignLine type='helper' ring />}
             {note && <ISignLine ring type="info" />}
             {colon && <div className={styles.colon}>{colon}</div>}
           </IFlex>

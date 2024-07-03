@@ -29,21 +29,39 @@
   --box-shadow-opacity: 0.04;
 
   --box-shadow-color: 0 0 0;
+  --box-shadow-color-hex: #000000;
 
   --tip-bg-color: 0 0 0;
+  --tip-bg-color-hex: #000000;
+
   --hover-bg-color: 29 33 41;
+  --hover-bg-color-hex: #1d2129;
+
   --chip-bg-color: 242 243 245;
-  --main-bg-color: 232 240 255;
+  --chip-bg-color-hex: #f2f3f5;
+
+  /* 背景色 */
+  --main-bg-color: 243 247 255;
+  --comp-bg-color-hex: #F3F7FF;
+
   --comp-bg-color: 255 255 255;
+  --comp-bg-color-hex: #ffffff;
+
   --page-bg-color: 242 243 245;
+  --page-bg-color-hex: #f2f3f5;
 
   --error-color: 245 66 77;
+  --error-color-hex: #f5424d;
 
   --border-color: 229 230 235;
+  --border-color-hex: #e5e6eb;
 
   --wave-color: 82 11 239;
-  /* 主色 */
-  --main-color: 47 84 235;
+  --wave-color-hex: #520bef;
+
+  --main-color: 31 100 231;
+  /* 75A4FE E8F0FE */
+  --main-color-hex: #1F64E7;
 }
 
 #root.bright {

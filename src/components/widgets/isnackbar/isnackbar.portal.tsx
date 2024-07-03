@@ -34,7 +34,7 @@ export const ISnackbarPortal: ReactCFC<{
       <IOverlay className={styles.overlay}>
         <IFlex vertical align="center" className={styles.container}>
           <MotionConfig reducedMotion="never">
-            <AnimatePresence mode="sync">
+            <AnimatePresence mode="popLayout">
               {useDeferredValue(snackbars).map((rect, index) => (
                 <ISnackbar
                   style={{ zIndex: -1 * index }}
