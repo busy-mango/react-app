@@ -15,6 +15,9 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { useMemoFunc } from '@/hooks';
 import { iArray, iCompact, sizeOf } from '@/utils';
 
+import EmptySVG from '@/icons/business/empty.svg';
+
+import { IFlex } from '../iflex';
 import { estimateSize } from './helpers';
 import type { ScrollableProps, ScrollableRef } from './models';
 
@@ -146,7 +149,12 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
         {...others}
       >
         <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
-        {isEmptyArray(items) && <div>NoData</div>}
+        {isEmptyArray(items) && (
+          <IFlex centered vertical className={styles.empty}>
+            <EmptySVG className={styles.emptyIcon} />
+            <span className={styles.emptyText}>暂无数据</span>
+          </IFlex>
+        )}
       </div>
     );
   }

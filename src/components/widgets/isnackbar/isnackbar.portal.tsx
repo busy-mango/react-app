@@ -37,9 +37,9 @@ export const ISnackbarPortal: ReactCFC<{
             <AnimatePresence mode="popLayout">
               {useDeferredValue(snackbars).map((rect, index) => (
                 <ISnackbar
-                  style={{ zIndex: -1 * index }}
                   {...rect}
                   key={rect.id}
+                  style={{ zIndex: -1 * index }}
                 />
               ))}
             </AnimatePresence>

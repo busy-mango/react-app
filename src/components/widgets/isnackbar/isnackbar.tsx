@@ -50,8 +50,8 @@ const initial: AnimationProps['initial'] = {
 };
 
 const transition: Transition = {
-  ease: 'circIn',
-  duration: 0.2,
+  type: 'spring',
+  duration: 0.3,
 };
 
 const isFinitePositive = (source: unknown): source is number => {
