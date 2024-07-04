@@ -57,25 +57,45 @@ export const transition: Transition = {
 
 export const iAnimateLine = (type: ISignType): Target[] => {
   switch (type) {
-    case 'arrow-top':
+    case 'arrowTop':
       return [
         { d: `M256 614.4 L512 358.4 L768 614.4` },
         { d: `M256 614.4 L512 358.4 L768 614.4` },
       ];
-    case 'arrow-left':
+    case 'arrowLeft':
       return [
         { d: 'M614.4 256 L358.4 512 L614.4 768' },
         { d: 'M614.4 256 L358.4 512 L614.4 768' },
       ];
-    case 'arrow-right':
+    case 'arrowRight':
       return [
         { d: 'M409.6 256 L665.6 512 L409.6 768' },
         { d: 'M409.6 256 L665.6 512 L409.6 768' },
       ];
-    case 'arrow-bottom':
+    case 'arrowBottom':
       return [
         { d: 'M256 409.6 L512 665.6 L768 409.6' },
         { d: 'M256 409.6 L512 665.6 L768 409.6' },
+      ];
+    case 'arrowDoubleTop':
+      return [
+        { d: `M320 512 L512 320 L704 512` },
+        { d: `M320 704 L512 512 L704 704` },
+      ];
+    case 'arrowDoubleLeft':
+      return [
+        { d: `M512 320 L320 512 L512 704` },
+        { d: `M704 320 L512 512 L704 704` },
+      ];
+    case 'arrowDoubleRight':
+      return [
+        { d: `M320 320 L512 512 L320 704` },
+        { d: `M512 320 L704 512 L512 704` },
+      ];
+    case 'arrowDoubleBottom':
+      return [
+        { d: 'M320 320 L512 512 L704 320' },
+        { d: 'M320 512 L512 704 L704 512' },
       ];
     case 'clock':
       return [
@@ -108,7 +128,7 @@ export const iAnimateLine = (type: ISignType): Target[] => {
         { d: 'M320 320 L512 512 L704 704' },
         { d: 'M704 320 L512 512 L320 704' },
       ];
-    case 'info':
+    case 'informer':
       return [{ d: 'M512 256 L512 256 L512 608' }, { d: iTrigo(512, 768, 8) }];
     default:
       return [];

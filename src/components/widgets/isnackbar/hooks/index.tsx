@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 import { create } from 'zustand';
 
 import { isNumber } from '@busymango/is-esm';
+import type { OmitOf } from '@busymango/utils';
 import { assign, contains, theFirst, theLast } from '@busymango/utils';
 
 import { useMemoFunc } from '@/hooks';
@@ -15,6 +16,7 @@ import type {
   ISnackbarActions,
   ISnackbarAPI,
   ISnackbarProps,
+  ISnackbarStatus,
   ISnackbarStore,
 } from '../models';
 
@@ -25,6 +27,23 @@ export const snackbar = {
     const options = assign<ISnackbarProps>(initial, config);
     return await useSnackbars.getState().emit(options);
   },
+  ...(() =>
+    (['info', 'error', 'warn', 'success'] satisfies ISnackbarStatus[]).reduce(
+      (accom, status) => ({
+        ...accom,
+        [status]: async (config: OmitOf<Partial<ISnackbarProps>, 'status'>) => {
+          const id = nanoid();
+          const duration = 3000;
+          const initial: ISnackbarProps = { id, status, duration };
+          const options = assign<ISnackbarProps>(initial, config);
+          return await useSnackbars.getState().emit(options);
+        },
+      }),
+      {} as Record<
+        ISnackbarStatus,
+        (config: OmitOf<Partial<ISnackbarProps>, 'status'>) => Promise<void>
+      >
+    ))(),
 };
 
 export const useSnackbars = create<ISnackbarStore & ISnackbarActions>(

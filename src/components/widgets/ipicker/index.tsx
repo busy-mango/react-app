@@ -260,7 +260,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
         {...getReferenceProps()}
       >
         <div>{inner}</div>
-        <ISignLine className={styles.arrow} type="arrow-right" />
+        <ISignLine className={styles.arrow} type="arrowRight" />
       </div>
       <FloatingPortal root={container}>
         <AnimatePresence>

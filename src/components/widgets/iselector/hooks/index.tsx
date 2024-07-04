@@ -19,7 +19,7 @@ export const useSignType = (
   isFocus?: boolean,
   open?: boolean
 ): ISignType => {
-  const iArrow: ISignType = open ? 'arrow-top' : 'arrow-bottom';
+  const iArrow: ISignType = open ? 'arrowTop' : 'arrowBottom';
 
   const isShowClear = clearable && (isFocus || open);
 

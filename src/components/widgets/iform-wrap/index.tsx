@@ -72,7 +72,7 @@ export const IFormCard: ReactCFC<IFormCardProps> = ({
         <IFlex align="center" className={styles.header} justify="space-between">
           <div>{title}</div>
           <ISignLine
-            type={visible ? 'arrow-top' : 'arrow-bottom'}
+            type={visible ? 'arrowTop' : 'arrowBottom'}
             onClick={toggle}
           />
         </IFlex>

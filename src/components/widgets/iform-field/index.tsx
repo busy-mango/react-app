@@ -102,8 +102,8 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
             justify={`flex-${align}`}
           >
             <IMarker required={required}>{title}</IMarker>
-            {description && <ISignLine type='helper' ring />}
-            {note && <ISignLine ring type="info" />}
+            {description && <ISignLine ring type="helper" />}
+            {note && <ISignLine ring type="informer" />}
             {colon && <div className={styles.colon}>{colon}</div>}
           </IFlex>
         )}

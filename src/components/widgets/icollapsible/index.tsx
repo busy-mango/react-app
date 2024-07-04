@@ -40,7 +40,7 @@ const ICollapsible: React.FC<ICollapsibleProps> = ({
               onArrowClick?.(name, !open);
             }}
           >
-            <ISignLine type={open ? 'arrow-top' : 'arrow-bottom'} />
+            <ISignLine type={open ? 'arrowTop' : 'arrowBottom'} />
           </IFlex>
         )}
       </div>

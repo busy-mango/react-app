@@ -2,12 +2,12 @@
  * @description 公共配置
  */
 
-import { parse } from 'dotenv';
 import ForkTSCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
 import { assign } from '@busymango/utils';
+import { parse } from '@dotenvx/dotenvx';
 import type { RspackPluginFunction, RspackPluginInstance } from '@rspack/core';
 import { rspack } from '@rspack/core';
 import ReactRefreshRspackPlugin from '@rspack/plugin-react-refresh';

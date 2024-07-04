@@ -9,6 +9,8 @@ export type ISnackbarAPI = {
   destory: () => void;
 };
 
+export type ISnackbarStatus = 'success' | 'info' | 'error' | 'warn';
+
 export interface ISnackbarProps
   extends ReactMotionDomProps<OmitOf<WrapperProps, 'id'>> {
   id: React.Key;
@@ -23,7 +25,7 @@ export interface ISnackbarProps
   /** 变体 */
   variant?: 'filled' | 'outlined';
   /** 状态 */
-  status?: 'success' | 'info' | 'error' | 'warn';
+  status?: ISnackbarStatus;
   /** 组件卸载时的回调 */
   onExit?: (api: ISnackbarAPI) => void;
 }

@@ -1,20 +1,25 @@
 import type { ReactSvgProps } from '@/models';
 
+/**
+ * TODO: refresh
+ */
 export type ISignType =
   | 'tick'
-  | 'info'
   | 'plus'
   | 'minus'
   | 'clock'
   | 'cross'
   | 'helper'
+  | 'informer'
   | 'magnifier'
-  | 'arrow-top'
-  | 'arrow-left'
-  | 'arrow-right'
-  | 'arrow-bottom';
-
-// arrow.double refresh
+  | 'arrowTop'
+  | 'arrowLeft'
+  | 'arrowRight'
+  | 'arrowBottom'
+  | 'arrowDoubleTop'
+  | 'arrowDoubleLeft'
+  | 'arrowDoubleRight'
+  | 'arrowDoubleBottom';
 
 export interface ISignLineProps extends ReactSvgProps {
   type: ISignType;

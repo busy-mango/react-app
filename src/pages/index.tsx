@@ -62,30 +62,33 @@ const Welcome: React.FC = () => {
             </IButton>
             <IButton
               onClick={() => {
-                snackbar.emit({
-                  children: '消息2',
-                  status: 'error',
-                });
+                snackbar.error({ children: '消息2' });
               }}
             >
               消息
             </IButton>
           </IFlex>
           <ISelector
-            options={[
-              { value: 'info' },
-              { value: 'tick' },
-              { value: 'plus' },
-              { value: 'minus' },
-              { value: 'cross' },
-              { value: 'clock' },
-              { value: 'helper' },
-              { value: 'magnifier' },
-              { value: 'arrow-top' },
-              { value: 'arrow-left' },
-              { value: 'arrow-right' },
-              { value: 'arrow-bottom' },
-            ]}
+            options={
+              [
+                { value: 'tick' },
+                { value: 'plus' },
+                { value: 'minus' },
+                { value: 'cross' },
+                { value: 'clock' },
+                { value: 'helper' },
+                { value: 'informer' },
+                { value: 'magnifier' },
+                { value: 'arrowTop' },
+                { value: 'arrowLeft' },
+                { value: 'arrowRight' },
+                { value: 'arrowBottom' },
+                { value: 'arrowDoubleTop' },
+                { value: 'arrowDoubleLeft' },
+                { value: 'arrowDoubleRight' },
+                { value: 'arrowDoubleBottom' },
+              ] satisfies { value: ISignType }[]
+            }
             prefix={<ISignLine ring className={styles.icon} type={sign} />}
             value={sign}
             onChange={(val) => {
