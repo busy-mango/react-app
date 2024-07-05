@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@busymango/fetch-driver':
-        specifier: ^0.2.4
-        version: 0.2.4(@busymango/is-esm@0.2.2)(@busymango/utils@0.2.2(@busymango/is-esm@0.2.2))(mime@4.0.3)
+        specifier: ^0.2.5
+        version: 0.2.5(@busymango/is-esm@0.2.2)(@busymango/utils@0.2.2(@busymango/is-esm@0.2.2))(mime@4.0.3)
       '@busymango/is-esm':
         specifier: ^0.2.2
         version: 0.2.2
@@ -833,8 +833,8 @@ packages:
   '@bufbuild/protobuf@1.10.0':
     resolution: {integrity: sha512-QDdVFLoN93Zjg36NoQPZfsVH9tZew7wKDKyV5qRdj8ntT4wQCOradQjRaTdwMhWUYsgKsvCINKKm87FdEk96Ag==}
 
-  '@busymango/fetch-driver@0.2.4':
-    resolution: {integrity: sha512-8RAqAAQzh/mv/TL3DeEplv30qY9ChJNsq/A6EwkrLLAoI+jRBd0vL8+QVkPTU3EKYEN3Be+NMaYefeTxBBKc3w==}
+  '@busymango/fetch-driver@0.2.5':
+    resolution: {integrity: sha512-oqQR3eeVunBBuOIYz+0dJCTuWVikLDXS8w+4Igja7ZarHoCRad5Ju/XIwsaXoIZmw5eQFeWlavUC2U8Go/pNAg==}
     peerDependencies:
       '@busymango/is-esm': '>=0.2.2'
       '@busymango/utils': '>=0.2.2'
@@ -5360,7 +5360,7 @@ snapshots:
 
   '@bufbuild/protobuf@1.10.0': {}
 
-  '@busymango/fetch-driver@0.2.4(@busymango/is-esm@0.2.2)(@busymango/utils@0.2.2(@busymango/is-esm@0.2.2))(mime@4.0.3)':
+  '@busymango/fetch-driver@0.2.5(@busymango/is-esm@0.2.2)(@busymango/utils@0.2.2(@busymango/is-esm@0.2.2))(mime@4.0.3)':
     dependencies:
       '@busymango/is-esm': 0.2.2
       '@busymango/utils': 0.2.2(@busymango/is-esm@0.2.2)

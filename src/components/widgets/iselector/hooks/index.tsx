@@ -43,7 +43,7 @@ export const useIFloating = (params: {
     ) => {
       floating.style.width = `${reference.width}px`;
     },
-    10 * FRAME2MS
+    1 * FRAME2MS
   );
 
   const apply = useMemoFunc(

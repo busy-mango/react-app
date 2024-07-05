@@ -60,7 +60,7 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
-    "@busymango/fetch-driver": "^0.2.4",
+    "@busymango/fetch-driver": "^0.2.5",
     "@busymango/is-esm": "^0.2.2",
     "@busymango/utils": "^0.2.2",
     "@floating-ui/react": "^0.26.19",

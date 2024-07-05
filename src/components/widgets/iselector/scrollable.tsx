@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  Fragment,
   useImperativeHandle,
   useLayoutEffect,
   useRef,
@@ -18,6 +19,7 @@ import { iArray, iCompact, sizeOf } from '@/utils';
 import EmptySVG from '@/icons/business/empty.svg';
 
 import { IFlex } from '../iflex';
+import { IClipSpinner } from '../ispinners';
 import { estimateSize } from './helpers';
 import type { ScrollableProps, ScrollableRef } from './models';
 
@@ -29,6 +31,7 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
       value,
       options,
       maxHeight,
+      isLoading,
       isPositioned,
       measure = false,
       multiple = false,
@@ -151,8 +154,14 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
         <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
         {isEmptyArray(items) && (
           <IFlex centered vertical className={styles.empty}>
-            <EmptySVG className={styles.emptyIcon} />
-            <span className={styles.emptyText}>暂无数据</span>
+            {isLoading ? (
+              <IClipSpinner />
+            ) : (
+              <Fragment>
+                <EmptySVG className={styles.emptyIcon} />
+                <span className={styles.emptyText}>暂无数据</span>
+              </Fragment>
+            )}
           </IFlex>
         )}
       </div>

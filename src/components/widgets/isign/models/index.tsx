@@ -9,6 +9,7 @@ export type ISignType =
   | 'minus'
   | 'clock'
   | 'cross'
+  | 'dollar'
   | 'helper'
   | 'informer'
   | 'magnifier'

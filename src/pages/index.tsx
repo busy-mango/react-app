@@ -17,11 +17,8 @@ import {
   NoData,
   snackbar,
 } from '@/components';
-import { AppEnv, env } from '@/init';
 
 import styles from './index.scss';
-
-const isDev = env.name === AppEnv.Dev;
 
 const text = `${'很长'.repeat(20)}的文字`;
 

@@ -31,4 +31,6 @@ export interface IChipProps extends WrapperProps<HTMLSpanElement> {
   size?: ControlUISize;
   /** @default 'outlined' */
   variant?: 'filled' | 'outlined';
+  /** show loading icon */
+  isLoading?: boolean;
 }

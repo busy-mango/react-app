@@ -9,8 +9,11 @@
 
   h1.title {
     max-width: 100%;
+    padding: 0 var(--gap-3);
     transform: translateY(-64px);
     font-size: var(--font-size-8);
     margin-bottom: calc(32px - 64px);
+
+    word-break: break-all;
   }
 }

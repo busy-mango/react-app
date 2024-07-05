@@ -9,12 +9,14 @@ import {
   transition,
 } from './helpers';
 
+const d = iCirclePath(512, 512, 0);
+
 const MagnifierPath: React.FC = () => (
   <Fragment>
     <motion.path
       animate={{ d: iCirclePath(448, 448, 256) }}
-      exit={{ d: iCirclePath(512, 512, 0) }}
-      initial={{ d: iCirclePath(512, 512, 0) }}
+      exit={{ d }}
+      initial={{ d }}
       transition={transition}
     />
     <motion.path

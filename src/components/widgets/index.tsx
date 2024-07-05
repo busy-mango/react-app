@@ -3,6 +3,7 @@
  */
 
 export * from './ibutton';
+export * from './ichip';
 export * from './icollapsible';
 export * from './iflex';
 export * from './iform-field';

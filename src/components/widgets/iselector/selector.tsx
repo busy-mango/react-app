@@ -84,6 +84,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
   function ISelector(props, ref) {
     const {
       clear,
+      style,
       render,
       status,
       prefix,
@@ -96,9 +97,9 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       separator,
       placeholder,
       open: _open,
+      filter = true,
       keyword: _keyword,
       iFloatingClassName,
-      filter = true,
       variant = 'bordered',
       size: _size = 'medium',
       onOpenChange: _onOpenChange,
@@ -284,7 +285,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
           suffixClickable={iSignType === 'cross'}
           variant={variant}
           onSuffixClick={onSuffixClick}
-          {...getReferenceProps({ onClick: iClick })}
+          {...getReferenceProps({ onClick: iClick, style })}
         >
           <motion.div className={styles.wrap}>
             {!multiple && isEmpty(keyword) && iChipListRender(iSelectedList)}
@@ -326,6 +327,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
               >
                 <Scrollable
                   ref={scrollable}
+                  isLoading={isLoading}
                   isPositioned={isPositioned}
                   maxHeight={maxHeight}
                   measure={measure}

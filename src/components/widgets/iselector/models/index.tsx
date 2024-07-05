@@ -57,6 +57,10 @@ export interface ScrollableProps {
    */
   maxHeight?: CSSProperties['maxHeight'];
   /**
+   * 是否展示加载UI
+   */
+  isLoading?: boolean;
+  /**
    * 选项渲染方法
    */
   render: IOptionRender;
@@ -100,7 +104,13 @@ export interface ISelectorProps
   extends Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur'>,
     Pick<
       IFieldWrapProps,
-      'suffix' | 'prefix' | 'isLoading' | 'variant' | 'size' | 'status'
+      | 'suffix'
+      | 'prefix'
+      | 'isLoading'
+      | 'variant'
+      | 'size'
+      | 'status'
+      | 'style'
     >,
     OmitOf<
       WrapperProps,
@@ -174,10 +184,15 @@ export interface ISelectorProps
    * 控件render方法
    */
   render?: {
+    /** 回填的渲染方法 */
     chip?: IOptionRender;
+    /** 选项的渲染方法 */
     option?: IOptionRender;
+    /** 下拉菜单的渲染方法 */
     scrollable?: (params: ScrollableProps) => React.ReactNode;
   };
+  /** 搜索值变更回调 */
   onSearch?: (value?: string) => void;
+  /** 下拉菜单展开/收起事件 */
   onOpenChange?: (open?: boolean) => void;
 }

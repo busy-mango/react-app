@@ -9,6 +9,7 @@ import type { ReactCFC } from '@/models';
 import { iEscapeEvent, iPropagation } from '@/utils';
 
 import { ISignLine } from '../isign';
+import { IClipSpinner } from '../ispinners';
 import { ISVGWrap } from '../isvg-wrap';
 import { IWave } from '../iwave';
 import type { IChipProps } from './models';
@@ -22,6 +23,7 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
     children,
     clickable,
     className,
+    isLoading,
     size = 'medium',
     disabled = false,
     variant = 'filled',
@@ -55,7 +57,13 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
     >
       {clickable && <IWave target={target} />}
       <AnimatePresence>
-        {icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>}
+        {isLoading ? (
+          <ISVGWrap className={styles.icon}>
+            <IClipSpinner />
+          </ISVGWrap>
+        ) : (
+          icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>
+        )}
       </AnimatePresence>
       {children}
       <AnimatePresence>

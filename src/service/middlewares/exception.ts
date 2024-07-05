@@ -6,6 +6,8 @@ import type { DriveMiddleware } from '@busymango/fetch-driver';
 import { FetchError } from '@busymango/fetch-driver';
 import { isTrue } from '@busymango/is-esm';
 
+import { catchMsg } from '@/utils';
+
 export const exception: DriveMiddleware = async (context, next) => {
   await next();
 
@@ -15,7 +17,7 @@ export const exception: DriveMiddleware = async (context, next) => {
     throw new FetchError('服务端失去响应', { context });
   }
 
-  const { ok, status, headers } = response;
+  const { ok, status } = response;
 
   if (status === 401) {
     throw new FetchError('登录态已过期', { context });
@@ -32,8 +34,8 @@ export const exception: DriveMiddleware = async (context, next) => {
   }
 
   if (!isTrue(ok)) {
-    console.dir(body);
-    console.info(headers);
-    throw new FetchError('网络异常', { context });
+    console.info('Context:', context);
+    const msg = catchMsg(body) || '网络异常';
+    throw new FetchError(msg, { context });
   }
 };

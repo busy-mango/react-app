@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { IDollarPath } from './dollar';
 import { IHelperPath } from './helper';
 import { iAnimateLine, initial, transition } from './helpers';
 import { IMagnifierPath } from './magnifier';
@@ -37,8 +38,8 @@ export const ISignLine: React.FC<ISignLineProps> = ({
           transition={transition}
         />
       )}
-      {type === 'helper' && <IHelperPath key="helper" />}
-      {type === 'magnifier' && <IMagnifierPath key="magnifier" />}
+    </AnimatePresence>
+    <AnimatePresence>
       {iAnimateLine(type).map((animate, index) => (
         <motion.path
           key={index.toLocaleString()}
@@ -48,6 +49,11 @@ export const ISignLine: React.FC<ISignLineProps> = ({
           transition={transition}
         />
       ))}
+    </AnimatePresence>
+    <AnimatePresence>
+      {type === 'dollar' && <IDollarPath key="dollar" />}
+      {type === 'helper' && <IHelperPath key="helper" />}
+      {type === 'magnifier' && <IMagnifierPath key="magnifier" />}
     </AnimatePresence>
   </svg>
 );
