@@ -64,13 +64,22 @@
     rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
 }
 
+.chip {
+  width: max-content;
+  height: 1lh;
+}
+
 .wrap {
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-2);
   justify-content: flex-start;
-  line-height: var(--control-size-3);
+  box-sizing: border-box;
+
   max-width: 100%;
+  padding: var(--gap-1);
+  min-height: var(--control-size-4);
+  line-height: inherit;
 }
 
 .input {
@@ -83,6 +92,7 @@
   width: 100%;
   min-height: 1em;
   min-width: 12em;
+  line-height: var(--control-size-3);
 
   cursor: text;
 
@@ -92,7 +102,7 @@
   }
 
   &:not(.multiple) {
-    .chip {
+    .input {
       position: absolute;
     }
 

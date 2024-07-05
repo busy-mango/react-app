@@ -9,6 +9,7 @@ import type { ReactCFC } from '@/models';
 import { iEscapeEvent, iPropagation } from '@/utils';
 
 import { ISignLine } from '../isign';
+import { ISVGWrap } from '../isvg-wrap';
 import { IWave } from '../iwave';
 import type { IChipProps } from './models';
 
@@ -54,14 +55,14 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
     >
       {clickable && <IWave target={target} />}
       <AnimatePresence>
-        {icon && <motion.div className={styles.icon}>{icon}</motion.div>}
+        {icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>}
       </AnimatePresence>
-      <motion.span>{children}</motion.span>
+      {children}
       <AnimatePresence>
         {close && (
-          <motion.div className={styles.close} onClick={iClose}>
+          <ISVGWrap className={styles.close} onClick={iClose}>
             {isTrue(close) ? <ISignLine type="cross" /> : close}
-          </motion.div>
+          </ISVGWrap>
         )}
       </AnimatePresence>
     </motion.span>

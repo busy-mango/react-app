@@ -236,10 +236,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     );
 
     const onSuffixClick = useMemoFunc(() => {
-      if (clearable) {
-        input.current?.clear();
-        iChange(undefined);
-      }
+      if (clearable) iChange(undefined);
     });
 
     const filtered = useMemo(() => {
@@ -290,8 +287,9 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
           {...getReferenceProps({ onClick: iClick })}
         >
           <motion.div className={styles.wrap}>
+            {!multiple && isEmpty(keyword) && iChipListRender(iSelectedList)}
             <AnimatePresence presenceAffectsLayout mode="popLayout">
-              {(multiple || isEmpty(keyword)) && iChipListRender(iSelectedList)}
+              {multiple && isEmpty(keyword) && iChipListRender(iSelectedList)}
             </AnimatePresence>
             <IInput
               ref={input}

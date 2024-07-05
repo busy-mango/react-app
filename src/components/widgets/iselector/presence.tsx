@@ -5,11 +5,7 @@ import { motion } from 'framer-motion';
 import type { WrapperProps } from '@/models';
 import { size2px } from '@/utils';
 
-const animate: Target = {
-  x: 0,
-  opacity: 1,
-  width: 'max-content',
-};
+const animate: Target = { x: 0, opacity: 1 };
 
 const transition: Transition = { duration: 0.1 };
 

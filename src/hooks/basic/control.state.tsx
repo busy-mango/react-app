@@ -3,37 +3,34 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { isUndefined } from '@busymango/is-esm';
 
 import { useMemoFunc } from './memo.func';
-import { useRecord } from './record';
 
 export interface ControlParams {
   /** 输入法是否介入中 */
   isComposing?: boolean;
 }
 
-export interface ControlComponentProps<T> {
+export interface ControlComponentProps<T, Args extends unknown[]> {
   value?: T;
   defaultValue?: T;
-  onChange?: (value?: T) => void;
+  onChange?: (value?: T, ...args: Args) => void;
 }
 
-export function useControlState<T = unknown>(
-  props: ControlComponentProps<T>,
-  params?: ControlParams
-) {
-  const { value, defaultValue, onChange } = props;
+export function useControlState<
+  T = unknown,
+  Args extends unknown[] = unknown[],
+>(props: ControlComponentProps<T, Args>, params: ControlParams = {}) {
+  const { isComposing } = params;
 
-  const { isComposing } = params ?? {};
+  const { value, defaultValue, onChange } = props;
 
   /** 使用输入法时取消受控状态 */
   const isControl = !isUndefined(value) && !isComposing;
 
-  const [inner, setInner] = useState<T | undefined>(
+  const [inner, setInner] = useState<T | undefined>(() =>
     isControl ? value : defaultValue
   );
 
   const control = isControl ? value : inner;
-
-  const record = useRecord(control);
 
   const onControl = useMemoFunc(onChange);
 
@@ -47,17 +44,13 @@ export function useControlState<T = unknown>(
   }, []);
 
   useLayoutEffect(() => {
-    if (isFirstMount.current) return;
-    if (inner !== record) onControl?.(inner);
-  }, [record, inner, onControl]);
-
-  useLayoutEffect(() => {
-    if (isFirstMount.current) return;
-    if (isControl) setInner(value);
+    const { current } = isFirstMount;
+    if (isControl && !current) setInner(value);
   }, [value, isControl]);
 
-  const iChange = useMemoFunc((next?: T) => {
+  const iChange = useMemoFunc((next?: T, ...args: Args) => {
     setInner(next);
+    onControl?.(next, ...args);
   });
 
   return [control, iChange] as const;

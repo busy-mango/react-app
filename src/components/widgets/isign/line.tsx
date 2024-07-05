@@ -20,7 +20,7 @@ export const ISignLine: React.FC<ISignLineProps> = ({
     strokeWidth={64}
     style={{
       ...style,
-      transform: `scale(${ring ? 1 : 1.5})`,
+      transform: `scale(${ring ? 1 : 1.325})`,
     }}
     version="1.1"
     viewBox="0 0 1024 1024"
@@ -29,10 +29,16 @@ export const ISignLine: React.FC<ISignLineProps> = ({
   >
     <AnimatePresence>
       {ring && (
-        <motion.circle cx={512} cy={512} r={480} transition={transition} />
+        <motion.circle
+          key="circle"
+          cx={512}
+          cy={512}
+          r={480}
+          transition={transition}
+        />
       )}
-      {type === 'helper' && <IHelperPath />}
-      {type === 'magnifier' && <IMagnifierPath />}
+      {type === 'helper' && <IHelperPath key="helper" />}
+      {type === 'magnifier' && <IMagnifierPath key="magnifier" />}
       {iAnimateLine(type).map((animate, index) => (
         <motion.path
           key={index.toLocaleString()}

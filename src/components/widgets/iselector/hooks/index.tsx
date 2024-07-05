@@ -1,5 +1,4 @@
-import { flushSync } from 'react-dom';
-
+import { FRAME2MS } from '@busymango/utils';
 import type { MiddlewareState } from '@floating-ui/react';
 import {
   autoUpdate,
@@ -9,7 +8,7 @@ import {
   useFloating,
 } from '@floating-ui/react';
 
-import { useMemoFunc } from '@/hooks';
+import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { size2px } from '@/utils';
 
 import type { ISignType } from '../../isign';
@@ -32,6 +31,21 @@ export const useIFloating = (params: {
 }) => {
   const { open, onOpenChange } = params;
 
+  const iSyncWidth = useDebounceFunc(
+    (
+      floating: HTMLElement,
+      reference: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+      }
+    ) => {
+      floating.style.width = `${reference.width}px`;
+    },
+    10 * FRAME2MS
+  );
+
   const apply = useMemoFunc(
     ({
       rects: { reference },
@@ -40,9 +54,7 @@ export const useIFloating = (params: {
       availableWidth: number;
       availableHeight: number;
     }) => {
-      flushSync(() => {
-        floating.style.width = `${reference.width}px`;
-      });
+      iSyncWidth.starer(floating, reference);
     }
   );
 

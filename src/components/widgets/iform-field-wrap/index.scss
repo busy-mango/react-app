@@ -50,7 +50,6 @@
 
       .icon-wrap {
         font-size: var(--font-size-2);
-        width: var(--control-size-1);
         height: var(--control-size-1);
       }
     }
@@ -61,8 +60,7 @@
 
       .icon-wrap {
         font-size: var(--font-size-3);
-        width: var(--control-size-2);
-        height: var(--control-size-2);
+        height: var(--control-size-3);
       }
     }
     &.huge {
@@ -92,6 +90,8 @@
   align-items: center;
   justify-content: center;
   color: var(--font-color-2);
+
+  width: max-content;
 
   &:first-of-type {
     margin-right: 0.3em;

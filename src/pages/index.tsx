@@ -92,8 +92,7 @@ const Welcome: React.FC = () => {
             prefix={<ISignLine ring className={styles.icon} type={sign} />}
             value={sign}
             onChange={(val) => {
-              const value = theFirst(iArray(val));
-              value && setSign(value as ISignType);
+              setSign(theFirst(iArray(val)) as ISignType);
             }}
           />
           <ISelector multiple options={options} />

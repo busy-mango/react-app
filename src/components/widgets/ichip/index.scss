@@ -12,7 +12,6 @@
   flex-grow: 0;
   position: relative;
   white-space: nowrap;
-  vertical-align: middle;
   box-sizing: border-box;
 
   /** variant */
@@ -50,13 +49,6 @@
     font-size: var(--font-size-3);
     height: var(--control-size-5);
     padding: 0 var(--gap-5);
-  }
-
-  .icon,
-  .close {
-    display: flex;
-    width: max-content;
-    height: max-content;
   }
 
   .icon {
