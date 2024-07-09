@@ -17,10 +17,6 @@
     "build": {
       "name": "build",
       "command": "pnpm build"
-    },
-    "preview": {
-      "name": "preview",
-      "command": "pnpm preview"
     }
   }
 }
