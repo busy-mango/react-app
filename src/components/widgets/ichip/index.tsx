@@ -20,6 +20,7 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
   const {
     icon,
     close,
+    style,
     children,
     clickable,
     className,
@@ -53,6 +54,7 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
         },
         className
       )}
+      style={style}
       onKeyDown={iEscapeEvent(onClose, onKeyDown)}
     >
       {clickable && <IWave target={target} />}

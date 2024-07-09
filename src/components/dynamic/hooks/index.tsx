@@ -34,13 +34,6 @@ const options: Partial<UndefinedInitialDataOptions> = {
     isFalse(isNotFoundError(error)) && count < 2,
 };
 
-function useAppUpdateEffect(isLatest?: boolean) {
-  useEffect(() => {
-    isTrue(isLatest) && reset();
-    isFalse(isLatest) && update();
-  }, [isLatest]);
-}
-
 export function useLazyIcon(route?: string) {
   const enabled = isNonEmptyString(route);
 
@@ -61,7 +54,10 @@ export function useLazyIcon(route?: string) {
   return { SVGComponent, isFetching };
 }
 
-export function useLazyComponent(route?: string) {
+/**
+ * Suspense
+ */
+export function useSuspenseIsLatest() {
   const { data: isLatest } = useSuspenseQuery({
     queryKey: [SNIFFER_KEY, env.version],
     queryFn: async () => {
@@ -70,20 +66,30 @@ export function useLazyComponent(route?: string) {
       const res = await fetch(src, { headers });
       return res.status === 200;
     },
+    gcTime: 5 * S2MS,
     staleTime: 5 * S2MS,
     refetchOnMount: true,
     refetchOnReconnect: true,
     refetchOnWindowFocus: 'always',
   });
 
-  useAppUpdateEffect(isLatest);
+  useEffect(() => {
+    isTrue(isLatest) && reset();
+    isFalse(isLatest) && update();
+  }, [isLatest]);
+
+  return isLatest;
+}
+
+export function useLazyComponent(route?: string, func = routeAsync) {
+  const isLatest = useSuspenseIsLatest();
 
   const { data, isFetching } = useSuspenseQuery({
     ...options,
     queryKey: [PAGE_LOADER_KEY, route, isLatest],
     queryFn: async () => {
       if (isLatest && isString(route)) {
-        const chunk = await routeAsync(route);
+        const chunk = await func(route);
         if (!isNil(chunk.default)) return chunk.default;
         throw new Error(`Loading chunk ${route} failed`);
       }

@@ -55,14 +55,35 @@ Like with the single selection, you can pull out the new value by accessing `val
 
 | Name | Type | Default | Description |
 |-------|-------|-------|-------|
-| `autoFocus` | `boolean` | - | Whether to get focus by default. |
+| `autoFocus` | `boolean` | `-` | Whether to get focus by default. |
 | `clear` | `ReactNode` | `true` | Icon for the clear button, default is true to show the default icon, set false to disable the clear button. |
-| `defaultValue` | `string` | - | The default value. Use when the component is not controlled. |
-| `filter` | `boolean` \| `ISelectorFilterParams` | - | Option filter configuration. |
-| `iFloatingRoot` | `QueryFloatingRootFunc` | - | Floats are rendered to the root by default, or you can specify the root node using this method. |
-| `multiple` | `boolean` | `false` | If true, value must be an array and the menu will support multiple selections. |
-| `onChange` | `func` | - | Callback fired when a menu item is selected. <br/> Warning: This is a generic event, not a change event, unless the change event is caused by browser autofill. |
-| `open` | `boolean` | - | If true, the component is shown |
-| `value` | `boolean` | - | The input value. Providing an null will select no options. Set to an `null` if you don't want any of the available options to be selected. |
+| `defaultValue` | `string` | `-` | The default value. Use when the component is not controlled. |
+| `filter` | `boolean` \| `ISelectorFilterParams` | `-` | Option filter configuration. |
+| `iFloatingClassName` | `string` | `-` | Floating element className. |
+| `iFloatingRoot` | `QueryFloatingRootFunc` | `-` | Floating are rendered to the root by default, or you can specify the root node using this method. |
+| `isLoading` | `boolean` | `false` | Control loading UI. |
+| `initialOpen` | `boolean` | `false` | If true, floating will open on mount. |
+| `keyword` | `string` | `-` | Control search text state. |
+| `maxHeight` | `string` | `-` | Set scrollable height. |
+| `measure` | `string` | `false` | If true, scrollable will auto measure item height. |
+| `multiple` | `boolean` | `false` | Callbacks for expanding scrollable. |
+| `open` | `boolean` | `-` | Control floating open state. |
+| `options` | `string` | `-` | Select options. |
+| `pattern` | `ControlUIPattern` | `editable` | Setting the control interaction mode  |
+| `prefix` | `ReactNode` | `-` | Customized prefix icons. |
+| `separator` | `ReactNode` | `-` | Separators for automatic word separation |
+| `size` | `ControlUISize` | `"medium"` | Selection wrap size |
+| `status` | `ControlCheckedStatus` | `"success"` | Setting the calibration status |
+| `suffix` | `ReactNode` | `-` | Customized suffix icons. |
+| `value` | `React.Key[]` \| `React.Key` | `-` | The input value. Providing an null will select no options. Set to an `null` if you don't want any of the available options to be selected. |
+| `variant` | `"filled"` \| `"standard"` \| `"bordered"` | `"bordered"` | Morphological variant |
+| `render.chip` | `IOptionRender` | `-` | Rendering method for chip |
+| `render.option` | `IOptionRender` | `-` | Rendering method for option |
+| `render.scrollable` | `(props: ScrollableProps) => ReactNode` | `-` | Rendering method for scrollable |
+| `onChange` | `(value?: React.Key[] \| React.Key) => void` | `-` | Callback fired when a menu item is selected. <br/> Warning: This is a generic event, not a change event, unless the change event is caused by browser autofill. |
+| `onOpenChange` | `(open?: boolean) => void` | `-` | - |
+| `onScroll` | `UIEventHandler<HTMLDivElement>` | `-` | Callbacks when scrolling a scrollable. |
+| `onSearch` | `(value?: string) => void` | `-` | Callback when search value changes. |
+| `onSelect` | `(index: number, value?: React.Key[]) => void` | `-` | Called when selected, parameter is the value (or key) of the selected item. |
 
 ## Troubleshooting

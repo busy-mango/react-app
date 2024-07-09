@@ -171,7 +171,6 @@ export interface ISelectorProps
    * 控制搜索文本
    */
   keyword?: string;
-
   /**
    * 分隔符
    */
@@ -189,7 +188,7 @@ export interface ISelectorProps
     /** 选项的渲染方法 */
     option?: IOptionRender;
     /** 下拉菜单的渲染方法 */
-    scrollable?: (params: ScrollableProps) => React.ReactNode;
+    scrollable?: (props: ScrollableProps) => React.ReactNode;
   };
   /** 搜索值变更回调 */
   onSearch?: (value?: string) => void;

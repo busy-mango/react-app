@@ -2,10 +2,12 @@
  * @description boundary error widgets
  */
 
-import { useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { NotFound, Unknown } from '@/components/business';
+import { IButton } from '@/components/widgets';
 import { catchMsg, isNotFoundError } from '@/utils';
 
 import RefreshSVG from '@/icons/refresh.svg';
@@ -40,9 +42,38 @@ export const BoundaryFallbackCard: React.FC = () => {
 };
 
 export const BoundaryFallbackPage: React.FC = () => {
-  const { error, info } = useFallbackContext();
+  const navigate = useNavigate();
 
-  if (isNotFoundError(error)) return <NotFound />;
+  const { error, info, reset } = useFallbackContext();
+
+  if (isNotFoundError(error)) {
+    return (
+      <NotFound
+        title={
+          <Fragment>
+            页面不存在
+            <span
+              style={{
+                marginLeft: 'var(--gap-3)',
+                fontSize: 'var(--font-size-4)',
+              }}
+            >
+              <IButton
+                size="inline"
+                variant="text"
+                onClick={() => {
+                  navigate('/', { replace: true });
+                  reset?.();
+                }}
+              >
+                首页
+              </IButton>
+            </span>
+          </Fragment>
+        }
+      />
+    );
+  }
 
   return <Unknown description={info?.componentStack} title={catchMsg(error)} />;
 };

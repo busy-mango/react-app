@@ -4,10 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 
-import type {
-  ControlUISize,
-  ControlValidationStatus,
-} from '@/components/models';
+import type { ControlCheckedStatus, ControlUISize } from '@/components/models';
 import { useEventState } from '@/hooks';
 import type { ReactMotionDomProps, WrapperProps } from '@/models';
 
@@ -19,7 +16,7 @@ import styles from './index.scss';
 
 export interface IFieldWrapProps
   extends OmitOf<ReactMotionDomProps<WrapperProps>, 'prefix'> {
-  status?: ControlValidationStatus;
+  status?: ControlCheckedStatus;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   suffixClickable?: boolean;
@@ -42,6 +39,7 @@ export const IFieldWrap = forwardRef<HTMLDivElement, IFieldWrapProps>(
       className,
       isLoading,
       suffixClickable,
+      status = 'success',
       variant = 'standard',
       size = ctx?.size ?? 'medium',
       onSuffixClick,

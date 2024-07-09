@@ -14,6 +14,7 @@ const api = 'https://gold-price-live.p.rapidapi.com/get_metal_prices';
 
 const queryFn = async () => parse.json<GoldBody>(await drive<string>(api));
 
+/** 盎司转克 */
 const OZ2G = 28.349523148774;
 
 export default function WatchChip() {
@@ -22,24 +23,44 @@ export default function WatchChip() {
     queryKey: [api],
     gcTime: Infinity,
     staleTime: 5 * MIN2MS,
-    initialData: { gold: 0, silver: 0 },
     refetchInterval: 5 * MIN2MS,
     refetchOnWindowFocus: true,
     throwOnError: false,
-    retry: false,
+    retry: true,
   });
 
-  const { gold = 0, silver = 0 } = data;
+  const { gold = 0, silver = 0 } = data ?? {};
 
   return (
     <IPage>
-      <IFlex gap={size2px(8)}>
-        <IChip isLoading={isPending} variant="outlined">
-          {gold / OZ2G}
-        </IChip>
-        <IChip isLoading={isPending} variant="outlined">
-          {silver / OZ2G}
+      <IFlex vertical gap={size2px(8)}>
+        <IChip
+          isLoading={isPending}
+          style={{
+            color: 'gold',
+            borderColor: 'gold',
+          }}
+          variant="outlined"
+        >
+          金价:
+          {` `}
+          {(gold / OZ2G).toFixed(2)}
           <ISignLine type="dollar" />
+          每克
+        </IChip>
+        <IChip
+          isLoading={isPending}
+          style={{
+            color: 'silver',
+            borderColor: 'silver',
+          }}
+          variant="outlined"
+        >
+          银价:
+          {` `}
+          {(silver / OZ2G).toFixed(2)}
+          <ISignLine type="dollar" />
+          每克
         </IChip>
       </IFlex>
     </IPage>

@@ -16,7 +16,7 @@ export type ControlUIPattern =
   | 'readPretty';
 
 /** 控件校验状态 */
-export type ControlValidationStatus =
+export type ControlCheckedStatus =
   | 'vaildating'
   | 'error'
   | 'warning'

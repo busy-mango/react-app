@@ -32,7 +32,7 @@ export interface IButtonProps extends ReactMotionDomProps<ReactButtonProps> {
   isLoading?: boolean;
   isFullWidth?: boolean;
   debounce?: boolean | number;
-  size?: ControlUISize;
+  size?: ControlUISize | 'inline';
   variant?: 'filled' | 'bordered' | 'text';
 }
 
@@ -46,13 +46,13 @@ const iTapBackground = (params: { variant: IButtonProps['variant'] }) => {
 export const IButton: React.FC<IButtonProps> = (props) => {
   const {
     icon,
+    wave,
     children,
     disabled,
     debounce,
     className,
     isLoading,
     isFullWidth,
-    wave = true,
     size = 'medium',
     variant = 'bordered',
     onPointerDownCapture,
@@ -102,7 +102,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
       }}
       {...others}
     >
-      {wave && <IWave target={ref} />}
+      {(wave ?? variant !== 'text') && <IWave target={ref} />}
       <AnimatePresence>
         {isLoading ? (
           <IconWrap>

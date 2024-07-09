@@ -6,9 +6,6 @@ import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import { isNil } from '@busymango/is-esm';
-import { useQuery } from '@tanstack/react-query';
-
 import { AppEnv, env } from '@/init';
 import type { ReactSvgProps } from '@/models';
 import { caseAsync, devtoolAsync } from '@/utils';
@@ -43,7 +40,7 @@ export const DynamicPage: React.FC = () => {
   const { pathname } = useLocation();
 
   return (
-    <AnimatePresence key={pathname} mode="wait">
+    <AnimatePresence mode="wait">
       <Loadable route={pathname} />
     </AnimatePresence>
   );
@@ -52,22 +49,13 @@ export const DynamicPage: React.FC = () => {
 export const DynamicCase: React.FC = () => {
   const { pathname } = useLocation();
 
-  const route = pathname.replace('/examples', '');
-
-  const { data: Component } = useQuery({
-    queryKey: ['Examples', env.version, route],
-    queryFn: async () => {
-      const chunk = await caseAsync(route);
-      if (!isNil(chunk.default)) return chunk.default;
-      throw new Error(`Loading example ${route} failed`);
-    },
-    throwOnError: false,
-  });
+  const { Component } = useLazyComponent(
+    pathname.replace('/examples', ''),
+    caseAsync
+  );
 
   return (
-    <AnimatePresence key={pathname} mode="wait">
-      {Component && <Component />}
-    </AnimatePresence>
+    <AnimatePresence mode="wait">{Component && <Component />}</AnimatePresence>
   );
 };
 

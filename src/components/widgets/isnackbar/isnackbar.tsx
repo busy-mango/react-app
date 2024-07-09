@@ -44,9 +44,9 @@ const iAnimate = (height?: number): Target => ({
 });
 
 const initial: AnimationProps['initial'] = {
-  scale: 0.36,
-  opacity: 0,
+  scale: 0,
   height: 0,
+  opacity: 0,
 };
 
 const transition: Transition = {

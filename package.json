@@ -18,6 +18,7 @@
   ],
   "author": "mango",
   "license": "ISC",
+  "packageManager": "pnpm@9.4.0",
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.5.0",
     "@rspack/core": "1.0.0-alpha.0",
