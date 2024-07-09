@@ -2,15 +2,22 @@
 
 > Select components are used for collecting user provided information from a list of options.
 
-<iframe
-  src="https://codesandbox.io/p/github/busy-mango/react-app/main?file=%2Fsrc%2Fexamples%2Fselector%2Fbasic.tsx&embed=1"
-  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
-  title="busy-mango/react-app/selector/basic"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
 
-<!-- [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/busy-mango/react-app?file=src%2Fpages%2Findex.tsx) -->
+``` tsx
+import { ISelector } from '@/components';
+
+const options = [
+  { value: 10, lable: 'Ten' },
+  { value: 20, lable: 'Twenty' },
+  { value: 30, lable: 'Thirty' },
+];
+
+function App() {
+  return (
+    <ISelector options={options} />
+  );
+}
+```
 
 ## Usage
 
@@ -31,6 +38,9 @@ function App() {
   );
 }
 ```
+[![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fbasic.tsx&showConsole=true)
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/busy-mango/react-app?file=src%2Fpages%2Findex.tsx)
 
 ### Advanced features
 
