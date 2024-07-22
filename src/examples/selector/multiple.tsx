@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-import { iArray, theLast } from '@busymango/utils';
+import { iArray } from '@busymango/utils';
 
 import { IPage, ISelector } from '@/components';
+import { iCompact } from '@/utils';
 
 const names = [
   'Oliver Hansen',
@@ -17,18 +18,24 @@ const names = [
   'Kelly Snyder',
 ];
 
+const options = names.map((value) => ({ value }));
+
 export default function MultipleSelect() {
-  const [age, setAge] = useState<React.Key>();
+  const [age, setAge] = useState<React.Key[]>();
+
+  const onChange = function (value?: React.Key | React.Key[]) {
+    setAge(iCompact(iArray(value)));
+  };
+
   return (
     <IPage>
       <form>
         <ISelector
           multiple
-          options={names.map((value) => ({ value }))}
+          options={options}
+          separator=","
           value={age}
-          onChange={(value) => {
-            setAge(theLast(iArray(value)));
-          }}
+          onChange={onChange}
         />
       </form>
     </IPage>

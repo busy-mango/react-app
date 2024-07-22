@@ -75,7 +75,7 @@ const iOptionRender: IOptionRender = (option, params) => (
   >
     {option?.label ?? option?.value?.toLocaleString()}
     <AnimatePresence>
-      {params?.isSelected && <ISignLine type="tick" />}
+      {params?.isSelected && <ISignLine className={styles.tick} type="tick" />}
     </AnimatePresence>
   </IFlex>
 );

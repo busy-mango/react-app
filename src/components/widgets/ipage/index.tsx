@@ -35,7 +35,17 @@ export const IPage: ReactCFC<IPageProps> = ({
           <IClipSpinner />
         </motion.div>
       )}
+      {!isLoading && (
+        <motion.div
+          animate={{ opacity: 1 }}
+          className={styles.area}
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0.36 }}
+          transition={{ duration: 0.3 }}
+        >
+          {children}
+        </motion.div>
+      )}
     </AnimatePresence>
-    {!isLoading && children}
   </motion.article>
 );

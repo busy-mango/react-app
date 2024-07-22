@@ -5,7 +5,7 @@ import { iArray, iSearchParams } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import type { ControlOptionModel, IOptionRender } from '@/components';
-import { IPage, ISelector } from '@/components';
+import { IOverflow, IPage, ISelector } from '@/components';
 import { IChip } from '@/components/widgets/ichip';
 import { useToggle } from '@/hooks';
 import { drive } from '@/service';
@@ -24,36 +24,19 @@ import { iCompact } from '@/utils';
 //   { value: 'Kelly Snyder', label: '凯莉-斯奈德' },
 // ];
 
-type AccountModel = {
-  hash: string;
-  sha1: string;
-  email: string;
-  sources: string;
-  password: string;
-  hash_password: boolean;
+type UniversityModel = {
+  name: string;
+  country: string;
+  domains: string[];
+  web_pages: string[];
+  alpha_two_code: string;
 };
 
-interface AccountListBody {
-  found?: number;
-  message?: string;
-  success?: boolean;
-  result?: AccountModel[];
-}
+const api = 'http://universities.hipolabs.com/search';
 
-const api = 'https://breachdirectory.p.rapidapi.com';
+const search = 'country=United+States';
 
-const search = 'func=auto&term=someone%40example.com';
-
-const queryFn = async () => {
-  const { success, message, result, found } = await drive<AccountListBody>(
-    api,
-    iSearchParams(search)
-  );
-
-  if (!success) throw new Error(message);
-
-  return { result, count: found };
-};
+const queryFn = () => drive<UniversityModel[]>(api, iSearchParams(search));
 
 const iChipRender: IOptionRender = (option, params) => {
   const { value, label } = option ?? {};
@@ -64,7 +47,7 @@ const iChipRender: IOptionRender = (option, params) => {
       {!multiple && content}
       {multiple && (
         <IChip close size="mini" variant="filled" onClose={onClose}>
-          {content}
+          <IOverflow maxWidth={'100%'}>{content}</IOverflow>
         </IChip>
       )}
     </Fragment>
@@ -82,29 +65,26 @@ export default function AdvancedSelector() {
     retry: false,
   });
 
-  const { result } = data ?? {};
-
   const options = useMemo(
     () =>
-      result?.map<ControlOptionModel>((e) => ({
-        value: e.hash,
-        label: e.email,
+      data?.map<ControlOptionModel>(({ country, domains, name }) => ({
+        value: `${country}-${domains.join('&')}`,
+        label: name,
       })),
-    [result]
+    [data]
   );
 
   return (
     <IPage>
       <form>
         <ISelector
+          measure
           multiple
           isLoading={isLoading}
           open={open}
           options={options}
           render={{ chip: iChipRender }}
-          style={{
-            width: 300,
-          }}
+          style={{ width: 300 }}
           value={value}
           onChange={(current) => {
             setValue(iCompact(iArray(current)));

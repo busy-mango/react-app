@@ -50,6 +50,44 @@ The component can handle multiple selections. It's enabled with the `multiple` p
 
 Like with the single selection, you can pull out the new value by accessing `value` in the `onChange` callback. It's always an array.
 
+``` tsx
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
+
+const options = names.map((value) => ({ value }));
+
+export default function MultipleSelect() {
+  const [age, setAge] = useState<React.Key>();
+
+  const onChange = function (value?: React.Key | React.Key[]) {
+    setAge(iCompact(iArray(value)));
+  };
+
+  return (
+    <form>
+      <ISelector
+        multiple
+        options={options}
+        separator=","
+        value={age}
+        onChange={onChange}
+      />
+    </form>
+  );
+}
+```
+[![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fmultiple.tsx)
+
 #### Controlling the open state
 
 ## API
