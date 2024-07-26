@@ -15,6 +15,17 @@ export function caseAsync(route: string) {
   return import(`../examples${route}`) as Promise<ReactComponentAsync>;
 }
 
+/** 动态导入语言包 */
+export function i18nAsync<L extends string = string, N extends string = string>(
+  language: L,
+  namespace?: N
+) {
+  const json = `${namespace ?? 'translation'}.json`;
+  return import(`@/i18n/${language}/${json}`) as Promise<
+    Record<string, string>
+  >;
+}
+
 /** 动态导入ReactQueryDevtools */
 export const devtoolAsync = async () => {
   const component = import('@tanstack/react-query-devtools');

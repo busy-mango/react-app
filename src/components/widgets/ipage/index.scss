@@ -13,7 +13,7 @@
   box-sizing: border-box;
 
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 
 .page {
@@ -21,10 +21,10 @@
 
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  max-height: 100dvh;
 
   display: block;
-
+  overflow: visible;
   position: relative;
   box-sizing: border-box;
 

@@ -50,6 +50,9 @@
   --page-bg-color: 242 243 245;
   --page-bg-color-hex: #f2f3f5;
 
+  --warn-color: 255 193 7;
+  --warn-color-hex: #FFC107;
+
   --error-color: 245 66 77;
   --error-color-hex: #f5424d;
 

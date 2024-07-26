@@ -3,6 +3,7 @@
  */
 
 import { Fragment, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -44,6 +45,8 @@ export const BoundaryFallbackCard: React.FC = () => {
 export const BoundaryFallbackPage: React.FC = () => {
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   const { error, info, reset } = useFallbackContext();
 
   if (isNotFoundError(error)) {
@@ -51,7 +54,7 @@ export const BoundaryFallbackPage: React.FC = () => {
       <NotFound
         title={
           <Fragment>
-            页面不存在
+            {t('common:Page not found')}
             <span
               style={{
                 marginLeft: 'var(--gap-3)',
@@ -66,7 +69,7 @@ export const BoundaryFallbackPage: React.FC = () => {
                   reset?.();
                 }}
               >
-                首页
+                {t('common:Home')}
               </IButton>
             </span>
           </Fragment>

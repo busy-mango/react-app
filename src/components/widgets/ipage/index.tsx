@@ -1,20 +1,23 @@
+import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import type { ReactCFC } from '@/models';
+import type { ReactCFC, ReactMotionDomProps, WrapperProps } from '@/models';
 
 import { IClipSpinner } from '../ispinners';
 
 import styles from './index.scss';
 
-export interface IPageProps {
+export interface IPageProps extends ReactMotionDomProps<WrapperProps> {
   isLoading?: boolean;
   background?: React.ReactNode;
 }
 
 export const IPage: ReactCFC<IPageProps> = ({
   children,
+  className,
   background,
   isLoading,
+  ...others
 }) => (
   <motion.article
     animate={{ opacity: 1 }}
@@ -23,9 +26,11 @@ export const IPage: ReactCFC<IPageProps> = ({
     initial={{ opacity: 0.36 }}
     transition={{ duration: 0.3 }}
   >
-    {background && <div className={styles.background}>{background}</div>}
     <AnimatePresence>
-      {isLoading && (
+      {background && (
+        <motion.div className={styles.background}>{background}</motion.div>
+      )}
+      {isLoading ? (
         <motion.div
           animate={{ opacity: 1 }}
           className={styles.spin}
@@ -34,14 +39,15 @@ export const IPage: ReactCFC<IPageProps> = ({
         >
           <IClipSpinner />
         </motion.div>
-      )}
-      {!isLoading && (
+      ) : (
         <motion.div
           animate={{ opacity: 1 }}
-          className={styles.area}
+          className={classNames(styles.area, className)}
+          data-safe-area={true}
           exit={{ opacity: 0 }}
           initial={{ opacity: 0.36 }}
           transition={{ duration: 0.3 }}
+          {...others}
         >
           {children}
         </motion.div>

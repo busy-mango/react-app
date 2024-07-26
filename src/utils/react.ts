@@ -1,6 +1,6 @@
 import type { PlainObject } from '@busymango/is-esm';
 import { isFunction, isHTMLElement, isNull, isTrue } from '@busymango/is-esm';
-import { includes } from '@busymango/utils';
+import { contains } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
 
@@ -59,7 +59,7 @@ export const iDeleteEvent =
     onKeyDown?: (event: React.KeyboardEvent<T>) => void
   ) =>
   (event: React.KeyboardEvent<T>) => {
-    includes(['Backspace', 'Delete'], (e) => e === event?.code)
+    contains(['Backspace', 'Delete'], (e) => e === event?.code)
       ? func?.(event)
       : onKeyDown?.(event);
   };

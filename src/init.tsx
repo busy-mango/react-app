@@ -2,15 +2,18 @@
  * @description 应用初始化
  */
 
+import { initReactI18next } from 'react-i18next';
 import dayjs from 'dayjs';
+import type { InitOptions } from 'i18next';
+import i18n, { t } from 'i18next';
 import Cookie from 'js-cookie';
 
 import { isNonEmptyString } from '@busymango/is-esm';
 import { dom } from '@busymango/utils';
 
-import 'dayjs/locale/zh-cn';
+import { i18nResourcesLoad } from './plugins';
 
-dayjs.locale('zh-cn');
+import 'dayjs/locale/zh-cn';
 
 /**
  * 生成`Chunk`文件用以判断应用版本是否更新
@@ -46,7 +49,7 @@ export const env = {
 /** 检查环境变量是否填写 */
 Object.values(env).forEach((val) => {
   if (!isNonEmptyString(val)) {
-    throw new Error('请检查环境变量文件是否填写');
+    throw new Error(t('common:Environment variables not found'));
   }
 });
 
@@ -64,20 +67,16 @@ export const theme = {
 // 检查主题样式是否定义
 Object.values(theme).forEach((val) => {
   if (!isNonEmptyString(val)) {
-    throw new Error('请检查主题样式是否定义');
+    throw new Error(t('common:Theme not found'));
   }
 });
 
 /** 创建主题样式标签 */
-export const style = dom.create(
-  'link',
-  {
-    href: `/themes/${theme.default}.css`,
-    title: theme.title,
-    rel: 'stylesheet',
-  },
-  document.head
-);
+export const style = dom.create('link', {
+  href: `/themes/${theme.default}.css`,
+  title: theme.title,
+  rel: 'stylesheet',
+});
 
 /** 创建应用容器 */
 export const container = dom.create(
@@ -92,3 +91,25 @@ export const container = dom.create(
 export const domain = process.env.SERVER_DOMAIN ?? '';
 
 export const prefix = process.env.SERVER_PREFIX ?? '';
+
+export const i18nInit = async () => {
+  const ns: InitOptions['ns'] = ['common'];
+
+  const supportedLngs: InitOptions['supportedLngs'] = ['zh-CN', 'en-US'];
+
+  await i18n
+    .use(initReactI18next)
+    .use(i18nResourcesLoad)
+    .init({
+      ns,
+      nsSeparator: ':',
+      defaultNS: ns[0],
+      fallbackNS: ns[0],
+      supportedLngs,
+      lng: navigator.language,
+      fallbackLng: supportedLngs[0],
+      interpolation: { escapeValue: false },
+    } satisfies InitOptions);
+
+  dayjs.locale(i18n.language.toLocaleLowerCase());
+};

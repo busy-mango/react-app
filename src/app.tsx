@@ -5,12 +5,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { t } from 'i18next';
 
 import { Configure } from '@/configure';
-import { container, style } from '@/init';
+import { container, i18nInit, style } from '@/init';
 
 import { caniuse } from './caniuse';
 import { IRoutes } from './routes';
+import { catchMsg } from './utils';
 
 import '@/styles/atom.global.scss';
 
@@ -18,23 +20,28 @@ const root = createRoot(container);
 
 const { userAgent } = window.navigator;
 
-if (caniuse.test(userAgent)) {
-  // 主题文件加载完成后再渲染应用
-  style.onload = () => {
-    root.render(
-      <StrictMode>
-        <BrowserRouter>
-          <Configure>
-            <IRoutes />
-          </Configure>
-        </BrowserRouter>
-      </StrictMode>
-    );
-  };
+try {
+  await i18nInit();
 
-  style.onerror = () => {
-    root.render('主题样式加载失败, 请刷新重试');
-  };
-} else {
-  root.render('暂不支持当前版本浏览器');
+  if (!caniuse.test(userAgent)) {
+    throw new Error(t('common:Browser version incompatibility'));
+  }
+
+  await new Promise((res, rej) => {
+    style.addEventListener('load', res);
+    style.addEventListener('error', rej);
+    document.head.append(style);
+  });
+
+  root.render(
+    <StrictMode>
+      <BrowserRouter>
+        <Configure>
+          <IRoutes />
+        </Configure>
+      </BrowserRouter>
+    </StrictMode>
+  );
+} catch (error) {
+  root.render(catchMsg(error));
 }

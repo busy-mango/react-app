@@ -6,11 +6,11 @@ import { resolve } from 'path';
 
 import { rspack } from '@rspack/core';
 
-import { dir, prod } from '../config';
+import { dir } from '../config';
 import { copy } from '../helpers';
 import { define } from './args.ts';
 
-const { config } = define();
+const { config } = define({ env: 'prod' });
 
 const time = () => date().format('YYYY-MM-DD HH:mm:ss');
 
@@ -21,7 +21,7 @@ const info = (message: string) => {
 info('Start build single page application');
 
 (async function main() {
-  rspack(config ?? prod, (error, stats) => {
+  rspack(config, (error, stats) => {
     if (error ?? stats?.hasErrors()) {
       info('Single page application failed to build');
       throw new Error(error?.message ?? stats?.toString());

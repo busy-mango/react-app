@@ -3,8 +3,8 @@
  */
 
 import { Component } from 'react';
+import { t } from 'i18next';
 
-import { COMPONENT_CRASHES_MSG } from '@/constants';
 import { catchMsg } from '@/utils';
 
 import { FallbackProvider } from '../../hooks';
@@ -46,7 +46,7 @@ export class ErrorBoundary extends Component<
     const { reset } = this;
     const { children, fallback } = this.props;
     const { error, info, isCaught } = this.state;
-    const message = catchMsg(error) ?? COMPONENT_CRASHES_MSG;
+    const message = catchMsg(error) ?? t('common:Oops');
 
     if (isCaught) {
       return (

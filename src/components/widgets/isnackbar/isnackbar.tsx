@@ -66,14 +66,12 @@ const iHoverParams = (target: ReactTargetType): EventStateParams => ({
 
 const iSnackbarSign = (status?: ISnackbarProps['status']): ISignType => {
   switch (status) {
-    case 'info':
-      return 'informer';
     case 'success':
       return 'tick';
     case 'error':
       return 'cross';
     default:
-      return 'cross';
+      return 'informer';
   }
 };
 

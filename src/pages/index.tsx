@@ -3,21 +3,15 @@
  */
 
 import { useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { iArray, theFirst } from '@busymango/utils';
 
 import type { ControlOptionModel, ISignType } from '@/components';
-import { IPage, ISelector, ISignLine } from '@/components';
+import { IChip, IPage, ISelector, ISignLine, snackbar } from '@/components';
+import { useEffectOnce } from '@/hooks';
 
 import styles from './index.scss';
-
-const children = (
-  <span>
-    <strong>Notice:</strong> You are currently running React in development
-    mode. Rendering performance will be slightly degraded until this application
-    is build for production.
-  </span>
-);
 
 const options = Array.from<unknown, ControlOptionModel>(
   { length: 10000 },
@@ -28,11 +22,30 @@ const options = Array.from<unknown, ControlOptionModel>(
   })
 );
 
+const HalloWorld: React.FC = () => (
+  <span>
+    <Trans
+      components={{
+        italic: <i />,
+        bold: <strong />,
+        code: <IChip size="mini" variant="filled" />,
+      }}
+      i18nKey="common:Hallo world"
+    />
+  </span>
+);
+
 const Welcome: React.FC = () => {
+  const { t } = useTranslation();
+
   const [sign, setSign] = useState<ISignType>('clock');
 
+  useEffectOnce(() => {
+    snackbar.warn({ children: <HalloWorld /> });
+  });
+
   return (
-    <IPage>
+    <IPage className={styles.page}>
       <ISelector
         options={
           [
@@ -61,15 +74,8 @@ const Welcome: React.FC = () => {
         }}
       />
       <ISelector multiple options={options} />
-      <div className={styles.area}>123</div>
-      <div className={styles.area}>123</div>
-      <div className={styles.area}>123</div>
-      <div className={styles.area}>123</div>
-
-      <div className={styles.area}>123</div>
-      <div className={styles.area}>123</div>
-      <div className={styles.area}>123</div>
-
+      <div className={styles.area}>{t('common:Confirm')}</div>
+      <div className={styles.area}>{t('common:Confirm')}</div>
       <div className={styles.stickey}>stickey</div>
     </IPage>
   );

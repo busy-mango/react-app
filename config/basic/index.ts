@@ -4,19 +4,11 @@
 
 import { resolve } from 'path';
 
-import { expands } from '../../helpers';
+import { expands, iCalcSHA, iGitSHA } from '../../helpers';
 
 const { PWD, INIT_CWD } = process.env;
 const { npm_package_name: name } = process.env;
 const { npm_package_version: version } = process.env;
-
-/** 当前应用基本信息 */
-export const app = {
-  /** 名称 */
-  name,
-  /** 项目版本 */
-  version,
-};
 
 const cwd = process.cwd() ?? INIT_CWD ?? PWD;
 
@@ -29,6 +21,7 @@ export const dirname = cwd;
 
 /** 默认路径 */
 export const dir = {
+  src: resolve(dirname, 'src'),
   /** 默认打包路径 */
   dist: resolve(dirname, 'dist'),
   /** 默认 config 路径 */
@@ -54,3 +47,25 @@ export const dirconfs = [
   dir.tsconfig,
   ...expands(dir.conf),
 ];
+
+/** 当前应用基本信息 */
+export const app = {
+  /** 名称 */
+  name: name ?? '',
+  /** 项目版本 */
+  version: [
+    version,
+    (
+      iGitSHA() ??
+      iCalcSHA([
+        dir.src,
+        dir.env,
+        dir.conf,
+        dir.static,
+        dir.package,
+        dir.tsconfig,
+        dir.browserslistrc,
+      ])
+    ).slice(0, 8),
+  ].join('.'),
+};
