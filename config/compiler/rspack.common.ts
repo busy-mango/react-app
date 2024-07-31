@@ -4,7 +4,7 @@
 
 import type { Configuration } from '@rspack/core';
 
-import { app, dir } from '../basic';
+import { app, dir } from '../project';
 
 const { version = '0.0.0' } = app;
 

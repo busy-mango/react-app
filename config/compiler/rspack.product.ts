@@ -6,9 +6,15 @@ import { merge } from 'webpack-merge';
 
 import type { Configuration } from '@rspack/core';
 
-import common from './common.ts';
-import { iPlugins } from './plugins.ts';
-import * as rules from './rules.ts';
+import {
+  AssetsRule,
+  CompatibleRule,
+  SassRule,
+  SVGRule,
+  TSRule,
+} from './loaders';
+import { iPlugins } from './plugins';
+import common from './rspack.common';
 
 const config: Configuration = {
   cache: false,
@@ -16,14 +22,7 @@ const config: Configuration = {
   mode: 'production',
   plugins: iPlugins('prod'),
   module: {
-    rules: [
-      rules.SassRule,
-      rules.LessRule,
-      rules.SVGRule,
-      rules.AssetsRule,
-      rules.CompatibleRule,
-      rules.TSRule,
-    ],
+    rules: [AssetsRule, CompatibleRule, SassRule, SVGRule, TSRule],
   },
 };
 

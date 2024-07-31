@@ -1,10 +1,10 @@
 import { program } from 'commander';
 
-import { dev, mock, prod, test } from '../config';
+import { dev, prod, test } from '../config';
 
-const conf = { dev, mock, test, prod };
+const configs = { dev, test, prod };
 
-type CCEnv = keyof typeof conf;
+type CCEnv = keyof typeof configs;
 
 type CCProgOpts = {
   env: CCEnv;
@@ -12,13 +12,13 @@ type CCProgOpts = {
   host: string;
 };
 
-export const define = (initial: Partial<CCProgOpts> = {}) => {
+export const define = ({ env, host, port }: Partial<CCProgOpts> = {}) => {
   const opts = program
-    .option('-e, --env <char>', 'DevServer环境', initial.env ?? 'dev')
-    .option('-h, --host <char>', 'DevServer的域名', initial.host ?? '0.0.0.0')
-    .option('-p, --port <number>', 'DevServer的端口号', initial.port ?? '8080')
+    .option('-e, --env <char>', 'DevServer环境', env ?? 'dev')
+    .option('-h, --host <char>', 'DevServer的域名', host ?? '0.0.0.0')
+    .option('-p, --port <number>', 'DevServer的端口号', port ?? '8080')
     .parse()
     .opts<CCProgOpts>();
 
-  return { opts, config: conf[opts.env] };
+  return { opts, config: configs[opts.env] };
 };

@@ -8,7 +8,7 @@ import { rspack } from '@rspack/core';
 
 import { dir } from '../config';
 import { copy } from '../helpers';
-import { define } from './args.ts';
+import { define } from './args';
 
 const { config } = define({ env: 'prod' });
 

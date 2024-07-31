@@ -6,12 +6,12 @@ import { merge } from 'webpack-merge';
 
 import type { Configuration } from '@rspack/core';
 
-import common from './common.ts';
-import { iPlugins } from './plugins.ts';
-import * as rules from './rules.ts';
+import { AssetsRule, SassRule, SVGRule, TSDevRule } from './loaders';
+import { iPlugins } from './plugins';
+import common from './rspack.common';
 
 const config: Configuration = {
-  cache: false,
+  cache: true,
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
   optimization: {
@@ -19,13 +19,7 @@ const config: Configuration = {
   },
   plugins: iPlugins(),
   module: {
-    rules: [
-      rules.SassRule,
-      rules.LessRule,
-      rules.SVGRule,
-      rules.AssetsRule,
-      rules.TSDevRule,
-    ],
+    rules: [AssetsRule, SassRule, SVGRule, TSDevRule],
   },
 };
 

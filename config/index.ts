@@ -1,2 +1,2 @@
-export * from './basic';
 export * from './compiler';
+export * from './project';

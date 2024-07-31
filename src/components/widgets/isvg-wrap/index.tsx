@@ -16,18 +16,18 @@ export interface ISVGWrapProps
   y?: string | number;
 }
 
-const initial: Target = {
-  opacity: 0.36,
-  scale: 0.64,
-  x: 0,
-  y: 0,
-};
-
 const transition: Transition = { ease: 'easeOut' };
 
 const iAnimate = ({ x = 0, y = 0 }: Partial<Target>): Target => ({
   opacity: 1,
   scale: 1,
+  x,
+  y,
+});
+
+const iInitial = ({ x = 0, y = 0 }: Partial<Target>): Target => ({
+  opacity: 0.36,
+  scale: 0.64,
   x,
   y,
 });
@@ -51,8 +51,8 @@ export const ISVGWrap: ReactCFC<ISVGWrapProps> = (props) => {
     <motion.i
       animate={iAnimate({ x, y })}
       className={classNames(styles.wrap, className)}
-      exit={initial}
-      initial={initial}
+      exit={iInitial({ x, y })}
+      initial={iInitial({ x, y })}
       style={{ height, ...style }}
       transition={transition}
       {...others}

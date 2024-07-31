@@ -1,68 +1,76 @@
-import { MIN2MS, parse } from '@busymango/utils';
+import { useMemo } from 'react';
+import { Fragment } from 'react/jsx-runtime';
+import { Translation, useTranslation } from 'react-i18next';
+
+import { MIN2MS } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import { IChip, IFlex, IPage, ISignLine } from '@/components';
-import { drive } from '@/service';
+import { BULLIONS_PRICE_INFO_API } from '@/service';
+import { iBullionsPrice } from '@/service/server';
 import { size2px } from '@/utils';
-
-interface GoldBody {
-  gold: number;
-  silver: number;
-}
-
-const api = 'https://gold-price-live.p.rapidapi.com/get_metal_prices';
-
-const queryFn = async () => parse.json<GoldBody>(await drive<string>(api));
 
 /** 盎司转克 */
 const OZ2G = 28.349523148774;
 
-export default function WatchChip() {
+const render = (title: React.ReactNode, price = 0) => (
+  <Translation>
+    {(t) => (
+      <Fragment>
+        {[title, ((price ?? 0) / OZ2G).toFixed(2)].join(' ')}
+        <ISignLine type="dollar" />
+        {t('price:per gram')}
+      </Fragment>
+    )}
+  </Translation>
+);
+
+const BullionsChip: React.FC<{
+  code?: string;
+}> = (props) => {
+  const { code } = props;
+
+  const { t } = useTranslation();
+
   const { data, isPending } = useQuery({
-    queryFn,
-    queryKey: [api],
-    gcTime: Infinity,
-    staleTime: 5 * MIN2MS,
+    queryFn: () => iBullionsPrice.info({ code }),
+    queryKey: [BULLIONS_PRICE_INFO_API, code],
     refetchInterval: 5 * MIN2MS,
     refetchOnWindowFocus: true,
     throwOnError: false,
     retry: true,
   });
 
-  const { gold = 0, silver = 0 } = data ?? {};
+  const title = useMemo(() => {
+    switch (code) {
+      case 'gold':
+        return t('price:Price of gold');
+      case 'silver':
+        return t('price:Price of silver');
+    }
+  }, [code, t]);
 
   return (
-    <IPage>
-      <IFlex vertical gap={size2px(8)}>
-        <IChip
-          isLoading={isPending}
-          style={{
-            color: 'gold',
-            borderColor: 'gold',
-          }}
-          variant="outlined"
-        >
-          金价:
-          {` `}
-          {(gold / OZ2G).toFixed(2)}
-          <ISignLine type="dollar" />
-          每克
-        </IChip>
-        <IChip
-          isLoading={isPending}
-          style={{
-            color: 'silver',
-            borderColor: 'silver',
-          }}
-          variant="outlined"
-        >
-          银价:
-          {` `}
-          {(silver / OZ2G).toFixed(2)}
-          <ISignLine type="dollar" />
-          每克
-        </IChip>
-      </IFlex>
-    </IPage>
+    <IChip
+      isLoading={isPending}
+      style={{
+        color: code,
+        borderColor: code,
+      }}
+      variant="outlined"
+    >
+      {render(title, data?.price)}
+    </IChip>
   );
-}
+};
+
+const WatchChip: React.FC = () => (
+  <IPage>
+    <IFlex vertical gap={size2px(8)}>
+      <BullionsChip code="gold" />
+      <BullionsChip code="silver" />
+    </IFlex>
+  </IPage>
+);
+
+export default WatchChip;

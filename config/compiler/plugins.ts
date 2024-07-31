@@ -12,7 +12,7 @@ import type { RspackPluginFunction, RspackPluginInstance } from '@rspack/core';
 import { rspack } from '@rspack/core';
 import ReactRefreshRspackPlugin from '@rspack/plugin-react-refresh';
 
-import { app, dir } from '../basic';
+import { app, dir } from '../project';
 
 type RspackPlugin =
   | 0
@@ -35,16 +35,16 @@ export const iPlugins = (
     favicon: './assets/favicon.svg',
     template: './assets/index.html',
     templateParameters: {
-      title: app.name!,
-      version: app.version!,
+      title: app.name,
+      version: app.version,
     },
   }),
   new DefinePlugin({
     'process.env': JSON.stringify(
       assign(
         process.env,
-        parse(readFileSync(resolve(dir.env, 'common.env'))),
-        parse(readFileSync(resolve(dir.env, 'dev.env')))
+        parse(readFileSync(resolve(dir.envs, 'common.env'))),
+        parse(readFileSync(resolve(dir.envs, 'dev.env')))
       )
     ),
   }),

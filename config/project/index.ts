@@ -24,12 +24,12 @@ export const dir = {
   src: resolve(dirname, 'src'),
   /** 默认打包路径 */
   dist: resolve(dirname, 'dist'),
+  /** 默认 环境变量 路径 */
+  envs: resolve(dirname, 'envs'),
   /** 默认 config 路径 */
   conf: resolve(dirname, 'config'),
   /** 默认 静态资源 路径 */
   static: resolve(dirname, 'assets'),
-  /** 默认 环境变量 路径 */
-  env: resolve(dirname, 'config/envs'),
   /** 默认 swc config 文件所在路径 */
   swcrc: resolve(dirname, '.swcrc'),
   /** 默认 package.json 所在路径 */
@@ -59,7 +59,7 @@ export const app = {
       iGitSHA() ??
       iCalcSHA([
         dir.src,
-        dir.env,
+        dir.envs,
         dir.conf,
         dir.static,
         dir.package,

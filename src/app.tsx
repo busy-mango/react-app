@@ -14,6 +14,7 @@ import { caniuse } from './caniuse';
 import { IRoutes } from './routes';
 import { catchMsg } from './utils';
 
+import '@/styles/normalize.css';
 import '@/styles/atom.global.scss';
 
 const root = createRoot(container);

@@ -9,7 +9,7 @@ import { RspackDevServer } from '@rspack/dev-server';
 
 import { dev, dir, dirconfs } from '../config';
 import { iUsablePort } from '../helpers';
-import { define } from './args.ts';
+import { define } from './args';
 
 const { opts, config } = define();
 

@@ -4,6 +4,7 @@
 
 import { useEffect } from 'react';
 
+import { S2MS } from '@busymango/utils';
 import {
   QueryCache,
   QueryClient,
@@ -26,7 +27,7 @@ export const client = new QueryClient({
   defaultOptions: {
     queries: {
       gcTime: Infinity,
-      staleTime: Infinity,
+      staleTime: 5 * S2MS,
       throwOnError: true,
       retryOnMount: true,
       refetchOnMount: false,

@@ -4,48 +4,26 @@
 
 import sass from 'sass-embedded';
 
-import type {
-  RuleSetRule,
-  RuleSetUseItem,
-  SwcLoaderOptions,
-} from '@rspack/core';
-
-type SassLoaderOptions = {
-  api: string;
-  implementation: typeof sass;
-};
-
-const LessLoader: RuleSetUseItem = {
-  loader: 'less-loader',
-  options: {
-    lessOptions: {
-      javascriptEnabled: true,
-    },
-  },
-};
+import type { RuleSetRule, SwcLoaderOptions } from '@rspack/core';
 
 /**
  * 同时使用 `modern-compiler` 和 `sass-embedded` 可以显著提升构建性能
  * 需要 `sass-loader >= 14.2.1`
  */
-const SassLoader: RuleSetUseItem = {
-  loader: 'sass-loader',
-  options: {
-    api: 'modern-compiler',
-    implementation: sass,
-  } satisfies SassLoaderOptions,
-};
-
 export const SassRule: RuleSetRule = {
+  use: {
+    loader: 'sass-loader',
+    options: {
+      api: 'modern-compiler',
+      implementation: sass,
+    } satisfies {
+      api: string;
+      implementation: typeof sass;
+    },
+  },
+  type: 'css/module',
   test: /\.(sa|sc|c)ss$/,
-  use: SassLoader,
-  type: 'css/module',
-};
-
-export const LessRule: RuleSetRule = {
-  test: /\.less?$/,
-  use: LessLoader,
-  type: 'css/module',
+  exclude: /node_modules/,
 };
 
 export const SVGRule: RuleSetRule = {
