@@ -20,7 +20,7 @@ const config: Configuration = {
   //   version: './src/version.ts',
   // },
   output: {
-    clean: true,
+    clean: false,
     path: dir.dist,
     filename: `static/${version}/[name].js`,
     chunkFilename: `static/${version}/[name].js`,

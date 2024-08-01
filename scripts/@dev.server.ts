@@ -46,8 +46,6 @@ const compiler = rspack(config ?? dev);
 
 const server = new RspackDevServer(options, compiler);
 
-process.once('exit', () => {
-  server.close();
-});
+process.once('exit', server.stop);
 
 server.start();

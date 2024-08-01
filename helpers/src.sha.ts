@@ -8,9 +8,13 @@ import { isEmptyString } from '@busymango/is-esm';
 const exec = (cmd: string) => execSync(cmd, { encoding: 'utf8' }).trim();
 
 export const iGitSHA = () => {
-  // 工作区和暂存区都是干净的CommitID才是有效的
-  if (isEmptyString(exec('git status --porcelain'))) {
-    return exec('git rev-parse HEAD');
+  try {
+    // 工作区和暂存区都是干净的CommitID才是有效的
+    if (isEmptyString(exec('git status --porcelain'))) {
+      return exec('git rev-parse HEAD');
+    }
+  } catch (error) {
+    console.warn('获取Git commit id 失败');
   }
 };
 
