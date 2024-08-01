@@ -90,7 +90,7 @@ select {
 [type=reset],
 [type=submit],
 button {
-  -webkit-appearance: button
+  appearance: button
 }
 
 ::-moz-focus-inner {
@@ -120,17 +120,17 @@ progress {
 }
 
 [type=search] {
-  -webkit-appearance: textfield;
+  appearance: textfield;
   outline-offset: -2px
 }
 
 ::-webkit-search-decoration {
-  -webkit-appearance: none
+  appearance: none
 }
 
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit
+  font: inherit;
+  appearance: button;
 }
 
 summary {

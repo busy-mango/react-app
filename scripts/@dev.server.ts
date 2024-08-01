@@ -7,7 +7,7 @@ import { rspack } from '@rspack/core';
 import type { Configuration } from '@rspack/dev-server';
 import { RspackDevServer } from '@rspack/dev-server';
 
-import { dev, dir, dirconfs } from '../config';
+import { dir, dirconfs } from '../config';
 import { iUsablePort } from '../helpers';
 import { define } from './args';
 
@@ -19,10 +19,6 @@ const port = await iUsablePort(
   opts.host
 );
 
-/**
- * 监听`browserslistrc`改动以生成对应正则
- * TODO: 放到 webpack plugin 中
- */
 watch(dir.browserslistrc, () => {
   exec('pnpm caniuse');
 });
@@ -30,7 +26,6 @@ watch(dir.browserslistrc, () => {
 const options: Configuration = {
   port,
   hot: true,
-  https: false,
   compress: true,
   host: opts.host,
   allowedHosts: 'all',
@@ -42,9 +37,7 @@ const options: Configuration = {
   headers: { 'Access-Control-Allow-Origin': '*' },
 };
 
-const compiler = rspack(config ?? dev);
-
-const server = new RspackDevServer(options, compiler);
+const server = new RspackDevServer(options, rspack(config));
 
 process.once('exit', server.stop);
 

@@ -47,33 +47,45 @@ export const AssetsRule: RuleSetRule = {
   type: 'asset/resource',
 };
 
+const iSwcrc = (development = false): SwcLoaderOptions => ({
+  minify: false,
+  jsc: {
+    parser: {
+      tsx: true,
+      syntax: 'typescript',
+    },
+    transform: {
+      react: {
+        development,
+        importSource: 'react',
+        refresh: development,
+        runtime: 'automatic',
+      },
+    },
+  },
+});
+
 export const TSDevRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'builtin:swc-loader',
+  type: 'javascript/auto',
   exclude: /node_modules/,
-  options: {
-    minify: false,
-    jsc: {
-      transform: {
-        react: {
-          refresh: true,
-          development: true,
-          runtime: 'automatic',
-        },
-      },
-    },
-  } satisfies SwcLoaderOptions,
+  options: iSwcrc(true),
 };
 
 export const TSRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'builtin:swc-loader',
+  type: 'javascript/auto',
   exclude: /node_modules/,
+  options: iSwcrc(),
 };
 
 export const CompatibleRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'builtin:swc-loader',
+  type: 'javascript/auto',
+  options: iSwcrc(),
   include: [
     /node_modules[\\/]@?mime/,
     /node_modules[\\/]@?immer/,

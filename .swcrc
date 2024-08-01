@@ -1,24 +1,9 @@
 {
-  "$schema": "https://swc.rs/schema.json",
-  "env": {
-    "dynamicImport": true
-  },
-  "module": {
-    "type": "nodenext"
-  },
   "jsc": {
-    "parser": {
-      "syntax": "typescript",
-      "dynamicImport": true,
-      "tsx": true
-    },
     "transform": {
       "react": {
-        "runtime": "automatic",
-        "development": false
+        "runtime": "automatic"
       }
-    },
-    "externalHelpers": true
-  },
-  "minify": true
+    }
+  }
 }

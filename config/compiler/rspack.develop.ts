@@ -11,7 +11,7 @@ import { iPlugins } from './plugins';
 import common from './rspack.common';
 
 const config: Configuration = {
-  cache: true,
+  cache: false,
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
   optimization: {

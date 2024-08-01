@@ -30,8 +30,6 @@ export const dir = {
   conf: resolve(dirname, 'config'),
   /** 默认 静态资源 路径 */
   static: resolve(dirname, 'assets'),
-  /** 默认 swc config 文件所在路径 */
-  swcrc: resolve(dirname, '.swcrc'),
   /** 默认 package.json 所在路径 */
   package: resolve(dirname, 'package.json'),
   /** 默认 tsconfig 所在路径 */
@@ -41,12 +39,7 @@ export const dir = {
 };
 
 /** 所有配置文件路径 */
-export const dirconfs = [
-  dir.swcrc,
-  dir.package,
-  dir.tsconfig,
-  ...expands(dir.conf),
-];
+export const dirconfs = [dir.package, dir.tsconfig, ...expands(dir.conf)];
 
 /** 当前应用基本信息 */
 export const app = {
