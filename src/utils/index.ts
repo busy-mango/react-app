@@ -1,3 +1,4 @@
+export * from './algorithm.lcs';
 export * from './assert';
 export * from './catch';
 export * from './common';
