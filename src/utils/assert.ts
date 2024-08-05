@@ -20,15 +20,15 @@ import { iFindElement } from './react';
 /**
  * 判断当前UserAgent是否移动端
  */
-export function isMobile(ua: string = navigator.userAgent.toLowerCase()) {
-  return /Mobile\/\w+/.test(ua);
+export function isMobile(ua: string = navigator.userAgent) {
+  return /mobile\/\w+/.test(ua.toLowerCase());
 }
 
 /**
  * 判断当前UserAgent是否IOS系统
  */
-export function isIOS(ua: string = navigator.userAgent.toLowerCase()): boolean {
-  return /iP(hone|ad|od)|iOS/.test(ua);
+export function isIOS(ua: string = navigator.userAgent): boolean {
+  return /ip(hone|ad|od)|ios/.test(ua.toLowerCase());
 }
 
 /**
