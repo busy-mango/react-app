@@ -4,22 +4,20 @@ ENV PNPM_HOME="/pnpm"
 
 ENV PATH="$PATH_HOME:$PATH"
 
-ENV TIME_ZONE="Asia/Shanghai"
-
 WORKDIR /usr/src/app
 
 COPY ./ /usr/src/app
 
 RUN npm config set registry https://registry.npmmirror.com/
 
-RUN npm install -g pnpm && pnpm install && pnpm build
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
+
+RUN pnpm build
 
 FROM nginx:1.27.0-alpine-slim
 
 COPY --from=builder /usr/src/app/etc /etc
 
 COPY --from=builder /usr/src/app/dist .
-
-# RUN useradd -s /bin/false nginx
 
 EXPOSE 80

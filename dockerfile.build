@@ -4,8 +4,6 @@ ENV PNPM_HOME="/pnpm"
 
 ENV PATH="$PATH_HOME:$PATH"
 
-ENV TIME_ZONE="Asia/Shanghai"
-
 WORKDIR /usr/src/app
 
 COPY ./ /usr/src/app

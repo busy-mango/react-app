@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import dayjs from 'dayjs';
+import mime from 'mime';
 
 import {
   isFalse,
@@ -7,7 +9,7 @@ import {
   isString,
   isTrue,
 } from '@busymango/is-esm';
-import { S2MS } from '@busymango/utils';
+import { compact, iSearchParams, S2MS } from '@busymango/utils';
 import type { UndefinedInitialDataOptions } from '@tanstack/react-query';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
@@ -61,10 +63,17 @@ export function useSuspenseIsLatest() {
   const { data: isLatest } = useSuspenseQuery({
     queryKey: [SNIFFER_KEY, env.version],
     queryFn: async () => {
-      const headers = { ['Cache-Control']: 'no-cache' };
+      const timer = dayjs().toISOString();
       const src = `/static/${env.version}/manifest.js`;
-      const res = await fetch(src, { headers });
-      return res.status === 200;
+      const headers = { ['Cache-Control']: 'no-cache' };
+      const params = iSearchParams({ timer })?.toString();
+      try {
+        const res = await fetch(compact([src, params]).join('?'), { headers });
+        const type = mime.getExtension(res.headers.get('Content-Type') ?? '');
+        return res.status === 200 && type === 'js';
+      } catch (error) {
+        return false;
+      }
     },
     gcTime: 5 * S2MS,
     staleTime: 5 * S2MS,

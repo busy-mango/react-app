@@ -2,12 +2,12 @@ import { UPDATE_RETRY_COUNT } from '@/constants';
 
 const { location, localStorage } = window;
 
-/** 版本更新 */
+/** 重置载入次数 */
 export const reset = () => {
   localStorage.removeItem(UPDATE_RETRY_COUNT);
 };
 
-/** 版本更新 */
+/** 刷新页面以重载入口HTML */
 export const update = () => {
   const val = localStorage.getItem(UPDATE_RETRY_COUNT);
   const count = Number(val ?? 0);

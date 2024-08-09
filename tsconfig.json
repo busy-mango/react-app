@@ -3,6 +3,8 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compileOnSave": true,
   "compilerOptions": {
+    // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#faster-subsequent-builds-with-the---incremental-flag
+    "incremental": true,
     /* Visit https://aka.ms/tsconfig.json, https://www.typescriptlang.org/tsconfig to read more about this file */
     /* Projects */
     /* Language and Environment */

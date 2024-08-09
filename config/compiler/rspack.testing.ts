@@ -17,7 +17,7 @@ import { iPlugins } from './plugins';
 import common from './rspack.common';
 
 const config: Configuration = {
-  plugins: iPlugins('sit'),
+  plugins: iPlugins('test'),
   module: {
     rules: [AssetsRule, CompatibleRule, SassRule, SVGRule, TSRule],
   },

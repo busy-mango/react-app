@@ -1,43 +1,46 @@
 #! /usr/bin/env tsx
 
-import date from 'dayjs';
-import { readdirSync } from 'fs';
-import { resolve } from 'path';
+import { hex } from 'ansis';
+import dayjs from 'dayjs';
 
 import { rspack } from '@rspack/core';
 
-import { dir } from '../config';
-import { copy } from '../helpers';
 import { define } from './args';
 
 const { config } = define({ env: 'prod' });
 
-const time = () => date().format('YYYY-MM-DD HH:mm:ss');
+const time = () => dayjs().format('YYYY-MM-DD HH:mm:ss');
 
 const info = (message: string) => {
-  console.info('>', '[webpack]', time(), message);
+  console.info(
+    [
+      '<i>',
+      hex('#0DD953')('[webpack]'),
+      hex('#0DD953')(time()),
+      hex('#0DD953')(message),
+    ].join(' ')
+  );
 };
 
 info('Start build single page application');
 
 (async function main() {
-  rspack(config, (error, stats) => {
-    if (error ?? stats?.hasErrors()) {
-      info('Single page application failed to build');
-      throw new Error(error?.message ?? stats?.toString());
-    }
+  try {
+    const start = dayjs();
 
-    // 把`assets`下的文件夹复制到`dist`中
-    readdirSync(dir.static, {
-      withFileTypes: true,
-    }).forEach((dirent) => {
-      const { name } = dirent;
-      if (dirent.isDirectory()) {
-        copy(resolve(dir.static, name), resolve(dir.dist, name));
-        info(`Copy ${name} to current dir success`);
-      }
+    await new Promise((resolve, reject) => {
+      rspack(config, (error, stats) => {
+        if (error ?? stats?.hasErrors()) {
+          reject(error ?? stats?.toString());
+        } else {
+          resolve(stats);
+        }
+      });
     });
 
-    info('Single page application success to build');
-  });
+    const finish = dayjs().diff(start, 'second');
+    info(`Single page application success to build with ${finish}s`);
+  } catch (error) {
+    console.error(error);
+  }
 })();
