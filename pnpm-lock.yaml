@@ -86,16 +86,16 @@ importers:
         version: 1.6.4
       '@rsdoctor/rspack-plugin':
         specifier: ^0.3.11
-        version: 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
+        version: 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
       '@rspack/core':
-        specifier: 1.0.0-beta.1
-        version: 1.0.0-beta.1(@swc/helpers@0.5.11)
+        specifier: 1.0.0-beta.5
+        version: 1.0.0-beta.5(@swc/helpers@0.5.11)
       '@rspack/dev-server':
-        specifier: 1.0.0-beta.1
-        version: 1.0.0-beta.1(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))(@types/express@4.17.21)(webpack@5.91.0)
+        specifier: 1.0.0-beta.5
+        version: 1.0.0-beta.5(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))(@types/express@4.17.21)(webpack@5.91.0)
       '@rspack/plugin-react-refresh':
-        specifier: 1.0.0-beta.1
-        version: 1.0.0-beta.1(react-refresh@0.14.2)
+        specifier: 1.0.0-beta.5
+        version: 1.0.0-beta.5(react-refresh@0.14.2)
       '@svgr/plugin-jsx':
         specifier: ^8.1.0
         version: 8.1.0(@svgr/core@8.1.0(typescript@5.5.4))
@@ -185,7 +185,7 @@ importers:
         version: 1.77.8
       sass-loader:
         specifier: ^16.0.0
-        version: 16.0.0(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))(sass-embedded@1.77.8)(sass@1.75.0)(webpack@5.91.0)
+        version: 16.0.0(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))(sass-embedded@1.77.8)(sass@1.75.0)(webpack@5.91.0)
       tsx:
         specifier: ^4.16.3
         version: 4.16.3
@@ -1217,60 +1217,60 @@ packages:
   '@rsdoctor/utils@0.3.11':
     resolution: {integrity: sha512-S1h/rG3wPFjHE9AffGjBGxPhP1j8X23KZKiyYnYHiOTCHxnYTyBqRJXUA0OvGewFY9zi7ucz800y+s0G1ujGyg==}
 
-  '@rspack/binding-darwin-arm64@1.0.0-beta.1':
-    resolution: {integrity: sha512-KyC+xEMy9Y5JivO2e5rlKFGT74uwDhbwJjSCR5KOLQtZjDWeLwhf7aZhkoSQJUEsK5tAuuUoTP02RJFzK5llpA==}
+  '@rspack/binding-darwin-arm64@1.0.0-beta.5':
+    resolution: {integrity: sha512-lHiQ5cZrBQEpoh7Cd0AY3ggzlfBy9HiK4T0x2VdtsT2ZMc81hPBJ23hB8WIA+CTfOwbeLUBi0Ypfo26jls+dBw==}
     cpu: [arm64]
     os: [darwin]
 
-  '@rspack/binding-darwin-x64@1.0.0-beta.1':
-    resolution: {integrity: sha512-Onc35+qQ7YwE6+aB66l/ZnRFXfhA1hXH5aNnNJmIFEAmqzkvOGREkWy3CdfsklF/l/xt33iUM7ccnNgdpk7yKw==}
+  '@rspack/binding-darwin-x64@1.0.0-beta.5':
+    resolution: {integrity: sha512-uEWJe2Egs0LawG/8pnfHIyZeJWLMCZkQjZM1PY8iH7jVLXh1rELQJbGlMHNFbYvM4cU8Xfk9si2Vi4mPRepzlQ==}
     cpu: [x64]
     os: [darwin]
 
-  '@rspack/binding-linux-arm64-gnu@1.0.0-beta.1':
-    resolution: {integrity: sha512-NlXtRlKcoBzB6EQEiXegW0nMToEPXD+hExaev0j1+uzsFrMJ0uIY49k6+DapwWZ8A2jUdvH7xdWT+eAXD3l/EA==}
+  '@rspack/binding-linux-arm64-gnu@1.0.0-beta.5':
+    resolution: {integrity: sha512-DHyd2f+H5Y1F12fH5aN1Rx341E6cvH86pGnqcbdsVaOgM+8GM55LIr4p90XIdrjK2vH5PYROFM8g/d6CGzX3VQ==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@rspack/binding-linux-arm64-musl@1.0.0-beta.1':
-    resolution: {integrity: sha512-fPS8ukoPgmBSUX4dt74flObcbYzO3uaP1bk4k/98Gr3Bw0ACDZ6h5nqlxoXoeVzhNcNMBcfv45un8H3i411AyA==}
+  '@rspack/binding-linux-arm64-musl@1.0.0-beta.5':
+    resolution: {integrity: sha512-QG9NYVcwpaDqkUT1Ny1yr+RAgSmdN8AswqLkLbtD42Q/P+DKlvKUa48BxU7irQgYe21AKEg4E7EnLCXaeSwRFw==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@rspack/binding-linux-x64-gnu@1.0.0-beta.1':
-    resolution: {integrity: sha512-9U78G7BtevPZ9GEJ2AhGHt03n+GEhKVvEZ/tgu+flFV0tYGjq75QQX345x4m+uercTqzRBTyuWITweIzppeWuQ==}
+  '@rspack/binding-linux-x64-gnu@1.0.0-beta.5':
+    resolution: {integrity: sha512-r3KB58qDZvTh9zoAdZG0F6soh9f7MtCbhZzhLAiFb8E5J+QBK3dN+hn6LLtap8istZaU0nq9UdYiKDPOthhPiQ==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@rspack/binding-linux-x64-musl@1.0.0-beta.1':
-    resolution: {integrity: sha512-qqNPseWAOKmV33YL7tihY0N9xwY+N1G9na6lT7iqZnsrzPkIZmESI9Z24fXVJqLC/UhfxAth4RKhVBeKTsPk1w==}
+  '@rspack/binding-linux-x64-musl@1.0.0-beta.5':
+    resolution: {integrity: sha512-/IDw2JI273wQXCoQQvnX2sthNglChMhQDig8XxFU3fLQmaPB8zxGFCxowstOQPjN/McSddHGdISGlv6RKh8rCQ==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@rspack/binding-win32-arm64-msvc@1.0.0-beta.1':
-    resolution: {integrity: sha512-VeBGYItHWqImYt23rBChXrk1o7fQxwTv6BEhtMpTnMJV10O6+Db9NckPEplcKLmNKAAA5anxH40GcpPc4nff8A==}
+  '@rspack/binding-win32-arm64-msvc@1.0.0-beta.5':
+    resolution: {integrity: sha512-HhT79VMinXof1sI7SWBRNBamSUUcwgZwlfhcQlaRtm06YzmK0wieJAWi1Gunr6/tlDPa4UNM+y3le6K5kibwfQ==}
     cpu: [arm64]
     os: [win32]
 
-  '@rspack/binding-win32-ia32-msvc@1.0.0-beta.1':
-    resolution: {integrity: sha512-ZxLQ1zOpyCKefsKvDYGGIHM019avNPfesJKdw7wYqeC+EIvWZfs86lnhlSL5PlZzV5AfFZQyQJFRjAv4JPpe4Q==}
+  '@rspack/binding-win32-ia32-msvc@1.0.0-beta.5':
+    resolution: {integrity: sha512-oYXpiXpoVBL7v3biBHeUlkrW0EVceG3PsBPcBg/AuVqbpogePu1xN6gRdaN9CYK/uRNcDyFC3QWDOq+Cn3KExg==}
     cpu: [ia32]
     os: [win32]
 
-  '@rspack/binding-win32-x64-msvc@1.0.0-beta.1':
-    resolution: {integrity: sha512-tMrjEA/2SGMVLbh/zOQoZrr1Xx+oI6RZnkXH6l95ON4yZiD+8wM84w8Ernj1N8KwclTuvBzxM0r3DLHTNZcDhw==}
+  '@rspack/binding-win32-x64-msvc@1.0.0-beta.5':
+    resolution: {integrity: sha512-tXYOIThPgiIvKKoV91GN/+P405DGFcuhdZZ+i0AhrRrtbK7mpkIRdde8aVMXNbTA6NnKAcOSAvJ2bVUVq3F2rQ==}
     cpu: [x64]
     os: [win32]
 
-  '@rspack/binding@1.0.0-beta.1':
-    resolution: {integrity: sha512-p7XBvk1+fAmvrlmdeRr5J9wdXx5idVZjHFJu/3qPHWf5mHKRw2/tQVbqzExj+B1nwR6HXFgxCiiddaWauMS/YQ==}
+  '@rspack/binding@1.0.0-beta.5':
+    resolution: {integrity: sha512-GT0cxYzD4jrXaB4eaGu1N/l32InSWelDREvqg1MDjZAYZlYreN2yFiA8Ds5+RqPz53csup1WWHFMqYcNH9KipQ==}
 
-  '@rspack/core@1.0.0-beta.1':
-    resolution: {integrity: sha512-aUWR/FUUw7x0L/qEZ0qrXC+7YYOL0Ezwd95TqDIDIYkSODJ6ZPt3a8poPwWc7IBdONgb8sGDPTzAXXEjcsBMwQ==}
+  '@rspack/core@1.0.0-beta.5':
+    resolution: {integrity: sha512-X8amU6N26FE4/3JPs+asTIeBZlESrfCC4jlfEOc6bsjLCiMK8NkF3r84xFG7qpGBe178c+yXwmBluyHUkMGHqg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@swc/helpers': '>=0.5.1'
@@ -1278,17 +1278,17 @@ packages:
       '@swc/helpers':
         optional: true
 
-  '@rspack/dev-server@1.0.0-beta.1':
-    resolution: {integrity: sha512-bL0b/UvzQBQooZMphfSpKuxbKkpTQuN5AOHwh205yFNWeEsMVxF7/N+262YAZ510hN2EeO2WDlZZzRd1DxnWBg==}
+  '@rspack/dev-server@1.0.0-beta.5':
+    resolution: {integrity: sha512-eYtI3nE3EULMT3Uan+vUvx5IhGu2RmObk6Ug2A8ay2Sr1E/k3H4zyyE9b4oPc1GlNVTbVo7Aswta2+U9BcEBkQ==}
     peerDependencies:
       '@rspack/core': '*'
 
-  '@rspack/lite-tapable@1.0.0-beta.1':
-    resolution: {integrity: sha512-r4xtbJp6QhW6A1twkgTP0UQkPC9cOT3sFjjjlx22j/q669HJRz+CVTlVcNxPomK7Q3Kg6dVsyv16MjGRl/fl5g==}
+  '@rspack/lite-tapable@1.0.0':
+    resolution: {integrity: sha512-7MZf4lburSUZoEenwazwUDKHhqyfnLCGnQ/tKcUtztfmVzfjZfRn/EaiT0AKkYGnL2U8AGsw89oUeVyvaOLVCw==}
     engines: {node: '>=16.0.0'}
 
-  '@rspack/plugin-react-refresh@1.0.0-beta.1':
-    resolution: {integrity: sha512-TLv3aB0NJtGPY38cMktnEkJ64RGLCed7MxQhc7f6V5FzOc3cZldTYSMThTZw1R/APc7GIHC4A26Ny5IogYlzvw==}
+  '@rspack/plugin-react-refresh@1.0.0-beta.5':
+    resolution: {integrity: sha512-7pP8OBOkGa/D/ZnkXI7/atWIc5QJDlLHju/qpPGaomdE+Ut0qSzpW6Loya63CDwB0Ok8AQUGe1GsnbsRNset6w==}
     peerDependencies:
       react-refresh: '>=0.10.0 <1.0.0'
     peerDependenciesMeta:
@@ -1434,9 +1434,6 @@ packages:
 
   '@types/connect-history-api-fallback@1.5.4':
     resolution: {integrity: sha512-n6Cr2xS1h4uAulPRdlw6Jl6s1oG8KrVilPN2yUITEs+K48EzMJJ3W1xy8K5eWuFvjp3R74AOIGSmp2UfBJ8HFw==}
-
-  '@types/connect@3.4.37':
-    resolution: {integrity: sha512-zBUSRqkfZ59OcwXon4HVxhx5oWCJmc0OtBTK05M+p0dYjgN6iTwIL2T/WbsQZrEsdnwaF9cWQ+azOnpPvIqY3Q==}
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
@@ -2679,15 +2676,6 @@ packages:
 
   fn.name@1.1.0:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
-
-  follow-redirects@1.15.3:
-    resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
 
   follow-redirects@1.15.6:
     resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
@@ -6006,12 +5994,12 @@ snapshots:
 
   '@rsdoctor/client@0.3.11': {}
 
-  '@rsdoctor/core@0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))':
+  '@rsdoctor/core@0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))':
     dependencies:
-      '@rsdoctor/graph': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/sdk': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
+      '@rsdoctor/graph': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/sdk': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
       axios: 1.7.3
       enhanced-resolve: 5.12.0
       filesize: 10.1.4
@@ -6034,10 +6022,10 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  '@rsdoctor/graph@0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))':
+  '@rsdoctor/graph@0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))':
     dependencies:
-      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
+      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
       lodash: 4.17.21
       socket.io: 4.7.2
       source-map: 0.7.4
@@ -6051,14 +6039,14 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  '@rsdoctor/rspack-plugin@0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))':
+  '@rsdoctor/rspack-plugin@0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))':
     dependencies:
-      '@rsdoctor/core': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/graph': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/sdk': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rspack/core': 1.0.0-beta.1(@swc/helpers@0.5.11)
+      '@rsdoctor/core': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/graph': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/sdk': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rspack/core': 1.0.0-beta.5(@swc/helpers@0.5.11)
       loader-utils: 2.0.4
       lodash: 4.17.21
     transitivePeerDependencies:
@@ -6071,12 +6059,12 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  '@rsdoctor/sdk@0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))':
+  '@rsdoctor/sdk@0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))':
     dependencies:
       '@rsdoctor/client': 0.3.11
-      '@rsdoctor/graph': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
-      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
+      '@rsdoctor/graph': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
+      '@rsdoctor/utils': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
       body-parser: 1.20.2
       cors: 2.8.5
       dayjs: 1.11.12
@@ -6096,7 +6084,7 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  '@rsdoctor/types@0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))':
+  '@rsdoctor/types@0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))':
     dependencies:
       '@types/connect': 3.4.38
       '@types/estree': 1.0.5
@@ -6104,17 +6092,17 @@ snapshots:
       '@types/webpack': 5.28.5
       source-map: 0.7.4
     optionalDependencies:
-      '@rspack/core': 1.0.0-beta.1(@swc/helpers@0.5.11)
+      '@rspack/core': 1.0.0-beta.5(@swc/helpers@0.5.11)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
       - uglify-js
       - webpack-cli
 
-  '@rsdoctor/utils@0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))':
+  '@rsdoctor/utils@0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))':
     dependencies:
       '@babel/code-frame': 7.24.7
-      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))
+      '@rsdoctor/types': 0.3.11(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))
       '@types/estree': 1.0.5
       acorn: 8.10.0
       acorn-import-assertions: 1.9.0(acorn@8.10.0)
@@ -6139,57 +6127,57 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@rspack/binding-darwin-arm64@1.0.0-beta.1':
+  '@rspack/binding-darwin-arm64@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-darwin-x64@1.0.0-beta.1':
+  '@rspack/binding-darwin-x64@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-linux-arm64-gnu@1.0.0-beta.1':
+  '@rspack/binding-linux-arm64-gnu@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-linux-arm64-musl@1.0.0-beta.1':
+  '@rspack/binding-linux-arm64-musl@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-linux-x64-gnu@1.0.0-beta.1':
+  '@rspack/binding-linux-x64-gnu@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-linux-x64-musl@1.0.0-beta.1':
+  '@rspack/binding-linux-x64-musl@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-win32-arm64-msvc@1.0.0-beta.1':
+  '@rspack/binding-win32-arm64-msvc@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-win32-ia32-msvc@1.0.0-beta.1':
+  '@rspack/binding-win32-ia32-msvc@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding-win32-x64-msvc@1.0.0-beta.1':
+  '@rspack/binding-win32-x64-msvc@1.0.0-beta.5':
     optional: true
 
-  '@rspack/binding@1.0.0-beta.1':
+  '@rspack/binding@1.0.0-beta.5':
     optionalDependencies:
-      '@rspack/binding-darwin-arm64': 1.0.0-beta.1
-      '@rspack/binding-darwin-x64': 1.0.0-beta.1
-      '@rspack/binding-linux-arm64-gnu': 1.0.0-beta.1
-      '@rspack/binding-linux-arm64-musl': 1.0.0-beta.1
-      '@rspack/binding-linux-x64-gnu': 1.0.0-beta.1
-      '@rspack/binding-linux-x64-musl': 1.0.0-beta.1
-      '@rspack/binding-win32-arm64-msvc': 1.0.0-beta.1
-      '@rspack/binding-win32-ia32-msvc': 1.0.0-beta.1
-      '@rspack/binding-win32-x64-msvc': 1.0.0-beta.1
+      '@rspack/binding-darwin-arm64': 1.0.0-beta.5
+      '@rspack/binding-darwin-x64': 1.0.0-beta.5
+      '@rspack/binding-linux-arm64-gnu': 1.0.0-beta.5
+      '@rspack/binding-linux-arm64-musl': 1.0.0-beta.5
+      '@rspack/binding-linux-x64-gnu': 1.0.0-beta.5
+      '@rspack/binding-linux-x64-musl': 1.0.0-beta.5
+      '@rspack/binding-win32-arm64-msvc': 1.0.0-beta.5
+      '@rspack/binding-win32-ia32-msvc': 1.0.0-beta.5
+      '@rspack/binding-win32-x64-msvc': 1.0.0-beta.5
 
-  '@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11)':
+  '@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11)':
     dependencies:
       '@module-federation/runtime-tools': 0.2.3
-      '@rspack/binding': 1.0.0-beta.1
-      '@rspack/lite-tapable': 1.0.0-beta.1
+      '@rspack/binding': 1.0.0-beta.5
+      '@rspack/lite-tapable': 1.0.0
       caniuse-lite: 1.0.30001645
     optionalDependencies:
       '@swc/helpers': 0.5.11
 
-  '@rspack/dev-server@1.0.0-beta.1(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))(@types/express@4.17.21)(webpack@5.91.0)':
+  '@rspack/dev-server@1.0.0-beta.5(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))(@types/express@4.17.21)(webpack@5.91.0)':
     dependencies:
-      '@rspack/core': 1.0.0-beta.1(@swc/helpers@0.5.11)
+      '@rspack/core': 1.0.0-beta.5(@swc/helpers@0.5.11)
       chokidar: 3.6.0
       connect-history-api-fallback: 2.0.0
       express: 4.19.2
@@ -6207,9 +6195,9 @@ snapshots:
       - webpack
       - webpack-cli
 
-  '@rspack/lite-tapable@1.0.0-beta.1': {}
+  '@rspack/lite-tapable@1.0.0': {}
 
-  '@rspack/plugin-react-refresh@1.0.0-beta.1(react-refresh@0.14.2)':
+  '@rspack/plugin-react-refresh@1.0.0-beta.5(react-refresh@0.14.2)':
     dependencies:
       error-stack-parser: 2.1.4
       html-entities: 2.4.0
@@ -6363,7 +6351,7 @@ snapshots:
 
   '@types/body-parser@1.19.4':
     dependencies:
-      '@types/connect': 3.4.37
+      '@types/connect': 3.4.38
       '@types/node': 22.0.2
 
   '@types/bonjour@3.5.13':
@@ -6373,10 +6361,6 @@ snapshots:
   '@types/connect-history-api-fallback@1.5.4':
     dependencies:
       '@types/express-serve-static-core': 4.17.39
-      '@types/node': 22.0.2
-
-  '@types/connect@3.4.37':
-    dependencies:
       '@types/node': 22.0.2
 
   '@types/connect@3.4.38':
@@ -7980,8 +7964,6 @@ snapshots:
 
   fn.name@1.1.0: {}
 
-  follow-redirects@1.15.3: {}
-
   follow-redirects@1.15.6: {}
 
   for-each@0.3.3:
@@ -8241,7 +8223,7 @@ snapshots:
   http-proxy@1.18.1:
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.3
+      follow-redirects: 1.15.6
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -9402,11 +9384,11 @@ snapshots:
       sass-embedded-win32-ia32: 1.77.8
       sass-embedded-win32-x64: 1.77.8
 
-  sass-loader@16.0.0(@rspack/core@1.0.0-beta.1(@swc/helpers@0.5.11))(sass-embedded@1.77.8)(sass@1.75.0)(webpack@5.91.0):
+  sass-loader@16.0.0(@rspack/core@1.0.0-beta.5(@swc/helpers@0.5.11))(sass-embedded@1.77.8)(sass@1.75.0)(webpack@5.91.0):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      '@rspack/core': 1.0.0-beta.1(@swc/helpers@0.5.11)
+      '@rspack/core': 1.0.0-beta.5(@swc/helpers@0.5.11)
       sass: 1.75.0
       sass-embedded: 1.77.8
       webpack: 5.91.0
