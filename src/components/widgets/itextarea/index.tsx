@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import { useControlState, useMemoFunc, useResizeObserver } from '@/hooks';
 
 import { iTextareaSize } from './helpers';
-import type { ITextAreaEvent, ITextareaProps, ITextareaRef } from './models';
+import type { ITextAreaEvent, ITextAreaProps, ITextareaRef } from './models';
 
 import iStyles from '@/components/widgets/common.scss';
 import styles from './index.scss';
 
-export const ITextarea = forwardRef<ITextareaRef, ITextareaProps>(
+export const ITextArea = forwardRef<ITextareaRef, ITextAreaProps>(
   function TextareaAutosize(props, ref) {
     const {
       style,
@@ -74,3 +74,5 @@ export const ITextarea = forwardRef<ITextareaRef, ITextareaProps>(
     );
   }
 );
+
+export type { ITextAreaProps } from './models';

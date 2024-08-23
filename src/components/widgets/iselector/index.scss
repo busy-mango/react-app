@@ -80,6 +80,8 @@
   flex-wrap: wrap;
   flex-basis: 0;
 
+  position: relative;
+
   gap: var(--gap-2);
   box-sizing: border-box;
   justify-content: flex-start;

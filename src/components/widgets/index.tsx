@@ -2,6 +2,7 @@
  * @description UI组件
  */
 
+export * from './checkbox';
 export * from './ibutton';
 export * from './ichip';
 export * from './icollapsible';

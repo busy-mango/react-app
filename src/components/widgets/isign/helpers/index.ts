@@ -55,7 +55,7 @@ export const transition: Transition = {
   ease: 'easeIn',
 };
 
-export const iAnimateLine = (type: ISignType): Target[] => {
+export const iAnimateLine = (type?: ISignType): Target[] => {
   switch (type) {
     case 'arrowTop':
       return [

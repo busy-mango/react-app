@@ -73,6 +73,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
 
   return (
     <div
+      data-ui-ifield-cell
       className={classNames(
         styles.cell,
         styles[size],
@@ -85,10 +86,10 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
         className
       )}
       data-address={address}
-      data-ui-ifield-cell=""
       {...others}
     >
       <div
+        data-ui-ifield-grid
         className={classNames(
           styles.grid,
           styles[mode],
@@ -97,14 +98,18 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
       >
         {showTitle && (
           <IFlex
-            align="center"
+            align="flex-start"
             className={styles.title}
             justify={`flex-${align}`}
           >
-            <IMarker required={required}>{title}</IMarker>
-            {description && <ISignLine ring type="helper" />}
-            {note && <ISignLine ring type="informer" />}
-            {colon && <div className={styles.colon}>{colon}</div>}
+            <IMarker className={styles.marker} required={required}>
+              {title}
+              {description && <ISignLine ring type="helper" />}
+              {note && <ISignLine ring type="informer" />}
+            </IMarker>
+            {colon && isReactNode(title) && (
+              <div className={styles.colon}>{colon}</div>
+            )}
           </IFlex>
         )}
         {isReactChildren(children) && (
@@ -132,3 +137,5 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     </div>
   );
 };
+
+export type { IFieldCellProps, IFieldGridProps } from './models';

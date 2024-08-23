@@ -60,6 +60,7 @@ export const IFieldWrap = forwardRef<HTMLDivElement, IFieldWrapProps>(
     return (
       <motion.div
         ref={target}
+        data-ui-field-wrap
         className={classNames(
           styles.wrap,
           styles[size],

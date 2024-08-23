@@ -19,6 +19,8 @@
 }
 
 .cell {
+  width: 100%;
+
   .grid {
     display: grid;
 
@@ -27,9 +29,13 @@
       line-height: inherit;
       padding: 0.4em 0.5em 0.4em 0;
 
-      & > .note,
-      & > .helper {
-        cursor: help;
+      .marker {
+        white-space: pre-wrap;
+
+        & > .note,
+        & > .helper {
+          cursor: help;
+        }
       }
 
       & > .colon {

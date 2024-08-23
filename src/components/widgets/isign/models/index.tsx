@@ -23,6 +23,6 @@ export type ISignType =
   | 'arrowDoubleBottom';
 
 export interface ISignLineProps extends ReactSvgProps {
-  type: ISignType;
+  type?: ISignType;
   ring?: boolean;
 }

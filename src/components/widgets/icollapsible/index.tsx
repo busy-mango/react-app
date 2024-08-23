@@ -17,41 +17,49 @@ import type {
 
 import styles from './index.scss';
 
-const ICollapsible: React.FC<ICollapsibleProps> = ({
+const Collapsible: React.FC<ICollapsibleProps> = ({
   open,
   name,
   title,
   extra,
   children,
   onArrowClick,
-}) => (
-  <div className={styles.wrap}>
-    <IFlex align="center" className={styles.header} justify="space-between">
-      <IFlex align="center" className={styles.title} gap={'var(--gap-2)'}>
-        {title}
-      </IFlex>
-      <div>
-        {extra ?? (
-          <IFlex
-            align="center"
-            className={styles.trigger}
-            justify="center"
-            onTouchEnd={() => {
-              onArrowClick?.(name, !open);
-            }}
-          >
-            <ISignLine type={open ? 'arrowTop' : 'arrowBottom'} />
-          </IFlex>
-        )}
-      </div>
-    </IFlex>
-    <IMotionPanel visible={open}>
-      <div className={styles.content}>{children}</div>
-    </IMotionPanel>
-  </div>
-);
+}) => {
+  const onChange = useMemoFunc((open?: boolean) => {
+    onArrowClick?.(name, open);
+  });
 
-const IMemoCollapsible = memo(ICollapsible, iPropsAreEqual);
+  const [iOpen, iChange] = useControlState({ value: open, onChange });
+
+  return (
+    <div className={styles.wrap}>
+      <IFlex align="center" className={styles.header} justify="space-between">
+        <IFlex align="center" className={styles.title} gap={'var(--gap-2)'}>
+          {title}
+        </IFlex>
+        <div>
+          {extra ?? (
+            <IFlex
+              align="center"
+              className={styles.trigger}
+              justify="center"
+              onClick={() => {
+                iChange?.(!iOpen);
+              }}
+            >
+              <ISignLine type={iOpen ? 'arrowTop' : 'arrowBottom'} />
+            </IFlex>
+          )}
+        </div>
+      </IFlex>
+      <IMotionPanel visible={iOpen}>
+        <div className={styles.content}>{children}</div>
+      </IMotionPanel>
+    </div>
+  );
+};
+
+export const ICollapsible = memo(Collapsible, iPropsAreEqual);
 
 export const ICollapseGroup: React.FC<ICollapseGroupProps> = (props) => {
   const { items } = props;
@@ -70,7 +78,7 @@ export const ICollapseGroup: React.FC<ICollapseGroupProps> = (props) => {
   return (
     <IFlex vertical className={styles.group}>
       {items?.map((item) => (
-        <IMemoCollapsible
+        <ICollapsible
           key={item.name}
           open={(value ?? []).includes(item.name)}
           onArrowClick={onArrowClick}
@@ -80,3 +88,5 @@ export const ICollapseGroup: React.FC<ICollapseGroupProps> = (props) => {
     </IFlex>
   );
 };
+
+export * from './models';

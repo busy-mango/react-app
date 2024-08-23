@@ -4,10 +4,14 @@
 }
 
 .marker {
-  top: calc(var(--gap-1) / 2);
-  bottom: calc(var(--gap-1) / 2);
-  height: calc(100% - var(--gap-1));
   position: absolute;
+
+  &.part,
+  &.required {
+    top: calc(var(--gap-1) / 2);
+    bottom: calc(var(--gap-1) / 2);
+    height: calc(100% - var(--gap-1));
+  }
 }
 
 .part {
@@ -21,4 +25,9 @@
 .required {
   right: calc(100% + 0.15em);
   color: rgb(var(--error-color));
+}
+
+.no {
+  color: inherit;
+  right: calc(100% + 0em);
 }

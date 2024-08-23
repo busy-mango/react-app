@@ -9,7 +9,7 @@ export interface IInputRef {
 }
 
 export interface IInputProps
-  extends OmitOf<ReactInputProps, 'onChange' | 'value'> {
+  extends OmitOf<ReactInputProps, 'onChange' | 'value' | 'ref'> {
   /** 控件是否跟随文本宽度 */
   autoSize?: boolean;
   /** 控件值 */

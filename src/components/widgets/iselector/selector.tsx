@@ -95,6 +95,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       autoFocus,
       isLoading,
       separator,
+      className,
       placeholder,
       open: _open,
       filter = true,
@@ -126,7 +127,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       }
       if (isTrue(filter)) {
         return ({ title }: ControlOptionModel, keyword?: string) => {
-          return !keyword ? true : title?.includes(keyword) ?? false;
+          return !keyword ? true : (title?.includes(keyword) ?? false);
         };
       }
     }, [filter]);
@@ -273,10 +274,15 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       <Fragment>
         <IFieldWrap
           ref={refs.setReference}
-          className={classNames(styles.reference, {
-            [styles.multiple]: multiple,
-            // [styles.keyword]: isNonEmptyString(keyword),
-          })}
+          className={classNames(
+            styles.reference,
+            {
+              [styles.multiple]: multiple,
+
+              // [styles.keyword]: isNonEmptyString(keyword),
+            },
+            className
+          )}
           isLoading={isLoading}
           prefix={prefix}
           size={_size}

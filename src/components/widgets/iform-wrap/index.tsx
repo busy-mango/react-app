@@ -37,7 +37,7 @@ export const IFormWrap: ReactCFC<IFormWrapProps> = ({
   </motion.form>
 );
 
-export interface IFormPartProps extends React.PropsWithChildren {
+export interface IFormPartProps {
   name?: string;
   title?: React.ReactNode;
 }

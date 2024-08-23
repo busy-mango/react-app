@@ -1,17 +1,19 @@
 import type { OmitOf } from '@busymango/utils';
 
+import type { ControlUIPattern } from '@/components/models';
+
 type ValueType = string | number | readonly string[] | undefined;
 
 export type ITextareaRef = React.RefObject<HTMLTextAreaElement>;
 
 export type ITextAreaEvent = React.ChangeEvent<HTMLTextAreaElement>;
 
-export interface ITextareaProps
+export interface ITextAreaProps
   extends OmitOf<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     'children' | 'rows' | 'onChange'
   > {
-  ref?: React.Ref<HTMLTextAreaElement>;
+  // ref?: React.Ref<HTMLTextAreaElement>;
   /**
    * Maximum number of rows to display.
    */
@@ -23,4 +25,6 @@ export interface ITextareaProps
   minRows?: number;
 
   onChange?: (value: ValueType) => void;
+
+  pattern?: ControlUIPattern;
 }

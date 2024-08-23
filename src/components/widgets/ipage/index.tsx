@@ -20,6 +20,7 @@ export const IPage: ReactCFC<IPageProps> = ({
   ...others
 }) => (
   <motion.article
+    data-page
     animate={{ opacity: 1 }}
     className={styles.page}
     exit={{ opacity: 0 }}
@@ -41,9 +42,9 @@ export const IPage: ReactCFC<IPageProps> = ({
         </motion.div>
       ) : (
         <motion.div
+          data-safe-area
           animate={{ opacity: 1 }}
           className={classNames(styles.area, className)}
-          data-safe-area={true}
           exit={{ opacity: 0 }}
           initial={{ opacity: 0.36 }}
           transition={{ duration: 0.3 }}

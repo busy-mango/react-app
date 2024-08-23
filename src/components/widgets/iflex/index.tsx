@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 
 import { isFalse, isTrue } from '@busymango/is-esm';
@@ -25,6 +25,10 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
       ...others
     } = props;
 
+    const iRef = useRef<HTMLDivElement>(null);
+
+    useImperativeHandle(ref, () => iRef.current!, [iRef]);
+
     const flexWrap = isTrue(wrap) ? 'wrap' : wrap;
 
     const alignItems = align ?? ifnot(centered && 'center');
@@ -33,7 +37,7 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
 
     return (
       <div
-        ref={ref}
+        ref={iRef}
         className={classNames(
           styles.wrap,
           reverse && styles.reverse,
