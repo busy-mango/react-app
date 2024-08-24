@@ -22,3 +22,4 @@ run
 .eslintcache
 npm-debug.log
 yarn-error.log
+tsconfig.tsbuildinfo
