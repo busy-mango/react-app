@@ -5,7 +5,7 @@ import { Translation, useTranslation } from 'react-i18next';
 import { MIN2MS } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { IChip, IFlex, IPage, ISignLine } from '@/components';
+import { IChip, IFlex, ISafeArea, ISignLine } from '@/components';
 import { BULLIONS_PRICE_INFO_API } from '@/service';
 import { iBullionsPrice } from '@/service/server';
 import { size2px } from '@/utils';
@@ -65,12 +65,12 @@ const BullionsChip: React.FC<{
 };
 
 const WatchChip: React.FC = () => (
-  <IPage>
+  <ISafeArea>
     <IFlex vertical gap={size2px(8)}>
       <BullionsChip code="gold" />
       <BullionsChip code="silver" />
     </IFlex>
-  </IPage>
+  </ISafeArea>
 );
 
 export default WatchChip;

@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 import { iArray, theLast } from '@busymango/utils';
 
-import { IPage, ISelector } from '@/components';
+import { ISafeArea, ISelector } from '@/components';
 
 export default function BasicSelect() {
   const [age, setAge] = useState<React.Key>();
   return (
-    <IPage>
+    <ISafeArea>
       <form>
         <ISelector
           options={[
@@ -22,6 +22,6 @@ export default function BasicSelect() {
           }}
         />
       </form>
-    </IPage>
+    </ISafeArea>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { iArray } from '@busymango/utils';
 
-import { IPage, ISelector } from '@/components';
+import { ISafeArea, ISelector } from '@/components';
 import { iCompact } from '@/utils';
 
 const names = [
@@ -28,7 +28,7 @@ export default function MultipleSelect() {
   };
 
   return (
-    <IPage>
+    <ISafeArea>
       <form>
         <ISelector
           multiple
@@ -38,6 +38,6 @@ export default function MultipleSelect() {
           onChange={onChange}
         />
       </form>
-    </IPage>
+    </ISafeArea>
   );
 }

@@ -7,12 +7,13 @@ import type { FocusEventHandler } from 'react';
 
 import type { OmitOf } from '@busymango/utils';
 
-import type {
-  ControlCheckedStatus,
-  ControlUIPattern,
-  ControlUISize,
-} from '@/components/models';
 import type { WrapperProps } from '@/models';
+
+import type {
+  ControlPattern,
+  ControlUISize,
+  ControlUIStatus,
+} from '../../control';
 
 interface CheckboxStatus {
   label?: React.ReactNode;
@@ -43,8 +44,8 @@ interface CheckboxStatus {
    * @default false
    */
   overlay: boolean;
-  status: ControlCheckedStatus;
-  pattren: ControlUIPattern;
+  status: ControlUIStatus;
+  pattren: ControlPattern;
 }
 
 export interface SlotRender<T = unknown> {

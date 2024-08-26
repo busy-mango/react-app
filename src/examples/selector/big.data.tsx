@@ -1,7 +1,7 @@
-import type { ControlOptionModel } from '@/components';
-import { IPage, ISelector } from '@/components';
+import type { ControlOption } from '@/components';
+import { ISafeArea, ISelector } from '@/components';
 
-const options = Array.from<unknown, ControlOptionModel>(
+const options = Array.from<unknown, ControlOption>(
   { length: 10000 },
   (_, i) => ({
     value: i,
@@ -11,9 +11,9 @@ const options = Array.from<unknown, ControlOptionModel>(
 );
 
 const Welcome: React.FC = () => (
-  <IPage>
+  <ISafeArea>
     <ISelector multiple options={options} />
-  </IPage>
+  </ISafeArea>
 );
 
 export default Welcome;

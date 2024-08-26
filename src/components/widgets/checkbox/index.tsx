@@ -7,12 +7,11 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
-import { useControlState } from '@/hooks';
-
-import { IFlex } from '../iflex';
-import { ISignLine } from '../isign';
-import { ISVGWrap } from '../isvg-wrap';
-import { IWave } from '../iwave';
+import { useControlState } from '../control';
+import { IFlex } from '../flex';
+import { ISignLine } from '../sign';
+import { ISVGWrap } from '../svg-wrap';
+import { IWave } from '../wave';
 import type {
   CheckboxRef,
   CheckInputRender,

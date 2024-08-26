@@ -4,8 +4,8 @@
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import { IChip, IPage, snackbar } from '@/components';
-import { IHighLighter } from '@/components/widgets/ihigh-lighter';
+import { IChip, ISafeArea, snackbar } from '@/components';
+import { IHighLighter } from '@/components/widgets/high-lighter';
 import { useEffectOnce } from '@/hooks';
 
 import styles from './index.scss';
@@ -31,14 +31,14 @@ const Welcome: React.FC = () => {
   });
 
   return (
-    <IPage className={styles.page}>
+    <ISafeArea className={styles.page}>
       <span>
         <IHighLighter content="abaabcadabacdabdd" keyword="abcd" mode="seq" />
       </span>
       <div className={styles.area}>{t('common:Confirm')}</div>
       <div className={styles.area}>{t('common:Confirm')}</div>
       <div className={styles.stickey}>stickey</div>
-    </IPage>
+    </ISafeArea>
   );
 };
 

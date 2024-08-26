@@ -1,5 +1,4 @@
 export * from './click.away';
-export * from './control.state';
 export * from './debounce.func';
 export * from './debounce.state';
 export * from './effect.once';

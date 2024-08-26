@@ -4,9 +4,9 @@ import { Fragment } from 'react/jsx-runtime';
 import { iArray, iSearchParams } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
-import type { ControlOptionModel, IOptionRender } from '@/components';
-import { IOverflow, IPage, ISelector } from '@/components';
-import { IChip } from '@/components/widgets/ichip';
+import type { ControlOption, IOptionRender } from '@/components';
+import { IOverflow, ISafeArea, ISelector } from '@/components';
+import { IChip } from '@/components/widgets/chip';
 import { useToggle } from '@/hooks';
 import { drive } from '@/service';
 import { iCompact } from '@/utils';
@@ -54,7 +54,7 @@ export default function AdvancedSelector() {
 
   const options = useMemo(
     () =>
-      data?.map<ControlOptionModel>(({ country, domains, name }) => ({
+      data?.map<ControlOption>(({ country, domains, name }) => ({
         value: `${country}-${domains.join('&')}`,
         label: name,
       })),
@@ -62,7 +62,7 @@ export default function AdvancedSelector() {
   );
 
   return (
-    <IPage>
+    <ISafeArea>
       <form>
         <ISelector
           measure
@@ -79,6 +79,6 @@ export default function AdvancedSelector() {
           onOpenChange={toggle}
         />
       </form>
-    </IPage>
+    </ISafeArea>
   );
 }
