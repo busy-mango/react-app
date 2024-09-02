@@ -1,0 +1,41 @@
+.wave {
+  border-radius: 50%;
+}
+
+.icon {
+  z-index: -1;
+  pointer-events: none;
+
+  border-width: 1px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: rgb(var(--main-color) / 1);
+
+  color: rgb(var(--main-color) / 1);
+}
+
+.input {
+  opacity: 0;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.radio {
+  display: inline-block;
+
+  position: relative;
+
+  .input {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+}
+
+.root {
+  display: inline-flex;
+}

@@ -5,7 +5,7 @@ import { iArray, theFirst } from '@busymango/utils';
 import type { ISignType } from '@/components';
 import { ISafeArea, ISelector, ISignLine } from '@/components';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const options = [
   { value: 'tick' },

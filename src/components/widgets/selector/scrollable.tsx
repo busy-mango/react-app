@@ -23,7 +23,7 @@ import { IClipSpinner } from '../spinners';
 import { estimateSize } from './helpers';
 import type { ScrollableProps, ScrollableRef } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
   function Scrollable(props, ref) {

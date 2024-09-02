@@ -7,8 +7,8 @@ import { useControlState } from '../control';
 import { iTextareaSize } from './helpers';
 import type { ITextAreaEvent, ITextAreaProps, ITextareaRef } from './models';
 
-import iStyles from '@/components/widgets/common.scss';
-import styles from './index.scss';
+import * as iStyles from '@/styles/widgets.scss';
+import * as styles from './index.scss';
 
 export const ITextArea = forwardRef<ITextareaRef, ITextAreaProps>(
   function TextareaAutosize(props, ref) {

@@ -9,6 +9,7 @@
   "Under maintenance": "Under maintenance",
   "Page not found": "Page not found",
   "Theme not found": "Theme not found",
+  "Theme style sheet not found": "Theme style sheet not found",
   "Environment variables not found": "111",
   "Browser version incompatibility": "Browser version incompatibility",
   "Hallo world": "<bold>$t(common:Notice)</bold> You are currently running React in development mode. Rendering performance will be slightly degraded until this application is build for production."

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import type { SVGMotionProps, Target } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export interface IClipSpinnerProps extends SVGMotionProps<SVGSVGElement> {
   animate?: Target;

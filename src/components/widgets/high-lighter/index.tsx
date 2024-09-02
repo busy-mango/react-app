@@ -2,7 +2,7 @@ import { Fragment, useMemo } from 'react';
 
 import { iLCSubSeq, iLCSubStr } from '@/utils';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 interface LighterProps {
   /** 目标文本 */

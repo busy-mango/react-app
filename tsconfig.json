@@ -60,17 +60,6 @@
     /* Completeness */
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    /* Plugins */
-    "plugins": [
-      {
-        /* Visit https://github.com/mrmckeb/typescript-plugin-css-modules to read more about this plugin*/
-        "name": "typescript-plugin-css-modules",
-        "options": {
-          "classnameTransform": "camelCaseOnly",
-          "customMatcher": "\\.(c|le|sa|sc)ss$"
-        }
-      }
-    ]
   },
   "include": [
     "scripts/**/*",

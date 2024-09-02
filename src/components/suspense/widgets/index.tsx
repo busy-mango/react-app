@@ -1,6 +1,6 @@
 import { IClipSpinner, IFlex } from '@/components/widgets';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const SuspenseFallbackWidget = IClipSpinner;
 

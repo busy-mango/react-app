@@ -6,12 +6,12 @@ import { initReactI18next } from 'react-i18next';
 import dayjs from 'dayjs';
 import type { InitOptions } from 'i18next';
 import i18n, { t } from 'i18next';
-import Cookie from 'js-cookie';
 
 import { isNonEmptyString } from '@busymango/is-esm';
 import { dom } from '@busymango/utils';
 
 import { i18nResourcesLoad } from './plugins';
+import { iThemeDefault } from './utils';
 
 import 'dayjs/locale/zh-cn';
 
@@ -53,37 +53,12 @@ Object.values(env).forEach((val) => {
   }
 });
 
-/** 默认从Cookie中获取当前主题样式名称 */
-const topic = Cookie.get(process.env.THEME_TITLE);
-
-/** 主题样式变量 */
-export const theme = {
-  /** 主题样式的 CSSRule title */
-  title: process.env.THEME_TITLE,
-  /** 默认的主题样式 */
-  default: topic ?? process.env.THEME_DEFAULT,
-};
-
-// 检查主题样式是否定义
-Object.values(theme).forEach((val) => {
-  if (!isNonEmptyString(val)) {
-    throw new Error(t('common:Theme not found'));
-  }
-});
-
-/** 创建主题样式标签 */
-export const style = dom.create('link', {
-  href: `/themes/${theme.default}.css`,
-  title: theme.title,
-  rel: 'stylesheet',
-});
-
 /** 创建应用容器 */
 export const container = dom.create(
   'div',
   {
     id: env.root,
-    class: theme.default,
+    class: iThemeDefault(),
   },
   document.body
 );

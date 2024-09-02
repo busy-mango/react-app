@@ -14,7 +14,7 @@ import { IMarker } from '../marker';
 import { IMotionPanel } from '../motion-panel';
 import { ISignLine } from '../sign';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export interface IFormWrapProps
   extends OmitOf<

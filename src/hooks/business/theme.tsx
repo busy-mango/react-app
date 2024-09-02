@@ -3,18 +3,14 @@
  */
 
 import { useEffect } from 'react';
-import Cookie from 'js-cookie';
+import { t } from 'i18next';
 
 import { isCSSStyleRule, isCSSStyleSheet, isNil } from '@busymango/is-esm';
 import { useMutation } from '@tanstack/react-query';
 
-import { container, theme } from '@/init';
+import { container } from '@/init';
 import { drive } from '@/service';
-
-function themeSheet() {
-  const sheets = Array.from(document.styleSheets);
-  return sheets.find((e) => e.title === theme.title);
-}
+import { iThemeDefault, iThemeSheet } from '@/utils';
 
 /**
  * 动态主题
@@ -23,9 +19,9 @@ export default function useMutateTheme<T extends string = string>() {
   const res = useMutation({
     gcTime: Infinity,
     mutationFn: async (name: T) => {
-      const sheet = themeSheet();
+      const sheet = iThemeSheet();
       if (!isCSSStyleSheet(sheet)) {
-        throw new Error("theme style sheet can't find");
+        throw new Error(t('common.Theme style sheet not found'));
       }
 
       const selector = `.${name}`;
@@ -41,12 +37,11 @@ export default function useMutateTheme<T extends string = string>() {
     },
   });
 
-  const classname = res?.data ?? (theme.default as T);
+  const classname = res?.data ?? iThemeDefault<T>();
 
   useEffect(() => {
     if (isNil(classname)) return;
 
-    Cookie.set(theme.title, classname);
     container.classList.add(classname);
 
     return () => {

@@ -1,15 +1,19 @@
 import { Fragment, useEffect, useRef } from 'react';
+import classNames from 'classnames';
 import { motion, useAnimate } from 'framer-motion';
 
 import { useEventState, useMemoFunc } from '@/hooks';
 import type { ReactTargetType } from '@/models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const IWave: React.FC<{
+  className?: string;
   placeholder?: boolean;
   target: ReactTargetType;
-}> = ({ target, placeholder }) => {
+}> = (props) => {
+  const { className, target, placeholder } = props;
+
   const memo = useRef(false);
 
   const [scope, animate] = useAnimate();
@@ -52,7 +56,7 @@ export const IWave: React.FC<{
 
   return (
     <Fragment>
-      <div ref={scope} className={styles.wrap} />
+      <div ref={scope} className={classNames(styles.wrap, className)} />
       {placeholder && (
         <motion.div
           className={styles.wrap}

@@ -60,13 +60,7 @@
     .top,
     .bottom {
       flex-grow: 1;
-      background-color: rgb(var(--comp-bg-color));
-    }
-    .top {
-      mask: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8) 50%, #000);
-    }
-    .bottom {
-      mask: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8) 50%, #000);
+      height: calc(50% - var(--control-size-7) / 2);
     }
 
     .view {

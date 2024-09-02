@@ -21,8 +21,8 @@ import { useControlPatternAssert, useControlState } from '../control';
 import { iTextSize } from './helpers';
 import type { IInputProps, IInputRef } from './models';
 
-import iStyles from '@/components/widgets/common.scss';
-import styles from './index.scss';
+import * as iStyles from '@/styles/widgets.scss';
+import * as styles from './index.scss';
 
 export const IInput = forwardRef<IInputRef, IInputProps>(
   function Input(props, ref) {

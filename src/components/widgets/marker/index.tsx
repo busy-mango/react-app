@@ -5,7 +5,7 @@ import { isFinite } from '@busymango/is-esm';
 
 import type { ReactCFC, WrapperProps } from '@/models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export interface IMarkerProps extends WrapperProps {
   /** 序号标识 */

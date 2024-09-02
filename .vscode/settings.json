@@ -29,6 +29,11 @@
   "cssVariables.lookupFiles": [
     "**/themes/*.css",
   ],
+  "css-module-typed.pluginOptions": {
+    "goToDefinition": true,
+    "classnameTransform": "camelCaseOnly",
+    "customMatcher": "\\.(c|le|sa|sc)ss$"
+  },
   "[svg]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "DotJoshJohnson.xml"

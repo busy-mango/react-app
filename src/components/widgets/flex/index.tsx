@@ -6,7 +6,7 @@ import { ifnot } from '@busymango/utils';
 
 import type { IFlexProps } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
   function Flex(props, ref) {

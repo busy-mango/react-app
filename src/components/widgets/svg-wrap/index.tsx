@@ -8,7 +8,7 @@ import { iFindElement } from '@/utils';
 
 import { IFlex } from '../flex';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export interface ISVGWrapProps
   extends ReactMotionDomProps<WrapperProps<HTMLElement>> {

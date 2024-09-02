@@ -5,4 +5,5 @@ export * from './common';
 export * from './date';
 export * from './import';
 export * from './react';
+export * from './theme';
 export * from './viewport';

@@ -24,9 +24,6 @@ type RspackPlugin =
   | RspackPluginInstance
   | RspackPluginFunction;
 
-const { DefinePlugin, ProgressPlugin, HtmlRspackPlugin, CopyRspackPlugin } =
-  rspack;
-
 const doctor = new RsdoctorRspackPlugin({
   supports: { generateTileGraph: true },
   linter: { rules: { 'ecma-version-check': 'off' } },
@@ -34,9 +31,21 @@ const doctor = new RsdoctorRspackPlugin({
 
 export const iPlugins = (
   env: 'dev' | 'test' | 'prod' = 'dev'
-): RspackPlugin[] =>
-  compact([
-    new HtmlRspackPlugin({
+): RspackPlugin[] => {
+  const dotenv = assign<{
+    THEME: string;
+    ENV_NAME: string;
+    CONTAINER_ID: string;
+    SERVER_DOMAIN?: string;
+    SERVER_PREFIX?: string;
+  }>(
+    process.env,
+    parse(readFileSync(resolve(dir.envs, 'comm.env'))),
+    parse(readFileSync(resolve(dir.envs, `${env}.env`)))
+  );
+
+  return compact([
+    new rspack.HtmlRspackPlugin({
       title: app.name,
       publicPath: '/',
       excludeChunks: ['mfeBBB'],
@@ -45,18 +54,26 @@ export const iPlugins = (
       templateParameters: {
         title: app.name,
         version: app.version,
+        theme: dotenv.THEME,
       },
     }),
-    new DefinePlugin({
-      'process.env': JSON.stringify(
-        assign(
-          process.env,
-          parse(readFileSync(resolve(dir.envs, 'common.env'))),
-          parse(readFileSync(resolve(dir.envs, 'dev.env')))
+    new rspack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv),
+    }),
+    new rspack.ProgressPlugin(),
+    new rspack.CopyRspackPlugin({
+      patterns: compact(
+        // 将 assets 路径下的所有文件夹复制到 dist 中
+        readdirSync(dir.static, { withFileTypes: true }).map(
+          (dirent) =>
+            dirent.isDirectory() && {
+              force: false,
+              to: resolve(dir.dist, dirent.name),
+              from: resolve(dir.static, dirent.name),
+            }
         )
       ),
     }),
-    new ProgressPlugin(),
     new ForkTSCheckerWebpackPlugin({
       typescript: {
         build: env !== 'dev',
@@ -64,23 +81,6 @@ export const iPlugins = (
       },
     }) as unknown as null,
     env === 'test' && doctor,
-    env !== 'dev' &&
-      new CopyRspackPlugin({
-        //`assets`下的所有文件夹复制到`dist`中
-        patterns: compact(
-          readdirSync(dir.static, {
-            withFileTypes: true,
-          }).map((dirent) => {
-            const { name } = dirent;
-            if (dirent.isDirectory()) {
-              return {
-                force: false,
-                to: resolve(dir.dist, name),
-                from: resolve(dir.static, name),
-              };
-            }
-          })
-        ),
-      }),
     env === 'dev' && new ReactRefreshRspackPlugin({}),
   ]);
+};

@@ -21,7 +21,7 @@ import { IButton } from '../button';
 import { IFlex } from '../flex';
 import { IOverlay } from '../overlay';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export type IModalRef = UseFloatingReturn['refs'] & {
   getReferenceProps: (props?: React.HTMLProps<Element>) => PlainObject;

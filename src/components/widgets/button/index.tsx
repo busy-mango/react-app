@@ -12,7 +12,7 @@ import type { ControlUISize } from '../control';
 import { IClipSpinner } from '../spinners';
 import { IWave } from '../wave';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const IconWrap: ReactCFC = ({ children }) => (
   <motion.span

@@ -9,7 +9,7 @@ import { Gender } from '@/constants/enums';
 import Female from '@/icons/female.svg';
 import Male from '@/icons/male.svg';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const GenderMale: React.FC = () => <Male className={styles.male} />;
 

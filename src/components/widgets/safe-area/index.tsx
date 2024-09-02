@@ -5,7 +5,7 @@ import type { ReactCFC, ReactMotionDomProps, WrapperProps } from '@/models';
 
 import { IClipSpinner } from '../spinners';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export interface ISafeAreaProps extends ReactMotionDomProps<WrapperProps> {
   isLoading?: boolean;

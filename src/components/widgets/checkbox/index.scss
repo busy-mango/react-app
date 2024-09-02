@@ -37,13 +37,8 @@
 }
 
 .root {
-  --icon-font-size: var(--checkbox-size);
-
   display: inline-flex;
-
   color: rgb(var(--main-color) / 1);
-
-  line-height: var(--checkbox-size);
 
   &.overlay {
     position: initial;
@@ -53,25 +48,24 @@
     position: relative;
   }
 
-  &.sm {
-    --checkbox-size: 1rem;
-
+  &.mini {
     & ~ * {
-      gap: calc(var(--checkbox-size) / 2);
+      gap: calc(var(--control-size-2) / 2);
       font-size: var(--font-size-3);
     }
   }
 
-  &.md {
+  &.medium {
+    line-height: var(--font-size-3);
     & ~ * {
-      gap: calc(var(--checkbox-size) * 0.625);
+      gap: calc(var(--control-size-4) * 0.625);
       font-size: var(--font-size-3);
     }
   }
 
-  &.lg {
+  &.huge {
     & ~ * {
-      gap: calc(var(--checkbox-size) * 0.75);
+      gap: calc(var(--control-size-6) * 0.75);
       font-size: var(--font-size-3);
     }
   }
@@ -79,27 +73,11 @@
   &.disabled {
     color: rgb(var(--font-color-b8) / 1);
   }
+
+  &.checked,
+  &.focus,
+  &.variant,
+  &.indeterminate {
+    font-family: inherit;
+  }
 }
-// root: [
-//       'root',
-//       checked && 'checked',
-//       disabled && 'disabled',
-//       focusVisible && 'focusVisible',
-//       variant && `variant${capitalize(variant)}`,
-//       color && `color${capitalize(color)}`,
-//       size && `size${capitalize(size)}`,
-//     ],
-//     checkbox: [
-//       'checkbox',
-//       checked && 'checked',
-//       indeterminate && 'indeterminate',
-//       disabled && 'disabled', // disabled class is necessary for displaying global variant
-//     ],
-//     action: [
-//       'action',
-//       checked && 'checked',
-//       disableIcon && disabled && 'disabled', // add disabled class to action element for displaying global variant
-//       focusVisible && 'focusVisible',
-//     ],
-//     input: ['input'],
-//     label: ['label'],

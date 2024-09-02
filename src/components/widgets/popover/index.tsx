@@ -32,7 +32,7 @@ import { size2px } from '@/utils/viewport';
 
 import type { InteractionProps } from '../control';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export type IPopoverRef = UseFloatingReturn['refs'];
 

@@ -21,7 +21,7 @@ import type {
   IconRender,
 } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const iIconRender: IconRender = ({ checked, pattren, indeterminate }) => {
   const type = (function () {
@@ -41,7 +41,7 @@ const iIconRender: IconRender = ({ checked, pattren, indeterminate }) => {
 };
 
 const iRootRender: CheckRootRender = ({ label, checkbox, className }) => (
-  <span className={className}>
+  <span data-ui-checkroot className={className}>
     {checkbox}
     <IFlex centered className={styles.label}>
       {label}
@@ -134,14 +134,10 @@ export const ICheckbox = forwardRef<CheckboxRef, ICheckboxProps>(
       [iChecked, indeterminate, variant, size, overlay, status, pattren, label]
     );
 
-    if ((1).toString() === '1') {
-      return <input type="checkbox" {...others} />;
-    }
-
     return (render?.root ?? iRootRender)({
       ref: root,
       ...states,
-      className: classNames(styles.root),
+      className: classNames(styles.root, styles[size]),
       checkbox: (render?.checkbox ?? iCheckboxRender)({
         ...states,
         className: styles.checkbox,

@@ -15,7 +15,7 @@ import RefreshSVG from '@/icons/refresh.svg';
 
 import { useFallbackContext } from '../../hooks';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const BoundaryFallbackWidget: React.FC<{
   autoSize?: boolean;

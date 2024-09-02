@@ -1,16 +1,14 @@
 declare namespace NodeJS {
   interface ProcessEnv {
+    /** 客户端默认主题样式 */
+    THEME: string;
     /** 当前环境名称 */
     ENV_NAME: string;
-    /** 应用渲染容器ID */
+    /** 客户端渲染容器ID */
     CONTAINER_ID: string;
-    /** 应用主题样式标题: CSSRule title & Cookie name */
-    THEME_TITLE: string;
-    /** 应用主题样式名称 */
-    THEME_DEFAULT: string;
-    /** 漂亮系统域名 */
+    /** 服务端域名 */
     SERVER_DOMAIN?: string;
-    /** 漂亮系统API前缀 */
+    /** 服务端API前缀 */
     SERVER_PREFIX?: string;
   }
 }

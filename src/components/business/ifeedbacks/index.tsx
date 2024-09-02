@@ -16,7 +16,7 @@ import NoConnectionSVG from '@/icons/business/no.connection.svg';
 import NoDocumentsSVG from '@/icons/business/no.documents.svg';
 import NoSearchResultSVG from '@/icons/business/no.search.result.svg';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 interface FeedbackProps {
   title?: React.ReactNode;

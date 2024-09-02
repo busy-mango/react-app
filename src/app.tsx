@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { t } from 'i18next';
 
 import { Configure } from '@/configure';
-import { container, i18nInit, style } from '@/init';
+import { container, i18nInit } from '@/init';
 
 import { caniuse } from './caniuse';
 import { IRoutes } from './routes';
@@ -27,12 +27,6 @@ try {
   if (!caniuse.test(userAgent)) {
     throw new Error(t('common:Browser version incompatibility'));
   }
-
-  await new Promise((res, rej) => {
-    style.addEventListener('load', res);
-    style.addEventListener('error', rej);
-    document.head.append(style);
-  });
 
   root.render(
     <StrictMode>

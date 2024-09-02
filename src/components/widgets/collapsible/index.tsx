@@ -16,7 +16,7 @@ import type {
   ICollapsibleProps,
 } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const Collapsible: React.FC<ICollapsibleProps> = ({
   open,

@@ -12,7 +12,7 @@ import type { ReactCFC } from '@/models';
 
 import type { IMotionPanelProps } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const initial: Target = { opacity: 0, height: 0 };
 

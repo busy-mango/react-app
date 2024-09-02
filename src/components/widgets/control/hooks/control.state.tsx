@@ -9,19 +9,26 @@ export interface ControlParams {
   isComposing?: boolean;
 }
 
-export interface ControlComponentProps<T, Args extends unknown[]> {
+export interface ControlComponentProps<T, E, Args extends unknown[]> {
   value?: T;
   defaultValue?: T;
-  onChange?: (value?: T, ...args: Args) => void;
+  onCatch?: (source: E) => T;
+  onChange?: (value: E, ...args: Args) => void;
 }
 
 export function useControlState<
   T = unknown,
+  E = T,
   Args extends unknown[] = unknown[],
->(props: ControlComponentProps<T, Args>, params: ControlParams = {}) {
+>(props: ControlComponentProps<T, E, Args>, params: ControlParams = {}) {
   const { isComposing } = params;
 
-  const { value, defaultValue, onChange } = props;
+  const {
+    value,
+    defaultValue,
+    onChange,
+    onCatch = (source) => source as unknown as T,
+  } = props;
 
   /** 使用输入法时取消受控状态 */
   const isControl = !isUndefined(value) && !isComposing;
@@ -31,8 +38,6 @@ export function useControlState<
   );
 
   const control = isControl ? value : inner;
-
-  const onControl = useMemoFunc(onChange);
 
   const isFirstMount = useRef(true);
 
@@ -48,9 +53,10 @@ export function useControlState<
     if (isControl && !current) setInner(value);
   }, [value, isControl]);
 
-  const iChange = useMemoFunc((next?: T, ...args: Args) => {
-    setInner(next);
-    onControl?.(next, ...args);
+  const iChange = useMemoFunc((next: E, ...args: Args) => {
+    console.log(next);
+    setInner(onCatch(next));
+    onChange?.(next, ...args);
   });
 
   return [control, iChange] as const;

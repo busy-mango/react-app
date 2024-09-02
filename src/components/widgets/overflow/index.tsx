@@ -10,7 +10,7 @@ import { isOverflow } from '@/utils';
 import type { IPopoverRef } from '../popover';
 import { IPopover } from '../popover';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export interface IOverflowProps extends WrapperProps {
   /** 气泡窗中的内容 */

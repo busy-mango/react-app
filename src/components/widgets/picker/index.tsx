@@ -43,9 +43,10 @@ import {
   iWrapExit,
   iWrapInitial,
 } from './helpers';
+import { IPickerMask } from './mask';
 import type { IWheelOptionProps, IWheelProps } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
   const { container, children, isFocus, ...others } = props;
@@ -301,15 +302,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
                           }}
                         />
                       ))}
-                      <IFlex
-                        vertical
-                        className={styles.mask}
-                        justify="space-between"
-                      >
-                        <div className={styles.top} />
-                        <div className={styles.view} />
-                        <div className={styles.bottom} />
-                      </IFlex>
+                      <IPickerMask />
                     </div>
                   </motion.div>
                 )}

@@ -9,7 +9,7 @@ import { IClipSpinner } from '../spinners';
 import { IWave } from '../wave';
 import type { IControlWrapProps } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
   function IControlWrap(props, ref) {

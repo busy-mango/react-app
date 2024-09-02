@@ -12,7 +12,7 @@ import { IOverlay } from '../overlay';
 import { useSnackbars } from './hooks';
 import { ISnackbar } from './isnackbar';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export { snackbar } from './hooks';
 

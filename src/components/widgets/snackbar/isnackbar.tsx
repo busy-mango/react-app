@@ -34,7 +34,7 @@ import { useShakeAnimate, useSnackbars } from './hooks';
 import { snackbar } from './isnackbar.portal';
 import type { ISnackbarProps } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const iAnimate = (height?: number): Target => ({
   height,

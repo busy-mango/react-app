@@ -9,6 +9,7 @@
   "Under maintenance": "系统维护中",
   "Page not found": "页面不存在",
   "Theme not found": "主题样式未定义",
+  "Theme style sheet not found": "主题样式获取失败",
   "Environment variables not found": "环境变量未定义",
   "Browser version incompatibility": "暂不支持当前版本浏览器",
   "Hallo world": "<bold>$t(Notice)</bold> 目前正在开发模式下运行<code>React</code>，在应用程序构建为生产模式之前，渲染性能将略有下降。"

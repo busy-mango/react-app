@@ -14,7 +14,7 @@ import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import type { IChipProps } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const IChip: ReactCFC<IChipProps> = (props) => {
   const {

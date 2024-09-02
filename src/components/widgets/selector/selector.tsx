@@ -46,7 +46,7 @@ import type {
 import { Presence } from './presence';
 import { Scrollable } from './scrollable';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const iChipRender: IOptionRender = (option, params) => (
   <Fragment>

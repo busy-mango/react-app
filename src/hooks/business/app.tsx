@@ -6,7 +6,7 @@ import { create } from 'zustand';
 
 import { isBoolean, isFalse, isString, isTrue } from '@busymango/is-esm';
 
-import { theme as intial } from '@/init';
+import { iThemeDefault } from '@/utils';
 
 import { useEffectOnce, useMemoFunc } from '../basic';
 
@@ -36,7 +36,7 @@ export type AppStoreAction = {
 
 export const useAppStore = create<AppState & AppStoreAction>((set) => ({
   display: document.visibilityState,
-  theme: intial.default,
+  theme: iThemeDefault(),
   collapsed: false,
   document: {},
   set,

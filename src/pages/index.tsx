@@ -4,11 +4,11 @@
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import { IChip, ISafeArea, snackbar } from '@/components';
+import { IChip, IPicker, ISafeArea, snackbar } from '@/components';
 import { IHighLighter } from '@/components/widgets/high-lighter';
 import { useEffectOnce } from '@/hooks';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const HalloWorld: React.FC = () => (
   <span>
@@ -35,6 +35,19 @@ const Welcome: React.FC = () => {
       <span>
         <IHighLighter content="abaabcadabacdabdd" keyword="abcd" mode="seq" />
       </span>
+      <IPicker
+        columns={[
+          [
+            { value: 1, label: '213' },
+            { value: 2, label: '213' },
+            { value: 3, label: '213' },
+            { value: 4, label: '213' },
+            { value: 5, label: '213' },
+            { value: 6, label: '213' },
+            { value: 7, label: '213' },
+          ],
+        ]}
+      />
       <div className={styles.area}>{t('common:Confirm')}</div>
       <div className={styles.area}>{t('common:Confirm')}</div>
       <div className={styles.stickey}>stickey</div>

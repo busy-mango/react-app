@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import type { ReactMotionDomProps, WrapperProps } from '@/models';
 import { isIOS } from '@/utils';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 const iLocks = new Set<string>();
 

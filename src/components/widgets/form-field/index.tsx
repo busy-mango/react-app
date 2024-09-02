@@ -12,7 +12,7 @@ import { ISignLine } from '../sign';
 import { IFieldGridProvider, useIFieldGridContext } from './hooks';
 import type { IFieldCellProps, IFieldGridProps } from './models';
 
-import styles from './index.scss';
+import * as styles from './index.scss';
 
 export const IFieldGrid: ReactCFC<IFieldGridProps> = ({
   size,
