@@ -105,7 +105,7 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
       [active, container, count, iChange]
     );
 
-    const iRender = ({ key, index, start }: VirtualItem<HTMLDivElement>) => {
+    const iRender = ({ key, index, start }: VirtualItem) => {
       const element = options![index];
 
       const { value } = element;

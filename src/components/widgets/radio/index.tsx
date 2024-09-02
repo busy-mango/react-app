@@ -7,6 +7,8 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
+import { isBigInt } from '@busymango/is-esm';
+
 import { useControlState } from '../control';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
@@ -38,7 +40,7 @@ const iRadioRender: IRadioRender = ({ input, ...others }, { checked }) => (
 
 const iInputRender: IRadioInputRender = (
   { ref, ...props },
-  { checked, pattern }
+  { checked, pattern, value }
 ) => (
   <Fragment>
     <input
@@ -46,6 +48,7 @@ const iInputRender: IRadioInputRender = (
       disabled={pattern === 'disabled'}
       readOnly={pattern.startsWith('read')}
       type="radio"
+      value={isBigInt(value) ? value.toLocaleString() : (value ?? undefined)}
       {...props}
       checked={checked ?? false}
     />

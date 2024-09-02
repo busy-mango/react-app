@@ -54,7 +54,6 @@ export function useControlState<
   }, [value, isControl]);
 
   const iChange = useMemoFunc((next: E, ...args: Args) => {
-    console.log(next);
     setInner(onCatch(next));
     onChange?.(next, ...args);
   });

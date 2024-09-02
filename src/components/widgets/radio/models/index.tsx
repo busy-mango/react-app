@@ -4,9 +4,11 @@ import type { OmitOf } from '@busymango/utils';
 import type { ReactMotionDomProps, WrapperProps } from '@/models';
 
 import type {
+  ControlOption,
   ControlPattern,
   ControlUIDirection,
   ControlUISize,
+  ControlValue,
 } from '../../control';
 
 interface InputProps
@@ -28,7 +30,7 @@ export interface IRadioState {
   /**
    * The value of the component. The DOM API casts this to a string.
    */
-  value?: unknown;
+  value?: ControlValue | ControlOption['value'];
   /**
    * The size of the component.
    * @default 'medium'
