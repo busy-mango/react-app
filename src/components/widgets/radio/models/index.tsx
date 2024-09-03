@@ -5,7 +5,6 @@ import type { ReactMotionDomProps, WrapperProps } from '@/models';
 
 import type {
   ControlOption,
-  ControlPattern,
   ControlUIDirection,
   ControlUISize,
   ControlValue,
@@ -46,9 +45,13 @@ export interface IRadioState {
    */
   variant: 'filled' | 'bordered';
   /**
-   * 控件交互状态
+   * 是否禁用
    */
-  pattern: ControlPattern;
+  disabled: boolean;
+  /**
+   * 是否只读
+   */
+  readOnly: boolean;
 }
 
 interface IRender<P = PlainObject, E = unknown> {

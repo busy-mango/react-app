@@ -18,6 +18,7 @@ __snapshots__/
 *tmp
 
 run
+doc_build
 .DS_Store
 .eslintcache
 npm-debug.log

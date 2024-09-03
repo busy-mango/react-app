@@ -17,7 +17,7 @@ import {
 } from '@/hooks';
 import { iPressEvent, isIOS, sizeOf } from '@/utils';
 
-import { useControlPatternAssert, useControlState } from '../control';
+import { useControlState, usePatternAssert } from '../control';
 import { iTextSize } from './helpers';
 import type { IInputProps, IInputRef } from './models';
 
@@ -43,7 +43,7 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
 
     const shadow = useRef<HTMLInputElement>(null);
 
-    const assert = useControlPatternAssert(pattern);
+    const assert = usePatternAssert(pattern);
 
     const { isReadOnly, isDisabled, isReadPretty } = assert;
 

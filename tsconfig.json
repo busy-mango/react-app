@@ -61,7 +61,11 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
   },
+  "mdx": {
+    "checkMdx": true
+  },
   "include": [
+    "docs/**/*",
     "scripts/**/*",
     "config/**/*",
     "helpers/**/*",
@@ -70,6 +74,7 @@
     "types/**/*",
     "utils/**/*",
     "global.d.ts",
+    "rspress.config.ts",
     "config/compiler/.develop.ts"
   ]
 }

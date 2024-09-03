@@ -16,6 +16,7 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
       wrap,
       align,
       style,
+      inline,
       justify,
       reverse,
       children,
@@ -41,6 +42,7 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
         className={classNames(
           styles.wrap,
           reverse && styles.reverse,
+          isTrue(inline) && styles.inline,
           isTrue(vertical) && styles.vertical,
           isFalse(vertical) && styles.horizontal,
           className

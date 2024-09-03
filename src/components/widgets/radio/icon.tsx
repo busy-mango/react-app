@@ -24,10 +24,11 @@ export const ICheckedSVG: React.FC<{
     <AnimatePresence>
       {checked && (
         <motion.circle
-          key="circle"
+          animate={{ r: 360 }}
           cx={512}
           cy={512}
-          r={360}
+          exit={{ r: 0 }}
+          initial={{ r: 0 }}
           transition={transition}
         />
       )}

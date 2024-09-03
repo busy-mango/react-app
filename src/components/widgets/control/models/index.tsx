@@ -30,6 +30,7 @@ export type ControlOption = {
   value: React.Key;
   title?: string;
   label?: React.ReactNode;
+  disabled?: boolean;
 };
 
 export interface InteractionProps {

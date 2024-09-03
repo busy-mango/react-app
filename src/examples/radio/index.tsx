@@ -1,5 +1,12 @@
 import type { ControlOption } from '@/components';
-import { IRadioGroup, ISafeArea } from '@/components';
+import {
+  IFieldCell,
+  IFieldGrid,
+  IFlex,
+  IFormWrap,
+  IRadioGroup,
+  ISafeArea,
+} from '@/components';
 
 const options: ControlOption[] = [
   { value: 1, label: '选项1' },
@@ -14,9 +21,15 @@ const options: ControlOption[] = [
 const NormalRadio: React.FC = () => {
   return (
     <ISafeArea>
-      <form>
-        <IRadioGroup options={options} />
-      </form>
+      <IFormWrap>
+        <IFieldGrid mode="horizontal">
+          <IFieldCell title="RadioGroup">
+            <IFlex wrap gap={8}>
+              <IRadioGroup options={options} />
+            </IFlex>
+          </IFieldCell>
+        </IFieldGrid>
+      </IFormWrap>
     </ISafeArea>
   );
 };

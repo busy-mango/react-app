@@ -1,6 +1,13 @@
 .wrap {
-  display: flex;
   flex-direction: unset;
+
+  &.inline {
+    display: inline-flex;
+  }
+
+  &:not(.inline) {
+    display: flex;
+  }
 
   &.reverse {
     &.vertical {

@@ -40,13 +40,13 @@ const iRadioRender: IRadioRender = ({ input, ...others }, { checked }) => (
 
 const iInputRender: IRadioInputRender = (
   { ref, ...props },
-  { checked, pattern, value }
+  { checked, disabled, readOnly, value }
 ) => (
   <Fragment>
     <input
       ref={ref}
-      disabled={pattern === 'disabled'}
-      readOnly={pattern.startsWith('read')}
+      disabled={disabled}
+      readOnly={readOnly}
       type="radio"
       value={isBigInt(value) ? value.toLocaleString() : (value ?? undefined)}
       {...props}
@@ -74,8 +74,9 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
       checked,
       defaultChecked,
       direction = 'horizontal',
-      pattern = 'editable',
       variant = 'bordered',
+      disabled = false,
+      readOnly = false,
       size = 'medium',
       id: _id,
       onChange,
@@ -99,7 +100,8 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
       size,
       value,
       variant,
-      pattern,
+      readOnly,
+      disabled,
       direction,
       checked: iChecked,
     };

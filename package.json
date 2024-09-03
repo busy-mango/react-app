@@ -5,6 +5,9 @@
   "main": "src/app.tsx",
   "type": "module",
   "scripts": {
+    "docs:dev": "rspress dev",
+    "docs:build": "rspress build",
+    "docs:preview": "rspress preview",
     "dev": "tsx watch ./scripts/@dev.server.ts",
     "caniuse": "tsx ./scripts/@caniuse.ts",
     "build": "pnpm caniuse && tsx ./scripts/@build.ts",
@@ -52,6 +55,7 @@
     "fork-ts-checker-webpack-plugin": "^9.0.2",
     "prettier": "^3.3.3",
     "react-refresh": "^0.14.2",
+    "rspress": "^1.28.3",
     "sass-embedded": "^1.77.8",
     "sass-loader": "^16.0.0",
     "tsx": "^4.16.3",
