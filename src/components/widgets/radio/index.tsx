@@ -140,3 +140,11 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
     );
   }
 );
+
+export type {
+  IRadioInputRender,
+  IRadioProps,
+  IRadioRef,
+  IRadioRender,
+  IRadioRootRender,
+} from './models';

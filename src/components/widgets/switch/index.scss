@@ -1,0 +1,83 @@
+.icon {
+  z-index: -1;
+  padding: 0.125em;
+  pointer-events: none;
+  border-radius: inherit;
+  border: 1px solid currentColor;
+
+  &.checked {
+    color: rgb(var(--main-color) / 1);
+  }
+}
+
+.input {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  cursor: pointer;
+  position: absolute;
+
+  z-index: 1;
+  opacity: 0;
+}
+
+.checkbox {
+  position: relative;
+  pointer-events: initial;
+  border-radius: var(--border-radius-2);
+}
+
+.label {
+  display: inline-flex;
+  margin: 0 var(--gap-3);
+}
+
+.root {
+  display: inline-flex;
+  color: rgb(var(--main-color) / 1);
+
+  &.overlay {
+    position: initial;
+  }
+
+  &:not(.overlay) {
+    position: relative;
+  }
+
+  &.mini {
+    & ~ * {
+      gap: calc(var(--control-size-2) / 2);
+      font-size: var(--font-size-3);
+    }
+  }
+
+  &.medium {
+    line-height: var(--font-size-3);
+    & ~ * {
+      gap: calc(var(--control-size-4) * 0.625);
+      font-size: var(--font-size-3);
+    }
+  }
+
+  &.huge {
+    & ~ * {
+      gap: calc(var(--control-size-6) * 0.75);
+      font-size: var(--font-size-3);
+    }
+  }
+
+  &.disabled {
+    color: rgb(var(--font-color-b8) / 1);
+  }
+
+  &.checked,
+  &.focus,
+  &.variant,
+  &.indeterminate {
+    font-family: inherit;
+  }
+}
