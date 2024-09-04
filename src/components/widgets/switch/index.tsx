@@ -1,15 +1,11 @@
-import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import type { Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 import { useControlState } from '../control';
-import { ISignLine } from '../sign';
-import { ISVGWrap } from '../svg-wrap';
 import type {
-  ISwitchIconRender,
   ISwitchInputRender,
-  ISwitchLabelRender,
   ISwitchProps,
   ISwitchRef,
   ISwitchRootRender,
@@ -18,56 +14,44 @@ import type {
 import * as styles from './index.scss';
 
 const spring: Transition = {
+  damping: 30,
   type: 'spring',
   stiffness: 700,
-  damping: 30,
+};
+
+const isInputElement = (target: unknown): target is HTMLInputElement =>
+  target instanceof HTMLInputElement;
+
+const onCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const { target } = event ?? {};
+  if (isInputElement(target)) return target.checked;
 };
 
 const iRootRender: ISwitchRootRender = ({ input, icon, label, className }) => (
   <span data-ui-switchroot className={className}>
-    <motion.div layout className="handle" transition={spring}>
+    <motion.div layout className={styles.label} transition={spring}>
+      {label}
+    </motion.div>
+    <motion.div layout className={styles.handle} transition={spring}>
       {icon}
     </motion.div>
-    {label}
     {input}
   </span>
 );
 
-const iIconRender: ISwitchIconRender = ({ checked, pattren }) => {
-  const type = (function () {
-    if (checked) return 'tick';
-  })();
-
-  return (
-    <ISVGWrap
-      className={classNames(styles.icon, {
-        [styles.checked]: checked,
-      })}
-    >
-      <ISignLine type={type} />
-    </ISVGWrap>
-  );
-};
-
-const iLabelRender: ISwitchLabelRender = ({ children }) => (
-  <Fragment>{children}</Fragment>
-);
-
 const iInputRender: ISwitchInputRender = (
   { ref, value, ...props },
-  { checked }
+  { checked, pattren }
 ) => (
-  <Fragment>
-    <input
-      ref={ref}
-      checked={checked}
-      type="checkbox"
-      value={value?.toString()}
-      // disabled={pattren === 'disabled'}
-      // readOnly={pattren === 'readOnly'}
-      {...props}
-    />
-  </Fragment>
+  <input
+    ref={ref}
+    checked={checked}
+    disabled={pattren === 'disabled'}
+    readOnly={pattren === 'readOnly' || pattren === 'readPretty'}
+    type="checkbox"
+    value={value?.toString()}
+    {...props}
+  />
 );
 
 export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
@@ -95,6 +79,7 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
     }));
 
     const [iChecked = false, iChange] = useControlState({
+      onCatch,
       onChange,
       value: checked,
       defaultValue: defaultChecked,
@@ -111,8 +96,12 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
     return (render?.root ?? iRootRender)(
       {
         ref: root,
-        className: classNames(styles.root, styles[size]),
-        label: (render?.label ?? iLabelRender)({}, states),
+        className: classNames(
+          styles.root,
+          styles[size],
+          iChecked && styles.checked
+        ),
+        label: render?.label?.({}, states),
         input: (render?.input ?? iInputRender)(
           {
             ref: input,
@@ -122,7 +111,7 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
           },
           states
         ),
-        icon: (render?.icon ?? iIconRender)?.({ className: '' }, states),
+        icon: render?.icon?.({}, states),
       },
       states
     );

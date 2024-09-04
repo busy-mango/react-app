@@ -1,15 +1,3 @@
-.icon {
-  z-index: -1;
-  padding: 0.125em;
-  pointer-events: none;
-  border-radius: inherit;
-  border: 1px solid currentColor;
-
-  &.checked {
-    color: rgb(var(--main-color) / 1);
-  }
-}
-
 .input {
   top: 0;
   left: 0;
@@ -19,65 +7,95 @@
   height: 100%;
 
   cursor: pointer;
-  position: absolute;
 
   z-index: 1;
   opacity: 0;
 }
 
-.checkbox {
-  position: relative;
-  pointer-events: initial;
-  border-radius: var(--border-radius-2);
+.label {
+  flex-basis: 1;
+  font-size: inherit;
 }
 
-.label {
-  display: inline-flex;
-  margin: 0 var(--gap-3);
+.handle {
+  z-index: 0;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  background-color: rgb(var(--comp-bg-color) / 1);
 }
 
 .root {
-  display: inline-flex;
-  color: rgb(var(--main-color) / 1);
+  position: relative;
 
-  &.overlay {
-    position: initial;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  color: rgb(var(--main-color) / 1);
+  background-color: rgb(var(--main-color) / 1);
+
+  &.checked {
+    flex-direction: row-reverse;
   }
 
-  &:not(.overlay) {
-    position: relative;
+  &:not(.checked) {
+    flex-direction: row;
   }
 
   &.mini {
-    & ~ * {
-      gap: calc(var(--control-size-2) / 2);
+    padding: var(--gap-1);
+    height: var(--control-size-2);
+
+    --iswitch-size: calc(var(--control-size-2) - var(--gap-1) * 2);
+
+    & > .label {
       font-size: var(--font-size-3);
     }
   }
 
   &.medium {
-    line-height: var(--font-size-3);
-    & ~ * {
-      gap: calc(var(--control-size-4) * 0.625);
-      font-size: var(--font-size-3);
+    padding: calc(var(--gap-1) * 1.5);
+    height: var(--control-size-4);
+
+    --iswitch-size: calc(var(--control-size-4) - var(--gap-1) * 3);
+
+    & > .label {
+      font-size: var(--font-size-4);
     }
   }
 
   &.huge {
-    & ~ * {
-      gap: calc(var(--control-size-6) * 0.75);
-      font-size: var(--font-size-3);
+    padding: var(--gap-2);
+    height: var(--control-size-5);
+
+    --iswitch-size: calc(var(--control-size-5) - var(--gap-2) * 2);
+
+    & > .label {
+      font-size: var(--font-size-6);
     }
+  }
+
+  & {
+    border-radius: var(--iswitch-size);
+  }
+
+  & > .label {
+    height: var(--iswitch-size);
+    min-width: var(--iswitch-size);
+  }
+
+  & > .handle {
+    width: var(--iswitch-size);
+    height: var(--iswitch-size);
   }
 
   &.disabled {
     color: rgb(var(--font-color-b8) / 1);
   }
 
-  &.checked,
-  &.focus,
-  &.variant,
-  &.indeterminate {
-    font-family: inherit;
+  & > .input {
+    position: absolute;
   }
 }
