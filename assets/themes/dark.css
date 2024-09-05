@@ -1,0 +1,202 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+#root.bright {
+  --font-color-2: rgba(255, 255, 255, 0.25);
+  --font-color-4: rgba(255, 255, 255, 0.45);
+  --font-color-8: rgba(255, 255, 255, 0.85);
+  --font-color-b8: rgba(0, 0, 0, 0.85);
+
+  --z-index-popup: 1000;
+  --z-index-dropdown: 999;
+  --z-index-affix: 999;
+  --z-index-modal: 1001;
+  --z-index-drawer: 1001;
+  --z-index-tip: 999;
+  --z-index-toast: 1003;
+  --z-index-notification: 1003;
+  --z-index-preview: 1003;
+  --z-index-badge: auto;
+  --z-index-fixed: 990;
+
+  --box-shadow-opacity: 0.04;
+
+  --box-shadow-color: 0 0 0;
+  --box-shadow-color-hex: #000000;
+
+  --tip-bg-color: 0 0 0;
+  --tip-bg-color-hex: #000000;
+
+  --hover-bg-color: 29 33 41;
+  --hover-bg-color-hex: #1d2129;
+
+  --chip-bg-color: 242 243 245;
+  --chip-bg-color-hex: #f2f3f5;
+
+  /* 背景色 */
+  --main-bg-color: 243 247 255;
+  --comp-bg-color-hex: #F3F7FF;
+
+  --comp-bg-color: 255 255 255;
+  --comp-bg-color-hex: #ffffff;
+
+  --page-bg-color: 242 243 245;
+  --page-bg-color-hex: #f2f3f5;
+
+  --warn-color: 255 193 7;
+  --warn-color-hex: #FFC107;
+
+  --error-color: 245 66 77;
+  --error-color-hex: #f5424d;
+
+  --border-color: 229 230 235;
+  --border-color-hex: #e5e6eb;
+
+  --wave-color: 144 77 255;
+  --wave-color-hex: #904dff;
+
+  --main-color: 31 100 231;
+  /* 75A4FE E8F0FE */
+  --main-color-hex: #1F64E7;
+}
+
+#root.bright {
+  color: var(--font-color-8);
+  font-size: var(--font-size-4);
+}
+
+/* PC Web */
+@media screen and (min-width: 1360px) {
+  #root {
+    height: 100dvh;
+  }
+
+  #root {
+    --gap-1: 2px;
+    --gap-2: 4px;
+    --gap-3: 8px;
+    --gap-4: 10px;
+    --gap-5: 12px;
+    --gap-6: 16px;
+    --gap-7: 20px;
+    --gap-8: 24px;
+    --gap-9: 36px;
+    --gap-10: 48px;
+
+    --font-size-1: 8px;
+    --font-size-2: 10px;
+    --font-size-3: 12px;
+    --font-size-4: 14px;
+    --font-size-5: 15px;
+    --font-size-6: 16px;
+    --font-size-8: 20px;
+    --font-size-9: 24px;
+    --font-size-10: 28px;
+
+    --control-size-1: 14px;
+    --control-size-2: 16px;
+    --control-size-3: 20px;
+    --control-size-4: 24px;
+    --control-size-5: 28px;
+    --control-size-6: 32px;
+    --control-size-7: 40px;
+    --control-size-8: 48px;
+
+    --border-radius-2: 4px;
+    --border-radius-3: 6px;
+    --border-radius-6: 12px;
+  }
+}
+
+/* iPad */
+@media screen and (min-width: 430px) and (max-width: 1360px) {
+  #root {
+    height: 100dvh;
+  }
+
+  #root {
+    --gap-1: 2px;
+    --gap-2: 4px;
+    --gap-3: 8px;
+    --gap-4: 10px;
+    --gap-5: 12px;
+    --gap-6: 16px;
+    --gap-7: 20px;
+    --gap-8: 24px;
+    --gap-9: 36px;
+    --gap-10: 48px;
+
+    --font-size-1: 8px;
+    --font-size-2: 10px;
+    --font-size-3: 12px;
+    --font-size-4: 14px;
+    --font-size-5: 15px;
+    --font-size-6: 16px;
+    --font-size-8: 20px;
+    --font-size-9: 24px;
+    --font-size-10: 28px;
+
+    --control-size-1: 14px;
+    --control-size-2: 16px;
+    --control-size-3: 20px;
+    --control-size-4: 24px;
+    --control-size-5: 28px;
+    --control-size-6: 32px;
+    --control-size-7: 40px;
+    --control-size-8: 48px;
+
+    --border-radius-2: 4px;
+    --border-radius-3: 6px;
+    --border-radius-6: 12px;
+  }
+}
+
+/* iPhone */
+@media screen and (max-width: 430px) {
+  #root {
+    height: 100dvh;
+  }
+
+  #root {
+    --gap-1: calc(2vw / 3.75);
+    --gap-2: calc(4vw / 3.75);
+    --gap-3: calc(8vw / 3.75);
+    --gap-4: calc(10vw / 3.75);
+    --gap-5: calc(12vw / 3.75);
+    --gap-6: calc(16vw / 3.75);
+    --gap-7: calc(20vw / 3.75);
+    --gap-8: calc(24vw / 3.75);
+    --gap-9: calc(36vw / 3.75);
+    --gap-10: calc(48vw / 3.75);
+
+    --font-size-1: calc(8vw / 3.75);
+    --font-size-2: calc(10vw / 3.75);
+    --font-size-3: calc(12vw / 3.75);
+    --font-size-4: calc(14vw / 3.75);
+    --font-size-5: calc(15vw / 3.75);
+    --font-size-6: calc(16vw / 3.75);
+    --font-size-8: calc(20vw / 3.75);
+    --font-size-9: calc(24vw / 3.75);
+    --font-size-10: calc(28vw / 3.75);
+
+    --control-size-1: calc(14vw / 3.75);
+    --control-size-2: calc(16vw / 3.75);
+    --control-size-3: calc(20vw / 3.75);
+    --control-size-4: calc(24vw / 3.75);
+    --control-size-5: calc(28vw / 3.75);
+    --control-size-6: calc(32vw / 3.75);
+    --control-size-7: calc(40vw / 3.75);
+    --control-size-8: calc(48vw / 3.75);
+
+    --border-radius-2: calc(4vw / 3.75);
+    --border-radius-3: calc(6vw / 3.75);
+    --border-radius-6: calc(12vw / 3.75);
+  }
+}

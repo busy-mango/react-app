@@ -3,9 +3,7 @@
 // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
 // └─────────────────────────────────────────────────────────────────────┘
 
-import type { FocusEventHandler } from 'react';
-
-import type { OmitOf } from '@busymango/utils';
+import type { PlainObject } from '@busymango/is-esm';
 
 import type { WrapperProps } from '@/models';
 
@@ -13,6 +11,7 @@ import type {
   ControlPattern,
   ControlUISize,
   ControlUIStatus,
+  ControlValue,
 } from '../../control';
 
 interface CheckboxStatus {
@@ -48,65 +47,50 @@ interface CheckboxStatus {
   pattren: ControlPattern;
 }
 
-export interface SlotRender<T = unknown> {
-  (props: T & CheckboxStatus & { className?: string }): React.ReactNode;
+interface IRender<P = PlainObject, E = unknown> {
+  (props: P, state: CheckboxStatus & E): React.ReactNode;
 }
 
-export type ICheckBoxRender = SlotRender<{
-  input?: React.ReactNode;
-  icon?: React.ReactNode;
-}>;
+export interface ICheckboxRef {
+  root?: HTMLDivElement;
+  input?: HTMLInputElement;
+}
 
-export type CheckRootRender = SlotRender<{
-  ref: React.RefObject<HTMLDivElement>;
-  checkbox?: React.ReactNode;
-  chilren?: React.ReactNode;
-}>;
+export interface ICheckboxInputProps extends WrapperProps<HTMLInputElement> {
+  /**
+   * The `name` attribute of the input.
+   */
+  name?: string;
+  /**
+   * The value of the component. The DOM API casts this to a string.
+   * The browser uses "on" as the default value.
+   */
+  value?: ControlValue;
+}
 
-export type CheckInputRender = SlotRender<
+export type ICheckRootRender = IRender<
+  {
+    label: React.ReactNode;
+    checkbox: React.ReactNode;
+    ref: React.RefObject<HTMLDivElement>;
+  } & WrapperProps
+>;
+
+export type ICheckBoxRender = IRender<
+  {
+    icon?: React.ReactNode;
+    input?: React.ReactNode;
+  } & WrapperProps
+>;
+
+export type ICheckInputRender = IRender<
   ICheckboxInputProps & {
     wave?: boolean;
     ref: React.RefObject<HTMLInputElement>;
   }
 >;
 
-export interface IconRender {
-  (status: CheckboxStatus): React.ReactNode;
-}
-
-export interface CheckboxRef {
-  root?: HTMLDivElement;
-  input?: HTMLInputElement;
-}
-
-export interface ICheckboxInputProps
-  extends OmitOf<WrapperProps<HTMLInputElement>, 'onChange'> {
-  /**
-   * The `name` attribute of the input.
-   */
-  name?: string;
-  /**
-   * Callback fired when the state is changed.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement>} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.value` (string).
-   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
-   */
-  onChange?: (value?: boolean) => void;
-  // /**
-  //  * @ignore
-  //  */
-  onFocus?: FocusEventHandler<HTMLInputElement>;
-  // /**
-  //  * @ignore
-  //  */
-  onBlur?: FocusEventHandler<HTMLInputElement>;
-  /**
-   * The value of the component. The DOM API casts this to a string.
-   * The browser uses "on" as the default value.
-   */
-  value?: string[] | string | number;
-}
+export type ICheckIconRender = IRender<WrapperProps>;
 
 export interface ICheckboxProps
   extends ICheckboxInputProps,
@@ -116,12 +100,6 @@ export interface ICheckboxProps
    */
   defaultChecked?: boolean;
   /**
-   * The icon to display when the component is `checked`.
-   * The icon to display when the component is indeterminate.
-   * The checked icon is removed and the selected variant is applied on the `action` element instead.
-   */
-  icon?: IconRender;
-  /**
    * If false, the ripple effect is disabled.
    */
   wave?: boolean;
@@ -130,8 +108,14 @@ export interface ICheckboxProps
    * @default {}
    */
   render?: {
+    /**
+     * The icon to display when the component is `checked`.
+     * The icon to display when the component is indeterminate.
+     * The checked icon is removed and the selected variant is applied on the `action` element instead.
+     */
+    icon?: ICheckIconRender;
+    root?: ICheckRootRender;
+    input?: ICheckInputRender;
     checkbox?: ICheckBoxRender;
-    input?: CheckInputRender;
-    root?: CheckRootRender;
   };
 }

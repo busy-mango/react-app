@@ -7,40 +7,25 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
+import { isInputElement } from '@/utils';
+
 import { useControlState } from '../control';
 import { IFlex } from '../flex';
 import { ISignLine } from '../sign';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import type {
-  CheckboxRef,
-  CheckInputRender,
-  CheckRootRender,
   ICheckboxProps,
+  ICheckboxRef,
   ICheckBoxRender,
-  IconRender,
+  ICheckIconRender,
+  ICheckInputRender,
+  ICheckRootRender,
 } from './models';
 
 import * as styles from './index.scss';
 
-const iIconRender: IconRender = ({ checked, pattren, indeterminate }) => {
-  const type = (function () {
-    if (indeterminate) return 'minus';
-    if (checked) return 'tick';
-  })();
-
-  return (
-    <ISVGWrap
-      className={classNames(styles.icon, {
-        [styles.checked]: checked,
-      })}
-    >
-      <ISignLine type={type} />
-    </ISVGWrap>
-  );
-};
-
-const iRootRender: CheckRootRender = ({ label, checkbox, className }) => (
+const iRootRender: ICheckRootRender = ({ label, checkbox, className }) => (
   <span data-ui-checkroot className={className}>
     {checkbox}
     <IFlex centered className={styles.label}>
@@ -56,18 +41,17 @@ const iCheckboxRender: ICheckBoxRender = ({ className, input, icon }) => (
   </span>
 );
 
-const iInputRender: CheckInputRender = ({
-  ref,
-  wave,
-  size: _size,
-  status: _status,
-  overlay: _overlay,
-  variant: _variant,
-  indeterminate,
-  pattren,
-  onChange,
-  ...others
-}) => (
+const iInputRender: ICheckInputRender = (
+  { ref, wave, value, ...others },
+  {
+    size: _size,
+    status: _status,
+    overlay: _overlay,
+    variant: _variant,
+    indeterminate,
+    pattren,
+  }
+) => (
   <Fragment>
     {wave && <IWave target={ref} />}
     <input
@@ -77,15 +61,34 @@ const iInputRender: CheckInputRender = ({
       disabled={pattren === 'disabled'}
       readOnly={pattren === 'readOnly'}
       type="checkbox"
-      onChange={({ target }) => {
-        onChange?.(target.checked);
-      }}
+      value={value?.toLocaleString()}
       {...others}
     />
   </Fragment>
 );
 
-export const ICheckbox = forwardRef<CheckboxRef, ICheckboxProps>(
+const iIconRender: ICheckIconRender = (
+  { className },
+  { checked, indeterminate }
+) => {
+  const type = (function () {
+    if (indeterminate) return 'minus';
+    if (checked) return 'tick';
+  })();
+
+  return (
+    <ISVGWrap className={className}>
+      <ISignLine type={type} />
+    </ISVGWrap>
+  );
+};
+
+const onCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const { target } = event ?? {};
+  if (isInputElement(target)) return target.checked;
+};
+
+export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
   function Checkbox(props, ref) {
     const {
       label,
@@ -101,7 +104,6 @@ export const ICheckbox = forwardRef<CheckboxRef, ICheckboxProps>(
       overlay = false,
       wave = true,
       onChange,
-      icon,
       ...others
     } = props;
 
@@ -115,6 +117,7 @@ export const ICheckbox = forwardRef<CheckboxRef, ICheckboxProps>(
     }));
 
     const [iChecked = false, iChange] = useControlState({
+      onCatch,
       onChange,
       value: checked,
       defaultValue: defaultChecked,
@@ -134,25 +137,43 @@ export const ICheckbox = forwardRef<CheckboxRef, ICheckboxProps>(
       [iChecked, indeterminate, variant, size, overlay, status, pattren, label]
     );
 
-    return (render?.root ?? iRootRender)({
-      ref: root,
-      ...states,
-      className: classNames(styles.root, styles[size]),
-      checkbox: (render?.checkbox ?? iCheckboxRender)({
-        ...states,
-        className: styles.checkbox,
-        input: (render?.input ?? iInputRender)({
-          wave,
-          ...others,
-          ...states,
-          ref: input,
-          onChange: iChange,
-          className: classNames(styles.input, className),
-        }),
-        icon: (icon ?? iIconRender)(states),
-      }),
-    });
+    return (render?.root ?? iRootRender)(
+      {
+        ref: root,
+        label: label,
+        className: classNames(styles.root, styles[size]),
+        checkbox: (render?.checkbox ?? iCheckboxRender)(
+          {
+            className: styles.checkbox,
+            input: (render?.input ?? iInputRender)(
+              {
+                wave,
+                ref: input,
+                onChange: iChange,
+                className: classNames(styles.input, className),
+                ...others,
+              },
+              states
+            ),
+            icon: (render?.icon ?? iIconRender)(
+              {
+                className: classNames(styles.icon, {
+                  [styles.checked]: checked,
+                }),
+              },
+              states
+            ),
+          },
+          states
+        ),
+      },
+      states
+    );
   }
 );
 
-export type { ICheckboxProps, ICheckBoxRender, IconRender } from './models';
+export type {
+  ICheckboxProps,
+  ICheckBoxRender,
+  ICheckIconRender,
+} from './models';

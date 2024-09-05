@@ -7,11 +7,8 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { t } from 'i18next';
 
-import { Configure } from '@/configure';
 import { container, i18nInit } from '@/init';
 
-import { caniuse } from './caniuse';
-import { IRoutes } from './routes';
 import { catchMsg } from './utils';
 
 import '@/styles/normalize.css';
@@ -23,6 +20,12 @@ const { userAgent } = window.navigator;
 
 try {
   await i18nInit();
+
+  const { IRoutes } = await import('./routes');
+
+  const { caniuse } = await import('./caniuse');
+
+  const { Configure } = await import('@/configure');
 
   if (!caniuse.test(userAgent)) {
     throw new Error(t('common:Browser version incompatibility'));

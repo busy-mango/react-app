@@ -28,6 +28,7 @@
     "@rspack/core": "1.0.0",
     "@rspack/dev-server": "1.0.0",
     "@rspack/plugin-react-refresh": "1.0.0",
+    "@rspress/plugin-preview": "^1.28.3",
     "@svgr/plugin-jsx": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
@@ -60,6 +61,7 @@
     "sass-loader": "^16.0.0",
     "tsx": "^4.16.3",
     "typescript": "^5.5.4",
+    "typescript-plugin-css-modules": "^5.1.0",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {

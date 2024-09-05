@@ -7,10 +7,9 @@ import dayjs from 'dayjs';
 import type { InitOptions } from 'i18next';
 import i18n, { t } from 'i18next';
 
-import { isNonEmptyString } from '@busymango/is-esm';
-import { dom } from '@busymango/utils';
+import { isHTMLElement, isString } from '@busymango/is-esm';
+import { dom, ifnot, omit } from '@busymango/utils';
 
-import { i18nResourcesLoad } from './plugins';
 import { iThemeDefault } from './utils';
 
 import 'dayjs/locale/zh-cn';
@@ -36,6 +35,10 @@ export const enum AppEnv {
 
 const meta = document.querySelector<HTMLMetaElement>('meta[name="version"]');
 
+export const domain = process.env.SERVER_DOMAIN ?? '';
+
+export const prefix = process.env.SERVER_PREFIX ?? '';
+
 /** 环境变量 */
 export const env = {
   /** 环境 */
@@ -47,28 +50,27 @@ export const env = {
 };
 
 /** 检查环境变量是否填写 */
-Object.values(env).forEach((val) => {
-  if (!isNonEmptyString(val)) {
-    throw new Error(t('common:Environment variables not found'));
+Object.entries(omit(env, ['version'])).forEach(([key, val]) => {
+  if (!isString(val)) {
+    console.error(t('common:Environment variables not found'));
   }
 });
 
+const existing = document.querySelector(`#${env.root}`);
+
+const attrs = { id: env.root, classNames: iThemeDefault() };
+
 /** 创建应用容器 */
-export const container = dom.create(
-  'div',
-  {
-    id: env.root,
-    class: iThemeDefault(),
-  },
-  document.body
-);
+export const container =
+  ifnot(isHTMLElement(existing) && existing) ??
+  dom.create('div', attrs, document.body);
 
-export const domain = process.env.SERVER_DOMAIN ?? '';
-
-export const prefix = process.env.SERVER_PREFIX ?? '';
+container.classList.add(iThemeDefault());
 
 export const i18nInit = async () => {
   const ns: InitOptions['ns'] = ['common'];
+
+  const { i18nResourcesLoad } = await import('./plugins');
 
   const supportedLngs: InitOptions['supportedLngs'] = ['zh-CN', 'en-US'];
 

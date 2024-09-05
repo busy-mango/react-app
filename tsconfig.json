@@ -65,7 +65,6 @@
     "checkMdx": true
   },
   "include": [
-    "docs/**/*",
     "scripts/**/*",
     "config/**/*",
     "helpers/**/*",

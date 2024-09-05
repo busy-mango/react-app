@@ -1,14 +1,12 @@
-import classNames from 'classnames';
 import type { SVGMotionProps, Target } from 'framer-motion';
 import { motion } from 'framer-motion';
-
-import * as styles from './index.scss';
 
 export interface IClipSpinnerProps extends SVGMotionProps<SVGSVGElement> {
   animate?: Target;
 }
 
 export const IClipSpinner: React.FC<IClipSpinnerProps> = ({
+  style,
   animate,
   className,
   ...others
@@ -23,10 +21,14 @@ export const IClipSpinner: React.FC<IClipSpinnerProps> = ({
         ease: 'linear',
       },
     }}
-    className={classNames(styles.icon, className?.toString())}
+    className={className}
     exit={{ x: 0, y: 0 }}
+    height="1em"
     initial={{ x: 0, y: 0 }}
+    stroke="currentColor"
+    style={{ lineHeight: '1em', ...style }}
     viewBox={'22 22 44 44'}
+    width="1em"
     {...others}
   >
     <motion.circle
@@ -39,7 +41,6 @@ export const IClipSpinner: React.FC<IClipSpinnerProps> = ({
           ease: 'easeInOut',
         },
       }}
-      className={styles.icon}
       cx={44}
       cy={44}
       fill={'none'}

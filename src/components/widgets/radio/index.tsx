@@ -9,6 +9,8 @@ import classNames from 'classnames';
 
 import { isBigInt } from '@busymango/is-esm';
 
+import { isInputElement } from '@/utils';
+
 import { useControlState } from '../control';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
@@ -55,9 +57,6 @@ const iInputRender: IRadioInputRender = (
     <IWave className={styles.wave} target={ref} />
   </Fragment>
 );
-
-const isInputElement = (target: unknown): target is HTMLInputElement =>
-  target instanceof HTMLInputElement;
 
 const onCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
   const { target } = event ?? {};

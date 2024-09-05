@@ -44,7 +44,7 @@ const config: Configuration = {
   module: {
     parser: {
       'css/module': {
-        namedExports: false,
+        namedExports: true,
       },
     },
     generator: {

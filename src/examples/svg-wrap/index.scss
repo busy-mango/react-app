@@ -1,0 +1,22 @@
+.wrap {
+  font-size: 40px;
+  line-height: 64px;
+  position: relative;
+  white-space: nowrap;
+
+  & > .vertical {
+    z-index: 1;
+    position: relative;
+
+    width: 100%;
+    display: inline-block;
+    margin-right: -100%;
+
+    opacity: 0.64;
+    border-top: 1px dashed;
+  }
+
+  & > svg {
+    display: inline;
+  }
+}

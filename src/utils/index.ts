@@ -1,5 +1,6 @@
 export * from './algorithm.lcs';
 export * from './assert';
+export * from './assert.dom';
 export * from './catch';
 export * from './common';
 export * from './date';
