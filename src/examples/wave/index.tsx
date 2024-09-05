@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { IWave } from '@/components/widgets/wave';
+import { IWave } from '@/components';
 
 const App: React.FC = () => {
   const ref = useRef<HTMLAnchorElement>(null);

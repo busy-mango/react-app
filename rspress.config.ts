@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { join, resolve } from 'path';
+import { join, parse as iPathParse, resolve } from 'path';
 import { defineConfig } from 'rspress/config';
 
 import { assign } from '@busymango/utils';
@@ -7,6 +7,8 @@ import { parse } from '@dotenvx/dotenvx';
 import { pluginPreview } from '@rspress/plugin-preview';
 
 import { dir } from './config';
+
+iPathParse('D:WorkSpace\react-appsrccomponentswidgets\form-fieldindex.scss');
 
 const dotenv = assign<{
   THEME: string;
@@ -37,7 +39,7 @@ export default defineConfig({
         namedExport: true,
         exportGlobals: true,
         exportLocalsConvention: 'camelCaseOnly',
-        auto: (resource) => resource.includes('/src/'),
+        auto: (res) => res.includes('src') && res.endsWith('.scss'),
       },
     },
   },

@@ -25,4 +25,6 @@ export * from './sign';
 export * from './snackbar';
 export * from './spinners';
 export * from './svg-wrap';
+export * from './switch';
 export * from './textarea';
+export * from './wave';

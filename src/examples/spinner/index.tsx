@@ -1,4 +1,4 @@
-import { IClipSpinner } from '@/components/widgets/spinners';
+import { IClipSpinner } from '@/components';
 
 const App: React.FC = () => <IClipSpinner />;
 

@@ -5,7 +5,6 @@
 import { Trans, useTranslation } from 'react-i18next';
 
 import { IChip, IPicker, ISafeArea, snackbar } from '@/components';
-import { IHighLighter } from '@/components/widgets/high-lighter';
 import { useEffectOnce } from '@/hooks';
 
 import * as styles from './index.scss';
@@ -32,9 +31,6 @@ const Welcome: React.FC = () => {
 
   return (
     <ISafeArea className={styles.page}>
-      <span>
-        <IHighLighter content="abaabcadabacdabdd" keyword="abcd" mode="seq" />
-      </span>
       <IPicker
         columns={[
           [

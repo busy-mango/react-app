@@ -5,8 +5,7 @@ import { iArray, iSearchParams } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import type { ControlOption, IOptionRender } from '@/components';
-import { IOverflow, ISafeArea, ISelector } from '@/components';
-import { IChip } from '@/components/widgets/chip';
+import { IChip, IOverflow, ISafeArea, ISelector } from '@/components';
 import { useToggle } from '@/hooks';
 import { drive } from '@/service';
 import { iCompact } from '@/utils';
