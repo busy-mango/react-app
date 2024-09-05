@@ -1,68 +1,37 @@
-import { Fragment } from 'react';
+import { IFlex, ISignLine, ISVGWrap } from '@/components';
 
-import { ISignLine } from '@/components';
-import { ISVGWrap } from '@/components/widgets/svg-wrap';
-import type { ReactCFC } from '@/models';
+import { BaseLineWrap } from '../widgets';
 
-import * as styles from './index.scss';
-
-const verticals: React.CSSProperties['verticalAlign'][] = [
-  'top',
-  'text-top',
-  'cap',
-  'super',
-  'middle',
-  'baseline',
-  'text-bottom',
-  'bottom',
-];
-
-const color = [
-  '#D1A20D',
-  '#2499FF',
-  '#0DD153',
-  '#BD0DD1',
-  '#9210FF',
-  '#FF5C7D',
-  '#0DC5D1',
-  '#00EFD8',
-];
-
-const BaseLineWrap: ReactCFC = ({ children }) => (
-  <div className={styles.wrap}>
-    {verticals.map((key, index) => (
-      <span
-        key={key}
-        className={styles.vertical}
-        style={{
-          borderColor: color[index],
-          verticalAlign: key === 'cap' ? '0.7em' : key,
-        }}
-        {...{
-          [`data-vertical-${key}`]: '',
-        }}
-      />
-    ))}
-    {children}
-  </div>
-);
-
-const App: React.FC = () => {
-  return (
-    <Fragment>
-      <BaseLineWrap>
-        <ISVGWrap>
-          <ISignLine type="magnifier" />
-          <ISignLine type="dollar" />
-          <ISignLine type="tick" />
-        </ISVGWrap>
-        东西 Style X x m 南北
-        <ISignLine type="magnifier" />
-        <ISignLine type="dollar" />
+const App: React.FC = () => (
+  <IFlex vertical gap={16}>
+    <BaseLineWrap>
+      <ISignLine ring type="helper" />
+      帮助
+      <ISignLine type="helper" />
+      <ISVGWrap>
+        <ISignLine ring type="helper" />
+      </ISVGWrap>
+      帮助
+      <ISVGWrap>
+        <ISignLine type="helper" />
+      </ISVGWrap>
+    </BaseLineWrap>
+    <BaseLineWrap>
+      Tick Style <ISignLine type="tick" />
+      Tick Style
+      <ISVGWrap>
         <ISignLine type="tick" />
-      </BaseLineWrap>
-    </Fragment>
-  );
-};
+      </ISVGWrap>
+    </BaseLineWrap>
+    <BaseLineWrap>
+      100
+      <ISignLine type="dollar" />
+      100
+      <ISVGWrap>
+        <ISignLine type="dollar" />
+      </ISVGWrap>
+    </BaseLineWrap>
+  </IFlex>
+);
 
 export default App;

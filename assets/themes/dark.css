@@ -12,6 +12,7 @@
   --font-color-2: rgba(255, 255, 255, 0.25);
   --font-color-4: rgba(255, 255, 255, 0.45);
   --font-color-8: rgba(255, 255, 255, 0.85);
+  --font-color-10: rgba(255, 255, 255, 1);
   --font-color-b8: rgba(0, 0, 0, 0.85);
 
   --z-index-popup: 1000;
