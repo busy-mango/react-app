@@ -24,6 +24,7 @@
   "packageManager": "pnpm@9.4.0",
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.12.1",
+    "@rsbuild/plugin-svgr": "1.0.1-rc.4",
     "@rsdoctor/rspack-plugin": "^0.4.0",
     "@rspack/core": "1.0.0",
     "@rspack/dev-server": "1.0.0",

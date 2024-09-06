@@ -1,6 +1,5 @@
 import React, {
   forwardRef,
-  Fragment,
   useImperativeHandle,
   useLayoutEffect,
   useRef,
@@ -16,10 +15,10 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { useMemoFunc } from '@/hooks';
 import { iArray, iCompact, sizeOf } from '@/utils';
 
-import EmptySVG from '@/icons/business/empty.svg';
+import EmptySVG from '@/icons/business/empty.svg?react';
 
 import { IFlex } from '../flex';
-import { IClipSpinner } from '../spinners';
+import { ISuspense } from '../suspense';
 import { estimateSize } from './helpers';
 import type { ScrollableProps, ScrollableRef } from './models';
 
@@ -154,14 +153,10 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
         <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
         {isEmptyArray(items) && (
           <IFlex centered vertical className={styles.empty}>
-            {isLoading ? (
-              <IClipSpinner />
-            ) : (
-              <Fragment>
-                <EmptySVG className={styles.emptyIcon} />
-                <span className={styles.emptyText}>暂无数据</span>
-              </Fragment>
-            )}
+            <ISuspense isLoading={isLoading}>
+              <EmptySVG className={styles.emptyIcon} />
+              <span className={styles.emptyText}>暂无数据</span>
+            </ISuspense>
           </IFlex>
         )}
       </div>

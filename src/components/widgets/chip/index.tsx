@@ -9,7 +9,7 @@ import type { ReactCFC } from '@/models';
 import { iEscapeEvent, iPropagation } from '@/utils';
 
 import { ISignLine } from '../sign';
-import { IClipSpinner } from '../spinners';
+import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import type { IChipProps } from './models';
@@ -61,7 +61,7 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
       <AnimatePresence>
         {isLoading ? (
           <ISVGWrap className={styles.icon}>
-            <IClipSpinner />
+            <ISpinner />
           </ISVGWrap>
         ) : (
           icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>

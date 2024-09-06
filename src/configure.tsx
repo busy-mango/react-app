@@ -14,9 +14,9 @@ import {
 import {
   BoundaryFallbackPage,
   ISnackbarPortal,
+  ISuspense,
   QueryBoundary,
   ReactQueryDevtools,
-  SuspenseModule,
 } from '@/components';
 import { useAppAction, useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
@@ -67,7 +67,7 @@ export const Configure: ReactCFC = (props) => {
   return (
     <QueryClientProvider client={client}>
       <QueryBoundary fallback={<BoundaryFallbackPage />}>
-        <SuspenseModule>{children}</SuspenseModule>
+        <ISuspense>{children}</ISuspense>
       </QueryBoundary>
       <ISnackbarPortal />
       {ReactQueryDevtools && <ReactQueryDevtools />}

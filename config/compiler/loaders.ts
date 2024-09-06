@@ -28,7 +28,7 @@ export const SassRule: RuleSetRule = {
 
 export const SVGRule: RuleSetRule = {
   test: /\.svg$/i,
-  // issuer: /\.[jt]sx$/,
+  resourceQuery: /react/,
   use: [
     {
       loader: '@svgr/webpack',

@@ -1,5 +1,5 @@
-import { IClipSpinner } from '@/components';
+import { ISpinner } from '@/components';
 
-const App: React.FC = () => <IClipSpinner />;
+const App: React.FC = () => <ISpinner />;
 
 export default App;

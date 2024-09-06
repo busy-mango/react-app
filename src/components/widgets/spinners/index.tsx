@@ -1,11 +1,12 @@
+import React from 'react';
 import type { SVGMotionProps, Target } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-export interface IClipSpinnerProps extends SVGMotionProps<SVGSVGElement> {
+export interface ISpinnerProps extends SVGMotionProps<SVGSVGElement> {
   animate?: Target;
 }
 
-export const IClipSpinner: React.FC<IClipSpinnerProps> = ({
+export const ISpinner: React.FC<ISpinnerProps> = ({
   style,
   animate,
   className,

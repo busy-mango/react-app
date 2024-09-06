@@ -11,7 +11,7 @@ import { NotFound, Unknown } from '@/components/business';
 import { IButton } from '@/components/widgets';
 import { catchMsg, isNotFoundError } from '@/utils';
 
-import RefreshSVG from '@/icons/refresh.svg';
+import RefreshSVG from '@/icons/refresh.svg?react';
 
 import { useFallbackContext } from '../../hooks';
 

@@ -1,20 +1,6 @@
-# ISelector
+# Selector 选择器
 
 > Select components are used for collecting user provided information from a list of options.
-
-```tsx
-import { ISelector } from '@/components';
-
-const options = [
-  { value: 10, lable: 'Ten' },
-  { value: 20, lable: 'Twenty' },
-  { value: 30, lable: 'Thirty' },
-];
-
-function App() {
-  return <ISelector options={options} />;
-}
-```
 
 ## Usage
 
@@ -22,17 +8,7 @@ function App() {
 
 Menus are positioned under their emitting elements, unless they are close to the bottom of the viewport.
 
-```tsx
-const options = [
-  { value: 10, lable: 'Ten' },
-  { value: 20, lable: 'Twenty' },
-  { value: 30, lable: 'Thirty' },
-];
-
-function App() {
-  return <ISelector options={options} />;
-}
-```
+<code src='@/examples/selector/basic' />
 
 [![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fbasic.tsx&showConsole=true)
 
@@ -46,46 +22,13 @@ The component can handle multiple selections. It's enabled with the `multiple` p
 
 Like with the single selection, you can pull out the new value by accessing `value` in the `onChange` callback. It's always an array.
 
-```tsx
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-const options = names.map((value) => ({ value }));
-
-export default function MultipleSelect() {
-  const [age, setAge] = useState<React.Key>();
-
-  const onChange = function (value?: React.Key | React.Key[]) {
-    setAge(iCompact(iArray(value)));
-  };
-
-  return (
-    <form>
-      <ISelector
-        multiple
-        options={options}
-        separator=","
-        value={age}
-        onChange={onChange}
-      />
-    </form>
-  );
-}
-```
+<code src='@/examples/selector/multiple' />
 
 [![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fmultiple.tsx)
 
 #### Controlling the open state
+
+<code src='@/examples/selector/advanced' />
 
 ## API
 

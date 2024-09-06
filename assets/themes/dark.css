@@ -13,7 +13,7 @@
   --font-color-4: rgba(255, 255, 255, 0.45);
   --font-color-8: rgba(255, 255, 255, 0.85);
   --font-color-10: rgba(255, 255, 255, 1);
-  --font-color-b8: rgba(0, 0, 0, 0.85);
+  --font-color-b8: rgba(255, 255, 255, 1);
 
   --z-index-popup: 1000;
   --z-index-dropdown: 999;
@@ -43,10 +43,10 @@
 
   /* 背景色 */
   --main-bg-color: 243 247 255;
-  --comp-bg-color-hex: #F3F7FF;
+  --main-bg-color-hex: #F3F7FF;
 
-  --comp-bg-color: 255 255 255;
-  --comp-bg-color-hex: #ffffff;
+  --comp-bg-color: 3 0 20;
+  --comp-bg-color-hex: #99030014;
 
   --page-bg-color: 242 243 245;
   --page-bg-color-hex: #f2f3f5;
@@ -63,9 +63,12 @@
   --wave-color: 144 77 255;
   --wave-color-hex: #904dff;
 
-  --main-color: 31 100 231;
+  --main-color: 41 155 255;
   /* 75A4FE E8F0FE */
-  --main-color-hex: #1F64E7;
+  --main-color-hex: #299BFF;
+
+  --focus-color: 36 153 255;
+  --focus-color-hex: #2499FF;
 }
 
 #root.bright {

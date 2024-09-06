@@ -10,7 +10,7 @@ import { AppEnv, env } from '@/init';
 import type { ReactSvgProps } from '@/models';
 import { caseAsync, devtoolAsync } from '@/utils';
 
-import Picture from '@/icons/picture.svg';
+import Picture from '@/icons/picture.svg?react';
 
 import { useLazyComponent, useLazyIcon } from './hooks';
 

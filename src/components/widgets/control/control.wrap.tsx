@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEventState } from '@/hooks';
 
 import { useIFieldGridContext } from '../form-field/hooks';
-import { IClipSpinner } from '../spinners';
+import { ISpinner } from '../spinners';
 import { IWave } from '../wave';
 import type { IControlWrapProps } from './models';
 
@@ -74,7 +74,7 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
               })}
               onClick={onSuffixClick}
             >
-              {isLoading ? <IClipSpinner /> : suffix}
+              {isLoading ? <ISpinner /> : suffix}
             </motion.div>
           )}
         </AnimatePresence>

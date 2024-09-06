@@ -85,7 +85,9 @@
 
   color: rgb(var(--main-color));
 
-  &:hover {
+  &:hover,
+  &:focus-within {
+    border-color: rgb(var(--focus-color) / 1);
   }
 }
 

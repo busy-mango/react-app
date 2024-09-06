@@ -2,10 +2,15 @@ import { useMemo, useState } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
 import { iArray, iSearchParams } from '@busymango/utils';
-import { useQuery } from '@tanstack/react-query';
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
 
 import type { ControlOption, IOptionRender } from '@/components';
-import { IChip, IOverflow, ISafeArea, ISelector } from '@/components';
+import { IChip, IOverflow, ISelector } from '@/components';
 import { useToggle } from '@/hooks';
 import { drive } from '@/service';
 import { iCompact } from '@/utils';
@@ -24,6 +29,10 @@ const search = 'country=United+States';
 
 const queryFn = () => drive<UniversityModel[]>(api, iSearchParams(search));
 
+export const client = new QueryClient({
+  queryCache: new QueryCache({}),
+});
+
 const iChipRender: IOptionRender = (option, params) => {
   const { label } = option ?? {};
   const { multiple, onClose } = params ?? {};
@@ -40,7 +49,7 @@ const iChipRender: IOptionRender = (option, params) => {
   );
 };
 
-export default function AdvancedSelector() {
+const AdvancedSelector: React.FC = () => {
   const [open, { toggle }] = useToggle();
 
   const [value, setValue] = useState<React.Key[]>(['unknown']);
@@ -48,7 +57,6 @@ export default function AdvancedSelector() {
   const { data, isLoading } = useQuery({
     queryKey: [api, search],
     queryFn,
-    retry: false,
   });
 
   const options = useMemo(
@@ -61,23 +69,27 @@ export default function AdvancedSelector() {
   );
 
   return (
-    <ISafeArea>
-      <form>
-        <ISelector
-          measure
-          multiple
-          isLoading={isLoading}
-          open={open}
-          options={options}
-          render={{ chip: iChipRender }}
-          style={{ width: 300 }}
-          value={value}
-          onChange={(current) => {
-            setValue(iCompact(iArray(current)));
-          }}
-          onOpenChange={toggle}
-        />
-      </form>
-    </ISafeArea>
+    <ISelector
+      measure
+      multiple
+      isLoading={isLoading}
+      open={open}
+      options={options}
+      render={{ chip: iChipRender }}
+      style={{ width: 300 }}
+      value={value}
+      onChange={(current) => {
+        setValue(iCompact(iArray(current)));
+      }}
+      onOpenChange={toggle}
+    />
   );
-}
+};
+
+const App: React.FC = () => (
+  <QueryClientProvider client={client}>
+    <AdvancedSelector />
+  </QueryClientProvider>
+);
+
+export default App;

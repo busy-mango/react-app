@@ -1,14 +1,20 @@
 import { readFileSync } from 'fs';
-import { join, parse as iPathParse, resolve } from 'path';
+import { join, resolve } from 'path';
 import { defineConfig } from 'rspress/config';
 
+import { isObject, isRegExp } from '@busymango/is-esm';
+import type { FalseValue } from '@busymango/utils';
 import { assign } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
+import { pluginSvgr } from '@rsbuild/plugin-svgr';
+import type { RuleSetRule } from '@rspack/core';
 import { pluginPreview } from '@rspress/plugin-preview';
 
 import { dir } from './config';
 
-iPathParse('D:WorkSpace\react-appsrccomponentswidgets\form-fieldindex.scss');
+const isRuleSetRule = (
+  rule: FalseValue | '...' | RuleSetRule
+): rule is RuleSetRule => isObject(rule);
 
 const dotenv = assign<{
   THEME: string;
@@ -25,12 +31,32 @@ const dotenv = assign<{
 export default defineConfig({
   // 文档根目录
   root: 'docs',
-  plugins: [pluginPreview()],
+  plugins: [
+    pluginPreview(),
+    pluginSvgr({
+      svgrOptions: {
+        exportType: 'default',
+      },
+    }),
+  ],
   globalStyles: join(dir.static, 'themes/dark.css'),
   builderConfig: {
     source: {
       define: {
         'process.env': JSON.stringify(dotenv),
+      },
+    },
+    tools: {
+      rspack: (config) => {
+        config.module?.rules
+          ?.filter(isRuleSetRule)
+          ?.find(({ test }) => isRegExp(test) && test.test('.svg'))
+          ?.oneOf?.unshift({
+            loader: '@svgr/webpack',
+            resourceQuery: /react/,
+            options: { icon: true, typescript: true },
+          });
+        return config;
       },
     },
     output: {

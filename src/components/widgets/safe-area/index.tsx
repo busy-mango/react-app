@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import type { ReactCFC, ReactMotionDomProps, WrapperProps } from '@/models';
 
-import { IClipSpinner } from '../spinners';
+import { ISpinner } from '../spinners';
 
 import * as styles from './index.scss';
 
@@ -38,7 +38,7 @@ export const ISafeArea: ReactCFC<ISafeAreaProps> = ({
           exit={{ opacity: 0 }}
           initial={{ opacity: 0.36 }}
         >
-          <IClipSpinner />
+          <ISpinner />
         </motion.div>
       ) : (
         <motion.div

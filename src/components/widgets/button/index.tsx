@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -9,7 +9,7 @@ import type { ReactButtonProps, ReactCFC, ReactMotionDomProps } from '@/models';
 import { iPropagation } from '@/utils';
 
 import type { ControlUISize } from '../control';
-import { IClipSpinner } from '../spinners';
+import { ISpinner } from '../spinners';
 import { IWave } from '../wave';
 
 import * as styles from './index.scss';
@@ -43,7 +43,10 @@ const iTapBackground = (params: { variant: IButtonProps['variant'] }) => {
   }
 };
 
-export const IButton: React.FC<IButtonProps> = (props) => {
+export const IButton: React.FC<IButtonProps> = forwardRef<
+  HTMLButtonElement,
+  IButtonProps
+>(function IButton(props, iForwardRef) {
   const {
     icon,
     wave,
@@ -67,6 +70,8 @@ export const IButton: React.FC<IButtonProps> = (props) => {
   const wait = isNumber(debounce) ? debounce : 300;
 
   const { starer } = useDebounceFunc(onClick, wait);
+
+  useImperativeHandle(iForwardRef, () => ref.current!, [ref]);
 
   const onTap = useMemoFunc<React.MouseEventHandler<HTMLButtonElement>>(
     (event) => {
@@ -106,7 +111,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
       <AnimatePresence>
         {isLoading ? (
           <IconWrap>
-            <IClipSpinner />
+            <ISpinner />
           </IconWrap>
         ) : (
           icon && <IconWrap>{icon}</IconWrap>
@@ -115,4 +120,4 @@ export const IButton: React.FC<IButtonProps> = (props) => {
       <span>{children}</span>
     </motion.button>
   );
-};
+});

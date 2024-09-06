@@ -11,10 +11,10 @@ import { isTrue } from '@busymango/is-esm';
 import { IFlex } from '@/components/widgets';
 import type { ReactCFC } from '@/models';
 
-import ErrorSVG from '@/icons/business/error.svg';
-import NoConnectionSVG from '@/icons/business/no.connection.svg';
-import NoDocumentsSVG from '@/icons/business/no.documents.svg';
-import NoSearchResultSVG from '@/icons/business/no.search.result.svg';
+import ErrorSVG from '@/icons/business/error.svg?react';
+import NoConnectionSVG from '@/icons/business/no.connection.svg?react';
+import NoDocumentsSVG from '@/icons/business/no.documents.svg?react';
+import NoSearchResultSVG from '@/icons/business/no.search.result.svg?react';
 
 import * as styles from './index.scss';
 

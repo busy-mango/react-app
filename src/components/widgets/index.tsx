@@ -24,6 +24,7 @@ export * from './selector';
 export * from './sign';
 export * from './snackbar';
 export * from './spinners';
+export * from './suspense';
 export * from './svg-wrap';
 export * from './switch';
 export * from './textarea';

@@ -30,7 +30,7 @@ import { container } from '@/init';
 import { iArray } from '@/utils';
 import { size2px } from '@/utils/viewport';
 
-import type { InteractionProps } from '../control';
+import { type InteractionProps, useControlState } from '../control';
 
 import * as styles from './index.scss';
 
@@ -56,18 +56,23 @@ const ARROW_HEIGHT = 7;
 export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
   function IPopover(props, ref) {
     const {
-      open,
       content,
+      open: iOpen,
       type = 'over',
       trigger = 'click',
       transform = false,
-      onOpenChange,
+      onOpenChange: iOpenChange,
       render,
     } = props;
 
     const iArrow = useRef(null);
 
     const iTriggerList = iArray(trigger);
+
+    const [open, onOpenChange] = useControlState({
+      value: iOpen,
+      onChange: iOpenChange,
+    });
 
     const { refs, context, placement, floatingStyles } = useFloating({
       open,
