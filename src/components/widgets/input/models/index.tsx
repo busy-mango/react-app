@@ -9,16 +9,13 @@ export interface IInputRef {
   native: HTMLInputElement | null;
 }
 
-export interface IInputProps
-  extends OmitOf<ReactInputProps, 'onChange' | 'value' | 'ref'> {
+export interface IInputProps extends OmitOf<ReactInputProps, 'value' | 'ref'> {
   /** 控件是否跟随文本宽度 */
   autoSize?: boolean;
   /** 控件值 */
   value?: ControlValue;
   /** 控件交互模式 */
   pattern?: ControlPattern;
-  /** 输入事件 */
-  onChange?: (value?: ControlValue) => void;
   /** 回车事件 */
   onPressEnter?: ReactInputProps['onKeyDown'];
 }

@@ -10,30 +10,14 @@
 
   &.active,
   &:hover {
-    background-color: rgb(var(--hover-bg-color) / 0.08);
+    background-color: var(--natural-color-hover);
   }
 
   &.selected {
     font-weight: 500;
-    color: rgb(var(--main-color) / 1);
-    background-color: rgb(var(--main-bg-color) / 1);
+    color: var(--font-info-color);
+    background-color: var(--natural-color-active);
   }
-}
-
-.empty {
-  overflow: hidden;
-  height: calc(100vw / 3.75);
-}
-
-.empty-icon {
-  font-size: calc(100vw / 3.75);
-  margin-top: calc(-1 * var(--gap-7));
-}
-
-.empty-text {
-  font-size: var(--font-size-3);
-  color: var(--font-color-4);
-  margin-top: calc(-1 * var(--gap-7));
 }
 
 .item {
@@ -62,7 +46,7 @@
   outline: none;
   padding: var(--gap-3) 0;
   border-radius: var(--border-radius-3);
-  background-color: rgb(var(--comp-bg-color) / 1);
+  background-color: var(--bg-menu-color);
   box-shadow:
     rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
     rgba(0, 0, 0, 0.14) 0px 3px 4px 0px,

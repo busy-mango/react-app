@@ -87,9 +87,6 @@ importers:
       '@dotenvx/dotenvx':
         specifier: ^1.12.1
         version: 1.12.1
-      '@rsbuild/plugin-svgr':
-        specifier: 1.0.1-rc.4
-        version: 1.0.1-rc.4(@rsbuild/core@1.0.1-rc.0)(typescript@5.5.4)
       '@rsdoctor/rspack-plugin':
         specifier: ^0.4.0
         version: 0.4.0(@rspack/core@1.0.0(@swc/helpers@0.5.12))
@@ -1380,11 +1377,6 @@ packages:
     peerDependencies:
       '@rsbuild/core': ^1.0.1-rc.0
 
-  '@rsbuild/plugin-react@1.0.1-rc.4':
-    resolution: {integrity: sha512-1EPBjVgBPd9eQk0rDgm78q/vQDKabTP24+vUKz02iYZDZZPfCRyZrfF3GvKLVJXRW44JqT51ykK9t9oxw/tDtA==}
-    peerDependencies:
-      '@rsbuild/core': ^1.0.1-rc.4
-
   '@rsbuild/plugin-sass@1.0.1-rc.0':
     resolution: {integrity: sha512-t6hjBvSHnJ9SiVnBo66o7M9MPMylVhv+KI1OJVbFH14Y6ZarN3y7Q1n0wYT/qc16N0ETaTegB3z8Xou02mgZ4w==}
     peerDependencies:
@@ -1394,11 +1386,6 @@ packages:
     resolution: {integrity: sha512-RlQIMi0YiVtQmPhc2RmZNyITYtmqcjoGOSNuEqguWysG+xUdgQKBgUCmpiGSeZObu5mp5d1iRVuPb2g/D8w1zA==}
     peerDependencies:
       '@rsbuild/core': ^1.0.1-rc.0
-
-  '@rsbuild/plugin-svgr@1.0.1-rc.4':
-    resolution: {integrity: sha512-F+4KptT90zeJcbX2CEU2ajgVDqqLd+qipeNMMZannCirF+Tn+R8zZW3aGq4pxbTBoA5i0RJpnZs8yC4G5VJTaw==}
-    peerDependencies:
-      '@rsbuild/core': ^1.0.1-rc.4
 
   '@rsdoctor/client@0.4.0':
     resolution: {integrity: sha512-Qw/mb1l7m/PII/j86No7VHBW2m2zjCMM5JPGxjADaa7iutA0uJQ51p5phzjgdZUZABnstwVVOYGwAlAoySlP5w==}
@@ -7212,12 +7199,6 @@ snapshots:
       '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.14.2)
       react-refresh: 0.14.2
 
-  '@rsbuild/plugin-react@1.0.1-rc.4(@rsbuild/core@1.0.1-rc.0)':
-    dependencies:
-      '@rsbuild/core': 1.0.1-rc.0
-      '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.14.2)
-      react-refresh: 0.14.2
-
   '@rsbuild/plugin-sass@1.0.1-rc.0(@rsbuild/core@1.0.1-rc.0)':
     dependencies:
       '@rsbuild/core': 1.0.1-rc.0
@@ -7237,19 +7218,6 @@ snapshots:
       - '@babel/core'
       - solid-js
       - supports-color
-
-  '@rsbuild/plugin-svgr@1.0.1-rc.4(@rsbuild/core@1.0.1-rc.0)(typescript@5.5.4)':
-    dependencies:
-      '@rsbuild/core': 1.0.1-rc.0
-      '@rsbuild/plugin-react': 1.0.1-rc.4(@rsbuild/core@1.0.1-rc.0)
-      '@svgr/core': 8.1.0(typescript@5.5.4)
-      '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0(typescript@5.5.4))
-      '@svgr/plugin-svgo': 8.1.0(@svgr/core@8.1.0(typescript@5.5.4))(typescript@5.5.4)
-      deepmerge: 4.3.1
-      loader-utils: 2.0.4
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
 
   '@rsdoctor/client@0.4.0': {}
 

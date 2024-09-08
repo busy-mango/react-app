@@ -16,11 +16,11 @@
 
   /** variant */
   &.filled {
-    color: rgb(var(--main-color));
-    background-color: rgb(var(--chip-bg-color));
+    color: var(--font-info-color);
+    background-color: var(--bg-warp-color);
   }
   &.outlined {
-    border: 1px solid rgb(var(--main-color));
+    border: 1px solid var(--info-color);
   }
 
   &.disabled {

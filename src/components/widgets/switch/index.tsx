@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import type { Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-import { useControlState } from '../control';
+import { onCheckCatch, useControlState } from '../control';
 import type {
   ISwitchInputRender,
   ISwitchProps,
@@ -17,14 +17,6 @@ const spring: Transition = {
   damping: 30,
   type: 'spring',
   stiffness: 700,
-};
-
-const isInputElement = (target: unknown): target is HTMLInputElement =>
-  target instanceof HTMLInputElement;
-
-const onCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const { target } = event ?? {};
-  if (isInputElement(target)) return target.checked;
 };
 
 const iRootRender: ISwitchRootRender = ({ input, icon, label, className }) => (
@@ -79,10 +71,10 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
     }));
 
     const [iChecked = false, iChange] = useControlState({
-      onCatch,
-      onChange,
       value: checked,
       defaultValue: defaultChecked,
+      onCatch: onCheckCatch,
+      onChange,
     });
 
     const states = {

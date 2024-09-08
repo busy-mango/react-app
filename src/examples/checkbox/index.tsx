@@ -1,10 +1,9 @@
-import { ICheckbox, ISafeArea } from '@/components';
+import { ICheckbox } from '@/components';
 
 const NormalCheckBox: React.FC = () => (
-  <ISafeArea>
-    <form></form>
+  <form>
     <ICheckbox label={1} />
-  </ISafeArea>
+  </form>
 );
 
 export default NormalCheckBox;

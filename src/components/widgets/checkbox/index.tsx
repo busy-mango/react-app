@@ -7,9 +7,7 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
-import { isInputElement } from '@/utils';
-
-import { useControlState } from '../control';
+import { onCheckCatch, useControlState } from '../control';
 import { IFlex } from '../flex';
 import { ISignLine } from '../sign';
 import { ISVGWrap } from '../svg-wrap';
@@ -83,11 +81,6 @@ const iIconRender: ICheckIconRender = (
   );
 };
 
-const onCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const { target } = event ?? {};
-  if (isInputElement(target)) return target.checked;
-};
-
 export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
   function Checkbox(props, ref) {
     const {
@@ -117,10 +110,10 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
     }));
 
     const [iChecked = false, iChange] = useControlState({
-      onCatch,
-      onChange,
       value: checked,
       defaultValue: defaultChecked,
+      onCatch: onCheckCatch,
+      onChange,
     });
 
     const states = useMemo(

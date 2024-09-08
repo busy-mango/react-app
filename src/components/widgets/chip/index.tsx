@@ -30,6 +30,7 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
     variant = 'filled',
     onKeyDown,
     onClose,
+    ...others
   } = props;
 
   const target = useRef<HTMLSpanElement>(null);
@@ -56,6 +57,7 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
       )}
       style={style}
       onKeyDown={iEscapeEvent(onClose, onKeyDown)}
+      {...others}
     >
       {clickable && <IWave target={target} />}
       <AnimatePresence>

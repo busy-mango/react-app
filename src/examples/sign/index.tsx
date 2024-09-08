@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { iArray, theFirst } from '@busymango/utils';
 
 import type { ISignType } from '@/components';
-import { ISafeArea, ISelector, ISignLine } from '@/components';
+import { IFormWrap, ISelector, ISignLine } from '@/components';
 
 import * as styles from './index.scss';
 
@@ -29,7 +29,7 @@ const options = [
 const Welcome: React.FC = () => {
   const [sign, setSign] = useState<ISignType>('clock');
   return (
-    <ISafeArea className={styles.page}>
+    <IFormWrap className={styles.page}>
       <ISelector
         options={options}
         prefix={<ISignLine ring className={styles.icon} type={sign} />}
@@ -38,7 +38,7 @@ const Welcome: React.FC = () => {
           setSign(theFirst(iArray(val)) as ISignType);
         }}
       />
-    </ISafeArea>
+    </IFormWrap>
   );
 };
 

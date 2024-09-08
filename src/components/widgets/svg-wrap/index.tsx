@@ -34,7 +34,12 @@ export const ISVGWrap: ReactCFC<ISVGWrapProps> = (props) => {
       className={className}
       exit={iInitial({ x, y })}
       initial={iInitial({ x, y })}
-      style={{ display: 'inline-flex', alignItems: 'center', ...style }}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        flexShrink: 0,
+        ...style,
+      }}
       transition={transition}
       {...others}
     >

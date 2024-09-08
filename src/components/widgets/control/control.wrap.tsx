@@ -6,6 +6,7 @@ import { useEventState } from '@/hooks';
 
 import { useIFieldGridContext } from '../form-field/hooks';
 import { ISpinner } from '../spinners';
+import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import type { IControlWrapProps } from './models';
 
@@ -52,30 +53,34 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
         )}
         {...others}
       >
-        <AnimatePresence>
-          {prefix && (
-            <motion.div className={styles.iconWrap} onClick={onPrefixClick}>
-              {prefix}
-            </motion.div>
-          )}
-        </AnimatePresence>
         {variant !== 'standard' && (
           <IWave
             placeholder={variant === 'bordered' && isFocus}
             target={target}
           />
         )}
+        <AnimatePresence>
+          {prefix ? (
+            <ISVGWrap className={styles.iconWrap} onClick={onPrefixClick}>
+              {prefix}
+            </ISVGWrap>
+          ) : (
+            <span />
+          )}
+        </AnimatePresence>
         {children}
         <AnimatePresence>
-          {(isLoading || suffix) && (
-            <motion.div
+          {isLoading || suffix ? (
+            <ISVGWrap
               className={classNames(styles.iconWrap, {
                 [styles.clickable]: suffixClickable,
               })}
               onClick={onSuffixClick}
             >
               {isLoading ? <ISpinner /> : suffix}
-            </motion.div>
+            </ISVGWrap>
+          ) : (
+            <span />
           )}
         </AnimatePresence>
       </motion.div>

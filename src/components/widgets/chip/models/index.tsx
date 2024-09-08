@@ -3,11 +3,11 @@
 // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
 // └─────────────────────────────────────────────────────────────────────┘
 
-import type { WrapperProps } from '@/models';
+import type { HTMLMotionProps } from 'framer-motion';
 
 import type { ControlUISize } from '../../control';
 
-export interface IChipProps extends WrapperProps<HTMLSpanElement> {
+export interface IChipProps extends HTMLMotionProps<'span'> {
   close?: React.ReactNode;
   /**
    * If `true`, the chip will appear clickable, and will raise when pressed,

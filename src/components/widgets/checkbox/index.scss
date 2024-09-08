@@ -6,7 +6,7 @@
   border: 1px solid currentColor;
 
   &.checked {
-    color: rgb(var(--main-color) / 1);
+    color: var(--info-color-active);
   }
 }
 
@@ -29,16 +29,22 @@
   position: relative;
   pointer-events: initial;
   border-radius: var(--border-radius-2);
+
+  color: var(--info-color);
+
+  &:hover {
+    color: var(--info-color-hover);
+  }
 }
 
 .label {
   display: inline-flex;
   margin: 0 var(--gap-3);
+  color: var(--font-color-8);
 }
 
 .root {
   display: inline-flex;
-  color: rgb(var(--main-color) / 1);
 
   &.overlay {
     position: initial;
@@ -71,7 +77,7 @@
   }
 
   &.disabled {
-    color: rgb(var(--font-color-b8) / 1);
+    color: var(--font-disabled-color);
   }
 
   &.checked,

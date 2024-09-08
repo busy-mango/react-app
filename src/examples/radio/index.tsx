@@ -5,7 +5,6 @@ import {
   IFlex,
   IFormWrap,
   IRadioGroup,
-  ISafeArea,
 } from '@/components';
 
 const options: ControlOption[] = [
@@ -20,17 +19,15 @@ const options: ControlOption[] = [
 
 const NormalRadio: React.FC = () => {
   return (
-    <ISafeArea>
-      <IFormWrap>
-        <IFieldGrid mode="horizontal">
-          <IFieldCell title="RadioGroup">
-            <IFlex wrap gap={8}>
-              <IRadioGroup options={options} />
-            </IFlex>
-          </IFieldCell>
-        </IFieldGrid>
-      </IFormWrap>
-    </ISafeArea>
+    <IFormWrap>
+      <IFieldGrid mode="horizontal">
+        <IFieldCell title="RadioGroup">
+          <IFlex wrap gap={8}>
+            <IRadioGroup options={options} />
+          </IFlex>
+        </IFieldCell>
+      </IFieldGrid>
+    </IFormWrap>
   );
 };
 

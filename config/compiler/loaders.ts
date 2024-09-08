@@ -28,13 +28,9 @@ export const SassRule: RuleSetRule = {
 
 export const SVGRule: RuleSetRule = {
   test: /\.svg$/i,
-  resourceQuery: /react/,
-  use: [
-    {
-      loader: '@svgr/webpack',
-      options: { icon: true, typescript: true },
-    },
-  ],
+  issuer: /\.[jt]sx?$/,
+  use: '@svgr/webpack',
+  options: { icon: false, typescript: true },
 };
 
 export const FontRule: RuleSetRule = {

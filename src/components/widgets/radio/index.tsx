@@ -9,9 +9,7 @@ import classNames from 'classnames';
 
 import { isBigInt } from '@busymango/is-esm';
 
-import { isInputElement } from '@/utils';
-
-import { useControlState } from '../control';
+import { onCheckCatch, useControlState } from '../control';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import { ICheckedSVG } from './icon';
@@ -58,11 +56,6 @@ const iInputRender: IRadioInputRender = (
   </Fragment>
 );
 
-const onCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const { target } = event ?? {};
-  if (isInputElement(target)) return target.checked;
-};
-
 export const IRadio = forwardRef<IRadioRef, IRadioProps>(
   function Radio(props, iForwardRef) {
     const {
@@ -89,10 +82,10 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
     const input = useRef<HTMLInputElement>(null);
 
     const [iChecked, iChange] = useControlState({
-      onCatch,
-      onChange,
       value: checked,
       defaultValue: defaultChecked,
+      onCatch: onCheckCatch,
+      onChange,
     });
 
     const state: IRadioState = {

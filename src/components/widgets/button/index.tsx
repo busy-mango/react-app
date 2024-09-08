@@ -5,35 +5,26 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { isNumber, isTrue } from '@busymango/is-esm';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
-import type { ReactButtonProps, ReactCFC, ReactMotionDomProps } from '@/models';
+import type { ReactButtonProps, ReactMotionDomProps } from '@/models';
 import { iPropagation } from '@/utils';
 
 import type { ControlUISize } from '../control';
 import { ISpinner } from '../spinners';
+import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 
 import * as styles from './index.scss';
 
-const IconWrap: ReactCFC = ({ children }) => (
-  <motion.span
-    animate={{ opacity: 1, width: '1em' }}
-    className={styles.icon}
-    exit={{ opacity: 0, width: 0 }}
-    initial={{ opacity: 0, width: 0 }}
-    transition={{ ease: 'easeOut' }}
-  >
-    {children}
-  </motion.span>
-);
-
 export interface IButtonProps extends ReactMotionDomProps<ReactButtonProps> {
-  wave?: boolean;
-  icon?: React.ReactNode;
-  isLoading?: boolean;
-  isFullWidth?: boolean;
+  capsule?: boolean;
+  danger?: boolean;
   debounce?: boolean | number;
-  size?: ControlUISize | 'inline';
+  icon?: React.ReactNode;
+  isFullWidth?: boolean;
+  isLoading?: boolean;
+  size?: ControlUISize;
   variant?: 'filled' | 'bordered' | 'text';
+  wave?: boolean;
 }
 
 const iTapBackground = (params: { variant: IButtonProps['variant'] }) => {
@@ -49,19 +40,23 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
 >(function IButton(props, iForwardRef) {
   const {
     icon,
-    wave,
+    danger,
+    capsule,
     children,
     disabled,
     debounce,
     className,
     isLoading,
     isFullWidth,
+    wave: iWave,
     size = 'medium',
     variant = 'bordered',
     onPointerDownCapture,
     onClick,
     ...others
   } = props;
+
+  const wave = iWave ?? !danger;
 
   const clickable = !isLoading && !disabled;
 
@@ -89,7 +84,10 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
         styles[size],
         styles[variant],
         {
+          [styles.danger]: danger,
+          [styles.capsule]: capsule,
           [styles.disabled]: disabled,
+          [styles.padding]: !!children,
           [styles.fullWidth]: isFullWidth,
         },
         className
@@ -109,15 +107,13 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
     >
       {(wave ?? variant !== 'text') && <IWave target={ref} />}
       <AnimatePresence>
-        {isLoading ? (
-          <IconWrap>
-            <ISpinner />
-          </IconWrap>
-        ) : (
-          icon && <IconWrap>{icon}</IconWrap>
+        {(isLoading || icon) && (
+          <ISVGWrap className={classNames(styles.icon, children && styles.gap)}>
+            {isLoading ? <ISpinner /> : icon}
+          </ISVGWrap>
         )}
       </AnimatePresence>
-      <span>{children}</span>
+      {children && <span>{children}</span>}
     </motion.button>
   );
 });

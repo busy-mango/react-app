@@ -17,7 +17,7 @@ import {
 } from '@/hooks';
 import { iPressEvent, isIOS, sizeOf } from '@/utils';
 
-import { useControlState, usePatternAssert } from '../control';
+import { onInputCatch, useControlState, usePatternAssert } from '../control';
 import { iTextSize } from './helpers';
 import type { IInputProps, IInputRef } from './models';
 
@@ -31,7 +31,10 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
       autoSize,
       className,
       placeholder,
+      defaultValue,
+      value: iValue,
       pattern = 'editable',
+      onChange,
       onPressEnter,
       onKeyDown,
       ...others
@@ -49,7 +52,15 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
 
     const isComposing = useEventState(iComposingParams(target));
 
-    const [value, onChange] = useControlState(props, { isComposing });
+    const [value, iChange] = useControlState(
+      {
+        defaultValue,
+        value: iValue,
+        onCatch: onInputCatch,
+        onChange,
+      },
+      { isComposing }
+    );
 
     useResizeObserver(shadow, () => {
       const { current: iInput } = target;
@@ -63,16 +74,10 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
     });
 
     const clear = useMemoFunc(() => {
-      onChange?.(null);
+      // TODO
       // https://github.com/ant-design/ant-design-mobile/issues/5212
       isIOS() && isComposing && target.current?.blur();
     });
-
-    const iChange = useMemoFunc(
-      ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        onChange?.(target.value);
-      }
-    );
 
     const width = ifnot((autoSize || isReadPretty) && `${sizeOf(value)}em`);
 

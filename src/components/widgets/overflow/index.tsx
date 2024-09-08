@@ -82,7 +82,7 @@ export const IOverflow: ReactCFC<IOverflowProps> = (props) => {
           {children}
         </div>
       )}
-      trigger={'click'}
+      trigger="hover"
       type="tip"
       onOpenChange={onChange}
     />

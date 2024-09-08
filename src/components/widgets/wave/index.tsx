@@ -24,9 +24,9 @@ export const IWave: React.FC<{
       scope.current,
       {
         boxShadow: [
-          '0 0 0 0px rgb(var(--wave-color) / 0.05)',
-          '0 0 0 3px rgb(var(--wave-color) / 0.2)',
-          '0 0 0 8px rgb(var(--wave-color) / 0)',
+          '0 0 0 0px var(--wave-color-1)',
+          '0 0 0 3px var(--wave-color-2)',
+          '0 0 0 8px var(--wave-color-3)',
         ],
       },
       {

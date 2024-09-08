@@ -6,7 +6,6 @@ import { isObject, isRegExp } from '@busymango/is-esm';
 import type { FalseValue } from '@busymango/utils';
 import { assign } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
-import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import type { RuleSetRule } from '@rspack/core';
 import { pluginPreview } from '@rspress/plugin-preview';
 
@@ -31,14 +30,7 @@ const dotenv = assign<{
 export default defineConfig({
   // 文档根目录
   root: 'docs',
-  plugins: [
-    pluginPreview(),
-    pluginSvgr({
-      svgrOptions: {
-        exportType: 'default',
-      },
-    }),
-  ],
+  plugins: [pluginPreview()],
   globalStyles: join(dir.static, 'themes/dark.css'),
   builderConfig: {
     source: {
@@ -54,7 +46,7 @@ export default defineConfig({
           ?.oneOf?.unshift({
             loader: '@svgr/webpack',
             resourceQuery: /react/,
-            options: { icon: true, typescript: true },
+            options: { icon: false, typescript: true },
           });
         return config;
       },

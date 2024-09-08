@@ -1,6 +1,6 @@
 import { t } from 'i18next';
 
-import { isString } from '@busymango/is-esm';
+import { isString, isValidKey } from '@busymango/is-esm';
 
 /**
  * 获取主题样式标签
@@ -22,6 +22,11 @@ export const iThemeSheet = () => {
  * 获取默认主题样式
  */
 export const iThemeDefault = <T extends string = string>() => {
+  const html = document.querySelector('html');
+  const style = html && getComputedStyle(html);
+  if (style && isValidKey('color-scheme', style, isString)) {
+    return style['color-scheme'];
+  }
   if (!isString(process.env.THEME)) {
     throw new Error(t('common:Theme not found'));
   }

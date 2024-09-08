@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { isUndefined } from '@busymango/is-esm';
 
 import { useMemoFunc } from '@/hooks';
+import { isInputElement } from '@/utils';
 
 export interface ControlParams {
   /** 输入法是否介入中 */
@@ -15,6 +16,16 @@ export interface ControlComponentProps<T, E, Args extends unknown[]> {
   onCatch?: (source: E) => T;
   onChange?: (value: E, ...args: Args) => void;
 }
+
+export const onInputCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const { target } = event ?? {};
+  if (isInputElement(target)) return target.value;
+};
+
+export const onCheckCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const { target } = event ?? {};
+  if (isInputElement(target)) return target.checked;
+};
 
 export function useControlState<
   T = unknown,
