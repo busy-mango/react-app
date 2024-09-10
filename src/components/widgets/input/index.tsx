@@ -7,7 +7,7 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
-import { assign, ifnot } from '@busymango/utils';
+import { assign, ifnot, sizeOf } from '@busymango/utils';
 
 import {
   iComposingParams,
@@ -15,7 +15,7 @@ import {
   useMemoFunc,
   useResizeObserver,
 } from '@/hooks';
-import { iPressEvent, isIOS, sizeOf } from '@/utils';
+import { iPressEvent, isIOS } from '@/utils';
 
 import { onInputCatch, useControlState, usePatternAssert } from '../control';
 import { iTextSize } from './helpers';

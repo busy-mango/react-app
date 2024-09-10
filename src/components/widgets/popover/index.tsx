@@ -8,7 +8,13 @@ import {
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-import type { UseFloatingOptions, UseFloatingReturn } from '@floating-ui/react';
+import { iArray } from '@busymango/utils';
+import type {
+  MiddlewareState,
+  Padding,
+  UseFloatingOptions,
+  UseFloatingReturn,
+} from '@floating-ui/react';
 import {
   arrow,
   autoUpdate,
@@ -27,10 +33,11 @@ import {
 } from '@floating-ui/react';
 
 import { container } from '@/init';
-import { iArray } from '@/utils';
-import { size2px } from '@/utils/viewport';
+import type { ReactTargetType } from '@/models';
+import { iFindElement, size2px } from '@/utils';
 
-import { type InteractionProps, useControlState } from '../control';
+import type { InteractionProps } from '../control';
+import { useControlState } from '../control';
 
 import * as styles from './index.scss';
 
@@ -38,14 +45,26 @@ export type IPopoverRef = UseFloatingReturn['refs'];
 
 export type IPopoverEvent = 'click' | 'focus' | 'hover';
 
+export interface ApplyFloatingStyle {
+  (
+    params: MiddlewareState & {
+      availableWidth: number;
+      availableHeight: number;
+    }
+  ): Partial<CSSStyleDeclaration>;
+}
+
 export interface IPopoverProps
   extends Pick<
     UseFloatingOptions,
     'open' | 'onOpenChange' | 'placement' | 'transform'
   > {
+  root?: ReactTargetType;
   content?: React.ReactNode;
+  padding?: Padding;
   type?: 'tip' | 'over' | 'confirm';
   trigger?: IPopoverEvent | IPopoverEvent[];
+  onApplyFloatingStyle?: ApplyFloatingStyle;
   render?: (props: InteractionProps) => React.ReactNode;
 }
 
@@ -61,7 +80,10 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
       type = 'over',
       trigger = 'click',
       transform = false,
+      root = container,
+      padding = size2px(5),
       onOpenChange: iOpenChange,
+      onApplyFloatingStyle,
       render,
     } = props;
 
@@ -85,12 +107,16 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
         arrow({ element: iArrow }),
         flip(),
         size({
-          padding: size2px(5),
-          apply({ elements, availableWidth, availableHeight }) {
-            Object.assign(elements.floating.style, {
-              maxWidth: `${availableWidth}px`,
-              maxHeight: `${availableHeight}px`,
-            });
+          padding,
+          apply(params) {
+            const { elements, availableWidth, availableHeight } = params;
+            Object.assign(
+              elements.floating.style,
+              onApplyFloatingStyle?.(params) ?? {
+                maxWidth: `${availableWidth}px`,
+                maxHeight: `${availableHeight}px`,
+              }
+            );
           },
         }),
       ],
@@ -141,7 +167,7 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
           ref: refs.setReference,
           ...getReferenceProps(),
         })}
-        <FloatingPortal root={container}>
+        <FloatingPortal root={iFindElement(root)}>
           {context.open && (
             <motion.div
               ref={refs.setFloating}

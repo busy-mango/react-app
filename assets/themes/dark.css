@@ -244,9 +244,9 @@
   /* 菜单背景色 */
   --bg-menu-color: rgb(var(--gray-color-200) / 1);
   /* 浮层背景色 */
-  --bg-popover-color: rgb(var(--gray-color-300) / 1);
+  --bg-popover-color: rgb(var(--gray-color-25) / 0.9);
   /* 控件背景色 */
-  --bg-control-color: rgb(var(--gray-color-25) / 1);
+  --bg-control-color: rgb(var(--gray-color-50) / 1);
   /* 组件背景色 */
   --bg-component-color: rgb(var(--gray-color-400) / 0.5);
 

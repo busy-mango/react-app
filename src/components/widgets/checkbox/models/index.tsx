@@ -3,6 +3,8 @@
 // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
 // └─────────────────────────────────────────────────────────────────────┘
 
+import type { HTMLMotionProps } from 'framer-motion';
+
 import type { PlainObject } from '@busymango/is-esm';
 
 import type { WrapperProps } from '@/models';
@@ -80,7 +82,7 @@ export type ICheckBoxRender = IRender<
   {
     icon?: React.ReactNode;
     input?: React.ReactNode;
-  } & WrapperProps
+  } & HTMLMotionProps<'i'>
 >;
 
 export type ICheckInputRender = IRender<

@@ -12,6 +12,10 @@
   border-color: currentColor;
 }
 
+.text {
+  margin: 0 var(--gap-2);
+}
+
 .input {
   opacity: 0;
   z-index: 0;
@@ -22,8 +26,14 @@
   position: relative;
   display: inline-block;
 
-  .icon {
-    color: var(--info-color);
+  color: var(--info-color);
+
+  &:hover {
+    color: var(--info-color-hover);
+  }
+
+  &.checked {
+    color: var(--info-color-active);
   }
 
   .input {
@@ -34,12 +44,6 @@
     width: 100%;
     height: 100%;
     position: absolute;
-  }
-
-  &:hover {
-    .icon {
-      color: var(--info-color-hover);
-    }
   }
 }
 

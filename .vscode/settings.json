@@ -32,7 +32,8 @@
   "css-module-typed.pluginOptions": {
     "goToDefinition": true,
     "classnameTransform": "camelCaseOnly",
-    "customMatcher": "\\.(c|le|sa|sc)ss$"
+    "customMatcher": "\\.(c|le|sa|sc)ss$",
+    "allowUnknownClassnamesAsDeprecated": true
   },
   "[svg]": {
     "editor.formatOnSave": true,

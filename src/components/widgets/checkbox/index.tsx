@@ -8,10 +8,8 @@ import {
 import classNames from 'classnames';
 
 import { onCheckCatch, useControlState } from '../control';
-import { IFlex } from '../flex';
 import { ISignLine } from '../sign';
 import { ISVGWrap } from '../svg-wrap';
-import { IWave } from '../wave';
 import type {
   ICheckboxProps,
   ICheckboxRef,
@@ -23,21 +21,31 @@ import type {
 
 import * as styles from './index.scss';
 
-const iRootRender: ICheckRootRender = ({ label, checkbox, className }) => (
-  <span data-ui-checkroot className={className}>
-    {checkbox}
-    <IFlex centered className={styles.label}>
-      {label}
-    </IFlex>
+const iRootRender: ICheckRootRender = (
+  { label, checkbox, ...others },
+  { pattren }
+) => (
+  <span data-ui-checkroot {...others}>
+    {pattren !== 'readPretty' && checkbox}
+    <span className={styles.text}>{label}</span>
   </span>
 );
 
-const iCheckboxRender: ICheckBoxRender = ({ className, input, icon }) => (
-  <span className={className}>
+const iCheckboxRender: ICheckBoxRender = ({ input, icon, ...others }) => (
+  <ISVGWrap {...others}>
     {icon}
     {input}
-  </span>
+  </ISVGWrap>
 );
+
+const iIconRender: ICheckIconRender = (props, { checked, indeterminate }) => {
+  const type = (function () {
+    if (indeterminate) return 'minus';
+    if (checked) return 'tick';
+  })();
+
+  return <ISignLine rect {...props} type={type} />;
+};
 
 const iInputRender: ICheckInputRender = (
   { ref, wave, value, ...others },
@@ -47,39 +55,23 @@ const iInputRender: ICheckInputRender = (
     overlay: _overlay,
     variant: _variant,
     indeterminate,
+    checked,
     pattren,
   }
 ) => (
   <Fragment>
-    {wave && <IWave target={ref} />}
     <input
       ref={ref}
-      aria-checked="mixed"
       data-indeterminate={indeterminate}
       disabled={pattren === 'disabled'}
       readOnly={pattren === 'readOnly'}
       type="checkbox"
       value={value?.toLocaleString()}
       {...others}
+      checked={checked ?? false}
     />
   </Fragment>
 );
-
-const iIconRender: ICheckIconRender = (
-  { className },
-  { checked, indeterminate }
-) => {
-  const type = (function () {
-    if (indeterminate) return 'minus';
-    if (checked) return 'tick';
-  })();
-
-  return (
-    <ISVGWrap className={className}>
-      <ISignLine type={type} />
-    </ISVGWrap>
-  );
-};
 
 export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
   function Checkbox(props, ref) {
@@ -134,7 +126,7 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
       {
         ref: root,
         label: label,
-        className: classNames(styles.root, styles[size]),
+        className: classNames(styles.root, styles[size], styles[pattren]),
         checkbox: (render?.checkbox ?? iCheckboxRender)(
           {
             className: styles.checkbox,

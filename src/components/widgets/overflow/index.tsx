@@ -2,17 +2,32 @@ import { useMemo, useRef } from 'react';
 import classNames from 'classnames';
 
 import { isHTMLElement } from '@busymango/is-esm';
+import { type PartialPick } from '@busymango/utils';
 
 import { useMemoFunc, useToggle } from '@/hooks';
 import type { ReactCFC, WrapperProps } from '@/models';
 import { isOverflow } from '@/utils';
 
-import type { IPopoverRef } from '../popover';
+import type {
+  ApplyFloatingStyle,
+  IPopoverProps,
+  IPopoverRef,
+} from '../popover';
 import { IPopover } from '../popover';
 
 import * as styles from './index.scss';
 
-export interface IOverflowProps extends WrapperProps {
+const iApplyFloatingStyle: ApplyFloatingStyle = ({
+  elements,
+  availableHeight,
+}) => ({
+  maxHeight: `${availableHeight / 2}px`,
+  maxWidth: `${elements.reference.getBoundingClientRect().width}px`,
+});
+
+export interface IOverflowProps
+  extends WrapperProps<HTMLDivElement>,
+    PartialPick<IPopoverProps, 'root' | 'onApplyFloatingStyle'> {
   /** 气泡窗中的内容 */
   tip?: React.ReactNode;
   /** 气泡窗的弹窗时机 */
@@ -30,14 +45,16 @@ export interface IOverflowProps extends WrapperProps {
 export const IOverflow: ReactCFC<IOverflowProps> = (props) => {
   const {
     tip,
+    root,
     style,
     width,
     minWidth,
     maxWidth,
     children,
     className,
-    timing = 'overflow',
     maxRow = 1,
+    timing = 'overflow',
+    onApplyFloatingStyle = iApplyFloatingStyle,
     ...others
   } = props;
 
@@ -82,8 +99,10 @@ export const IOverflow: ReactCFC<IOverflowProps> = (props) => {
           {children}
         </div>
       )}
+      root={root}
       trigger="hover"
       type="tip"
+      onApplyFloatingStyle={onApplyFloatingStyle}
       onOpenChange={onChange}
     />
   );

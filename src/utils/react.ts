@@ -1,10 +1,8 @@
 import type { PlainObject } from '@busymango/is-esm';
 import { isFunction, isHTMLElement, isNull, isTrue } from '@busymango/is-esm';
-import { contains } from '@busymango/utils';
+import { contains, sizeOf } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
-
-import { sizeOf } from './common';
 
 /** 从ReactTargetType中获取HTMLElement */
 export function iFindElement(target?: ReactTargetType) {

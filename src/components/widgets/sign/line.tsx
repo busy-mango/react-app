@@ -8,6 +8,7 @@ import type { ISignLineProps } from './models';
 
 export const ISignLine: React.FC<ISignLineProps> = ({
   type,
+  rect,
   ring,
   style,
   ...others
@@ -21,7 +22,7 @@ export const ISignLine: React.FC<ISignLineProps> = ({
     strokeWidth={64}
     style={{
       ...style,
-      transform: `scale(${ring ? 1 : 1.325})`,
+      transform: `scale(${ring || rect ? 1 : 1.325})`,
     }}
     version="1.1"
     viewBox="0 0 1024 1024"
@@ -36,6 +37,19 @@ export const ISignLine: React.FC<ISignLineProps> = ({
           cy={512}
           r={480}
           transition={transition}
+        />
+      )}
+    </AnimatePresence>
+    <AnimatePresence>
+      {rect && (
+        <motion.rect
+          key="rect"
+          height={960}
+          rx={256}
+          transition={transition}
+          width={960}
+          x={32}
+          y={32}
         />
       )}
     </AnimatePresence>

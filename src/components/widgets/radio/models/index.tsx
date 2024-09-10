@@ -1,7 +1,9 @@
+import type { HTMLMotionProps } from 'framer-motion';
+
 import type { PlainObject } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 
-import type { ReactMotionDomProps, WrapperProps } from '@/models';
+import type { WrapperProps } from '@/models';
 
 import type {
   ControlOption,
@@ -66,7 +68,7 @@ export type IRadioRootRender = IRender<
 >;
 
 export type IRadioRender = IRender<
-  ReactMotionDomProps<WrapperProps> & { input: React.ReactNode }
+  HTMLMotionProps<'i'> & { input: React.ReactNode }
 >;
 
 export type IRadioInputRender = IRender<

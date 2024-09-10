@@ -1,5 +1,8 @@
 .wrap {
   box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-y: auto;
 
   &.tip,
   &.over,
@@ -12,6 +15,6 @@
     font-size: var(--font-size-3);
     color: var(--font-color-b8);
     padding: var(--gap-2) var(--gap-3);
-    background-color: rgb(var(--tip-bg-color) / 0.8);
+    background-color: var(--bg-popover-color);
   }
 }

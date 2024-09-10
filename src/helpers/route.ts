@@ -1,6 +1,4 @@
-import { compact } from '@busymango/utils';
-
-import { sizeOf } from '@/utils';
+import { compact, sizeOf } from '@busymango/utils';
 
 /** 获取上一级面包屑 */
 export const findParentCrumbs = (route?: string) => {

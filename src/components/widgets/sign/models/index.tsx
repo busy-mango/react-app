@@ -25,4 +25,5 @@ export type ISignType =
 export interface ISignLineProps extends ReactSvgProps {
   type?: ISignType;
   ring?: boolean;
+  rect?: boolean;
 }

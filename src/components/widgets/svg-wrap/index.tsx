@@ -1,10 +1,9 @@
-import type { Target, Transition } from 'framer-motion';
+import type { HTMLMotionProps, Target, Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-import type { ReactCFC, ReactMotionDomProps, WrapperProps } from '@/models';
+import type { ReactCFC } from '@/models';
 
-export interface ISVGWrapProps
-  extends ReactMotionDomProps<WrapperProps<HTMLElement>> {
+export interface ISVGWrapProps extends HTMLMotionProps<'i'> {
   x?: string | number;
   y?: string | number;
 }

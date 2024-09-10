@@ -8,12 +8,12 @@ import React, {
 import classNames from 'classnames';
 
 import { isEmptyArray, isFalse, isNumber, isTrue } from '@busymango/is-esm';
-import { dedup, ifnot } from '@busymango/utils';
+import { dedup, iArray, ifnot, sizeOf } from '@busymango/utils';
 import type { VirtualItem } from '@tanstack/react-virtual';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import { useMemoFunc } from '@/hooks';
-import { iArray, iCompact, sizeOf } from '@/utils';
+import { iCompact } from '@/utils';
 
 import { EmptyWrap } from './empty';
 import { estimateSize } from './helpers';

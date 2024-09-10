@@ -7,10 +7,9 @@ import { create } from 'zustand';
 
 import { isNumber } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
-import { assign, contains, theFirst, theLast } from '@busymango/utils';
+import { assign, contains, sizeOf, theFirst, theLast } from '@busymango/utils';
 
 import { useMemoFunc } from '@/hooks';
-import { sizeOf } from '@/utils';
 
 import type {
   ISnackbarActions,

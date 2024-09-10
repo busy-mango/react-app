@@ -15,7 +15,7 @@ import {
   isObject,
   isTrue,
 } from '@busymango/is-esm';
-import { ifnot } from '@busymango/utils';
+import { iArray, ifnot } from '@busymango/utils';
 import {
   FloatingPortal,
   useClick,
@@ -25,10 +25,10 @@ import {
 
 import { iFocusParams, useEventState, useMemoFunc } from '@/hooks';
 import { container } from '@/init';
-import { iArray, iCompact } from '@/utils';
+import { iCompact } from '@/utils';
 
 import { IChip } from '../chip';
-import type { ControlOption, ControlValue } from '../control';
+import type { ControlOption } from '../control';
 import { IControlWrap, useControlState } from '../control';
 import { IFlex } from '../flex';
 import type { IInputRef } from '../input';
@@ -197,9 +197,11 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       onClick?.(event);
     });
 
-    const iSearch = useMemoFunc((value: ControlValue) => {
-      onSearch(value?.toLocaleString());
-    });
+    const iSearch = useMemoFunc(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        onSearch?.(event.target.value?.toLocaleString());
+      }
+    );
 
     const iArrowKeyDown = useMemoFunc(
       ({ code }: React.KeyboardEvent<HTMLInputElement>) => {

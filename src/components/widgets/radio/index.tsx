@@ -11,7 +11,6 @@ import { isBigInt } from '@busymango/is-esm';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISVGWrap } from '../svg-wrap';
-import { IWave } from '../wave';
 import { ICheckedSVG } from './icon';
 import type {
   IRadioInputRender,
@@ -25,9 +24,9 @@ import type {
 import * as styles from './index.scss';
 
 const iRootRender: IRadioRootRender = ({ label, radio, ...others }) => (
-  <span {...others}>
+  <span data-ui-radioroot {...others}>
     {radio}
-    {label}
+    <span className={styles.text}>{label}</span>
   </span>
 );
 
@@ -39,7 +38,7 @@ const iRadioRender: IRadioRender = ({ input, ...others }, { checked }) => (
 );
 
 const iInputRender: IRadioInputRender = (
-  { ref, ...props },
+  { ref, ...others },
   { checked, disabled, readOnly, value }
 ) => (
   <Fragment>
@@ -49,10 +48,9 @@ const iInputRender: IRadioInputRender = (
       readOnly={readOnly}
       type="radio"
       value={isBigInt(value) ? value.toLocaleString() : (value ?? undefined)}
-      {...props}
+      {...others}
       checked={checked ?? false}
     />
-    <IWave className={styles.wave} target={ref} />
   </Fragment>
 );
 
