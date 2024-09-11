@@ -11,14 +11,15 @@ const App: React.FC = () => (
             <p>Content</p>
           </div>
         }
-        render={(props) => (
+        mode="tip"
+        trigger={type.toLowerCase() as Lowercase<typeof type>}
+      >
+        {(props) => (
           <IButton tabIndex={0} {...props}>
             {type} me
           </IButton>
         )}
-        trigger={type.toLowerCase() as Lowercase<typeof type>}
-        type="tip"
-      />
+      </IPopover>
     ))}
   </IFlex>
 );

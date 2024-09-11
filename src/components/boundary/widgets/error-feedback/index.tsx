@@ -62,7 +62,6 @@ export const BoundaryFallbackPage: React.FC = () => {
               }}
             >
               <IButton
-                size="inline"
                 variant="text"
                 onClick={() => {
                   navigate('/', { replace: true });

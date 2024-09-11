@@ -1,95 +1,45 @@
-import {
-  forwardRef,
-  Fragment,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from 'react';
+import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-import { iArray } from '@busymango/utils';
-import type {
-  MiddlewareState,
-  Padding,
-  UseFloatingOptions,
-  UseFloatingReturn,
-} from '@floating-ui/react';
+import { compact, iArray } from '@busymango/utils';
 import {
-  arrow,
   autoUpdate,
-  flip,
   FloatingArrow,
   FloatingPortal,
-  offset,
-  size,
-  useClick,
-  useDismiss,
   useFloating,
-  useFocus,
-  useHover,
-  useInteractions,
-  useRole,
 } from '@floating-ui/react';
 
 import { container } from '@/init';
-import type { ReactTargetType } from '@/models';
 import { iFindElement, size2px } from '@/utils';
 
-import type { InteractionProps } from '../control';
 import { useControlState } from '../control';
+import { useFloatingMotion } from './hooks/motion';
+import { ARROW_HEIGHT, ARROW_RADIUS, iFill, middlewares } from './helpers';
+import { useInterax } from './hooks';
+import type { IPopoverProps, IPopoverRef } from './models';
 
 import * as styles from './index.scss';
-
-export type IPopoverRef = UseFloatingReturn['refs'];
-
-export type IPopoverEvent = 'click' | 'focus' | 'hover';
-
-export interface ApplyFloatingStyle {
-  (
-    params: MiddlewareState & {
-      availableWidth: number;
-      availableHeight: number;
-    }
-  ): Partial<CSSStyleDeclaration>;
-}
-
-export interface IPopoverProps
-  extends Pick<
-    UseFloatingOptions,
-    'open' | 'onOpenChange' | 'placement' | 'transform'
-  > {
-  root?: ReactTargetType;
-  content?: React.ReactNode;
-  padding?: Padding;
-  type?: 'tip' | 'over' | 'confirm';
-  trigger?: IPopoverEvent | IPopoverEvent[];
-  onApplyFloatingStyle?: ApplyFloatingStyle;
-  render?: (props: InteractionProps) => React.ReactNode;
-}
-
-const GAP = 2;
-
-const ARROW_HEIGHT = 7;
 
 export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
   function IPopover(props, ref) {
     const {
       content,
       open: iOpen,
-      type = 'over',
+      mode = 'tip',
+      root = container,
       trigger = 'click',
       transform = false,
-      root = container,
       padding = size2px(5),
+      placement: iPlacement,
       onOpenChange: iOpenChange,
       onApplyFloatingStyle,
-      render,
+      children,
     } = props;
 
-    const iArrow = useRef(null);
+    const events = compact(iArray(trigger));
 
-    const iTriggerList = iArray(trigger);
+    const iArrow = useRef<SVGSVGElement>(null);
 
     const [open, onOpenChange] = useControlState({
       value: iOpen,
@@ -99,104 +49,41 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
     const { refs, context, placement, floatingStyles } = useFloating({
       open,
       transform,
-      placement: props?.placement ?? 'top',
+      placement: iPlacement,
+      middleware: middlewares({ iArrow, padding, onApplyFloatingStyle }),
       whileElementsMounted: autoUpdate,
       onOpenChange,
-      middleware: [
-        offset(ARROW_HEIGHT + GAP),
-        arrow({ element: iArrow }),
-        flip(),
-        size({
-          padding,
-          apply(params) {
-            const { elements, availableWidth, availableHeight } = params;
-            Object.assign(
-              elements.floating.style,
-              onApplyFloatingStyle?.(params) ?? {
-                maxWidth: `${availableWidth}px`,
-                maxHeight: `${availableHeight}px`,
-              }
-            );
-          },
-        }),
-      ],
     });
 
     useImperativeHandle(ref, () => refs, [refs]);
 
-    const role = useRole(context, {
-      role: 'tooltip',
-    });
-    const focus = useFocus(context, {
-      enabled: iTriggerList?.includes('focus'),
-    });
-    const hover = useHover(context, {
-      enabled: iTriggerList?.includes('hover'),
-    });
-    const click = useClick(context, {
-      enabled: iTriggerList?.includes('click'),
-    });
-    const dismiss = useDismiss(context);
+    const motions = useFloatingMotion({ placement });
 
-    const initial = useMemo(() => {
-      if (placement.startsWith('top')) {
-        return { translateY: 5 };
-      }
-      if (placement.startsWith('left')) {
-        return { translateX: 5 };
-      }
-      if (placement.startsWith('right')) {
-        return { translateX: -5 };
-      }
-      if (placement.startsWith('bottom')) {
-        return { translateY: -5 };
-      }
-    }, [placement]);
-
-    const { getReferenceProps, getFloatingProps } = useInteractions([
-      role,
-      click,
-      focus,
-      hover,
-      dismiss,
-    ]);
+    const interax = useInterax(context, { mode, events });
 
     return (
       <Fragment>
-        {render?.({
+        {children?.({
           ref: refs.setReference,
-          ...getReferenceProps(),
+          ...interax.getReferenceProps(),
         })}
         <FloatingPortal root={iFindElement(root)}>
           {context.open && (
             <motion.div
               ref={refs.setFloating}
-              animate={{
-                opacity: 1,
-                translateX: 0,
-                translateY: 0,
-              }}
-              className={classNames(styles.wrap, styles[type])}
-              exit={{
-                ...initial,
-                opacity: 0,
-              }}
-              initial={{
-                opacity: 0,
-                ...initial,
-              }}
+              className={classNames(styles.wrap, styles.tip)}
               style={floatingStyles}
-              {...getFloatingProps()}
+              {...interax.getFloatingProps()}
+              {...motions}
             >
+              <div className={styles.content}>{content}</div>
               <FloatingArrow
                 ref={iArrow}
                 context={context}
-                fill={`rgb(var(--${type}-bg-color))`}
-                fillOpacity={0.8}
+                fill={iFill(mode)}
                 height={ARROW_HEIGHT}
-                tipRadius={2}
+                tipRadius={ARROW_RADIUS}
               />
-              {content}
             </motion.div>
           )}
         </FloatingPortal>
@@ -204,3 +91,6 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
     );
   }
 );
+
+export { iFloatingMaxSize } from './helpers';
+export type * from './models';

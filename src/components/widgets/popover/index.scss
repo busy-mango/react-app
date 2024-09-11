@@ -2,19 +2,27 @@
   box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
-  overflow-y: auto;
+
+  .content {
+    overflow: auto;
+    max-width: inherit;
+    max-height: inherit;
+    border-radius: var(--border-radius-3);
+  }
 
   &.tip,
   &.over,
   &.confirm {
-    border-radius: var(--border-radius-2);
+    background-color: var(--bg-card-color);
   }
 
   &.tip {
-    word-break: break-all;
-    font-size: var(--font-size-3);
     color: var(--font-color-b8);
-    padding: var(--gap-2) var(--gap-3);
-    background-color: var(--bg-popover-color);
+    font-size: var(--font-size-3);
+
+    .content {
+      padding: var(--gap-2) var(--gap-3);
+      background-color: var(--bg-popover-color);
+    }
   }
 }

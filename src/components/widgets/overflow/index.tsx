@@ -6,27 +6,25 @@ import { type PartialPick } from '@busymango/utils';
 
 import { useMemoFunc, useToggle } from '@/hooks';
 import type { ReactCFC, WrapperProps } from '@/models';
-import { isOverflow } from '@/utils';
+import { isOverflow, size2px } from '@/utils';
 
 import type {
   ApplyFloatingStyle,
   IPopoverProps,
   IPopoverRef,
 } from '../popover';
-import { IPopover } from '../popover';
+import { iFloatingMaxSize, IPopover } from '../popover';
 
 import * as styles from './index.scss';
 
-const iApplyFloatingStyle: ApplyFloatingStyle = ({
-  elements,
-  availableHeight,
-}) => ({
-  maxHeight: `${availableHeight / 2}px`,
-  maxWidth: `${elements.reference.getBoundingClientRect().width}px`,
+const iApplyFloatingStyle: ApplyFloatingStyle = (params) => ({
+  maxHeight: iFloatingMaxSize(params, 'height'),
+  maxWidth: `${Math.max(size2px(128), params.rects.reference.width)}px`,
 });
 
 export interface IOverflowProps
   extends WrapperProps<HTMLDivElement>,
+    PartialPick<React.CSSProperties, 'width' | 'minWidth' | 'maxWidth'>,
     PartialPick<IPopoverProps, 'root' | 'onApplyFloatingStyle'> {
   /** 气泡窗中的内容 */
   tip?: React.ReactNode;
@@ -34,12 +32,6 @@ export interface IOverflowProps
   timing?: 'overflow' | 'alway';
   /** 最大行数 */
   maxRow?: number;
-  /** 宽度 */
-  width?: React.CSSProperties['width'];
-  /** 最小宽度 */
-  minWidth?: React.CSSProperties['minWidth'];
-  /** 最大宽度 */
-  maxWidth?: React.CSSProperties['maxWidth'];
 }
 
 export const IOverflow: ReactCFC<IOverflowProps> = (props) => {
@@ -88,8 +80,14 @@ export const IOverflow: ReactCFC<IOverflowProps> = (props) => {
     <IPopover
       ref={refs}
       content={content}
+      mode="tip"
       open={!!content && open}
-      render={(props) => (
+      root={root}
+      trigger="hover"
+      onApplyFloatingStyle={onApplyFloatingStyle}
+      onOpenChange={onChange}
+    >
+      {(props) => (
         <div
           className={classNames(styles.wrap, className)}
           style={iStyle}
@@ -99,11 +97,6 @@ export const IOverflow: ReactCFC<IOverflowProps> = (props) => {
           {children}
         </div>
       )}
-      root={root}
-      trigger="hover"
-      type="tip"
-      onApplyFloatingStyle={onApplyFloatingStyle}
-      onOpenChange={onChange}
-    />
+    </IPopover>
   );
 };
