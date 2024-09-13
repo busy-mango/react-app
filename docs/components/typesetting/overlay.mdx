@@ -1,0 +1,41 @@
+# Overlay 遮罩层
+
+为固定覆盖元素提供基本样式。
+
+使用 `import { IOverlay } from "@/components";`
+
+源码 `/src/components/widgets/overlay`
+
+## 何时使用
+
+* 锁定主体滚动
+
+* 使内容变暗或阻止浮层元素后面的指针事件。
+
+## 代码演示
+
+### 基本用法
+
+使用基本样式呈现`<div/>`。
+
+<code src='@/examples/overlay/basic' />
+
+{/* ### 锁定主体滚动 */}
+
+{/* 渲染覆盖层时是否阻止`<body/>`滚动。适用于`iOS`。
+
+> 如果您需要更高级的解决方案，`react-remove-scroll`是一个不错的选择。
+
+<code src='@/examples/overlay/advanced' />
+
+## API
+
+| Name | Type | Default | Description |
+|-------|-------|-------|-------|
+| `scroll` | `boolean` | `true` | Whether the `<body>` is prevented from scrolling while the overlay is rendered. Uses a robust technique that works on iOS and handles horizontal scrolling. |
+
+## 常见问题
+
+### 兄弟节点覆盖问题
+
+在可滚动上下文中使用锚定位和覆盖层时，最好使覆盖层成为浮动元素的同级元素，而不是父容器。这将确保浮动元素不会被覆盖层包含，从而允许其定位在其边界之外，从而防止滚动问题。它还允许叠加层独立地设置动画。 */}

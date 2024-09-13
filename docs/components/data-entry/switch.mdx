@@ -1,0 +1,44 @@
+# Switch 开关
+
+使用开关切换两种互斥的状态。
+
+使用 `import { ISwitch } from "@/components";`
+
+源码 `components/widgets/switch`
+
+## 何时使用
+
+* 需要表示开关状态/两种互斥的状态的切换时。
+
+* `Checkbox`组件一般用于状态标记，需要和提交操作配合。
+
+## 代码演示
+
+### 基本用法
+
+<code src='@/examples/switch/basic' />
+
+### 携带文本
+
+<code src='@/examples/switch/copywriter' />
+
+### 异步状态
+
+<code src='@/examples/button/size' />
+
+
+## API
+
+| Name          | Type                                    | Default      | Description                                                                                                                                                     |
+| ------------- | --------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `capsule`     | `boolean`                               | `-`          | Whether to get focus by default.                                                                                                                                |
+| `danger`      | `boolean`                               | `-`          | Icon for the clear button, default is true to show the default icon, set false to disable the clear button.                                                     |
+| `debounce`    | `boolean` \| `number`                   | `-`          | The default value. Use when the component is not controlled.                                                                                                    |
+| `icon`        | `ReactNode`                             | `-`          | Option filter configuration.                                                                                                                                    |
+| `isFullWidth` | `boolean`                               | `-`          | Floating element className.                                                                                                                                     |
+| `isLoading`   | `boolean`                               | `-`          | Control loading UI.                                                                                                                                             |
+| `size`        | `ControlUISize`                         | `medium`     | If true, floating will open on mount.                                                                                                                           |
+| `variant`     | `'filled'` \| `'bordered'` \| `'text'`  | `bordered`   | Control search text state.                                                                                                                                      |
+| `wave`        | `boolean`                               | `-`          | Set scrollable height.                                                                                                                                          |
+
+## Troubleshooting

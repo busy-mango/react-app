@@ -237,6 +237,8 @@
 
   /* 背景色 */
   --bg-color: rgb(var(--gray-color-80) / 1);
+  /* 滑块背景色 */
+  --bg-thumb-color: rgb(var(--gray-color-900) / 1);
   /* 容器背景色 */
   --bg-warp-color: rgb(var(--gray-color-400) / 0.3);
   /* 卡片背景色 */

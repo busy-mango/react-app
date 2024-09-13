@@ -15,6 +15,7 @@ export * from './marker';
 export * from './modal';
 export * from './motion-panel';
 export * from './overflow';
+export * from './overlay';
 export * from './picker';
 export * from './popover';
 export * from './radio';
