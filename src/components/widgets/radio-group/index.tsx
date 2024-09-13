@@ -35,6 +35,7 @@ export const IRadioGroup: React.FC<IRadioGroupProps> = (props) => {
       checked={current === option.value}
       defaultChecked={defaultValue === option.value}
       direction={direction}
+      label={option.value?.toLocaleString()}
       name={name}
       readOnly={assert.isReadOnly}
       render={render}

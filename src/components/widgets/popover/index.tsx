@@ -67,8 +67,8 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
           ref: refs.setReference,
           ...interax.getReferenceProps(),
         })}
-        <FloatingPortal root={iFindElement(root)}>
-          {context.open && (
+        {context.open && (
+          <FloatingPortal root={iFindElement(root)}>
             <motion.div
               ref={refs.setFloating}
               className={classNames(styles.wrap, styles.tip)}
@@ -85,8 +85,8 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
                 tipRadius={ARROW_RADIUS}
               />
             </motion.div>
-          )}
-        </FloatingPortal>
+          </FloatingPortal>
+        )}
       </Fragment>
     );
   }

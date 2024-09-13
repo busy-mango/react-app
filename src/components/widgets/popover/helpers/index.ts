@@ -1,14 +1,7 @@
 import { isNumber } from '@busymango/is-esm';
 import { capitalize, ifnot } from '@busymango/utils';
 import type { Padding } from '@floating-ui/react';
-import {
-  arrow,
-  flip,
-  limitShift,
-  offset,
-  shift,
-  size,
-} from '@floating-ui/react';
+import { arrow, flip, hide, offset, shift, size } from '@floating-ui/react';
 
 import { size2px } from '@/utils';
 
@@ -43,6 +36,7 @@ export const iFloatingMaxSize = (
 ) => {
   const { elements } = params;
   const size = capitalize(mode);
+  console.log(params);
   const availableSize = params[`available${size}`];
   const scrollSize = elements.floating[`scroll${size}`];
   const maxSize = ifnot(
@@ -56,11 +50,22 @@ export const middlewares = ({
   padding,
   onApplyFloatingStyle,
 }: MiddlewareOpts) => [
-  offset(OFFSET),
-  shift({ limiter: limitShift({ offset: OFFSET }) }),
-  flip(),
+  offset({
+    mainAxis: OFFSET,
+    crossAxis: OFFSET,
+  }),
+  flip({
+    padding,
+    crossAxis: true,
+    elementContext: 'reference',
+    fallbackAxisSideDirection: 'start',
+  }),
+  shift({
+    elementContext: 'reference',
+  }),
   size({
     padding,
+    elementContext: 'reference',
     apply(params) {
       Object.assign(
         params.elements.floating.style,
@@ -71,5 +76,6 @@ export const middlewares = ({
       );
     },
   }),
-  arrow({ element: iArrow }),
+  arrow({ element: iArrow, padding }),
+  hide({ strategy: 'escaped', padding, elementContext: 'reference' }),
 ];
