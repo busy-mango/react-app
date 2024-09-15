@@ -30,8 +30,10 @@ const dotenv = assign<{
 export default defineConfig({
   // 文档根目录
   root: 'docs',
+  icon: './assets/favicon.svg',
   plugins: [pluginPreview()],
   globalStyles: join(dir.static, 'themes/dark.css'),
+  globalUIComponents: [join(dir.docs, 'effects.tsx')],
   builderConfig: {
     source: {
       define: {

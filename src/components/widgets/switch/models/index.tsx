@@ -3,6 +3,8 @@
 // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
 // └─────────────────────────────────────────────────────────────────────┘
 
+import type { HTMLMotionProps } from 'framer-motion';
+
 import type { PlainObject } from '@busymango/is-esm';
 
 import type { WrapperProps } from '@/models';
@@ -51,7 +53,7 @@ export interface ISwitchRef {
 
 export type ISwitchRootRender = IRender<
   WrapperProps & {
-    icon?: React.ReactNode;
+    thumb?: React.ReactNode;
     input?: React.ReactNode;
     label?: React.ReactNode;
     ref: React.RefObject<HTMLDivElement>;
@@ -59,6 +61,12 @@ export type ISwitchRootRender = IRender<
 >;
 
 export type ISwitchIconRender = IRender;
+
+export type ISwitchThumbRender = IRender<
+  {
+    icon?: React.ReactNode;
+  } & HTMLMotionProps<'div'>
+>;
 
 export type ISwitchInputRender = IRender<
   ISwitchInputProps & {
@@ -85,6 +93,7 @@ type ISwitchRenders = {
   root?: ISwitchRootRender;
   input?: ISwitchInputRender;
   label?: ISwitchLabelRender;
+  thumb?: ISwitchThumbRender;
 };
 
 export interface ISwitchProps

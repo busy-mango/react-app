@@ -1,0 +1,453 @@
+#root.light {
+  --orange-color-50: 255 247 237;
+  --orange-color-100: 255 242 224;
+  --orange-color-200: 255 226 189;
+  --orange-color-300: 255 191 122;
+  --orange-color-400: 255 157 71;
+  --orange-color-500: 255 121 37;
+  --orange-color-600: 249 92 9;
+  --orange-color-700: 184 64 16;
+  --orange-color-800: 148 41 8;
+  --orange-color-900: 112 23 3;
+
+  --sunset-color-50: 255 247 232;
+  --sunset-color-100: 255 241 209;
+  --sunset-color-200: 255 223 162;
+  --sunset-color-300: 255 195 104;
+  --sunset-color-400: 255 173 69;
+  --sunset-color-500: 255 153 23;
+  --sunset-color-600: 213 117 17;
+  --sunset-color-700: 170 85 12;
+  --sunset-color-800: 128 57 8;
+  --sunset-color-900: 85 33 4;
+
+  --sunglow-color-50: 253 255 214;
+  --sunglow-color-100: 250 250 160;
+  --sunglow-color-200: 250 246 109;
+  --sunglow-color-300: 250 237 68;
+  --sunglow-color-400: 250 226 21;
+  --sunglow-color-500: 246 205 0;
+  --sunglow-color-600: 220 161 0;
+  --sunglow-color-700: 193 130 2;
+  --sunglow-color-800: 110 64 0;
+  --sunglow-color-900: 73 39 0;
+
+  --shamrock-color-50: 249 255 224;
+  --shamrock-color-100: 233 248 187;
+  --shamrock-color-200: 214 241 144;
+  --shamrock-color-300: 201 233 104;
+  --shamrock-color-400: 181 226 65;
+  --shamrock-color-500: 159 219 29;
+  --shamrock-color-600: 129 182 22;
+  --shamrock-color-700: 101 146 16;
+  --shamrock-color-800: 58 92 6;
+  --shamrock-color-900: 48 73 7;
+
+  --green-color-50: 242 252 244;
+  --green-color-100: 215 245 219;
+  --green-color-200: 170 229 182;
+  --green-color-300: 132 219 152;
+  --green-color-400: 83 212 118;
+  --green-color-500: 35 191 90;
+  --green-color-600: 1 166 64;
+  --green-color-700: 1 144 60;
+  --green-color-800: 1 117 55;
+  --green-color-900: 2 99 53;
+
+  --viking-color-50: 232 255 251;
+  --viking-color-100: 183 244 236;
+  --viking-color-200: 137 233 224;
+  --viking-color-300: 94 223 214;
+  --viking-color-400: 55 212 207;
+  --viking-color-500: 20 201 201;
+  --viking-color-600: 13 165 170;
+  --viking-color-700: 11 130 134;
+  --viking-color-800: 7 96 101;
+  --viking-color-900: 4 63 67;
+
+  --malibu-color-50: 235 246 255;
+  --malibu-color-100: 181 224 255;
+  --malibu-color-200: 148 210 255;
+  --malibu-color-300: 117 197 255;
+  --malibu-color-400: 74 179 255;
+  --malibu-color-500: 37 164 255;
+  --malibu-color-600: 2 135 232;
+  --malibu-color-700: 16 108 184;
+  --malibu-color-800: 8 83 148;
+  --malibu-color-900: 3 59 112;
+
+  --blue-color-50: 235 243 255;
+  --blue-color-100: 224 236 255;
+  --blue-color-200: 184 209 252;
+  --blue-color-300: 119 165 245;
+  --blue-color-400: 78 134 245;
+  --blue-color-500: 48 112 240;
+  --blue-color-600: 24 82 218;
+  --blue-color-700: 15 60 183;
+  --blue-color-800: 4 40 137;
+  --blue-color-900: 8 32 97;
+
+  --dodger-color-50: 232 243 255;
+  --dodger-color-100: 190 218 255;
+  --dodger-color-200: 148 191 255;
+  --dodger-color-300: 106 161 255;
+  --dodger-color-400: 64 128 255;
+  --dodger-color-500: 22 93 255;
+  --dodger-color-600: 11 67 221;
+  --dodger-color-700: 5 53 184;
+  --dodger-color-800: 0 38 148;
+  --dodger-color-900: 0 27 112;
+
+  --heliotrope-color-50: 232 236 255;
+  --heliotrope-color-100: 205 213 255;
+  --heliotrope-color-200: 179 188 255;
+  --heliotrope-color-300: 152 161 255;
+  --heliotrope-color-400: 126 132 255;
+  --heliotrope-color-500: 99 102 255;
+  --heliotrope-color-600: 79 79 219;
+  --heliotrope-color-700: 62 60 184;
+  --heliotrope-color-800: 47 44 148;
+  --heliotrope-color-900: 34 30 112;
+
+  --violet-color-50: 245 232 255;
+  --violet-color-100: 231 201 255;
+  --violet-color-200: 214 170 255;
+  --violet-color-300: 195 139 255;
+  --violet-color-400: 174 108 255;
+  --violet-color-500: 151 76 255;
+  --violet-color-600: 121 59 219;
+  --violet-color-700: 93 44 184;
+  --violet-color-800: 68 31 148;
+  --violet-color-900: 46 20 112;
+
+  --purple-color-50: 255 232 251;
+  --purple-color-100: 251 188 243;
+  --purple-color-200: 247 145 237;
+  --purple-color-300: 243 103 234;
+  --purple-color-400: 239 62 233;
+  --purple-color-500: 235 23 235;
+  --purple-color-600: 189 14 195;
+  --purple-color-700: 153 6 164;
+  --purple-color-800: 115 1 128;
+  --purple-color-900: 80 0 92;
+
+  --rosein-color-50: 255 232 241;
+  --rosein-color-100: 255 193 219;
+  --rosein-color-200: 255 154 199;
+  --rosein-color-300: 255 114 182;
+  --rosein-color-400: 255 75 168;
+  --rosein-color-500: 255 36 157;
+  --rosein-color-600: 219 24 139;
+  --rosein-color-700: 184 15 119;
+  --rosein-color-800: 148 8 99;
+  --rosein-color-900: 112 2 78;
+
+  --red-color-50: 255 245 246;
+  --red-color-100: 255 231 232;
+  --red-color-200: 255 191 199;
+  --red-color-300: 255 153 165;
+  --red-color-400: 255 102 122;
+  --red-color-500: 250 60 82;
+  --red-color-600: 242 36 64;
+  --red-color-700: 220 27 53;
+  --red-color-800: 194 17 47;
+  --red-color-900: 174 1 41;
+
+  --gray-color-00: 255 255 255;
+  --gray-color-50: 245 246 250;
+  --gray-color-100: 237 239 245;
+  --gray-color-200: 223 226 235;
+  --gray-color-300: 197 200 212;
+  --gray-color-400: 142 150 171;
+  --gray-color-500: 128 136 156;
+  --gray-color-600: 102 109 132;
+  --gray-color-700: 76 82 105;
+  --gray-color-800: 57 63 82;
+  --gray-color-900: 23 23 31;
+  --gray-color-1000: 0 0 0;
+  --gray-color-150: 233 235 242;
+
+  /* 主题色 - 默认 */
+  --primary-color: rgb(var(--blue-color-600) / 1);
+  /* 主题色 - 悬浮态 */
+  --primary-color-hover: rgb(var(--blue-color-500) / 1);
+  /* 主题色 - 激活态 */
+  --primary-color-active: rgb(var(--blue-color-700) / 1);
+  /* 主题色 - 禁用态 */
+  --primary-color-disabled: rgb(var(--blue-color-200) / 1);
+
+  /* 信息色 - 默认 */
+  --info-color: rgb(var(--blue-color-500) / 1);
+  /* 信息色 - 悬浮态 */
+  --info-color-hover: rgb(var(--blue-color-400) / 1);
+  /* 信息色 - 激活态 */
+  --info-color-active: rgb(var(--blue-color-600) / 1);
+  /* 信息色 - 禁用态 */
+  --info-color-disabled: rgb(var(--blue-color-200) / 1);
+
+  /* 警告色 - 默认 */
+  --warn-color: rgb(var(--orange-color-500) / 1);
+  /* 警告色 - 悬浮态 */
+  --warn-color-hover: rgb(var(--orange-color-400) / 1);
+  /* 警告色 - 激活态 */
+  --warn-color-active: rgb(var(--orange-color-600) / 1);
+  /* 警告色 - 禁用态 */
+  --warn-color-disabled: rgb(var(--orange-color-200) / 1);
+
+  /* 成功色 - 默认 */
+  --success-color: rgb(var(--green-color-500) / 1);
+  /* 成功色 - 悬浮态 */
+  --success-color-hover: rgb(var(--green-color-400) / 1);
+  /* 成功色 - 激活态 */
+  --success-color-active: rgb(var(--green-color-600) / 1);
+  /* 成功色 - 禁用态 */
+  --success-color-disabled: rgb(var(--green-color-200) / 1);
+
+  /* 危险色 - 默认 */
+  --danger-color: rgb(var(--red-color-500) / 1);
+  /* 危险色 - 悬浮态 */
+  --danger-color-hover: rgb(var(--red-color-400) / 1);
+  /* 危险色 - 激活态 */
+  --danger-color-active: rgb(var(--red-color-600) / 1);
+  /* 危险色 - 禁用态 */
+  --danger-color-disabled: rgb(var(--red-color-200) / 1);
+
+  /* 自然色 - 默认 */
+  --natural-color: rgb(var(--gray-color-400) / 1);
+  /* 自然色 - 悬浮态 */
+  --natural-color-hover: rgb(var(--gray-color-300) / 1);
+  /* 自然色 - 激活态 */
+  --natural-color-active: rgb(var(--gray-color-500) / 1);
+  /* 自然色 - 禁用态 */
+  --natural-color-disabled: rgb(var(--gray-color-200) / 1);
+
+  --font-color-2: rgb(var(--gray-color-200) / 0.75);
+  --font-color-4: rgb(var(--gray-color-400) / 0.8);
+  --font-color-6: rgb(var(--gray-color-500) / 1);
+  --font-color-8: rgb(var(--gray-color-700) / 1);
+  --font-color-10: rgb(var(--gray-color-900) / 1);
+  --font-color-b8: rgb(var(--gray-color-00) / 1);
+
+  --font-icon-color: rgb(var(--gray-color-700) / 1);
+  --font-info-color: rgb(var(--blue-color-600) / 1);
+  --font-warn-color: rgb(var(--orange-color-600) / 1);
+  --font-danger-color: rgb(var(--red-color-700) / 1);
+  --font-success-color: rgb(var(--green-color-700) / 1);
+  --font-disabled-color: rgb(var(--gray-color-600) / 0.9);
+
+  /* 背景色 */
+  --bg-color: rgb(var(--gray-color-00) / 1);
+  /* 滑块背景色 */
+  --bg-thumb-color: rgb(var(--gray-color-00) / 1);
+  /* 容器背景色 */
+  --bg-warp-color: rgb(var(--gray-color-150) / 1);
+  /* 卡片背景色 0 */
+  --bg-card-color: rgb(var(--gray-color-00) / 1);
+  /* 菜单背景色 */
+  --bg-menu-color: rgb(var(--gray-color-00) / 1);
+  /* 小贴士背景色 */
+  --bg-tips-color: rgb(var(--gray-color-900) / 1);
+  /* 浮层背景色 */
+  --bg-popover-color: rgb(var(--gray-color-25) / 0.9);
+  /* 控件背景色 */
+  --bg-control-color: rgb(var(--gray-color-50) / 1);
+  /* 组件背景色 */
+  --bg-component-color: rgb(var(--gray-color-00) / 1);
+  /* 导航栏背景色 */
+  --bg-navbar-color: rgb(var(--gray-color-150) / 1);
+  /* 遮罩层背景色 */
+  --bg-mask-color: rgb(var(--gray-color-600) / 0.4);
+
+  --fill-hover-color: rgb(var(--gray-color-400) / 0.1);
+  --fill-active-color: rgb(var(--gray-color-400) / 0.2);
+  --fill-select-color: rgb(var(--blue-color-500) / 0.08);
+
+  --cell-hover-color: rgb(var(--gray-color-50) / 1);
+  --cell-active-color: rgb(var(--gray-color-100) / 1);
+  --cell-select-color: rgb(var(--blue-color-50) / 1);
+
+  --wave-color-1: rgb(82 11 239 / 0.05);
+  --wave-color-2: rgb(82 11 239 / 0.2);
+  --wave-color-3: rgb(82 11 239 / 0);
+
+  --border-color-1: rgb(var(--gray-color-100) / 0.8);
+  --border-color-2: rgb(var(--gray-color-150) / 1);
+  --border-color-3: rgb(var(--gray-color-200) / 1);
+  --border-hover-color: rgb(var(--dodger-color-600) / 1);
+  --border-active-color: rgb(var(--dodger-color-500) / 1);
+  --border-disabled-color: rgb(var(--gray-color-700) / 1);
+
+  --shadow-01: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  --shadow-02: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  --shadow-03: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+  --shadow-04: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  --shadow-06: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  --shadow-08: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --shadow-12: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+  --shadow-16: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+  --shadow-24: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+#root.light {
+  width: 100vw;
+  height: 100vh;
+
+  --z-index-popup: 1000;
+  --z-index-dropdown: 999;
+  --z-index-affix: 999;
+  --z-index-modal: 1001;
+  --z-index-drawer: 1001;
+  --z-index-tip: 999;
+  --z-index-toast: 1003;
+  --z-index-notification: 1003;
+  --z-index-preview: 1003;
+  --z-index-badge: auto;
+  --z-index-fixed: 990;
+
+  color: var(--font-color-8);
+  font-size: var(--font-size-4);
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: var(--bg-control-color);
+  }
+}
+
+/* PC Web */
+@media screen and (min-width: 1360px) {
+  #root {
+    height: 100dvh;
+  }
+
+  #root {
+    --gap-1: 2px;
+    --gap-2: 4px;
+    --gap-3: 8px;
+    --gap-4: 10px;
+    --gap-5: 12px;
+    --gap-6: 16px;
+    --gap-7: 20px;
+    --gap-8: 24px;
+    --gap-9: 36px;
+    --gap-10: 48px;
+
+    --font-size-1: 8px;
+    --font-size-2: 10px;
+    --font-size-3: 12px;
+    --font-size-4: 14px;
+    --font-size-5: 15px;
+    --font-size-6: 16px;
+    --font-size-8: 20px;
+    --font-size-9: 24px;
+    --font-size-10: 28px;
+
+    --control-size-1: 14px;
+    --control-size-2: 16px;
+    --control-size-3: 20px;
+    --control-size-4: 24px;
+    --control-size-5: 28px;
+    --control-size-6: 32px;
+    --control-size-7: 40px;
+    --control-size-8: 48px;
+
+    --border-radius-2: 4px;
+    --border-radius-3: 6px;
+    --border-radius-6: 12px;
+  }
+}
+
+/* iPad */
+@media screen and (min-width: 430px) and (max-width: 1360px) {
+  #root {
+    height: 100dvh;
+  }
+
+  #root {
+    --gap-1: 2px;
+    --gap-2: 4px;
+    --gap-3: 8px;
+    --gap-4: 10px;
+    --gap-5: 12px;
+    --gap-6: 16px;
+    --gap-7: 20px;
+    --gap-8: 24px;
+    --gap-9: 36px;
+    --gap-10: 48px;
+
+    --font-size-1: 8px;
+    --font-size-2: 10px;
+    --font-size-3: 12px;
+    --font-size-4: 14px;
+    --font-size-5: 15px;
+    --font-size-6: 16px;
+    --font-size-8: 20px;
+    --font-size-9: 24px;
+    --font-size-10: 28px;
+
+    --control-size-1: 14px;
+    --control-size-2: 16px;
+    --control-size-3: 20px;
+    --control-size-4: 24px;
+    --control-size-5: 28px;
+    --control-size-6: 32px;
+    --control-size-7: 40px;
+    --control-size-8: 48px;
+
+    --border-radius-2: 4px;
+    --border-radius-3: 6px;
+    --border-radius-6: 12px;
+  }
+}
+
+/* iPhone */
+@media screen and (max-width: 430px) {
+  #root {
+    height: 100dvh;
+  }
+
+  #root {
+    --gap-1: calc(2vw / 3.75);
+    --gap-2: calc(4vw / 3.75);
+    --gap-3: calc(8vw / 3.75);
+    --gap-4: calc(10vw / 3.75);
+    --gap-5: calc(12vw / 3.75);
+    --gap-6: calc(16vw / 3.75);
+    --gap-7: calc(20vw / 3.75);
+    --gap-8: calc(24vw / 3.75);
+    --gap-9: calc(36vw / 3.75);
+    --gap-10: calc(48vw / 3.75);
+
+    --font-size-1: calc(8vw / 3.75);
+    --font-size-2: calc(10vw / 3.75);
+    --font-size-3: calc(12vw / 3.75);
+    --font-size-4: calc(14vw / 3.75);
+    --font-size-5: calc(15vw / 3.75);
+    --font-size-6: calc(16vw / 3.75);
+    --font-size-8: calc(20vw / 3.75);
+    --font-size-9: calc(24vw / 3.75);
+    --font-size-10: calc(28vw / 3.75);
+
+    --control-size-1: calc(14vw / 3.75);
+    --control-size-2: calc(16vw / 3.75);
+    --control-size-3: calc(20vw / 3.75);
+    --control-size-4: calc(24vw / 3.75);
+    --control-size-5: calc(28vw / 3.75);
+    --control-size-6: calc(32vw / 3.75);
+    --control-size-7: calc(40vw / 3.75);
+    --control-size-8: calc(48vw / 3.75);
+
+    --border-radius-2: calc(4vw / 3.75);
+    --border-radius-3: calc(6vw / 3.75);
+    --border-radius-6: calc(12vw / 3.75);
+  }
+}

@@ -1,7 +1,9 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import type { Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
+
+import { ifnot } from '@busymango/utils';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISpinner } from '../spinners';
@@ -10,6 +12,7 @@ import type {
   ISwitchProps,
   ISwitchRef,
   ISwitchRootRender,
+  ISwitchThumbRender,
 } from './models';
 
 import * as styles from './index.scss';
@@ -21,21 +24,26 @@ const spring: Transition = {
 };
 
 const iRootRender: ISwitchRootRender = (
-  { input, icon, label, className },
-  { isLoading, pattren }
+  { input, thumb, label, className },
+  { pattren }
 ) => (
   <span data-ui-switchroot className={className}>
     <motion.div layout className={styles.label} transition={spring}>
       {label}
     </motion.div>
     {pattren !== 'readPretty' && (
-      <motion.div layout className={styles.handle} transition={spring}>
-        {isLoading ? <ISpinner /> : icon}
-      </motion.div>
+      <Fragment>
+        {thumb}
+        {input}
+      </Fragment>
     )}
-    {pattren !== 'readPretty' && input}
   </span>
 );
+
+const iThumbRender: ISwitchThumbRender = (
+  { icon, ...others },
+  { isLoading }
+) => <motion.div {...others}>{isLoading ? <ISpinner /> : icon}</motion.div>;
 
 const iInputRender: ISwitchInputRender = (
   { ref, value, ...props },
@@ -101,18 +109,36 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
           iChecked && styles.checked
         ),
         label: render?.label?.({}, states),
+        thumb: (render?.thumb ?? iThumbRender)(
+          {
+            layout: true,
+            transition: spring,
+            className: styles.thumb,
+            icon: render?.icon?.({}, states),
+          },
+          states
+        ),
         input: (render?.input ?? iInputRender)(
           {
             ...others,
             ref: input,
-            onChange: iChange,
             className: classNames(styles.input, className),
+            onChange: ifnot(pattren === 'editable' && iChange),
           },
           states
         ),
-        icon: render?.icon?.({}, states),
       },
       states
     );
   }
 );
+
+export type {
+  ISwitchIconRender,
+  ISwitchInputRender,
+  ISwitchLabelRender,
+  ISwitchProps,
+  ISwitchRef,
+  ISwitchRootRender,
+  ISwitchThumbRender,
+} from './models';

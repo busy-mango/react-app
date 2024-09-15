@@ -1,18 +1,14 @@
-/* 通用样式 */
-.sticky-wrap,
-.sticky-shadow-wrap {
-  bottom: 0;
-  width: 100%;
-  position: sticky;
-  padding: var(--gap-2);
-  box-sizing: border-box;
-  z-index: var(--z-index-fixed);
-}
+// /* 通用样式 */
+// .sticky-wrap,
+// .sticky-shadow-wrap {
+//   bottom: 0;
+//   width: 100%;
+//   position: sticky;
+//   padding: var(--gap-2);
+//   box-sizing: border-box;
+//   z-index: var(--z-index-fixed);
+// }
 
-.sticky-shadow-wrap {
-  background-color: rgb(var(--comp-bg-color));
-  box-shadow:
-    0px 3px 3px -2px rgba(0, 0, 0, 0.2),
-    0px 3px 4px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 8px 0px rgba(0, 0, 0, 0.12);
-}
+// .sticky-shadow-wrap {
+//   background-color: rgb(var(--comp-bg-color));
+// }

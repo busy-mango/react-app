@@ -46,7 +46,6 @@ const Welcome: React.FC = () => {
       />
       <div className={styles.area}>{t('common:Confirm')}</div>
       <div className={styles.area}>{t('common:Confirm')}</div>
-      <div className={styles.stickey}>stickey</div>
     </ISafeArea>
   );
 };

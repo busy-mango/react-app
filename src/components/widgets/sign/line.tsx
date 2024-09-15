@@ -13,7 +13,7 @@ export const ISignLine: React.FC<ISignLineProps> = ({
   style,
   ...others
 }) => (
-  <svg
+  <motion.svg
     fill="none"
     height="1em"
     stroke="currentColor"
@@ -69,5 +69,5 @@ export const ISignLine: React.FC<ISignLineProps> = ({
       {type === 'helper' && <IHelperPath key="helper" />}
       {type === 'magnifier' && <IMagnifierPath key="magnifier" />}
     </AnimatePresence>
-  </svg>
+  </motion.svg>
 );

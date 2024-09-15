@@ -12,6 +12,7 @@ import { container, i18nInit } from '@/init';
 import { catchMsg } from './utils';
 
 import '@/styles/normalize.css';
+import '@/styles/transition.css';
 import '@/styles/atom.global.scss';
 
 const root = createRoot(container);

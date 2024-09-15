@@ -22,6 +22,8 @@ export const dirname = cwd;
 /** 默认路径 */
 export const dir = {
   src: resolve(dirname, 'src'),
+  /** 文档路径 */
+  docs: resolve(dirname, 'docs'),
   /** 默认打包路径 */
   dist: resolve(dirname, 'dist'),
   /** 默认 环境变量 路径 */

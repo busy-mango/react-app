@@ -70,6 +70,7 @@
     "helpers/**/*",
     "src/**/*",
     "test/**/*",
+    "docs/**/*.tsx",
     "types/**/*",
     "utils/**/*",
     "global.d.ts",

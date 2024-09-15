@@ -1,4 +1,4 @@
-import type { ReactSvgProps } from '@/models';
+import type { SVGMotionProps } from 'framer-motion';
 
 /**
  * TODO: refresh
@@ -22,7 +22,7 @@ export type ISignType =
   | 'arrowDoubleRight'
   | 'arrowDoubleBottom';
 
-export interface ISignLineProps extends ReactSvgProps {
+export interface ISignLineProps extends SVGMotionProps<SVGSVGElement> {
   type?: ISignType;
   ring?: boolean;
   rect?: boolean;

@@ -166,6 +166,7 @@
   --gray-color-700: 142 150 171;
   --gray-color-800: 197 200 212;
   --gray-color-900: 240 242 247;
+  --gray-color-1000: 255 255 255;
 
   /* 主题色 - 默认 */
   --primary-color: rgb(var(--blue-color-600) / 1);
@@ -245,12 +246,26 @@
   --bg-card-color: rgb(var(--gray-color-100) / 1);
   /* 菜单背景色 */
   --bg-menu-color: rgb(var(--gray-color-200) / 1);
+  /* 小贴士背景色 */
+  --bg-tips-color: rgb(var(--gray-color-900) / 1);
   /* 浮层背景色 */
   --bg-popover-color: rgb(var(--gray-color-25) / 0.9);
   /* 控件背景色 */
   --bg-control-color: rgb(var(--gray-color-50) / 1);
   /* 组件背景色 */
   --bg-component-color: rgb(var(--gray-color-400) / 0.5);
+  /* 导航栏背景色 */
+  --bg-navbar-color: rgb(var(--gray-color-25) / 1);
+  /* 遮罩层背景色 */
+  --bg-mask-color: rgb(var(--gray-color-00) / 0.4);
+
+  --fill-hover-color: rgb(var(--gray-color-600) / 0.2);
+  --fill-active-color: rgb(var(--gray-color-600) / 0.35);
+  --fill-select-color: rgb(var(--blue-color-700) / 0.12);
+
+  --cell-hover-color: rgb(var(--gray-color-100) / 1);
+  --cell-active-color: rgb(var(--gray-color-200) / 1);
+  --cell-select-color: rgb(var(--blue-color-50) / 1);
 
   --wave-color-1: rgb(var(--heliotrope-color-600) / 0.05);
   --wave-color-2: rgb(var(--heliotrope-color-600) / 0.2);
@@ -262,6 +277,16 @@
   --border-hover-color: rgb(var(--dodger-color-600) / 1);
   --border-active-color: rgb(var(--dodger-color-500) / 1);
   --border-disabled-color: rgb(var(--gray-color-700) / 1);
+
+  --shadow-01: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  --shadow-02: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  --shadow-03: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+  --shadow-04: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  --shadow-06: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  --shadow-08: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --shadow-12: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+  --shadow-16: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+  --shadow-24: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 
 #root.dark {

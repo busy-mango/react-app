@@ -6,8 +6,6 @@
   width: 100%;
   height: 100%;
 
-  cursor: pointer;
-
   z-index: 1;
   opacity: 0;
 }
@@ -19,16 +17,15 @@
 
   text-wrap: nowrap;
   font-size: inherit;
-  padding: 0 var(--gap-1);
 }
 
-.handle {
-  z-index: 0;
+.thumb {
   flex-shrink: 0;
   border-radius: 50%;
 
   display: flex;
   align-items: center;
+  pointer-events: none;
   justify-content: center;
   color: var(--font-info-color);
   background-color: var(--bg-thumb-color);
@@ -38,12 +35,26 @@
   position: relative;
 
   display: inline-flex;
-
   align-items: center;
   justify-content: space-between;
 
-  color: var(--font-color-b8);
-  background-color: var(--primary-color);
+  transition-duration: 300ms;
+  transition-property: background-color;
+  transition-timing-function: var(--ease-in-back);
+
+  & > .input {
+    position: absolute;
+  }
+
+  & > .label {
+    height: var(--iswitch-size);
+    min-width: var(--iswitch-size);
+  }
+
+  & > .thumb {
+    width: var(--iswitch-size);
+    height: var(--iswitch-size);
+  }
 
   &.checked {
     flex-direction: row;
@@ -53,64 +64,73 @@
     flex-direction: row-reverse;
   }
 
-  &.mini {
-    padding: var(--gap-1);
-    height: var(--control-size-2);
-
-    --iswitch-size: calc(var(--control-size-2) - var(--gap-1) * 2);
-
-    & > .label {
-      font-size: var(--font-size-3);
-    }
-  }
-
-  &.medium {
-    padding: calc(var(--gap-1) * 1.5);
-    height: var(--control-size-4);
-
-    --iswitch-size: calc(var(--control-size-4) - var(--gap-1) * 3);
-
-    & > .label {
-      font-size: var(--font-size-4);
-    }
-  }
-
-  &.huge {
-    padding: var(--gap-2);
-    height: var(--control-size-5);
-
-    --iswitch-size: calc(var(--control-size-5) - var(--gap-2) * 2);
-
-    & > .label {
-      font-size: var(--font-size-6);
-    }
-  }
-
-  & {
-    border-radius: var(--iswitch-size);
-  }
-
-  & > .label {
-    height: var(--iswitch-size);
-    min-width: var(--iswitch-size);
-  }
-
-  & > .handle {
-    width: var(--iswitch-size);
-    height: var(--iswitch-size);
-  }
-
   &.editable,
-  &.read-only,
-  &.read-pretty {
-    font-family: inherit;
+  &.read-only {
+    &.checked {
+      background-color: var(--primary-color);
+    }
+
+    &:not(.checked) {
+      background-color: var(--natural-color);
+    }
+  }
+
+  &.editable {
+    & > input {
+      cursor: pointer;
+    }
   }
 
   &.disabled {
+    cursor: not-allowed;
     color: var(--font-disabled-color);
+    background-color: var(--natural-color-disabled);
   }
 
-  & > .input {
-    position: absolute;
+  &.read-pretty {
+    font-family: inherit;
+    color: var(--font-color-8);
+  }
+
+  &:not(.read-pretty) {
+    color: var(--font-color-b8);
+    border-radius: var(--iswitch-size);
+
+    & > .label {
+      padding: 0 var(--gap-1);
+    }
+
+    &.mini {
+      padding: var(--gap-1);
+      height: var(--control-size-2);
+
+      --iswitch-size: calc(var(--control-size-2) - var(--gap-1) * 2);
+
+      & > .label {
+        font-size: var(--font-size-3);
+      }
+    }
+
+    &.medium {
+      padding: calc(var(--gap-1) * 1.5);
+      height: var(--control-size-4);
+
+      --iswitch-size: calc(var(--control-size-4) - var(--gap-1) * 3);
+
+      & > .label {
+        font-size: var(--font-size-4);
+      }
+    }
+
+    &.huge {
+      padding: var(--gap-2);
+      height: var(--control-size-5);
+
+      --iswitch-size: calc(var(--control-size-5) - var(--gap-2) * 2);
+
+      & > .label {
+        font-size: var(--font-size-6);
+      }
+    }
   }
 }

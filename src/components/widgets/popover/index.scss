@@ -11,10 +11,9 @@
     border-radius: var(--border-radius-3);
   }
 
-  &.tip,
   &.over,
   &.confirm {
-    background-color: var(--bg-card-color);
+    background-color: var(--bg-popover-color);
   }
 
   &.tip {
@@ -23,7 +22,7 @@
 
     .content {
       padding: var(--gap-2) var(--gap-3);
-      background-color: var(--bg-popover-color);
+      background-color: var(--bg-tips-color);
     }
   }
 }
