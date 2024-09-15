@@ -22,6 +22,7 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
       children,
       centered,
       className,
+      direction,
       vertical = false,
       ...others
     } = props;
@@ -54,9 +55,10 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
             flexWrap,
             alignItems,
             justifyContent,
+            flexDirection: direction,
             gap,
           }),
-          [style, flex, alignItems, justifyContent, flexWrap, gap]
+          [style, flex, alignItems, justifyContent, flexWrap, gap, direction]
         )}
         {...others}
       >

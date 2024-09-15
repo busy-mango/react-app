@@ -8,9 +8,11 @@
 
 ## 何时使用
 
+> 开关是在移动设备上调整设置的首选方式。
+
 * 需要表示开关状态/两种互斥的状态的切换时。
 
-* `Checkbox`组件一般用于状态标记，需要和提交操作配合。
+* `Checkbox`组件一般用于状态标记，需要和提交操作配合（[Checkboxes vs. Switches](https://uxplanet.org/checkbox-vs-toggle-switch-7fc6e83f10b8)）。
 
 ## 代码演示
 
@@ -24,21 +26,19 @@
 
 ### 异步状态
 
-<code src='@/examples/button/size' />
+<code src='@/examples/switch/promise' />
 
 
 ## API
 
-| Name          | Type                                    | Default      | Description                                                                                                                                                     |
-| ------------- | --------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `capsule`     | `boolean`                               | `-`          | Whether to get focus by default.                                                                                                                                |
-| `danger`      | `boolean`                               | `-`          | Icon for the clear button, default is true to show the default icon, set false to disable the clear button.                                                     |
-| `debounce`    | `boolean` \| `number`                   | `-`          | The default value. Use when the component is not controlled.                                                                                                    |
-| `icon`        | `ReactNode`                             | `-`          | Option filter configuration.                                                                                                                                    |
-| `isFullWidth` | `boolean`                               | `-`          | Floating element className.                                                                                                                                     |
-| `isLoading`   | `boolean`                               | `-`          | Control loading UI.                                                                                                                                             |
-| `size`        | `ControlUISize`                         | `medium`     | If true, floating will open on mount.                                                                                                                           |
-| `variant`     | `'filled'` \| `'bordered'` \| `'text'`  | `bordered`   | Control search text state.                                                                                                                                      |
-| `wave`        | `boolean`                               | `-`          | Set scrollable height.                                                                                                                                          |
+* 通用属性-`Input`
 
-## Troubleshooting
+| 参数 | 类型 | 默认值 | 描述 |
+| ---------------- | ------------------- | ------------ | ------------ |
+| `checked`        | `boolean`           | `-`          | 控制是否选中。|
+| `defaultChecked` | `boolean`           | `-`          | 默认是否选中。|
+| `isLoading`      | `boolean`           | `-`          | 控制控件是否加载中。|
+| `pattren`        | `ControlPattern`    | `editable`   | 控制控件的交互方式。|
+| `size`           | `ControlUISize`     | `medium`     | 控制控件的尺寸大小。|
+| `status`         | `ControlUIStatus`   | `success`    | 控制控件的校验状态。|
+| `render`         | `ISwitchRenders`    | `-`          | 自定义控件UI。|

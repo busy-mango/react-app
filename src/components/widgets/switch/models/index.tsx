@@ -16,20 +16,28 @@ import type {
 
 interface ISwitchStatus {
   /**
-   * If `true`, the component is checked.
+   * 指定当前是否选中
    */
   checked: boolean;
   /**
-   * The size of the component.
+   * 控制控件是否加载中。
+   */
+  isLoading: boolean;
+  /**
+   * 控制控件的交互方式。
+   * @default 'success'
+   */
+  pattren: ControlPattern;
+  /**
+   * 控制控件的尺寸大小
    * @default 'medium'
    */
   size: ControlUISize;
   /**
-   * @default 'outlined'
+   * 控制控件的校验状态。
+   * @default 'success'
    */
-  variant: 'outlined' | 'plain' | 'soft' | 'solid';
   status: ControlUIStatus;
-  pattren: ControlPattern;
 }
 
 interface IRender<P = PlainObject, E = unknown> {
@@ -72,6 +80,13 @@ export interface ISwitchInputProps extends WrapperProps<HTMLInputElement> {
   value?: ControlValue;
 }
 
+type ISwitchRenders = {
+  icon?: ISwitchIconRender;
+  root?: ISwitchRootRender;
+  input?: ISwitchInputRender;
+  label?: ISwitchLabelRender;
+};
+
 export interface ISwitchProps
   extends ISwitchInputProps,
     Partial<ISwitchStatus> {
@@ -83,10 +98,5 @@ export interface ISwitchProps
    * The components used for each slot inside.
    * @default {}
    */
-  render?: {
-    icon?: ISwitchIconRender;
-    root?: ISwitchRootRender;
-    input?: ISwitchInputRender;
-    label?: ISwitchLabelRender;
-  };
+  render?: ISwitchRenders;
 }

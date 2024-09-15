@@ -4,6 +4,7 @@ import type { Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 import { onCheckCatch, useControlState } from '../control';
+import { ISpinner } from '../spinners';
 import type {
   ISwitchInputRender,
   ISwitchProps,
@@ -19,15 +20,20 @@ const spring: Transition = {
   stiffness: 700,
 };
 
-const iRootRender: ISwitchRootRender = ({ input, icon, label, className }) => (
+const iRootRender: ISwitchRootRender = (
+  { input, icon, label, className },
+  { isLoading, pattren }
+) => (
   <span data-ui-switchroot className={className}>
     <motion.div layout className={styles.label} transition={spring}>
       {label}
     </motion.div>
-    <motion.div layout className={styles.handle} transition={spring}>
-      {icon}
-    </motion.div>
-    {input}
+    {pattren !== 'readPretty' && (
+      <motion.div layout className={styles.handle} transition={spring}>
+        {isLoading ? <ISpinner /> : icon}
+      </motion.div>
+    )}
+    {pattren !== 'readPretty' && input}
   </span>
 );
 
@@ -53,9 +59,9 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
       checked,
       className,
       defaultChecked,
+      isLoading = false,
       pattren = 'editable',
       status = 'success',
-      variant = 'solid',
       size = 'medium',
       onChange,
       ...others
@@ -80,8 +86,8 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
     const states = {
       size,
       status,
-      variant,
       pattren,
+      isLoading,
       checked: iChecked,
     };
 
@@ -91,13 +97,14 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
         className: classNames(
           styles.root,
           styles[size],
+          styles[pattren],
           iChecked && styles.checked
         ),
         label: render?.label?.({}, states),
         input: (render?.input ?? iInputRender)(
           {
-            ref: input,
             ...others,
+            ref: input,
             onChange: iChange,
             className: classNames(styles.input, className),
           },

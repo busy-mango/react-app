@@ -10,5 +10,6 @@ export interface IFlexProps extends WrapperProps<HTMLElement> {
   flex?: React.CSSProperties['flex'];
   wrap?: React.CSSProperties['flexWrap'] | true;
   align?: React.CSSProperties['alignItems'];
+  direction?: React.CSSProperties['flexDirection'];
   justify?: React.CSSProperties['justifyContent'];
 }

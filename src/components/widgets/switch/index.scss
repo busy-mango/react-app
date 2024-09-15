@@ -13,9 +13,11 @@
 }
 
 .label {
+  flex: 1;
   display: flex;
-  flex-basis: 1;
   align-items: center;
+
+  text-wrap: nowrap;
   font-size: inherit;
   padding: 0 var(--gap-1);
 }
@@ -25,6 +27,10 @@
   flex-shrink: 0;
   border-radius: 50%;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--font-info-color);
   background-color: var(--bg-thumb-color);
 }
 
@@ -40,11 +46,11 @@
   background-color: var(--primary-color);
 
   &.checked {
-    flex-direction: row-reverse;
+    flex-direction: row;
   }
 
   &:not(.checked) {
-    flex-direction: row;
+    flex-direction: row-reverse;
   }
 
   &.mini {
@@ -92,6 +98,12 @@
   & > .handle {
     width: var(--iswitch-size);
     height: var(--iswitch-size);
+  }
+
+  &.editable,
+  &.read-only,
+  &.read-pretty {
+    font-family: inherit;
   }
 
   &.disabled {
