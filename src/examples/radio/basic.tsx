@@ -17,18 +17,16 @@ const options: ControlOption[] = [
   { value: 7, label: '一个超长超长超长的选项7' },
 ];
 
-const NormalRadio: React.FC = () => {
-  return (
-    <IFormWrap>
-      <IFieldGrid mode="horizontal">
-        <IFieldCell title="RadioGroup">
-          <IFlex wrap gap={8}>
-            <IRadioGroup options={options} />
-          </IFlex>
-        </IFieldCell>
-      </IFieldGrid>
-    </IFormWrap>
-  );
-};
+const App: React.FC = () => (
+  <IFormWrap>
+    <IFieldGrid mode="vertical">
+      <IFieldCell title="RadioGroup">
+        <IFlex wrap gap={8}>
+          <IRadioGroup options={options} />
+        </IFlex>
+      </IFieldCell>
+    </IFieldGrid>
+  </IFormWrap>
+);
 
-export default NormalRadio;
+export default App;

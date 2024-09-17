@@ -3,7 +3,7 @@
 // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
 // └─────────────────────────────────────────────────────────────────────┘
 
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps, SVGMotionProps } from 'framer-motion';
 
 import type { PlainObject } from '@busymango/is-esm';
 
@@ -92,7 +92,7 @@ export type ICheckInputRender = IRender<
   }
 >;
 
-export type ICheckIconRender = IRender<WrapperProps>;
+export type ICheckIconRender = IRender<SVGMotionProps<SVGSVGElement>>;
 
 export interface ICheckboxProps
   extends ICheckboxInputProps,

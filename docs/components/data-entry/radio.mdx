@@ -4,11 +4,52 @@
 
 ## 何时使用
 
-* 在一组可选项中进行多项选择时；
-* 单独使用可以表示两种状态之间的切换，和 switch 类似。区别在于切换 switch 会直接触发状态改变，而 checkbox 一般用于状态标记，需要和提交操作配合。
+* 在一组可选项中进行多项选择时
 
-# 代码演示
+* 当用户需要查看所有可用选项时，请使用单选按钮。如果可用选项可以折叠，请考虑使用 Select 组件，因为它使用的空间更少
 
-基本用法
+## 代码演示
 
-<code src='@/examples/radio' />
+### 基本用法
+
+<code src='@/examples/radio/basic' />
+
+### 单选组合
+
+配合name属性以提供键盘可访问性
+
+<code src='@/examples/radio/advanced' />
+
+## 独立使用
+
+<code src='@/examples/radio/single' />
+
+## API
+
+### Radio
+
+* 通用属性-`Input`
+
+| 参数 | 类型 | 默认值 | 描述 |
+| ---------------- | ------------------- | ------------ | ------------ |
+| `checked`        | `boolean`           | `-`          | 控制是否选中。|
+| `defaultChecked` | `boolean`           | `-`          | 默认是否选中。|
+| `disabled`      | `boolean`           | `-`          | 控制控件是否禁用状态。|
+| `pattren`        | `ControlPattern`    | `editable`   | 控制控件是否只读状态。|
+| `size`           | `ControlUISize`     | `medium`     | 控制控件的尺寸大小。|
+| `status`         | `ControlUIStatus`   | `success`    | 控制控件的校验状态。|
+| `label`         | `ControlUIStatus`   | `success`    | 控制控件的校验状态。|
+| `value`         | `ControlUIStatus`   | `success`    | 控制控件的校验状态。|
+| `render`         | `IRadioRenders`    | `-`          | 自定义控件UI。|
+
+### RadioGroup
+
+* 通用属性-`Input`
+
+| 参数 | 类型 | 默认值 | 描述 |
+| ---------------- | ------------------- | ------------ | ------------ |
+| `defaultValue`   | `React.Key`         | `-`          | 默认选中的值|
+| `pattren`        | `ControlPattern`    | `editable`   | 控制控件的交互方式。|
+| `size`           | `ControlUISize`     | `medium`     | 控制控件的尺寸大小。|
+| `status`         | `ControlUIStatus`   | `success`    | 控制控件的校验状态。|
+| `render`         | `ISwitchRenders`    | `-`          | 自定义控件UI。|

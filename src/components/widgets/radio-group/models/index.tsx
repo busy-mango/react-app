@@ -4,26 +4,23 @@ import type { ControlOption, ControlPattern } from '../../control';
 import type { IRadioProps } from '../../radio';
 
 export interface IRadioGroupProps
-  extends PartialPick<
-    IRadioProps,
-    'direction' | 'render' | 'variant' | 'size' | 'name'
-  > {
+  extends PartialPick<IRadioProps, 'render' | 'size' | 'name'> {
   /**
-   * 控件交互模式
+   * 默认选中的值
    */
-  pattern?: ControlPattern;
+  defaultValue?: ControlOption['value'];
   /**
    * 选项
    */
   options?: ControlOption[];
   /**
+   * 控件交互模式
+   */
+  pattern?: ControlPattern;
+  /**
    * 选中的值
    */
   value?: ControlOption['value'];
-  /**
-   * 默认选中的值
-   */
-  defaultValue?: ControlOption['value'];
   /**
    * 选中事件
    */

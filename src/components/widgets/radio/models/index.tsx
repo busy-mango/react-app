@@ -5,12 +5,7 @@ import type { OmitOf } from '@busymango/utils';
 
 import type { WrapperProps } from '@/models';
 
-import type {
-  ControlOption,
-  ControlUIDirection,
-  ControlUISize,
-  ControlValue,
-} from '../../control';
+import type { ControlOption, ControlUISize, ControlValue } from '../../control';
 
 interface InputProps
   extends OmitOf<WrapperProps<HTMLInputElement>, 'onChange'> {
@@ -24,28 +19,13 @@ export interface IRadioRef {
 
 export interface IRadioState {
   /**
-   * If true, the component is checked.
+   * 是否选中
    */
   checked?: boolean;
+  /**
+   * 默认是否选中
+   */
   defaultChecked?: boolean;
-  /**
-   * The value of the component. The DOM API casts this to a string.
-   */
-  value?: ControlValue | ControlOption['value'];
-  /**
-   * The size of the component.
-   * @default 'medium'
-   */
-  size: ControlUISize;
-  /**
-   * @internal
-   * The value from the RadioGroup component.
-   */
-  direction: ControlUIDirection;
-  /**
-   * @default 'outlined'
-   */
-  variant: 'filled' | 'bordered';
   /**
    * 是否禁用
    */
@@ -54,6 +34,15 @@ export interface IRadioState {
    * 是否只读
    */
   readOnly: boolean;
+  /**
+   * The size of the component.
+   * @default 'medium'
+   */
+  size: ControlUISize;
+  /**
+   * input标签的value
+   */
+  value?: ControlValue | ControlOption['value'];
 }
 
 interface IRender<P = PlainObject, E = unknown> {
@@ -67,7 +56,7 @@ export type IRadioRootRender = IRender<
   }
 >;
 
-export type IRadioRender = IRender<
+export type IRadioRadioRender = IRender<
   HTMLMotionProps<'i'> & { input: React.ReactNode }
 >;
 
@@ -78,20 +67,19 @@ export type IRadioInputRender = IRender<
   IRadioState
 >;
 
+type IRadioRenders = {
+  root?: IRadioRootRender;
+  radio?: IRadioRadioRender;
+  input?: IRadioInputRender;
+};
+
 export interface IRadioProps extends Partial<IRadioState>, InputProps {
   /**
    * The label element at the end the radio.
    */
   label?: React.ReactNode;
-
-  render?: {
-    /**
-     * The icon to display when the component is checked.
-     */
-    radio?: IRadioRender;
-
-    input?: IRadioInputRender;
-
-    root?: IRadioRootRender;
-  };
+  /**
+   * The label element at the end the radio.
+   */
+  render?: IRadioRenders;
 }

@@ -1,13 +1,8 @@
-import {
-  forwardRef,
-  Fragment,
-  useId,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import { forwardRef, useId, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 
 import { isBigInt } from '@busymango/is-esm';
+import { ifnot } from '@busymango/utils';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISVGWrap } from '../svg-wrap';
@@ -15,8 +10,8 @@ import { ICheckedSVG } from './icon';
 import type {
   IRadioInputRender,
   IRadioProps,
+  IRadioRadioRender,
   IRadioRef,
-  IRadioRender,
   IRadioRootRender,
   IRadioState,
 } from './models';
@@ -30,7 +25,7 @@ const iRootRender: IRadioRootRender = ({ label, radio, ...others }) => (
   </span>
 );
 
-const iRadioRender: IRadioRender = ({ input, ...others }, { checked }) => (
+const iRadioRender: IRadioRadioRender = ({ input, ...others }, { checked }) => (
   <ISVGWrap {...others}>
     <ICheckedSVG checked={checked} className={styles.icon} />
     {input}
@@ -38,20 +33,19 @@ const iRadioRender: IRadioRender = ({ input, ...others }, { checked }) => (
 );
 
 const iInputRender: IRadioInputRender = (
-  { ref, ...others },
+  { ref, onChange, ...others },
   { checked, disabled, readOnly, value }
 ) => (
-  <Fragment>
-    <input
-      ref={ref}
-      disabled={disabled}
-      readOnly={readOnly}
-      type="radio"
-      value={isBigInt(value) ? value.toLocaleString() : (value ?? undefined)}
-      {...others}
-      checked={checked ?? false}
-    />
-  </Fragment>
+  <input
+    ref={ref}
+    disabled={disabled}
+    readOnly={readOnly}
+    type="radio"
+    value={isBigInt(value) ? value.toLocaleString() : (value ?? undefined)}
+    onChange={ifnot(!disabled && !readOnly && onChange)}
+    {...others}
+    checked={checked ?? false}
+  />
 );
 
 export const IRadio = forwardRef<IRadioRef, IRadioProps>(
@@ -63,8 +57,6 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
       render,
       checked,
       defaultChecked,
-      direction = 'horizontal',
-      variant = 'bordered',
       disabled = false,
       readOnly = false,
       size = 'medium',
@@ -89,10 +81,8 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
     const state: IRadioState = {
       size,
       value,
-      variant,
       readOnly,
       disabled,
-      direction,
       checked: iChecked,
     };
 
@@ -107,7 +97,10 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
     return (render?.root ?? iRootRender)(
       {
         label: label,
-        className: styles.root,
+        className: classNames(styles.root, styles[size], {
+          [styles.disabled]: disabled,
+          [styles.readOnly]: readOnly,
+        }),
         radio: (render?.radio ?? iRadioRender)(
           {
             className: classNames(styles.radio),
@@ -134,7 +127,7 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
 export type {
   IRadioInputRender,
   IRadioProps,
+  IRadioRadioRender,
   IRadioRef,
-  IRadioRender,
   IRadioRootRender,
 } from './models';

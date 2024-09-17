@@ -20,7 +20,6 @@
 .input {
   opacity: 0;
   z-index: 0;
-  cursor: pointer;
 }
 
 .radio {
@@ -28,10 +27,6 @@
   display: inline-block;
 
   color: var(--info-color);
-
-  &:hover {
-    color: var(--info-color-hover);
-  }
 
   &.checked {
     color: var(--info-color-active);
@@ -50,4 +45,37 @@
 
 .root {
   display: inline-flex;
+
+  &.mini {
+    font-size: var(--font-size-3);
+  }
+  &.medium {
+    font-size: var(--font-size-4);
+  }
+  &.huge {
+    font-size: var(--font-size-5);
+  }
+
+  &.disabled {
+    color: var(--font-disabled-color);
+
+    .input {
+      cursor: not-allowed;
+    }
+
+    .radio {
+      color: var(--natural-color-disabled);
+    }
+  }
+
+  &:not(.disabled):not(.read-only) {
+    .radio {
+      &:hover {
+        color: var(--info-color-hover);
+      }
+    }
+    .input {
+      cursor: pointer;
+    }
+  }
 }

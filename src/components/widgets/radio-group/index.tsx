@@ -9,20 +9,18 @@ export const IRadioGroup: React.FC<IRadioGroupProps> = (props) => {
     value,
     render,
     options,
-    variant,
-    direction,
     defaultValue,
     pattern = 'editable',
     onChange,
   } = props;
+
+  const assert = usePatternAssert(pattern);
 
   const [current, iChange] = useControlState({
     value,
     defaultValue,
     onChange,
   });
-
-  const assert = usePatternAssert(pattern);
 
   if (assert.isReadPretty) {
     const option = options?.find(({ value }) => value === current);
@@ -34,13 +32,11 @@ export const IRadioGroup: React.FC<IRadioGroupProps> = (props) => {
       key={option.value}
       checked={current === option.value}
       defaultChecked={defaultValue === option.value}
-      direction={direction}
       label={option.value?.toLocaleString()}
       name={name}
       readOnly={assert.isReadOnly}
       render={render}
       size={size}
-      variant={variant}
       onChange={() => {
         iChange?.(option.value, option);
       }}
