@@ -6,8 +6,9 @@
 import type { HTMLMotionProps, SVGMotionProps } from 'framer-motion';
 
 import type { PlainObject } from '@busymango/is-esm';
+import type { OmitOf } from '@busymango/utils';
 
-import type { WrapperProps } from '@/models';
+import type { ReactInputProps, ReactWrapProps } from '@/models';
 
 import type {
   ControlPattern,
@@ -58,7 +59,8 @@ export interface ICheckboxRef {
   input?: HTMLInputElement;
 }
 
-export interface ICheckboxInputProps extends WrapperProps<HTMLInputElement> {
+export interface ICheckboxInputProps
+  extends OmitOf<ReactInputProps, 'value' | 'size'> {
   /**
    * The `name` attribute of the input.
    */
@@ -75,7 +77,7 @@ export type ICheckRootRender = IRender<
     label: React.ReactNode;
     checkbox: React.ReactNode;
     ref: React.RefObject<HTMLDivElement>;
-  } & WrapperProps
+  } & ReactWrapProps
 >;
 
 export type ICheckBoxRender = IRender<

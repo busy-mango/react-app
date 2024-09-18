@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
-import type { AnimationDefinition } from 'framer-motion';
+import type { AnimationDefinition, HTMLMotionProps } from 'framer-motion';
 import {
   AnimatePresence,
   motion,
@@ -25,7 +25,7 @@ import {
   useToggle,
 } from '@/hooks';
 import { container } from '@/init';
-import type { ReactCFC, ReactMotionDomProps, WrapperProps } from '@/models';
+import type { ReactCFC } from '@/models';
 import { isCentered } from '@/utils';
 
 import { IButton } from '../button';
@@ -169,7 +169,7 @@ const IWheel: React.FC<IWheelProps> = (props) => {
 
 export interface IPickerProps
   extends OmitOf<
-    ReactMotionDomProps<WrapperProps>,
+    HTMLMotionProps<'div'>,
     'title' | 'onChange' | 'defaultValue'
   > {
   open?: boolean;
@@ -275,9 +275,10 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
                     className={classNames(styles.wrap, className)}
                     exit={iWrapExit}
                     initial={iWrapInitial}
+                    style={style}
                     onAnimationStart={onAnimationStart}
                     {...others}
-                    {...getFloatingProps({ style })}
+                    {...getFloatingProps()}
                   >
                     <IFlex
                       align="center"

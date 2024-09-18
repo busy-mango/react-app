@@ -1,6 +1,6 @@
-import type { WrapperProps } from '@/models';
+import type { ReactWrapProps } from '@/models';
 
-export interface IFlexProps extends WrapperProps<HTMLElement> {
+export interface IFlexProps extends ReactWrapProps {
   children: React.ReactNode;
   vertical?: boolean;
   reverse?: boolean;

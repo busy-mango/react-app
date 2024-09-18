@@ -1,12 +1,12 @@
 import type { OmitOf } from '@busymango/utils';
 
-import type { WrapperProps } from '@/models';
+import type { ReactWrapProps } from '@/models';
 
 import { IButton } from '../button';
 import { useControlState } from '../control';
 
 export interface TypographyProps
-  extends OmitOf<WrapperProps<HTMLParagraphElement>, 'onChange'> {
+  extends OmitOf<ReactWrapProps<HTMLParagraphElement>, 'onChange'> {
   folded?: boolean;
   onChange?: (folded: boolean) => void;
 }

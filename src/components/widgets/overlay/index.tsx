@@ -6,9 +6,9 @@
 
 import { forwardRef, useId, useLayoutEffect } from 'react';
 import classNames from 'classnames';
+import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-import type { ReactMotionDomProps, WrapperProps } from '@/models';
 import { isIOS } from '@/utils';
 
 import * as styles from './index.scss';
@@ -26,7 +26,7 @@ const iScrollbarWidth = () => {
   return window.innerWidth - document.documentElement.clientWidth;
 };
 
-export interface IOverlayProps extends ReactMotionDomProps<WrapperProps> {
+export interface IOverlayProps extends HTMLMotionProps<'div'> {
   /**
    * overlay will lock scrolling on the document body if is false.
    * @default false

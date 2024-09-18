@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useMemoFunc, useRecord, useResizeObserver } from '@/hooks';
 import type { ReactCFC } from '@/models';
 
-import type { IMotionPanelProps } from './models';
+import type { IMotionPanelProps, IMotionPanelRender } from './models';
 
 import * as styles from './index.scss';
 
@@ -18,14 +18,17 @@ const initial: Target = { opacity: 0, height: 0 };
 
 const transition: Transition = { ease: 'circIn' };
 
+const iRender: IMotionPanelRender = ({ children, ...others }, { record }) => (
+  <div {...others}>{children || record}</div>
+);
+
 export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
   const {
-    style,
     children,
     className,
     visible = true,
     ghosting = true,
-    wrapClassName,
+    render,
     ...others
   } = props;
 
@@ -46,19 +49,16 @@ export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
       {visible && (
         <motion.div
           animate={{ opacity: 1, height }}
-          className={classNames(styles.wrap, wrapClassName)}
+          className={classNames(styles.wrap, className)}
           exit={initial}
           initial={initial}
           transition={transition}
+          {...others}
         >
-          <div
-            ref={target}
-            className={classNames(styles.content, className)}
-            style={style}
-            {...others}
-          >
-            {children || record}
-          </div>
+          {(render ?? iRender)(
+            { ref: target, className: styles.content },
+            { record }
+          )}
         </motion.div>
       )}
     </AnimatePresence>

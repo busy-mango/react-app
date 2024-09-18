@@ -2,13 +2,13 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { or } from '@busymango/utils';
 
-import type { WrapperProps } from '@/models';
+import type { ReactWrapProps } from '@/models';
 
 interface MeasureRef {
   native: HTMLSpanElement;
 }
 
-interface MeasureProps extends WrapperProps<HTMLSpanElement> {}
+interface MeasureProps extends ReactWrapProps<HTMLSpanElement> {}
 
 function cuttable(node: React.ReactElement) {
   const type = typeof node;

@@ -3,6 +3,10 @@ import type { PartialPick } from '@busymango/utils';
 import type { ControlOption, ControlPattern } from '../../control';
 import type { IRadioProps } from '../../radio';
 
+interface IRadioChange {
+  (value?: ControlOption['value'] | null, option?: ControlOption): void;
+}
+
 export interface IRadioGroupProps
   extends PartialPick<IRadioProps, 'render' | 'size' | 'name'> {
   /**
@@ -24,8 +28,5 @@ export interface IRadioGroupProps
   /**
    * 选中事件
    */
-  onChange?: (
-    value?: ControlOption['value'] | null,
-    option?: ControlOption
-  ) => void;
+  onChange?: IRadioChange;
 }

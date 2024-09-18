@@ -1,6 +1,6 @@
 import type { OmitOf, PartialPick } from '@busymango/utils';
 
-import type { WrapperProps } from '@/models';
+import type { ReactWrapProps } from '@/models';
 
 import type {
   ControlPattern,
@@ -20,7 +20,7 @@ export type IFieldGridMode =
   | 'quadruple';
 
 export interface IFieldCellProps
-  extends OmitOf<WrapperProps, 'title' | 'children'> {
+  extends OmitOf<ReactWrapProps, 'title' | 'children'> {
   /** 字段标题对齐方式 */
   align?: 'start' | 'end';
   /** 是否开启外间距 */

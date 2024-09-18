@@ -5,7 +5,7 @@ import { isHTMLElement } from '@busymango/is-esm';
 import { type PartialPick } from '@busymango/utils';
 
 import { useMemoFunc, useToggle } from '@/hooks';
-import type { ReactCFC, WrapperProps } from '@/models';
+import type { ReactCFC, ReactWrapProps } from '@/models';
 import { isOverflow, size2px } from '@/utils';
 
 import type {
@@ -23,7 +23,7 @@ const iApplyFloatingStyle: ApplyFloatingStyle = (params) => ({
 });
 
 export interface IOverflowProps
-  extends WrapperProps<HTMLDivElement>,
+  extends ReactWrapProps,
     PartialPick<React.CSSProperties, 'width' | 'minWidth' | 'maxWidth'>,
     PartialPick<IPopoverProps, 'root' | 'onApplyFloatingStyle'> {
   /** 气泡窗中的内容 */

@@ -1,6 +1,6 @@
-import type { OmitOf } from '@busymango/utils';
+import type { HTMLMotionProps } from 'framer-motion';
 
-import type { ReactMotionDomProps, WrapperProps } from '@/models';
+import type { OmitOf } from '@busymango/utils';
 
 import type { ControlOption } from '../../control';
 
@@ -17,7 +17,7 @@ export interface IWheelProps {
 
 export interface IPickerProps
   extends OmitOf<
-    ReactMotionDomProps<WrapperProps>,
+    HTMLMotionProps<'div'>,
     'title' | 'onChange' | 'defaultValue'
   > {
   open?: boolean;

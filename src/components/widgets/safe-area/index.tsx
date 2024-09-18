@@ -1,13 +1,14 @@
 import classNames from 'classnames';
+import type { HTMLMotionProps } from 'framer-motion';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import type { ReactCFC, ReactMotionDomProps, WrapperProps } from '@/models';
+import type { ReactCFC } from '@/models';
 
 import { ISpinner } from '../spinners';
 
 import * as styles from './index.scss';
 
-export interface ISafeAreaProps extends ReactMotionDomProps<WrapperProps> {
+export interface ISafeAreaProps extends HTMLMotionProps<'article'> {
   isLoading?: boolean;
   background?: React.ReactNode;
 }

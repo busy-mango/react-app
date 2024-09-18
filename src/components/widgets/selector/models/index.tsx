@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 import type { OmitOf } from '@busymango/utils';
 import type { ReferenceType } from '@floating-ui/react';
 
-import type { ReactTargetFunc, WrapperProps } from '@/models';
+import type { ReactTargetFunc, ReactWrapProps } from '@/models';
 
 import type {
   ControlOption,
@@ -104,16 +104,10 @@ export interface ISelectorProps
   extends Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur'>,
     Pick<
       IControlWrapProps,
-      | 'suffix'
-      | 'prefix'
-      | 'isLoading'
-      | 'variant'
-      | 'size'
-      | 'status'
-      | 'style'
+      'suffix' | 'prefix' | 'isLoading' | 'variant' | 'size' | 'status'
     >,
     OmitOf<
-      WrapperProps,
+      ReactWrapProps,
       | 'onChange'
       | 'defaultValue'
       | 'onFocus'

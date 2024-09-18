@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
 import classNames from 'classnames';
+import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 
 import { useToggle } from '@/hooks';
-import type { ReactCFC, WrapperProps } from '@/models';
+import type { ReactCFC } from '@/models';
 
 import type { IFlexProps } from '../flex';
 import { IFlex } from '../flex';
@@ -16,11 +17,7 @@ import { ISignLine } from '../sign';
 
 import * as styles from './index.scss';
 
-export interface IFormWrapProps
-  extends OmitOf<
-    WrapperProps<HTMLFormElement>,
-    'onAnimationStart' | 'onDrag' | 'onDragStart' | 'onDragEnd'
-  > {}
+export interface IFormWrapProps extends HTMLMotionProps<'form'> {}
 
 export const IFormWrap: ReactCFC<IFormWrapProps> = ({
   children,

@@ -60,8 +60,7 @@ export const MenuItem = forwardRef<MenuItemRef, MenuItemProps>(
 
     return (
       <IButton
-        ref={useMergeRefs([ref, iRef])}
-        // className="MenuItem"
+        // ref={useMergeRefs([ref, iRef])}
         disabled={disabled}
         role="menuitem"
         variant="text"

@@ -15,7 +15,7 @@ import {
 } from '@floating-ui/react';
 
 import { container } from '@/init';
-import type { WrapperProps } from '@/models';
+import type { ReactWrapProps } from '@/models';
 
 import { IButton } from '../button';
 import { IFlex } from '../flex';
@@ -27,8 +27,7 @@ export type IModalRef = UseFloatingReturn['refs'] & {
   getReferenceProps: (props?: React.HTMLProps<Element>) => PlainObject;
 };
 
-interface IModalProps
-  extends React.PropsWithChildren<OmitOf<WrapperProps, 'title'>> {
+interface IModalProps extends OmitOf<ReactWrapProps, 'title'> {
   open?: boolean;
   isLoading?: boolean;
   initialOpen?: boolean;

@@ -9,7 +9,7 @@ export interface IInputRef {
   native: HTMLInputElement | null;
 }
 
-export interface IInputProps extends OmitOf<ReactInputProps, 'value' | 'ref'> {
+export interface IInputProps extends OmitOf<ReactInputProps, 'value'> {
   /** 控件是否跟随文本宽度 */
   autoSize?: boolean;
   /** 控件值 */

@@ -2,7 +2,18 @@
  * @description My React Type Define
  */
 
-import type { AnimationDefinition, PanInfo } from 'framer-motion';
+import type { PlainObject } from '@busymango/is-esm';
+
+/** HTML元素尺寸 */
+export type RectSize = {
+  width?: number;
+  height?: number;
+};
+
+/** React通用渲染方法 */
+export interface ReactRender<P = PlainObject, S = never> {
+  (props: P, state: S): React.ReactNode;
+}
 
 /** React SetStateAction */
 export type ReactAction<T> = React.Dispatch<React.SetStateAction<T>>;
@@ -25,19 +36,17 @@ export type ReactComponentAsync<T = unknown> = {
 export type ReactCSSColor = React.CSSProperties['color'];
 
 /** React wrap props */
-export type WrapperProps<T extends Element = Element> = React.HTMLAttributes<T>;
+export type ReactWrapProps<T extends HTMLElement = HTMLElement> =
+  React.HTMLAttributes<T>;
+
+/** React native button props */
+export type ReactButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 /** React native input props */
-export type ReactInputProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
+export type ReactInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-/** React native props */
-export type ReactButtonProps = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
+/** React native form props */
+export type ReactFormProps = React.FormHTMLAttributes<HTMLFormElement>;
 
 /** React FC with children */
 export type ReactCFC<T = unknown> = React.FC<React.PropsWithChildren<T>>;
@@ -49,19 +58,3 @@ export interface ReactTargetFunc {
 
 /** React target ref type */
 export type ReactTargetType = ReactTargetFunc | ReturnType<ReactTargetFunc>;
-
-/** React framer motion UI event */
-export type ReactMotionEvent = {
-  onAnimationStart?: (definition: AnimationDefinition) => void;
-} & Partial<
-  Record<
-    'onDrag' | 'onDragEnd' | 'onDragStart',
-    (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void
-  >
->;
-
-/** React framer motion dom props */
-export type ReactMotionDomProps<
-  T extends React.DetailedHTMLProps<React.HTMLAttributes<unknown>, Element>,
-> = ReactMotionEvent &
-  Omit<T, 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onAnimationStart'>;

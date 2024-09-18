@@ -6,8 +6,9 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
 import type { PlainObject } from '@busymango/is-esm';
+import type { OmitOf } from '@busymango/utils';
 
-import type { WrapperProps } from '@/models';
+import type { ReactInputProps, ReactWrapProps } from '@/models';
 
 import type {
   ControlPattern,
@@ -52,7 +53,7 @@ export interface ISwitchRef {
 }
 
 export type ISwitchRootRender = IRender<
-  WrapperProps & {
+  ReactWrapProps & {
     thumb?: React.ReactNode;
     input?: React.ReactNode;
     label?: React.ReactNode;
@@ -74,9 +75,10 @@ export type ISwitchInputRender = IRender<
   }
 >;
 
-export type ISwitchLabelRender = IRender<WrapperProps>;
+export type ISwitchLabelRender = IRender<ReactWrapProps>;
 
-export interface ISwitchInputProps extends WrapperProps<HTMLInputElement> {
+export interface ISwitchInputProps
+  extends OmitOf<ReactInputProps, 'value' | 'size'> {
   /**
    * The `name` attribute of the input.
    */

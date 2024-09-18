@@ -1,4 +1,4 @@
-import type { ReactAction, WrapperProps } from '@/models';
+import type { ReactAction, ReactButtonProps } from '@/models';
 
 import type { IButtonProps } from '../../button';
 
@@ -33,7 +33,5 @@ export interface MenuContextVal {
   activeIndex: number | null;
   setActiveIndex: ReactAction<number | null>;
   setHasFocusInside?: ReactAction<boolean>;
-  iItemProps: (
-    props?: WrapperProps<HTMLButtonElement>
-  ) => Record<string, unknown>;
+  iItemProps: (props?: ReactButtonProps) => Record<string, unknown>;
 }

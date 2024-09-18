@@ -1,6 +1,6 @@
-import type { OmitOf } from '@busymango/utils';
+import type { HTMLMotionProps } from 'framer-motion';
 
-import type { ReactMotionDomProps, WrapperProps } from '@/models';
+import type { OmitOf } from '@busymango/utils';
 
 import type { ControlUISize } from '../../control';
 
@@ -12,8 +12,7 @@ export type ISnackbarAPI = {
 
 export type ISnackbarStatus = 'success' | 'info' | 'error' | 'warn';
 
-export interface ISnackbarProps
-  extends ReactMotionDomProps<OmitOf<WrapperProps, 'id'>> {
+export interface ISnackbarProps extends OmitOf<HTMLMotionProps<'div'>, 'id'> {
   id: React.Key;
   /** 自动关闭的延时，单位秒。设为 0 时不自动关闭	number	3 */
   duration?: number;

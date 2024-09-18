@@ -1,11 +1,12 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
+import type { HTMLMotionProps } from 'framer-motion';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { isNumber, isTrue } from '@busymango/is-esm';
+import type { OmitOf } from '@busymango/utils';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
-import type { ReactButtonProps, ReactMotionDomProps } from '@/models';
 import { iPropagation } from '@/utils';
 
 import type { ControlUISize } from '../control';
@@ -15,7 +16,9 @@ import { IWave } from '../wave';
 
 import * as styles from './index.scss';
 
-export interface IButtonProps extends ReactMotionDomProps<ReactButtonProps> {
+export interface IButtonProps
+  extends React.PropsWithChildren,
+    OmitOf<HTMLMotionProps<'button'>, 'children'> {
   capsule?: boolean;
   danger?: boolean;
   debounce?: boolean | number;

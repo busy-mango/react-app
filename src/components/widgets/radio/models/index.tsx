@@ -1,17 +1,12 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
-import type { PlainObject } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 
-import type { WrapperProps } from '@/models';
+import type { ReactInputProps, ReactRender, ReactWrapProps } from '@/models';
 
 import type { ControlOption, ControlUISize, ControlValue } from '../../control';
 
-interface InputProps
-  extends OmitOf<WrapperProps<HTMLInputElement>, 'onChange'> {
-  name?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-}
+interface InputProps extends OmitOf<ReactInputProps, 'size' | 'value'> {}
 
 export interface IRadioRef {
   input: HTMLInputElement;
@@ -45,22 +40,20 @@ export interface IRadioState {
   value?: ControlValue | ControlOption['value'];
 }
 
-interface IRender<P = PlainObject, E = unknown> {
-  (props: P, state: IRadioState & E): React.ReactNode;
-}
-
-export type IRadioRootRender = IRender<
-  WrapperProps<HTMLSpanElement> & {
+export type IRadioRootRender = ReactRender<
+  ReactWrapProps<HTMLSpanElement> & {
     radio: React.ReactNode;
     label: React.ReactNode;
-  }
+  },
+  IRadioState
 >;
 
-export type IRadioRadioRender = IRender<
-  HTMLMotionProps<'i'> & { input: React.ReactNode }
+export type IRadioRadioRender = ReactRender<
+  HTMLMotionProps<'i'> & { input: React.ReactNode },
+  IRadioState
 >;
 
-export type IRadioInputRender = IRender<
+export type IRadioInputRender = ReactRender<
   InputProps & {
     ref: React.RefObject<HTMLInputElement>;
   },
@@ -75,11 +68,11 @@ type IRadioRenders = {
 
 export interface IRadioProps extends Partial<IRadioState>, InputProps {
   /**
-   * The label element at the end the radio.
+   * 控件的文本。
    */
   label?: React.ReactNode;
   /**
-   * The label element at the end the radio.
+   * 自定义控件UI。
    */
   render?: IRadioRenders;
 }

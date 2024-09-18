@@ -1,12 +1,9 @@
 import type React from 'react';
+import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 
-import type {
-  ReactInputProps,
-  ReactMotionDomProps,
-  WrapperProps,
-} from '@/models';
+import type { ReactInputProps } from '@/models';
 
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';
@@ -47,7 +44,8 @@ export interface InteractionProps {
 }
 
 export interface IControlWrapProps
-  extends OmitOf<ReactMotionDomProps<WrapperProps>, 'prefix'> {
+  extends React.PropsWithChildren,
+    OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'children'> {
   status?: ControlUIStatus;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;

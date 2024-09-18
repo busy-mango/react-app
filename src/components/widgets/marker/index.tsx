@@ -3,11 +3,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { isFinite } from '@busymango/is-esm';
 
-import type { ReactCFC, WrapperProps } from '@/models';
+import type { ReactCFC, ReactWrapProps } from '@/models';
 
 import * as styles from './index.scss';
 
-export interface IMarkerProps extends WrapperProps {
+export interface IMarkerProps extends ReactWrapProps {
   /** 序号标识 */
   no?: number;
   /** 章节标识 */
