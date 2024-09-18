@@ -29,4 +29,5 @@ export * from './suspense';
 export * from './svg-wrap';
 export * from './switch';
 export * from './textarea';
+export * from './typography';
 export * from './wave';

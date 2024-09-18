@@ -5,13 +5,13 @@ import type { WrapperProps } from '@/models';
 import { IButton } from '../button';
 import { useControlState } from '../control';
 
-export interface ParagraphProps
+export interface TypographyProps
   extends OmitOf<WrapperProps<HTMLParagraphElement>, 'onChange'> {
   folded?: boolean;
   onChange?: (folded: boolean) => void;
 }
 
-export const Paragraph: React.FC<ParagraphProps> = (props) => {
+export const Typography: React.FC<TypographyProps> = (props) => {
   const { folded, children, onChange, ...others } = props;
 
   const [value, iChange] = useControlState({
@@ -20,9 +20,9 @@ export const Paragraph: React.FC<ParagraphProps> = (props) => {
   });
 
   return (
-    <p {...others}>
+    <article {...others}>
       {children}
       <IButton isFullWidth variant="filled" />
-    </p>
+    </article>
   );
 };
