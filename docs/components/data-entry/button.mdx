@@ -1,6 +1,6 @@
 # Button 按钮
 
-按钮允许用户只需点击一下即可采取行动并做出选择。
+按钮允许用户通过单击来执行操作和做出选择，一般用来传达用户可以执行的操作。
 
 使用 `import { IButton } from "@/components";`
 
@@ -14,13 +14,19 @@
 
 ### 基本按钮
 
+组件附带三种变体：`text`，`filled`，`bordered`。
+
 <code src='@/examples/button/basic' />
 
 ### 图标按钮
 
+有时我们希望为某些按钮提供图标以增强用户体验，毕竟图标比文本更容易识别。
+
 <code src='@/examples/button/icon' />
 
 ### 按钮尺寸
+
+对于更大或更小的按钮，请使用`size`属性。
 
 <code src='@/examples/button/size' />
 
@@ -28,19 +34,16 @@
 
 <code src='@/examples/button/promise' />
 
-
 ## API
 
-| Name          | Type                                    | Default      | Description                                                                                                                                                     |
-| ------------- | --------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `capsule`     | `boolean`                               | `-`          | Whether to get focus by default.                                                                                                                                |
-| `danger`      | `boolean`                               | `-`          | Icon for the clear button, default is true to show the default icon, set false to disable the clear button.                                                     |
-| `debounce`    | `boolean` \| `number`                   | `-`          | The default value. Use when the component is not controlled.                                                                                                    |
-| `icon`        | `ReactNode`                             | `-`          | Option filter configuration.                                                                                                                                    |
-| `isFullWidth` | `boolean`                               | `-`          | Floating element className.                                                                                                                                     |
-| `isLoading`   | `boolean`                               | `-`          | Control loading UI.                                                                                                                                             |
-| `size`        | `ControlUISize`                         | `medium`     | If true, floating will open on mount.                                                                                                                           |
-| `variant`     | `'filled'` \| `'bordered'` \| `'text'`  | `bordered`   | Control search text state.                                                                                                                                      |
-| `wave`        | `boolean`                               | `-`          | Set scrollable height.                                                                                                                                          |
-
-## Troubleshooting
+| 参数 | 类型 | 默认值 | 描述 |
+| ------------- | --------------------------------------- | ------------ | ------------ |
+| `capsule`     | `boolean`                               | `-`          | 是否呈现胶囊按钮样式。|
+| `danger`      | `boolean`                               | `-`          | 是否呈现危险按钮样式。|
+| `debounce`    | `boolean` \| `number`                   | `-`          | 是否启用事件防抖。|
+| `icon`        | `ReactNode`                             | `-`          | 设置按钮的图标组件。|
+| `isFullWidth` | `boolean`                               | `-`          | 设置按钮宽度是否填满父容器。|
+| `isLoading`   | `boolean`                               | `-`          | 设置是否呈现加载按钮样式。|
+| `size`        | `ControlUISize`                         | `medium`     | 设置按钮尺寸。|
+| `variant`     | `'filled'` \| `'bordered'` \| `'text'`  | `bordered`   | 设置按钮类型。|
+| `wave`        | `boolean`                               | `-`          | 是否呈现波纹反馈（在filled类型默认呈现）。|

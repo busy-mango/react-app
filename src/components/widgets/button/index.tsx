@@ -54,11 +54,11 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
 
   const isText = variant === 'text';
 
-  const wave = iWave ?? (!danger && !isText);
-
   const clickable = !isLoading && !disabled;
 
   const ref = useRef<HTMLButtonElement>(null);
+
+  const wave = iWave ?? (variant === 'filled' && !danger);
 
   const wait = isNumber(debounce) ? debounce : 5 * FRAME2MS;
 

@@ -26,6 +26,10 @@
   color: inherit;
   font-size: inherit;
 
+  transition-duration: 200ms;
+  transition-property: color border-color background-color;
+  transition-timing-function: var(--ease-in-out-cubic);
+
   &::-moz-focus-inner {
     border-style: none;
   }
@@ -44,7 +48,7 @@
     line-height: inherit;
     vertical-align: inherit;
     &.capsule {
-      border-radius: 0.5lh;
+      border-radius: var(--border-radius-10);
     }
     &:not(.capsule) {
       border-radius: var(--border-radius-02);
@@ -88,21 +92,13 @@
 }
 
 /** variant */
-.text,
-.filled,
-.bordered {
-  transition-duration: 200ms;
-  transition-property: background-color;
-  // TODO
-  transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
 .text {
-  &:not(.danger):not(.disabled) {
+  &:not(.disabled):not(.danger) {
+    color: inherit;
+  }
+  &:not(.disabled) {
     &:hover {
       background-color: var(--fill-color-hover);
-    }
-    &:active {
-      background-color: var(--fill-color-active);
     }
     &:focus-within {
       background-color: var(--fill-color-active);
@@ -115,54 +111,56 @@
     color: var(--font-color-danger);
   }
 }
+
 .filled {
   color: var(--font-color-b8);
-
   &:not(.danger):not(.disabled) {
     background-color: var(--secondary-color);
-    &:hover,
-    &:focus-within {
+    &:hover {
       background-color: var(--secondary-color-hover);
+    }
+    &:focus-within {
+      background-color: var(--secondary-color-active);
     }
   }
   &.disabled {
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--border-color-disabled);
-    background-color: var(--natural-color-disabled);
+    background-color: var(--secondary-color-disabled);
   }
   &.danger {
     background-color: var(--danger-color);
-    &:hover,
+    &:hover {
+      background-color: var(--danger-color-hover);
+    }
     &:focus-within {
-      border-color: var(--danger-color-hover);
+      background-color: var(--danger-color-active);
     }
   }
 }
+
 .bordered {
   border-width: 1px;
   border-style: solid;
   border-color: currentColor;
 
   &:not(.danger):not(.disabled) {
+    color: var(--font-color-8);
     &:hover {
-      color: var(--border-color-hover);
-      border-color: var(--border-color-hover);
+      color: var(--font-color-6);
     }
     &:focus-within {
-      color: var(--border-color-active);
-      border-color: var(--border-color-active);
+      color: var(--font-color-10);
     }
   }
   &.disabled {
     color: var(--font-color-disabled);
-    border-color: var(--border-color-disabled);
   }
   &.danger {
     color: var(--font-color-danger);
-    &:hover,
+    &:hover {
+      color: var(--danger-color-hover);
+    }
     &:focus-within {
-      border-color: var(--danger-color-hover);
+      color: var(--danger-color-active);
     }
   }
 }
