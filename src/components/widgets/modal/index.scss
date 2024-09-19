@@ -7,7 +7,7 @@
     min-width: 80vw;
     min-height: 12vh;
 
-    border-radius: var(--border-radius-3);
+    border-radius: var(--border-radius-03);
 
     background-color: rgb(var(--comp-bg-color));
 
@@ -16,7 +16,7 @@
     & > .close,
     & > .header,
     & > .footer {
-      padding: var(--gap-4) var(--gap-5);
+      padding: var(--gap-04) var(--gap-05);
     }
 
     & > .close {
@@ -27,12 +27,12 @@
     }
 
     & > .content {
-      padding: var(--gap-6) var(--gap-5);
+      padding: var(--gap-06) var(--gap-05);
     }
 
     & > .footer {
       & > button:not(:last-child) {
-        margin-right: var(--gap-3);
+        margin-right: var(--gap-03);
       }
     }
   }

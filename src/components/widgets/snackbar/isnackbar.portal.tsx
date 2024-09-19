@@ -19,9 +19,7 @@ export { snackbar } from './hooks';
 export const ISnackbarPortal: ReactCFC<{
   max?: number;
 }> = ({ max }) => {
-  const { snackbars, setMaxCount } = useSnackbars(
-    ({ snackbars, setMaxCount }) => ({ snackbars, setMaxCount })
-  );
+  const { snackbars, setMaxCount } = useSnackbars();
 
   useEffect(() => {
     if (isNumber(max)) {

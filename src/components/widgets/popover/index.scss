@@ -8,21 +8,21 @@
     max-width: inherit;
     max-height: inherit;
     box-sizing: border-box;
-    border-radius: var(--border-radius-3);
+    border-radius: var(--border-radius-03);
   }
 
   &.over,
   &.confirm {
-    background-color: var(--bg-popover-color);
+    background-color: var(--bg-color-float);
   }
 
   &.tip {
     color: var(--font-color-b8);
-    font-size: var(--font-size-3);
+    font-size: var(--font-size-03);
 
     .content {
-      padding: var(--gap-2) var(--gap-3);
-      background-color: var(--bg-tips-color);
+      padding: var(--gap-02) var(--gap-03);
+      background-color: var(--bg-color-tip);
     }
   }
 }

@@ -154,7 +154,10 @@
   --red-color-900: 174 1 41;
 
   --gray-color-00: 255 255 255;
+  /* --gray-color-25: 255 255 255; */
   --gray-color-50: 245 246 250;
+  /* --gray-color-80: 245 246 250; */
+  --gray-color-150: 233 235 242;
   --gray-color-100: 237 239 245;
   --gray-color-200: 223 226 235;
   --gray-color-300: 197 200 212;
@@ -165,7 +168,6 @@
   --gray-color-800: 57 63 82;
   --gray-color-900: 23 23 31;
   --gray-color-1000: 0 0 0;
-  --gray-color-150: 233 235 242;
 
   /* 主题色 - 默认 */
   --primary-color: rgb(var(--blue-color-600) / 1);
@@ -177,13 +179,22 @@
   --primary-color-disabled: rgb(var(--blue-color-200) / 1);
 
   /* 信息色 - 默认 */
-  --info-color: rgb(var(--blue-color-500) / 1);
+  --secondary-color: rgb(var(--blue-color-500) / 1);
   /* 信息色 - 悬浮态 */
-  --info-color-hover: rgb(var(--blue-color-400) / 1);
+  --secondary-color-hover: rgb(var(--blue-color-400) / 1);
   /* 信息色 - 激活态 */
-  --info-color-active: rgb(var(--blue-color-600) / 1);
+  --secondary-color-active: rgb(var(--blue-color-600) / 1);
   /* 信息色 - 禁用态 */
-  --info-color-disabled: rgb(var(--blue-color-200) / 1);
+  --secondary-color-disabled: rgb(var(--blue-color-200) / 1);
+
+  /* 信息色 - 默认 */
+  --tertiary-color: rgb(var(--blue-color-500) / 1);
+  /* 信息色 - 悬浮态 */
+  --tertiary-color-hover: rgb(var(--blue-color-400) / 1);
+  /* 信息色 - 激活态 */
+  --tertiary-color-active: rgb(var(--blue-color-600) / 1);
+  /* 信息色 - 禁用态 */
+  --tertiary-color-disabled: rgb(var(--blue-color-200) / 1);
 
   /* 警告色 - 默认 */
   --warn-color: rgb(var(--orange-color-500) / 1);
@@ -221,6 +232,56 @@
   /* 自然色 - 禁用态 */
   --natural-color-disabled: rgb(var(--gray-color-200) / 1);
 
+  /* 填充色 - 默认 */
+  --fill-color-normal: rgb(var(--gray-color-600) / 0.2);
+  /* 填充色 - 悬浮态 */
+  --fill-color-hover: rgb(var(--gray-color-400) / 0.1);
+  /* 填充色 - 激活态 */
+  --fill-color-active: rgb(var(--gray-color-400) / 0.2);
+  /* 填充色 - 选中态 */
+  --fill-color-select: rgb(var(--blue-color-500) / 0.08);
+  /* 填充色 - 禁用态 */
+  /* --fill-color-disabled: rgb(var(--blue-color-700) / 0.12); */
+
+  /* 背景色 - 默认 */
+  --bg-color: rgb(var(--gray-color-00) / 1);
+  /* 背景色 - 导航栏 */
+  --bg-color-navbar: rgb(var(--gray-color-150) / 1);
+  /* 背景色 - 遮罩层 */
+  --bg-color-mask: rgb(var(--gray-color-600) / 0.4);
+
+  /* 背景色 - 容器 */
+  --bg-color-warp: rgb(var(--gray-color-150) / 1);
+  /* 背景色 - 菜单 */
+  --bg-color-menu: rgb(var(--gray-color-00) / 1);
+  /* 背景色 - 卡片 */
+  --bg-color-card: rgb(var(--gray-color-00) / 1);
+
+  /* 背景色 - 控件 */
+  --bg-color-control: rgb(var(--gray-color-50) / 1);
+  /* 背景色 - 原件 */
+  --bg-color-widgets: rgb(var(--gray-color-00) / 1);
+
+  /* 背景色 - 小贴士 */
+  --bg-color-tip: rgb(var(--gray-color-900) / 1);
+  /* 背景色 - 浮层 */
+  --bg-color-float: rgb(var(--gray-color-25) / 0.9);
+  /* 背景色 - 滑块 */
+  --bg-color-thumb: rgb(var(--gray-color-00) / 1);
+
+  /* 边框色 - 主 */
+  --border-color-1: rgb(var(--gray-color-100) / 0.8);
+  /* 边框色 - 次要场景 */
+  --border-color-2: rgb(var(--gray-color-150) / 1);
+  /* 边框色 - 特殊场景 */
+  --border-color-3: rgb(var(--gray-color-200) / 1);
+  /* 边框色 - 悬浮 */
+  --border-color-hover: rgb(var(--dodger-color-600) / 1);
+  /* 边框色 - 激活 */
+  --border-color-active: rgb(var(--dodger-color-500) / 1);
+  /* 边框色 - 禁用 */
+  --border-color-disabled: rgb(var(--gray-color-700) / 1);
+
   --font-color-2: rgb(var(--gray-color-200) / 0.75);
   --font-color-4: rgb(var(--gray-color-400) / 0.8);
   --font-color-6: rgb(var(--gray-color-500) / 1);
@@ -228,54 +289,24 @@
   --font-color-10: rgb(var(--gray-color-900) / 1);
   --font-color-b8: rgb(var(--gray-color-00) / 1);
 
-  --font-icon-color: rgb(var(--gray-color-700) / 1);
-  --font-info-color: rgb(var(--blue-color-600) / 1);
-  --font-warn-color: rgb(var(--orange-color-600) / 1);
-  --font-danger-color: rgb(var(--red-color-700) / 1);
-  --font-success-color: rgb(var(--green-color-700) / 1);
-  --font-disabled-color: rgb(var(--gray-color-600) / 0.9);
+  /* 字体颜色 - 警告 */
+  --font-color-warn: rgb(var(--orange-color-600) / 1);
+  /* 字体颜色 - 危险 */
+  --font-color-danger: rgb(var(--red-color-700) / 1);
+  /* 字体颜色 - 成功 */
+  --font-color-success: rgb(var(--green-color-700) / 1);
+  /* 字体颜色 - 禁用 */
+  --font-color-disabled: rgb(var(--gray-color-600) / 0.9);
+  /* 字体颜色 - 高亮 */
+  --font-color-highlight: rgb(var(--blue-color-600) / 1);
 
-  /* 背景色 */
-  --bg-color: rgb(var(--gray-color-00) / 1);
-  /* 滑块背景色 */
-  --bg-thumb-color: rgb(var(--gray-color-00) / 1);
-  /* 容器背景色 */
-  --bg-warp-color: rgb(var(--gray-color-150) / 1);
-  /* 卡片背景色 0 */
-  --bg-card-color: rgb(var(--gray-color-00) / 1);
-  /* 菜单背景色 */
-  --bg-menu-color: rgb(var(--gray-color-00) / 1);
-  /* 小贴士背景色 */
-  --bg-tips-color: rgb(var(--gray-color-900) / 1);
-  /* 浮层背景色 */
-  --bg-popover-color: rgb(var(--gray-color-25) / 0.9);
-  /* 控件背景色 */
-  --bg-control-color: rgb(var(--gray-color-50) / 1);
-  /* 组件背景色 */
-  --bg-component-color: rgb(var(--gray-color-00) / 1);
-  /* 导航栏背景色 */
-  --bg-navbar-color: rgb(var(--gray-color-150) / 1);
-  /* 遮罩层背景色 */
-  --bg-mask-color: rgb(var(--gray-color-600) / 0.4);
+  /* 图标颜色-默认 */
+  --icon-color: rgb(var(--gray-color-700) / 1);
 
-  --fill-hover-color: rgb(var(--gray-color-400) / 0.1);
-  --fill-active-color: rgb(var(--gray-color-400) / 0.2);
-  --fill-select-color: rgb(var(--blue-color-500) / 0.08);
-
-  --cell-hover-color: rgb(var(--gray-color-50) / 1);
-  --cell-active-color: rgb(var(--gray-color-100) / 1);
-  --cell-select-color: rgb(var(--blue-color-50) / 1);
-
+  /* 波纹动画颜色 */
   --wave-color-1: rgb(82 11 239 / 0.05);
   --wave-color-2: rgb(82 11 239 / 0.2);
   --wave-color-3: rgb(82 11 239 / 0);
-
-  --border-color-1: rgb(var(--gray-color-100) / 0.8);
-  --border-color-2: rgb(var(--gray-color-150) / 1);
-  --border-color-3: rgb(var(--gray-color-200) / 1);
-  --border-hover-color: rgb(var(--dodger-color-600) / 1);
-  --border-active-color: rgb(var(--dodger-color-500) / 1);
-  --border-disabled-color: rgb(var(--gray-color-700) / 1);
 
   --shadow-01: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   --shadow-02: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -289,165 +320,137 @@
 }
 
 #root.light {
-  width: 100vw;
-  height: 100vh;
-
-  --z-index-popup: 1000;
-  --z-index-dropdown: 999;
-  --z-index-affix: 999;
+  --z-index-fixed: 990;
+  --z-index-dropdown: 998;
+  --z-index-tip: 999;
+  --z-index-float: 1000;
   --z-index-modal: 1001;
   --z-index-drawer: 1001;
-  --z-index-tip: 999;
-  --z-index-toast: 1003;
-  --z-index-notification: 1003;
+  --z-index-toast: 1002;
   --z-index-preview: 1003;
+  --z-index-notification: 1004;
   --z-index-badge: auto;
-  --z-index-fixed: 990;
-
-  color: var(--font-color-8);
-  font-size: var(--font-size-4);
-
-  * {
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  *::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    border-radius: 6px;
-    background-color: var(--bg-control-color);
-  }
 }
 
-/* PC Web */
+/* PC */
 @media screen and (min-width: 1360px) {
   #root {
-    height: 100dvh;
-  }
-
-  #root {
-    --gap-1: 2px;
-    --gap-2: 4px;
-    --gap-3: 8px;
-    --gap-4: 10px;
-    --gap-5: 12px;
-    --gap-6: 16px;
-    --gap-7: 20px;
-    --gap-8: 24px;
-    --gap-9: 36px;
+    --gap-00: 0px;
+    --gap-01: 2px;
+    --gap-02: 4px;
+    --gap-03: 8px;
+    --gap-04: 10px;
+    --gap-05: 12px;
+    --gap-06: 16px;
+    --gap-07: 20px;
+    --gap-08: 24px;
+    --gap-09: 36px;
     --gap-10: 48px;
 
-    --font-size-1: 8px;
-    --font-size-2: 10px;
-    --font-size-3: 12px;
-    --font-size-4: 14px;
-    --font-size-5: 15px;
-    --font-size-6: 16px;
-    --font-size-8: 20px;
-    --font-size-9: 24px;
-    --font-size-10: 28px;
+    --font-size-01: 10px;
+    --font-size-02: 12px;
+    --font-size-03: 14px;
+    --font-size-04: 15px;
+    --font-size-05: 16px;
+    --font-size-06: 20px;
+    --font-size-08: 24px;
+    --font-size-09: 28px;
+    --font-size-10: 32px;
 
-    --control-size-1: 14px;
-    --control-size-2: 16px;
-    --control-size-3: 20px;
-    --control-size-4: 24px;
-    --control-size-5: 28px;
-    --control-size-6: 32px;
-    --control-size-7: 40px;
-    --control-size-8: 48px;
+    --control-size-01: 14px;
+    --control-size-02: 16px;
+    --control-size-03: 20px;
+    --control-size-04: 24px;
+    --control-size-05: 28px;
+    --control-size-06: 32px;
+    --control-size-07: 40px;
+    --control-size-08: 48px;
 
-    --border-radius-2: 4px;
-    --border-radius-3: 6px;
-    --border-radius-6: 12px;
+    --border-radius-02: 4px;
+    --border-radius-03: 6px;
+    --border-radius-06: 12px;
+    --border-radius-10: 9999px;
   }
 }
 
 /* iPad */
 @media screen and (min-width: 430px) and (max-width: 1360px) {
   #root {
-    height: 100dvh;
-  }
-
-  #root {
-    --gap-1: 2px;
-    --gap-2: 4px;
-    --gap-3: 8px;
-    --gap-4: 10px;
-    --gap-5: 12px;
-    --gap-6: 16px;
-    --gap-7: 20px;
-    --gap-8: 24px;
-    --gap-9: 36px;
+    --gap-00: 0px;
+    --gap-01: 2px;
+    --gap-02: 4px;
+    --gap-03: 8px;
+    --gap-04: 10px;
+    --gap-05: 12px;
+    --gap-06: 16px;
+    --gap-07: 20px;
+    --gap-08: 24px;
+    --gap-09: 36px;
     --gap-10: 48px;
 
-    --font-size-1: 8px;
-    --font-size-2: 10px;
-    --font-size-3: 12px;
-    --font-size-4: 14px;
-    --font-size-5: 15px;
-    --font-size-6: 16px;
-    --font-size-8: 20px;
-    --font-size-9: 24px;
-    --font-size-10: 28px;
+    --font-size-01: 10px;
+    --font-size-02: 12px;
+    --font-size-03: 14px;
+    --font-size-04: 15px;
+    --font-size-05: 16px;
+    --font-size-06: 20px;
+    --font-size-08: 24px;
+    --font-size-09: 28px;
+    --font-size-10: 32px;
 
-    --control-size-1: 14px;
-    --control-size-2: 16px;
-    --control-size-3: 20px;
-    --control-size-4: 24px;
-    --control-size-5: 28px;
-    --control-size-6: 32px;
-    --control-size-7: 40px;
-    --control-size-8: 48px;
+    --control-size-01: 14px;
+    --control-size-02: 16px;
+    --control-size-03: 20px;
+    --control-size-04: 24px;
+    --control-size-05: 28px;
+    --control-size-06: 32px;
+    --control-size-07: 40px;
+    --control-size-08: 48px;
 
-    --border-radius-2: 4px;
-    --border-radius-3: 6px;
-    --border-radius-6: 12px;
+    --border-radius-02: 4px;
+    --border-radius-03: 6px;
+    --border-radius-06: 12px;
+    --border-radius-10: 9999px;
   }
 }
 
 /* iPhone */
 @media screen and (max-width: 430px) {
   #root {
-    height: 100dvh;
-  }
-
-  #root {
-    --gap-1: calc(2vw / 3.75);
-    --gap-2: calc(4vw / 3.75);
-    --gap-3: calc(8vw / 3.75);
-    --gap-4: calc(10vw / 3.75);
-    --gap-5: calc(12vw / 3.75);
-    --gap-6: calc(16vw / 3.75);
-    --gap-7: calc(20vw / 3.75);
-    --gap-8: calc(24vw / 3.75);
-    --gap-9: calc(36vw / 3.75);
+    --gap-00: 0vw;
+    --gap-01: calc(2vw / 3.75);
+    --gap-02: calc(4vw / 3.75);
+    --gap-03: calc(8vw / 3.75);
+    --gap-04: calc(10vw / 3.75);
+    --gap-05: calc(12vw / 3.75);
+    --gap-06: calc(16vw / 3.75);
+    --gap-07: calc(20vw / 3.75);
+    --gap-08: calc(24vw / 3.75);
+    --gap-09: calc(36vw / 3.75);
     --gap-10: calc(48vw / 3.75);
 
-    --font-size-1: calc(8vw / 3.75);
-    --font-size-2: calc(10vw / 3.75);
-    --font-size-3: calc(12vw / 3.75);
-    --font-size-4: calc(14vw / 3.75);
-    --font-size-5: calc(15vw / 3.75);
-    --font-size-6: calc(16vw / 3.75);
-    --font-size-8: calc(20vw / 3.75);
-    --font-size-9: calc(24vw / 3.75);
-    --font-size-10: calc(28vw / 3.75);
+    --font-size-01: calc(10vw / 3.75);
+    --font-size-02: calc(12vw / 3.75);
+    --font-size-03: calc(14vw / 3.75);
+    --font-size-04: calc(15vw / 3.75);
+    --font-size-05: calc(16vw / 3.75);
+    --font-size-06: calc(20vw / 3.75);
+    --font-size-08: calc(24vw / 3.75);
+    --font-size-09: calc(28vw / 3.75);
+    --font-size-10: calc(32vw / 3.75);
 
-    --control-size-1: calc(14vw / 3.75);
-    --control-size-2: calc(16vw / 3.75);
-    --control-size-3: calc(20vw / 3.75);
-    --control-size-4: calc(24vw / 3.75);
-    --control-size-5: calc(28vw / 3.75);
-    --control-size-6: calc(32vw / 3.75);
-    --control-size-7: calc(40vw / 3.75);
-    --control-size-8: calc(48vw / 3.75);
+    --control-size-01: calc(14vw / 3.75);
+    --control-size-02: calc(16vw / 3.75);
+    --control-size-03: calc(20vw / 3.75);
+    --control-size-04: calc(24vw / 3.75);
+    --control-size-05: calc(28vw / 3.75);
+    --control-size-06: calc(32vw / 3.75);
+    --control-size-07: calc(40vw / 3.75);
+    --control-size-08: calc(48vw / 3.75);
 
-    --border-radius-2: calc(4vw / 3.75);
-    --border-radius-3: calc(6vw / 3.75);
-    --border-radius-6: calc(12vw / 3.75);
+    --border-radius-02: calc(4vw / 3.75);
+    --border-radius-03: calc(6vw / 3.75);
+    --border-radius-06: calc(12vw / 3.75);
+    --border-radius-10: 9999px;
   }
 }

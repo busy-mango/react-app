@@ -1,6 +1,9 @@
 import { t } from 'i18next';
 
 import { isString, isValidKey } from '@busymango/is-esm';
+import { iCSSVariable } from '@busymango/utils';
+
+import { container } from '@/init';
 
 /**
  * 获取主题样式标签
@@ -32,3 +35,8 @@ export const iThemeDefault = <T extends string = string>() => {
   }
   return process.env.THEME as T;
 };
+
+export const iThemeVariable = (name: string) =>
+  iCSSVariable(name, {
+    element: container,
+  });

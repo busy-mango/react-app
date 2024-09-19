@@ -24,9 +24,9 @@ type MiddlewareOpts = {
 export const iFill = (mode?: IPopoverProps['mode']) => {
   switch (mode) {
     case 'tip':
-      return 'var(--bg-popover-color)';
+      return 'var(--bg-color-float)';
     default:
-      return 'var(--bg-card-color)';
+      return 'var(--bg-color-card)';
   }
 };
 

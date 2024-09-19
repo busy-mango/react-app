@@ -4,9 +4,9 @@
 
 .option {
   height: 100%;
-  padding: calc(var(--gap-1) + var(--gap-2)) var(--gap-3);
-  font-size: var(--font-size-5);
-  line-height: var(--control-size-3);
+  padding: calc(var(--gap-01) + var(--gap-02)) var(--gap-03);
+  font-size: var(--font-size-05);
+  line-height: var(--control-size-03);
 
   &.active,
   &:hover {
@@ -15,7 +15,7 @@
 
   &.selected {
     font-weight: 500;
-    color: var(--font-info-color);
+    color: var(--font-color-info);
     background-color: var(--natural-color-active);
   }
 }
@@ -27,7 +27,7 @@
 
   width: 100%;
   flex-basis: 0;
-  min-height: var(--control-size-6);
+  min-height: var(--control-size-06);
 
   cursor: pointer;
 }
@@ -39,14 +39,14 @@
   overflow-x: hidden;
   position: relative;
 
-  max-height: calc(var(--control-size-6) * 8 + 2 * var(--gap-3));
+  max-height: calc(var(--control-size-06) * 8 + 2 * var(--gap-03));
 }
 
 .floating {
   outline: none;
-  padding: var(--gap-3) 0;
-  border-radius: var(--border-radius-3);
-  background-color: var(--bg-menu-color);
+  padding: var(--gap-03) 0;
+  border-radius: var(--border-radius-03);
+  background-color: var(--bg-color-menu);
   box-shadow: var(--shadow-02);
 }
 
@@ -63,13 +63,13 @@
 
   position: relative;
 
-  gap: var(--gap-2);
+  gap: var(--gap-02);
   box-sizing: border-box;
   justify-content: flex-start;
 
   max-width: 100%;
-  padding: var(--gap-1);
-  min-height: var(--control-size-4);
+  padding: var(--gap-01);
+  min-height: var(--control-size-03);
   line-height: inherit;
 }
 
@@ -83,7 +83,7 @@
   width: 100%;
   min-height: 1em;
   min-width: 12em;
-  line-height: var(--control-size-3);
+  line-height: var(--control-size-03);
 
   cursor: text;
 

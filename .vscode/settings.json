@@ -27,7 +27,7 @@
     "assets/index.html": "ejs"
   },
   "cssVariables.lookupFiles": [
-    "**/themes/*.css",
+    "**/themes/dark.css",
   ],
   "css-module-typed.pluginOptions": {
     "goToDefinition": true,

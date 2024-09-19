@@ -4,7 +4,7 @@ import type { HTMLMotionProps } from 'framer-motion';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { isNumber, isTrue } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
+import { FRAME2MS, type OmitOf } from '@busymango/utils';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { iPropagation } from '@/utils';
@@ -30,13 +30,6 @@ export interface IButtonProps
   wave?: boolean;
 }
 
-const iTapBackground = (params: { variant: IButtonProps['variant'] }) => {
-  const { variant } = params;
-  if (variant === 'text') {
-    return 'rgb(0 0 0 / 0.06)';
-  }
-};
-
 export const IButton: React.FC<IButtonProps> = forwardRef<
   HTMLButtonElement,
   IButtonProps
@@ -59,13 +52,15 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
     ...others
   } = props;
 
-  const wave = iWave ?? !danger;
+  const isText = variant === 'text';
+
+  const wave = iWave ?? (!danger && !isText);
 
   const clickable = !isLoading && !disabled;
 
   const ref = useRef<HTMLButtonElement>(null);
 
-  const wait = isNumber(debounce) ? debounce : 300;
+  const wait = isNumber(debounce) ? debounce : 5 * FRAME2MS;
 
   const { starer } = useDebounceFunc(onClick, wait);
 
@@ -98,8 +93,7 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
       disabled={disabled}
       type="button"
       whileTap={{
-        scale: [null, 0.96],
-        backgroundColor: iTapBackground({ variant }),
+        scale: !isText ? [null, 0.98] : undefined,
       }}
       onClick={onTap}
       onPointerDownCapture={(event) => {
@@ -108,7 +102,7 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
       }}
       {...others}
     >
-      {(wave ?? variant !== 'text') && <IWave target={ref} />}
+      {wave && <IWave target={ref} />}
       <AnimatePresence>
         {(isLoading || icon) && (
           <ISVGWrap className={classNames(styles.icon, children && styles.gap)}>

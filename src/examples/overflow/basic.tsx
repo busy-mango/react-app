@@ -10,7 +10,7 @@ const App: React.FC = () => (
     <IOverflow
       maxRow={3}
       style={{
-        backgroundColor: 'var(--bg-warp-color)',
+        backgroundColor: 'var(--bg-color-warp)',
         borderRadius: 'var(--border-radius-2)',
       }}
       tip={string}
@@ -20,7 +20,7 @@ const App: React.FC = () => (
     <IOverflow
       maxRow={3}
       style={{
-        backgroundColor: 'var(--bg-warp-color)',
+        backgroundColor: 'var(--bg-color-warp)',
         borderRadius: 'var(--border-radius-2)',
       }}
       tip={string}

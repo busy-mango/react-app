@@ -32,7 +32,6 @@ export default defineConfig({
   root: 'docs',
   icon: './assets/favicon.svg',
   plugins: [pluginPreview()],
-  globalStyles: join(dir.static, 'themes/dark.css'),
   globalUIComponents: [join(dir.docs, 'effects.tsx')],
   builderConfig: {
     source: {
@@ -54,6 +53,7 @@ export default defineConfig({
       },
     },
     output: {
+      cleanDistPath: true,
       cssModules: {
         mode: 'local',
         namedExport: true,

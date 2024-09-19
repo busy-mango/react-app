@@ -8,17 +8,17 @@
 
   &.part,
   &.required {
-    top: calc(var(--gap-1) / 2);
-    bottom: calc(var(--gap-1) / 2);
-    height: calc(100% - var(--gap-1));
+    top: calc(var(--gap-01) / 2);
+    bottom: calc(var(--gap-01) / 2);
+    height: calc(100% - var(--gap-01));
   }
 }
 
 .part {
-  width: var(--gap-2);
+  width: var(--gap-02);
   right: calc(100% + 0.3em);
 
-  border-radius: var(--border-radius-2);
+  border-radius: var(--border-radius-02);
   background-color: rgb(var(--main-color));
 }
 

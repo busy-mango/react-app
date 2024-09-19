@@ -1,11 +1,19 @@
 import { Fragment, useEffect, useRef } from 'react';
 import classNames from 'classnames';
+import type { Target } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
+
+import { compact } from '@busymango/utils';
 
 import { useEventState, useMemoFunc } from '@/hooks';
 import type { ReactTargetType } from '@/models';
+import { iThemeVariable } from '@/utils';
 
 import * as styles from './index.scss';
+
+const initial: Target = {
+  boxShadow: `0 0 0 4px ${iThemeVariable(`--wave-color-0`)}`,
+};
 
 export const IWave: React.FC<{
   className?: string;
@@ -20,21 +28,23 @@ export const IWave: React.FC<{
 
   const animation = useMemoFunc(async () => {
     memo.current = true;
+
+    const boxShadow = compact(
+      ['1', '2', '3'].map((gradation) =>
+        iThemeVariable(`--wave-color-${gradation}`)
+      )
+    ).map((color, index) => `0 0 0 ${index * 3}px ${color}`);
+
     await animate(
       scope.current,
-      {
-        boxShadow: [
-          '0 0 0 0px var(--wave-color-1)',
-          '0 0 0 3px var(--wave-color-2)',
-          '0 0 0 8px var(--wave-color-3)',
-        ],
-      },
+      { boxShadow },
       {
         duration: 0.4,
         velocity: 100,
         repeatType: 'reverse',
       }
     );
+
     memo.current = false;
   });
 
@@ -57,14 +67,7 @@ export const IWave: React.FC<{
   return (
     <Fragment>
       <div ref={scope} className={classNames(styles.wrap, className)} />
-      {placeholder && (
-        <motion.div
-          className={styles.wrap}
-          initial={{
-            boxShadow: '0 0 0 4px rgb(var(--wave-color) / 0.1)',
-          }}
-        />
-      )}
+      {placeholder && <motion.div className={styles.wrap} initial={initial} />}
     </Fragment>
   );
 };

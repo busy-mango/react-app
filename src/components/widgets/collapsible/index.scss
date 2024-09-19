@@ -1,7 +1,7 @@
 .group {
   & > .wrap {
     &:not(:first-of-type) {
-      margin-top: var(--gap-2);
+      margin-top: var(--gap-02);
     }
   }
 }
@@ -12,8 +12,8 @@
 
 .header,
 .content {
-  padding-left: var(--gap-5);
-  padding-right: var(--gap-5);
+  padding-left: var(--gap-05);
+  padding-right: var(--gap-05);
 }
 
 .trigger {
@@ -23,12 +23,12 @@
 
 .header {
   position: relative;
-  padding-top: var(--gap-5);
-  padding-bottom: var(--gap-5);
+  padding-top: var(--gap-05);
+  padding-bottom: var(--gap-05);
 
   .title {
     font-weight: 500;
-    font-size: var(--font-size-6);
+    font-size: var(--font-size-06);
   }
 
   &::before {

@@ -18,11 +18,11 @@
   &.filled,
   &.standard,
   &.bordered {
-    border-radius: var(--border-radius-3);
+    border-radius: var(--border-radius-03);
   }
   &.filled,
   &.bordered {
-    background-color: var(--bg-control-color);
+    background-color: var(--bg-color-control);
   }
   &.filled {
   }
@@ -34,7 +34,7 @@
     border-width: 1px;
 
     &:focus-within {
-      border-color: var(--border-active-color);
+      border-color: var(--border-color-active);
     }
   }
 
@@ -45,32 +45,32 @@
   &:not(.read-pretty) {
     /** size */
     &.mini {
-      font-size: var(--font-size-3);
-      min-height: var(--control-size-4);
+      font-size: var(--font-size-03);
+      min-height: var(--control-size-03);
 
       .icon-wrap {
-        font-size: var(--font-size-2);
-        height: var(--control-size-1);
+        font-size: var(--font-size-02);
+        height: var(--control-size-01);
       }
     }
     &.medium {
-      font-size: var(--font-size-4);
-      padding: var(--gap-2) var(--gap-4);
-      min-height: var(--control-size-6);
+      font-size: var(--font-size-04);
+      padding: var(--gap-02) var(--gap-04);
+      min-height: var(--control-size-06);
 
       .icon-wrap {
-        font-size: var(--font-size-3);
-        height: var(--control-size-3);
+        font-size: var(--font-size-03);
+        height: var(--control-size-03);
       }
     }
     &.huge {
-      font-size: var(--font-size-5);
-      min-height: var(--control-size-8);
-      padding: var(--gap-2) var(--gap-4);
+      font-size: var(--font-size-05);
+      min-height: var(--control-size-08);
+      padding: var(--gap-02) var(--gap-04);
 
       .icon-wrap {
-        width: var(--control-size-3);
-        height: var(--control-size-3);
+        width: var(--control-size-03);
+        height: var(--control-size-03);
       }
     }
   }

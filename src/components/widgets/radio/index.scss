@@ -13,7 +13,7 @@
 }
 
 .text {
-  margin: 0 var(--gap-2);
+  margin: 0 var(--gap-02);
   text-wrap: nowrap;
 }
 
@@ -26,10 +26,10 @@
   position: relative;
   display: inline-block;
 
-  color: var(--info-color);
+  color: var(--secondary-color);
 
   &.checked {
-    color: var(--info-color-active);
+    color: var(--secondary-color-active);
   }
 
   .input {
@@ -47,17 +47,17 @@
   display: inline-flex;
 
   &.mini {
-    font-size: var(--font-size-3);
+    font-size: var(--font-size-03);
   }
   &.medium {
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-04);
   }
   &.huge {
-    font-size: var(--font-size-5);
+    font-size: var(--font-size-05);
   }
 
   &.disabled {
-    color: var(--font-disabled-color);
+    color: var(--font-color-disabled);
 
     .input {
       cursor: not-allowed;
@@ -71,7 +71,7 @@
   &:not(.disabled):not(.read-only) {
     .radio {
       &:hover {
-        color: var(--info-color-hover);
+        color: var(--secondary-color-hover);
       }
     }
     .input {

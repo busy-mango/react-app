@@ -16,11 +16,11 @@
 
   /** variant */
   &.filled {
-    color: var(--font-info-color);
-    background-color: var(--bg-warp-color);
+    color: var(--font-color-info);
+    background-color: var(--bg-color-warp);
   }
   &.outlined {
-    border: 1px solid var(--info-color);
+    border: 1px solid var(--secondary-color);
   }
 
   &.disabled {
@@ -33,20 +33,20 @@
   /** size */
   &.mini {
     font-size: inherit;
-    height: var(--control-size-3);
-    border-radius: var(--border-radius-2);
-    padding: 0 var(--gap-3);
+    height: var(--control-size-03);
+    border-radius: var(--border-radius-02);
+    padding: 0 var(--gap-03);
   }
   &.medium {
-    padding: 0 var(--gap-5);
-    height: var(--control-size-5);
-    font-size: var(--font-size-4);
-    border-radius: var(--border-radius-3);
+    padding: 0 var(--gap-05);
+    height: var(--control-size-05);
+    font-size: var(--font-size-04);
+    border-radius: var(--border-radius-03);
   }
   &.huge {
-    font-size: var(--font-size-3);
-    height: var(--control-size-5);
-    padding: 0 var(--gap-5);
+    font-size: var(--font-size-03);
+    height: var(--control-size-05);
+    padding: 0 var(--gap-05);
   }
 
   .icon {

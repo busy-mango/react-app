@@ -9,12 +9,12 @@
 
   h1.title {
     max-width: 100%;
-    padding: 0 var(--gap-3);
+    padding: 0 var(--gap-03);
     transform: translateY(-64px);
-    font-size: var(--font-size-8);
+    font-size: var(--font-size-08);
     margin-bottom: calc(32px - 64px);
 
-    line-height: var(--control-size-4);
+    line-height: var(--control-size-03);
     word-break: break-all;
   }
 }

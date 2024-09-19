@@ -47,42 +47,42 @@
       border-radius: 0.5lh;
     }
     &:not(.capsule) {
-      border-radius: var(--border-radius-2);
+      border-radius: var(--border-radius-02);
     }
     &.padding {
-      padding: 0 var(--gap-1);
+      padding: 0 var(--gap-01);
     }
   }
   &.medium {
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-04);
 
-    height: var(--control-size-6);
-    min-width: var(--control-size-6);
+    height: var(--control-size-06);
+    min-width: var(--control-size-06);
 
     &.capsule {
-      border-radius: var(--control-size-6);
+      border-radius: var(--control-size-06);
     }
     &:not(.capsule) {
-      border-radius: var(--border-radius-3);
+      border-radius: var(--border-radius-03);
     }
     &.padding {
-      padding: 0 var(--gap-5);
+      padding: 0 var(--gap-05);
     }
   }
   &.huge {
-    height: var(--control-size-8);
-    min-width: var(--control-size-8);
+    height: var(--control-size-08);
+    min-width: var(--control-size-08);
 
-    font-size: var(--font-size-6);
+    font-size: var(--font-size-06);
 
     &.capsule {
-      border-radius: var(--control-size-8);
+      border-radius: var(--control-size-08);
     }
     &:not(.capsule) {
-      border-radius: var(--border-radius-6);
+      border-radius: var(--border-radius-06);
     }
     &.padding {
-      padding: 0 var(--gap-6);
+      padding: 0 var(--gap-06);
     }
   }
 }
@@ -91,33 +91,44 @@
 .text,
 .filled,
 .bordered {
-  overflow: initial;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  // TODO
+  transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 .text {
   &:not(.danger):not(.disabled) {
-    color: var(--font-info-color);
+    &:hover {
+      background-color: var(--fill-color-hover);
+    }
+    &:active {
+      background-color: var(--fill-color-active);
+    }
+    &:focus-within {
+      background-color: var(--fill-color-active);
+    }
   }
   &.disabled {
-    color: var(--font-disabled-color);
+    color: var(--font-color-disabled);
   }
   &.danger {
-    color: var(--font-danger-color);
+    color: var(--font-color-danger);
   }
 }
 .filled {
   color: var(--font-color-b8);
 
   &:not(.danger):not(.disabled) {
-    background-color: var(--info-color);
+    background-color: var(--secondary-color);
     &:hover,
     &:focus-within {
-      background-color: var(--info-color-hover);
+      background-color: var(--secondary-color-hover);
     }
   }
   &.disabled {
     border-width: 1px;
     border-style: solid;
-    border-color: var(--border-disabled-color);
+    border-color: var(--border-color-disabled);
     background-color: var(--natural-color-disabled);
   }
   &.danger {
@@ -134,18 +145,21 @@
   border-color: currentColor;
 
   &:not(.danger):not(.disabled) {
-    color: var(--font-info-color);
-    &:hover,
+    &:hover {
+      color: var(--border-color-hover);
+      border-color: var(--border-color-hover);
+    }
     &:focus-within {
-      border-color: var(--border-active-color);
+      color: var(--border-color-active);
+      border-color: var(--border-color-active);
     }
   }
   &.disabled {
-    color: var(--font-disabled-color);
-    border-color: var(--border-disabled-color);
+    color: var(--font-color-disabled);
+    border-color: var(--border-color-disabled);
   }
   &.danger {
-    color: var(--font-danger-color);
+    color: var(--font-color-danger);
     &:hover,
     &:focus-within {
       border-color: var(--danger-color-hover);
@@ -155,6 +169,6 @@
 
 .icon {
   &.gap {
-    margin-right: var(--gap-2);
+    margin-right: var(--gap-02);
   }
 }

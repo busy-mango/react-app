@@ -27,8 +27,8 @@
   align-items: center;
   pointer-events: none;
   justify-content: center;
-  color: var(--font-info-color);
-  background-color: var(--bg-thumb-color);
+  color: var(--font-color-info);
+  background-color: var(--bg-color-thumb);
 }
 
 .root {
@@ -83,7 +83,7 @@
 
   &.disabled {
     cursor: not-allowed;
-    color: var(--font-disabled-color);
+    color: var(--font-color-disabled);
     background-color: var(--natural-color-disabled);
   }
 
@@ -97,39 +97,39 @@
     border-radius: var(--iswitch-size);
 
     & > .label {
-      padding: 0 var(--gap-1);
+      padding: 0 var(--gap-01);
     }
 
     &.mini {
-      padding: var(--gap-1);
-      height: var(--control-size-2);
+      padding: var(--gap-01);
+      height: var(--control-size-02);
 
-      --iswitch-size: calc(var(--control-size-2) - var(--gap-1) * 2);
+      --iswitch-size: calc(var(--control-size-02) - var(--gap-01) * 2);
 
       & > .label {
-        font-size: var(--font-size-3);
+        font-size: var(--font-size-03);
       }
     }
 
     &.medium {
-      padding: calc(var(--gap-1) * 1.5);
-      height: var(--control-size-4);
+      padding: calc(var(--gap-01) * 1.5);
+      height: var(--control-size-03);
 
-      --iswitch-size: calc(var(--control-size-4) - var(--gap-1) * 3);
+      --iswitch-size: calc(var(--control-size-03) - var(--gap-01) * 3);
 
       & > .label {
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-04);
       }
     }
 
     &.huge {
-      padding: var(--gap-2);
-      height: var(--control-size-5);
+      padding: var(--gap-02);
+      height: var(--control-size-05);
 
-      --iswitch-size: calc(var(--control-size-5) - var(--gap-2) * 2);
+      --iswitch-size: calc(var(--control-size-05) - var(--gap-02) * 2);
 
       & > .label {
-        font-size: var(--font-size-6);
+        font-size: var(--font-size-06);
       }
     }
   }

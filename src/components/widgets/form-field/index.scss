@@ -54,7 +54,7 @@
 
       & > .wrapper {
         min-width: 100%;
-        min-height: var(--control-size-6);
+        min-height: var(--control-size-06);
       }
     }
 
@@ -86,11 +86,11 @@
 
   &.margin {
     &.read-pretty {
-      margin-bottom: var(--gap-4);
+      margin-bottom: var(--gap-04);
     }
 
     &:not(.read-pretty) {
-      margin-bottom: var(--gap-8);
+      margin-bottom: var(--gap-08);
     }
   }
 
@@ -102,7 +102,7 @@
   &.warning,
   &.success,
   &.waiting {
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-04);
   }
 
   &.show-title {
@@ -208,21 +208,21 @@
   &.mini {
     .feedback {
       &.with-margin {
-        min-height: var(--control-size-1);
+        min-height: var(--control-size-01);
       }
     }
   }
   &.medium {
     .feedback {
       &.with-margin {
-        min-height: var(--control-size-2);
+        min-height: var(--control-size-02);
       }
     }
   }
   &.huge {
     .feedback {
       &.with-margin {
-        min-height: var(--control-size-4);
+        min-height: var(--control-size-03);
       }
     }
   }

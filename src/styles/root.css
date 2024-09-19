@@ -1,0 +1,18 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  color: var(--font-color-8);
+  font-size: var(--font-size-4);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--bg-color-thumb);
+}

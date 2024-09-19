@@ -1,15 +1,15 @@
 .wrap {
   overflow: hidden;
-  height: calc(var(--control-size-3) * 5);
+  height: calc(var(--control-size-03) * 5);
 }
 
 .icon {
-  font-size: var(--font-size-6);
-  margin-top: calc(-1 * var(--gap-7));
+  font-size: var(--font-size-06);
+  margin-top: calc(-1 * var(--gap-07));
 }
 
 .text {
-  font-size: var(--font-size-3);
+  font-size: var(--font-size-03);
   color: var(--font-color-4);
-  margin-top: calc(-1 * var(--gap-7));
+  margin-top: calc(-1 * var(--gap-07));
 }

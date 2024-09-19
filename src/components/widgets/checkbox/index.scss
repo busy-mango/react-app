@@ -8,7 +8,7 @@
 }
 
 .text {
-  margin: 0 var(--gap-2);
+  margin: 0 var(--gap-02);
 }
 
 .input {
@@ -21,9 +21,9 @@
   position: relative;
   display: inline-block;
 
-  border-radius: var(--border-radius-2);
+  border-radius: var(--border-radius-02);
 
-  color: var(--info-color);
+  color: var(--secondary-color);
 
   .input {
     top: 0;
@@ -40,19 +40,19 @@
   display: inline-flex;
 
   &:hover {
-    color: var(--info-color-hover);
+    color: var(--secondary-color-hover);
   }
 
   &.mini {
-    font-size: var(--font-size-3);
+    font-size: var(--font-size-03);
   }
 
   &.medium {
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-04);
   }
 
   &.huge {
-    font-size: var(--font-size-5);
+    font-size: var(--font-size-05);
   }
 
   &.checked,
@@ -70,10 +70,10 @@
   }
 
   &.disabled {
-    color: var(--font-disabled-color);
+    color: var(--font-color-disabled);
   }
 
   &.checked {
-    color: var(--info-color-active);
+    color: var(--secondary-color-active);
   }
 }

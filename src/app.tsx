@@ -11,6 +11,7 @@ import { container, i18nInit } from '@/init';
 
 import { catchMsg } from './utils';
 
+import '@/styles/root.css';
 import '@/styles/normalize.css';
 import '@/styles/transition.css';
 import '@/styles/atom.global.scss';
