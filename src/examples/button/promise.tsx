@@ -22,7 +22,7 @@ const App: React.FC = () => {
         加载中
       </IButton>
       <IButton
-        debounce={300}
+        debounce
         icon={<ISignLine ring type="informer" />}
         isLoading={isPending}
         type="submit"

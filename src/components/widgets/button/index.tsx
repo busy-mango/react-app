@@ -76,7 +76,6 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
   return (
     <motion.button
       ref={ref}
-      layout
       className={classNames(
         styles.wrap,
         styles[size],

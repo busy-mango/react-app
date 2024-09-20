@@ -62,7 +62,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     pattern = 'editable',
     colon = ctx?.colon ?? ':',
     size = ctx?.size ?? 'medium',
-    margin = ctx?.margin ?? true,
+    margin = ctx?.margin ?? false,
     mode = ctx?.mode ?? 'vertical',
     forceRenderTitle = ctx?.forceRenderTitle,
     children,

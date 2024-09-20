@@ -54,7 +54,7 @@
       border-radius: var(--border-radius-02);
     }
     &.padding {
-      padding: 0 var(--gap-01);
+      padding: 0 var(--gap-02);
     }
   }
   &.medium {
@@ -95,8 +95,6 @@
 .text {
   &:not(.disabled):not(.danger) {
     color: inherit;
-  }
-  &:not(.disabled) {
     &:hover {
       background-color: var(--fill-color-hover);
     }
@@ -104,11 +102,20 @@
       background-color: var(--fill-color-active);
     }
   }
+  &.danger:not(.disabled) {
+    color: var(--font-color-danger);
+    &:hover {
+      background-color: var(--fill-color-hover);
+    }
+    &:focus-within {
+      background-color: var(--fill-color-active);
+    }
+  }
+  &.danger.disabled {
+    color: var(--danger-color-disabled);
+  }
   &.disabled {
     color: var(--font-color-disabled);
-  }
-  &.danger {
-    color: var(--font-color-danger);
   }
 }
 
@@ -123,10 +130,7 @@
       background-color: var(--secondary-color-active);
     }
   }
-  &.disabled {
-    background-color: var(--secondary-color-disabled);
-  }
-  &.danger {
+  &.danger:not(.disabled) {
     background-color: var(--danger-color);
     &:hover {
       background-color: var(--danger-color-hover);
@@ -135,6 +139,13 @@
       background-color: var(--danger-color-active);
     }
   }
+  &.danger.disabled {
+    background-color: var(--danger-color-disabled);
+  }
+  &.disabled {
+    color: var(--font-color-disabled);
+    background-color: var(--secondary-color-disabled);
+  }
 }
 
 .bordered {
@@ -142,19 +153,16 @@
   border-style: solid;
   border-color: currentColor;
 
-  &:not(.danger):not(.disabled) {
-    color: var(--font-color-8);
+  &:not(.disabled):not(.danger) {
+    color: var(--secondary-color);
     &:hover {
-      color: var(--font-color-6);
+      color: var(--secondary-color-hover);
     }
     &:focus-within {
-      color: var(--font-color-10);
+      color: var(--secondary-color-active);
     }
   }
-  &.disabled {
-    color: var(--font-color-disabled);
-  }
-  &.danger {
+  &.danger:not(.disabled) {
     color: var(--font-color-danger);
     &:hover {
       color: var(--danger-color-hover);
@@ -162,6 +170,12 @@
     &:focus-within {
       color: var(--danger-color-active);
     }
+  }
+  &.danger.disabled {
+    color: var(--danger-color-disabled);
+  }
+  &.disabled:not(.danger) {
+    color: var(--secondary-color-disabled);
   }
 }
 

@@ -1,6 +1,9 @@
+import type { ChangeEvent } from 'react';
 import { useMemo, useState } from 'react';
 
 import { isBoolean } from '@busymango/is-esm';
+
+import { isInputElement } from '@/utils';
 
 import { useMemoFunc } from './memo.func';
 
@@ -15,7 +18,16 @@ export function useToggle(initial = false) {
     setOpen((state) => (isBoolean(value) ? value : !state));
   });
 
-  const actions = useMemo(() => ({ on, off, toggle }), [on, off, toggle]);
+  const iCheck = useMemoFunc((event?: ChangeEvent<HTMLInputElement>) => {
+    if (isInputElement(event?.target)) {
+      setOpen(event.target.checked);
+    }
+  });
+
+  const actions = useMemo(
+    () => ({ on, off, toggle, iCheck }),
+    [on, off, toggle, iCheck]
+  );
 
   return [open, actions] as const;
 }
