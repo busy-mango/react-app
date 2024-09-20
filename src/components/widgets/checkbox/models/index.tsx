@@ -37,10 +37,6 @@ interface CheckboxStatus {
    */
   size: ControlUISize;
   /**
-   * @default 'outlined'
-   */
-  variant: 'outlined' | 'plain' | 'soft' | 'solid';
-  /**
    * If `true`, the root element's position is set to initial which allows the action area to fill the nearest positioned parent.
    * This prop is useful for composing Checkbox with ListItem component.
    * @default false

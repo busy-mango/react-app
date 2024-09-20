@@ -42,7 +42,7 @@ export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
     scrollHeight !== height && setHeight(scrollHeight);
   });
 
-  useResizeObserver(target, iSyncHeight, visible);
+  useResizeObserver(target, iSyncHeight, { enabled: visible });
 
   return (
     <AnimatePresence>

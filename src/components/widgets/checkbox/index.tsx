@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import { onCheckCatch, useControlState } from '../control';
 import { ISignLine } from '../sign';
 import { ISVGWrap } from '../svg-wrap';
+import { IWave } from '../wave';
 import type {
   ICheckboxProps,
   ICheckboxRef,
@@ -53,13 +54,13 @@ const iInputRender: ICheckInputRender = (
     size: _size,
     status: _status,
     overlay: _overlay,
-    variant: _variant,
     indeterminate,
     checked,
     pattren,
   }
 ) => (
   <Fragment>
+    {wave && <IWave measure={ref} target={ref} />}
     <input
       ref={ref}
       data-indeterminate={indeterminate}
@@ -84,7 +85,6 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
       indeterminate = false,
       pattren = 'editable',
       status = 'success',
-      variant = 'solid',
       size = 'medium',
       overlay = false,
       wave = true,
@@ -113,20 +113,22 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
         size,
         label,
         status,
-        variant,
         overlay,
         pattren,
         indeterminate,
         checked: iChecked,
       }),
-      [iChecked, indeterminate, variant, size, overlay, status, pattren, label]
+      [iChecked, indeterminate, size, overlay, status, pattren, label]
     );
 
     return (render?.root ?? iRootRender)(
       {
         ref: root,
         label: label,
-        className: classNames(styles.root, styles[size], styles[pattren]),
+        className: classNames(styles.root, styles[size], styles[pattren], {
+          [styles.checked]: iChecked && !indeterminate,
+          [styles.indeterminate]: indeterminate,
+        }),
         checkbox: (render?.checkbox ?? iCheckboxRender)(
           {
             className: styles.checkbox,

@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import type { Target } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
 
-import { compact } from '@busymango/utils';
+import { compact, FRAME2MS } from '@busymango/utils';
 
-import { useEventState, useMemoFunc } from '@/hooks';
+import { useEventState, useMemoFunc, useResizeObserver } from '@/hooks';
 import type { ReactTargetType } from '@/models';
 import { iThemeVariable } from '@/utils';
 
@@ -18,13 +18,14 @@ const initial: Target = {
 export const IWave: React.FC<{
   className?: string;
   placeholder?: boolean;
+  measure?: ReactTargetType;
   target: ReactTargetType;
 }> = (props) => {
-  const { className, target, placeholder } = props;
+  const { className, target, measure, placeholder } = props;
 
   const memo = useRef(false);
 
-  const [scope, animate] = useAnimate();
+  const [scope, animate] = useAnimate<HTMLDivElement>();
 
   const animation = useMemoFunc(async () => {
     memo.current = true;
@@ -59,6 +60,17 @@ export const IWave: React.FC<{
     end: 'touchend',
     start: 'touchstart',
   });
+
+  useResizeObserver(
+    measure,
+    ({ clientWidth, clientHeight }) => {
+      scope.current.style.width = `${clientWidth}px`;
+      scope.current.style.height = `${clientHeight}px`;
+
+      console.log(clientWidth, clientHeight);
+    },
+    { debounce: 10 * FRAME2MS }
+  );
 
   useEffect(() => {
     (isClick || isTouch) && !memo.current && animation();
