@@ -11,7 +11,7 @@ import type {
   ControlValue,
   IControlWrapProps,
 } from '../../control';
-import type { IInputProps } from '../../input';
+import type { IInputProps, IInputRef } from '../../input';
 
 export interface IOptionRender {
   (
@@ -83,6 +83,7 @@ export interface ISelectorPredicate {
 }
 
 export type ISelectorRef = {
+  input: IInputRef;
   floating: React.MutableRefObject<ReferenceType | null>;
   reference: React.MutableRefObject<ReferenceType | null>;
 };

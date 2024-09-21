@@ -10,13 +10,13 @@
 
   &.active,
   &:hover {
-    background-color: var(--natural-color-hover);
+    background-color: var(--fill-color-hover);
   }
 
   &.selected {
     font-weight: 500;
-    color: var(--font-color-info);
-    background-color: var(--natural-color-active);
+    color: var(--primary-color);
+    background-color: var(--fill-color-active);
   }
 }
 
@@ -53,7 +53,6 @@
 .chip {
   width: max-content;
   max-width: 100%;
-  height: 1lh;
 }
 
 .wrap {
@@ -68,7 +67,6 @@
   justify-content: flex-start;
 
   max-width: 100%;
-  padding: var(--gap-01);
   min-height: var(--control-size-03);
   line-height: inherit;
 }
@@ -77,10 +75,27 @@
   min-width: 1em;
   max-width: 100%;
   line-height: inherit;
+
+  &::placeholder {
+    color: var(--font-color-4);
+  }
+}
+
+.editable,
+.disabled,
+.read-only {
+  .wrap {
+    width: 100%;
+  }
+}
+
+.read-pretty {
+  .wrap {
+    width: auto;
+  }
 }
 
 .reference {
-  width: 100%;
   min-height: 1em;
   min-width: 12em;
   line-height: var(--control-size-03);
@@ -88,6 +103,10 @@
   cursor: text;
 
   box-sizing: border-box;
+
+  &:not(.read-pretty) {
+    width: 100%;
+  }
 
   &.multiple {
   }

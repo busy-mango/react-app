@@ -196,6 +196,15 @@
   /* 信息色 - 禁用态 */
   --tertiary-color-disabled: rgb(var(--blue-color-200) / 1);
 
+  /* 自然色 - 默认 */
+  --natural-color: rgb(var(--gray-color-400) / 1);
+  /* 自然色 - 悬浮态 */
+  --natural-color-hover: rgb(var(--gray-color-300) / 1);
+  /* 自然色 - 激活态 */
+  --natural-color-active: rgb(var(--gray-color-500) / 1);
+  /* 自然色 - 禁用态 */
+  --natural-color-disabled: rgb(var(--gray-color-200) / 1);
+
   /* 警告色 - 默认 */
   --warn-color: rgb(var(--orange-color-500) / 1);
   /* 警告色 - 悬浮态 */
@@ -223,15 +232,6 @@
   /* 危险色 - 禁用态 */
   --danger-color-disabled: rgb(var(--red-color-200) / 1);
 
-  /* 自然色 - 默认 */
-  --natural-color: rgb(var(--gray-color-400) / 1);
-  /* 自然色 - 悬浮态 */
-  --natural-color-hover: rgb(var(--gray-color-300) / 1);
-  /* 自然色 - 激活态 */
-  --natural-color-active: rgb(var(--gray-color-500) / 1);
-  /* 自然色 - 禁用态 */
-  --natural-color-disabled: rgb(var(--gray-color-200) / 1);
-
   /* 填充色 - 默认 */
   --fill-color-normal: rgb(var(--gray-color-600) / 0.2);
   /* 填充色 - 悬浮态 */
@@ -241,7 +241,7 @@
   /* 填充色 - 选中态 */
   --fill-color-select: rgb(var(--blue-color-500) / 0.08);
   /* 填充色 - 禁用态 */
-  /* --fill-color-disabled: rgb(var(--blue-color-700) / 0.12); */
+  --fill-color-disabled: rgb(var(--gray-color-200) / 1);
 
   /* 背景色 - 默认 */
   --bg-color: rgb(var(--gray-color-00) / 1);
@@ -269,6 +269,13 @@
   /* 背景色 - 滑块 */
   --bg-color-thumb: rgb(var(--gray-color-00) / 1);
 
+  /* 背景色 - 危险 */
+  --bg-color-danger: rgb(var(--red-color-50) / 1);
+  /* 背景色 - 警告 */
+  --bg-color-warn: rgb(var(--orange-color-50) / 1);
+  /* 背景色 - 成功 */
+  --bg-color-success: rgb(var(--green-color-50) / 1);
+
   /* 边框色 - 主 */
   --border-color-1: rgb(var(--gray-color-100) / 0.8);
   /* 边框色 - 次要场景 */
@@ -280,7 +287,7 @@
   /* 边框色 - 激活 */
   --border-color-active: rgb(var(--dodger-color-500) / 1);
   /* 边框色 - 禁用 */
-  --border-color-disabled: rgb(var(--gray-color-700) / 1);
+  --border-color-disabled: rgb(var(--gray-color-600) / 0.3);
 
   --font-color-2: rgb(var(--gray-color-200) / 0.75);
   --font-color-4: rgb(var(--gray-color-400) / 0.8);

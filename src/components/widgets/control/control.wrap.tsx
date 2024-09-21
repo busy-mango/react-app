@@ -8,6 +8,7 @@ import { useIFieldGridContext } from '../form-field/hooks';
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
+import { usePatternAssert } from './hooks';
 import type { IControlWrapProps } from './models';
 
 import * as styles from './index.scss';
@@ -25,6 +26,7 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
       suffixClickable,
       status = 'success',
       variant = 'standard',
+      pattern = 'editable',
       size = ctx?.size ?? 'medium',
       onSuffixClick,
       onPrefixClick,
@@ -32,6 +34,8 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
     } = props;
 
     const target = useRef<HTMLDivElement>(null);
+
+    const { isEditable } = usePatternAssert(pattern);
 
     useImperativeHandle(ref, () => target.current!, [target]);
 
@@ -44,16 +48,18 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
     return (
       <motion.div
         ref={target}
-        data-ui-field-wrap
+        data-ui-control-wrap
         className={classNames(
           styles.wrap,
           styles[size],
+          styles[status],
+          styles[pattern],
           styles[variant],
           className
         )}
         {...others}
       >
-        {variant !== 'standard' && (
+        {isEditable && variant === 'bordered' && (
           <IWave
             placeholder={variant === 'bordered' && isFocus}
             target={target}

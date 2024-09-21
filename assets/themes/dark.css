@@ -241,7 +241,7 @@
   /* 填充色 - 选中态 */
   --fill-color-select: rgb(var(--blue-color-700) / 0.12);
   /* 填充色 - 禁用态 */
-  /* --fill-color-disabled: rgb(var(--blue-color-700) / 0.12); */
+  --fill-color-disabled: rgb(var(--gray-color-300) / 1);
 
   /* 背景色 - 默认 */
   --bg-color-normal: rgb(var(--gray-color-80) / 1);
@@ -268,6 +268,13 @@
   --bg-color-float: rgb(var(--gray-color-25) / 0.9);
   /* 背景色 - 滑块 */
   --bg-color-thumb: rgb(var(--gray-color-900) / 1);
+
+  /* 背景色 - 危险 */
+  --bg-color-danger: rgb(var(--red-color-50) / 1);
+  /* 背景色 - 警告 */
+  --bg-color-warn: rgb(var(--orange-color-600) / 0.12);
+  /* 背景色 - 成功 */
+  --bg-color-success: rgb(var(--green-color-50) / 1);
 
   /* 边框色 - 主要场景 */
   --border-color-1: rgb(var(--gray-color-400) / 0.3);

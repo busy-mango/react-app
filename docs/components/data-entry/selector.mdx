@@ -1,12 +1,22 @@
 # Selector 选择器
 
-> Select components are used for collecting user provided information from a list of options.
+> 选择组件用于从选项列表中收集用户提供的信息。
 
-## Usage
+使用 `import { ISelector } from "@/components";`
 
-### Basic select
+源码 `components/widgets/selector`
 
-Menus are positioned under their emitting elements, unless they are close to the bottom of the viewport.
+## 何时使用
+
+* 弹出一个下拉菜单给用户选择操作，用于代替原生的选择器，或者需要一个更优雅的多选器时。
+
+* 当选项少时（少于 5 项），建议直接将选项平铺，使用 Radio 是更好的选择。
+
+## 代码演示
+
+### 基础使用
+
+除非下拉选单靠近窗口底部，否则会被放置在其引用元素的下方。
 
 <code src='@/examples/selector/basic' />
 
@@ -14,9 +24,7 @@ Menus are positioned under their emitting elements, unless they are close to the
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/busy-mango/react-app?file=src%2Fpages%2Findex.tsx)
 
-### Advanced features
-
-#### Multiple
+### 多选
 
 The component can handle multiple selections. It's enabled with the `multiple` prop.
 

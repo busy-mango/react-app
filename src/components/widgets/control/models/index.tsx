@@ -43,6 +43,8 @@ export interface InteractionProps {
   onPointerEnter?(): void;
 }
 
+export type IControlVariant = 'filled' | 'standard' | 'bordered';
+
 export interface IControlWrapProps
   extends React.PropsWithChildren,
     OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'children'> {
@@ -51,9 +53,10 @@ export interface IControlWrapProps
   suffix?: React.ReactNode;
   suffixClickable?: boolean;
   size?: ControlUISize;
+  pattern?: ControlPattern;
   isLoading?: boolean;
   /** 变体 */
-  variant?: 'filled' | 'standard' | 'bordered';
+  variant?: IControlVariant;
   onPrefixClick?: React.MouseEventHandler<HTMLDivElement>;
   onSuffixClick?: React.MouseEventHandler<HTMLDivElement>;
 }

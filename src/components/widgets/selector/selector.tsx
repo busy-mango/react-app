@@ -1,44 +1,30 @@
-import {
-  forwardRef,
-  Fragment,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from 'react';
+import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import {
-  isArray,
-  isEmpty,
-  isNonEmptyString,
-  isObject,
-  isTrue,
-} from '@busymango/is-esm';
+import { isArray, isEmpty, isFalse, isNonEmptyString } from '@busymango/is-esm';
 import { iArray, ifnot } from '@busymango/utils';
-import {
-  FloatingPortal,
-  useClick,
-  useDismiss,
-  useInteractions,
-} from '@floating-ui/react';
+import { FloatingPortal } from '@floating-ui/react';
 
-import { iFocusParams, useEventState, useMemoFunc } from '@/hooks';
+import { useMemoFunc } from '@/hooks';
 import { container } from '@/init';
-import { iCompact } from '@/utils';
+import { iCompact, isReactNode } from '@/utils';
 
 import { IChip } from '../chip';
-import type { ControlOption } from '../control';
-import { IControlWrap, useControlState } from '../control';
+import { IControlWrap, useControlState, usePatternAssert } from '../control';
 import { IFlex } from '../flex';
 import type { IInputRef } from '../input';
 import { IInput } from '../input';
 import { ISignLine } from '../sign';
-import { estimateSize } from './helpers';
-import { useIFloating, useSignType } from './hooks';
+import {
+  useFilterOptions,
+  useIFloating,
+  useIInteractions,
+  useIMotion,
+  useSignType,
+} from './hooks';
 import type {
   IOptionRender,
-  ISelectorPredicate,
   ISelectorProps,
   ISelectorRef,
   ScrollableRef,
@@ -78,7 +64,6 @@ const iOptionRender: IOptionRender = (option, params) => (
 export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
   function ISelector(props, ref) {
     const {
-      clear,
       style,
       render,
       status,
@@ -93,10 +78,12 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       className,
       placeholder,
       open: _open,
+      clear = true,
       filter = true,
       keyword: _keyword,
       iFloatingClassName,
       variant = 'bordered',
+      pattern = 'editable',
       size: _size = 'medium',
       onOpenChange: _onOpenChange,
       onSearch: _onSearch,
@@ -105,6 +92,12 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       onClick,
       onBlur,
     } = props;
+
+    const input = useRef<IInputRef>(null);
+
+    const scrollable = useRef<ScrollableRef>(null);
+
+    const [value, onChange] = useControlState(props);
 
     const [keyword, onSearch] = useControlState({
       value: _keyword,
@@ -116,20 +109,15 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       onChange: _onOpenChange,
     });
 
-    const predicate = useMemo<ISelectorPredicate | undefined>(() => {
-      if (isObject(filter)) {
-        return filter?.predicate;
-      }
-      if (isTrue(filter)) {
-        return ({ title }: ControlOption, keyword?: string) => {
-          return !keyword ? true : (title?.includes(keyword) ?? false);
-        };
-      }
-    }, [filter]);
+    const assert = usePatternAssert(pattern);
 
-    const input = useRef<IInputRef>(null);
+    const iSelectedList = iCompact(iArray(value) ?? []);
 
-    const scrollable = useRef<ScrollableRef>(null);
+    const { isEditable, isReadPretty } = assert;
+
+    const clearable = !isEmpty(value) && isReactNode(clear) && !isFalse(clear);
+
+    const filtered = useFilterOptions(options, { filter, keyword });
 
     const {
       refs,
@@ -138,53 +126,21 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       isPositioned = false,
     } = useIFloating({ open, onOpenChange });
 
-    useImperativeHandle(ref, () => ({
-      floating: refs.floating,
-      reference: refs.reference,
-    }));
-
-    const click = useClick(context, {
-      toggle: false,
-    });
-
-    const dismiss = useDismiss(context, {
-      referencePressEvent: 'click',
-      referencePress: false,
-    });
-
-    const isFocus = useEventState(
-      iFocusParams(refs.reference.current as HTMLDivElement)
-    );
-
-    const interactions = useInteractions([click, dismiss]);
-
-    const { getReferenceProps, getFloatingProps } = interactions;
-
-    const [value, onChange] = useControlState(props);
-
-    const iSelectedList = iCompact(iArray(value) ?? []);
-
-    const isTop = context.placement.startsWith('top');
-
-    const clearable = !isEmpty(value);
-
-    const transition = useMemo(
+    useImperativeHandle(
+      ref,
       () => ({
-        duration: 0.15,
-        ease: 'easeOut',
-        originY: isTop ? 1 : 0,
+        input: input.current!,
+        floating: refs.floating,
+        reference: refs.reference,
       }),
-      [isTop]
+      [refs, input]
     );
 
-    const initial = useMemo(
-      () => ({
-        opacity: 0,
-        scaleY: 0.96,
-        y: (isTop ? 0.25 : -0.25) * estimateSize(),
-      }),
-      [isTop]
-    );
+    const { transition, initial } = useIMotion(context);
+
+    const iSignType = useSignType(context, { clearable });
+
+    const { getReferenceProps, getFloatingProps } = useIInteractions(context);
 
     const iChange = useMemoFunc((current?: React.Key | React.Key[]) => {
       input.current?.clear();
@@ -238,15 +194,6 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       if (clearable) iChange(undefined);
     });
 
-    const filtered = useMemo(() => {
-      if (predicate) {
-        return options?.filter((option) => {
-          return predicate(option, keyword);
-        });
-      }
-      return options;
-    }, [predicate, keyword, options]);
-
     const iChipListRender = (inners?: React.Key[]) =>
       isArray(options) &&
       inners?.map((inner, index) => {
@@ -265,26 +212,25 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
         );
       });
 
-    const iSignType = useSignType(clearable, context.open, isFocus);
-
     return (
       <Fragment>
         <IControlWrap
           ref={refs.setReference}
           className={classNames(
             styles.reference,
+            styles[pattern],
             {
               [styles.multiple]: multiple,
-
               // [styles.keyword]: isNonEmptyString(keyword),
             },
             className
           )}
           isLoading={isLoading}
+          pattern={pattern}
           prefix={prefix}
           size={_size}
           status={status}
-          suffix={<ISignLine ring={iSignType === 'cross'} type={iSignType} />}
+          suffix={!isReadPretty && <ISignLine type={iSignType} />}
           suffixClickable={iSignType === 'cross'}
           variant={variant}
           onSuffixClick={onSuffixClick}
@@ -300,6 +246,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
               autoSize
               autoFocus={autoFocus}
               className={styles.input}
+              pattern={pattern}
               placeholder={ifnot(isEmpty(iSelectedList) && placeholder)}
               value={keyword}
               onBlur={onBlur}
@@ -311,7 +258,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
         </IControlWrap>
         <FloatingPortal root={iFloatingRoot?.(refs.reference) ?? container}>
           <AnimatePresence>
-            {context.open && (
+            {context.open && isEditable && (
               <motion.div
                 ref={refs.setFloating}
                 animate={{
