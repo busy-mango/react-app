@@ -1,16 +1,12 @@
-import {
-  forwardRef,
-  Fragment,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
+
+import { ifnot } from '@busymango/utils';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISignLine } from '../sign';
 import { ISVGWrap } from '../svg-wrap';
-import { IWave } from '../wave';
+import { IWaveWrap } from '../wave';
 import type {
   ICheckboxProps,
   ICheckboxRef,
@@ -24,11 +20,13 @@ import * as styles from './index.scss';
 
 const iRootRender: ICheckRootRender = (
   { label, checkbox, ...others },
-  { pattren }
+  { pattren, checked, indeterminate }
 ) => (
   <span data-ui-checkroot {...others}>
     {pattren !== 'readPretty' && checkbox}
-    <span className={styles.text}>{label}</span>
+    {(pattren !== 'readPretty' || checked || indeterminate) && (
+      <span className={styles.text}>{label}</span>
+    )}
   </span>
 );
 
@@ -39,39 +37,43 @@ const iCheckboxRender: ICheckBoxRender = ({ input, icon, ...others }) => (
   </ISVGWrap>
 );
 
-const iIconRender: ICheckIconRender = (props, { checked, indeterminate }) => {
+const iIconRender: ICheckIconRender = (
+  { wave, inputRef, ...others },
+  { checked, indeterminate }
+) => {
   const type = (function () {
     if (indeterminate) return 'minus';
     if (checked) return 'tick';
   })();
 
-  return <ISignLine rect {...props} type={type} />;
+  return (
+    <IWaveWrap
+      enabled={wave}
+      style={{
+        borderRadius: 'var(--border-radius-10)',
+      }}
+      target={inputRef}
+    >
+      <ISignLine rect {...others} type={type} />
+    </IWaveWrap>
+  );
 };
 
 const iInputRender: ICheckInputRender = (
-  { ref, wave, value, ...others },
-  {
-    size: _size,
-    status: _status,
-    overlay: _overlay,
-    indeterminate,
-    checked,
-    pattren,
-  }
+  { ref, value, onChange, ...others },
+  { size: _size, status: _status, indeterminate, checked, pattren }
 ) => (
-  <Fragment>
-    {wave && <IWave measure={ref} target={ref} />}
-    <input
-      ref={ref}
-      data-indeterminate={indeterminate}
-      disabled={pattren === 'disabled'}
-      readOnly={pattren === 'readOnly'}
-      type="checkbox"
-      value={value?.toLocaleString()}
-      {...others}
-      checked={checked ?? false}
-    />
-  </Fragment>
+  <input
+    ref={ref}
+    checked={checked ?? false}
+    data-indeterminate={indeterminate}
+    disabled={pattren === 'disabled'}
+    readOnly={pattren === 'readOnly' || pattren === 'readPretty'}
+    type="checkbox"
+    value={value?.toLocaleString()}
+    onChange={ifnot(pattren === 'editable' && onChange)}
+    {...others}
+  />
 );
 
 export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
@@ -86,7 +88,6 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
       pattren = 'editable',
       status = 'success',
       size = 'medium',
-      overlay = false,
       wave = true,
       onChange,
       ...others
@@ -113,12 +114,11 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
         size,
         label,
         status,
-        overlay,
         pattren,
         indeterminate,
         checked: iChecked,
       }),
-      [iChecked, indeterminate, size, overlay, status, pattren, label]
+      [iChecked, indeterminate, size, status, pattren, label]
     );
 
     return (render?.root ?? iRootRender)(
@@ -134,7 +134,6 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
             className: styles.checkbox,
             input: (render?.input ?? iInputRender)(
               {
-                wave,
                 ref: input,
                 onChange: iChange,
                 className: classNames(styles.input, className),
@@ -144,6 +143,8 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
             ),
             icon: (render?.icon ?? iIconRender)(
               {
+                wave,
+                inputRef: input,
                 className: classNames(styles.icon, {
                   [styles.checked]: checked,
                 }),

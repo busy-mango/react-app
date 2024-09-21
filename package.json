@@ -66,6 +66,7 @@
     "@busymango/is-esm": "^0.2.3",
     "@busymango/utils": "^0.2.4",
     "@floating-ui/react": "^0.26.24",
+    "@tanstack/react-form": "^0.33.0",
     "@tanstack/react-query": "^5.56.1",
     "@tanstack/react-query-devtools": "^5.56.1",
     "@tanstack/react-virtual": "^3.10.8",

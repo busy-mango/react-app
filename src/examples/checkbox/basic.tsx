@@ -1,12 +1,28 @@
 import { useState } from 'react';
 
-import type { ControlPattern } from '@/components';
+import type { ControlPattern, ControlUISize } from '@/components';
 import { ICheckbox, IFlex, IRadioGroup } from '@/components';
 
 const App: React.FC = () => {
-  const [pattern, setPattern] = useState<ControlPattern>();
+  const [size, setSize] = useState<ControlUISize>('medium');
+
+  const [pattern, setPattern] = useState<ControlPattern>('editable');
+
   return (
     <IFlex vertical gap={16}>
+      <IFlex gap={8}>
+        <IRadioGroup
+          options={(['mini', 'medium', 'huge'] satisfies ControlUISize[]).map(
+            (value) => ({
+              value,
+            })
+          )}
+          value={size}
+          onChange={(value) => {
+            setSize(value as ControlUISize);
+          }}
+        />
+      </IFlex>
       <IFlex gap={8}>
         <IRadioGroup
           options={(
@@ -20,14 +36,14 @@ const App: React.FC = () => {
             value,
             label: value,
           }))}
+          value={pattern}
           onChange={(value) => {
             setPattern(value as ControlPattern);
           }}
         />
       </IFlex>
       <IFlex gap={8}>
-        <ICheckbox label="Checkbox" pattren={pattern} />
-        <ICheckbox indeterminate label="Indeterminate" pattren={pattern} />
+        <ICheckbox label="Checkbox" pattren={pattern} size={size} />
       </IFlex>
     </IFlex>
   );

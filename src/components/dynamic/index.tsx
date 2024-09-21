@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import { AppEnv, env } from '@/init';
 import type { ReactSvgProps } from '@/models';
-import { caseAsync, devtoolAsync } from '@/utils';
+import { devtoolAsync } from '@/utils';
 
 import Picture from '@/icons/picture.svg?react';
 
@@ -43,19 +43,6 @@ export const DynamicPage: React.FC = () => {
     <AnimatePresence mode="wait">
       <Loadable route={pathname} />
     </AnimatePresence>
-  );
-};
-
-export const DynamicCase: React.FC = () => {
-  const { pathname } = useLocation();
-
-  const { Component } = useLazyComponent(
-    pathname.replace('/examples', ''),
-    caseAsync
-  );
-
-  return (
-    <AnimatePresence mode="wait">{Component && <Component />}</AnimatePresence>
   );
 };
 

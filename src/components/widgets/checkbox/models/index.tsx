@@ -1,7 +1,6 @@
-// ┌────────────────────────────── Warning ──────────────────────────────┐
-// │ These PropTypes are generated from the TypeScript type definitions. │
-// │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
-// └─────────────────────────────────────────────────────────────────────┘
+// ┌────────────────────────────── 说明 ─────────────────────────────────┐
+//   React Checkbox 组件的 API 参考文档。了解此导出模块的 props、CSS 和其他 API.
+// └────────────────────────────────────────────────────────────────────┘
 
 import type { HTMLMotionProps, SVGMotionProps } from 'framer-motion';
 
@@ -20,30 +19,25 @@ import type {
 interface CheckboxStatus {
   label?: React.ReactNode;
   /**
-   * If `true`, the component is checked.
+   * 控制控件当前是否选中。
    */
   checked: boolean;
   /**
-   * If `true`, the component appears indeterminate.
-   * This does not set the native input element to indeterminate due
-   * to inconsistent behavior across browsers.
-   * However, we set a `data-indeterminate` attribute on the `input`.
-   * @default false
+   * 如果为 true ，则组件显示为不确定。由于兼容性问题这里没有控制 input 的 indeterminate属性
    */
   indeterminate: boolean;
   /**
-   * The size of the component.
-   * @default 'medium'
+   * 设置控件的交互方式。
+   */
+  pattren: ControlPattern;
+  /**
+   * 设置控件尺寸。
    */
   size: ControlUISize;
   /**
-   * If `true`, the root element's position is set to initial which allows the action area to fill the nearest positioned parent.
-   * This prop is useful for composing Checkbox with ListItem component.
-   * @default false
+   * 设置控件的校验状态。
    */
-  overlay: boolean;
   status: ControlUIStatus;
-  pattren: ControlPattern;
 }
 
 interface IRender<P = PlainObject, E = unknown> {
@@ -58,12 +52,7 @@ export interface ICheckboxRef {
 export interface ICheckboxInputProps
   extends OmitOf<ReactInputProps, 'value' | 'size'> {
   /**
-   * The `name` attribute of the input.
-   */
-  name?: string;
-  /**
-   * The value of the component. The DOM API casts this to a string.
-   * The browser uses "on" as the default value.
+   * 控制控件 input 元素的值。
    */
   value?: ControlValue;
 }
@@ -85,37 +74,37 @@ export type ICheckBoxRender = IRender<
 
 export type ICheckInputRender = IRender<
   ICheckboxInputProps & {
-    wave?: boolean;
     ref: React.RefObject<HTMLInputElement>;
   }
 >;
 
-export type ICheckIconRender = IRender<SVGMotionProps<SVGSVGElement>>;
+export type ICheckIconRender = IRender<
+  SVGMotionProps<SVGSVGElement> & {
+    wave?: boolean;
+    inputRef: React.RefObject<HTMLInputElement>;
+  }
+>;
+
+export interface ICheckboxRenders {
+  icon?: ICheckIconRender;
+  root?: ICheckRootRender;
+  input?: ICheckInputRender;
+  checkbox?: ICheckBoxRender;
+}
 
 export interface ICheckboxProps
   extends ICheckboxInputProps,
     Partial<CheckboxStatus> {
   /**
-   * The default checked state. Use when the component is not controlled.
+   * 控件是否默认选中。
    */
   defaultChecked?: boolean;
   /**
-   * If false, the ripple effect is disabled.
+   * 是否呈现波纹反馈。
    */
   wave?: boolean;
   /**
-   * The components used for each slot inside.
-   * @default {}
+   * 自定义控件UI。
    */
-  render?: {
-    /**
-     * The icon to display when the component is `checked`.
-     * The icon to display when the component is indeterminate.
-     * The checked icon is removed and the selected variant is applied on the `action` element instead.
-     */
-    icon?: ICheckIconRender;
-    root?: ICheckRootRender;
-    input?: ICheckInputRender;
-    checkbox?: ICheckBoxRender;
-  };
+  render?: ICheckboxRenders;
 }

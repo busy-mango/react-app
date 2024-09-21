@@ -6,8 +6,10 @@ import { motion, useAnimate } from 'framer-motion';
 import { compact, FRAME2MS } from '@busymango/utils';
 
 import { useEventState, useMemoFunc, useResizeObserver } from '@/hooks';
-import type { ReactTargetType } from '@/models';
+import type { ReactCFC } from '@/models';
 import { iThemeVariable } from '@/utils';
+
+import type { IWaveProps, IWaveWrapProps } from './models';
 
 import * as styles from './index.scss';
 
@@ -15,13 +17,8 @@ const initial: Target = {
   boxShadow: `0 0 0 4px ${iThemeVariable(`--wave-color-0`)}`,
 };
 
-export const IWave: React.FC<{
-  className?: string;
-  placeholder?: boolean;
-  measure?: ReactTargetType;
-  target: ReactTargetType;
-}> = (props) => {
-  const { className, target, measure, placeholder } = props;
+export const IWave: React.FC<IWaveProps> = (props) => {
+  const { className, target, measure, placeholder, ...others } = props;
 
   const memo = useRef(false);
 
@@ -78,8 +75,26 @@ export const IWave: React.FC<{
 
   return (
     <Fragment>
-      <div ref={scope} className={classNames(styles.wrap, className)} />
+      <div
+        ref={scope}
+        className={classNames(styles.wrap, className)}
+        {...others}
+      />
       {placeholder && <motion.div className={styles.wrap} initial={initial} />}
     </Fragment>
   );
 };
+
+export const IWaveWrap: ReactCFC<IWaveWrapProps> = ({
+  children,
+  enabled,
+  target,
+  placeholder,
+  style,
+  ...others
+}) => (
+  <span style={{ position: 'relative', ...style }} {...others}>
+    {enabled && <IWave placeholder={placeholder} target={target} />}
+    {children}
+  </span>
+);
