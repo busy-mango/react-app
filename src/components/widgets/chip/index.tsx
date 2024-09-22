@@ -72,7 +72,13 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
       {children}
       <AnimatePresence>
         {close && (
-          <ISVGWrap className={styles.close} onClick={iClose}>
+          <ISVGWrap
+            className={styles.close}
+            whileHover={{
+              scale: 1.12,
+            }}
+            onClick={iClose}
+          >
             {isTrue(close) ? <ISignLine type="cross" /> : close}
           </ISVGWrap>
         )}

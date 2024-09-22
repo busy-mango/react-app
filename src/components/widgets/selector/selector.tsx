@@ -2,31 +2,40 @@ import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { isArray, isEmpty, isFalse, isNonEmptyString } from '@busymango/is-esm';
+import { isArray, isEmpty, isNonEmptyString } from '@busymango/is-esm';
 import { iArray, ifnot } from '@busymango/utils';
 import { FloatingPortal } from '@floating-ui/react';
 
-import { useMemoFunc } from '@/hooks';
+import {
+  iFocusParams,
+  iHoverParams,
+  useEventState,
+  useMemoFunc,
+} from '@/hooks';
 import { container } from '@/init';
-import { iCompact, isReactNode } from '@/utils';
+import { iCompact } from '@/utils';
 
 import { IChip } from '../chip';
-import { IControlWrap, useControlState, usePatternAssert } from '../control';
+import { IControlWrap, useControlState } from '../control';
 import { IFlex } from '../flex';
 import type { IInputRef } from '../input';
 import { IInput } from '../input';
 import { ISignLine } from '../sign';
+import { iSignType } from './helpers';
 import {
   useFilterOptions,
   useIFloating,
   useIInteractions,
   useIMotion,
-  useSignType,
 } from './hooks';
 import type {
-  IOptionRender,
+  ISelectorChipRender,
+  ISelectorOptionRender,
   ISelectorProps,
   ISelectorRef,
+  ISelectorRootRender,
+  ISelectorScrollableRender,
+  ISelectorSearchRender,
   ScrollableRef,
 } from './models';
 import { Presence } from './presence';
@@ -34,31 +43,95 @@ import { Scrollable } from './scrollable';
 
 import * as styles from './index.scss';
 
-const iChipRender: IOptionRender = (option, params) => (
+const iChipRender: ISelectorChipRender = (
+  { option, onClose },
+  { multiple }
+) => (
   <Fragment>
-    {!params?.multiple && (option?.label ?? option?.value?.toLocaleString())}
-    {params?.multiple && (
-      <IChip close size="mini" variant="filled" onClose={params?.onClose}>
+    {!multiple && (option?.label ?? option?.value?.toLocaleString())}
+    {multiple && (
+      <IChip close size="mini" variant="filled" onClose={onClose}>
         {option?.label ?? option?.value?.toLocaleString()}
       </IChip>
     )}
   </Fragment>
 );
 
-const iOptionRender: IOptionRender = (option, params) => (
+const iOptionRender: ISelectorOptionRender = ({
+  option,
+  isActive,
+  isSelected,
+}) => (
   <IFlex
     align="center"
     className={classNames(styles.option, {
-      [styles.active]: params?.isActive,
-      [styles.selected]: params?.isSelected,
+      [styles.active]: isActive,
+      [styles.selected]: isSelected,
     })}
     justify="space-between"
   >
     {option?.label ?? option?.value?.toLocaleString()}
     <AnimatePresence>
-      {params?.isSelected && <ISignLine className={styles.tick} type="tick" />}
+      {isSelected && <ISignLine className={styles.tick} type="tick" />}
     </AnimatePresence>
   </IFlex>
+);
+
+const iScrollableRender: ISelectorScrollableRender = (props) => (
+  <Scrollable {...props} />
+);
+
+const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
+  <IInput autoSize className={styles.input} {...props} pattern={pattern} />
+);
+
+const iRootRender: ISelectorRootRender = (
+  { ref, iChange, chips, search, prefix, suffix, ...others },
+  {
+    clearable,
+    isLoading,
+    pattern,
+    size,
+    status,
+    multiple,
+    variant,
+    keyword,
+    isFocus,
+    isHover,
+    value,
+    open,
+  }
+) => (
+  <IControlWrap
+    ref={ref}
+    isLoading={isLoading}
+    pattern={pattern}
+    prefix={prefix}
+    size={size}
+    status={status}
+    suffix={pattern !== 'readPretty' && suffix}
+    suffixClickable={
+      iSignType({
+        clearable: clearable && isEmpty(value),
+        isFocus,
+        isHover,
+        open,
+      }) === 'cross'
+    }
+    variant={variant}
+    onSuffixClick={() => {
+      clearable && iChange?.(undefined);
+    }}
+    {...others}
+  >
+    <motion.div className={styles.wrap}>
+      {!multiple && isEmpty(keyword) && chips}
+      <AnimatePresence presenceAffectsLayout mode="popLayout">
+        {multiple && isEmpty(keyword) && chips}
+      </AnimatePresence>
+      {search}
+    </motion.div>
+  </IControlWrap>
 );
 
 export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
@@ -78,8 +151,8 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       className,
       placeholder,
       open: _open,
-      clear = true,
       filter = true,
+      clearable = true,
       keyword: _keyword,
       iFloatingClassName,
       variant = 'bordered',
@@ -109,13 +182,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       onChange: _onOpenChange,
     });
 
-    const assert = usePatternAssert(pattern);
-
     const iSelectedList = iCompact(iArray(value) ?? []);
-
-    const { isEditable, isReadPretty } = assert;
-
-    const clearable = !isEmpty(value) && isReactNode(clear) && !isFalse(clear);
 
     const filtered = useFilterOptions(options, { filter, keyword });
 
@@ -126,10 +193,16 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       isPositioned = false,
     } = useIFloating({ open, onOpenChange });
 
+    const current = refs.reference.current as HTMLDivElement;
+
+    const isFocus = useEventState(iFocusParams(current));
+
+    const isHover = useEventState(iHoverParams(current));
+
     useImperativeHandle(
       ref,
       () => ({
-        input: input.current!,
+        input: input.current?.native,
         floating: refs.floating,
         reference: refs.reference,
       }),
@@ -137,8 +210,6 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     );
 
     const { transition, initial } = useIMotion(context);
-
-    const iSignType = useSignType(context, { clearable });
 
     const { getReferenceProps, getFloatingProps } = useIInteractions(context);
 
@@ -190,9 +261,19 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       }
     );
 
-    const onSuffixClick = useMemoFunc(() => {
-      if (clearable) iChange(undefined);
-    });
+    const states = {
+      isFocus,
+      isHover,
+      multiple,
+      pattern,
+      isLoading,
+      prefix,
+      status,
+      variant,
+      value,
+      clearable,
+      size: _size,
+    };
 
     const iChipListRender = (inners?: React.Key[]) =>
       isArray(options) &&
@@ -200,13 +281,12 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
         const onClose = () => {
           iChange?.(iSelectedList.filter((v) => v !== inner));
         };
-        const current = options.find(({ value }) => value === inner);
-        const params = { multiple, onClose };
+        const option = options.find(({ value }) => value === inner);
         return (
           <Fragment key={inner.toLocaleString()}>
             {index !== 0 && separator}
             <Presence className={styles.chip}>
-              {(render?.chip ?? iChipRender)(current, params)}
+              {(render?.chip ?? iChipRender)({ option, onClose }, states)}
             </Presence>
           </Fragment>
         );
@@ -214,51 +294,42 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
 
     return (
       <Fragment>
-        <IControlWrap
-          ref={refs.setReference}
-          className={classNames(
-            styles.reference,
-            styles[pattern],
-            {
-              [styles.multiple]: multiple,
-              // [styles.keyword]: isNonEmptyString(keyword),
-            },
-            className
-          )}
-          isLoading={isLoading}
-          pattern={pattern}
-          prefix={prefix}
-          size={_size}
-          status={status}
-          suffix={!isReadPretty && <ISignLine type={iSignType} />}
-          suffixClickable={iSignType === 'cross'}
-          variant={variant}
-          onSuffixClick={onSuffixClick}
-          {...getReferenceProps({ onClick: iClick, style })}
-        >
-          <motion.div className={styles.wrap}>
-            {!multiple && isEmpty(keyword) && iChipListRender(iSelectedList)}
-            <AnimatePresence presenceAffectsLayout mode="popLayout">
-              {multiple && isEmpty(keyword) && iChipListRender(iSelectedList)}
-            </AnimatePresence>
-            <IInput
-              ref={input}
-              autoSize
-              autoFocus={autoFocus}
-              className={styles.input}
-              pattern={pattern}
-              placeholder={ifnot(isEmpty(iSelectedList) && placeholder)}
-              value={keyword}
-              onBlur={onBlur}
-              onChange={iSearch}
-              onFocus={onFocus}
-              onKeyDown={iKeyDown}
-            />
-          </motion.div>
-        </IControlWrap>
+        {(render?.root ?? iRootRender)(
+          {
+            prefix,
+            iChange,
+            ref: refs.setReference,
+            chips: iChipListRender(iSelectedList),
+            search: (render?.search ?? iSearchRender)(
+              {
+                ref: input,
+                autoFocus,
+                value: keyword,
+                className: styles.input,
+                placeholder: ifnot(isEmpty(iSelectedList) && placeholder),
+                onChange: iSearch,
+                onKeyDown: iKeyDown,
+                onFocus,
+                onBlur,
+              },
+              states
+            ),
+            className: classNames(
+              styles.reference,
+              styles[pattern],
+              {
+                [styles.multiple]: multiple,
+              },
+              className
+            ),
+            suffix: <ISignLine type={iSignType(states)} />,
+            ...getReferenceProps({ onClick: iClick, style }),
+          },
+          states
+        )}
         <FloatingPortal root={iFloatingRoot?.(refs.reference) ?? container}>
           <AnimatePresence>
-            {context.open && isEditable && (
+            {context.open && pattern === 'editable' && (
               <motion.div
                 ref={refs.setFloating}
                 animate={{
@@ -275,18 +346,30 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                   className: classNames(styles.floating, iFloatingClassName),
                 })}
               >
-                <Scrollable
-                  ref={scrollable}
-                  isLoading={isLoading}
-                  isPositioned={isPositioned}
-                  maxHeight={maxHeight}
-                  measure={measure}
-                  multiple={multiple}
-                  options={filtered}
-                  render={render?.option ?? iOptionRender}
-                  value={value}
-                  onChange={iChange}
-                />
+                {(render?.scrollable ?? iScrollableRender)(
+                  {
+                    ref: scrollable,
+                    isLoading,
+                    isPositioned,
+                    maxHeight,
+                    measure,
+                    multiple,
+                    options: filtered,
+                    value,
+                    onChange: iChange,
+                    render: {
+                      option: (option, state) =>
+                        (render?.option ?? iOptionRender)(
+                          {
+                            option,
+                            ...state,
+                          },
+                          states
+                        ),
+                    },
+                  },
+                  states
+                )}
               </motion.div>
             )}
           </AnimatePresence>

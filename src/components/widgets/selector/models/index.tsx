@@ -1,9 +1,15 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, RefObject } from 'react';
+import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 import type { ReferenceType } from '@floating-ui/react';
 
-import type { ReactTargetFunc, ReactWrapProps } from '@/models';
+import type {
+  ReactInputProps,
+  ReactRender,
+  ReactTargetFunc,
+  ReactWrapProps,
+} from '@/models';
 
 import type {
   ControlOption,
@@ -13,16 +19,97 @@ import type {
 } from '../../control';
 import type { IInputProps, IInputRef } from '../../input';
 
-export interface IOptionRender {
-  (
-    option?: ControlOption,
-    params?: {
-      multiple?: boolean;
-      isActive?: boolean;
-      isSelected?: boolean;
-      onClose?: () => void;
-    }
-  ): React.ReactNode;
+export type ISelectorState = Pick<
+  IControlWrapProps,
+  'suffix' | 'prefix' | 'isLoading' | 'variant' | 'size' | 'status'
+> & {
+  /**
+   * 控件是否呈现清空按钮
+   */
+  clearable?: boolean;
+  /**
+   * 控件是否处于聚焦状态
+   */
+  isFocus?: boolean;
+  /**
+   * 控件是否处于悬浮状态
+   */
+  isHover?: boolean;
+  /**
+   * 检索关键字
+   */
+  keyword?: string;
+  /**
+   * 是否开启多选
+   */
+  multiple?: boolean;
+  /**
+   * 控制下拉选单是否展开，如果为`true`则显示下拉选单
+   */
+  open?: boolean;
+  /**
+   * 控件交互状态
+   */
+  pattern?: ControlPattern;
+  /**
+   * 选中的值
+   */
+  value?: React.Key[] | React.Key;
+};
+
+export type ISelectorChipRender = ReactRender<
+  {
+    option?: ControlOption;
+    onClose?: () => void;
+  },
+  ISelectorState
+>;
+
+export type ISelectorOptionRender = ReactRender<
+  {
+    isActive?: boolean;
+    isSelected?: boolean;
+    option?: ControlOption;
+  },
+  ISelectorState
+>;
+
+export type ISelectorSearchRender = ReactRender<
+  ReactInputProps & {
+    ref: RefObject<IInputRef>;
+  },
+  ISelectorState
+>;
+
+export type ISelectorScrollableRender = ReactRender<
+  ScrollableProps & {
+    ref: React.RefObject<ScrollableRef>;
+  },
+  ISelectorState
+>;
+
+export type ISelectorRootRender = ReactRender<
+  OmitOf<HTMLMotionProps<'div'>, 'prefix'> & {
+    ref: (node: HTMLDivElement | null) => void;
+    chips?: React.ReactNode;
+    search?: React.ReactNode;
+    prefix?: React.ReactNode;
+    suffix?: React.ReactNode;
+    iChange?: (current?: React.Key | React.Key[]) => void;
+  },
+  ISelectorState
+>;
+
+interface ISelectorRenders {
+  /** 回填的渲染方法 */
+  chip?: ISelectorChipRender;
+  root?: ISelectorRootRender;
+  search?: ISelectorSearchRender;
+  /** 选项的渲染方法 */
+  option?: ISelectorOptionRender;
+  // floating?: IOptionRender;
+  /** 下拉菜单的渲染方法 */
+  scrollable?: (props: ScrollableProps) => React.ReactNode;
 }
 
 export interface ScrollableRef {
@@ -63,7 +150,15 @@ export interface ScrollableProps {
   /**
    * 选项渲染方法
    */
-  render: IOptionRender;
+  render?: {
+    option: ReactRender<
+      ControlOption,
+      {
+        isActive: boolean;
+        isSelected: boolean;
+      }
+    >;
+  };
   /**
    * 选择菜单项时触发的回调。
    */
@@ -83,7 +178,7 @@ export interface ISelectorPredicate {
 }
 
 export type ISelectorRef = {
-  input: IInputRef;
+  input?: HTMLInputElement | null;
   floating: React.MutableRefObject<ReferenceType | null>;
   reference: React.MutableRefObject<ReferenceType | null>;
 };
@@ -102,11 +197,8 @@ export interface QueryFloatingRootFunc {
 }
 
 export interface ISelectorProps
-  extends Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur'>,
-    Pick<
-      IControlWrapProps,
-      'suffix' | 'prefix' | 'isLoading' | 'variant' | 'size' | 'status'
-    >,
+  extends Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur' | 'autoFocus'>,
+    OmitOf<ISelectorState, 'isFocus' | 'isHover'>,
     OmitOf<
       ReactWrapProps,
       | 'onChange'
@@ -128,14 +220,6 @@ export interface ISelectorProps
       | 'onScroll'
       | 'onSelect'
     > {
-  /**
-   * 是否默认获取焦点
-   */
-  autoFocus?: boolean;
-  /**
-   * 清除按钮的图标，默认为true显示默认图标，设置false关闭清除按钮
-   */
-  clear?: React.ReactNode;
   /**
    * 默认选中的值
    */
@@ -159,32 +243,13 @@ export interface ISelectorProps
    */
   initialOpen?: boolean;
   /**
-   * 控制下拉选单是否展开，如果为`true`则显示下拉选单
-   */
-  open?: boolean;
-  /**
-   * 控制搜索文本
-   */
-  keyword?: string;
-  /**
    * 分隔符
    */
   separator?: React.ReactNode;
   /**
-   * 控件交互状态
-   */
-  pattern?: ControlPattern;
-  /**
    * 控件render方法
    */
-  render?: {
-    /** 回填的渲染方法 */
-    chip?: IOptionRender;
-    /** 选项的渲染方法 */
-    option?: IOptionRender;
-    /** 下拉菜单的渲染方法 */
-    scrollable?: (props: ScrollableProps) => React.ReactNode;
-  };
+  render?: ISelectorRenders;
   /** 搜索值变更回调 */
   onSearch?: (value?: string) => void;
   /** 下拉菜单展开/收起事件 */

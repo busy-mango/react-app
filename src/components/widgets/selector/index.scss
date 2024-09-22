@@ -10,12 +10,12 @@
 
   &.active,
   &:hover {
+    color: var(--primary-color-hover);
     background-color: var(--fill-color-hover);
   }
 
   &.selected {
-    font-weight: 500;
-    color: var(--primary-color);
+    color: var(--primary-color-active);
     background-color: var(--fill-color-active);
   }
 }
@@ -40,6 +40,18 @@
   position: relative;
 
   max-height: calc(var(--control-size-06) * 8 + 2 * var(--gap-03));
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--border-radius-10);
+    background-color: var(--bg-color-mask);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-10);
+    background-color: var(--bg-color-thumb);
+  }
 }
 
 .floating {
@@ -120,9 +132,9 @@
     }
   }
 
-  &:focus-within {
-    .chip {
-      color: var(--font-color-2);
-    }
-  }
+  // &:focus-within {
+  //   .chip {
+  //     color: var(--font-color-2);
+  //   }
+  // }
 }

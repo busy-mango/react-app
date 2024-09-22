@@ -1,19 +1,17 @@
 import { useMemo, useState } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
-import { iArray, iSearchParams } from '@busymango/utils';
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query';
+import { iArray, iSearchParams, sleep } from '@busymango/utils';
+import { useQuery } from '@tanstack/react-query';
 
-import type { ControlOption, IOptionRender } from '@/components';
+import type { ControlOption } from '@/components';
 import { IChip, IOverflow, ISelector } from '@/components';
+import type { ISelectorChipRender } from '@/components/widgets/selector/models';
 import { useToggle } from '@/hooks';
 import { drive } from '@/service';
 import { iCompact } from '@/utils';
+
+import { configure } from '../widgets';
 
 type UniversityModel = {
   name: string;
@@ -23,19 +21,20 @@ type UniversityModel = {
   alpha_two_code: string;
 };
 
-const api = 'http://universities.hipolabs.com/search';
-
 const search = 'country=United+States';
 
-const queryFn = () => drive<UniversityModel[]>(api, iSearchParams(search));
+const api = 'http://universities.hipolabs.com/search';
 
-export const client = new QueryClient({
-  queryCache: new QueryCache({}),
-});
+const queryFn = async () => {
+  await sleep(3000);
+  return drive<UniversityModel[]>(api, iSearchParams(search));
+};
 
-const iChipRender: IOptionRender = (option, params) => {
+const iChipRender: ISelectorChipRender = (
+  { option, onClose },
+  { multiple }
+) => {
   const { label } = option ?? {};
-  const { multiple, onClose } = params ?? {};
   const content = label ?? 'UnknownRender';
   return (
     <Fragment>
@@ -49,15 +48,12 @@ const iChipRender: IOptionRender = (option, params) => {
   );
 };
 
-const AdvancedSelector: React.FC = () => {
+const App: React.FC = () => {
   const [open, { toggle }] = useToggle();
 
   const [value, setValue] = useState<React.Key[]>(['unknown']);
 
-  const { data, isLoading } = useQuery({
-    queryKey: [api, search],
-    queryFn,
-  });
+  const { data, isLoading } = useQuery({ queryKey: [api, search], queryFn });
 
   const options = useMemo(
     () =>
@@ -70,6 +66,7 @@ const AdvancedSelector: React.FC = () => {
 
   return (
     <ISelector
+      filter
       measure
       multiple
       isLoading={isLoading}
@@ -86,10 +83,4 @@ const AdvancedSelector: React.FC = () => {
   );
 };
 
-const App: React.FC = () => (
-  <QueryClientProvider client={client}>
-    <AdvancedSelector />
-  </QueryClientProvider>
-);
-
-export default App;
+export default configure(App);

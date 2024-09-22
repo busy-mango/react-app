@@ -8,11 +8,13 @@
 }
 
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--border-radius-10);
+  background-color: var(--bg-color-mask);
 }
 
 *::-webkit-scrollbar-thumb {
-  border-radius: 6px;
+  border-radius: var(--border-radius-10);
   background-color: var(--bg-color-thumb);
 }

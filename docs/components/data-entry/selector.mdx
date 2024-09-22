@@ -24,19 +24,23 @@
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/busy-mango/react-app?file=src%2Fpages%2Findex.tsx)
 
-### 多选
+### 使用多选
 
-The component can handle multiple selections. It's enabled with the `multiple` prop.
-
-Like with the single selection, you can pull out the new value by accessing `value` in the `onChange` callback. It's always an array.
+该组件可以处理多个选择。与单选一样，您可以通过访问 onChange 回调中的值来获取新值。
 
 <code src='@/examples/selector/multiple' />
 
 [![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fmultiple.tsx)
 
-#### Controlling the open state
+### 进阶使用
 
-<code src='@/examples/selector/advanced' />
+配合 react-query 获取远程数据。
+
+<code src='@/examples/selector/promise' />
+
+自定义控件UI。
+
+<code src='@/examples/selector/promise' />
 
 ## API
 

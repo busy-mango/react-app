@@ -1,7 +1,12 @@
 import { useMemo } from 'react';
 
-import { isObject, isTrue } from '@busymango/is-esm';
-import { FRAME2MS } from '@busymango/utils';
+import {
+  isNonEmptyString,
+  isObject,
+  isString,
+  isTrue,
+} from '@busymango/is-esm';
+import { FRAME2MS, ifnot } from '@busymango/utils';
 import type { FloatingContext, MiddlewareState } from '@floating-ui/react';
 import {
   autoUpdate,
@@ -14,42 +19,12 @@ import {
   useInteractions,
 } from '@floating-ui/react';
 
-import {
-  iFocusParams,
-  iHoverParams,
-  useDebounceFunc,
-  useEventState,
-  useMemoFunc,
-} from '@/hooks';
+import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { size2px } from '@/utils';
 
 import type { ControlOption } from '../../control';
-import type { ISignType } from '../../sign';
 import { estimateSize } from '../helpers';
 import type { ISelectorPredicate, ISelectorProps } from '../models';
-
-export const useSignType = (
-  context: FloatingContext<HTMLDivElement>,
-  params: {
-    clearable?: boolean;
-  }
-): ISignType => {
-  const { clearable } = params;
-
-  const { open, refs } = context;
-
-  const current = refs.reference.current as HTMLDivElement;
-
-  const isFocus = useEventState(iFocusParams(current));
-
-  const isHover = useEventState(iHoverParams(current));
-
-  const iArrow: ISignType = open ? 'arrowTop' : 'arrowBottom';
-
-  const isShowClear = clearable && (isFocus || isHover || open);
-
-  return isShowClear ? 'cross' : iArrow;
-};
 
 export const useIFloating = (params: {
   open?: boolean;
@@ -147,8 +122,10 @@ export const useFilterOptions = (
       return filter?.predicate;
     }
     if (isTrue(filter)) {
-      return ({ title }: ControlOption, keyword?: string) => {
-        return !keyword ? true : (title?.includes(keyword) ?? false);
+      return ({ title, label }: ControlOption, keyword?: string) => {
+        if (!isNonEmptyString(keyword)) return true;
+        const text = title ?? ifnot(isString(label) && label);
+        return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
       };
     }
   }, [filter]);

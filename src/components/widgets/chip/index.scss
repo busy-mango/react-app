@@ -17,10 +17,13 @@
   /** variant */
   &.filled {
     color: var(--font-color-info);
-    background-color: var(--bg-color-warp);
+    background-color: var(--fill-color);
+    &:hover {
+      background-color: var(--fill-color-hover);
+    }
   }
   &.outlined {
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var(--border-color-3);
   }
 
   &.disabled {
