@@ -3,7 +3,7 @@ import EmptySVG from '@/icons/business/empty.svg?react';
 import { IFlex } from '../flex';
 import { ISuspense } from '../suspense';
 
-import * as styles from './empty.scss';
+import * as styles from './index.scss';
 
 export const EmptyWrap: React.FC<{
   isLoading?: boolean;

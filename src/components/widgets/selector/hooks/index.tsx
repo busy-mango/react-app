@@ -6,7 +6,7 @@ import {
   isString,
   isTrue,
 } from '@busymango/is-esm';
-import { FRAME2MS, ifnot } from '@busymango/utils';
+import { ifnot } from '@busymango/utils';
 import type { FloatingContext, MiddlewareState } from '@floating-ui/react';
 import {
   autoUpdate,
@@ -19,11 +19,11 @@ import {
   useInteractions,
 } from '@floating-ui/react';
 
-import { useDebounceFunc, useMemoFunc } from '@/hooks';
+import { useMemoFunc } from '@/hooks';
 import { size2px } from '@/utils';
 
 import type { ControlOption } from '../../control';
-import { estimateSize } from '../helpers';
+import { estimateSize } from '../../scrollable';
 import type { ISelectorPredicate, ISelectorProps } from '../models';
 
 export const useIFloating = (params: {
@@ -32,32 +32,19 @@ export const useIFloating = (params: {
 }) => {
   const { open, onOpenChange } = params;
 
-  const iSyncWidth = useDebounceFunc(
-    (
-      floating: HTMLElement,
-      reference: {
-        x: number;
-        y: number;
-        width: number;
-        height: number;
-      }
-    ) => {
-      floating.style.width = `${reference.width}px`;
-    },
-    1 * FRAME2MS
-  );
-
   const apply = useMemoFunc(
     ({
-      rects: { reference },
-      elements: { floating },
+      elements: { floating, reference },
     }: MiddlewareState & {
       availableWidth: number;
       availableHeight: number;
     }) => {
-      iSyncWidth.starer(floating, reference);
+      const rect = reference.getBoundingClientRect();
+      floating.style.width = `${rect.width}px`;
     }
   );
+
+  const padding = size2px(2);
 
   return useFloating<HTMLDivElement>({
     open,
@@ -65,8 +52,8 @@ export const useIFloating = (params: {
     placement: 'bottom',
     middleware: [
       offset(size2px(2)),
-      flip({ padding: size2px(2) }),
-      size({ apply }),
+      flip({ padding }),
+      size({ apply, padding }),
     ],
     onOpenChange,
     whileElementsMounted: autoUpdate,

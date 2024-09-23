@@ -20,6 +20,8 @@ import { IControlWrap, useControlState } from '../control';
 import { IFlex } from '../flex';
 import type { IInputRef } from '../input';
 import { IInput } from '../input';
+import type { ScrollableRef } from '../scrollable';
+import { Scrollable } from '../scrollable';
 import { ISignLine } from '../sign';
 import { iSignType } from './helpers';
 import {
@@ -36,12 +38,10 @@ import type {
   ISelectorRootRender,
   ISelectorScrollableRender,
   ISelectorSearchRender,
-  ScrollableRef,
 } from './models';
 import { Presence } from './presence';
-import { Scrollable } from './scrollable';
 
-import * as styles from './index.scss';
+import * as styles from './selector.scss';
 
 const iChipRender: ISelectorChipRender = (
   { option, onClose },
@@ -348,15 +348,15 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
               >
                 {(render?.scrollable ?? iScrollableRender)(
                   {
-                    ref: scrollable,
+                    value,
                     isLoading,
                     isPositioned,
                     maxHeight,
                     measure,
                     multiple,
+                    ref: scrollable,
                     options: filtered,
-                    value,
-                    onChange: iChange,
+                    className: styles.scrollable,
                     render: {
                       option: (option, state) =>
                         (render?.option ?? iOptionRender)(
@@ -367,6 +367,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                           states
                         ),
                     },
+                    onChange: iChange,
                   },
                   states
                 )}

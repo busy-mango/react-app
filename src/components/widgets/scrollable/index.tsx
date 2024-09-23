@@ -15,7 +15,7 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { useMemoFunc } from '@/hooks';
 import { iCompact } from '@/utils';
 
-import { EmptyWrap } from './empty';
+import { EmptyWrap } from '../empty';
 import { estimateSize } from './helpers';
 import type { ScrollableProps, ScrollableRef } from './models';
 
@@ -153,3 +153,6 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
     );
   }
 );
+
+export { estimateSize } from './/helpers';
+export type { ScrollableProps, ScrollableRef } from './models';

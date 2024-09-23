@@ -14,11 +14,12 @@
   height: max-content;
 
   max-width: 100%;
+  box-sizing: border-box;
 
   font-size: inherit;
 
   &::placeholder {
-    color: rgba(0, 0, 0, 0.45);
+    color: var(--font-color-4);
   }
 
   // https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete

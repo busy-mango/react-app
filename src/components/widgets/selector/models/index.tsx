@@ -1,4 +1,4 @@
-import type { CSSProperties, RefObject } from 'react';
+import type { RefObject } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
@@ -18,6 +18,7 @@ import type {
   IControlWrapProps,
 } from '../../control';
 import type { IInputProps, IInputRef } from '../../input';
+import type { ScrollableProps, ScrollableRef } from '../../scrollable';
 
 export type ISelectorState = Pick<
   IControlWrapProps,
@@ -101,76 +102,16 @@ export type ISelectorRootRender = ReactRender<
 >;
 
 interface ISelectorRenders {
-  /** 回填的渲染方法 */
-  chip?: ISelectorChipRender;
+  /** 根元素渲染方法 */
   root?: ISelectorRootRender;
+  /** 选中项的渲染方法 */
+  chip?: ISelectorChipRender;
+  /** 检索区渲染方法 */
   search?: ISelectorSearchRender;
   /** 选项的渲染方法 */
   option?: ISelectorOptionRender;
-  // floating?: IOptionRender;
   /** 下拉菜单的渲染方法 */
-  scrollable?: (props: ScrollableProps) => React.ReactNode;
-}
-
-export interface ScrollableRef {
-  native: HTMLDivElement;
-  select: (index?: number, isSelected?: boolean) => void;
-  active: (recipe: (current: number) => number) => void;
-}
-
-export interface ScrollableProps {
-  /**
-   * Whether the floating element has been positioned yet when used inside an Effect (not during render).
-   */
-  isPositioned: boolean;
-  /**
-   * 是否测量元素高度（消耗性能，不建议开启）
-   */
-  measure?: boolean;
-  /**
-   * 是否开启多选
-   */
-  multiple?: boolean;
-  /**
-   * 是否开启多选
-   */
-  options?: ControlOption[];
-  /**
-   * 选中的值
-   */
-  value?: React.Key[] | React.Key;
-  /**
-   * 容器最大高度
-   */
-  maxHeight?: CSSProperties['maxHeight'];
-  /**
-   * 是否展示加载UI
-   */
-  isLoading?: boolean;
-  /**
-   * 选项渲染方法
-   */
-  render?: {
-    option: ReactRender<
-      ControlOption,
-      {
-        isActive: boolean;
-        isSelected: boolean;
-      }
-    >;
-  };
-  /**
-   * 选择菜单项时触发的回调。
-   */
-  onChange?: (value?: React.Key[] | React.Key) => void;
-  /**
-   * 点击选项时触发的回调
-   */
-  onSelect?: (index: number, value?: React.Key[]) => void;
-  /**
-   * 滚动回调
-   */
-  onScroll?: React.UIEventHandler<HTMLDivElement>;
+  scrollable?: ISelectorScrollableRender;
 }
 
 export interface ISelectorPredicate {
