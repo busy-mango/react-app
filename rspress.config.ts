@@ -30,6 +30,7 @@ const dotenv = assign<{
 export default defineConfig({
   // 文档根目录
   root: 'docs',
+  base: '/react-app/',
   icon: './assets/favicon.svg',
   plugins: [pluginPreview()],
   globalUIComponents: [join(dir.docs, 'effects.tsx')],
