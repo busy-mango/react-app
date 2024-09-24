@@ -1,6 +1,8 @@
 export type {
   ISelectorChipRender,
+  ISelectorEmptyRender,
   ISelectorOptionRender,
+  ISelectorPredicate,
   ISelectorProps,
   ISelectorRef,
   ISelectorRootRender,

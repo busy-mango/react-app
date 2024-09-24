@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { flushSync } from 'react-dom';
 
 import {
   isNonEmptyString,
@@ -19,7 +20,7 @@ import {
   useInteractions,
 } from '@floating-ui/react';
 
-import { useMemoFunc } from '@/hooks';
+import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { size2px } from '@/utils';
 
 import type { ControlOption } from '../../control';
@@ -32,6 +33,14 @@ export const useIFloating = (params: {
 }) => {
   const { open, onOpenChange } = params;
 
+  const sync = useDebounceFunc(
+    ({ rect, floating }: { floating: HTMLElement; rect: DOMRect }) => {
+      flushSync(() => {
+        floating.style.width = `${rect.width}px`;
+      });
+    }
+  );
+
   const apply = useMemoFunc(
     ({
       elements: { floating, reference },
@@ -40,7 +49,11 @@ export const useIFloating = (params: {
       availableHeight: number;
     }) => {
       const rect = reference.getBoundingClientRect();
-      floating.style.width = `${rect.width}px`;
+      sync.starer({ floating, rect: rect as DOMRect });
+      if (floating.getAttribute('data-resize') !== 'true') {
+        floating.setAttribute('data-resize', 'true');
+        sync.flush();
+      }
     }
   );
 

@@ -10,7 +10,7 @@ interface LighterProps {
   /** 需要高亮的关键字 */
   keyword: string;
   /** 关键字比对方法（判断字符是否需要高亮） */
-  compare: typeof Object.is;
+  compare: (pre: string, cur: string) => boolean;
   /** 高亮渲染方式 */
   render: (word: string) => React.ReactNode;
 }

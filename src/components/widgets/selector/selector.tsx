@@ -2,7 +2,7 @@ import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { isArray, isEmpty, isNonEmptyString } from '@busymango/is-esm';
+import { isEmpty, isNonEmptyString } from '@busymango/is-esm';
 import { iArray, ifnot } from '@busymango/utils';
 import { FloatingPortal } from '@floating-ui/react';
 
@@ -22,6 +22,7 @@ import type { IInputRef } from '../input';
 import { IInput } from '../input';
 import type { ScrollableRef } from '../scrollable';
 import { Scrollable } from '../scrollable';
+import type { IScrollableEmptyRender } from '../scrollable/models';
 import { ISignLine } from '../sign';
 import { iSignType } from './helpers';
 import {
@@ -38,6 +39,7 @@ import type {
   ISelectorRootRender,
   ISelectorScrollableRender,
   ISelectorSearchRender,
+  ISelectorState,
 } from './models';
 import { Presence } from './presence';
 
@@ -86,7 +88,7 @@ const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
 );
 
 const iRootRender: ISelectorRootRender = (
-  { ref, iChange, chips, search, prefix, suffix, ...others },
+  { ref, onChange, chips, search, prefix, suffix, ...others },
   {
     clearable,
     isLoading,
@@ -120,14 +122,14 @@ const iRootRender: ISelectorRootRender = (
     }
     variant={variant}
     onSuffixClick={() => {
-      clearable && iChange?.(undefined);
+      clearable && onChange?.(undefined);
     }}
     {...others}
   >
     <motion.div className={styles.wrap}>
       {!multiple && isEmpty(keyword) && chips}
       <AnimatePresence presenceAffectsLayout mode="popLayout">
-        {multiple && isEmpty(keyword) && chips}
+        {multiple && chips}
       </AnimatePresence>
       {search}
     </motion.div>
@@ -261,27 +263,31 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       }
     );
 
-    const states = {
+    const states: ISelectorState = {
+      clearable,
       isFocus,
       isHover,
+      isLoading,
+      keyword,
       multiple,
       pattern,
-      isLoading,
       prefix,
       status,
+      size: _size,
       variant,
       value,
-      clearable,
-      size: _size,
+    };
+
+    const iEmptyRender: IScrollableEmptyRender = (props) => {
+      return render?.empty!(props, states);
     };
 
     const iChipListRender = (inners?: React.Key[]) =>
-      isArray(options) &&
       inners?.map((inner, index) => {
         const onClose = () => {
-          iChange?.(iSelectedList.filter((v) => v !== inner));
+          iChange?.(inners.filter((v) => v !== inner));
         };
-        const option = options.find(({ value }) => value === inner);
+        const option = options?.find(({ value }) => value === inner);
         return (
           <Fragment key={inner.toLocaleString()}>
             {index !== 0 && separator}
@@ -297,7 +303,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
         {(render?.root ?? iRootRender)(
           {
             prefix,
-            iChange,
+            onChange: iChange,
             ref: refs.setReference,
             chips: iChipListRender(iSelectedList),
             search: (render?.search ?? iSearchRender)(
@@ -358,11 +364,17 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                     options: filtered,
                     className: styles.scrollable,
                     render: {
-                      option: (option, state) =>
+                      empty: ifnot(render?.empty && iEmptyRender),
+                      option: (option, { isActive, isSelected }) =>
                         (render?.option ?? iOptionRender)(
                           {
                             option,
-                            ...state,
+                            className: classNames(styles.option, {
+                              [styles.active]: isActive,
+                              [styles.selected]: isSelected,
+                            }),
+                            isActive,
+                            isSelected,
                           },
                           states
                         ),

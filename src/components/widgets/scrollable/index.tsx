@@ -15,11 +15,19 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { useMemoFunc } from '@/hooks';
 import { iCompact } from '@/utils';
 
-import { EmptyWrap } from '../empty';
+import { IEmptyWrap } from '../empty';
 import { estimateSize } from './helpers';
-import type { ScrollableProps, ScrollableRef } from './models';
+import type {
+  IScrollableEmptyRender,
+  ScrollableProps,
+  ScrollableRef,
+} from './models';
 
 import * as styles from './index.scss';
+
+const iEmptyRender: IScrollableEmptyRender = (props) => (
+  <IEmptyWrap {...props} />
+);
 
 export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
   function Scrollable(props, ref) {
@@ -28,6 +36,7 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
       options,
       maxHeight,
       isLoading,
+      className,
       isPositioned,
       measure = false,
       multiple = false,
@@ -142,13 +151,17 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
     return (
       <div
         ref={container}
-        className={classNames(styles.scrollable)}
+        className={classNames(styles.scrollable, className)}
         style={{ maxHeight }}
         onScroll={onScroll}
         {...others}
       >
         <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
-        {isEmptyArray(items) && <EmptyWrap isLoading={isLoading} />}
+        {isEmptyArray(items) &&
+          (render?.empty ?? iEmptyRender)(
+            { className: styles.empty, isLoading },
+            {}
+          )}
       </div>
     );
   }

@@ -10,6 +10,7 @@ export * from './control';
 export * from './flex';
 export * from './form-field';
 export * from './form-wrap';
+export * from './high-lighter';
 export * from './input';
 export * from './marker';
 export * from './modal';

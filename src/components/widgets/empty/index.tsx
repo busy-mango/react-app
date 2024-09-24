@@ -1,17 +1,37 @@
+import { Fragment } from 'react';
+import classNames from 'classnames';
+
 import EmptySVG from '@/icons/business/empty.svg?react';
 
+import type { IFlexProps } from '../flex';
 import { IFlex } from '../flex';
 import { ISuspense } from '../suspense';
 
 import * as styles from './index.scss';
 
-export const EmptyWrap: React.FC<{
+export interface IEmptyWrapProps extends Partial<IFlexProps> {
   isLoading?: boolean;
-}> = ({ isLoading }) => (
-  <IFlex centered vertical className={styles.wrap}>
+}
+
+export const IEmptyWrap: React.FC<IEmptyWrapProps> = ({
+  isLoading,
+  className,
+  children,
+  ...others
+}) => (
+  <IFlex
+    centered
+    vertical
+    className={classNames(styles.wrap, className)}
+    {...others}
+  >
     <ISuspense isLoading={isLoading}>
-      <EmptySVG className={styles.icon} />
-      <span className={styles.text}>暂无数据</span>
+      {children ?? (
+        <Fragment>
+          <EmptySVG className={styles.icon} />
+          <span className={styles.text}>暂无数据</span>
+        </Fragment>
+      )}
     </ISuspense>
   </IFlex>
 );

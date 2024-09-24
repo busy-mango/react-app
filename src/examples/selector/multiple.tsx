@@ -13,7 +13,7 @@ const names = [
   'Kelly Snyder',
 ];
 
-const options = names.map((value) => ({ value }));
+const options = names.map((value) => ({ value, label: value }));
 
 const App = () => <ISelector multiple options={options} separator="," />;
 

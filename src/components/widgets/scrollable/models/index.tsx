@@ -1,10 +1,22 @@
 import type { CSSProperties } from 'react';
 
+import type { PlainObject } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 
 import type { ReactRender, ReactWrapProps } from '@/models';
 
 import type { ControlOption } from '../../control';
+import type { IEmptyWrapProps } from '../../empty';
+
+export type IScrollableEmptyRender = ReactRender<IEmptyWrapProps, PlainObject>;
+
+export type IScrollableOptionRender = ReactRender<
+  ControlOption,
+  {
+    isActive: boolean;
+    isSelected: boolean;
+  }
+>;
 
 export interface ScrollableRef {
   native: HTMLDivElement;
@@ -27,7 +39,7 @@ export interface ScrollableProps
    */
   multiple?: boolean;
   /**
-   * 是否开启多选
+   * 选项
    */
   options?: ControlOption[];
   /**
@@ -46,13 +58,8 @@ export interface ScrollableProps
    * 选项渲染方法
    */
   render?: {
-    option: ReactRender<
-      ControlOption,
-      {
-        isActive: boolean;
-        isSelected: boolean;
-      }
-    >;
+    empty?: IScrollableEmptyRender;
+    option: IScrollableOptionRender;
   };
   /**
    * 选择菜单项时触发的回调。

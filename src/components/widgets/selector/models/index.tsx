@@ -17,6 +17,7 @@ import type {
   ControlValue,
   IControlWrapProps,
 } from '../../control';
+import type { IEmptyWrapProps } from '../../empty';
 import type { IInputProps, IInputRef } from '../../input';
 import type { ScrollableProps, ScrollableRef } from '../../scrollable';
 
@@ -68,12 +69,15 @@ export type ISelectorChipRender = ReactRender<
 
 export type ISelectorOptionRender = ReactRender<
   {
-    isActive?: boolean;
-    isSelected?: boolean;
-    option?: ControlOption;
+    className: string;
+    isActive: boolean;
+    isSelected: boolean;
+    option: ControlOption;
   },
   ISelectorState
 >;
+
+export type ISelectorEmptyRender = ReactRender<IEmptyWrapProps, ISelectorState>;
 
 export type ISelectorSearchRender = ReactRender<
   ReactInputProps & {
@@ -90,13 +94,13 @@ export type ISelectorScrollableRender = ReactRender<
 >;
 
 export type ISelectorRootRender = ReactRender<
-  OmitOf<HTMLMotionProps<'div'>, 'prefix'> & {
+  OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'onChange'> & {
     ref: (node: HTMLDivElement | null) => void;
     chips?: React.ReactNode;
     search?: React.ReactNode;
     prefix?: React.ReactNode;
     suffix?: React.ReactNode;
-    iChange?: (current?: React.Key | React.Key[]) => void;
+    onChange?: (current?: React.Key | React.Key[]) => void;
   },
   ISelectorState
 >;
@@ -106,6 +110,8 @@ interface ISelectorRenders {
   root?: ISelectorRootRender;
   /** 选中项的渲染方法 */
   chip?: ISelectorChipRender;
+  /** 空数据渲染方法 */
+  empty?: ISelectorEmptyRender;
   /** 检索区渲染方法 */
   search?: ISelectorSearchRender;
   /** 选项的渲染方法 */
