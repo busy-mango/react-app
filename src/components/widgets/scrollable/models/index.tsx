@@ -13,6 +13,7 @@ export type IScrollableEmptyRender = ReactRender<IEmptyWrapProps, PlainObject>;
 export type IScrollableOptionRender = ReactRender<
   ControlOption,
   {
+    index: number;
     isActive: boolean;
     isSelected: boolean;
   }

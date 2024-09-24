@@ -365,7 +365,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                     className: styles.scrollable,
                     render: {
                       empty: ifnot(render?.empty && iEmptyRender),
-                      option: (option, { isActive, isSelected }) =>
+                      option: (option, { isActive, isSelected, index }) =>
                         (render?.option ?? iOptionRender)(
                           {
                             option,
@@ -373,6 +373,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                               [styles.active]: isActive,
                               [styles.selected]: isSelected,
                             }),
+                            index,
                             isActive,
                             isSelected,
                           },

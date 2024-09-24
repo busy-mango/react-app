@@ -69,6 +69,7 @@ export type ISelectorChipRender = ReactRender<
 
 export type ISelectorOptionRender = ReactRender<
   {
+    index: number;
     className: string;
     isActive: boolean;
     isSelected: boolean;

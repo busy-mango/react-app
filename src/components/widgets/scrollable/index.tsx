@@ -134,7 +134,7 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
             onSelect?.(index, iSelectedList);
           }}
         >
-          {render?.option(element, { isActive, isSelected })}
+          {render?.option(element, { isActive, isSelected, index })}
         </div>
       );
     };

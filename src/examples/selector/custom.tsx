@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment, useState } from 'react';
+import { motion } from 'framer-motion';
 import { produce } from 'immer';
 import { create } from 'zustand';
 
@@ -68,8 +68,16 @@ const options = [
 const useSelectorStore = create<{
   options: ControlOption[];
   creator: (option: ControlOption) => void;
+  mutation: (index: number, recipe: (option: ControlOption) => void) => void;
 }>((set) => ({
   options,
+  mutation: (index, recipe) => {
+    set(
+      produce(({ options }: { options: ControlOption[] }) => {
+        recipe(options[index]);
+      })
+    );
+  },
   creator: (option) => {
     set(
       produce(({ options }: { options: ControlOption[] }) => {
@@ -104,7 +112,7 @@ const iChipRender: ISelectorChipRender = (
 };
 
 const iOptionRender: ISelectorOptionRender = (
-  { option, className },
+  { option, className, index },
   { keyword }
 ) => (
   <IFlex align="center" className={className} justify="space-between">
@@ -128,7 +136,7 @@ const iOptionRender: ISelectorOptionRender = (
           }}
         >
           {iColorDisc.map((color) => (
-            <div
+            <motion.div
               key={color}
               style={{
                 cursor: 'pointer',
@@ -136,20 +144,33 @@ const iOptionRender: ISelectorOptionRender = (
                 backgroundColor: color,
                 borderRadius: 'var(--border-radius-02)',
               }}
-              onClick={iPropagation}
+              onClick={() => {
+                useSelectorStore.getState().mutation(index, (opt) => {
+                  opt.color = color;
+                });
+              }}
             >
               <IWaveShell>
                 {(ref) => (
-                  <div
+                  <motion.div
                     ref={ref}
+                    animate={{
+                      scale: option.color === color ? 1.1 : 1,
+                      borderColor: ifnot(
+                        option.color === color && `var(--border-color-active)`
+                      ),
+                    }}
                     style={{
                       width: '1em',
                       height: '1em',
+                      borderWidth: 1,
+                      borderStyle: 'solid',
+                      borderRadius: 'var(--border-radius-02)',
                     }}
                   />
                 )}
               </IWaveShell>
-            </div>
+            </motion.div>
           ))}
         </IFlex>
       }

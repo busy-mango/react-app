@@ -11,7 +11,7 @@ import {
 } from '@floating-ui/react';
 
 import { container } from '@/init';
-import { iFindElement, size2px } from '@/utils';
+import { iFindElement, iPropagation, size2px } from '@/utils';
 
 import { useControlState } from '../control';
 import { useFloatingMotion } from './hooks/motion';
@@ -78,7 +78,9 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
               ref={refs.setFloating}
               className={classNames(styles.wrap, styles.tip)}
               style={floatingStyles}
-              {...interax.getFloatingProps()}
+              {...interax.getFloatingProps({
+                onClick: iPropagation,
+              })}
               {...motions}
             >
               <div className={styles.content}>{content}</div>
