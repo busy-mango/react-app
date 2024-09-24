@@ -1,4 +1,5 @@
 import type React from 'react';
+import type { FocusEvent } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
@@ -28,19 +29,20 @@ export type ControlOption = {
   title?: string;
   label?: React.ReactNode;
   disabled?: boolean;
-};
+  icon?: React.ReactNode;
+} & Pick<React.CSSProperties, 'color'>;
 
 export interface InteractionProps {
   ref: (node: HTMLElement | SVGElement | null) => void;
-  onBlur?(): void;
-  onFocus?(): void;
-  onClick?(): void;
-  onKeyUp?(): void;
-  onKeyDown?(): void;
-  onMouseDown?(): void;
-  onMouseMove?(): void;
-  onPointerDown?(): void;
-  onPointerEnter?(): void;
+  onBlur?(e: React.FocusEvent): void;
+  onFocus?(e: React.FocusEvent): void;
+  onClick?(e: React.MouseEvent): void;
+  onKeyUp?(e: React.KeyboardEvent): void;
+  onKeyDown?(e: React.KeyboardEvent): void;
+  onMouseDown?(e: React.MouseEvent): void;
+  onMouseMove?(e: React.MouseEvent): void;
+  onPointerDown?(e: React.UIEvent): void;
+  onPointerEnter?(e: React.UIEvent): void;
 }
 
 export type IControlVariant = 'filled' | 'standard' | 'bordered';

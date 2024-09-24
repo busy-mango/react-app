@@ -63,8 +63,6 @@ export const IWave: React.FC<IWaveProps> = (props) => {
     ({ clientWidth, clientHeight }) => {
       scope.current.style.width = `${clientWidth}px`;
       scope.current.style.height = `${clientHeight}px`;
-
-      console.log(clientWidth, clientHeight);
     },
     { debounce: 10 * FRAME2MS }
   );
@@ -98,3 +96,15 @@ export const IWaveWrap: ReactCFC<IWaveWrapProps> = ({
     {children}
   </span>
 );
+
+export const IWaveShell: React.FC<{
+  children: (ref: React.MutableRefObject<null>) => React.ReactNode;
+}> = ({ children }) => {
+  const ref = useRef(null);
+  return (
+    <Fragment>
+      <IWave target={ref} />
+      {children(ref)}
+    </Fragment>
+  );
+};

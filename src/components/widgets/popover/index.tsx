@@ -17,7 +17,7 @@ import { useControlState } from '../control';
 import { useFloatingMotion } from './hooks/motion';
 import { ARROW_HEIGHT, ARROW_RADIUS, iFill, middlewares } from './helpers';
 import { useInterax } from './hooks';
-import type { IPopoverProps, IPopoverRef } from './models';
+import type { IPopoverProps, IPopoverRef, IPopoverState } from './models';
 
 import * as styles from './index.scss';
 
@@ -61,12 +61,17 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
 
     const interax = useInterax(context, { mode, events });
 
+    const states: IPopoverState = { open: context.open, placement };
+
     return (
       <Fragment>
-        {children?.({
-          ref: refs.setReference,
-          ...interax.getReferenceProps(),
-        })}
+        {children?.(
+          {
+            ref: refs.setReference,
+            ...interax.getReferenceProps(),
+          },
+          states
+        )}
         {context.open && (
           <FloatingPortal root={iFindElement(root)}>
             <motion.div

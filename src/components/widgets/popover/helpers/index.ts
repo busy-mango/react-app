@@ -24,7 +24,9 @@ type MiddlewareOpts = {
 export const iFill = (mode?: IPopoverProps['mode']) => {
   switch (mode) {
     case 'tip':
-      return 'var(--bg-color-float)';
+      return 'var(--bg-color-tip)';
+    case 'confirm':
+      return 'var(--bg-color-tip)';
     default:
       return 'var(--bg-color-card)';
   }
@@ -36,7 +38,6 @@ export const iFloatingMaxSize = (
 ) => {
   const { elements } = params;
   const size = capitalize(mode);
-  console.log(params);
   const availableSize = params[`available${size}`];
   const scrollSize = elements.floating[`scroll${size}`];
   const maxSize = ifnot(

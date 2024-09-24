@@ -13,6 +13,8 @@ export type IPopoverRef = UseFloatingReturn['refs'];
 
 export type IPopoverEvent = 'click' | 'focus' | 'hover';
 
+export type IPopoverState = Pick<UseFloatingOptions, 'open' | 'placement'>;
+
 export interface ApplyFloatingStyle {
   (
     params: MiddlewareState & {
@@ -33,5 +35,5 @@ export interface IPopoverProps
   mode?: 'tip' | 'over' | 'confirm';
   trigger?: IPopoverEvent | IPopoverEvent[];
   onApplyFloatingStyle?: ApplyFloatingStyle;
-  children?: (props: InteractionProps) => React.ReactNode;
+  children?: (props: InteractionProps, state: IPopoverState) => React.ReactNode;
 }

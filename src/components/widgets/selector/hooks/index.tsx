@@ -1,13 +1,7 @@
 import { useMemo } from 'react';
 import { flushSync } from 'react-dom';
 
-import {
-  isNonEmptyString,
-  isObject,
-  isString,
-  isTrue,
-} from '@busymango/is-esm';
-import { ifnot } from '@busymango/utils';
+import { isObject, isTrue } from '@busymango/is-esm';
 import type { FloatingContext, MiddlewareState } from '@floating-ui/react';
 import {
   autoUpdate,
@@ -25,6 +19,7 @@ import { size2px } from '@/utils';
 
 import type { ControlOption } from '../../control';
 import { estimateSize } from '../../scrollable';
+import { iPredicate } from '../helpers';
 import type { ISelectorPredicate, ISelectorProps } from '../models';
 
 export const useIFloating = (params: {
@@ -118,24 +113,14 @@ export const useFilterOptions = (
   const { filter, keyword } = params;
 
   const predicate = useMemo<ISelectorPredicate | undefined>(() => {
-    if (isObject(filter)) {
-      return filter?.predicate;
-    }
-    if (isTrue(filter)) {
-      return ({ title, label }: ControlOption, keyword?: string) => {
-        if (!isNonEmptyString(keyword)) return true;
-        const text = title ?? ifnot(isString(label) && label);
-        return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
-      };
-    }
+    if (isTrue(filter)) return iPredicate;
+    if (isObject(filter)) return filter?.predicate;
   }, [filter]);
 
   return useMemo(() => {
-    if (predicate) {
-      return options?.filter((option) => {
-        return predicate(option, keyword);
-      });
-    }
-    return options;
+    if (!predicate) return options;
+    return options?.filter((option) => {
+      return predicate(option, keyword);
+    });
   }, [predicate, keyword, options]);
 };

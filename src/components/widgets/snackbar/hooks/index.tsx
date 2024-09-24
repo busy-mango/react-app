@@ -65,7 +65,6 @@ export const useSnackbars = create<ISnackbarStore & ISnackbarActions>(
       );
     },
     emit: async (config: ISnackbarProps) => {
-      console.log(1);
       const { snackbars: previous, max } = get();
       const assert = ({ id }: ISnackbarProps) => id === config.id;
       if (contains(previous, assert)) {

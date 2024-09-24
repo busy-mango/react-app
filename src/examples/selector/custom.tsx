@@ -20,11 +20,33 @@ import {
   IHighLighter,
   IInput,
   IOverflow,
+  IPopover,
   ISelector,
+  ISignLine,
+  IWaveShell,
   Scrollable,
 } from '@/components';
 import { useToggle } from '@/hooks';
-import { iCompact } from '@/utils';
+import { iCompact, iPropagation, iThemeVariable } from '@/utils';
+
+const iColorDisc = iCompact(
+  [
+    'orange',
+    'sunset',
+    'sunglow',
+    'shamrock',
+    'green',
+    'viking',
+    'malibu',
+    'blue',
+    'dodger',
+    'heliotrope',
+    'violet',
+    'purple',
+    'rosein',
+    'red',
+  ].map((name) => `rgb(${iThemeVariable(`--${name}-color-600`)} / 1)`)
+);
 
 const options = [
   'Oliver Hansen',
@@ -37,7 +59,11 @@ const options = [
   'Bradley Wilkerson',
   'Virginia Andrews',
   'Kelly Snyder',
-].map((value) => ({ value, label: value }));
+].map<ControlOption>((value, index) => ({
+  value,
+  label: value,
+  color: iColorDisc[index],
+}));
 
 const useSelectorStore = create<{
   options: ControlOption[];
@@ -57,13 +83,19 @@ const iChipRender: ISelectorChipRender = (
   { option, onClose },
   { multiple }
 ) => {
-  const { label } = option ?? {};
+  const { label, color } = option ?? {};
   const content = label ?? 'UnknownRender';
   return (
     <Fragment>
-      {!multiple && content}
+      {!multiple && <span style={{ color }}>{content}</span>}
       {multiple && (
-        <IChip close size="mini" variant="filled" onClose={onClose}>
+        <IChip
+          close
+          size="mini"
+          style={{ backgroundColor: color, color: 'var(--font-color-b8)' }}
+          variant="filled"
+          onClose={onClose}
+        >
           <IOverflow maxWidth={'100%'}>{content}</IOverflow>
         </IChip>
       )}
@@ -76,7 +108,7 @@ const iOptionRender: ISelectorOptionRender = (
   { keyword }
 ) => (
   <IFlex align="center" className={className} justify="space-between">
-    <span>
+    <span style={{ color: option.color }}>
       <IHighLighter
         compare={(pre, cur) =>
           Object.is(pre?.toLowerCase(), cur?.toLowerCase())
@@ -85,6 +117,56 @@ const iOptionRender: ISelectorOptionRender = (
         keyword={keyword}
       />
     </span>
+    <IPopover
+      content={
+        <IFlex
+          wrap
+          gap={'0.75em'}
+          style={{
+            width: '12.5em',
+            padding: '0.5em',
+          }}
+        >
+          {iColorDisc.map((color) => (
+            <div
+              key={color}
+              style={{
+                cursor: 'pointer',
+                position: 'relative',
+                backgroundColor: color,
+                borderRadius: 'var(--border-radius-02)',
+              }}
+              onClick={iPropagation}
+            >
+              <IWaveShell>
+                {(ref) => (
+                  <div
+                    ref={ref}
+                    style={{
+                      width: '1em',
+                      height: '1em',
+                    }}
+                  />
+                )}
+              </IWaveShell>
+            </div>
+          ))}
+        </IFlex>
+      }
+      mode="confirm"
+    >
+      {({ onClick, ...props }, { open }) => (
+        <ISignLine
+          style={{ color: option.color }}
+          type={open ? 'arrowDoubleTop' : 'arrowDoubleBottom'}
+          onClick={(event) => {
+            iPropagation?.(event);
+            onClick?.(event);
+          }}
+          {...props}
+        />
+      )}
+    </IPopover>
   </IFlex>
 );
 

@@ -1,3 +1,7 @@
+import { isNonEmptyString, isString } from '@busymango/is-esm';
+import { ifnot } from '@busymango/utils';
+
+import type { ControlOption } from '../../control';
 import type { ISignType } from '../../sign';
 import type { ISelectorState } from '../models';
 
@@ -15,4 +19,13 @@ export const iSignType = ({
   const isShowClear = clearable && (isFocus || isHover || open);
 
   return isShowClear ? 'cross' : iArrow;
+};
+
+export const iPredicate = (
+  { title, label }: ControlOption,
+  keyword?: string
+) => {
+  if (!isNonEmptyString(keyword)) return true;
+  const text = title ?? ifnot(isString(label) && label);
+  return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
 };
