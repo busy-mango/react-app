@@ -49,7 +49,10 @@ export type IRadioRootRender = ReactRender<
 >;
 
 export type IRadioRadioRender = ReactRender<
-  HTMLMotionProps<'i'> & { input: React.ReactNode },
+  HTMLMotionProps<'i'> & {
+    input: React.ReactNode;
+    inputRef: React.RefObject<HTMLInputElement>;
+  },
   IRadioState
 >;
 

@@ -27,6 +27,7 @@
   display: inline-block;
 
   color: var(--secondary-color);
+  border-radius: var(--border-radius-10);
 
   &.checked {
     color: var(--secondary-color-active);
