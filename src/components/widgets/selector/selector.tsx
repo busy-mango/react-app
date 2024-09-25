@@ -79,12 +79,17 @@ const iOptionRender: ISelectorOptionRender = ({
   </IFlex>
 );
 
-const iScrollableRender: ISelectorScrollableRender = (props) => (
-  <Scrollable {...props} />
+const iScrollableRender: ISelectorScrollableRender = ({
+  className,
+  ...props
+}) => (
+  <div className={className}>
+    <Scrollable {...props} />
+  </div>
 );
 
 const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
-  <IInput autoSize className={styles.input} {...props} pattern={pattern} />
+  <IInput autoSize {...props} pattern={pattern} />
 );
 
 const iRootRender: ISelectorRootRender = (
@@ -106,20 +111,22 @@ const iRootRender: ISelectorRootRender = (
 ) => (
   <IControlWrap
     ref={ref}
+    isFocusWithin={open}
     isLoading={isLoading}
+    isSuffixClickable={
+      iSignType({
+        clearable: clearable,
+        isFocus,
+        isHover,
+        value,
+        open,
+      }) === 'cross'
+    }
     pattern={pattern}
     prefix={prefix}
     size={size}
     status={status}
     suffix={pattern !== 'readPretty' && suffix}
-    suffixClickable={
-      iSignType({
-        clearable: clearable && isEmpty(value),
-        isFocus,
-        isHover,
-        open,
-      }) === 'cross'
-    }
     variant={variant}
     onSuffixClick={() => {
       clearable && onChange?.(undefined);
@@ -264,6 +271,8 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     );
 
     const states: ISelectorState = {
+      open: context.open,
+      size: _size,
       clearable,
       isFocus,
       isHover,
@@ -273,7 +282,6 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       pattern,
       prefix,
       status,
-      size: _size,
       variant,
       value,
     };
@@ -311,7 +319,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                 ref: input,
                 autoFocus,
                 value: keyword,
-                className: styles.input,
+                className: styles.search,
                 placeholder: ifnot(isEmpty(iSelectedList) && placeholder),
                 onChange: iSearch,
                 onKeyDown: iKeyDown,

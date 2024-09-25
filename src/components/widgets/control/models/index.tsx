@@ -53,10 +53,12 @@ export interface IControlWrapProps
   status?: ControlUIStatus;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
-  suffixClickable?: boolean;
   size?: ControlUISize;
   pattern?: ControlPattern;
   isLoading?: boolean;
+  isFocusWithin?: boolean;
+  isPrefixClickable?: boolean;
+  isSuffixClickable?: boolean;
   /** 变体 */
   variant?: IControlVariant;
   onPrefixClick?: React.MouseEventHandler<HTMLDivElement>;

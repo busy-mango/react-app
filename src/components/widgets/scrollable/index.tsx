@@ -13,7 +13,7 @@ import type { VirtualItem } from '@tanstack/react-virtual';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import { useMemoFunc } from '@/hooks';
-import { iCompact } from '@/utils';
+import { iCompact, iPropagation } from '@/utils';
 
 import { IEmptyWrap } from '../empty';
 import { estimateSize } from './helpers';
@@ -40,6 +40,7 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
       isPositioned,
       measure = false,
       multiple = false,
+      onClick = iPropagation,
       onSelect,
       onChange,
       onScroll,
@@ -153,6 +154,7 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
         ref={container}
         className={classNames(styles.scrollable, className)}
         style={{ maxHeight }}
+        onClick={onClick}
         onScroll={onScroll}
         {...others}
       >

@@ -44,6 +44,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-basis: 0;
+  cursor: text;
 
   position: relative;
 
@@ -56,7 +57,7 @@
   line-height: inherit;
 }
 
-.input {
+.search {
   min-width: 1em;
   max-width: 100%;
   line-height: inherit;
@@ -85,8 +86,6 @@
   min-width: 12em;
   line-height: var(--control-size-03);
 
-  cursor: text;
-
   box-sizing: border-box;
 
   &:not(.read-pretty) {
@@ -97,17 +96,11 @@
   }
 
   &:not(.multiple) {
-    .input {
+    .search {
       position: absolute;
     }
 
     &.keyword {
     }
   }
-
-  // &:focus-within {
-  //   .chip {
-  //     color: var(--font-color-2);
-  //   }
-  // }
 }

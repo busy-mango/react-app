@@ -8,7 +8,10 @@ import { IMagnifierPath } from './magnifier';
 import type { ISignLineProps } from './models';
 
 export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
-  function SignLine({ type, rect, ring, style, ...others }, iForwardRef) {
+  function SignLine(
+    { type, rect, ring, style, animate, ...others },
+    iForwardRef
+  ) {
     const ref = useRef<SVGSVGElement>(null);
 
     useImperativeHandle(iForwardRef, () => ref.current!, [ref]);
@@ -16,6 +19,8 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
     return (
       <motion.svg
         ref={ref}
+        animate={animate}
+        data-sign-icon={type}
         fill="none"
         height="1em"
         stroke="currentColor"
@@ -24,6 +29,7 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
         strokeWidth={64}
         style={{
           ...style,
+          cursor: 'inherit',
           transform: `scale(${ring || rect ? 1 : 1.325})`,
         }}
         version="1.1"

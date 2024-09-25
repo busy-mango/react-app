@@ -116,6 +116,7 @@
       &:hover {
         border-color: var(--danger-color-hover);
       }
+      &.focus,
       &:focus-within {
         border-color: var(--danger-color-active);
       }
@@ -126,6 +127,7 @@
       &:hover {
         border-color: var(--border-color-hover);
       }
+      &.focus,
       &:focus-within {
         border-color: var(--border-color-active);
       }
@@ -136,6 +138,7 @@
       &:hover {
         border-color: var(--warn-color-hover);
       }
+      &.focus,
       &:focus-within {
         border-color: var(--warn-color-active);
       }
@@ -145,6 +148,7 @@
       &:hover {
         border-color: var(--border-color-hover);
       }
+      &.focus,
       &:focus-within {
         border-color: var(--border-color-active);
       }

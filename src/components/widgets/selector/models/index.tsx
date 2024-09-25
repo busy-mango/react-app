@@ -26,7 +26,7 @@ export type ISelectorState = Pick<
   'suffix' | 'prefix' | 'isLoading' | 'variant' | 'size' | 'status'
 > & {
   /**
-   * 控件是否呈现清空按钮
+   * 控件是否呈现清空按钮。
    */
   clearable?: boolean;
   /**
@@ -56,7 +56,7 @@ export type ISelectorState = Pick<
   /**
    * 选中的值
    */
-  value?: React.Key[] | React.Key;
+  value?: React.Key[] | React.Key | null;
 };
 
 export type ISelectorChipRender = ReactRender<
@@ -169,23 +169,21 @@ export interface ISelectorProps
       | 'onSelect'
     > {
   /**
-   * 默认选中的值
+   * 控件默认选中的值。
    */
   defaultValue?: React.Key[] | React.Key;
   /**
-   * 选项过滤配置
+   * 控件选项过滤配置。
    */
   filter?: ISelectorFilterParams | boolean;
   /**
-   * 浮层默认渲染到 root 上，也可以使用此方法指定根节点。
-   * @param reference 参数元素引用
-   * @returns HTMLElement
-   */
-  iFloatingRoot?: QueryFloatingRootFunc;
-  /**
-   * 浮层样式
+   * 控件浮层样式。
    */
   iFloatingClassName?: string;
+  /**
+   * 浮层默认渲染到 root 上，也可以使用此方法指定根节点。
+   */
+  iFloatingRoot?: QueryFloatingRootFunc;
   /**
    * 是否默认打开
    */
@@ -200,6 +198,8 @@ export interface ISelectorProps
   render?: ISelectorRenders;
   /** 搜索值变更回调 */
   onSearch?: (value?: string) => void;
-  /** 下拉菜单展开/收起事件 */
+  /**
+   * 控件浮层选单展开、收起时触发的回调。
+   */
   onOpenChange?: (open?: boolean) => void;
 }

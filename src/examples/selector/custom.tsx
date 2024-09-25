@@ -65,22 +65,24 @@ const options = [
   color: iColorDisc[index],
 }));
 
-const useSelectorStore = create<{
+type SelectorStore = {
   options: ControlOption[];
   creator: (option: ControlOption) => void;
-  mutation: (index: number, recipe: (option: ControlOption) => void) => void;
-}>((set) => ({
+  mutation: (recipe: (options: ControlOption[]) => void) => void;
+};
+
+const useSelectorStore = create<SelectorStore>((set) => ({
   options,
-  mutation: (index, recipe) => {
+  mutation: (recipe) => {
     set(
-      produce(({ options }: { options: ControlOption[] }) => {
-        recipe(options[index]);
+      produce(({ options }: SelectorStore) => {
+        recipe(options);
       })
     );
   },
   creator: (option) => {
     set(
-      produce(({ options }: { options: ControlOption[] }) => {
+      produce(({ options }: SelectorStore) => {
         options.push(option);
       })
     );
@@ -112,10 +114,15 @@ const iChipRender: ISelectorChipRender = (
 };
 
 const iOptionRender: ISelectorOptionRender = (
-  { option, className, index },
+  { option, className },
   { keyword }
 ) => (
-  <IFlex align="center" className={className} justify="space-between">
+  <IFlex
+    align="center"
+    className={className}
+    justify="space-between"
+    // style={{ color: option.color }}
+  >
     <span style={{ color: option.color }}>
       <IHighLighter
         compare={(pre, cur) =>
@@ -145,8 +152,10 @@ const iOptionRender: ISelectorOptionRender = (
                 borderRadius: 'var(--border-radius-02)',
               }}
               onClick={() => {
-                useSelectorStore.getState().mutation(index, (opt) => {
-                  opt.color = color;
+                useSelectorStore.getState().mutation((opts) => {
+                  const { value: val } = option;
+                  const opt = opts.find(({ value }) => value === val);
+                  if (opt) opt.color = color;
                 });
               }}
             >
@@ -178,7 +187,9 @@ const iOptionRender: ISelectorOptionRender = (
     >
       {({ onClick, ...props }, { open }) => (
         <ISignLine
-          style={{ color: option.color }}
+          animate={{
+            color: option.color,
+          }}
           type={open ? 'arrowDoubleTop' : 'arrowDoubleBottom'}
           onClick={(event) => {
             iPropagation?.(event);

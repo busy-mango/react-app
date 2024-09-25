@@ -11,7 +11,7 @@ import { IWave } from '../wave';
 import { usePatternAssert } from './hooks';
 import type { IControlWrapProps } from './models';
 
-import * as styles from './index.scss';
+import * as styles from './control.warp.scss';
 
 export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
   function IControlWrap(props, ref) {
@@ -23,7 +23,9 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
       children,
       className,
       isLoading,
-      suffixClickable,
+      isFocusWithin,
+      isPrefixClickable,
+      isSuffixClickable,
       status = 'success',
       variant = 'standard',
       pattern = 'editable',
@@ -55,6 +57,9 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
           styles[status],
           styles[pattern],
           styles[variant],
+          {
+            [styles.focus]: isFocusWithin,
+          },
           className
         )}
         {...others}
@@ -67,7 +72,12 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
         )}
         <AnimatePresence>
           {prefix ? (
-            <ISVGWrap className={styles.iconWrap} onClick={onPrefixClick}>
+            <ISVGWrap
+              className={classNames(styles.iconWrap, {
+                [styles.clickable]: isPrefixClickable,
+              })}
+              onClick={onPrefixClick}
+            >
               {prefix}
             </ISVGWrap>
           ) : (
@@ -79,7 +89,7 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
           {isLoading || suffix ? (
             <ISVGWrap
               className={classNames(styles.iconWrap, {
-                [styles.clickable]: suffixClickable,
+                [styles.clickable]: isSuffixClickable,
               })}
               onClick={onSuffixClick}
             >

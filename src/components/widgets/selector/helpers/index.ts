@@ -1,4 +1,4 @@
-import { isNonEmptyString, isString } from '@busymango/is-esm';
+import { isEmpty, isNonEmptyString, isString } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
 
 import type { ControlOption } from '../../control';
@@ -9,16 +9,17 @@ export const iSignType = ({
   clearable,
   isFocus,
   isHover,
+  value,
   open,
 }: Pick<
   ISelectorState,
-  'open' | 'isFocus' | 'isHover' | 'clearable'
+  'open' | 'isFocus' | 'isHover' | 'clearable' | 'value'
 >): ISignType => {
   const iArrow: ISignType = open ? 'arrowTop' : 'arrowBottom';
 
   const isShowClear = clearable && (isFocus || isHover || open);
 
-  return isShowClear ? 'cross' : iArrow;
+  return isShowClear && !isEmpty(value) ? 'cross' : iArrow;
 };
 
 export const iPredicate = (

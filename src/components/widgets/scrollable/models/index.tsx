@@ -25,6 +25,14 @@ export interface ScrollableRef {
   active: (recipe: (current: number) => number) => void;
 }
 
+export interface ScrollableChangeFunc {
+  (value?: React.Key[] | React.Key): void;
+}
+
+export interface ScrollableSelectFunc {
+  (index: number, value?: React.Key[]): void;
+}
+
 export interface ScrollableProps
   extends OmitOf<ReactWrapProps, 'onChange' | 'onSelect'> {
   /**
@@ -46,7 +54,7 @@ export interface ScrollableProps
   /**
    * 选中的值
    */
-  value?: React.Key[] | React.Key;
+  value?: React.Key[] | React.Key | null;
   /**
    * 容器最大高度
    */
@@ -65,9 +73,9 @@ export interface ScrollableProps
   /**
    * 选择菜单项时触发的回调。
    */
-  onChange?: (value?: React.Key[] | React.Key) => void;
+  onChange?: ScrollableChangeFunc;
   /**
    * 点击选项时触发的回调
    */
-  onSelect?: (index: number, value?: React.Key[]) => void;
+  onSelect?: ScrollableSelectFunc;
 }

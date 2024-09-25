@@ -20,9 +20,9 @@
 
 <code src='@/examples/selector/basic' />
 
-[![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fbasic.tsx&showConsole=true)
+{/* [![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fbasic.tsx&showConsole=true)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/busy-mango/react-app?file=src%2Fpages%2Findex.tsx)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/busy-mango/react-app?file=src%2Fpages%2Findex.tsx) */}
 
 ### 使用多选
 
@@ -30,7 +30,7 @@
 
 <code src='@/examples/selector/multiple' />
 
-[![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fmultiple.tsx)
+{/* [![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fmultiple.tsx) */}
 
 ### 进阶使用
 
@@ -44,37 +44,35 @@
 
 ## API
 
-| Name                 | Type                                           | Default      | Description                                                                                                                                                     |
-| -------------------- | ---------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `autoFocus`          | `boolean`                                      | `-`          | Whether to get focus by default.                                                                                                                                |
-| `clear`              | `ReactNode`                                    | `true`       | Icon for the clear button, default is true to show the default icon, set false to disable the clear button.                                                     |
-| `defaultValue`       | `string`                                       | `-`          | The default value. Use when the component is not controlled.                                                                                                    |
-| `filter`             | `boolean` \| `ISelectorFilterParams`           | `-`          | Option filter configuration.                                                                                                                                    |
-| `iFloatingClassName` | `string`                                       | `-`          | Floating element className.                                                                                                                                     |
-| `iFloatingRoot`      | `QueryFloatingRootFunc`                        | `-`          | Floating are rendered to the root by default, or you can specify the root node using this method.                                                               |
-| `isLoading`          | `boolean`                                      | `false`      | Control loading UI.                                                                                                                                             |
-| `initialOpen`        | `boolean`                                      | `false`      | If true, floating will open on mount.                                                                                                                           |
-| `keyword`            | `string`                                       | `-`          | Control search text state.                                                                                                                                      |
-| `maxHeight`          | `string`                                       | `-`          | Set scrollable height.                                                                                                                                          |
-| `measure`            | `string`                                       | `false`      | If true, scrollable will auto measure item height.                                                                                                              |
-| `multiple`           | `boolean`                                      | `false`      | Callbacks for expanding scrollable.                                                                                                                             |
-| `open`               | `boolean`                                      | `-`          | Control floating open state.                                                                                                                                    |
-| `options`            | `string`                                       | `-`          | Select options.                                                                                                                                                 |
-| `pattern`            | `ControlPattern`                               | `editable`   | Setting the control interaction mode                                                                                                                            |
-| `prefix`             | `ReactNode`                                    | `-`          | Customized prefix icons.                                                                                                                                        |
-| `separator`          | `ReactNode`                                    | `-`          | Separators for automatic word separation                                                                                                                        |
-| `size`               | `ControlUISize`                                | `"medium"`   | Selection wrap size                                                                                                                                             |
-| `status`             | `ControlUIStatus`                              | `"success"`  | Setting the calibration status                                                                                                                                  |
-| `suffix`             | `ReactNode`                                    | `-`          | Customized suffix icons.                                                                                                                                        |
-| `value`              | `React.Key[]` \| `React.Key`                   | `-`          | The input value. Providing an null will select no options. Set to an `null` if you don't want any of the available options to be selected.                      |
-| `variant`            | `"filled"` \| `"standard"` \| `"bordered"`     | `"bordered"` | Morphological variant                                                                                                                                           |
-| `render.chip`        | `IOptionRender`                                | `-`          | Rendering method for chip                                                                                                                                       |
-| `render.option`      | `IOptionRender`                                | `-`          | Rendering method for option                                                                                                                                     |
-| `render.scrollable`  | `(props: ScrollableProps) => ReactNode`        | `-`          | Rendering method for scrollable                                                                                                                                 |
-| `onChange`           | `(value?: React.Key[] \| React.Key) => void`   | `-`          | Callback fired when a menu item is selected. <br/> Warning: This is a generic event, not a change event, unless the change event is caused by browser autofill. |
-| `onOpenChange`       | `(open?: boolean) => void`                     | `-`          | -                                                                                                                                                               |
-| `onScroll`           | `UIEventHandler<HTMLDivElement>`               | `-`          | Callbacks when scrolling a scrollable.                                                                                                                          |
-| `onSearch`           | `(value?: string) => void`                     | `-`          | Callback when search value changes.                                                                                                                             |
-| `onSelect`           | `(index: number, value?: React.Key[]) => void` | `-`          | Called when selected, parameter is the value (or key) of the selected item.                                                                                     |
+| 参数 | 类型 | 默认值 | 描述 |
+| -------------------- | ----------------------------------------- | ------------ | --------------- |
+| `autoFocus`          | `boolean`                                 | `-`          | 控件是否自动聚焦。|
+| `clearable`          | `boolean`                                 | `true`       | 控件是否呈现清空按钮。|
+| `defaultValue`       | `string`                                  | `-`          | 控件默认选中的值。|
+| `filter`             | `boolean` \| `ISelectorFilterParams`      | `true`       | 控件过滤选项配置。|
+| `iFloatingClassName` | `string`                                  | `-`          | 控件浮层样式。|
+| `iFloatingRoot`      | `QueryFloatingRootFunc`                   | `-`          | 浮层默认渲染到 root 上，也可以使用此方法指定根节点。|
+| `isLoading`          | `boolean`                                 | `false`      | 控件是否呈现加载中样式。|
+| `initialOpen`        | `boolean`                                 | `false`      | 控件是否在载入时展开浮层选单。|
+| `keyword`            | `string`                                  | `-`          | 控制控件搜索文本。|
+| `maxHeight`          | `string`                                  | `-`          | 控制控件浮层选单最大高度。|
+| `measure`            | `string`                                  | `false`      | 浮层选单是否测量元素高度（用来实现选项动态高度，消耗性能，不建议开启）。|
+| `multiple`           | `boolean`                                 | `false`      | 控件是否开启多选。 |
+| `open`               | `boolean`                                 | `-`          | 控制浮层选单是否展开。|
+| `options`            | `ControlOption[]`                         | `-`          | 控件浮层选单可选性。|
+| `pattern`            | `ControlPattern`                          | `editable`   | 控制控件交互方式。  |
+| `prefix`             | `ReactNode`                               | `-`          | 控件前缀节点（一般用于放置前缀图标）。|
+| `separator`          | `ReactNode`                               | `-`          | 控件选中项的分隔符。|
+| `size`               | `ControlUISize`                           | `"medium"`   | 控制控件的尺寸大小。|
+| `status`             | `ControlUIStatus`                         | `"success"`  | 控制控件的校验状态。 |
+| `suffix`             | `ReactNode`                               | `-`          | 控件后缀节点，用于替换选择器默认的箭头、关闭按钮交互。|
+| `value`              | `React.Key[]` \| `React.Key` \| `null`    | `-`          | 控件当前选中项，支持`null`值。|
+| `variant`            | `"filled"` \| `"standard"` \| `"bordered"`| `"bordered"` | 控制控件呈现的形态变体。|
+| `render`             | `ISelectorRenders`                        | `-`          | 自定义控件UI样式。|
+| `onChange`           | `ScrollableChangeFunc`                    | `-`          | 控件选中选单选项时触发的回调。 <br/> ⚠️这是通用事件，不是`ChangeEvent`，除非是由浏览器自动填充引起的。 |
+| `onOpenChange`       | `(open?: boolean) => void`                | `-`          | 浮层选单展开、收起时触发的回调。|
+| `onScroll`           | `React.UIEventHandler<HTMLDivElement>`    | `-`          | 浮层选单滚动时的触发的回调。|
+| `onSearch`           | `(value?: string) => void`                | `-`          | 控件搜索文本变更触发的回调。|
+| `onSelect`           | `ScrollableSelectFunc`                    | `-`          | 选项选中时触发的回调。|
 
-## Troubleshooting
+## 常见问题
