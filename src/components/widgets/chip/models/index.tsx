@@ -5,12 +5,12 @@
 
 import type { HTMLMotionProps } from 'framer-motion';
 
-import type { ReactValue, ReactValueChangeFunc } from '@/models';
+import type { ReactRender, ReactValue, ReactValueChangeFunc } from '@/models';
 
 import type { ControlUISize } from '../../control';
+import type { ISVGWrapProps } from '../../svg-wrap';
 
-export interface IChipProps extends HTMLMotionProps<'span'> {
-  close?: React.ReactNode;
+export interface IChipState {
   /**
    * If `true`, the chip will appear clickable, and will raise when pressed,
    * even if the onClick prop is not defined.
@@ -22,14 +22,6 @@ export interface IChipProps extends HTMLMotionProps<'span'> {
   clickable?: boolean;
   /** @default false */
   disabled?: boolean;
-
-  /** Icon element */
-  icon?: React.ReactNode;
-  /**
-   * Callback fired when the delete icon is clicked.
-   * If set, the delete icon will be shown.
-   */
-  onClose?: (event: React.UIEvent) => void;
   /** @default 'medium' */
   size?: ControlUISize;
   /** @default 'outlined' */
@@ -38,16 +30,61 @@ export interface IChipProps extends HTMLMotionProps<'span'> {
   isLoading?: boolean;
 }
 
+export type IChipCloseFunc = (event: React.UIEvent<HTMLElement>) => void;
+
+export type IChipPrefixRender = ReactRender<
+  ISVGWrapProps & {
+    icon?: React.ReactNode;
+    close?: React.ReactNode;
+    onClose: IChipCloseFunc;
+  },
+  IChipState
+>;
+
+export type IChipSuffixRender = ReactRender<
+  ISVGWrapProps & {
+    icon?: React.ReactNode;
+    close?: React.ReactNode;
+    onClose: IChipCloseFunc;
+  },
+  IChipState
+>;
+
+export interface IChipRenders {
+  prefix?: IChipPrefixRender;
+  suffix?: IChipSuffixRender;
+}
+
+export interface IChipProps extends IChipState, HTMLMotionProps<'span'> {
+  /** Prefix icon element */
+  icon?: React.ReactNode;
+  /** Close icon element */
+  close?: React.ReactNode;
+  render?: IChipRenders;
+  /**
+   * Callback fired when the delete icon is clicked.
+   * If set, the delete icon will be shown.
+   */
+  onClose?: IChipCloseFunc;
+}
+
 export type IChipConfig = Pick<
   IChipProps,
   'isLoading' | 'variant' | 'size' | 'icon' | 'disabled' | 'clickable' | 'close'
 > & {
   value?: React.Key;
+  label?: React.ReactNode;
 };
 
-export interface IChipGroupProps {
+export interface IChipGroupProps
+  extends Pick<
+    IChipConfig,
+    'variant' | 'size' | 'icon' | 'disabled' | 'clickable' | 'close'
+  > {
   chips?: IChipConfig[];
   value?: ReactValue;
+  editable?: boolean;
+  creatable?: boolean;
   onChange?: ReactValueChangeFunc;
   onChipsChange?: (current: IChipConfig, chips?: IChipConfig[]) => void;
 }

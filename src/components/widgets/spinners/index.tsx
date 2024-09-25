@@ -20,6 +20,7 @@ export const ISpinner: React.FC<ISpinnerProps> = ({
         repeat: Infinity,
         ease: 'linear',
       },
+      ...animate,
     }}
     className={className}
     exit={{ x: 0, y: 0 }}

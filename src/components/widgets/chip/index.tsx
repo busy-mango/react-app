@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -8,14 +8,44 @@ import { useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { iEscapeEvent, iPropagation } from '@/utils';
 
-import { IFlex } from '../flex';
+import { useControlState } from '../control';
 import { ISignLine } from '../sign';
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
-import type { IChipGroupProps, IChipProps } from './models';
+import type {
+  IChipGroupProps,
+  IChipPrefixRender,
+  IChipProps,
+  IChipState,
+  IChipSuffixRender,
+} from './models';
 
 import * as styles from './index.scss';
+
+const iPrefixRender: IChipPrefixRender = (
+  { icon, close, ...others },
+  { isLoading }
+) => (
+  <ISVGWrap {...others}>
+    <AnimatePresence>{isLoading ? <ISpinner /> : icon}</AnimatePresence>
+  </ISVGWrap>
+);
+
+const iSuffixRender: IChipSuffixRender = ({
+  icon,
+  close,
+  onClose,
+  ...others
+}) => (
+  <AnimatePresence>
+    {close && (
+      <ISVGWrap whileHover={{ scale: 1.12 }} onClick={onClose} {...others}>
+        {isTrue(close) ? <ISignLine type="cross" /> : close}
+      </ISVGWrap>
+    )}
+  </AnimatePresence>
+);
 
 export const IChip: ReactCFC<IChipProps> = (props) => {
   const {
@@ -29,6 +59,7 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
     size = 'medium',
     disabled = false,
     variant = 'filled',
+    render,
     onKeyDown,
     onClose,
     ...others
@@ -36,12 +67,18 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
 
   const target = useRef<HTMLSpanElement>(null);
 
-  const iClose = useMemoFunc(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      iPropagation(event);
-      onClose?.(event);
-    }
-  );
+  const states: IChipState = {
+    clickable,
+    disabled,
+    isLoading,
+    variant,
+    size,
+  };
+
+  const iClose = useMemoFunc((event: React.UIEvent<HTMLElement>) => {
+    iPropagation(event);
+    onClose?.(event);
+  });
 
   return (
     <motion.span
@@ -61,31 +98,34 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
       {...others}
     >
       {clickable && <IWave target={target} />}
-      <AnimatePresence>
-        {isLoading ? (
-          <ISVGWrap className={styles.icon}>
-            <ISpinner />
-          </ISVGWrap>
-        ) : (
-          icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>
-        )}
-      </AnimatePresence>
+      {(render?.prefix ?? iPrefixRender)(
+        { icon, close, onClose: iClose, className: styles.icon },
+        states
+      )}
       {children}
-      <AnimatePresence>
-        {close && (
-          <ISVGWrap
-            className={styles.close}
-            whileHover={{
-              scale: 1.12,
-            }}
-            onClick={iClose}
-          >
-            {isTrue(close) ? <ISignLine type="cross" /> : close}
-          </ISVGWrap>
-        )}
-      </AnimatePresence>
+      {(render?.suffix ?? iSuffixRender)(
+        { icon, close, onClose: iClose, className: styles.close },
+        states
+      )}
     </motion.span>
   );
 };
 
-export const IChipGroup: React.FC<IChipGroupProps> = () => <IFlex>{''}</IFlex>;
+export const IChipGroup: React.FC<IChipGroupProps> = (props) => {
+  const { value, chips, variant, icon, onChange, onChipsChange } = props;
+
+  const [iChips, iChipsChange] = useControlState({
+    value: chips,
+    onChange: onChipsChange,
+  });
+
+  return (
+    <Fragment>
+      {iChips?.map(({ value, label, ...others }, index) => (
+        <IChip key={value ?? index} {...others}>
+          {label ?? value?.toString()}
+        </IChip>
+      ))}
+    </Fragment>
+  );
+};
