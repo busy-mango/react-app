@@ -5,6 +5,8 @@
 
 import type { HTMLMotionProps } from 'framer-motion';
 
+import type { ReactValue, ReactValueChangeFunc } from '@/models';
+
 import type { ControlUISize } from '../../control';
 
 export interface IChipProps extends HTMLMotionProps<'span'> {
@@ -34,4 +36,18 @@ export interface IChipProps extends HTMLMotionProps<'span'> {
   variant?: 'filled' | 'outlined';
   /** show loading icon */
   isLoading?: boolean;
+}
+
+export type IChipConfig = Pick<
+  IChipProps,
+  'isLoading' | 'variant' | 'size' | 'icon' | 'disabled' | 'clickable' | 'close'
+> & {
+  value?: React.Key;
+};
+
+export interface IChipGroupProps {
+  chips?: IChipConfig[];
+  value?: ReactValue;
+  onChange?: ReactValueChangeFunc;
+  onChipsChange?: (current: IChipConfig, chips?: IChipConfig[]) => void;
 }

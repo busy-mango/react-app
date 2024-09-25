@@ -14,43 +14,9 @@
   white-space: nowrap;
   box-sizing: border-box;
 
-  /** variant */
-  &.filled {
-    color: var(--font-color-info);
-    background-color: var(--fill-color);
-    &:hover {
-      background-color: var(--fill-color-hover);
-    }
-  }
-  &.outlined {
-    border: 1px solid var(--border-color-3);
-  }
-
-  &.disabled {
-    cursor: not-allowed;
-  }
-  &.clickable {
-    cursor: pointer;
-  }
-
-  /** size */
-  &.mini {
-    font-size: inherit;
-    height: var(--control-size-03);
-    border-radius: var(--border-radius-02);
-    padding: 0 var(--gap-03);
-  }
-  &.medium {
-    padding: 0 var(--gap-05);
-    height: var(--control-size-05);
-    font-size: var(--font-size-04);
-    border-radius: var(--border-radius-03);
-  }
-  &.huge {
-    font-size: var(--font-size-03);
-    height: var(--control-size-05);
-    padding: 0 var(--gap-05);
-  }
+  transition-duration: 200ms;
+  transition-timing-function: var(--ease-in-out-cubic);
+  transition-property: color border-color border-width border-style background-color;
 
   .icon {
     margin-left: -0.4em;
@@ -61,5 +27,50 @@
     cursor: pointer;
     margin-left: 0.4em;
     margin-right: -0.4em;
+  }
+}
+
+/** status */
+.disabled {
+  cursor: not-allowed;
+}
+.clickable {
+  cursor: pointer;
+}
+
+/** size */
+.mini {
+  font-size: inherit;
+  height: var(--control-size-03);
+  font-size: var(--font-size-02);
+  border-radius: var(--border-radius-02);
+  padding: 0 var(--gap-03);
+}
+.medium {
+  padding: 0 var(--gap-05);
+  height: var(--control-size-05);
+  font-size: var(--font-size-04);
+  border-radius: var(--border-radius-03);
+}
+.huge {
+  border-radius: var(--border-radius-04);
+  font-size: var(--font-size-04);
+  height: var(--control-size-06);
+  padding: 0 var(--gap-06);
+}
+
+/** variant */
+.filled {
+  color: var(--font-color-info);
+  background-color: var(--fill-color);
+  &:hover {
+    background-color: var(--fill-color-hover);
+  }
+}
+.outlined {
+  border: 1px solid var(--border-color-3);
+  &:hover {
+    color: var(--border-color-hover);
+    border-color: var(--border-color-hover);
   }
 }

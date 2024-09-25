@@ -28,7 +28,7 @@ export function VariantControl<T extends string = never>(
   const {
     variants,
     sizeable = true,
-    patternable = true,
+    patternable = false,
     statusable,
     children,
   } = props;

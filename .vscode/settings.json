@@ -28,6 +28,7 @@
   },
   "cssVariables.lookupFiles": [
     "**/themes/dark.css",
+    "src/styles/*.css",
   ],
   "css-module-typed.pluginOptions": {
     "goToDefinition": true,

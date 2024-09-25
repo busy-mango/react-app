@@ -8,11 +8,12 @@ import { useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { iEscapeEvent, iPropagation } from '@/utils';
 
+import { IFlex } from '../flex';
 import { ISignLine } from '../sign';
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
-import type { IChipProps } from './models';
+import type { IChipGroupProps, IChipProps } from './models';
 
 import * as styles from './index.scss';
 
@@ -86,3 +87,5 @@ export const IChip: ReactCFC<IChipProps> = (props) => {
     </motion.span>
   );
 };
+
+export const IChipGroup: React.FC<IChipGroupProps> = () => <IFlex>{''}</IFlex>;

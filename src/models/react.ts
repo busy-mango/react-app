@@ -10,6 +10,14 @@ export type RectSize = {
   height?: number;
 };
 
+/** React组件值 */
+export type ReactValue = React.Key | React.Key[] | null;
+
+/** React组件值变更的回调 */
+export interface ReactValueChangeFunc {
+  (value?: ReactValue): void;
+}
+
 /** React通用渲染方法 */
 export interface ReactRender<P = PlainObject, S = never> {
   (props: P, state: S): React.ReactNode;
