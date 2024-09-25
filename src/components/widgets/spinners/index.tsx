@@ -1,4 +1,3 @@
-import React from 'react';
 import type { SVGMotionProps, Target } from 'framer-motion';
 import { motion } from 'framer-motion';
 

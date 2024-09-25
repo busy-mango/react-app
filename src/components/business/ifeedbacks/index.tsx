@@ -2,7 +2,7 @@
  * @description boundary error widgets
  */
 
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment } from 'react';
 import type { TranslationProps } from 'react-i18next';
 import { Translation } from 'react-i18next';
 

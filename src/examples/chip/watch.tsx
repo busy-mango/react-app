@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment, useMemo } from 'react';
 import { Translation, useTranslation } from 'react-i18next';
 
 import { MIN2MS } from '@busymango/utils';

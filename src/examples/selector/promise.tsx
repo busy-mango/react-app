@@ -1,5 +1,4 @@
-import { useMemo, useState } from 'react';
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment, useMemo, useState } from 'react';
 
 import { iArray, iSearchParams, sleep } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
