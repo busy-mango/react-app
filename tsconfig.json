@@ -28,6 +28,10 @@
       "@assets/*": [
         "assets/*"
       ],
+      /* porject */
+      "@examples/*": [
+        "examples/*"
+      ],
       /* app */
       "@/*": [
         "src/*"
@@ -65,16 +69,14 @@
     "checkMdx": true
   },
   "include": [
-    "scripts/**/*",
     "config/**/*",
+    "docs/**/*.tsx",
+    "examples/**/*",
     "helpers/**/*",
+    "scripts/**/*",
     "src/**/*",
     "test/**/*",
-    "docs/**/*.tsx",
-    "types/**/*",
-    "utils/**/*",
     "global.d.ts",
-    "rspress.config.ts",
-    "config/compiler/.develop.ts"
+    "rspress.config.ts"
   ]
 }

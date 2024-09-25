@@ -60,7 +60,9 @@ export default defineConfig({
         namedExport: true,
         exportGlobals: true,
         exportLocalsConvention: 'camelCaseOnly',
-        auto: (res) => res.includes('src') && res.endsWith('.scss'),
+        auto: (res) =>
+          res.endsWith('.scss') &&
+          (res.includes('src') || res.includes('examples')),
       },
     },
   },
