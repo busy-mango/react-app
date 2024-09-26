@@ -34,6 +34,7 @@ export default defineConfig({
   icon: './assets/favicon.svg',
   plugins: [pluginPreview()],
   globalUIComponents: [join(dir.docs, 'effects.tsx')],
+  route: { exclude: ['widgets/**/*'] },
   builderConfig: {
     source: {
       define: {

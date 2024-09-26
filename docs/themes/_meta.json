@@ -1,0 +1,9 @@
+[
+  {
+    "type": "dir",
+    "name": "design-token",
+    "label": "Design Token",
+    "collapsible": true,
+    "collapsed": false
+  }
+]

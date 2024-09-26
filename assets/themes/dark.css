@@ -1,5 +1,5 @@
 #root.dark {
-  --orange-color-50: 46 29 21;
+  --orange-color-050: 46 29 21;
   --orange-color-100: 72 40 23;
   --orange-color-200: 108 61 32;
   --orange-color-300: 140 74 32;
@@ -10,7 +10,7 @@
   --orange-color-800: 248 201 157;
   --orange-color-900: 250 225 197;
 
-  --sunset-color-50: 46 31 20;
+  --sunset-color-050: 46 31 20;
   --sunset-color-100: 72 43 20;
   --sunset-color-200: 97 59 24;
   --sunset-color-300: 135 79 24;
@@ -21,7 +21,7 @@
   --sunset-color-800: 248 212 141;
   --sunset-color-900: 250 230 183;
 
-  --sunglow-color-50: 45 39 20;
+  --sunglow-color-050: 45 39 20;
   --sunglow-color-100: 69 59 17;
   --sunglow-color-200: 90 78 16;
   --sunglow-color-300: 123 105 13;
@@ -32,7 +32,7 @@
   --sunglow-color-800: 248 239 119;
   --sunglow-color-900: 250 247 160;
 
-  --shamrock-color-50: 33 41 20;
+  --shamrock-color-050: 33 41 20;
   --shamrock-color-100: 48 63 21;
   --shamrock-color-200: 64 82 25;
   --shamrock-color-300: 84 111 26;
@@ -43,7 +43,7 @@
   --shamrock-color-800: 227 248 152;
   --shamrock-color-900: 240 250 193;
 
-  --green-color-50: 38 51 49;
+  --green-color-050: 38 51 49;
   --green-color-100: 38 61 55;
   --green-color-200: 34 80 66;
   --green-color-300: 7 121 83;
@@ -54,7 +54,7 @@
   --green-color-800: 104 217 170;
   --green-color-900: 168 219 198;
 
-  --viking-color-50: 20 37 38;
+  --viking-color-050: 20 37 38;
   --viking-color-100: 19 57 58;
   --viking-color-200: 22 76 76;
   --viking-color-300: 22 103 103;
@@ -65,7 +65,7 @@
   --viking-color-800: 136 233 224;
   --viking-color-900: 184 247 240;
 
-  --malibu-color-50: 21 34 46;
+  --malibu-color-050: 21 34 46;
   --malibu-color-100: 23 50 72;
   --malibu-color-200: 30 71 102;
   --malibu-color-300: 31 93 138;
@@ -76,7 +76,7 @@
   --malibu-color-800: 157 219 248;
   --malibu-color-900: 197 236 250;
 
-  --blue-color-50: 30 34 52;
+  --blue-color-050: 30 34 52;
   --blue-color-100: 24 43 87;
   --blue-color-200: 28 58 122;
   --blue-color-300: 40 84 173;
@@ -87,7 +87,7 @@
   --blue-color-800: 158 191 255;
   --blue-color-900: 218 233 255;
 
-  --dodger-color-50: 26 32 54;
+  --dodger-color-050: 26 32 54;
   --dodger-color-100: 25 42 92;
   --dodger-color-200: 30 58 122;
   --dodger-color-300: 30 72 167;
@@ -98,7 +98,7 @@
   --dodger-color-800: 144 187 252;
   --dodger-color-900: 183 212 250;
 
-  --heliotrope-color-50: 29 28 51;
+  --heliotrope-color-050: 29 28 51;
   --heliotrope-color-100: 43 38 87;
   --heliotrope-color-200: 54 45 107;
   --heliotrope-color-300: 64 53 143;
@@ -109,7 +109,7 @@
   --heliotrope-color-800: 197 188 248;
   --heliotrope-color-900: 230 225 250;
 
-  --violet-color-50: 43 33 61;
+  --violet-color-050: 43 33 61;
   --violet-color-100: 53 35 82;
   --violet-color-200: 70 45 107;
   --violet-color-300: 91 53 143;
@@ -120,7 +120,7 @@
   --violet-color-800: 219 188 248;
   --violet-color-900: 239 225 250;
 
-  --purple-color-50: 50 24 51;
+  --purple-color-050: 50 24 51;
   --purple-color-100: 75 23 77;
   --purple-color-200: 92 24 92;
   --purple-color-300: 122 24 122;
@@ -131,7 +131,7 @@
   --purple-color-800: 248 144 237;
   --purple-color-900: 250 186 242;
 
-  --rosein-color-50: 51 23 41;
+  --rosein-color-050: 51 23 41;
   --rosein-color-100: 72 22 51;
   --rosein-color-200: 93 27 63;
   --rosein-color-300: 127 29 83;
@@ -142,7 +142,7 @@
   --rosein-color-800: 248 154 197;
   --rosein-color-900: 250 195 218;
 
-  --red-color-50: 51 40 42;
+  --red-color-050: 51 40 42;
   --red-color-100: 69 41 48;
   --red-color-200: 96 39 51;
   --red-color-300: 138 43 57;
@@ -153,10 +153,10 @@
   --red-color-800: 246 134 141;
   --red-color-900: 250 191 195;
 
-  --gray-color-00: 0 0 0;
-  --gray-color-25: 8 9 13;
-  --gray-color-50: 23 23 31;
-  --gray-color-80: 26 28 36;
+  --gray-color-000: 0 0 0;
+  --gray-color-025: 8 9 13;
+  --gray-color-050: 23 23 31;
+  --gray-color-080: 26 28 36;
   --gray-color-100: 32 34 44;
   /* --gray-color-150: 32 34 44; */
   --gray-color-200: 44 47 59;
@@ -343,7 +343,7 @@
 /* PC */
 @media screen and (min-width: 1360px) {
   #root {
-    --gap-00: 0px;
+    --gap-000: 0px;
     --gap-01: 2px;
     --gap-02: 4px;
     --gap-03: 8px;
@@ -386,7 +386,7 @@
 /* iPad */
 @media screen and (min-width: 430px) and (max-width: 1360px) {
   #root {
-    --gap-00: 0px;
+    --gap-000: 0px;
     --gap-01: 2px;
     --gap-02: 4px;
     --gap-03: 8px;
@@ -427,7 +427,7 @@
 /* iPhone */
 @media screen and (max-width: 430px) {
   #root {
-    --gap-00: 0vw;
+    --gap-000: 0vw;
     --gap-01: calc(2vw / 3.75);
     --gap-02: calc(4vw / 3.75);
     --gap-03: calc(8vw / 3.75);
