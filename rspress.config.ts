@@ -28,7 +28,6 @@ const dotenv = assign<{
 );
 
 export default defineConfig({
-  // 文档根目录
   root: 'docs',
   base: '/react-app/',
   icon: './assets/favicon.svg',
