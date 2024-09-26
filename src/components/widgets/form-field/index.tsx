@@ -1,7 +1,9 @@
+import { useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { isTrue } from '@busymango/is-esm';
 
+import { useResizeObserver } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { isReactChildren, isReactNode } from '@/utils';
 
@@ -10,38 +12,66 @@ import { IMarker } from '../marker';
 import { IMotionPanel } from '../motion-panel';
 import { ISignLine } from '../sign';
 import { IFieldGridProvider, useIFieldGridContext } from './hooks';
-import type { IFieldCellProps, IFieldGridProps } from './models';
+import type {
+  IFieldCellProps,
+  IFieldGridMode,
+  IFieldGridProps,
+} from './models';
 
 import * as styles from './index.scss';
 
-export const IFieldGrid: ReactCFC<IFieldGridProps> = ({
-  size,
-  mode,
-  colon,
-  margin,
-  children,
-  className,
-  forceRenderTitle,
-  ...others
-}) => (
-  <IFlex
-    vertical
-    wrap
-    className={classNames(styles.wrap, className)}
-    data-ui-ifield-grid=""
-    {...others}
-  >
-    <IFieldGridProvider
-      colon={colon}
-      forceRenderTitle={forceRenderTitle}
-      margin={margin}
-      mode={mode}
-      size={size}
+export const IFieldGrid: ReactCFC<IFieldGridProps> = (props) => {
+  const {
+    size,
+    mode,
+    colon,
+    margin,
+    children,
+    className,
+    responsive,
+    forceRenderTitle,
+    ...others
+  } = props;
+
+  const ref = useRef(null);
+
+  const [iMode, setIMode] = useState<IFieldGridMode>();
+
+  useResizeObserver(
+    ref,
+    ({ scrollWidth }) => {
+      if (scrollWidth <= 260) {
+        setIMode('vertical');
+      } else if (scrollWidth <= 430) {
+        setIMode('horizontal');
+      } else {
+        setIMode(mode);
+      }
+    },
+    { enabled: responsive }
+  );
+
+  return (
+    <IFlex
+      ref={ref}
+      vertical
+      wrap
+      className={classNames(styles.wrap, className)}
+      data-ui-ifield-grid=""
+      {...others}
     >
-      {children}
-    </IFieldGridProvider>
-  </IFlex>
-);
+      <IFieldGridProvider
+        colon={colon}
+        forceRenderTitle={forceRenderTitle}
+        margin={margin}
+        mode={responsive ? iMode : mode}
+        size={size}
+      >
+        {children}
+      </IFieldGridProvider>
+    </IFlex>
+  );
+};
 
 export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
   const ctx = useIFieldGridContext();

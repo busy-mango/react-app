@@ -18,7 +18,6 @@ import { iCompact } from '@/utils';
 import { IChip } from '../chip';
 import { IControlWrap, useControlState } from '../control';
 import { IFlex } from '../flex';
-import type { IInputRef } from '../input';
 import { IInput } from '../input';
 import type { ScrollableRef } from '../scrollable';
 import { Scrollable } from '../scrollable';
@@ -52,7 +51,7 @@ const iChipRender: ISelectorChipRender = (
   <Fragment>
     {!multiple && (option?.label ?? option?.value?.toLocaleString())}
     {multiple && (
-      <IChip close size="mini" variant="filled" onClose={onClose}>
+      <IChip closeable size="mini" variant="filled" onClose={onClose}>
         {option?.label ?? option?.value?.toLocaleString()}
       </IChip>
     )}
@@ -175,7 +174,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       onBlur,
     } = props;
 
-    const input = useRef<IInputRef>(null);
+    const input = useRef<HTMLInputElement>(null);
 
     const scrollable = useRef<ScrollableRef>(null);
 
@@ -211,7 +210,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     useImperativeHandle(
       ref,
       () => ({
-        input: input.current?.native,
+        input: input.current,
         floating: refs.floating,
         reference: refs.reference,
       }),
@@ -223,13 +222,12 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     const { getReferenceProps, getFloatingProps } = useIInteractions(context);
 
     const iChange = useMemoFunc((current?: React.Key | React.Key[]) => {
-      input.current?.clear();
-      input.current?.native?.focus();
+      input.current?.focus();
       onChange?.(current ?? undefined);
     });
 
     const iClick = useMemoFunc((event: React.MouseEvent<HTMLDivElement>) => {
-      input.current?.native?.focus();
+      input.current?.focus();
       onClick?.(event);
     });
 

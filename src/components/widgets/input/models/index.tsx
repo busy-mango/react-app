@@ -4,11 +4,6 @@ import type { ReactInputProps } from '@/models';
 
 import type { ControlPattern, ControlValue } from '../../control';
 
-export interface IInputRef {
-  clear: () => void;
-  native: HTMLInputElement | null;
-}
-
 export interface IInputProps extends OmitOf<ReactInputProps, 'value'> {
   /** 控件是否跟随文本宽度 */
   autoSize?: boolean;

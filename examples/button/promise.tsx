@@ -13,7 +13,7 @@ const App: React.FC = () => {
   });
 
   return (
-    <IFlex gap={8}>
+    <IFlex wrap gap={8}>
       <IButton isLoading variant="filled" onClick={mutate} />
       <IButton disabled isLoading variant="filled" onClick={mutate}>
         加载中

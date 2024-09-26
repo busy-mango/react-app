@@ -27,9 +27,9 @@ export function VariantControl<T extends string = never>(
 ): React.ReactNode {
   const {
     variants,
-    sizeable = true,
+    sizeable = false,
+    statusable = false,
     patternable = false,
-    statusable,
     children,
   } = props;
 

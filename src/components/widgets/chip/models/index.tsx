@@ -5,12 +5,13 @@
 
 import type { HTMLMotionProps } from 'framer-motion';
 
-import type { ReactRender, ReactValue, ReactValueChangeFunc } from '@/models';
+import type { ReactRender } from '@/models';
 
 import type { ControlUISize } from '../../control';
 import type { ISVGWrapProps } from '../../svg-wrap';
 
 export interface IChipState {
+  closeable?: boolean;
   /**
    * If `true`, the chip will appear clickable, and will raise when pressed,
    * even if the onClick prop is not defined.
@@ -35,7 +36,6 @@ export type IChipCloseFunc = (event: React.UIEvent<HTMLElement>) => void;
 export type IChipPrefixRender = ReactRender<
   ISVGWrapProps & {
     icon?: React.ReactNode;
-    close?: React.ReactNode;
     onClose: IChipCloseFunc;
   },
   IChipState
@@ -44,7 +44,6 @@ export type IChipPrefixRender = ReactRender<
 export type IChipSuffixRender = ReactRender<
   ISVGWrapProps & {
     icon?: React.ReactNode;
-    close?: React.ReactNode;
     onClose: IChipCloseFunc;
   },
   IChipState
@@ -58,33 +57,10 @@ export interface IChipRenders {
 export interface IChipProps extends IChipState, HTMLMotionProps<'span'> {
   /** Prefix icon element */
   icon?: React.ReactNode;
-  /** Close icon element */
-  close?: React.ReactNode;
   render?: IChipRenders;
   /**
    * Callback fired when the delete icon is clicked.
    * If set, the delete icon will be shown.
    */
   onClose?: IChipCloseFunc;
-}
-
-export type IChipConfig = Pick<
-  IChipProps,
-  'isLoading' | 'variant' | 'size' | 'icon' | 'disabled' | 'clickable' | 'close'
-> & {
-  value?: React.Key;
-  label?: React.ReactNode;
-};
-
-export interface IChipGroupProps
-  extends Pick<
-    IChipConfig,
-    'variant' | 'size' | 'icon' | 'disabled' | 'clickable' | 'close'
-  > {
-  chips?: IChipConfig[];
-  value?: ReactValue;
-  editable?: boolean;
-  creatable?: boolean;
-  onChange?: ReactValueChangeFunc;
-  onChipsChange?: (current: IChipConfig, chips?: IChipConfig[]) => void;
 }

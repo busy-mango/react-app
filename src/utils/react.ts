@@ -32,8 +32,8 @@ export function iPropsAreEqual(pre: PlainObject, cur: PlainObject) {
 /** 从键盘敲击事件中创建回车敲击事件 */
 export const iPressEvent =
   <T extends Element = Element>(
-    func?: (event: React.KeyboardEvent<T>) => void,
-    onKeyDown?: (event: React.KeyboardEvent<T>) => void
+    func?: React.KeyboardEventHandler<T>,
+    onKeyDown?: React.KeyboardEventHandler<T>
   ) =>
   (event: React.KeyboardEvent<T>) => {
     onKeyDown?.(event);

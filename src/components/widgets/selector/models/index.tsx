@@ -18,7 +18,7 @@ import type {
   IControlWrapProps,
 } from '../../control';
 import type { IEmptyWrapProps } from '../../empty';
-import type { IInputProps, IInputRef } from '../../input';
+import type { IInputProps } from '../../input';
 import type { ScrollableProps, ScrollableRef } from '../../scrollable';
 
 export type ISelectorState = Pick<
@@ -82,7 +82,7 @@ export type ISelectorEmptyRender = ReactRender<IEmptyWrapProps, ISelectorState>;
 
 export type ISelectorSearchRender = ReactRender<
   ReactInputProps & {
-    ref: RefObject<IInputRef>;
+    ref: RefObject<HTMLInputElement>;
   },
   ISelectorState
 >;

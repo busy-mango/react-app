@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
 
-  cursor: unset;
   border: unset;
   outline: none;
   text-decoration: none;
@@ -24,9 +23,10 @@
   }
 
   .close {
+    z-index: 1;
     cursor: pointer;
-    margin-left: 0.4em;
-    margin-right: -0.4em;
+    padding: 0 0.4em;
+    margin-right: -0.8em;
   }
 }
 

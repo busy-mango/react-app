@@ -70,6 +70,7 @@
   },
   "include": [
     "config/**/*",
+    "docs/**/*.ts",
     "docs/**/*.tsx",
     "examples/**/*",
     "helpers/**/*",

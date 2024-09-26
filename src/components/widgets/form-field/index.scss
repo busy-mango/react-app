@@ -111,7 +111,7 @@
     }
 
     .horizontal {
-      grid-template-columns: 10% 90%;
+      grid-template-columns: calc(100% / 3) calc(200% / 3);
     }
 
     .single {

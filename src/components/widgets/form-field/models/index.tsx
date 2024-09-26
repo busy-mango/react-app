@@ -63,4 +63,7 @@ export interface IFieldGridContextVal
     'size' | 'colon' | 'mode' | 'margin' | 'forceRenderTitle'
   > {}
 
-export interface IFieldGridProps extends IFlexProps, IFieldGridContextVal {}
+export interface IFieldGridProps extends IFlexProps, IFieldGridContextVal {
+  /** 是否响应区域宽度以决定布局模式 */
+  responsive?: boolean;
+}

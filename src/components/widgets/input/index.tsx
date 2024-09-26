@@ -9,22 +9,17 @@ import classNames from 'classnames';
 
 import { assign, ifnot, sizeOf } from '@busymango/utils';
 
-import {
-  iComposingParams,
-  useEventState,
-  useMemoFunc,
-  useResizeObserver,
-} from '@/hooks';
-import { iPressEvent, isIOS } from '@/utils';
+import { iComposingParams, useEventState, useResizeObserver } from '@/hooks';
+import { iPressEvent } from '@/utils';
 
 import { onInputCatch, useControlState, usePatternAssert } from '../control';
 import { iTextSize } from './helpers';
-import type { IInputProps, IInputRef } from './models';
+import type { IInputProps } from './models';
 
 import * as iStyles from '@/styles/widgets.scss';
 import * as styles from './index.scss';
 
-export const IInput = forwardRef<IInputRef, IInputProps>(
+export const IInput = forwardRef<HTMLInputElement, IInputProps>(
   function Input(props, ref) {
     const {
       style,
@@ -73,17 +68,16 @@ export const IInput = forwardRef<IInputRef, IInputProps>(
       }
     });
 
-    const clear = useMemoFunc(() => {
-      // TODO
-      // https://github.com/ant-design/ant-design-mobile/issues/5212
-      isIOS() && isComposing && target.current?.blur();
-    });
+    // const clear = useMemoFunc(() => {
+    //   // https://github.com/ant-design/ant-design-mobile/issues/5212
+    //   if (target.current && isIOS() && isComposing) {
+    //     onClear?.();
+    //   }
+    // });
 
     const width = ifnot((autoSize || isReadPretty) && `${sizeOf(value)}em`);
 
-    useImperativeHandle(ref, () => ({ clear, native: target.current }), [
-      clear,
-    ]);
+    useImperativeHandle(ref, () => target.current!, [target]);
 
     return (
       <Fragment>

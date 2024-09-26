@@ -26,6 +26,8 @@
   color: inherit;
   font-size: inherit;
 
+  flex-shrink: 0;
+
   transition-duration: 200ms;
   transition-property: color border-color background-color;
   transition-timing-function: var(--ease-in-out-cubic);

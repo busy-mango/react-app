@@ -1,4 +1,11 @@
-import { IButton, IFieldCell, IFlex, IFormWrap, ISwitch } from '@/components';
+import {
+  IButton,
+  IFieldCell,
+  IFieldGrid,
+  IFlex,
+  IFormWrap,
+  ISwitch,
+} from '@/components';
 import { useToggle } from '@/hooks';
 
 const App: React.FC = () => {
@@ -7,11 +14,13 @@ const App: React.FC = () => {
   return (
     <IFlex vertical gap={8}>
       <IFormWrap>
-        <IFieldCell mode="horizontal" title="disabled">
-          <ISwitch checked={disabled} onChange={iCheck} />
-        </IFieldCell>
+        <IFieldGrid responsive mode="horizontal">
+          <IFieldCell title="disabled">
+            <ISwitch checked={disabled} onChange={iCheck} />
+          </IFieldCell>
+        </IFieldGrid>
       </IFormWrap>
-      <IFlex gap={8}>
+      <IFlex wrap gap={8}>
         <IButton disabled={disabled} variant="filled">
           主要按钮
         </IButton>
@@ -22,7 +31,7 @@ const App: React.FC = () => {
           文本按钮
         </IButton>
       </IFlex>
-      <IFlex gap={8}>
+      <IFlex wrap gap={8}>
         <IButton danger disabled={disabled} variant="filled">
           主要按钮
         </IButton>
