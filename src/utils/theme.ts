@@ -36,7 +36,7 @@ export const iThemeDefault = <T extends string = string>() => {
   return process.env.THEME as T;
 };
 
-export const iThemeVariable = (name: string) =>
+export const iThemeVariable = (name: keyof React.CSSVarProps) =>
   iCSSVariable(name, {
     element: container,
   });

@@ -47,7 +47,7 @@ const iSwcrc = (development = false): SwcLoaderOptions => ({
   minify: false,
   env: {
     mode: 'usage',
-    coreJs: '3.37.1',
+    coreJs: '3.38.1',
   },
   jsc: {
     parser: {

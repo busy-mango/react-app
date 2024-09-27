@@ -28,7 +28,7 @@ export const IWave: React.FC<IWaveProps> = (props) => {
     memo.current = true;
 
     const boxShadow = compact(
-      ['1', '2', '3'].map((gradation) =>
+      (['1', '2', '3'] as const).map((gradation) =>
         iThemeVariable(`--wave-color-${gradation}`)
       )
     ).map((color, index) => `0 0 0 ${index * 3}px ${color}`);

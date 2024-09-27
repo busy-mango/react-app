@@ -97,8 +97,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(@swc/helpers@0.5.13)
       '@rspack/dev-server':
-        specifier: 1.0.5
-        version: 1.0.5(@rspack/core@1.0.7(@swc/helpers@0.5.13))(@types/express@4.17.21)(webpack@5.91.0)
+        specifier: 1.0.7
+        version: 1.0.7(@rspack/core@1.0.7(@swc/helpers@0.5.13))(@types/express@4.17.21)(webpack@5.91.0)
       '@rspack/plugin-react-refresh':
         specifier: 1.0.0
         version: 1.0.0(react-refresh@0.14.2)
@@ -142,8 +142,11 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0
       core-js:
-        specifier: ^3.37.1
+        specifier: ^3.38.1
         version: 3.38.1
+      csstype:
+        specifier: ^3.1.3
+        version: 3.1.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -174,6 +177,9 @@ importers:
       fork-ts-checker-webpack-plugin:
         specifier: ^9.0.2
         version: 9.0.2(typescript@5.6.2)(webpack@5.91.0)
+      postcss:
+        specifier: ^8.4.39
+        version: 8.4.39
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -1356,8 +1362,8 @@ packages:
       '@swc/helpers':
         optional: true
 
-  '@rspack/dev-server@1.0.5':
-    resolution: {integrity: sha512-S1o1j9adjqNCiSWrIv1vmVHQPXFvcBa9JvPWIGxGjei72ejz0zvO6Fd948UkRlDgCPIoY4Cy+g1GLmBkJT5MKA==}
+  '@rspack/dev-server@1.0.7':
+    resolution: {integrity: sha512-a3AB/mqD7HV4pKF7RrOPCWxDfsVLHwCxfc9UupHq8JR4+9U4g3qDxpSN2CCfwS4et1Jrd45C+9BiAmgLesqlrQ==}
     peerDependencies:
       '@rspack/core': '*'
 
@@ -2390,6 +2396,9 @@ packages:
 
   csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
+
+  csstype@3.1.3:
+    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
   data-uri-to-buffer@3.0.1:
     resolution: {integrity: sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==}
@@ -4222,6 +4231,10 @@ packages:
   possible-typed-array-names@1.0.0:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
     engines: {node: '>= 0.4'}
+
+  postcss@8.4.39:
+    resolution: {integrity: sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==}
+    engines: {node: ^10 || ^12 || >=14}
 
   postcss@8.4.47:
     resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
@@ -6945,7 +6958,7 @@ snapshots:
     optionalDependencies:
       '@swc/helpers': 0.5.13
 
-  '@rspack/dev-server@1.0.5(@rspack/core@1.0.7(@swc/helpers@0.5.13))(@types/express@4.17.21)(webpack@5.91.0)':
+  '@rspack/dev-server@1.0.7(@rspack/core@1.0.7(@swc/helpers@0.5.13))(@types/express@4.17.21)(webpack@5.91.0)':
     dependencies:
       '@rspack/core': 1.0.7(@swc/helpers@0.5.13)
       chokidar: 3.6.0
@@ -7453,7 +7466,7 @@ snapshots:
   '@types/react@18.3.3':
     dependencies:
       '@types/prop-types': 15.7.9
-      csstype: 3.1.2
+      csstype: 3.1.3
 
   '@types/retry@0.12.0': {}
 
@@ -8199,6 +8212,8 @@ snapshots:
 
   csstype@3.1.2: {}
 
+  csstype@3.1.3: {}
+
   data-uri-to-buffer@3.0.1: {}
 
   data-uri-to-buffer@4.0.1: {}
@@ -8320,7 +8335,7 @@ snapshots:
   dom-helpers@5.2.1:
     dependencies:
       '@babel/runtime': 7.24.8
-      csstype: 3.1.2
+      csstype: 3.1.3
 
   dom-serializer@1.4.1:
     dependencies:
@@ -10488,6 +10503,12 @@ snapshots:
   pluralize@8.0.0: {}
 
   possible-typed-array-names@1.0.0: {}
+
+  postcss@8.4.39:
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.1.0
+      source-map-js: 1.2.1
 
   postcss@8.4.47:
     dependencies:

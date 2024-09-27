@@ -30,22 +30,24 @@ import { useToggle } from '@/hooks';
 import { iCompact, iPropagation, iThemeVariable } from '@/utils';
 
 const iColorDisc = iCompact(
-  [
-    'orange',
-    'sunset',
-    'sunglow',
-    'shamrock',
-    'green',
-    'viking',
-    'malibu',
-    'blue',
-    'dodger',
-    'heliotrope',
-    'violet',
-    'purple',
-    'rosein',
-    'red',
-  ].map((name) => `rgb(${iThemeVariable(`--${name}-color-600`)} / 1)`)
+  (
+    [
+      'orange',
+      'sunset',
+      'sunglow',
+      'shamrock',
+      'green',
+      'viking',
+      'malibu',
+      'blue',
+      'dodger',
+      'heliotrope',
+      'violet',
+      'purple',
+      'rosein',
+      'red',
+    ] as const
+  ).map((name) => `rgb(${iThemeVariable(`--${name}-color-600`)} / 1)`)
 );
 
 const options = [

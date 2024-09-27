@@ -4,7 +4,7 @@
 
 import ForkTSCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { readdirSync, readFileSync } from 'fs';
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 
 import { assign, compact } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
@@ -13,6 +13,7 @@ import type { RspackPluginFunction, RspackPluginInstance } from '@rspack/core';
 import { rspack } from '@rspack/core';
 import ReactRefreshRspackPlugin from '@rspack/plugin-react-refresh';
 
+import { CSSVarTSEmitPlugin } from '../plugins';
 import { app, dir } from '../project';
 
 type RspackPlugin =
@@ -81,6 +82,11 @@ export const iPlugins = (
       },
     }) as unknown as null,
     env === 'test' && doctor,
+    env === 'dev' &&
+      new CSSVarTSEmitPlugin({
+        includes: ['dark.css'],
+        dirname: join(dir.src, 'types'),
+      }),
     env === 'dev' && new ReactRefreshRspackPlugin({}),
   ]);
 };
