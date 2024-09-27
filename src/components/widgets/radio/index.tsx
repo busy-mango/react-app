@@ -6,7 +6,7 @@ import { ifnot } from '@busymango/utils';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISVGWrap } from '../svg-wrap';
-import { IWave } from '../wave';
+import { IWaveWrap } from '../wave';
 import { ICheckedSVG } from './icon';
 import type {
   IRadioInputRender,
@@ -31,8 +31,9 @@ const iRadioRender: IRadioRadioRender = (
   { checked }
 ) => (
   <ISVGWrap {...others}>
-    <ICheckedSVG checked={checked} className={styles.icon} />
-    <IWave target={inputRef} />
+    <IWaveWrap enabled target={inputRef}>
+      <ICheckedSVG checked={checked} className={styles.icon} />
+    </IWaveWrap>
     {input}
   </ISVGWrap>
 );

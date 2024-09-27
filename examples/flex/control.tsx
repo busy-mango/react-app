@@ -53,7 +53,7 @@ const App: React.FC = () => {
         justify={justify}
         style={{
           height: 64,
-          padding: 'var(--gap-3)',
+          padding: 'var(--gap-03)',
           border: '1px solid var(--border-color-2)',
           borderRadius: 'var(--border-radius-3)',
         }}

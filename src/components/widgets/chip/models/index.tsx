@@ -1,33 +1,38 @@
-// ┌────────────────────────────── Warning ──────────────────────────────┐
-// │ These PropTypes are generated from the TypeScript type definitions. │
-// │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-// └─────────────────────────────────────────────────────────────────────┘
-
 import type { HTMLMotionProps } from 'framer-motion';
 
+import type { COLOR_DISC } from '@/constants';
 import type { ReactRender } from '@/models';
 
 import type { ControlUISize } from '../../control';
 import type { ISVGWrapProps } from '../../svg-wrap';
 
 export interface IChipState {
+  /**
+   * 控制是否呈现关闭按钮。
+   */
   closeable?: boolean;
   /**
-   * If `true`, the chip will appear clickable, and will raise when pressed,
-   * even if the onClick prop is not defined.
-   * If `false`, the chip will not appear clickable, even if onClick prop is defined.
-   * This can be used, for example,
-   * along with the component prop to indicate an anchor Chip is clickable.
-   * Note: this controls the UI and does not affect the onClick event.
+   * 控制是否呈现可点击样式。
    */
   clickable?: boolean;
-  /** @default false */
+  /**
+   * 控制是否呈现禁用样式。
+   * @default false
+   */
   disabled?: boolean;
-  /** @default 'medium' */
+  /**
+   * 控制控件的尺寸大小
+   *  @default 'medium'
+   */
   size?: ControlUISize;
-  /** @default 'outlined' */
-  variant?: 'filled' | 'outlined';
-  /** show loading icon */
+  /**
+   * 控制控件的呈现方式
+   * @default 'bordered'
+   */
+  variant?: 'filled' | 'bordered';
+  /**
+   * 控制是否呈现加载中样式。
+   */
   isLoading?: boolean;
 }
 
@@ -55,12 +60,17 @@ export interface IChipRenders {
 }
 
 export interface IChipProps extends IChipState, HTMLMotionProps<'span'> {
-  /** Prefix icon element */
+  color?: (typeof COLOR_DISC)[number];
+  /**
+   * 控制组件前缀图标。
+   */
   icon?: React.ReactNode;
+  /**
+   * 自定义控件UI样式。
+   */
   render?: IChipRenders;
   /**
-   * Callback fired when the delete icon is clicked.
-   * If set, the delete icon will be shown.
+   * 点击关闭按钮的回调事件。
    */
   onClose?: IChipCloseFunc;
 }

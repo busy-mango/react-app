@@ -60,17 +60,36 @@
 }
 
 /** variant */
+.filled,
+.bordered {
+  border-width: 1px;
+  border-style: solid;
+}
+
 .filled {
-  color: var(--font-color-info);
-  background-color: var(--fill-color);
-  &:hover {
-    background-color: var(--fill-color-hover);
+  border-color: transparent;
+  .disabled {
+    color: var(--font-color-disabled);
+    background-color: var(--fill-color-disabled);
+  }
+  &:not(.disabled) {
+    color: var(--font-color-info);
+    background-color: var(--fill-color);
+    &:hover {
+      background-color: var(--fill-color-hover);
+    }
   }
 }
-.outlined {
-  border: 1px solid var(--border-color-3);
-  &:hover {
-    color: var(--border-color-hover);
-    border-color: var(--border-color-hover);
+.bordered {
+  .disabled {
+    color: var(--font-color-disabled);
+    border-color: var(--border-color-disabled);
+  }
+  &:not(.disabled) {
+    border-color: var(--border-color-3);
+    &:hover {
+      color: var(--border-color-hover);
+      border-color: var(--border-color-hover);
+    }
   }
 }

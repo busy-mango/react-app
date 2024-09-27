@@ -35,7 +35,7 @@ const Collapsible: React.FC<ICollapsibleProps> = ({
   return (
     <div className={styles.wrap}>
       <IFlex align="center" className={styles.header} justify="space-between">
-        <IFlex align="center" className={styles.title} gap={'var(--gap-2)'}>
+        <IFlex align="center" className={styles.title} gap={'var(--gap-02)'}>
           {title}
         </IFlex>
         <div>

@@ -5,7 +5,7 @@ import type { IChipProps } from '@/components/widgets/chip/models';
 
 const App: React.FC = () => (
   <VariantControl
-    variants={['filled', 'outlined'] satisfies IChipProps['variant'][]}
+    variants={['filled', 'bordered'] satisfies IChipProps['variant'][]}
   >
     {({ size, variant }) => (
       <IFlex gap={8}>

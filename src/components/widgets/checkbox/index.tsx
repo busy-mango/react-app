@@ -49,9 +49,7 @@ const iIconRender: ICheckIconRender = (
   return (
     <IWaveWrap
       enabled={wave}
-      style={{
-        borderRadius: 'var(--border-radius-10)',
-      }}
+      style={{ borderRadius: 'var(--border-radius-10)' }}
       target={inputRef}
     >
       <ISignLine rect {...others} type={type} />

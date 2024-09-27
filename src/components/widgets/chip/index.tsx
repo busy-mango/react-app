@@ -2,6 +2,8 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { ifnot } from '@busymango/utils';
+
 import { useMemoFunc } from '@/hooks';
 import { iEscapeEvent, iPropagation } from '@/utils';
 
@@ -9,7 +11,7 @@ import { ISignLine } from '../sign';
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
-import { animate, initial, transition } from './helpers';
+import { iAnimate, initial, transition } from './helpers';
 import type {
   IChipPrefixRender,
   IChipProps,
@@ -30,10 +32,10 @@ const iPrefixRender: IChipPrefixRender = (
 
 const iSuffixRender: IChipSuffixRender = (
   { icon, onClose, ...others },
-  { closeable }
+  { closeable, disabled }
 ) => (
   <AnimatePresence>
-    {closeable && (
+    {closeable && !disabled && (
       <ISVGWrap whileHover={{ scale: 1.12 }} onClick={onClose} {...others}>
         <ISignLine type="cross" />
       </ISVGWrap>
@@ -48,6 +50,7 @@ export const IChip = forwardRef<
   const {
     icon,
     style,
+    color,
     children,
     clickable,
     className,
@@ -58,6 +61,7 @@ export const IChip = forwardRef<
     variant = 'filled',
     render,
     onKeyDown,
+    onClick,
     onClose,
     ...others
   } = props;
@@ -75,6 +79,8 @@ export const IChip = forwardRef<
     size,
   };
 
+  const iClickable = !disabled && clickable;
+
   const iClose = useMemoFunc((event: React.UIEvent<HTMLElement>) => {
     iPropagation(event);
     onClose?.(event);
@@ -83,14 +89,14 @@ export const IChip = forwardRef<
   return (
     <motion.span
       ref={target}
-      animate={animate}
+      animate={iAnimate({ color, variant, disabled })}
       className={classNames(
         styles.chip,
         styles[size],
         styles[variant],
         {
-          [styles.clickable]: clickable,
-          [styles.disabled]: clickable && disabled,
+          [styles.disabled]: disabled,
+          [styles.clickable]: iClickable,
         },
         className
       )}
@@ -98,10 +104,11 @@ export const IChip = forwardRef<
       initial={initial}
       style={style}
       transition={transition}
+      onClick={ifnot(iClickable && onClick)}
       onKeyDown={iEscapeEvent(onClose, onKeyDown)}
       {...others}
     >
-      {clickable && <IWave target={target} />}
+      {iClickable && variant === 'filled' && <IWave target={target} />}
       {(render?.prefix ?? iPrefixRender)(
         { icon, onClose: iClose, className: styles.icon },
         states

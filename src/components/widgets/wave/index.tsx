@@ -75,10 +75,10 @@ export const IWave: React.FC<IWaveProps> = (props) => {
     <Fragment>
       <div
         ref={scope}
-        className={classNames(styles.wrap, className)}
+        className={classNames(styles.wave, className)}
         {...others}
       />
-      {placeholder && <motion.div className={styles.wrap} initial={initial} />}
+      {placeholder && <motion.div className={styles.wave} initial={initial} />}
     </Fragment>
   );
 };
@@ -87,11 +87,11 @@ export const IWaveWrap: ReactCFC<IWaveWrapProps> = ({
   children,
   enabled,
   target,
+  className,
   placeholder,
-  style,
   ...others
 }) => (
-  <span style={{ position: 'relative', ...style }} {...others}>
+  <span className={classNames(styles.wrap, className)} {...others}>
     {enabled && <IWave placeholder={placeholder} target={target} />}
     {children}
   </span>

@@ -43,7 +43,7 @@ const render = {
           display: 'flex',
           alignItems: 'center',
           position: 'absolute',
-          padding: 'var(--gap-2)',
+          padding: 'var(--gap-02)',
         }}
       >
         <div

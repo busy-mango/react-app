@@ -57,7 +57,7 @@ export const BoundaryFallbackPage: React.FC = () => {
             {t('common:Page not found')}
             <span
               style={{
-                marginLeft: 'var(--gap-3)',
+                marginLeft: 'var(--gap-03)',
                 fontSize: 'var(--font-size-4)',
               }}
             >

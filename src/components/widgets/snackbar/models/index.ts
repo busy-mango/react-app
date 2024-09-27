@@ -23,7 +23,7 @@ export interface ISnackbarProps extends OmitOf<HTMLMotionProps<'div'>, 'id'> {
   /** 控件尺寸 */
   size?: ControlUISize;
   /** 变体 */
-  variant?: 'filled' | 'outlined';
+  variant?: 'filled' | 'bordered';
   /** 状态 */
   status?: ISnackbarStatus;
   /** 组件卸载时的回调 */

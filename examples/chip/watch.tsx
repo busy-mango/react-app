@@ -56,7 +56,6 @@ const BullionsChip: React.FC<{
         color: code,
         borderColor: code,
       }}
-      variant="outlined"
     >
       {render(title, data?.price)}
     </IChip>

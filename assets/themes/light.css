@@ -244,7 +244,7 @@
   --fill-color-disabled: rgb(var(--gray-color-200) / 1);
 
   /* 背景色 - 默认 */
-  --bg-color: rgb(var(--gray-color-00) / 1);
+  --bg-color: rgb(var(--gray-color-000) / 1);
   /* 背景色 - 导航栏 */
   --bg-color-navbar: rgb(var(--gray-color-150) / 1);
   /* 背景色 - 遮罩层 */
@@ -253,28 +253,28 @@
   /* 背景色 - 容器 */
   --bg-color-warp: rgb(var(--gray-color-150) / 1);
   /* 背景色 - 菜单 */
-  --bg-color-menu: rgb(var(--gray-color-00) / 1);
+  --bg-color-menu: rgb(var(--gray-color-000) / 1);
   /* 背景色 - 卡片 */
-  --bg-color-card: rgb(var(--gray-color-00) / 1);
+  --bg-color-card: rgb(var(--gray-color-000) / 1);
 
   /* 背景色 - 控件 */
-  --bg-color-control: rgb(var(--gray-color-50) / 1);
+  --bg-color-control: rgb(var(--gray-color-050) / 1);
   /* 背景色 - 原件 */
-  --bg-color-widgets: rgb(var(--gray-color-00) / 1);
+  --bg-color-widgets: rgb(var(--gray-color-000) / 1);
 
   /* 背景色 - 小贴士 */
   --bg-color-tip: rgb(var(--gray-color-900) / 1);
   /* 背景色 - 浮层 */
-  --bg-color-float: rgb(var(--gray-color-25) / 0.9);
+  --bg-color-float: rgb(var(--gray-color-025) / 0.9);
   /* 背景色 - 滑块 */
-  --bg-color-thumb: rgb(var(--gray-color-00) / 1);
+  --bg-color-thumb: rgb(var(--gray-color-000) / 1);
 
   /* 背景色 - 危险 */
-  --bg-color-danger: rgb(var(--red-color-50) / 1);
+  --bg-color-danger: rgb(var(--red-color-050) / 1);
   /* 背景色 - 警告 */
-  --bg-color-warn: rgb(var(--orange-color-50) / 1);
+  --bg-color-warn: rgb(var(--orange-color-050) / 1);
   /* 背景色 - 成功 */
-  --bg-color-success: rgb(var(--green-color-50) / 1);
+  --bg-color-success: rgb(var(--green-color-050) / 1);
 
   /* 边框色 - 主 */
   --border-color-1: rgb(var(--gray-color-100) / 0.8);
@@ -294,7 +294,7 @@
   --font-color-6: rgb(var(--gray-color-500) / 1);
   --font-color-8: rgb(var(--gray-color-700) / 1);
   --font-color-10: rgb(var(--gray-color-900) / 1);
-  --font-color-b8: rgb(var(--gray-color-00) / 1);
+  --font-color-b8: rgb(var(--gray-color-000) / 1);
 
   /* 字体颜色 - 警告 */
   --font-color-warn: rgb(var(--orange-color-600) / 1);
@@ -342,7 +342,7 @@
 /* PC */
 @media screen and (min-width: 1360px) {
   #root {
-    --gap-000: 0px;
+    --gap-00: 0px;
     --gap-01: 2px;
     --gap-02: 4px;
     --gap-03: 8px;
@@ -383,7 +383,7 @@
 /* iPad */
 @media screen and (min-width: 430px) and (max-width: 1360px) {
   #root {
-    --gap-000: 0px;
+    --gap-00: 0px;
     --gap-01: 2px;
     --gap-02: 4px;
     --gap-03: 8px;
@@ -426,7 +426,7 @@
 /* iPhone */
 @media screen and (max-width: 430px) {
   #root {
-    --gap-000: 0vw;
+    --gap-00: 0vw;
     --gap-01: calc(2vw / 3.75);
     --gap-02: calc(4vw / 3.75);
     --gap-03: calc(8vw / 3.75);

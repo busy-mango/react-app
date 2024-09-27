@@ -125,11 +125,11 @@
       border-color: var(--border-color-3);
 
       &:hover {
-        border-color: var(--border-color-hover);
+        border-color: var(--secondary-color-hover);
       }
       &.focus,
       &:focus-within {
-        border-color: var(--border-color-active);
+        border-color: var(--secondary-color-active);
       }
     }
     &.warning {
@@ -146,11 +146,11 @@
     &.vaildating {
       border-color: var(--border-color-2);
       &:hover {
-        border-color: var(--border-color-hover);
+        border-color: var(--secondary-color-hover);
       }
       &.focus,
       &:focus-within {
-        border-color: var(--border-color-active);
+        border-color: var(--secondary-color-active);
       }
     }
   }
