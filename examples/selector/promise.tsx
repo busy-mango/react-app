@@ -39,7 +39,7 @@ const iChipRender: ISelectorChipRender = (
     <Fragment>
       {!multiple && content}
       {multiple && (
-        <IChip close size="mini" variant="filled" onClose={onClose}>
+        <IChip closeable size="mini" variant="filled" onClose={onClose}>
           <IOverflow maxWidth={'100%'}>{content}</IOverflow>
         </IChip>
       )}

@@ -100,7 +100,7 @@ const iChipRender: ISelectorChipRender = (
       {!multiple && <span style={{ color }}>{content}</span>}
       {multiple && (
         <IChip
-          close
+          closeable
           size="mini"
           style={{ backgroundColor: color, color: 'var(--font-color-b8)' }}
           variant="filled"

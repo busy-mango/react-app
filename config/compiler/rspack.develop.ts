@@ -13,7 +13,7 @@ import common from './rspack.common';
 const config: Configuration = {
   cache: false,
   mode: 'development',
-  devtool: 'eval-cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
   optimization: {
     minimize: false,
   },

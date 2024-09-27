@@ -2,4 +2,5 @@
 Chrome >= 73, Firefox > 87, iOS >= 12.0, Edge >= 79
 
 [development]
-fully supports abortcontroller and fully supports proxy and fully supports same-site-cookie-attribute and fully supports resizeobserver and fully supports css-sticky
+last 2 chrome version, last 2 firefox version, last 2 safari version
+# fully supports abortcontroller and fully supports proxy and fully supports same-site-cookie-attribute and fully supports resizeobserver and fully supports css-sticky

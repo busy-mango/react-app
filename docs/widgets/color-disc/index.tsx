@@ -3,6 +3,10 @@ import { capitalCase } from 'change-case';
 
 import { sizeOf } from '@busymango/utils';
 
+import { IFlex } from '@/components';
+
+import * as styles from './index.scss';
+
 const colors = [
   { value: 'orange', label: '品牌橙' },
   { value: 'sunset', label: '日落黄' },
@@ -21,47 +25,41 @@ const colors = [
   { value: 'gray', label: '灰色' },
 ];
 
-const steps = Array.from({ length: 10 }, (_, i) =>
+const scales = Array.from({ length: 10 }, (_, i) =>
   i === 0 ? '050' : (i * 100).toString()
 );
 
-export const ColorDisc: React.FC = () => {
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gap: '1em',
-        gridTemplateRows: `2em repeat(${sizeOf(colors)}, 4em)`,
-        gridTemplateColumns: `4em repeat(${sizeOf(steps)}, 4em)`,
-      }}
-    >
-      <div />
-      {steps.map((step) => (
-        <div key={step}>{step}</div>
-      ))}
-      {colors.map(({ value, label }) => (
-        <Fragment key={value}>
+export const ColorDisc: React.FC = () => (
+  <div
+    className={styles.wrap}
+    style={{
+      gridTemplateRows: `1.5em repeat(${sizeOf(colors)}, 3em)`,
+      gridTemplateColumns: `repeat(${sizeOf(scales)}, 3em) 4em`,
+    }}
+  >
+    {scales.map((scale) => (
+      <IFlex key={scale} centered>
+        {scale}
+      </IFlex>
+    ))}
+    <div />
+    {colors.map(({ value, label }) => (
+      <Fragment key={value}>
+        {scales.map((scale) => (
           <div
+            key={scale}
+            className={styles.scale}
             style={{
-              whiteSpace: 'pre-wrap',
+              backgroundColor: `rgb(var(--${value}-color-${scale}) / 1)`,
             }}
-          >
-            {label}
-            {'\n'}
-            {capitalCase(value)}
-          </div>
-          {steps.map((step) => (
-            <div
-              key={step}
-              style={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: `rgb(var(--${value}-color-${step}) / 1)`,
-              }}
-            />
-          ))}
-        </Fragment>
-      ))}
-    </div>
-  );
-};
+          />
+        ))}
+        <div className={styles.title}>
+          {label}
+          {'\n'}
+          {capitalCase(value)}
+        </div>
+      </Fragment>
+    ))}
+  </div>
+);

@@ -1,5 +1,10 @@
 [
   {
+    "text": "指南",
+    "link": "/guides/started",
+    "activeMatch": "^/guides"
+  },
+  {
     "text": "主题",
     "link": "/themes",
     "activeMatch": "^/themes/"

@@ -45,6 +45,10 @@ export const AssetsRule: RuleSetRule = {
 
 const iSwcrc = (development = false): SwcLoaderOptions => ({
   minify: false,
+  env: {
+    mode: 'usage',
+    coreJs: '3.37.1',
+  },
   jsc: {
     parser: {
       tsx: true,

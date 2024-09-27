@@ -1,0 +1,13 @@
+# 路由
+
+应用路由基于 React Router 6，提供了基于文件约定的路由能力，并支持了业界流行的约定式路由模式：动态路由。
+
+## 路由文件约定
+
+在`pages`目录下，子目录名、文件名会作为路由 URL 的映射，只要叶子节点默认导出 React 组件即可被访问。
+
+```tsx
+export default () => {
+  return <div>Hello world</div>
+};
+```

@@ -4,7 +4,7 @@ import { defineConfig } from 'rspress/config';
 
 import { isObject, isRegExp } from '@busymango/is-esm';
 import type { FalseValue } from '@busymango/utils';
-import { assign } from '@busymango/utils';
+import { assign, or } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
 import type { RuleSetRule } from '@rspack/core';
 import { pluginPreview } from '@rspress/plugin-preview';
@@ -31,9 +31,13 @@ export default defineConfig({
   root: 'docs',
   base: '/react-app/',
   icon: './assets/favicon.svg',
+  logo: './docs/public/mango.png',
+  logoText: 'react-app',
   plugins: [pluginPreview()],
   globalUIComponents: [join(dir.docs, 'effects.tsx')],
-  route: { exclude: ['widgets/**/*'] },
+  route: {
+    exclude: ['utils/**/*', 'widgets/**/*', 'images/**/*', 'public/**/*'],
+  },
   builderConfig: {
     source: {
       define: {
@@ -62,7 +66,7 @@ export default defineConfig({
         exportLocalsConvention: 'camelCaseOnly',
         auto: (res) =>
           res.endsWith('.scss') &&
-          (res.includes('src') || res.includes('examples')),
+          or(['src', 'docs', 'examples'], (val) => res.includes(val)),
       },
     },
   },
