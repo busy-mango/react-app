@@ -30,14 +30,12 @@ const dotenv = assign<{
 export default defineConfig({
   root: 'docs',
   base: '/react-app/',
-  icon: './assets/favicon.svg',
-  logo: './docs/public/mango.png',
+  icon: '/favicon.svg',
+  logo: '/mango.png',
   logoText: 'react-app',
   plugins: [pluginPreview()],
   globalUIComponents: [join(dir.docs, 'effects.tsx')],
-  route: {
-    exclude: ['utils/**/*', 'widgets/**/*', 'images/**/*', 'public/**/*'],
-  },
+  route: { exclude: ['utils/**/*', 'widgets/**/*'] },
   builderConfig: {
     source: {
       define: {
