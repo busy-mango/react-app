@@ -1,7 +1,10 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
+import type { ChildNode } from 'postcss';
 import { parse } from 'postcss';
 
+import { isNonEmptyArray } from '@busymango/is-esm';
+import { dedup } from '@busymango/utils';
 import type { Compiler, RspackPluginInstance } from '@rspack/core';
 
 type PluginOptions = {
@@ -9,6 +12,8 @@ type PluginOptions = {
   filename?: string;
   includes?: string[];
 };
+
+const PLUGIN_NAME = 'CSSVarTSEmitPlugin';
 
 const iTemp = (names: string[]) => `import 'react';\n
 type CSSVarModel = {
@@ -34,25 +39,32 @@ export class CSSVarTSEmitPlugin implements RspackPluginInstance {
       filename = 'react.css.vars.d.ts',
     } = this.options;
 
-    hooks.emit.tap('MyPlugin', (compilation) => {
+    hooks.emit.tap(PLUGIN_NAME, (compilation) => {
       const names: string[] = [];
+
+      const recursion = (node: ChildNode) => {
+        if (node.type === 'rule') {
+          node.nodes?.forEach((node) => {
+            if (node.type === 'decl' && node.variable) {
+              names.push(node.prop);
+            }
+          });
+        }
+        if (node.type === 'atrule') {
+          node.nodes?.forEach(recursion);
+        }
+      };
 
       includes?.forEach((name) => {
         const selector = `themes\\${name}`;
         const asset = compilation.getAsset(selector);
         const source = asset?.source.source().toString();
-        (source ? parse(source) : null)?.nodes?.forEach((node) => {
-          if (node.type === 'rule') {
-            node.nodes?.forEach((node) => {
-              if (node.type === 'decl' && node.variable) {
-                names.push(node.prop);
-              }
-            });
-          }
-        });
+        (source ? parse(source) : null)?.nodes?.forEach(recursion);
       });
 
-      writeFileSync(join(dirname, filename), iTemp(names));
+      if (isNonEmptyArray(names)) {
+        writeFileSync(join(dirname, filename), iTemp(dedup(names)));
+      }
     });
   }
 }

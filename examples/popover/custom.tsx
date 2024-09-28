@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import type { Placement } from '@floating-ui/react';
 
 import { IButton, IFlex, IPopover, IRadioGroup } from '@/components';
+import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => {
+  const ref = useRef(null);
+
   const [placement, setPlacement] = useState<Placement>('top');
 
   return (
@@ -33,12 +36,13 @@ const App: React.FC = () => {
           onChange={(v) => setPlacement(v as Placement)}
         />
       </IFlex>
-      <IFlex centered>
+      <IFlex ref={ref} centered style={{ padding: iThemeVariable('--gap-10') }}>
         <IPopover
           open
           content={placement}
           mode="tip"
           placement={placement}
+          root={ref}
           trigger={'click'}
         >
           {(props) => (

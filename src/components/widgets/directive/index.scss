@@ -1,0 +1,13 @@
+.wrap {
+  display: grid;
+}
+
+.header,
+.with-icon {
+  grid-template-rows: max-content;
+  grid-template-columns: max-content minmax(0, 1fr);
+}
+
+.header {
+  display: grid;
+}
