@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { isUndefined } from '@busymango/is-esm';
 
 import { useMemoFunc } from '@/hooks';
-import { isInputElement } from '@/utils';
+import { isInputElement, isTextAreaElement } from '@/utils';
 
 export interface ControlParams {
   /** 输入法是否介入中 */
@@ -16,6 +16,13 @@ export interface ControlComponentProps<T, E, Args extends unknown[]> {
   onCatch?: (source: E) => T;
   onChange?: (value: E, ...args: Args) => void;
 }
+
+export const onTextAreaCatch = (
+  event: React.ChangeEvent<HTMLTextAreaElement>
+) => {
+  const { target } = event ?? {};
+  if (isTextAreaElement(target)) return target.value;
+};
 
 export const onInputCatch = (event: React.ChangeEvent<HTMLInputElement>) => {
   const { target } = event ?? {};

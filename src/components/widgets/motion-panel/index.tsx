@@ -2,12 +2,12 @@
  * @description 消息反馈组件
  */
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import classNames from 'classnames';
 import type { Target, Transition } from 'framer-motion';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { useMemoFunc, useRecord, useResizeObserver } from '@/hooks';
+import { useRecord } from '@/hooks';
 import type { ReactCFC } from '@/models';
 
 import type { IMotionPanelProps, IMotionPanelRender } from './models';
@@ -34,21 +34,13 @@ export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
 
   const target = useRef<HTMLDivElement>(null);
 
-  const [height, setHeight] = useState<number>();
-
   const record = useRecord(children, visible && ghosting);
-
-  const iSyncHeight = useMemoFunc(({ scrollHeight }: HTMLElement) => {
-    scrollHeight !== height && setHeight(scrollHeight);
-  });
-
-  useResizeObserver(target, iSyncHeight, { enabled: visible });
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
-          animate={{ opacity: 1, height }}
+          animate={{ opacity: 1, height: 'auto' }}
           className={classNames(styles.wrap, className)}
           exit={initial}
           initial={initial}

@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import {
   iCirclePath,
   initial,
-  iTrigoAdjacent,
-  iTrigoOpposite,
+  iTrigonAdjacent,
+  iTrigonOpposite,
   transition,
 } from './helpers';
 
@@ -22,9 +22,9 @@ const MagnifierPath: React.FC = () => (
     <motion.path
       animate={{
         d: [
-          `M${448 + iTrigoAdjacent(256, 45)} ${448 + iTrigoOpposite(256, 45)}`,
-          `L${448 + iTrigoAdjacent(352, 45)} ${448 + iTrigoOpposite(352, 45)}`,
-          `L${448 + iTrigoAdjacent(448, 45)} ${448 + iTrigoOpposite(448, 45)}`,
+          `M${448 + iTrigonAdjacent(256, 45)} ${448 + iTrigonOpposite(256, 45)}`,
+          `L${448 + iTrigonAdjacent(352, 45)} ${448 + iTrigonOpposite(352, 45)}`,
+          `L${448 + iTrigonAdjacent(448, 45)} ${448 + iTrigonOpposite(448, 45)}`,
         ].join(' '),
       }}
       exit={initial}

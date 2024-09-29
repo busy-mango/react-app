@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { isFunction, isHTMLElement } from '@busymango/is-esm';
-import { debounce } from '@busymango/utils';
+import { debounce, theLast } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
 import { iFindElement } from '@/utils';
@@ -11,9 +11,13 @@ export type ResizeObserverOpts = {
   debounce?: number;
 };
 
+export interface ResizeObserverFunc {
+  (entry: ResizeObserverEntry): void;
+}
+
 export function useResizeObserver(
   target?: ReactTargetType,
-  func?: (e: HTMLElement) => void,
+  func?: ResizeObserverFunc,
   params: ResizeObserverOpts = {}
 ) {
   const { enabled = true, debounce: wait } = params;
@@ -24,8 +28,9 @@ export function useResizeObserver(
       const callback = wait ? debounce(func, wait).starer : func;
 
       const observer = new ResizeObserver((entries) => {
-        const current = entries.find(({ target }) => target === element);
-        current?.target && callback(current.target as HTMLElement);
+        callback(theLast(entries)!);
+        // const current = entries.find(({ target }) => target === element);
+        // current?.target && callback(current.target as HTMLElement);
       });
 
       observer.observe(element);

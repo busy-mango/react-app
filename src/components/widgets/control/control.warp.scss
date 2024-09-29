@@ -72,10 +72,10 @@
     color: var(--font-color-disabled);
   }
   &:not(.disabled) {
-    &.error {
+    &.danger {
       color: var(--font-color-danger);
     }
-    &.warning {
+    &.warn {
       color: var(--font-color-warn);
     }
   }
@@ -85,10 +85,10 @@
     background-color: var(--natural-color-disabled);
   }
   &:not(.disabled):not(.read-pretty) {
-    &.error {
+    &.danger {
       background-color: var(--bg-color-danger);
     }
-    &.warning {
+    &.warn {
       background-color: var(--bg-color-warn);
     }
     &.success,
@@ -110,7 +110,7 @@
     background-color: var(--natural-color-disabled);
   }
   &:not(.disabled) {
-    &.error {
+    &.danger {
       border-color: var(--danger-color);
 
       &:hover {
@@ -132,7 +132,7 @@
         border-color: var(--secondary-color-active);
       }
     }
-    &.warning {
+    &.warn {
       border-color: var(--warn-color);
 
       &:hover {

@@ -269,6 +269,8 @@
   /* 背景色 - 滑块 */
   --bg-color-thumb: rgb(var(--gray-color-900) / 1);
 
+  /* 背景色 - 强调 */
+  --bg-color-info: rgb(var(--blue-color-050) / 1);
   /* 背景色 - 危险 */
   --bg-color-danger: rgb(var(--red-color-050) / 1);
   /* 背景色 - 警告 */
@@ -296,12 +298,14 @@
   --font-color-10: rgba(255, 255, 255 / 1);
   --font-color-b8: rgba(255, 255, 255 / 1);
 
+  /* 字体颜色 - 强调 */
+  --font-color-info: rgb(var(--blue-color-900) / 1);
   /* 字体颜色 - 警告 */
-  --font-color-warn: rgb(var(--orange-color-500) / 1);
+  --font-color-warn: rgb(var(--orange-color-900) / 1);
   /* 字体颜色 - 危险 */
-  --font-color-danger: rgb(var(--red-color-700) / 1);
+  --font-color-danger: rgb(var(--red-color-700) / 0.9);
   /* 字体颜色 - 成功 */
-  --font-color-success: rgb(var(--green-color-700) / 1);
+  --font-color-success: rgb(var(--green-color-900) / 1);
   /* 字体颜色 - 禁用 */
   --font-color-disabled: rgb(var(--gray-color-600) / 0.9);
   /* 字体颜色 - 高亮 */
@@ -309,6 +313,14 @@
 
   /* 图标颜色-默认 */
   --icon-color: rgb(var(--gray-color-700) / 1);
+  /* 图标颜色 - 强调 */
+  --icon-color-info: rgb(var(--blue-color-500) / 1);
+  /* 图标颜色 - 警告 */
+  --icon-color-warn: rgb(var(--orange-color-500) / 1);
+  /* 图标颜色 - 危险 */
+  --icon-color-danger: rgb(var(--red-color-700) / 1);
+  /* 图标颜色 - 成功 */
+  --icon-color-success: rgb(var(--green-color-700) / 1);
 
   /* 波纹动画颜色 */
   --wave-color-0: rgb(var(--heliotrope-color-600) / 0.1);

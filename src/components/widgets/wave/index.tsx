@@ -60,7 +60,7 @@ export const IWave: React.FC<IWaveProps> = (props) => {
 
   useResizeObserver(
     measure,
-    ({ clientWidth, clientHeight }) => {
+    ({ target: { clientWidth, clientHeight } }) => {
       scope.current.style.width = `${clientWidth}px`;
       scope.current.style.height = `${clientHeight}px`;
     },

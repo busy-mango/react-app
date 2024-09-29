@@ -1,11 +1,4 @@
-import {
-  forwardRef,
-  useDeferredValue,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import type {
   AnimationDefinition,
@@ -19,12 +12,7 @@ import { isFinite, isObject, isTrue } from '@busymango/is-esm';
 import { isEqual } from '@busymango/utils';
 
 import type { EventStateParams } from '@/hooks';
-import {
-  useEventState,
-  useMemoFunc,
-  useResizeObserver,
-  useTimeout,
-} from '@/hooks';
+import { useEventState, useMemoFunc, useTimeout } from '@/hooks';
 import type { ReactTargetType } from '@/models';
 
 import type { ISignType } from '../sign';
@@ -36,8 +24,8 @@ import type { ISnackbarProps } from './models';
 
 import * as styles from './index.scss';
 
-const iAnimate = (height?: number): Target => ({
-  height,
+const iAnimate = (): Target => ({
+  height: 'auto',
   scale: 1,
   opacity: 1,
   originY: 0,
@@ -68,7 +56,7 @@ const iSnackbarSign = (status?: ISnackbarProps['status']): ISignType => {
   switch (status) {
     case 'success':
       return 'tick';
-    case 'error':
+    case 'danger':
       return 'cross';
     default:
       return 'informer';
@@ -94,15 +82,9 @@ export const ISnackbar = forwardRef<HTMLDivElement, ISnackbarProps>(
 
     const [scope, iShakeAnimate] = useShakeAnimate();
 
-    const [height, setHeight] = useState<number>();
-
     const isHover = useEventState(iHoverParams(scope));
 
     const iDestory = useSnackbars(({ destory }) => destory);
-
-    useResizeObserver(scope, ({ scrollHeight }) => {
-      if (height !== scrollHeight) setHeight(scrollHeight);
-    });
 
     useImperativeHandle(ref, () => scope.current);
 
@@ -135,7 +117,7 @@ export const ISnackbar = forwardRef<HTMLDivElement, ISnackbarProps>(
     return (
       <motion.div
         ref={scope}
-        animate={iAnimate(useDeferredValue(height))}
+        animate={iAnimate()}
         className={classNames(
           styles.snackbar,
           styles[status],

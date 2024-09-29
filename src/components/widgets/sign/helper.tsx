@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 
 import {
   initial,
-  iTrigo,
-  iTrigoAdjacent,
-  iTrigoOpposite,
+  iTrigon,
+  iTrigonAdjacent,
+  iTrigonOpposite,
   transition,
 } from './helpers';
 
@@ -15,14 +15,14 @@ const HelperPath: React.FC = () => (
   <Fragment>
     <motion.path
       animate={{
-        d: `M ${512 - 128} ${256 + 128} A 128 128 0 1 1 ${512 + iTrigoAdjacent(128, 45)} ${256 + 128 + iTrigoOpposite(128, 45)} A 128 128 0 0 0 512 608`,
+        d: `M ${512 - 128} ${256 + 128} A 128 128 0 1 1 ${512 + iTrigonAdjacent(128, 45)} ${256 + 128 + iTrigonOpposite(128, 45)} A 128 128 0 0 0 512 608`,
       }}
       exit={{ d }}
       initial={{ d }}
       transition={transition}
     />
     <motion.path
-      animate={{ d: iTrigo(512, 768, 8) }}
+      animate={{ d: iTrigon(512, 768, 8) }}
       exit={initial}
       initial={initial}
       transition={transition}

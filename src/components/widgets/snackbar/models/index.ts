@@ -10,7 +10,7 @@ export type ISnackbarAPI = {
   destory: () => void;
 };
 
-export type ISnackbarStatus = 'success' | 'info' | 'error' | 'warn';
+export type ISnackbarStatus = 'success' | 'info' | 'danger' | 'warn';
 
 export interface ISnackbarProps extends OmitOf<HTMLMotionProps<'div'>, 'id'> {
   id: React.Key;

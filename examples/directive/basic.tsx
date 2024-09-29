@@ -1,18 +1,45 @@
-import { Fragment } from 'react/jsx-runtime';
+import { VariantControl } from '@examples/widgets';
 
-import { ISignLine } from '@/components';
-import { IDirective } from '@/components/widgets/directive';
+import { IDirective, IFlex, ISignLine } from '@/components';
 
 const App: React.FC = () => (
-  <Fragment>
-    <IDirective
-      icon={<ISignLine ring type="informer" />}
-      title="通用"
-    ></IDirective>
-    <IDirective icon={<ISignLine ring type="tick" />} title="成功"></IDirective>
-    <IDirective title="失败"></IDirective>
-    <IDirective title="警告"></IDirective>
-  </Fragment>
+  <VariantControl variants={['filled', 'borderered'] as const}>
+    {({ variant }) => (
+      <IFlex vertical gap={16}>
+        <IDirective
+          icon={<ISignLine ring type="informer" />}
+          title="通用"
+          variant={variant}
+        >
+          这是一个指示。
+        </IDirective>
+        <IDirective
+          icon={<ISignLine ring type="tick" />}
+          status="success"
+          title="成功"
+          variant={variant}
+        >
+          这是一个成功的指示。
+        </IDirective>
+        <IDirective
+          icon={<ISignLine ring type="cross" />}
+          status="danger"
+          title="危险"
+          variant={variant}
+        >
+          这是一个危险的指示。
+        </IDirective>
+        <IDirective
+          icon={<ISignLine trigon type="informer" />}
+          status="warn"
+          title="警告"
+          variant={variant}
+        >
+          这是一个包含警告意的指示。
+        </IDirective>
+      </IFlex>
+    )}
+  </VariantControl>
 );
 
 export default App;

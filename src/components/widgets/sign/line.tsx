@@ -3,13 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { IDollarPath } from './dollar';
 import { IHelperPath } from './helper';
-import { iAnimateLine, initial, transition } from './helpers';
+import { iAnimateLine, initial, iTrigon, transition } from './helpers';
 import { IMagnifierPath } from './magnifier';
 import type { ISignLineProps } from './models';
 
 export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
   function SignLine(
-    { type, rect, ring, style, animate, ...others },
+    { type, rect, ring, style, animate, trigon, ...others },
     iForwardRef
   ) {
     const ref = useRef<SVGSVGElement>(null);
@@ -47,8 +47,16 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
               transition={transition}
             />
           )}
-        </AnimatePresence>
-        <AnimatePresence>
+          {trigon && (
+            <motion.path
+              key="trigon"
+              animate={{
+                d: iTrigon(512, 512, 480),
+              }}
+              exit={initial}
+              initial={initial}
+            />
+          )}
           {rect && (
             <motion.rect
               key="rect"
@@ -71,8 +79,6 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
               transition={transition}
             />
           ))}
-        </AnimatePresence>
-        <AnimatePresence>
           {type === 'dollar' && <IDollarPath key="dollar" />}
           {type === 'helper' && <IHelperPath key="helper" />}
           {type === 'magnifier' && <IMagnifierPath key="magnifier" />}

@@ -26,4 +26,5 @@ export interface ISignLineProps extends SVGMotionProps<SVGSVGElement> {
   type?: ISignType;
   ring?: boolean;
   rect?: boolean;
+  trigon?: boolean;
 }

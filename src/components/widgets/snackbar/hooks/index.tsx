@@ -27,7 +27,7 @@ export const snackbar = {
     return await useSnackbars.getState().emit(options);
   },
   ...(() =>
-    (['info', 'error', 'warn', 'success'] satisfies ISnackbarStatus[]).reduce(
+    (['info', 'danger', 'warn', 'success'] satisfies ISnackbarStatus[]).reduce(
       (accom, status) => ({
         ...accom,
         [status]: async (config: OmitOf<Partial<ISnackbarProps>, 'status'>) => {

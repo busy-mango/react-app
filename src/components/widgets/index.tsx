@@ -7,6 +7,7 @@ export * from './checkbox';
 export * from './chip';
 export * from './collapsible';
 export * from './control';
+export * from './directive';
 export * from './flex';
 export * from './form-field';
 export * from './form-wrap';

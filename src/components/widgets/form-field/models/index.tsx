@@ -9,7 +9,7 @@ import type {
 } from '../../control';
 import type { IFlexProps } from '../../flex/models';
 
-export type IFieldStatus = 'error' | 'success' | 'warning';
+export type IFieldStatus = 'danger' | 'success' | 'warn';
 
 export type IFieldGridMode =
   | ControlUIDirection

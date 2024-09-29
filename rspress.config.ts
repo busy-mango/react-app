@@ -1,3 +1,4 @@
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 import { defineConfig } from 'rspress/config';
@@ -52,6 +53,16 @@ export default defineConfig({
             resourceQuery: /react/,
             options: { icon: false, typescript: true },
           });
+
+        config.plugins?.push(
+          new ForkTsCheckerWebpackPlugin({
+            typescript: {
+              build: config.mode !== 'development',
+              mode: 'write-references',
+            },
+          })
+        );
+
         return config;
       },
     },

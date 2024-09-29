@@ -72,9 +72,9 @@ export function VariantControl<T extends string = never>(
           <IRadioGroup
             options={(
               [
-                'error',
+                'danger',
                 'success',
-                'warning',
+                'warn',
                 'vaildating',
               ] satisfies ControlUIStatus[]
             ).map((value) => ({ value }))}

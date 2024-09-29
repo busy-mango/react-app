@@ -8,7 +8,7 @@ import type { ISignType } from '../models';
  * @param degrees 角度
  * @returns 对边
  */
-export const iTrigoOpposite = (hypotenuse: number, degrees = 30) => {
+export const iTrigonOpposite = (hypotenuse: number, degrees = 30) => {
   const radians = degrees * (Math.PI / 180);
   return Math.sin(radians) * hypotenuse;
 };
@@ -19,7 +19,7 @@ export const iTrigoOpposite = (hypotenuse: number, degrees = 30) => {
  * @param degrees 角度
  * @returns 邻边
  */
-export const iTrigoAdjacent = (hypotenuse: number, degrees = 30) => {
+export const iTrigonAdjacent = (hypotenuse: number, degrees = 30) => {
   const radians = degrees * (Math.PI / 180);
   return Math.cos(radians) * hypotenuse;
 };
@@ -30,10 +30,10 @@ export const iTrigoAdjacent = (hypotenuse: number, degrees = 30) => {
  * @param y 中心点y
  * @param r 以r为半径寻找正三角三个点坐标
  */
-export const iTrigo = (x: number, y: number, r: number) => {
+export const iTrigon = (x: number, y: number, r: number) => {
   const point1 = `${x} ${y - r}`;
-  const point2 = `${x - iTrigoAdjacent(r)} ${y + iTrigoOpposite(r)}`;
-  const point3 = `${x + iTrigoAdjacent(r)} ${y + iTrigoOpposite(r)}`;
+  const point2 = `${x - iTrigonAdjacent(r)} ${y + iTrigonOpposite(r)}`;
+  const point3 = `${x + iTrigonAdjacent(r)} ${y + iTrigonOpposite(r)}`;
   return `M${point1} L${point2} L${point3}Z`;
 };
 
@@ -103,8 +103,8 @@ export const iAnimateLine = (type?: ISignType): Target[] => {
         {
           d: [
             'M512 512',
-            `L${512 + iTrigoAdjacent(112)} ${512 + iTrigoOpposite(112)}`,
-            `L${512 + iTrigoAdjacent(224)} ${512 + iTrigoOpposite(224)}`,
+            `L${512 + iTrigonAdjacent(112)} ${512 + iTrigonOpposite(112)}`,
+            `L${512 + iTrigonAdjacent(224)} ${512 + iTrigonOpposite(224)}`,
           ].join(' '),
         },
       ];
@@ -129,7 +129,7 @@ export const iAnimateLine = (type?: ISignType): Target[] => {
         { d: 'M704 320 L512 512 L320 704' },
       ];
     case 'informer':
-      return [{ d: 'M512 256 L512 256 L512 608' }, { d: iTrigo(512, 768, 8) }];
+      return [{ d: 'M512 256 L512 256 L512 608' }, { d: iTrigon(512, 768, 8) }];
     default:
       return [];
   }

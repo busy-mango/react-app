@@ -20,7 +20,7 @@ export type ControlPattern =
   | 'readPretty';
 
 /** 控件校验状态 */
-export type ControlUIStatus = 'vaildating' | 'error' | 'warning' | 'success';
+export type ControlUIStatus = 'vaildating' | 'danger' | 'warn' | 'success';
 
 export type ControlValue = ReactInputProps['value'] | null;
 

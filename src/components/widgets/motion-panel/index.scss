@@ -13,8 +13,8 @@
     height: max-content;
   }
 
-  &.error,
-  &.warning,
+  &.warn,
+  &.danger,
   &.success,
   &.waiting {
     font-size: inherit;

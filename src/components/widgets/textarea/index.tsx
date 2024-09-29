@@ -1,11 +1,11 @@
 import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 
-import { useMemoFunc, useResizeObserver } from '@/hooks';
+import { useResizeObserver } from '@/hooks';
 
-import { useControlState } from '../control';
+import { onTextAreaCatch, useControlState } from '../control';
 import { iTextareaSize } from './helpers';
-import type { ITextAreaEvent, ITextAreaProps, ITextareaRef } from './models';
+import type { ITextAreaProps, ITextareaRef } from './models';
 
 import * as iStyles from '@/styles/widgets.scss';
 import * as styles from './index.scss';
@@ -29,7 +29,10 @@ export const ITextArea = forwardRef<ITextareaRef, ITextAreaProps>(
 
     useImperativeHandle(ref, () => input, [input]);
 
-    const [value, onChange] = useControlState(other);
+    const [value, iChange] = useControlState({
+      onCatch: onTextAreaCatch,
+      ...other,
+    });
 
     useResizeObserver(shadow, () => {
       const { current: iInput } = input;
@@ -45,10 +48,6 @@ export const ITextArea = forwardRef<ITextareaRef, ITextAreaProps>(
 
         iInput.style.overflow = overflow;
       }
-    });
-
-    const iChange = useMemoFunc(({ target }: ITextAreaEvent) => {
-      onChange?.(target.value);
     });
 
     return (

@@ -98,8 +98,8 @@
     margin: unset;
   }
 
-  &.error,
-  &.warning,
+  &.danger,
+  &.warn,
   &.success,
   &.waiting {
     font-size: var(--font-size-04);

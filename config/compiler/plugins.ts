@@ -9,7 +9,11 @@ import { join, resolve } from 'path';
 import { assign, compact } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
 import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
-import type { RspackPluginFunction, RspackPluginInstance } from '@rspack/core';
+import type {
+  RspackPluginFunction,
+  RspackPluginInstance,
+  WebpackPluginInstance,
+} from '@rspack/core';
 import { rspack } from '@rspack/core';
 import ReactRefreshRspackPlugin from '@rspack/plugin-react-refresh';
 
@@ -32,7 +36,7 @@ const doctor = new RsdoctorRspackPlugin({
 
 export const iPlugins = (
   env: 'dev' | 'test' | 'prod' = 'dev'
-): RspackPlugin[] => {
+): (RspackPlugin | WebpackPluginInstance)[] => {
   const dotenv = assign<{
     THEME: string;
     ENV_NAME: string;
@@ -80,7 +84,7 @@ export const iPlugins = (
         build: env !== 'dev',
         mode: 'write-references',
       },
-    }) as unknown as null,
+    }),
     env === 'test' && doctor,
     env === 'dev' &&
       new CSSVarTSEmitPlugin({
