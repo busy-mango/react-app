@@ -29,12 +29,12 @@ export function useResizeObserver(
 
       const observer = new ResizeObserver((entries) => {
         callback(theLast(entries)!);
-        // const current = entries.find(({ target }) => target === element);
-        // current?.target && callback(current.target as HTMLElement);
       });
 
       observer.observe(element);
-      return () => observer.disconnect();
+      return () => {
+        observer.disconnect();
+      };
     }
   }, [target, enabled, wait, func]);
 }

@@ -1,11 +1,12 @@
 import { forwardRef, useId, useLayoutEffect } from 'react';
 import classNames from 'classnames';
-import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 import { isIOS } from '@/utils';
 
-import * as styles from './index.scss';
+import type { IOverlayProps } from './models';
+
+import * as styles from './overlay.scss';
 
 const iLocks = new Set<string>();
 
@@ -19,14 +20,6 @@ const iScrollbarX = () => {
 const iScrollbarWidth = () => {
   return window.innerWidth - document.documentElement.clientWidth;
 };
-
-export interface IOverlayProps extends HTMLMotionProps<'div'> {
-  /**
-   * overlay will lock scrolling on the document body if is false.
-   * @default false
-   */
-  scroll?: boolean;
-}
 
 export const IOverlay = forwardRef(function IOverlay(
   props: IOverlayProps,

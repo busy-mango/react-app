@@ -17,4 +17,5 @@
 *::-webkit-scrollbar-thumb {
   border-radius: var(--border-radius-10);
   background-color: var(--bg-color-thumb);
+  box-shadow: var(--shadow-02);
 }

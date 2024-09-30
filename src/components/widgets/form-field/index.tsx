@@ -40,6 +40,7 @@ export const IFieldGrid: ReactCFC<IFieldGridProps> = (props) => {
   useResizeObserver(
     ref,
     ({ target: { scrollWidth } }) => {
+      console.log(scrollWidth);
       if (scrollWidth <= 260) {
         setIMode('vertical');
       } else if (scrollWidth <= 430) {
@@ -93,7 +94,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     colon = ctx?.colon ?? ':',
     size = ctx?.size ?? 'medium',
     margin = ctx?.margin ?? false,
-    mode = ctx?.mode ?? 'vertical',
+    mode = ctx?.mode ?? 'horizontal',
     forceRenderTitle = ctx?.forceRenderTitle,
     children,
     ...others

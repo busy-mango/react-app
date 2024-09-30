@@ -81,9 +81,9 @@ const onPressEnter: React.KeyboardEventHandler<HTMLInputElement> = ({
 const Creator: React.FC = () => (
   <IChip icon={<ISignLine type="plus" />} variant="filled">
     <IInput
-      autoSize
       placeholder="新增标签"
       value={useChipGroup(({ keyword }) => keyword)}
+      width="auto"
       onBlur={onBlur}
       onChange={onChange}
       onPressEnter={onPressEnter}

@@ -11,7 +11,6 @@ import {
 import { isArray, isHTMLElement, isNil } from '@busymango/is-esm';
 import { FRAME2MS, isEqual, type OmitOf } from '@busymango/utils';
 import {
-  FloatingPortal,
   useClick,
   useDismiss,
   useFloating,
@@ -28,11 +27,11 @@ import { container } from '@/init';
 import type { ReactCFC } from '@/models';
 import { isCentered } from '@/utils';
 
+import { IBackdrop } from '../backdrop';
 import { IButton } from '../button';
 import type { ControlOption } from '../control';
 import { useControlState } from '../control';
 import { IFlex } from '../flex';
-import { IOverlay } from '../overlay';
 import { ISignLine } from '../sign';
 import {
   DATA_ID_NAME,
@@ -263,55 +262,53 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
         <div>{inner}</div>
         <ISignLine className={styles.arrow} type="arrowRight" />
       </div>
-      <FloatingPortal root={container}>
+      <IBackdrop
+        className={styles.overlay}
+        open={context.open || isPlaying}
+        root={container}
+      >
         <AnimatePresence>
-          {(context.open || isPlaying) && (
-            <IOverlay className={styles.overlay}>
-              <AnimatePresence>
-                {context.open && (
-                  <motion.div
-                    ref={refs.setFloating}
-                    animate={iWrapAnimate}
-                    className={classNames(styles.wrap, className)}
-                    exit={iWrapExit}
-                    initial={iWrapInitial}
-                    style={style}
-                    onAnimationStart={onAnimationStart}
-                    {...others}
-                    {...getFloatingProps()}
-                  >
-                    <IFlex
-                      align="center"
-                      className={styles.header}
-                      justify="space-between"
-                    >
-                      <motion.h2 layout>{title}</motion.h2>
-                      <IButton variant="text" wave={false} onClick={onConfirm}>
-                        确定
-                      </IButton>
-                    </IFlex>
-                    <div className={styles.container}>
-                      {columns?.map((colum, index) => (
-                        <IWheel
-                          key={index}
-                          options={colum}
-                          value={value?.[index]}
-                          onChange={(val) => {
-                            focus.current = focus.current?.map(
-                              (e, i) => (i === index ? val : e) ?? e
-                            );
-                          }}
-                        />
-                      ))}
-                      <IPickerMask />
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </IOverlay>
+          {context.open && (
+            <motion.div
+              ref={refs.setFloating}
+              animate={iWrapAnimate}
+              className={classNames(styles.wrap, className)}
+              exit={iWrapExit}
+              initial={iWrapInitial}
+              style={style}
+              onAnimationStart={onAnimationStart}
+              {...others}
+              {...getFloatingProps()}
+            >
+              <IFlex
+                align="center"
+                className={styles.header}
+                justify="space-between"
+              >
+                <motion.h2 layout>{title}</motion.h2>
+                <IButton variant="text" wave={false} onClick={onConfirm}>
+                  确定
+                </IButton>
+              </IFlex>
+              <div className={styles.container}>
+                {columns?.map((colum, index) => (
+                  <IWheel
+                    key={index}
+                    options={colum}
+                    value={value?.[index]}
+                    onChange={(val) => {
+                      focus.current = focus.current?.map(
+                        (e, i) => (i === index ? val : e) ?? e
+                      );
+                    }}
+                  />
+                ))}
+                <IPickerMask />
+              </div>
+            </motion.div>
           )}
         </AnimatePresence>
-      </FloatingPortal>
+      </IBackdrop>
     </Fragment>
   );
 };

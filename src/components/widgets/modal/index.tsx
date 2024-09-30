@@ -1,13 +1,11 @@
 import { forwardRef, useImperativeHandle } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence } from 'framer-motion';
 
 import { isTrue, type PlainObject } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 import type { UseFloatingReturn } from '@floating-ui/react';
 import {
   FloatingFocusManager,
-  FloatingPortal,
   useClick,
   useDismiss,
   useFloating,
@@ -17,9 +15,9 @@ import {
 import { container } from '@/init';
 import type { ReactWrapProps } from '@/models';
 
+import { IBackdrop } from '../backdrop';
 import { IButton } from '../button';
 import { IFlex } from '../flex';
-import { IOverlay } from '../overlay';
 
 import * as styles from './index.scss';
 
@@ -82,53 +80,43 @@ export const IModal = forwardRef<IModalRef, IModalProps>(
     ]);
 
     return (
-      <FloatingPortal root={container}>
-        <AnimatePresence>
-          {context.open && (
-            <IOverlay className={styles.overlay}>
-              <FloatingFocusManager context={context}>
-                <div
-                  ref={refs.setFloating}
-                  className={classNames(styles.wrap, className)}
-                  {...getFloatingProps({ style })}
-                >
-                  {(icon || title) && (
-                    <h2 className={styles.header}>
-                      <IFlex align="center" justify="flex-start">
-                        <span>{icon}</span>
-                        <span>{title}</span>
-                      </IFlex>
-                    </h2>
-                  )}
-                  <div className={styles.close}>
-                    {isTrue(close) ? 'close' : close}
-                  </div>
-                  <div className={styles.content}>{children}</div>
-                  <IFlex
-                    align="center"
-                    className={styles.footer}
-                    justify="flex-end"
-                  >
-                    <IButton
-                      variant="bordered"
-                      onClick={(event) => {
-                        const { nativeEvent } = event;
-                        onCancel?.(event);
-                        context.onOpenChange?.(false, nativeEvent, 'click');
-                      }}
-                    >
-                      {cancelText ?? '取消'}
-                    </IButton>
-                    <IButton variant="filled" onClick={onConfirm}>
-                      {confirmText ?? '确认'}
-                    </IButton>
-                  </IFlex>
-                </div>
-              </FloatingFocusManager>
-            </IOverlay>
-          )}
-        </AnimatePresence>
-      </FloatingPortal>
+      <IBackdrop className={styles.mask} open={context.open} root={container}>
+        <FloatingFocusManager context={context}>
+          <div
+            ref={refs.setFloating}
+            className={classNames(styles.wrap, className)}
+            {...getFloatingProps({ style })}
+          >
+            {(icon || title) && (
+              <h2 className={styles.header}>
+                <IFlex align="center" justify="flex-start">
+                  <span>{icon}</span>
+                  <span>{title}</span>
+                </IFlex>
+              </h2>
+            )}
+            <div className={styles.close}>
+              {isTrue(close) ? 'close' : close}
+            </div>
+            <div className={styles.content}>{children}</div>
+            <IFlex align="center" className={styles.footer} justify="flex-end">
+              <IButton
+                variant="bordered"
+                onClick={(event) => {
+                  const { nativeEvent } = event;
+                  onCancel?.(event);
+                  context.onOpenChange?.(false, nativeEvent, 'click');
+                }}
+              >
+                {cancelText ?? '取消'}
+              </IButton>
+              <IButton variant="filled" onClick={onConfirm}>
+                {confirmText ?? '确认'}
+              </IButton>
+            </IFlex>
+          </div>
+        </FloatingFocusManager>
+      </IBackdrop>
     );
   }
 );

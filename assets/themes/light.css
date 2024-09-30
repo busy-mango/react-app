@@ -172,7 +172,7 @@
   /* 主题色 - 默认 */
   --primary-color: rgb(var(--blue-color-500) / 1);
   /* 主题色 - 悬浮态 */
-  --primary-color-hover: rgb(var(--blue-color-600) / 1);
+  --primary-color-hover: rgb(var(--blue-color-400) / 1);
   /* 主题色 - 激活态 */
   --primary-color-active: rgb(var(--blue-color-600) / 1);
   /* 主题色 - 禁用态 */
@@ -267,7 +267,7 @@
   /* 背景色 - 浮层 */
   --bg-color-float: rgb(var(--gray-color-025) / 0.9);
   /* 背景色 - 滑块 */
-  --bg-color-thumb: rgb(var(--gray-color-000) / 1);
+  --bg-color-thumb: rgb(var(--gray-color-000) / 0.9);
 
   /* 背景色 - 强调 */
   --bg-color-info: rgb(var(--blue-color-050) / 1);
@@ -305,7 +305,7 @@
   /* 字体颜色 - 成功 */
   --font-color-success: rgb(var(--green-color-700) / 1);
   /* 字体颜色 - 禁用 */
-  --font-color-disabled: rgb(var(--gray-color-600) / 0.9);
+  --font-color-disabled: rgb(var(--gray-color-500) / 0.7);
   /* 字体颜色 - 高亮 */
   --font-color-highlight: rgb(var(--blue-color-600) / 1);
 

@@ -2,6 +2,8 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { ifnot } from '@busymango/utils';
+
 import { useEventState } from '@/hooks';
 
 import { useIFieldGridContext } from '../form-field/hooks';
@@ -76,7 +78,7 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
               className={classNames(styles.iconWrap, {
                 [styles.clickable]: isPrefixClickable,
               })}
-              onClick={onPrefixClick}
+              onClick={ifnot(isPrefixClickable && onPrefixClick)}
             >
               {prefix}
             </ISVGWrap>
@@ -91,7 +93,7 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
               className={classNames(styles.iconWrap, {
                 [styles.clickable]: isSuffixClickable,
               })}
-              onClick={onSuffixClick}
+              onClick={ifnot(isSuffixClickable && onSuffixClick)}
             >
               {isLoading ? <ISpinner /> : suffix}
             </ISVGWrap>

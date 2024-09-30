@@ -2,6 +2,7 @@
  * @description UI组件
  */
 
+export * from './backdrop';
 export * from './button';
 export * from './checkbox';
 export * from './chip';
@@ -17,7 +18,6 @@ export * from './marker';
 export * from './modal';
 export * from './motion-panel';
 export * from './overflow';
-export * from './overlay';
 export * from './picker';
 export * from './popover';
 export * from './radio';

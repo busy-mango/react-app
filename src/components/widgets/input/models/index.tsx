@@ -4,9 +4,10 @@ import type { ReactInputProps } from '@/models';
 
 import type { ControlPattern, ControlValue } from '../../control';
 
-export interface IInputProps extends OmitOf<ReactInputProps, 'value'> {
+export interface IInputProps
+  extends OmitOf<ReactInputProps, 'value' | 'width'> {
   /** 控件是否跟随文本宽度 */
-  autoSize?: boolean;
+  width?: React.CSSProperties['width'];
   /** 控件值 */
   value?: ControlValue;
   /** 控件交互模式 */

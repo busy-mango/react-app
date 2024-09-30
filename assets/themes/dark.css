@@ -176,7 +176,7 @@
   /* 主题色 - 激活态 */
   --primary-color-active: rgb(var(--blue-color-600) / 1);
   /* 主题色 - 禁用态 */
-  --primary-color-disabled: rgb(var(--blue-color-200) / 0.4);
+  --primary-color-disabled: rgb(var(--blue-color-300) / 0.8);
 
   /* 次要颜色 - 默认 */
   --secondary-color: rgb(var(--dodger-color-500) / 1);
@@ -267,7 +267,7 @@
   /* 背景色 - 浮层 */
   --bg-color-float: rgb(var(--gray-color-025) / 0.9);
   /* 背景色 - 滑块 */
-  --bg-color-thumb: rgb(var(--gray-color-900) / 1);
+  --bg-color-thumb: rgb(var(--gray-color-900) / 0.9);
 
   /* 背景色 - 强调 */
   --bg-color-info: rgb(var(--blue-color-050) / 1);

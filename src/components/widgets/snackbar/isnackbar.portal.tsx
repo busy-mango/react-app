@@ -8,7 +8,6 @@ import { container } from '@/init';
 import type { ReactCFC } from '@/models';
 
 import { IFlex } from '../flex';
-import { IOverlay } from '../overlay';
 import { useSnackbars } from './hooks';
 import { ISnackbar } from './isnackbar';
 
@@ -29,21 +28,19 @@ export const ISnackbarPortal: ReactCFC<{
 
   return (
     <FloatingPortal root={container}>
-      <IOverlay className={styles.overlay}>
-        <IFlex vertical align="center" className={styles.container}>
-          <MotionConfig reducedMotion="never">
-            <AnimatePresence mode="popLayout">
-              {useDeferredValue(snackbars).map((rect, index) => (
-                <ISnackbar
-                  {...rect}
-                  key={rect.id}
-                  style={{ zIndex: -1 * index }}
-                />
-              ))}
-            </AnimatePresence>
-          </MotionConfig>
-        </IFlex>
-      </IOverlay>
+      <IFlex vertical align="center" className={styles.container}>
+        <MotionConfig reducedMotion="never">
+          <AnimatePresence mode="popLayout">
+            {useDeferredValue(snackbars).map((rect, index) => (
+              <ISnackbar
+                {...rect}
+                key={rect.id}
+                style={{ zIndex: -1 * index }}
+              />
+            ))}
+          </AnimatePresence>
+        </MotionConfig>
+      </IFlex>
     </FloatingPortal>
   );
 };

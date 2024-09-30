@@ -88,7 +88,7 @@ const iScrollableRender: ISelectorScrollableRender = ({
 );
 
 const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
-  <IInput autoSize {...props} pattern={pattern} />
+  <IInput width="auto" {...props} pattern={pattern} />
 );
 
 const iRootRender: ISelectorRootRender = (

@@ -1,7 +1,5 @@
-.overlay {
-  display: grid;
-  place-items: center;
-  background-color: rgb(0 0 0 / 0.5);
+.mask {
+  z-index: var(--z-index-modal);
 
   & > .wrap {
     min-width: 80vw;

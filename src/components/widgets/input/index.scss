@@ -27,6 +27,10 @@
     -webkit-background-clip: text;
   }
 
+  &.consistent {
+    min-width: 11em;
+  }
+
   &.editable,
   &.disabled,
   &.read-only,

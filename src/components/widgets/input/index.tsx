@@ -1,19 +1,11 @@
-import {
-  forwardRef,
-  Fragment,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from 'react';
+import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 
-import { assign, ifnot, sizeOf } from '@busymango/utils';
-
-import { iComposingParams, useEventState, useResizeObserver } from '@/hooks';
+import { iComposingParams, useEventState } from '@/hooks';
 import { iPressEvent } from '@/utils';
 
 import { onInputCatch, useControlState, usePatternAssert } from '../control';
-import { iTextSize } from './helpers';
+import { useWidth } from './hooks';
 import type { IInputProps } from './models';
 
 import * as iStyles from '@/styles/widgets.scss';
@@ -23,7 +15,7 @@ export const IInput = forwardRef<HTMLInputElement, IInputProps>(
   function Input(props, ref) {
     const {
       style,
-      autoSize,
+      width,
       className,
       placeholder,
       defaultValue,
@@ -35,15 +27,20 @@ export const IInput = forwardRef<HTMLInputElement, IInputProps>(
       ...others
     } = props;
 
-    const record = useRef<string | null>(null);
+    const assert = usePatternAssert(pattern);
 
     const target = useRef<HTMLInputElement>(null);
 
     const shadow = useRef<HTMLInputElement>(null);
 
-    const assert = usePatternAssert(pattern);
-
     const { isReadOnly, isDisabled, isReadPretty } = assert;
+
+    const iWidth = useWidth({
+      width,
+      shadow,
+      target,
+      isReadPretty,
+    });
 
     const isComposing = useEventState(iComposingParams(target));
 
@@ -57,34 +54,21 @@ export const IInput = forwardRef<HTMLInputElement, IInputProps>(
       { isComposing }
     );
 
-    useResizeObserver(shadow, () => {
-      const { current: iInput } = target;
-      const { current: iShadow } = shadow;
-
-      if (iInput && iShadow) {
-        const width = `${iTextSize(iInput, iShadow)}px`;
-        if (record.current !== width) iInput.style.width = width;
-        if (record.current !== width) record.current = width;
-      }
-    });
-
-    // const clear = useMemoFunc(() => {
-    //   // https://github.com/ant-design/ant-design-mobile/issues/5212
-    //   if (target.current && isIOS() && isComposing) {
-    //     onClear?.();
-    //   }
-    // });
-
-    const width = ifnot((autoSize || isReadPretty) && `${sizeOf(value)}em`);
-
     useImperativeHandle(ref, () => target.current!, [target]);
 
     return (
       <Fragment>
         <input
           ref={target}
-          className={classNames(styles.input, styles[pattern], className)}
-          style={useMemo(() => assign(style ?? {}, { width }), [style, width])}
+          className={classNames(
+            styles.input,
+            styles[pattern],
+            {
+              [styles.consistent]: iWidth === 'default',
+            },
+            className
+          )}
+          style={{ width: iWidth, ...style }}
           onClick={props.onClick}
           onKeyDown={iPressEvent(onPressEnter, onKeyDown)}
           {...others}

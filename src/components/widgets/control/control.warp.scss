@@ -19,6 +19,8 @@
 
   &:not(.read-pretty) {
     width: 100%;
+    border-width: 1px;
+    border-style: solid;
     border-radius: var(--border-radius-03);
 
     /** size */
@@ -81,6 +83,7 @@
   }
 }
 .filled {
+  border-color: transparent;
   &.disabled {
     background-color: var(--natural-color-disabled);
   }
@@ -98,13 +101,9 @@
   }
 }
 .standard {
+  border-color: transparent;
 }
 .bordered {
-  &:not(.read-pretty) {
-    border-width: 1px;
-    border-style: solid;
-  }
-
   &.disabled {
     border-color: var(--border-color-disabled);
     background-color: var(--natural-color-disabled);
