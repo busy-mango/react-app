@@ -3,7 +3,7 @@ import { t } from 'i18next';
 import { isString, isValidKey } from '@busymango/is-esm';
 import { iCSSVariable } from '@busymango/utils';
 
-import { container } from '@/init';
+import { iThemeRoot } from '@/init';
 
 /**
  * 获取主题样式标签
@@ -25,8 +25,7 @@ export const iThemeSheet = () => {
  * 获取默认主题样式
  */
 export const iThemeDefault = <T extends string = string>() => {
-  const html = document.querySelector('html');
-  const style = html && getComputedStyle(html);
+  const style = getComputedStyle(iThemeRoot);
   if (style && isValidKey('color-scheme', style, isString)) {
     return style['color-scheme'];
   }
@@ -37,6 +36,4 @@ export const iThemeDefault = <T extends string = string>() => {
 };
 
 export const iThemeVariable = (name: keyof React.CSSVarProps) =>
-  iCSSVariable(name, {
-    element: container,
-  });
+  iCSSVariable(name, { element: iThemeRoot });

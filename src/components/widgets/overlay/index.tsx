@@ -1,9 +1,3 @@
-// ┌────────────────────────────────── Note ────────────────────────────────────┐
-// │ Provides base styling for a fixed overlay element to dim content or block. │
-// │                  pointer events behind a floating element.                 │
-// │It's a regular `<div>`, so it can be styled via any CSS solution you prefer.│
-// └────────────────────────────────────────────────────────────────────────────┘
-
 import { forwardRef, useId, useLayoutEffect } from 'react';
 import classNames from 'classnames';
 import type { HTMLMotionProps } from 'framer-motion';

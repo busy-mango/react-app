@@ -24,6 +24,11 @@
   border-color: currentColor;
 }
 
+.content {
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
 .info {
   color: var(--font-color-info);
 

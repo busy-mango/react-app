@@ -8,7 +8,7 @@ import { t } from 'i18next';
 import { isCSSStyleRule, isCSSStyleSheet, isNil } from '@busymango/is-esm';
 import { useMutation } from '@tanstack/react-query';
 
-import { container } from '@/init';
+import { iThemeRoot } from '@/init';
 import { drive } from '@/service';
 import { iThemeDefault, iThemeSheet } from '@/utils';
 
@@ -42,10 +42,10 @@ export default function useMutateTheme<T extends string = string>() {
   useEffect(() => {
     if (isNil(classname)) return;
 
-    container.classList.add(classname);
+    iThemeRoot.classList.add(classname);
 
     return () => {
-      container.classList.remove(classname);
+      iThemeRoot.classList.remove(classname);
     };
   }, [classname]);
 

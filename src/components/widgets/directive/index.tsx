@@ -9,6 +9,7 @@ import type { ReactCFC } from '@/models';
 import { isReactNode } from '@/utils';
 
 import { ISVGWrap } from '../svg-wrap';
+import { animate, initial, transition } from './helpers';
 
 import * as styles from './index.scss';
 
@@ -42,12 +43,13 @@ export const IDirective: ReactCFC<IDirectiveProps> = forwardRef<
   return (
     <motion.div
       ref={target}
-      animate={{ height: 'auto' }}
+      animate={animate}
       className={classNames(styles.wrap, styles[status], styles[variant], {
         [styles.withIcon]: icon && isReactNode(icon),
       })}
-      exit={{ height: 0 }}
-      initial={{ height: 0 }}
+      exit={initial}
+      initial={initial}
+      transition={transition}
     >
       <div className={styles.icon}>{icon && <ISVGWrap>{icon}</ISVGWrap>}</div>
       <div className={styles.article}>
@@ -55,7 +57,7 @@ export const IDirective: ReactCFC<IDirectiveProps> = forwardRef<
           {title}
           {extra}
         </div>
-        <div>{children}</div>
+        <p className={styles.content}>{children}</p>
       </div>
     </motion.div>
   );

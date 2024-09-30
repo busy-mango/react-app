@@ -1,4 +1,4 @@
-#root.light {
+:root.light {
   --orange-color-050: 255 247 237;
   --orange-color-100: 255 242 224;
   --orange-color-200: 255 226 189;
@@ -170,11 +170,11 @@
   --gray-color-1000: 0 0 0;
 
   /* 主题色 - 默认 */
-  --primary-color: rgb(var(--blue-color-600) / 1);
+  --primary-color: rgb(var(--blue-color-500) / 1);
   /* 主题色 - 悬浮态 */
-  --primary-color-hover: rgb(var(--blue-color-500) / 1);
+  --primary-color-hover: rgb(var(--blue-color-600) / 1);
   /* 主题色 - 激活态 */
-  --primary-color-active: rgb(var(--blue-color-700) / 1);
+  --primary-color-active: rgb(var(--blue-color-600) / 1);
   /* 主题色 - 禁用态 */
   --primary-color-disabled: rgb(var(--blue-color-200) / 1);
 
@@ -224,11 +224,11 @@
   --success-color-disabled: rgb(var(--green-color-200) / 1);
 
   /* 危险色 - 默认 */
-  --danger-color: rgb(var(--red-color-500) / 1);
+  --danger-color: rgb(var(--red-color-600) / 1);
   /* 危险色 - 悬浮态 */
-  --danger-color-hover: rgb(var(--red-color-400) / 1);
+  --danger-color-hover: rgb(var(--red-color-500) / 0.9);
   /* 危险色 - 激活态 */
-  --danger-color-active: rgb(var(--red-color-600) / 1);
+  --danger-color-active: rgb(var(--red-color-500) / 1);
   /* 危险色 - 禁用态 */
   --danger-color-disabled: rgb(var(--red-color-200) / 1);
 
@@ -301,7 +301,7 @@
   /* 字体颜色 - 警告 */
   --font-color-warn: rgb(var(--orange-color-600) / 1);
   /* 字体颜色 - 危险 */
-  --font-color-danger: rgb(var(--red-color-700) / 1);
+  --font-color-danger: rgb(var(--red-color-600) / 1);
   /* 字体颜色 - 成功 */
   --font-color-success: rgb(var(--green-color-700) / 1);
   /* 字体颜色 - 禁用 */
@@ -336,7 +336,7 @@
   --shadow-24: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 
-#root.light {
+:root.light {
   --z-index-fixed: 990;
   --z-index-dropdown: 998;
   --z-index-tip: 999;
@@ -351,7 +351,7 @@
 
 /* PC */
 @media screen and (min-width: 1360px) {
-  #root {
+  :root {
     --gap-00: 0px;
     --gap-01: 2px;
     --gap-02: 4px;
@@ -392,7 +392,7 @@
 
 /* iPad */
 @media screen and (min-width: 430px) and (max-width: 1360px) {
-  #root {
+  :root {
     --gap-00: 0px;
     --gap-01: 2px;
     --gap-02: 4px;
@@ -435,7 +435,7 @@
 
 /* iPhone */
 @media screen and (max-width: 430px) {
-  #root {
+  :root {
     --gap-00: 0vw;
     --gap-01: calc(2vw / 3.75);
     --gap-02: calc(4vw / 3.75);

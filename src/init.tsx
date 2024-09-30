@@ -52,20 +52,21 @@ export const env = {
 /** 检查环境变量是否填写 */
 Object.entries(omit(env, ['version'])).forEach(([key, val]) => {
   if (!isString(val)) {
-    console.error(t('common:Environment variables not found'));
+    console.error(key, t('common:Environment variables not found'));
   }
 });
 
 const existing = document.querySelector(`#${env.root}`);
 
-const attrs = { id: env.root, classNames: iThemeDefault() };
+/** 文档根节点：通常是HTML元素 */
+export const { documentElement: iThemeRoot } = document;
+
+document.documentElement.classList.add(iThemeDefault());
 
 /** 创建应用容器 */
 export const container =
   ifnot(isHTMLElement(existing) && existing) ??
-  dom.create('div', attrs, document.body);
-
-container.classList.add(iThemeDefault());
+  dom.create('div', { id: env.root }, document.body);
 
 export const i18nInit = async () => {
   const ns: InitOptions['ns'] = ['common'];
