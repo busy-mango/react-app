@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import type { Target } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
 
 import { compact, FRAME2MS } from '@busymango/utils';
@@ -12,10 +11,6 @@ import { iThemeVariable } from '@/utils';
 import type { IWaveProps, IWaveWrapProps } from './models';
 
 import * as styles from './index.scss';
-
-const initial: Target = {
-  boxShadow: `0 0 0 4px ${iThemeVariable(`--wave-color-0`)}`,
-};
 
 export const IWave: React.FC<IWaveProps> = (props) => {
   const { className, target, measure, placeholder, ...others } = props;
@@ -78,7 +73,14 @@ export const IWave: React.FC<IWaveProps> = (props) => {
         className={classNames(styles.wave, className)}
         {...others}
       />
-      {placeholder && <motion.div className={styles.wave} initial={initial} />}
+      {placeholder && (
+        <motion.div
+          className={styles.wave}
+          initial={{
+            boxShadow: `0 0 0 4px ${iThemeVariable(`--wave-color-0`)}`,
+          }}
+        />
+      )}
     </Fragment>
   );
 };

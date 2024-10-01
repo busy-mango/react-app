@@ -10,7 +10,7 @@ import i18n, { t } from 'i18next';
 import { isHTMLElement, isString } from '@busymango/is-esm';
 import { dom, ifnot, omit } from '@busymango/utils';
 
-import { iThemeDefault } from './utils';
+import { iThemeDefault, iThemeRoot } from './utils';
 
 import 'dayjs/locale/zh-cn';
 
@@ -56,12 +56,9 @@ Object.entries(omit(env, ['version'])).forEach(([key, val]) => {
   }
 });
 
+iThemeRoot.classList.add(iThemeDefault());
+
 const existing = document.querySelector(`#${env.root}`);
-
-/** 文档根节点：通常是HTML元素 */
-export const { documentElement: iThemeRoot } = document;
-
-document.documentElement.classList.add(iThemeDefault());
 
 /** 创建应用容器 */
 export const container =

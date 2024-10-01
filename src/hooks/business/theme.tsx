@@ -8,9 +8,8 @@ import { t } from 'i18next';
 import { isCSSStyleRule, isCSSStyleSheet, isNil } from '@busymango/is-esm';
 import { useMutation } from '@tanstack/react-query';
 
-import { iThemeRoot } from '@/init';
 import { drive } from '@/service';
-import { iThemeDefault, iThemeSheet } from '@/utils';
+import { iThemeDefault, iThemeRoot, iThemeSheet } from '@/utils';
 
 /**
  * 动态主题

@@ -3,7 +3,8 @@ import { t } from 'i18next';
 import { isString, isValidKey } from '@busymango/is-esm';
 import { iCSSVariable } from '@busymango/utils';
 
-import { iThemeRoot } from '@/init';
+/** 文档根节点：通常是HTML元素 */
+export const { documentElement: iThemeRoot } = document;
 
 /**
  * 获取主题样式标签

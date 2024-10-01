@@ -35,7 +35,7 @@ export default defineConfig({
   logo: '/mango.png',
   logoText: 'react-app',
   plugins: [pluginPreview()],
-  globalUIComponents: [join(dir.docs, 'effects.tsx')],
+  globalStyles: join(dir.docs, 'index.css'),
   route: { exclude: ['utils/**/*', 'widgets/**/*'] },
   builderConfig: {
     source: {

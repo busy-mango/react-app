@@ -7,6 +7,8 @@ import { VariantControl } from '@examples/widgets';
 import type { IControlWrapProps } from '@/components';
 import { IControlWrap, IFlex, IInput, ISignLine } from '@/components';
 
+import AccountSVG from '@/icons/account.svg?react';
+
 type InputStore = {
   text?: string | null;
   clear?: () => void;
@@ -42,6 +44,8 @@ const App: React.FC = () => {
 
   return (
     <VariantControl
+      sizeable
+      statusable
       variants={
         [
           'bordered',
@@ -50,10 +54,13 @@ const App: React.FC = () => {
         ] satisfies IControlWrapProps['variant'][]
       }
     >
-      {({ variant }) => (
+      {({ size, status, variant }) => (
         <IFlex>
           <IControlWrap
             isSuffixClickable={closeable}
+            prefix={<AccountSVG />}
+            size={size}
+            status={status}
             suffix={
               <ISignLine
                 animate={{ opacity: closeable ? 1 : 0 }}
