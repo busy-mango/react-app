@@ -83,17 +83,18 @@ export function iCenter(container?: ReactTargetType) {
  */
 export function isCentered(target?: unknown, parent?: unknown) {
   if (isHTMLElement(target) && isHTMLElement(parent)) {
-    const { x, y } = iCenter(parent);
     const {
       offsetTop = 0,
       offsetLeft = 0,
       offsetWidth = 0,
       offsetHeight = 0,
     } = target;
+
+    const { x, y } = iCenter(parent);
     const offsetRight = offsetLeft + offsetWidth;
     const offsetBottom = offsetTop + offsetHeight;
     return (
-      offsetTop < y && offsetBottom > y && offsetLeft < x && offsetRight > x
+      offsetTop <= y && offsetBottom >= y && offsetLeft <= x && offsetRight >= x
     );
   }
   return false;

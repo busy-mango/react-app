@@ -199,6 +199,7 @@ type CSSVarModel = {
   '--bg-color-tip'?: string;
   '--bg-color-float'?: string;
   '--bg-color-thumb'?: string;
+  '--bg-color-info'?: string;
   '--bg-color-danger'?: string;
   '--bg-color-warn'?: string;
   '--bg-color-success'?: string;
@@ -214,12 +215,17 @@ type CSSVarModel = {
   '--font-color-8'?: string;
   '--font-color-10'?: string;
   '--font-color-b8'?: string;
+  '--font-color-info'?: string;
   '--font-color-warn'?: string;
   '--font-color-danger'?: string;
   '--font-color-success'?: string;
   '--font-color-disabled'?: string;
   '--font-color-highlight'?: string;
   '--icon-color'?: string;
+  '--icon-color-info'?: string;
+  '--icon-color-warn'?: string;
+  '--icon-color-danger'?: string;
+  '--icon-color-success'?: string;
   '--wave-color-0'?: string;
   '--wave-color-1'?: string;
   '--wave-color-2'?: string;

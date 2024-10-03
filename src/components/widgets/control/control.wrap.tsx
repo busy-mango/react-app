@@ -75,7 +75,7 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
         <AnimatePresence>
           {prefix ? (
             <ISVGWrap
-              className={classNames(styles.iconWrap, {
+              className={classNames(styles.iconWrap, styles.prefix, {
                 [styles.clickable]: isPrefixClickable,
               })}
               onClick={ifnot(isPrefixClickable && onPrefixClick)}
@@ -88,17 +88,15 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
         </AnimatePresence>
         {children}
         <AnimatePresence>
-          {isLoading || suffix ? (
+          {(isLoading || suffix) && (
             <ISVGWrap
-              className={classNames(styles.iconWrap, {
+              className={classNames(styles.iconWrap, styles.suffix, {
                 [styles.clickable]: isSuffixClickable,
               })}
               onClick={ifnot(isSuffixClickable && onSuffixClick)}
             >
               {isLoading ? <ISpinner /> : suffix}
             </ISVGWrap>
-          ) : (
-            <span />
           )}
         </AnimatePresence>
       </motion.div>

@@ -2,6 +2,8 @@ import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 
+import type { ReactRender, ReactTargetType, ReactWrapProps } from '@/models';
+
 import type { ControlOption } from '../../control';
 
 export interface IWheelOptionProps {
@@ -15,16 +17,27 @@ export interface IWheelProps {
   onChange?: (value?: ControlOption['value']) => void;
 }
 
+interface IPickerState {
+  open: boolean;
+}
+
+export type IPickerRootRender = ReactRender<ReactWrapProps, IPickerState>;
+
 export interface IPickerProps
   extends OmitOf<
     HTMLMotionProps<'div'>,
     'title' | 'onChange' | 'defaultValue'
   > {
   open?: boolean;
+  root?: ReactTargetType;
+  title?: React.ReactNode;
   initialOpen?: boolean;
   defaultValue?: ControlOption['value'][];
   value?: ControlOption['value'][];
   columns?: ControlOption[][];
+  render?: {
+    root?: IPickerRootRender;
+  };
   onChange?: (value?: ControlOption['value'][]) => void;
   onOpenChange?: (open?: boolean) => void;
 }

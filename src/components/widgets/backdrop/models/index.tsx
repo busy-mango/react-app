@@ -1,6 +1,7 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
-import type { ReactTargetType } from '@/models';
+import type { OmitOf } from '@busymango/utils';
+import type { FloatingPortalProps } from '@floating-ui/react';
 
 export interface IOverlayProps extends HTMLMotionProps<'div'> {
   /**
@@ -10,10 +11,8 @@ export interface IOverlayProps extends HTMLMotionProps<'div'> {
   scroll?: boolean;
 }
 
-export interface IBackdropProps extends IOverlayProps {
+export interface IBackdropProps
+  extends IOverlayProps,
+    OmitOf<FloatingPortalProps, 'children'> {
   open?: boolean;
-  /**
-   * 浮层默认渲染到 root 上，也可以使用此方法指定根节点。
-   */
-  root?: ReactTargetType;
 }

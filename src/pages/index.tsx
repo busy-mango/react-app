@@ -4,7 +4,7 @@
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import { IChip, IPicker, ISafeArea, snackbar } from '@/components';
+import { IChip, ISafeArea, snackbar } from '@/components';
 import { useEffectOnce } from '@/hooks';
 
 import * as styles from './index.scss';
@@ -31,19 +31,6 @@ const Welcome: React.FC = () => {
 
   return (
     <ISafeArea className={styles.page}>
-      <IPicker
-        columns={[
-          [
-            { value: 1, label: '213' },
-            { value: 2, label: '213' },
-            { value: 3, label: '213' },
-            { value: 4, label: '213' },
-            { value: 5, label: '213' },
-            { value: 6, label: '213' },
-            { value: 7, label: '213' },
-          ],
-        ]}
-      />
       <div className={styles.area}>{t('common:Confirm')}</div>
       <div className={styles.area}>{t('common:Confirm')}</div>
     </ISafeArea>

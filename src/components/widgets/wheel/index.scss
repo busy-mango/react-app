@@ -1,0 +1,45 @@
+.focus {
+  color: var(--primary-color-active);
+}
+
+.option {
+  width: 100%;
+  height: var(--control-size-07);
+
+  position: relative;
+
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  // scroll-snap-stop: normal;
+  // scroll-snap-align: center;
+
+  // transform-style: preserve-3d;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  transform-style: preserve-3d;
+  scroll-behavior: smooth;
+
+  // scroll-snap-type: y mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
