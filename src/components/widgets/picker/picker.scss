@@ -28,6 +28,7 @@
 .header {
   width: 100%;
   box-sizing: border-box;
+  min-height: var(--control-size-07);
 
   & > h2 {
     padding: 0 var(--gap-05);

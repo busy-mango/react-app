@@ -4,7 +4,7 @@ import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 
-import type { ReactInputProps } from '@/models';
+import type { ReactInputProps, ReactRender } from '@/models';
 
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';
@@ -47,20 +47,37 @@ export interface InteractionProps {
 
 export type IControlVariant = 'filled' | 'standard' | 'bordered';
 
-export interface IControlWrapProps
-  extends React.PropsWithChildren,
-    OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'children'> {
-  status?: ControlUIStatus;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+export type IControlWrapState = {
   size?: ControlUISize;
+  status?: ControlUIStatus;
   pattern?: ControlPattern;
+  isFocus?: boolean;
   isLoading?: boolean;
   isFocusWithin?: boolean;
   isPrefixClickable?: boolean;
   isSuffixClickable?: boolean;
-  /** 变体 */
   variant?: IControlVariant;
+};
+
+export type IControlWrapRootRender = ReactRender<
+  OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'children'> & {
+    ref: React.RefObject<HTMLDivElement>;
+    prefix: React.ReactNode;
+    suffix: React.ReactNode;
+    children?: React.ReactNode;
+  },
+  IControlWrapState
+>;
+
+export interface IControlWrapProps
+  extends React.PropsWithChildren,
+    OmitOf<IControlWrapState, 'isFocus'>,
+    OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'children'> {
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
+  render?: {
+    root?: IControlWrapRootRender;
+  };
   onPrefixClick?: React.MouseEventHandler<HTMLDivElement>;
   onSuffixClick?: React.MouseEventHandler<HTMLDivElement>;
 }

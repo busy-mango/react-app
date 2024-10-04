@@ -15,13 +15,36 @@
 
   font-size: inherit;
 
-  caret-color: rgb(var(--main-color));
+  caret-color: var(--primary-color);
 
   &::placeholder {
-    color: rgb(0 0 0 / 0.45);
+    color: var(--font-color-4);
   }
 
   &:-webkit-autofill {
     -webkit-background-clip: text;
+  }
+
+  &::-webkit-resizer {
+    opacity: 0;
+    background-color: inherit;
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background-color: transparent;
+    border-radius: var(--border-radius-10);
+  }
+
+  &:active {
+    /* 拖拽时的背景色 */
+    background-color: var(--fill-color-active);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-10);
+    background-color: var(--bg-color-thumb);
+    box-shadow: var(--shadow-02);
   }
 }

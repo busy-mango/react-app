@@ -10,10 +10,27 @@ import { useIFieldGridContext } from '../form-field/hooks';
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
-import { usePatternAssert } from './hooks';
-import type { IControlWrapProps } from './models';
+import type {
+  IControlWrapProps,
+  IControlWrapRootRender,
+  IControlWrapState,
+} from './models';
 
 import * as styles from './control.warp.scss';
+
+const iRootRender: IControlWrapRootRender = (
+  { ref, prefix, suffix, children, ...others },
+  { variant, pattern, isFocus }
+) => (
+  <motion.div ref={ref} data-ui-control-wrap {...others}>
+    {pattern === 'editable' && variant === 'bordered' && (
+      <IWave placeholder={variant === 'bordered' && isFocus} target={ref} />
+    )}
+    {prefix}
+    {children}
+    {suffix}
+  </motion.div>
+);
 
 export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
   function IControlWrap(props, ref) {
@@ -34,12 +51,11 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
       size = ctx?.size ?? 'medium',
       onSuffixClick,
       onPrefixClick,
+      render,
       ...others
     } = props;
 
     const target = useRef<HTMLDivElement>(null);
-
-    const { isEditable } = usePatternAssert(pattern);
 
     useImperativeHandle(ref, () => target.current!, [target]);
 
@@ -49,11 +65,23 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
       start: 'focusin',
     });
 
-    return (
-      <motion.div
-        ref={target}
-        data-ui-control-wrap
-        className={classNames(
+    const states: IControlWrapState = {
+      size,
+      status,
+      pattern,
+      isFocus,
+      isLoading,
+      isFocusWithin,
+      isPrefixClickable,
+      isSuffixClickable,
+      variant,
+    };
+
+    return (render?.root ?? iRootRender)(
+      {
+        children,
+        ref: target,
+        className: classNames(
           styles.wrap,
           styles[size],
           styles[status],
@@ -63,43 +91,40 @@ export const IControlWrap = forwardRef<HTMLDivElement, IControlWrapProps>(
             [styles.focus]: isFocusWithin,
           },
           className
-        )}
-        {...others}
-      >
-        {isEditable && variant === 'bordered' && (
-          <IWave
-            placeholder={variant === 'bordered' && isFocus}
-            target={target}
-          />
-        )}
-        <AnimatePresence>
-          {prefix ? (
-            <ISVGWrap
-              className={classNames(styles.iconWrap, styles.prefix, {
-                [styles.clickable]: isPrefixClickable,
-              })}
-              onClick={ifnot(isPrefixClickable && onPrefixClick)}
-            >
-              {prefix}
-            </ISVGWrap>
-          ) : (
-            <span />
-          )}
-        </AnimatePresence>
-        {children}
-        <AnimatePresence>
-          {(isLoading || suffix) && (
-            <ISVGWrap
-              className={classNames(styles.iconWrap, styles.suffix, {
-                [styles.clickable]: isSuffixClickable,
-              })}
-              onClick={ifnot(isSuffixClickable && onSuffixClick)}
-            >
-              {isLoading ? <ISpinner /> : suffix}
-            </ISVGWrap>
-          )}
-        </AnimatePresence>
-      </motion.div>
+        ),
+        prefix: (
+          <AnimatePresence>
+            {prefix ? (
+              <ISVGWrap
+                className={classNames(styles.iconWrap, styles.prefix, {
+                  [styles.clickable]: isPrefixClickable,
+                })}
+                onClick={ifnot(isPrefixClickable && onPrefixClick)}
+              >
+                {prefix}
+              </ISVGWrap>
+            ) : (
+              <span />
+            )}
+          </AnimatePresence>
+        ),
+        suffix: (
+          <AnimatePresence>
+            {(isLoading || suffix) && (
+              <ISVGWrap
+                className={classNames(styles.iconWrap, styles.suffix, {
+                  [styles.clickable]: isSuffixClickable,
+                })}
+                onClick={ifnot(isSuffixClickable && onSuffixClick)}
+              >
+                {isLoading ? <ISpinner /> : suffix}
+              </ISVGWrap>
+            )}
+          </AnimatePresence>
+        ),
+        ...others,
+      },
+      states
     );
   }
 );

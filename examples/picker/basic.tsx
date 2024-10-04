@@ -27,6 +27,10 @@ const App: React.FC = () => {
           width: 375,
           height: 667,
           position: 'relative',
+          margin: iThemeVariable('--gap-02'),
+          padding: iThemeVariable('--gap-04'),
+          boxShadow: iThemeVariable('--shadow-06'),
+          borderRadius: iThemeVariable('--border-radius-03'),
           backgroundColor: iThemeVariable('--bg-color-normal'),
         }}
       >
