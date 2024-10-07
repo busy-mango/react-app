@@ -13,6 +13,7 @@ import { useControlState } from '../control';
 import {
   identified,
   iScrollIntoView,
+  isSupportSnape,
   iTarget,
   WHEEL_ITEM_ID_NAME,
 } from './helpers';
@@ -62,7 +63,7 @@ const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
 };
 
 export const IWheel: React.FC<IWheelProps> = (props) => {
-  const { options } = props;
+  const { options, isScrollSnape = isSupportSnape() } = props;
 
   const view = useRef<string>();
 
@@ -81,11 +82,11 @@ export const IWheel: React.FC<IWheelProps> = (props) => {
         iScrollIntoView(element);
       }
     }
-  }, 10 * FRAME2MS);
+  }, 0);
 
   useEffect(() => {
     const { current } = container;
-    if (current) {
+    if (current && !isScrollSnape) {
       const { starer, cancel } = iEventListener;
       current?.addEventListener('scrollend', starer);
       return () => {
@@ -93,7 +94,7 @@ export const IWheel: React.FC<IWheelProps> = (props) => {
         current?.removeEventListener('scrollend', starer);
       };
     }
-  }, [container, iEventListener]);
+  }, [container, iEventListener, isScrollSnape]);
 
   const iScroll = useDebounceFunc(() => {
     const index = options?.findIndex((option, index) => {
@@ -124,7 +125,13 @@ export const IWheel: React.FC<IWheelProps> = (props) => {
   );
 
   return (
-    <div ref={container} className={styles.wheel} onScroll={iScroll.starer}>
+    <div
+      ref={container}
+      className={classNames(styles.wheel, {
+        [styles.isScrollSnap]: isScrollSnape,
+      })}
+      onScroll={iScroll.starer}
+    >
       <IWheelOption key={-3} container={container} />
       <IWheelOption key={-2} container={container} />
       <IWheelOption key={-1} container={container} />
@@ -147,15 +154,3 @@ export const IWheel: React.FC<IWheelProps> = (props) => {
     </div>
   );
 };
-
-// useEffect(() => {
-//   const { current } = refs.floating;
-//   if (open && current) {
-//     value?.forEach((e, i) => {
-//       const id = identified(e, i);
-//       const selector = `[${DATA_ID_NAME}="${id}"]`;
-//       const element = current.querySelector(selector);
-//       isHTMLElement(element) && iScrollIntoView(element);
-//     });
-//   }
-// }, [open, value, refs.floating]);

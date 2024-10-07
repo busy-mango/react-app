@@ -1,5 +1,5 @@
 import { isNumber, isString } from '@busymango/is-esm';
-import { compact } from '@busymango/utils';
+import { and, compact } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
 import { iFindElement } from '@/utils';
@@ -47,3 +47,13 @@ export const iScrollIntoView = (target?: ReactTargetType) => {
     inline: 'center',
   });
 };
+
+export const isSupportSnape = () =>
+  and(
+    [
+      ['scroll-snap-type', 'y mandatory'],
+      ['scroll-snap-stop', 'normal'],
+      ['scroll-snap-align', 'center'],
+    ] satisfies [string, string][],
+    (args) => CSS.supports(...args)
+  );

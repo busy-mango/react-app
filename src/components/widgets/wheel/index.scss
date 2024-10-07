@@ -13,10 +13,16 @@
   align-items: center;
   justify-content: center;
 
-  // scroll-snap-stop: normal;
-  // scroll-snap-align: center;
-
   // transform-style: preserve-3d;
+}
+
+.is-scroll-snap {
+  scroll-snap-type: y mandatory;
+
+  & > .option {
+    scroll-snap-stop: normal;
+    scroll-snap-align: center;
+  }
 }
 
 .wheel {
@@ -34,8 +40,6 @@
 
   transform-style: preserve-3d;
   scroll-behavior: smooth;
-
-  // scroll-snap-type: y mandatory;
 
   -webkit-overflow-scrolling: touch;
 

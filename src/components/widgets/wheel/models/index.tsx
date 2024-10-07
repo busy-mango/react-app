@@ -7,6 +7,7 @@ export interface IWheelOptionProps {
 
 export interface IWheelProps {
   options?: ControlOption[];
+  isScrollSnape?: boolean;
   value?: ControlOption['value'];
   onChange?: (value?: ControlOption['value']) => void;
 }
