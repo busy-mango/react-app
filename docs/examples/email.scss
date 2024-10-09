@@ -1,0 +1,14 @@
+.area {
+  display: grid;
+  background-color: var(--bg-color-normal);
+
+  grid-template-rows: max-content minmax(0, 1fr);
+  grid-template-columns: max-content max-content minmax(0, 1fr);
+
+  border: 1px solid var(--border-color-1);
+
+  & > p,
+  & > div {
+    padding: var(--gap-03);
+  }
+}

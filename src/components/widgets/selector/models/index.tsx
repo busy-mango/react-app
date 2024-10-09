@@ -145,18 +145,9 @@ export interface QueryFloatingRootFunc {
 }
 
 export interface ISelectorProps
-  extends Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur' | 'autoFocus'>,
-    OmitOf<ISelectorState, 'isFocus' | 'isHover'>,
-    OmitOf<
-      ReactWrapProps,
-      | 'onChange'
-      | 'defaultValue'
-      | 'onFocus'
-      | 'onBlur'
-      | 'prefix'
-      | 'onScroll'
-      | 'onSelect'
-    >,
+  extends OmitOf<ISelectorState, 'isFocus' | 'isHover'>,
+    OmitOf<ReactWrapProps, 'onFocus' | 'onBlur' | 'prefix' | 'onScroll'>,
+    Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur' | 'autoFocus'>,
     Pick<
       ScrollableProps,
       | 'maxHeight'

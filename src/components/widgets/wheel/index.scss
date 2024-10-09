@@ -6,14 +6,13 @@
   width: 100%;
   height: var(--control-size-07);
 
+  cursor: pointer;
   position: relative;
 
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-
-  // transform-style: preserve-3d;
 }
 
 .is-scroll-snap {

@@ -36,8 +36,8 @@ export default defineConfig({
   logoText: 'react-app',
   plugins: [pluginPreview()],
   globalStyles: join(dir.docs, 'index.css'),
-  globalUIComponents: [join(dir.docs, 'index.tsx')],
-  route: { exclude: ['utils/**/*', 'widgets/**/*'] },
+  globalUIComponents: [join(dir.docs, 'effects.tsx')],
+  route: { exclude: ['utils/**/*', 'widgets/**/*', 'icons/**/*'] },
   builderConfig: {
     source: {
       define: {

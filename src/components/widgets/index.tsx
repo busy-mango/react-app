@@ -24,6 +24,7 @@ export * from './radio';
 export * from './radio-group';
 export * from './safe-area';
 export * from './scrollable';
+export * from './segment';
 export * from './selector';
 export * from './sign';
 export * from './snackbar';

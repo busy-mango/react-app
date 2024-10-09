@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'react';
 
 import type { PlainObject } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
 
 import type { ReactRender, ReactWrapProps } from '@/models';
 
@@ -33,8 +32,7 @@ export interface ScrollableSelectFunc {
   (index: number, value?: React.Key[]): void;
 }
 
-export interface ScrollableProps
-  extends OmitOf<ReactWrapProps, 'onChange' | 'onSelect'> {
+export interface ScrollableProps extends ReactWrapProps {
   /**
    * Whether the floating element has been positioned yet when used inside an Effect (not during render).
    */

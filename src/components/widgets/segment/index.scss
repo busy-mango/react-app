@@ -1,0 +1,27 @@
+.wrap {
+  padding: var(--gap-01);
+  font-size: var(--font-size-03);
+  border-radius: var(--border-radius-03);
+  background-color: var(--bg-color-widgets);
+}
+
+.item {
+  position: relative;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: unset;
+  min-height: var(--control-size-05);
+  padding: var(--gap-01) var(--gap-03);
+}
+
+.thumb {
+  z-index: -1;
+  box-shadow: var(--shadow-03);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: inherit;
+
+  background-color: var(--bg-color-float);
+}

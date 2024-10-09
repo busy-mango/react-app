@@ -33,19 +33,16 @@ const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
     offset: ['end end', 'start start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1, 0.96]);
+  const scaleY = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
 
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [40, 0, -40]);
-
-  const translateZ = useTransform(scrollYProgress, [0, 0.5, 1], [-16, 0, -16]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -15]);
 
   return (
     <motion.div
       ref={target}
       animate={{
-        scale: scale.get(),
+        scaleY: scaleY.get(),
         rotateX: rotateX.get(),
-        translateZ: translateZ.get(),
       }}
       className={classNames(styles.option, isFocus && styles.focus)}
       exit={{ opacity: 0 }}

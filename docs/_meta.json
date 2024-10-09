@@ -5,6 +5,11 @@
     "activeMatch": "^/guides"
   },
   {
+    "text": "示例",
+    "link": "/examples",
+    "activeMatch": "^/examples/"
+  },
+  {
     "text": "主题",
     "link": "/themes",
     "activeMatch": "^/themes/"

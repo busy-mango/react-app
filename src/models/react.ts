@@ -3,6 +3,7 @@
  */
 
 import type { PlainObject } from '@busymango/is-esm';
+import type { OmitOf } from '@busymango/utils';
 
 /** HTML元素尺寸 */
 export type RectSize = {
@@ -44,8 +45,10 @@ export type ReactComponentAsync<T = unknown> = {
 export type ReactCSSColor = React.CSSProperties['color'];
 
 /** React wrap props */
-export type ReactWrapProps<T extends HTMLElement = HTMLElement> =
-  React.HTMLAttributes<T>;
+export type ReactWrapProps<T extends HTMLElement = HTMLElement> = OmitOf<
+  React.HTMLAttributes<T>,
+  'defaultValue' | 'onChange' | 'onSelect'
+>;
 
 /** React native button props */
 export type ReactButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
