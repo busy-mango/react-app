@@ -17,10 +17,10 @@ const PLUGIN_NAME = 'CSSVarTSEmitPlugin';
 
 const iTemp = (names: string[]) => `import 'react';\n
 type CSSVarModel = {
-  ${names.map((name) => `'${name}'?: string;`).join(`\n${' '.repeat(2)}`)}
+  ${names.map((name) => `'${name}': string;`).join(`\n${' '.repeat(2)}`)}
 };\n
 declare module 'react' {
-  export type CSSVarProps = CSSVarModel;
+  export type CSSVarProps = Partial<CSSVarModel>;
   export interface CSSProperties extends CSSVarProps {}
 }
 `;
