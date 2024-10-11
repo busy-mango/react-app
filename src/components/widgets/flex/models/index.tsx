@@ -1,6 +1,6 @@
-import type { ReactWrapProps } from '@/models';
+import type { HTMLMotionProps } from 'framer-motion';
 
-export interface IFlexProps extends ReactWrapProps {
+export interface IFlexProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;
   vertical?: boolean;
   reverse?: boolean;

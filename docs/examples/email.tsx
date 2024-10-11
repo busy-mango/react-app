@@ -9,8 +9,8 @@ import {
 } from '@/components';
 import { iThemeVariable } from '@/utils';
 
-import CloudSVG from './icons/cloud.svg?react';
-import GmailSVG from './icons/gmail.svg?react';
+import CloudSVG from '../icons/cloud.svg?react';
+import GmailSVG from '../icons/gmail.svg?react';
 
 import * as styles from './email.scss';
 

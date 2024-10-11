@@ -1,0 +1,24 @@
+# Segment 分段控制器
+
+> Segment Control通常用于切换不同的视图，或者在表单中作为单选组件使用。
+
+使用 `import { ISegment } from "@/components";`
+
+源码 `components/widgets/sgment`
+
+## 何时使用
+
+* 在一组互斥的可选项中进行单项选择时。
+
+## 代码演示
+
+<code src='@cases/segment/basic' />
+
+## 常见问题
+
+### Segment VS Tabs
+
+* 来源不同：Tabs 来自 Android 规范，早在 Android 2.0 时代，官方的通讯录 App 就使用顶部 Tab 导航，之前 Android 4.0 规范和最新的 Material Design 都将Tabs作为推荐的导航形式。而 Segment Control 则来源于iOS规范。
+* 操作方式不同：Segment Control 只能通过点击控件本身的分段来进行操作，而 Tabs 除了点击控件本身外，还可以通过屏幕内左右滑动切换不同的视图。
+* 适用场景不同：Segment Control 除了适用于表单的单选组件，其作为视图切换控制时，一般来说，起到的是分割和筛选同类数据的作用。例如 App Store 的排行榜，[总排行榜]这个长列表数据集，通过 Segment Controls 把长列表分割成付费的、免费的和畅销的几个子列表数据集。再比如「设置」中的电池用量，Segment Controls 把开机后[所有时间耗电的App]筛选出[过去24小时]和[过去4天]这一部分数据。所以说 Segment Controls 本质上和下拉菜单一样，只是有更好的可见性罢了。
+* 数量限制不同：Segment Control 分段通常限制在 5 个以内，而 Tabs 可以通过 Scrollable tabs 这种形式，扩展更多的 Tab 数量。

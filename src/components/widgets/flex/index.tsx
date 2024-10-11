@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 import { isFalse, isTrue } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
@@ -38,7 +39,7 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
     const justifyContent = justify ?? ifnot(centered && 'center');
 
     return (
-      <div
+      <motion.div
         ref={iRef}
         className={classNames(
           styles.wrap,
@@ -63,7 +64,7 @@ export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
         {...others}
       >
         {children}
-      </div>
+      </motion.div>
     );
   }
 );

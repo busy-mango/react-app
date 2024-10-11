@@ -38,6 +38,9 @@
 }
 
 .root {
+  flex-grow: 0;
+  width: max-content;
+
   position: relative;
 
   display: inline-flex;

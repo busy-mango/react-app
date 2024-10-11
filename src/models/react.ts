@@ -51,7 +51,10 @@ export type ReactWrapProps<T extends HTMLElement = HTMLElement> = OmitOf<
 >;
 
 /** React native button props */
-export type ReactButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type ReactButtonProps = OmitOf<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  'onChange' | 'value'
+>;
 
 /** React native input props */
 export type ReactInputProps = React.InputHTMLAttributes<HTMLInputElement>;
