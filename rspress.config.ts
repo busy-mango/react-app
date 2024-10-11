@@ -37,7 +37,9 @@ export default defineConfig({
   plugins: [pluginPreview()],
   globalStyles: join(dir.docs, 'index.css'),
   globalUIComponents: [join(dir.docs, 'effects.tsx')],
-  route: { exclude: ['utils/**/*', 'widgets/**/*', 'icons/**/*'] },
+  route: {
+    exclude: ['cases/**/*', 'utils/**/*', 'widgets/**/*', 'icons/**/*'],
+  },
   builderConfig: {
     source: {
       define: {

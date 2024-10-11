@@ -5,10 +5,8 @@
 import type { DriveMiddleware } from '@busymango/fetch-driver';
 import { isFalse, isUndefined } from '@busymango/is-esm';
 
-const html = document.querySelector('html');
-
 function theLanguage() {
-  return html?.lang ?? 'zh-Hans-CN';
+  return document.querySelector('html')?.lang ?? 'zh-Hans-CN';
 }
 
 export const common: DriveMiddleware = async (context, next) => {
