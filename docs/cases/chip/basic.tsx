@@ -1,4 +1,4 @@
-import { VariantControl } from '@examples/widgets';
+import { VariantControl } from '@cases/widgets';
 
 import { IChip, IFlex } from '@/components';
 import type { IChipProps } from '@/components/widgets/chip/models';

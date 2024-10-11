@@ -24,15 +24,15 @@
     "baseUrl": ".",
     /* https://github.com/microsoft/TypeScript/issues/26859 */
     "paths": {
-      /* porject */
+      /* doc */
+      "@cases/*": [
+        "docs/cases/*"
+      ],
+      /* dist */
       "@assets/*": [
         "assets/*"
       ],
-      /* porject */
-      "@examples/*": [
-        "examples/*"
-      ],
-      /* app */
+      /* src */
       "@/*": [
         "src/*"
       ]

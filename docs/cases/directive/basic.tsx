@@ -1,4 +1,4 @@
-import { VariantControl } from '@examples/widgets';
+import { VariantControl } from '@cases/widgets';
 
 import { IDirective, IFlex, ISignLine } from '@/components';
 

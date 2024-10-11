@@ -2,7 +2,7 @@ import { produce } from 'immer';
 import { create } from 'zustand';
 
 import { isEmpty, isString } from '@busymango/is-esm';
-import { VariantControl } from '@examples/widgets';
+import { VariantControl } from '@cases/widgets';
 
 import type { IControlWrapProps } from '@/components';
 import { IControlWrap, IFlex, IInput, ISignLine } from '@/components';

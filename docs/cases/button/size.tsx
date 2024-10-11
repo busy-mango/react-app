@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { VariantControl } from '@examples/widgets';
+import { VariantControl } from '@cases/widgets';
 
 import {
   IButton,

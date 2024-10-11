@@ -1,4 +1,4 @@
-import { VariantControl } from '@examples/widgets';
+import { VariantControl } from '@cases/widgets';
 
 import type { IControlWrapProps, IControlWrapRootRender } from '@/components';
 import { IControlWrap, ITextArea } from '@/components';
