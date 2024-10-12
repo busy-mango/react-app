@@ -7,18 +7,46 @@ import type { IFlexProps } from '../../flex';
 
 export interface ISegmentState {
   /**
+   * 控制控件是否禁用状态。
+   */
+  disabled?: boolean;
+  /**
+   * 控制控件是否只读状态。
+   */
+  readOnly?: boolean;
+  /**
    * 将宽度调整为父元素宽度的选项
    */
   isFullWidth?: boolean;
   /**
-   * 控件的值
-   */
-  value?: ControlOption['value'];
-  /**
    * 控件尺寸
    */
   size?: ControlUISize;
+  /**
+   * 控件的值
+   */
+  value?: ControlOption['value'];
 }
+
+export interface ISegmentChangeFunc {
+  (value: React.Key): void;
+}
+
+export type ISegmentThumbRender = ReactRender<
+  ControlOption & {
+    isActive: boolean;
+    layoutId: string;
+  },
+  ISegmentState
+>;
+
+export type ISegmentItemRender = ReactRender<
+  ReactButtonProps & {
+    thumb: React.ReactNode;
+    onChange: ISegmentChangeFunc;
+  } & ControlOption,
+  ISegmentState
+>;
 
 export type ISegmentRootRender = ReactRender<
   OmitOf<IFlexProps, 'children'> & {
@@ -27,12 +55,11 @@ export type ISegmentRootRender = ReactRender<
   ISegmentState
 >;
 
-export type ISegmentItemRender = ReactRender<
-  ReactButtonProps & {
-    onChange: (next: React.Key) => void;
-  } & ControlOption,
-  ISegmentState
->;
+type ISegmentRenders = {
+  root?: ISegmentRootRender;
+  item?: ISegmentItemRender;
+  thumb?: ISegmentThumbRender;
+};
 
 export interface ISegmentProps
   extends ISegmentState,
@@ -45,12 +72,9 @@ export interface ISegmentProps
    * 数据化配置选项内容
    */
   options?: ControlOption[];
-  render?: {
-    root?: ISegmentRootRender;
-    item?: ISegmentItemRender;
-  };
+  render?: ISegmentRenders;
   /**
    * 选项变化时的回调函数
    */
-  onChange?: (val: ControlOption['value']) => void;
+  onChange?: ISegmentChangeFunc;
 }

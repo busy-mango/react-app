@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useId } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -12,6 +12,7 @@ import type {
   ISegmentProps,
   ISegmentRootRender,
   ISegmentState,
+  ISegmentThumbRender,
 } from './models';
 
 import * as styles from './index.scss';
@@ -23,41 +24,72 @@ const iRootRender: ISegmentRootRender = ({ segments, ...others }) => (
 );
 
 const iItemRender: ISegmentItemRender = (
-  { label, icon, value, disabled, onChange, onKeyDown, onClick, ...others },
-  state
+  {
+    label,
+    icon,
+    value,
+    thumb,
+    extra,
+    disabled,
+    onChange,
+    onKeyDown,
+    onClick,
+    ...others
+  },
+  { readOnly }
 ) => (
-  <button
-    {...others}
-    tabIndex={0}
-    onClick={(event) => {
-      onClick?.(event);
-      !disabled && onChange(value);
-    }}
-    onKeyDown={iPressEvent(() => {
-      !disabled && onChange(value);
-    }, onKeyDown)}
-  >
-    <AnimatePresence>
-      {icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>}
-    </AnimatePresence>
-    {label}
-    <AnimatePresence>
-      {state.value === value && !disabled && (
-        <motion.div
-          animate={{ opacity: 1 }}
-          className={styles.thumb}
-          exit={{ opacity: 0 }}
-          initial={{ opacity: 0 }}
-          layoutId="arrow"
-        />
-      )}
-    </AnimatePresence>
-  </button>
+  <div className={styles.itemWrap}>
+    <button
+      {...others}
+      tabIndex={0}
+      onClick={(event) => {
+        onClick?.(event);
+        if (!readOnly && !disabled) {
+          onChange(value);
+        }
+      }}
+      onKeyDown={iPressEvent(() => {
+        if (!readOnly && !disabled) {
+          onChange(value);
+        }
+      }, onKeyDown)}
+    >
+      <span>
+        <AnimatePresence>
+          {icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>}
+        </AnimatePresence>
+        {label}
+      </span>
+      {extra}
+    </button>
+    {thumb}
+  </div>
+);
+
+const iThumbRender: ISegmentThumbRender = ({
+  isActive,
+  layoutId,
+  disabled,
+}) => (
+  <AnimatePresence>
+    {isActive && !disabled && (
+      <motion.div
+        animate={{ opacity: 1 }}
+        className={styles.thumb}
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0 }}
+        layoutId={layoutId}
+      />
+    )}
+  </AnimatePresence>
 );
 
 export const ISegment: React.FC<ISegmentProps> = (props) => {
   const {
     options,
+    disabled,
+    readOnly,
+    vertical,
     className,
     isFullWidth,
     defaultValue,
@@ -69,21 +101,27 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
     ...others
   } = props;
 
+  const layoutId = useId();
+
   const [value, onChange] = useControlState(props);
 
   const states: ISegmentState = {
+    isFullWidth,
+    readOnly,
+    disabled,
     value,
     size,
-    isFullWidth,
   };
 
   return (render?.root ?? iRootRender)(
     {
       gap,
+      vertical,
       className: classNames(
         styles.wrap,
         styles[size],
         {
+          [styles.vertical]: vertical,
           [styles.isFullWidth]: isFullWidth,
         },
         className
@@ -95,8 +133,17 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
               ...item,
               onChange,
               className: classNames(styles.item, {
-                [styles.disabled]: item.disabled,
+                [styles.readOnly]: readOnly,
+                [styles.disabled]: disabled ?? item.disabled,
               }),
+              thumb: (render?.thumb ?? iThumbRender)(
+                {
+                  ...item,
+                  layoutId,
+                  isActive: value === item.value,
+                },
+                states
+              ),
             },
             states
           )}

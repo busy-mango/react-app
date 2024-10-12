@@ -30,6 +30,7 @@ export type ControlOption = {
   label?: React.ReactNode;
   disabled?: boolean;
   icon?: React.ReactNode;
+  extra?: React.ReactNode;
 } & Pick<React.CSSProperties, 'color'>;
 
 export interface InteractionProps {
