@@ -21,10 +21,10 @@ import {
   IInput,
   IOverflow,
   IPopover,
+  IScrollable,
   ISelector,
   ISignLine,
   IWaveShell,
-  Scrollable,
 } from '@/components';
 import { useToggle } from '@/hooks';
 import { iCompact, iPropagation, iThemeVariable } from '@/utils';
@@ -249,7 +249,7 @@ const App: React.FC = () => {
           setKeyword(target.value);
         }}
       />
-      <Scrollable {...others} />
+      <IScrollable {...others} />
     </IFlex>
   );
 

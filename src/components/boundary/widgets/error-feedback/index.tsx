@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { NotFound, Unknown } from '@/components/business';
-import { IButton } from '@/components/widgets';
+import { IButton, IDirective, ISignLine } from '@/components/widgets';
 import { catchMsg, isNotFoundError } from '@/utils';
 
 import RefreshSVG from '@/icons/refresh.svg?react';
@@ -35,11 +35,25 @@ export const BoundaryFallbackWidget: React.FC<{
 };
 
 export const BoundaryFallbackCard: React.FC = () => {
-  const { error } = useFallbackContext();
+  const { t } = useTranslation();
+
+  const { error, reset } = useFallbackContext();
 
   const msg = useMemo(() => catchMsg(error), [error]);
 
-  return <div className={styles.card}>{msg}</div>;
+  return (
+    <IDirective
+      className={styles.card}
+      extra={
+        <IButton danger size="mini" variant="text" onClick={reset}>
+          {t('common:Reset')}
+        </IButton>
+      }
+      icon={<ISignLine trigon type="informer" />}
+      status="danger"
+      title={msg}
+    />
+  );
 };
 
 export const BoundaryFallbackPage: React.FC = () => {

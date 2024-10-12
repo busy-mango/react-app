@@ -81,10 +81,12 @@
 }
 
 .header {
+  display: grid;
   grid-template-rows: max-content;
-  grid-template-columns: max-content minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) max-content;
 }
 
-.header {
-  display: grid;
+.header,
+.footer {
+  margin: unset;
 }

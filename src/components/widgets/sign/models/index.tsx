@@ -1,4 +1,6 @@
-import type { SVGMotionProps } from 'framer-motion';
+import type { SVGMotionProps, Target } from 'framer-motion';
+
+import type { OmitOf } from '@busymango/utils';
 
 /**
  * TODO: refresh
@@ -22,9 +24,11 @@ export type ISignType =
   | 'arrowDoubleRight'
   | 'arrowDoubleBottom';
 
-export interface ISignLineProps extends SVGMotionProps<SVGSVGElement> {
+export interface ISignLineProps
+  extends OmitOf<SVGMotionProps<SVGSVGElement>, 'animate'> {
   type?: ISignType;
   ring?: boolean;
   rect?: boolean;
   trigon?: boolean;
+  animate?: Target;
 }

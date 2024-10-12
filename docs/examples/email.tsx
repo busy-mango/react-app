@@ -3,11 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 
 import type { ControlOption } from '@/components';
 import {
+  IControlWrap,
   IFlex,
+  IInput,
   IRadioGroup,
   ISafeArea,
+  IScrollable,
   ISegment,
   ISelector,
+  ISignLine,
   ISuspense,
   ISVGWrap,
 } from '@/components';
@@ -143,7 +147,15 @@ const App: React.FC = () => {
           size="huge"
         />
       </IFlex>
-      <p style={{ height: '100%' }}>5</p>
+      <IFlex vertical style={{ height: '100%' }}>
+        <IControlWrap
+          prefix={<ISignLine type="magnifier" />}
+          variant="bordered"
+        >
+          <IInput />
+        </IControlWrap>
+        <IScrollable style={{ flexGrow: 1 }} />
+      </IFlex>
       <p style={{ height: '100%' }}>6</p>
     </ISafeArea>
   );

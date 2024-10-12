@@ -19,8 +19,8 @@ import { IChip } from '../chip';
 import { IControlWrap, useControlState } from '../control';
 import { IFlex } from '../flex';
 import { IInput } from '../input';
-import type { ScrollableRef } from '../scrollable';
-import { Scrollable } from '../scrollable';
+import type { IScrollableRef } from '../scrollable';
+import { IScrollable } from '../scrollable';
 import type { IScrollableEmptyRender } from '../scrollable/models';
 import { ISignLine } from '../sign';
 import { iSignType } from './helpers';
@@ -83,7 +83,7 @@ const iScrollableRender: ISelectorScrollableRender = ({
   ...props
 }) => (
   <div className={className}>
-    <Scrollable {...props} />
+    <IScrollable {...props} />
   </div>
 );
 
@@ -176,7 +176,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
 
     const input = useRef<HTMLInputElement>(null);
 
-    const scrollable = useRef<ScrollableRef>(null);
+    const scrollable = useRef<IScrollableRef>(null);
 
     const [value, onChange] = useControlState(props);
 

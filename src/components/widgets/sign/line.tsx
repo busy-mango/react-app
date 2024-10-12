@@ -19,7 +19,10 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
     return (
       <motion.svg
         ref={ref}
-        animate={animate}
+        animate={{
+          ...animate,
+          scale: ring || rect || trigon ? 1 : 1.325,
+        }}
         data-sign-icon={type}
         fill="none"
         height="1em"
@@ -30,7 +33,6 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
         style={{
           ...style,
           cursor: 'inherit',
-          transform: `scale(${ring || rect ? 1 : 1.325})`,
         }}
         version="1.1"
         viewBox="0 0 1024 1024"

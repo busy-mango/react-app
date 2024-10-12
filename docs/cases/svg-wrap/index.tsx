@@ -1,9 +1,10 @@
 import { IFlex, ISignLine, ISVGWrap } from '@/components';
+import { iThemeVariable } from '@/utils';
 
 import { BaseLineWrap } from '../widgets';
 
 const App: React.FC = () => (
-  <IFlex vertical gap={16}>
+  <IFlex vertical gap={iThemeVariable('--gap-06')}>
     <BaseLineWrap>
       <ISignLine ring type="helper" />
       帮助
@@ -17,15 +18,36 @@ const App: React.FC = () => (
       </ISVGWrap>
     </BaseLineWrap>
     <BaseLineWrap>
-      Tick Style <ISignLine type="tick" />
-      Tick Style
+      <ISignLine ring type="tick" />
+      Tick
+      <ISignLine type="tick" />
+      <ISVGWrap>
+        <ISignLine ring type="tick" />
+      </ISVGWrap>
+      Tick
       <ISVGWrap>
         <ISignLine type="tick" />
       </ISVGWrap>
     </BaseLineWrap>
     <BaseLineWrap>
+      <ISignLine ring type="magnifier" />
+      搜索
+      <ISignLine type="magnifier" />
+      <ISVGWrap>
+        <ISignLine ring type="magnifier" />
+      </ISVGWrap>
+      搜索
+      <ISVGWrap>
+        <ISignLine type="magnifier" />
+      </ISVGWrap>
+    </BaseLineWrap>
+    <BaseLineWrap>
+      <ISignLine ring type="dollar" />
       100
       <ISignLine type="dollar" />
+      <ISVGWrap>
+        <ISignLine ring type="dollar" />
+      </ISVGWrap>
       100
       <ISVGWrap>
         <ISignLine type="dollar" />

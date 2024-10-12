@@ -19,8 +19,8 @@ import { IEmptyWrap } from '../empty';
 import { estimateSize } from './helpers';
 import type {
   IScrollableEmptyRender,
-  ScrollableProps,
-  ScrollableRef,
+  IScrollableProps,
+  IScrollableRef,
 } from './models';
 
 import * as styles from './index.scss';
@@ -29,7 +29,7 @@ const iEmptyRender: IScrollableEmptyRender = (props) => (
   <IEmptyWrap {...props} />
 );
 
-export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
+export const IScrollable = forwardRef<IScrollableRef, IScrollableProps>(
   function Scrollable(props, ref) {
     const {
       value,
@@ -169,5 +169,5 @@ export const Scrollable = forwardRef<ScrollableRef, ScrollableProps>(
   }
 );
 
-export { estimateSize } from './/helpers';
-export type { ScrollableProps, ScrollableRef } from './models';
+export { estimateSize } from './helpers';
+export type { IScrollableProps, IScrollableRef } from './models';

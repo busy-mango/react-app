@@ -18,25 +18,25 @@ export type IScrollableOptionRender = ReactRender<
   }
 >;
 
-export interface ScrollableRef {
+export interface IScrollableRef {
   native: HTMLDivElement;
   select: (index?: number, isSelected?: boolean) => void;
   active: (recipe: (current: number) => number) => void;
 }
 
-export interface ScrollableChangeFunc {
+export interface IScrollableChangeFunc {
   (value?: React.Key[] | React.Key): void;
 }
 
-export interface ScrollableSelectFunc {
+export interface IScrollableSelectFunc {
   (index: number, value?: React.Key[]): void;
 }
 
-export interface ScrollableProps extends ReactWrapProps {
+export interface IScrollableProps extends ReactWrapProps {
   /**
    * Whether the floating element has been positioned yet when used inside an Effect (not during render).
    */
-  isPositioned: boolean;
+  isPositioned?: boolean;
   /**
    * 是否测量元素高度（消耗性能，不建议开启）
    */
@@ -71,9 +71,9 @@ export interface ScrollableProps extends ReactWrapProps {
   /**
    * 选择菜单项时触发的回调。
    */
-  onChange?: ScrollableChangeFunc;
+  onChange?: IScrollableChangeFunc;
   /**
    * 点击选项时触发的回调
    */
-  onSelect?: ScrollableSelectFunc;
+  onSelect?: IScrollableSelectFunc;
 }

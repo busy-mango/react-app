@@ -20,6 +20,7 @@ export interface IDirectiveProps
   title?: React.ReactNode;
   extra?: React.ReactNode;
   variant?: 'filled' | 'borderered';
+  footer?: React.ReactNode;
   status?: 'success' | 'danger' | 'warn' | 'info';
 }
 
@@ -31,9 +32,11 @@ export const IDirective: ReactCFC<IDirectiveProps> = forwardRef<
     icon,
     title,
     extra,
+    footer,
+    children,
+    className,
     status = 'info',
     variant = 'filled',
-    children,
   } = props;
 
   const target = useRef<HTMLDivElement>(null);
@@ -44,9 +47,15 @@ export const IDirective: ReactCFC<IDirectiveProps> = forwardRef<
     <motion.div
       ref={target}
       animate={animate}
-      className={classNames(styles.wrap, styles[status], styles[variant], {
-        [styles.withIcon]: icon && isReactNode(icon),
-      })}
+      className={classNames(
+        styles.wrap,
+        styles[status],
+        styles[variant],
+        {
+          [styles.withIcon]: icon && isReactNode(icon),
+        },
+        className
+      )}
       exit={initial}
       initial={initial}
       transition={transition}
@@ -57,7 +66,8 @@ export const IDirective: ReactCFC<IDirectiveProps> = forwardRef<
           {title}
           {extra}
         </div>
-        <p className={styles.content}>{children}</p>
+        {children && <p className={styles.content}>{children}</p>}
+        {footer && <p className={styles.footer}>{footer}</p>}
       </div>
     </motion.div>
   );

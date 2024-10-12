@@ -4,8 +4,15 @@
   position: relative;
   white-space: nowrap;
 
+  padding: var(--gap-03);
+
   color: var(--font-color-10);
-  background-color: rgb(var(--tip-bg-color) / 0.85);
+
+  box-shadow: var(--shadow-06);
+
+  border-radius: var(--border-radius-03);
+
+  background-color: var(--bg-color-widgets);
 
   & > .vertical {
     // z-index: 0;

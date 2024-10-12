@@ -79,7 +79,7 @@ export type ICheckInputRender = IRender<
 >;
 
 export type ICheckIconRender = IRender<
-  SVGMotionProps<SVGSVGElement> & {
+  Pick<SVGMotionProps<SVGSVGElement>, 'className'> & {
     wave?: boolean;
     inputRef: React.RefObject<HTMLInputElement>;
   }
