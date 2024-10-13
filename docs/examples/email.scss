@@ -5,6 +5,7 @@
   grid-template-columns: max-content max-content minmax(0, 1fr);
 
   gap: 0.5px;
+  border-radius: var(--border-radius-04);
   border: 1px solid var(--border-color-1);
   background-color: var(--border-color-1);
 
