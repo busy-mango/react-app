@@ -12,6 +12,7 @@
   & > p,
   & > div {
     padding: var(--gap-03);
+    overflow: hidden;
     background-color: var(--bg-color-normal);
   }
 }

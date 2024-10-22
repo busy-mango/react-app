@@ -47,7 +47,13 @@ export type ReactCSSColor = React.CSSProperties['color'];
 /** React wrap props */
 export type ReactWrapProps<T extends HTMLElement = HTMLElement> = OmitOf<
   React.HTMLAttributes<T>,
-  'defaultValue' | 'onChange' | 'onSelect'
+  | 'defaultValue'
+  | 'onChange'
+  | 'onSelect'
+  | 'onAnimationStart'
+  | 'onDragStart'
+  | 'onDragEnd'
+  | 'onDrag'
 >;
 
 /** React native button props */

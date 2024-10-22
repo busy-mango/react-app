@@ -1,25 +1,43 @@
-import type { ReactWrapProps } from '@/models';
+import classNames from 'classnames';
 
-import { IButton } from '../button';
-import { useControlState } from '../control';
+import type { ITypographyProps } from './models';
 
-export interface TypographyProps extends ReactWrapProps<HTMLParagraphElement> {
-  folded?: boolean;
-  onChange?: (folded: boolean) => void;
-}
+import * as styles from './index.scss';
 
-export const Typography: React.FC<TypographyProps> = (props) => {
-  const { folded, children, onChange, ...others } = props;
+export const ITypography: React.FC<ITypographyProps> = (props) => {
+  const {
+    variant = 'inherit',
+    color,
+    align: textAlign,
+    className,
+    style,
+    ...others
+  } = props;
 
-  const [value, iChange] = useControlState({
-    value: folded,
-    onChange,
-  });
+  const iStyle: React.CSSProperties = { textAlign, ...style };
 
-  return (
-    <article {...others}>
-      {children}
-      <IButton isFullWidth variant="filled" />
-    </article>
-  );
+  const iClassName = classNames(styles[variant], className);
+
+  switch (variant) {
+    case 'h1':
+      return <h1 className={iClassName} style={iStyle} {...others} />;
+    case 'h2':
+      return <h2 className={iClassName} style={iStyle} {...others} />;
+    case 'h3':
+      return <h3 className={iClassName} style={iStyle} {...others} />;
+    case 'h4':
+      return <h4 className={iClassName} style={iStyle} {...others} />;
+    case 'h5':
+      return <h5 className={iClassName} style={iStyle} {...others} />;
+    case 'h6':
+      return <h6 className={iClassName} style={iStyle} {...others} />;
+    case 'body':
+      return <p className={iClassName} style={iStyle} {...others} />;
+    case 'inherit':
+      return <p className={iClassName} style={iStyle} {...others} />;
+    case 'subtitle':
+      return <h6 className={iClassName} style={iStyle} {...others} />;
+    default:
+      break;
+  }
 };

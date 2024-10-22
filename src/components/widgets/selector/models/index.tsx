@@ -19,7 +19,7 @@ import type {
 } from '../../control';
 import type { IEmptyWrapProps } from '../../empty';
 import type { IInputProps } from '../../input';
-import type { IScrollableProps, IScrollableRef } from '../../scrollable';
+import type { IMenuProps, IMenuRef } from '../../menu';
 
 export type ISelectorState = Pick<
   IControlWrapProps,
@@ -88,8 +88,8 @@ export type ISelectorSearchRender = ReactRender<
 >;
 
 export type ISelectorScrollableRender = ReactRender<
-  IScrollableProps & {
-    ref: React.RefObject<IScrollableRef>;
+  IMenuProps & {
+    ref: React.RefObject<IMenuRef>;
   },
   ISelectorState
 >;
@@ -149,7 +149,7 @@ export interface ISelectorProps
     OmitOf<ReactWrapProps, 'onFocus' | 'onBlur' | 'prefix' | 'onScroll'>,
     Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur' | 'autoFocus'>,
     Pick<
-      IScrollableProps,
+      IMenuProps,
       | 'maxHeight'
       | 'options'
       | 'multiple'

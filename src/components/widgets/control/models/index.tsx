@@ -9,6 +9,9 @@ import type { ReactInputProps, ReactRender } from '@/models';
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';
 
+/** 控件大小 */
+export type ControlAlign = 'start' | 'center' | 'end';
+
 /** 控件排版方向 */
 export type ControlUIDirection = 'horizontal' | 'vertical';
 

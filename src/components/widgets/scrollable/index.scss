@@ -5,9 +5,6 @@
 
   width: 100%;
   flex-basis: 0;
-  min-height: var(--control-size-06);
-
-  cursor: pointer;
 }
 
 .empty {
@@ -21,11 +18,9 @@
   overflow-x: hidden;
   position: relative;
 
-  max-height: calc(var(--control-size-06) * 8 + 2 * var(--gap-03));
-
   &::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: var(--border-radius-10);
     background-color: var(--bg-color-mask);
   }

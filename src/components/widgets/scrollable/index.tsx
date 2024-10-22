@@ -1,173 +1,90 @@
-import {
-  forwardRef,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useRef } from 'react';
 import classNames from 'classnames';
 
-import { isEmptyArray, isFalse, isNumber, isTrue } from '@busymango/is-esm';
-import { dedup, iArray, ifnot, sizeOf } from '@busymango/utils';
+import { isEmptyArray } from '@busymango/is-esm';
+import { ifnot, sizeOf } from '@busymango/utils';
 import type { VirtualItem } from '@tanstack/react-virtual';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
-import { useMemoFunc } from '@/hooks';
-import { iCompact, iPropagation } from '@/utils';
+import { iPropagation } from '@/utils';
 
 import { IEmptyWrap } from '../empty';
 import { estimateSize } from './helpers';
-import type {
-  IScrollableEmptyRender,
-  IScrollableProps,
-  IScrollableRef,
-} from './models';
+import type { IScrollableProps } from './models';
 
 import * as styles from './index.scss';
 
-const iEmptyRender: IScrollableEmptyRender = (props) => (
-  <IEmptyWrap {...props} />
-);
+export const IScrollable = <T,>(props: IScrollableProps<T>) => {
+  const {
+    gap,
+    style,
+    source,
+    maxHeight,
+    isLoading,
+    className,
+    measure = false,
+    onClick = iPropagation,
+    onScroll,
+    render,
+    ...others
+  } = props;
 
-export const IScrollable = forwardRef<IScrollableRef, IScrollableProps>(
-  function Scrollable(props, ref) {
-    const {
-      value,
-      options,
-      maxHeight,
-      isLoading,
-      className,
-      isPositioned,
-      measure = false,
-      multiple = false,
-      onClick = iPropagation,
-      onSelect,
-      onChange,
-      onScroll,
-      render,
-      ...others
-    } = props;
+  const count = sizeOf(source);
 
-    const count = sizeOf(options);
+  const container = useRef<HTMLDivElement>(null);
 
-    const container = useRef<HTMLDivElement>(null);
+  const getScrollElement = () => container.current!;
 
-    const [active, setActive] = useState<number>(0);
+  const {
+    getTotalSize,
+    scrollToIndex,
+    measureElement,
+    getVirtualItems,
+    getOffsetForIndex,
+  } = useVirtualizer({
+    getScrollElement,
+    estimateSize,
+    overscan: 20,
+    count,
+    gap,
+  });
 
-    const getScrollElement = () => container.current!;
-
-    const iSelectedList = iCompact(iArray(value) ?? []);
-
-    const {
-      getTotalSize,
-      scrollToIndex,
-      measureElement,
-      getVirtualItems,
-      getOffsetForIndex,
-    } = useVirtualizer({
-      getScrollElement,
-      estimateSize,
-      overscan: 20,
-      count,
-    });
-
-    /**
-     * 多选回调
-     * @param value 选中值
-     * @param selected 是否选中
-     */
-    const onMultipleChange = (value?: React.Key, selected?: boolean) => {
-      onChange?.(
-        dedup(
-          selected
-            ? iSelectedList.concat(iCompact([value]))
-            : iSelectedList.filter((v) => v !== value)
-        )
-      );
-    };
-
-    const iChange = useMemoFunc(
-      (index: number = active, isSelected?: boolean) => {
-        setActive(index);
-        const { value } = options![index];
-        isFalse(multiple) && onChange?.(value);
-        const selected = isSelected ?? iSelectedList.includes(value);
-        isTrue(multiple) && onMultipleChange?.(value, isFalse(selected));
-      }
-    );
-
-    useImperativeHandle(
-      ref,
-      () => ({
-        native: container.current!,
-        select: iChange,
-        active: (recipe) => {
-          const next = recipe(active);
-          if (next >= 0 && next < count) {
-            setActive(recipe(active));
-          }
-        },
-      }),
-      [active, container, count, iChange]
-    );
-
-    const iRender = ({ key, index, start }: VirtualItem) => {
-      const element = options![index];
-
-      const { value } = element;
-      const isActive = active === index;
-      const transform = `translateY(${start}px)`;
-      const isSelected = iSelectedList.includes(value);
-
-      return (
-        <div
-          key={key}
-          ref={ifnot(measure && measureElement)}
-          aria-posinset={index + 1}
-          aria-selected={isActive}
-          aria-setsize={count}
-          className={styles.item}
-          data-index={index}
-          role="option"
-          style={{ transform }}
-          onClick={() => {
-            iChange(index, isSelected);
-            onSelect?.(index, iSelectedList);
-          }}
-        >
-          {render?.option(element, { isActive, isSelected, index })}
-        </div>
-      );
-    };
-
-    useLayoutEffect(() => {
-      if (count && isPositioned && isNumber(active)) {
-        const behavior = measure ? 'auto' : 'smooth';
-        scrollToIndex(active, { behavior });
-      }
-    }, [scrollToIndex, isPositioned, active, count, measure]);
-
-    const items = getVirtualItems();
-
+  const iRender = (item: VirtualItem) => {
+    const { key, index, start } = item;
+    const transform = `translateY(${start}px)`;
     return (
       <div
-        ref={container}
-        className={classNames(styles.scrollable, className)}
-        style={{ maxHeight }}
-        onClick={onClick}
-        onScroll={onScroll}
-        {...others}
+        key={key}
+        ref={ifnot(measure && measureElement)}
+        aria-posinset={index + 1}
+        aria-setsize={count}
+        className={styles.item}
+        data-index={index}
+        role="option"
+        style={{ transform }}
       >
-        <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
-        {isEmptyArray(items) &&
-          (render?.empty ?? iEmptyRender)(
-            { className: styles.empty, isLoading },
-            {}
-          )}
+        {render(source![index], item)}
       </div>
     );
-  }
-);
+  };
 
-export { estimateSize } from './helpers';
-export type { IScrollableProps, IScrollableRef } from './models';
+  const items = getVirtualItems();
+
+  return (
+    <div
+      ref={container}
+      className={classNames(styles.scrollable, className)}
+      style={{ ...style, maxHeight }}
+      onClick={onClick}
+      onScroll={onScroll}
+      {...others}
+    >
+      <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
+      {isEmptyArray(items) && (
+        <IEmptyWrap className={styles.empty} isLoading={isLoading} />
+      )}
+    </div>
+  );
+};
+
+export type { IScrollableProps } from './models';

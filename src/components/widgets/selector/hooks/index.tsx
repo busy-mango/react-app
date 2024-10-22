@@ -18,7 +18,7 @@ import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { size2px } from '@/utils';
 
 import type { ControlOption } from '../../control';
-import { estimateSize } from '../../scrollable';
+import { estimateSize } from '../../menu';
 import { iPredicate } from '../helpers';
 import type { ISelectorPredicate, ISelectorProps } from '../models';
 

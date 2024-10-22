@@ -19,9 +19,9 @@ import {
   IFlex,
   IHighLighter,
   IInput,
+  IMenu,
   IOverflow,
   IPopover,
-  IScrollable,
   ISelector,
   ISignLine,
   IWaveShell,
@@ -168,7 +168,8 @@ const iOptionRender: ISelectorOptionRender = (
                     animate={{
                       scale: option.color === color ? 1.1 : 1,
                       borderColor: ifnot(
-                        option.color === color && `var(--border-color-active)`
+                        option.color === color &&
+                          iThemeVariable('--border-color-active')
                       ),
                     }}
                     style={{
@@ -176,7 +177,7 @@ const iOptionRender: ISelectorOptionRender = (
                       height: '1em',
                       borderWidth: 1,
                       borderStyle: 'solid',
-                      borderRadius: 'var(--border-radius-02)',
+                      borderRadius: iThemeVariable('--border-radius-02'),
                     }}
                   />
                 )}
@@ -249,7 +250,7 @@ const App: React.FC = () => {
           setKeyword(target.value);
         }}
       />
-      <IScrollable {...others} />
+      <IMenu {...others} />
     </IFlex>
   );
 

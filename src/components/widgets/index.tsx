@@ -1,7 +1,6 @@
 /**
  * @description UI组件
  */
-
 export * from './backdrop';
 export * from './button';
 export * from './card';
@@ -10,12 +9,14 @@ export * from './chip';
 export * from './collapsible';
 export * from './control';
 export * from './directive';
+export * from './divider';
 export * from './flex';
 export * from './form-field';
 export * from './form-wrap';
 export * from './high-lighter';
 export * from './input';
 export * from './marker';
+export * from './menu';
 export * from './modal';
 export * from './motion-panel';
 export * from './overflow';

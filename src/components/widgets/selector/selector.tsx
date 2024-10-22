@@ -19,9 +19,9 @@ import { IChip } from '../chip';
 import { IControlWrap, useControlState } from '../control';
 import { IFlex } from '../flex';
 import { IInput } from '../input';
-import type { IScrollableRef } from '../scrollable';
-import { IScrollable } from '../scrollable';
-import type { IScrollableEmptyRender } from '../scrollable/models';
+import type { IMenuRef } from '../menu';
+import { IMenu } from '../menu';
+import type { IMenuEmptyRender } from '../menu/models';
 import { ISignLine } from '../sign';
 import { iSignType } from './helpers';
 import {
@@ -83,7 +83,7 @@ const iScrollableRender: ISelectorScrollableRender = ({
   ...props
 }) => (
   <div className={className}>
-    <IScrollable {...props} />
+    <IMenu {...props} />
   </div>
 );
 
@@ -176,7 +176,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
 
     const input = useRef<HTMLInputElement>(null);
 
-    const scrollable = useRef<IScrollableRef>(null);
+    const scrollable = useRef<IMenuRef>(null);
 
     const [value, onChange] = useControlState(props);
 
@@ -284,7 +284,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       value,
     };
 
-    const iEmptyRender: IScrollableEmptyRender = (props) => {
+    const iEmptyRender: IMenuEmptyRender = (props) => {
       return render?.empty!(props, states);
     };
 

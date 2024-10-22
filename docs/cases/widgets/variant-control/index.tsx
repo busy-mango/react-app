@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { isNonEmptyArray } from '@busymango/is-esm';
 
 import type {
+  ControlAlign,
   ControlPattern,
   ControlUISize,
   ControlUIStatus,
@@ -12,10 +13,12 @@ import { IFlex, IRadioGroup } from '@/components';
 interface Props<T extends string = never> {
   variants?: T[];
   sizeable?: boolean;
+  alignable?: boolean;
   statusable?: boolean;
   patternable?: boolean;
   children: (props: {
     size?: ControlUISize;
+    align?: ControlAlign;
     status?: ControlUIStatus;
     pattern?: ControlPattern;
     variant?: T;
@@ -27,6 +30,7 @@ export function VariantControl<T extends string = never>(
 ): React.ReactNode {
   const {
     variants,
+    alignable = false,
     sizeable = false,
     statusable = false,
     patternable = false,
@@ -36,6 +40,8 @@ export function VariantControl<T extends string = never>(
   const [variant, setVariant] = useState(variants?.[0]);
 
   const [size, setSize] = useState<ControlUISize>('medium');
+
+  const [align, setAlign] = useState<ControlAlign>('center');
 
   const [status, setStatus] = useState<ControlUIStatus>('success');
 
@@ -52,6 +58,19 @@ export function VariantControl<T extends string = never>(
             value={size}
             onChange={(value) => {
               setSize(value as ControlUISize);
+            }}
+          />
+        </IFlex>
+      )}
+      {alignable && (
+        <IFlex gap={8}>
+          <IRadioGroup
+            options={(['start', 'center', 'end'] satisfies ControlAlign[]).map(
+              (value) => ({ value })
+            )}
+            value={align}
+            onChange={(value) => {
+              setAlign(value as ControlAlign);
             }}
           />
         </IFlex>
@@ -103,7 +122,7 @@ export function VariantControl<T extends string = never>(
           />
         </IFlex>
       )}
-      {children({ size, pattern, variant, status })}
+      {children({ align, size, pattern, variant, status })}
     </IFlex>
   );
 }

@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "webben.browserslist",
+    "vunguyentuan.vscode-css-variables",
+    "dbaeumer.vscode-eslint",
+    "Lokalise.i18n-ally",
+    "PKief.material-icon-theme",
+    "unifiedjs.vscode-mdx",
+  ]
+}

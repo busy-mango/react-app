@@ -1,15 +1,20 @@
 import { EmailList } from 'docs/widgets';
+import { EmialBody } from 'docs/widgets/email-body';
 
 import { sleep } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import type { ControlOption } from '@/components';
 import {
+  IButton,
+  IDivider,
   IFlex,
-  IRadioGroup,
+  IMenu,
+  IPopover,
   ISafeArea,
   ISegment,
   ISelector,
+  ISignLine,
   ISuspense,
   ISVGWrap,
 } from '@/components';
@@ -82,10 +87,11 @@ const App: React.FC = () => (
         style={{ width: 196 }}
       />
     </div>
-    <IFlex align="center" justify="space-between" style={{ width: 360 }}>
+    <IFlex align="center" justify="space-between" style={{ width: 256 }}>
       <span>收件箱</span>
       <div>
         <ISegment
+          defaultValue="all"
           options={[
             { value: 'all', label: '所有邮件' },
             { value: 'unread', label: '未读邮件' },
@@ -93,9 +99,22 @@ const App: React.FC = () => (
         />
       </div>
     </IFlex>
-    <div style={{ height: '100%', width: '100%' }}>
-      <IRadioGroup />
-    </div>
+    <IFlex
+      justify="space-between"
+      style={{ padding: 8, height: '100%', width: '100%' }}
+    >
+      <IFlex gap={iThemeVariable('--gap-03')} style={{ fontSize: 16 }}>
+        <IPopover content="archive" mode="tip" trigger="hover">
+          {(props) => (
+            <IButton {...props} icon={<ArchiveSVG />} variant="text" />
+          )}
+        </IPopover>
+        <IButton icon={<JunkSVG />} variant="text" />
+        <IButton icon={<TrashSVG />} variant="text" />
+        <IDivider vertical />
+        <IButton icon={<ISignLine ring type="clock" />} variant="text" />
+      </IFlex>
+    </IFlex>
     <IFlex vertical align="start" justify="start" style={{ height: '100%' }}>
       <ISegment
         isFullWidth
@@ -141,11 +160,36 @@ const App: React.FC = () => (
         ]}
         size="huge"
       />
+      <IDivider>分割线</IDivider>
+      <IMenu
+        options={[
+          {
+            value: 'social',
+            label: '社交',
+          },
+          {
+            value: 'updates',
+            label: '更新',
+          },
+          {
+            value: 'forums',
+            label: '论坛',
+          },
+          {
+            value: 'shopping',
+            label: '购物',
+          },
+          {
+            value: 'promotions',
+            label: '促销',
+          },
+        ]}
+      />
     </IFlex>
-    <IFlex vertical style={{ height: '100%' }}>
-      <EmailList />
-    </IFlex>
-    <p style={{ height: '100%' }}>6</p>
+    <EmailList />
+    <p style={{ height: '100%' }}>
+      <EmialBody />
+    </p>
   </ISafeArea>
 );
 
