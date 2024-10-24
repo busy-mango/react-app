@@ -243,6 +243,9 @@
   /* 填充色 - 禁用态 */
   --fill-color-disabled: rgb(var(--gray-color-200) / 1);
 
+  /* 填充色 - 容器 */
+  --fill-color-warp: rgb(var(--gray-color-000) / 1);
+
   /* 背景色 - 默认 */
   --bg-color: rgb(var(--gray-color-000) / 1);
   /* 背景色 - 导航栏 */
@@ -250,13 +253,8 @@
   /* 背景色 - 遮罩层 */
   --bg-color-mask: rgb(var(--gray-color-600) / 0.4);
 
-  /* 背景色 - 容器 */
-  --bg-color-warp: rgb(var(--gray-color-150) / 1);
   /* 背景色 - 菜单 */
   --bg-color-menu: rgb(var(--gray-color-000) / 1);
-  /* 背景色 - 卡片 */
-  --bg-color-card: rgb(var(--gray-color-000) / 1);
-
   /* 背景色 - 控件 */
   --bg-color-control: rgb(var(--gray-color-050) / 1);
   /* 背景色 - 原件 */
@@ -298,6 +296,8 @@
   --font-color-10: rgb(var(--gray-color-900) / 1);
   --font-color-b8: rgb(var(--gray-color-000) / 1);
 
+  /* 字体颜色 - 强调 */
+  --font-color-info: rgb(var(--blue-color-600) / 1);
   /* 字体颜色 - 警告 */
   --font-color-warn: rgb(var(--orange-color-600) / 1);
   /* 字体颜色 - 危险 */
@@ -305,7 +305,7 @@
   /* 字体颜色 - 成功 */
   --font-color-success: rgb(var(--green-color-700) / 1);
   /* 字体颜色 - 禁用 */
-  --font-color-disabled: rgb(var(--gray-color-500) / 0.7);
+  --font-color-disabled: rgb(var(--gray-color-000) / 1);
   /* 字体颜色 - 高亮 */
   --font-color-highlight: rgb(var(--blue-color-600) / 1);
 

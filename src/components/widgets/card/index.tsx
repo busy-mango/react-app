@@ -1,21 +1,48 @@
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 import { IFlex } from '../flex';
-import type { ICardProps } from './models';
+import type { ICardProps, ICardRootRender } from './models';
 
 import * as styles from './index.scss';
 
-export const ICard: React.FC<ICardProps> = (props) => {
-  const { title, extra, children, footer, ...others } = props;
+const iRootRender: ICardRootRender = ({
+  ref,
+  header,
+  footer,
+  children,
+  ...others
+}) => (
+  <motion.div ref={ref} className={styles.wrap} {...others}>
+    {header}
+    {children}
+    {footer}
+  </motion.div>
+);
+export const ICard: React.FC<ICardProps> = forwardRef<
+  HTMLDivElement,
+  ICardProps
+>(function ICard(props, iForwardRef) {
+  const { title, extra, children, footer, render, ...others } = props;
 
-  return (
-    <motion.div className={styles.wrap} {...others}>
-      <IFlex align="center" justify="space-between">
-        {title}
-        {extra}
-      </IFlex>
-      {children}
-      {footer}
-    </motion.div>
+  const ref = useRef<HTMLDivElement>(null);
+
+  useImperativeHandle(iForwardRef, () => ref.current!);
+
+  return (render?.root ?? iRootRender)(
+    {
+      ref,
+      footer,
+      children,
+      className: styles.wrap,
+      header: (
+        <IFlex align="center" justify="space-between">
+          {title}
+          {extra}
+        </IFlex>
+      ),
+      ...others,
+    },
+    {}
   );
-};
+});

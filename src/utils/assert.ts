@@ -37,8 +37,8 @@ export function isIOS(ua: string = navigator.userAgent): boolean {
 export function isScrollable(target?: ReactTargetType) {
   const element = iFindElement(target);
   if (isHTMLElement(element)) {
-    const { scrollHeight, clientHeight } = element;
-    return scrollHeight > clientHeight;
+    const { scrollHeight, clientHeight, scrollWidth, clientWidth } = element;
+    return scrollHeight > clientHeight || scrollWidth > clientWidth;
   }
 }
 

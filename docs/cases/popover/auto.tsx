@@ -13,11 +13,16 @@ const App: React.FC = () => {
           width: '40vw',
           height: '30vw',
           overflow: 'scroll',
-          backgroundColor: 'var(--bg-color-warp)',
+          backgroundColor: 'var(--fill-color-warp)',
         }}
       >
         <IFlex centered style={{ width: '120vw', height: '90vw' }}>
-          <IPopover content="我是文本" mode="tip" root={ref} trigger="click">
+          <IPopover
+            content="我是文本"
+            root={ref}
+            trigger="click"
+            variant="tooltip"
+          >
             {(props) => (
               <IButton size="huge" tabIndex={0} {...props}>
                 按钮

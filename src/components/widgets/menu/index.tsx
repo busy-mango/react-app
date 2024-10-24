@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 
@@ -40,96 +40,104 @@ const iOptionRender: IMenuOptionRender = (option, { isActive, isSelected }) => (
   </IFlex>
 );
 
-export const IMenu = forwardRef<IMenuRef, IMenuProps>(function IMenu(props) {
-  const {
-    value,
-    options,
-    maxHeight,
-    isLoading,
-    className,
-    isPositioned,
-    measure = false,
-    multiple = false,
-    onClick = iPropagation,
-    onSelect,
-    onChange,
-    onScroll,
-    render,
-    ...others
-  } = props;
-  const count = sizeOf(options);
+export const IMenu = forwardRef<IMenuRef, IMenuProps>(
+  function IMenu(props, iForwardRef) {
+    const {
+      value,
+      options,
+      maxHeight,
+      isLoading,
+      className,
+      isPositioned,
+      measure = false,
+      multiple = false,
+      onClick = iPropagation,
+      onSelect,
+      onChange,
+      onScroll,
+      render,
+      ...others
+    } = props;
+    const count = sizeOf(options);
 
-  const container = useRef<HTMLDivElement>(null);
+    const container = useRef<HTMLDivElement>(null);
 
-  const [active, setActive] = useState<number>(-1);
+    const [active, setActive] = useState<number>(-1);
 
-  const getScrollElement = () => container.current!;
+    const getScrollElement = () => container.current!;
 
-  const [val, iChange] = useControlState({ value, onChange });
+    const [val, iChange] = useControlState({ value, onChange });
 
-  const iSelectedList = iCompact(iArray(val) ?? []);
+    const iSelectedList = iCompact(iArray(val) ?? []);
 
-  const {
-    getTotalSize,
-    scrollToIndex,
-    measureElement,
-    getVirtualItems,
-    getOffsetForIndex,
-  } = useVirtualizer({
-    getScrollElement,
-    estimateSize,
-    overscan: 20,
-    count,
-  });
+    useImperativeHandle(iForwardRef, () => ({
+      native: container.current!,
+      active: () => {},
+      select: () => {},
+    }));
 
-  const items = getVirtualItems();
+    const {
+      getTotalSize,
+      scrollToIndex,
+      measureElement,
+      getVirtualItems,
+      getOffsetForIndex,
+    } = useVirtualizer({
+      getScrollElement,
+      estimateSize,
+      overscan: 20,
+      count,
+    });
 
-  const iRender = ({ key, index, start }: VirtualItem) => {
-    const element = options![index];
+    const items = getVirtualItems();
 
-    const { value } = element;
-    const isActive = active === index;
-    const transform = `translateY(${start}px)`;
-    const isSelected = iSelectedList.includes(value);
+    const iRender = ({ key, index, start }: VirtualItem) => {
+      const element = options![index];
+
+      const { value } = element;
+      const isActive = active === index;
+      const transform = `translateY(${start}px)`;
+      const isSelected = iSelectedList.includes(value);
+
+      return (
+        <div
+          key={key}
+          ref={ifnot(measure && measureElement)}
+          aria-posinset={index + 1}
+          aria-selected={isActive}
+          aria-setsize={count}
+          className={styles.item}
+          data-index={index}
+          role="option"
+          style={{ transform }}
+          onClick={() => {
+            iChange(element.value);
+            onSelect?.(index, iSelectedList);
+          }}
+        >
+          {(render?.option ?? iOptionRender)(element, {
+            isActive,
+            isSelected,
+            index,
+          })}
+        </div>
+      );
+    };
 
     return (
       <div
-        key={key}
-        ref={ifnot(measure && measureElement)}
-        aria-posinset={index + 1}
-        aria-selected={isActive}
-        aria-setsize={count}
-        className={styles.item}
-        data-index={index}
-        role="option"
-        style={{ transform }}
-        onClick={() => {
-          iChange(element.value);
-          onSelect?.(index, iSelectedList);
-        }}
+        ref={container}
+        className={classNames(styles.wrap, className)}
+        style={{ maxHeight }}
+        onClick={onClick}
+        onScroll={onScroll}
+        {...others}
       >
-        {(render?.option ?? iOptionRender)(element, {
-          isActive,
-          isSelected,
-          index,
-        })}
+        <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
       </div>
     );
-  };
-
-  return (
-    <div
-      ref={container}
-      className={classNames(styles.wrap, className)}
-      style={{ maxHeight }}
-      onClick={onClick}
-      onScroll={onScroll}
-      {...others}
-    >
-      <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
-    </div>
-  );
-});
+  }
+);
 
 export { estimateSize } from './helpers';
 export type { IMenuProps, IMenuRef } from './models';

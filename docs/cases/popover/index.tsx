@@ -11,8 +11,8 @@ const App: React.FC = () => (
             <p>Content</p>
           </div>
         }
-        mode="tip"
         trigger={type.toLowerCase() as Lowercase<typeof type>}
+        variant="tooltip"
       >
         {(props) => (
           <IButton tabIndex={0} {...props}>

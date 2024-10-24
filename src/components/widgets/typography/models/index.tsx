@@ -20,9 +20,12 @@ export type ITypographyColor =
   | 'warning'
   | 'disabled';
 
+export type ITypographyElement = HTMLHeadingElement & HTMLParagraphElement;
+
 export type ITypographyAlign = React.CSSProperties['textAlign'];
 
 export interface ITypographyProps extends ReactWrapProps {
+  maxRow?: number;
   align?: ITypographyAlign;
   color?: ITypographyColor;
   /**

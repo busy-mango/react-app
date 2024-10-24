@@ -9,11 +9,15 @@ import type { ReactTargetType } from '@/models';
 
 import type { InteractionProps } from '../../control';
 
+type FloatingOptions = Required<UseFloatingOptions>;
+
 export type IPopoverRef = UseFloatingReturn['refs'];
 
 export type IPopoverEvent = 'click' | 'focus' | 'hover';
 
 export type IPopoverState = Pick<UseFloatingOptions, 'open' | 'placement'>;
+
+export type IPopoverOpenChangeFunc = FloatingOptions['onOpenChange'];
 
 export interface ApplyFloatingStyle {
   (
@@ -32,7 +36,8 @@ export interface IPopoverProps
   root?: ReactTargetType;
   content?: React.ReactNode;
   padding?: Padding;
-  mode?: 'tip' | 'over' | 'confirm';
+  timing?: 'alway' | 'overflow';
+  variant?: 'tooltip' | 'card' | 'confirm';
   trigger?: IPopoverEvent | IPopoverEvent[];
   onApplyFloatingStyle?: ApplyFloatingStyle;
   children?: (props: InteractionProps, state: IPopoverState) => React.ReactNode;

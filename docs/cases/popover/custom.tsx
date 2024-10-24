@@ -40,10 +40,10 @@ const App: React.FC = () => {
         <IPopover
           open
           content={placement}
-          mode="tip"
           placement={placement}
           root={ref}
           trigger={'click'}
+          variant="tooltip"
         >
           {(props) => (
             <IButton size="huge" tabIndex={0} {...props}>

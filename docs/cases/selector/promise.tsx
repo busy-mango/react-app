@@ -4,7 +4,7 @@ import { iArray, iSearchParams, sleep } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import type { ControlOption } from '@/components';
-import { IChip, IOverflow, ISelector } from '@/components';
+import { IChip, ISelector } from '@/components';
 import type { ISelectorChipRender } from '@/components/widgets/selector/models';
 import { useToggle } from '@/hooks';
 import { drive } from '@/service';
@@ -40,7 +40,7 @@ const iChipRender: ISelectorChipRender = (
       {!multiple && content}
       {multiple && (
         <IChip closeable size="mini" variant="filled" onClose={onClose}>
-          <IOverflow maxWidth={'100%'}>{content}</IOverflow>
+          {/* <IOverflow maxWidth={'100%'}>{content}</IOverflow> */}
         </IChip>
       )}
     </Fragment>

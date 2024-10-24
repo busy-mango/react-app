@@ -125,6 +125,10 @@
 
 .filled {
   color: var(--font-color-b8);
+
+  &.disabled {
+    color: var(--font-color-disabled);
+  }
   &:not(.danger):not(.disabled) {
     background-color: var(--primary-color);
     &:hover {
@@ -154,24 +158,27 @@
 .bordered {
   border-width: 1px;
   border-style: solid;
-  border-color: currentColor;
+  border-color: var(--border-color-3);
 
   &:not(.disabled):not(.danger) {
-    color: var(--primary-color);
+    color: var(--font-size-06);
+
+    background-color: var(--fill-color-warp);
+
     &:hover {
-      color: var(--primary-color-hover);
+      background-color: var(--fill-color-hover);
     }
     &:focus-within {
-      color: var(--primary-color-active);
+      background-color: var(--fill-color-active);
     }
   }
   &.danger:not(.disabled) {
     color: var(--font-color-danger);
     &:hover {
-      color: var(--danger-color-hover);
+      background-color: var(--fill-color-hover);
     }
     &:focus-within {
-      color: var(--danger-color-active);
+      background-color: var(--fill-color-active);
     }
   }
   &.danger.disabled {

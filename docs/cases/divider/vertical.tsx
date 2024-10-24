@@ -1,13 +1,13 @@
-import { IDivider, IFlex, ISignLine } from '@/components';
+import { IButton, IDivider, IFlex, ISignLine } from '@/components';
 import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => (
   <IFlex gap={iThemeVariable('--gap-01')}>
-    <ISignLine type="arrowDoubleLeft" />
+    <IButton icon={<ISignLine type="arrowDoubleLeft" />} variant="text" />
     <IDivider vertical />
-    <ISignLine type="arrowDoubleRight" />
+    <IButton icon={<ISignLine type="arrowDoubleRight" />} variant="text" />
     <IDivider vertical />
-    <ISignLine type="magnifier" />
+    <IButton icon={<ISignLine type="magnifier" />} variant="text" />
   </IFlex>
 );
 

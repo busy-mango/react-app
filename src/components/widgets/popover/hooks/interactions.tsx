@@ -10,11 +10,11 @@ import {
 
 import type { IPopoverEvent, IPopoverProps } from '../models';
 
-const iRole = (mode: IPopoverProps['mode']) => {
-  switch (mode) {
-    case 'tip':
+const iRole = (variant: IPopoverProps['variant']) => {
+  switch (variant) {
+    case 'tooltip':
       return 'tooltip' as const;
-    case 'over':
+    case 'card':
       return 'menu' as const;
     case 'confirm':
       return 'dialog' as const;
@@ -24,14 +24,14 @@ const iRole = (mode: IPopoverProps['mode']) => {
 export const useInterax = (
   context: FloatingRootContext,
   {
-    mode,
+    variant,
     events,
   }: {
     events: IPopoverEvent[];
-    mode: IPopoverProps['mode'];
+    variant: IPopoverProps['variant'];
   }
 ) => {
-  const role = useRole(context, { role: iRole(mode) });
+  const role = useRole(context, { role: iRole(variant) });
   const focus = useFocus(context, {
     enabled: events?.includes('focus'),
   });

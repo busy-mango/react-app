@@ -191,9 +191,9 @@ type CSSVarModel = {
   '--bg-color-normal': string;
   '--bg-color-navbar': string;
   '--bg-color-mask': string;
-  '--bg-color-warp': string;
+  '--fill-color-warp': string;
   '--bg-color-menu': string;
-  '--bg-color-card': string;
+  '--fill-color-warp': string;
   '--bg-color-control': string;
   '--bg-color-widgets': string;
   '--bg-color-tip': string;

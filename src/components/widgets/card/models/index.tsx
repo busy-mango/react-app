@@ -3,6 +3,24 @@ import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
 
+import type { ReactRender } from '@/models';
+
+export interface ICardState {}
+
+export type ICardRootRender = ReactRender<
+  HTMLMotionProps<'div'> & {
+    ref: React.RefObject<HTMLDivElement>;
+    header: React.ReactNode;
+    footer?: React.ReactNode;
+    children?: React.ReactNode;
+  },
+  ICardState
+>;
+
+export type ICardRenders = {
+  root?: ICardRootRender;
+};
+
 export interface ICardProps
   extends PropsWithChildren,
     OmitOf<HTMLMotionProps<'div'>, 'children' | 'title'> {
@@ -10,4 +28,6 @@ export interface ICardProps
   extra?: React.ReactNode;
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  variant?: 'filled' | 'bordered';
+  render?: ICardRenders;
 }

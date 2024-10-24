@@ -20,7 +20,6 @@ import {
   IHighLighter,
   IInput,
   IMenu,
-  IOverflow,
   IPopover,
   ISelector,
   ISignLine,
@@ -108,7 +107,7 @@ const iChipRender: ISelectorChipRender = (
           variant="filled"
           onClose={onClose}
         >
-          <IOverflow maxWidth={'100%'}>{content}</IOverflow>
+          {/* <IOverflow maxWidth={'100%'}>{content}</IOverflow> */}
         </IChip>
       )}
     </Fragment>
@@ -186,7 +185,7 @@ const iOptionRender: ISelectorOptionRender = (
           ))}
         </IFlex>
       }
-      mode="confirm"
+      variant="confirm"
     >
       {({ onClick, ...props }, { open }) => (
         <ISignLine

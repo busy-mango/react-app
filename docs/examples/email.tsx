@@ -104,7 +104,7 @@ const App: React.FC = () => (
       style={{ padding: 8, height: '100%', width: '100%' }}
     >
       <IFlex gap={iThemeVariable('--gap-03')} style={{ fontSize: 16 }}>
-        <IPopover content="archive" mode="tip" trigger="hover">
+        <IPopover content="archive" trigger="hover" variant="tooltip">
           {(props) => (
             <IButton {...props} icon={<ArchiveSVG />} variant="text" />
           )}

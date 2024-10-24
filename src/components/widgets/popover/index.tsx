@@ -1,8 +1,15 @@
-import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
+import {
+  forwardRef,
+  Fragment,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-import { compact, iArray } from '@busymango/utils';
+import { isFalse, isHTMLElement } from '@busymango/is-esm';
+import { compact, iArray, ifnot } from '@busymango/utils';
 import {
   autoUpdate,
   FloatingArrow,
@@ -11,11 +18,16 @@ import {
 } from '@floating-ui/react';
 
 import { container } from '@/init';
-import { iFindElement, iPropagation, size2px } from '@/utils';
+import { iFindElement, iPropagation, isOverflow } from '@/utils';
 
 import { useControlState } from '../control';
-import { useFloatingMotion } from './hooks/motion';
-import { ARROW_HEIGHT, ARROW_RADIUS, iFill, middlewares } from './helpers';
+import {
+  ARROW_HEIGHT,
+  ARROW_RADIUS,
+  iFill,
+  iFloatingMotion,
+  middlewares,
+} from './helpers';
 import { useInterax } from './hooks';
 import type { IPopoverProps, IPopoverRef, IPopoverState } from './models';
 
@@ -24,14 +36,15 @@ import * as styles from './index.scss';
 export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
   function IPopover(props, ref) {
     const {
+      root,
       content,
       open: iOpen,
-      mode = 'tip',
-      root = container,
+      padding = 5,
+      timing = 'alway',
       trigger = 'click',
       transform = false,
-      padding = size2px(5),
-      placement: iPlacement,
+      variant = 'tooltip',
+      placement: _placement,
       onOpenChange: iOpenChange,
       onApplyFloatingStyle,
       children,
@@ -46,22 +59,35 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
       onChange: iOpenChange,
     });
 
+    const middleware = useMemo(
+      () => middlewares({ iArrow, padding, root, onApplyFloatingStyle }),
+      [onApplyFloatingStyle, padding, root]
+    );
+
     const { refs, context, placement, floatingStyles } = useFloating({
       open,
       transform,
-      placement: iPlacement,
-      middleware: middlewares({ iArrow, padding, onApplyFloatingStyle }),
+      middleware,
+      placement: _placement,
       whileElementsMounted: autoUpdate,
       onOpenChange,
     });
 
     useImperativeHandle(ref, () => refs, [refs]);
 
-    const motions = useFloatingMotion({ placement });
+    const { current: reference } = refs.reference ?? {};
 
-    const interax = useInterax(context, { mode, events });
+    const interax = useInterax(context, { variant, events });
 
     const states: IPopoverState = { open: context.open, placement };
+
+    const isReferenceOverflow = useMemo(() => {
+      if (timing === 'overflow') {
+        return isOverflow(ifnot(isHTMLElement(reference) && reference));
+      }
+    }, [reference, timing]);
+
+    const iRoot = iFindElement(root) ?? container;
 
     return (
       <Fragment>
@@ -72,22 +98,21 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
           },
           states
         )}
-        {context.open && (
-          <FloatingPortal root={iFindElement(root)}>
+        {context.open && !isFalse(isReferenceOverflow) && (
+          <FloatingPortal key={String(context.open)} root={iRoot}>
             <motion.div
               ref={refs.setFloating}
-              className={classNames(styles.wrap, styles.tip)}
-              style={floatingStyles}
+              className={classNames(styles.wrap, styles[variant])}
               {...interax.getFloatingProps({
                 onClick: iPropagation,
               })}
-              {...motions}
+              {...iFloatingMotion(floatingStyles)}
             >
               <div className={styles.content}>{content}</div>
               <FloatingArrow
                 ref={iArrow}
                 context={context}
-                fill={iFill(mode)}
+                fill={iFill(variant)}
                 height={ARROW_HEIGHT}
                 tipRadius={ARROW_RADIUS}
               />

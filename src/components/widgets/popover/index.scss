@@ -11,18 +11,33 @@
     border-radius: var(--border-radius-03);
   }
 
-  &.over,
+  &.card,
   &.confirm {
     background-color: var(--bg-color-float);
   }
 
-  &.tip {
+  &.tooltip {
     color: var(--font-color-b8);
     font-size: var(--font-size-03);
 
+    width: calc(100vw - var(--gap-03) * 2);
+
     .content {
-      padding: var(--gap-02) var(--gap-03);
+      padding: var(--gap-03) var(--gap-04);
       background-color: var(--bg-color-tip);
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: var(--border-radius-10);
+        background-color: var(--bg-color-thumb);
+        box-shadow: var(--shadow-02);
+      }
+
+      &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+        background-color: transparent;
+        border-radius: var(--border-radius-10);
+      }
     }
   }
 }
