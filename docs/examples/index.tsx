@@ -1,5 +1,6 @@
 import { Tab, Tabs } from 'rspress/theme';
 
+import { Algorithm } from './algorithm';
 import Email from './email';
 
 import * as styles from './index.scss';
@@ -10,7 +11,9 @@ const App: React.FC = () => (
       <Tab label="邮件">
         <Email />
       </Tab>
-      <Tab label="Tab 2">Tab 2 content</Tab>
+      <Tab label="算法">
+        <Algorithm />
+      </Tab>
     </Tabs>
   </article>
 );

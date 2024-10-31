@@ -28,40 +28,23 @@ const App: React.FC = () => {
     >
       <IPopover
         content={string}
+        render={{
+          reference: (props) => (
+            <ICard
+              render={{
+                root: ({ className }) => (
+                  <ITypography className={className} maxRow={3} {...props}>
+                    {ellipsis(string)}
+                  </ITypography>
+                ),
+              }}
+            />
+          ),
+        }}
         root={root}
         timing="overflow"
         variant="tooltip"
-      >
-        {(props) => (
-          <ICard
-            render={{
-              root: ({ className }) => (
-                <ITypography className={className} maxRow={3} {...props}>
-                  {string}
-                </ITypography>
-              ),
-            }}
-          />
-        )}
-      </IPopover>
-      <IPopover
-        content={string}
-        root={root}
-        timing="overflow"
-        variant="tooltip"
-      >
-        {(props) => (
-          <ICard
-            render={{
-              root: ({ className }) => (
-                <ITypography className={className} maxRow={3} {...props}>
-                  {ellipsis(string)}
-                </ITypography>
-              ),
-            }}
-          />
-        )}
-      </IPopover>
+      />
     </IFlex>
   );
 };

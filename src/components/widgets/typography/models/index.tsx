@@ -1,4 +1,5 @@
 import type { ReactWrapProps } from '@/models';
+import type { ThemeColorToken } from '@/utils';
 
 export type ITypographyVariant =
   | 'h1'
@@ -11,23 +12,14 @@ export type ITypographyVariant =
   | 'inherit'
   | 'subtitle';
 
-export type ITypographyColor =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'error'
-  | 'info'
-  | 'warning'
-  | 'disabled';
-
 export type ITypographyElement = HTMLHeadingElement & HTMLParagraphElement;
 
 export type ITypographyAlign = React.CSSProperties['textAlign'];
 
 export interface ITypographyProps extends ReactWrapProps {
   maxRow?: number;
+  mark?: ThemeColorToken;
   align?: ITypographyAlign;
-  color?: ITypographyColor;
   /**
    * If `true`, the text will have a bottom margin.
    * @default false

@@ -1,16 +1,19 @@
-.tick {
-  flex-shrink: 0;
-}
-
 .option {
-  height: 100%;
-  border-radius: inherit;
-  padding: calc(var(--gap-01) + var(--gap-02)) var(--gap-03);
+  display: flex;
+  gap: var(--gap-03);
+
+  width: max-content;
+  min-height: var(--control-size-06);
+
+  cursor: pointer;
+
   font-size: var(--font-size-05);
   line-height: var(--control-size-03);
+  padding: var(--gap-02) var(--gap-06);
 
-  &.active,
+  &:focus,
   &:hover {
+    outline: none;
     color: var(--primary-color-hover);
     background-color: var(--fill-color-hover);
   }
@@ -21,19 +24,6 @@
   }
 }
 
-.item {
-  top: 0;
-  left: 0;
-  position: absolute;
-  border-radius: var(--border-radius-03);
-
-  width: 100%;
-  flex-basis: 0;
-  min-height: var(--control-size-06);
-
-  cursor: pointer;
-}
-
 .empty {
   padding: var(--gap-03);
 }
@@ -41,15 +31,17 @@
 .wrap {
   width: 100%;
   height: 100%;
+
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
 
-  max-height: calc(var(--control-size-06) * 8 + 2 * var(--gap-03));
+  box-shadow: var(--shadow-06);
+  background-color: var(--bg-color-menu);
 
   &::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 6px;
+    height: 6px;
     border-radius: var(--border-radius-10);
     background-color: var(--bg-color-mask);
   }

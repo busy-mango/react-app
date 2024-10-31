@@ -6,7 +6,7 @@ import { ifnot } from '@busymango/utils';
 import { onCheckCatch, useControlState } from '../control';
 import { ISignLine } from '../sign';
 import { ISVGWrap } from '../svg-wrap';
-import { IWaveWrap } from '../wave';
+import { IWave } from '../wave';
 import type {
   ICheckboxProps,
   ICheckboxRef,
@@ -30,32 +30,30 @@ const iRootRender: ICheckRootRender = (
   </span>
 );
 
-const iCheckboxRender: ICheckBoxRender = ({ input, icon, ...others }) => (
+const iCheckboxRender: ICheckBoxRender = ({
+  inputRef,
+  input,
+  icon,
+  wave,
+  ...others
+}) => (
   <ISVGWrap {...others}>
     {icon}
     {input}
+    {wave && <IWave className={styles.wave} target={inputRef} />}
   </ISVGWrap>
 );
 
-const iIconRender: ICheckIconRender = (
-  { wave, inputRef, ...others },
-  { checked, indeterminate }
-) => {
-  const type = (function () {
-    if (indeterminate) return 'minus';
-    if (checked) return 'tick';
-  })();
-
-  return (
-    <IWaveWrap
-      enabled={wave}
-      style={{ borderRadius: 'var(--border-radius-10)' }}
-      target={inputRef}
-    >
-      <ISignLine rect {...others} type={type} />
-    </IWaveWrap>
-  );
-};
+const iIconRender: ICheckIconRender = (props, { checked, indeterminate }) => (
+  <ISignLine
+    inline
+    {...props}
+    type={(function () {
+      if (indeterminate) return 'minus';
+      if (checked) return 'tick';
+    })()}
+  />
+);
 
 const iInputRender: ICheckInputRender = (
   { ref, value, onChange, ...others },
@@ -129,6 +127,8 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
         }),
         checkbox: (render?.checkbox ?? iCheckboxRender)(
           {
+            wave,
+            inputRef: input,
             className: styles.checkbox,
             input: (render?.input ?? iInputRender)(
               {
@@ -141,8 +141,6 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
             ),
             icon: (render?.icon ?? iIconRender)(
               {
-                wave,
-                inputRef: input,
                 className: classNames(styles.icon, {
                   [styles.checked]: checked,
                 }),

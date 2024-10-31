@@ -41,10 +41,9 @@
 /** size */
 .mini {
   font-size: inherit;
-  height: var(--control-size-03);
-  font-size: var(--font-size-02);
+  line-height: inherit;
   border-radius: var(--border-radius-02);
-  padding: 0 var(--gap-03);
+  padding: 0 var(--gap-02);
 }
 .medium {
   padding: 0 var(--gap-05);
@@ -87,7 +86,7 @@
   }
   &:not(.disabled) {
     border-color: var(--border-color-3);
-    &:hover {
+    &.clickable:hover {
       color: var(--border-color-hover);
       border-color: var(--border-color-hover);
     }

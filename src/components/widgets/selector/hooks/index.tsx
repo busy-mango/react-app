@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { flushSync } from 'react-dom';
 
-import { isObject, isTrue } from '@busymango/is-esm';
+import { isEmpty, isNumber, isObject, isTrue } from '@busymango/is-esm';
+import { compact, iArray } from '@busymango/utils';
 import type { FloatingContext, MiddlewareState } from '@floating-ui/react';
 import {
   autoUpdate,
@@ -15,12 +16,16 @@ import {
 } from '@floating-ui/react';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
+import type { ReactAction } from '@/models';
 import { size2px } from '@/utils';
 
-import type { ControlOption } from '../../control';
-import { estimateSize } from '../../menu';
+import type { ControlOption, ControlValues } from '../../control';
 import { iPredicate } from '../helpers';
-import type { ISelectorPredicate, ISelectorProps } from '../models';
+import type {
+  ISelectorChangeHandle,
+  ISelectorPredicate,
+  ISelectorProps,
+} from '../models';
 
 export const useIFloating = (params: {
   open?: boolean;
@@ -79,30 +84,6 @@ export const useIInteractions = (context: FloatingContext) => {
   return useInteractions([click, dismiss]);
 };
 
-export const useIMotion = (context: FloatingContext) => {
-  const isTop = context.placement.startsWith('top');
-
-  const transition = useMemo(
-    () => ({
-      duration: 0.15,
-      ease: 'easeOut',
-      originY: isTop ? 1 : 0,
-    }),
-    [isTop]
-  );
-
-  const initial = useMemo(
-    () => ({
-      opacity: 0,
-      scaleY: 0.96,
-      y: (isTop ? 0.25 : -0.25) * estimateSize(),
-    }),
-    [isTop]
-  );
-
-  return { transition, initial };
-};
-
 export const useFilterOptions = (
   options?: ControlOption[],
   params: {
@@ -124,3 +105,56 @@ export const useFilterOptions = (
     });
   }, [predicate, keyword, options]);
 };
+
+export const useArrowKeyDown = ({
+  active,
+  values,
+  options,
+  multiple,
+  onChange,
+  setActive,
+}: {
+  setActive: ReactAction<number | undefined>;
+  onChange: ISelectorChangeHandle;
+  values?: ControlValues;
+  options?: ControlOption[];
+  multiple?: boolean;
+  active?: number;
+}) =>
+  useMemoFunc((event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { code } = event;
+    event.stopPropagation();
+    if (!isEmpty(options)) {
+      switch (code) {
+        case 'Backspace':
+          if (multiple) {
+            onChange((cur) => compact(iArray(cur)).slice(0, -1));
+          }
+          break;
+        case 'Enter':
+          if (isNumber(active)) {
+            const current = options[active];
+            if (current) {
+              onChange((cur) => {
+                if (multiple) {
+                  const curs = compact(iArray(cur));
+                  return values?.includes(current.value)
+                    ? curs.filter((val) => val !== current.value)
+                    : curs.concat([current.value]);
+                }
+                return current.value;
+              });
+            }
+          }
+          break;
+        case 'ArrowDown':
+          setActive((cur) => (cur ?? -1) + 1);
+          break;
+        case 'ArrowUp':
+          setActive?.((cur) => (cur ?? options.length) - 1);
+          break;
+        default:
+          break;
+      }
+    }
+  });

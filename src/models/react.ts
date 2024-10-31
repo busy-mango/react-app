@@ -47,6 +47,7 @@ export type ReactCSSColor = React.CSSProperties['color'];
 /** React wrap props */
 export type ReactWrapProps<T extends HTMLElement = HTMLElement> = OmitOf<
   React.HTMLAttributes<T>,
+  | 'content'
   | 'defaultValue'
   | 'onChange'
   | 'onSelect'

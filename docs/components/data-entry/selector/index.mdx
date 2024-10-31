@@ -1,0 +1,78 @@
+# Selector 选择器
+
+> 选择组件用于从选项列表中收集用户提供的信息。
+
+使用 `import { ISelector } from "@/components";`
+
+源码 `components/widgets/selector`
+
+## 何时使用
+
+* 弹出一个下拉菜单给用户选择操作，用于代替原生的选择器，或者需要一个更优雅的多选器时。
+
+* 当选项少时（少于 5 项），建议直接将选项平铺，使用 Radio 是更好的选择。
+
+## 代码演示
+
+### 基础使用
+
+除非下拉选单靠近窗口底部，否则会被放置在其引用元素的下方。
+
+<code src='./demos/basic' />
+
+{/* [![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fbasic.tsx&showConsole=true)
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/busy-mango/react-app?file=src%2Fpages%2Findex.tsx) */}
+
+### 使用多选
+
+Selector 组件可以处理多个选择。与单选一样，您可以通过访问 onChange 回调中的值来获取新值。
+
+<code src='./demos/multiple' />
+
+{/* [![Open in Sandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/busy-mango/react-app/main?embed=1&file=%2Fsrc%2Fexamples%2Fselector%2Fmultiple.tsx) */}
+
+{/* ### 进阶使用
+
+配合 react-query 获取远程数据。
+
+<code src='@cases/selector/promise' />
+
+自定义控件UI。
+
+<code src='@cases/selector/custom' /> */}
+
+## API
+
+| 参数 | 类型 | 默认值 | 描述 |
+| -------------------- | ----------------------------------------- | ------------ | --------------- |
+| `autoFocus`          | `boolean`                                 | `-`          | 控件是否自动聚焦。|
+| `clearable`          | `boolean`                                 | `true`       | 控件是否呈现清空按钮。|
+| `defaultValue`       | `string`                                  | `-`          | 控件默认选中的值。|
+| `filter`             | `boolean` \| `ISelectorFilterParams`      | `true`       | 控件过滤选项配置。|
+| `iFloatingClassName` | `string`                                  | `-`          | 控件浮层样式。|
+| `iFloatingRoot`      | `QueryFloatingRootFunc`                   | `-`          | 浮层默认渲染到 root 上，也可以使用此方法指定根节点。|
+| `isLoading`          | `boolean`                                 | `false`      | 控件是否呈现加载中样式。|
+| `initialOpen`        | `boolean`                                 | `false`      | 控件是否在载入时展开浮层选单。|
+| `keyword`            | `string`                                  | `-`          | 控制控件搜索文本。|
+| `maxHeight`          | `string`                                  | `-`          | 控制控件浮层选单最大高度。|
+| `measure`            | `string`                                  | `false`      | 浮层选单是否测量元素高度（用来实现选项动态高度，消耗性能，不建议开启）。|
+| `multiple`           | `boolean`                                 | `false`      | 控件是否开启多选。 |
+| `open`               | `boolean`                                 | `-`          | 控制浮层选单是否展开。|
+| `options`            | `ControlOption[]`                         | `-`          | 控件浮层选单可选性。|
+| `pattern`            | `ControlPattern`                          | `editable`   | 控制控件交互方式。  |
+| `prefix`             | `ReactNode`                               | `-`          | 控件前缀节点（一般用于放置前缀图标）。|
+| `separator`          | `ReactNode`                               | `-`          | 控件选中项的分隔符。|
+| `size`               | `ControlUISize`                           | `"medium"`   | 控制控件的尺寸大小。|
+| `status`             | `ControlUIStatus`                         | `"success"`  | 控制控件的校验状态。 |
+| `suffix`             | `ReactNode`                               | `-`          | 控件后缀节点，用于替换选择器默认的箭头、关闭按钮交互。|
+| `value`              | `React.Key[]` \| `React.Key` \| `null`    | `-`          | 控件当前选中项，支持`null`值。|
+| `variant`            | `"filled"` \| `"standard"` \| `"bordered"`| `"bordered"` | 控制控件呈现的形态变体。|
+| `render`             | `ISelectorRenders`                        | `-`          | 自定义控件UI样式。|
+| `onChange`           | `ScrollableChangeFunc`                    | `-`          | 控件选中选单选项时触发的回调。 <br/> ⚠️这是通用事件，不是`ChangeEvent`，除非是由浏览器自动填充引起的。 |
+| `onOpenChange`       | `(open?: boolean) => void`                | `-`          | 浮层选单展开、收起时触发的回调。|
+| `onScroll`           | `React.UIEventHandler<HTMLDivElement>`    | `-`          | 浮层选单滚动时的触发的回调。|
+| `onSearch`           | `(value?: string) => void`                | `-`          | 控件搜索文本变更触发的回调。|
+| `onSelect`           | `ScrollableSelectFunc`                    | `-`          | 选项选中时触发的回调。|
+
+{/* ## 常见问题 */}

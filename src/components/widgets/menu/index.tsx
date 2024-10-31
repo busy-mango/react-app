@@ -1,18 +1,14 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence } from 'framer-motion';
 
-import { iArray, ifnot, sizeOf } from '@busymango/utils';
-import type { VirtualItem } from '@tanstack/react-virtual';
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { isEmpty, isFunction } from '@busymango/is-esm';
+import { iArray } from '@busymango/utils';
 
 import { iCompact, iPropagation } from '@/utils';
 
 import { useControlState } from '../control';
 import { IEmptyWrap } from '../empty';
-import { IFlex } from '../flex';
-import { ISignLine } from '../sign';
-import { estimateSize } from './helpers';
+import { ISVGWrap } from '../svg-wrap';
 import type {
   IMenuEmptyRender,
   IMenuOptionRender,
@@ -22,122 +18,86 @@ import type {
 
 import * as styles from './index.scss';
 
-const iEmptyRender: IMenuEmptyRender = (props) => <IEmptyWrap {...props} />;
+const iEmptyRender: IMenuEmptyRender = (props) => (
+  <li>
+    <IEmptyWrap {...props} />
+  </li>
+);
 
-const iOptionRender: IMenuOptionRender = (option, { isActive, isSelected }) => (
-  <IFlex
-    align="center"
-    className={classNames(styles.option, {
-      [styles.active]: isActive,
-      [styles.selected]: isSelected,
-    })}
-    justify="space-between"
+const iOptionRender: IMenuOptionRender = ({
+  option: { icon, value, label },
+  index,
+  onChange,
+}) => (
+  <li
+    className={classNames(styles.option)}
+    data-index={index}
+    value={value?.toString()}
+    onClick={() => {
+      onChange(value);
+    }}
   >
-    {option?.label ?? option?.value?.toLocaleString()}
-    <AnimatePresence>
-      {isSelected && <ISignLine className={styles.tick} type="tick" />}
-    </AnimatePresence>
-  </IFlex>
+    {icon && <ISVGWrap>{icon}</ISVGWrap>}
+    {label ?? value?.toLocaleString()}
+  </li>
 );
 
 export const IMenu = forwardRef<IMenuRef, IMenuProps>(
   function IMenu(props, iForwardRef) {
     const {
-      value,
       options,
-      maxHeight,
-      isLoading,
       className,
-      isPositioned,
-      measure = false,
+      value: _value,
       multiple = false,
       onClick = iPropagation,
+      onChange: _onChange,
       onSelect,
-      onChange,
-      onScroll,
       render,
       ...others
     } = props;
-    const count = sizeOf(options);
 
     const container = useRef<HTMLDivElement>(null);
 
-    const [active, setActive] = useState<number>(-1);
+    const [value, onChange] = useControlState(props);
 
-    const getScrollElement = () => container.current!;
+    const values = iCompact(iArray(value) ?? []);
 
-    const [val, iChange] = useControlState({ value, onChange });
-
-    const iSelectedList = iCompact(iArray(val) ?? []);
+    const states = { values, multiple };
 
     useImperativeHandle(iForwardRef, () => ({
       native: container.current!,
-      active: () => {},
-      select: () => {},
+      scroll: (recipe) => {
+        const { current } = container;
+      },
+      select: (recipe) => {
+        onChange?.(isFunction(recipe) ? recipe(value) : recipe);
+      },
     }));
 
-    const {
-      getTotalSize,
-      scrollToIndex,
-      measureElement,
-      getVirtualItems,
-      getOffsetForIndex,
-    } = useVirtualizer({
-      getScrollElement,
-      estimateSize,
-      overscan: 20,
-      count,
-    });
-
-    const items = getVirtualItems();
-
-    const iRender = ({ key, index, start }: VirtualItem) => {
-      const element = options![index];
-
-      const { value } = element;
-      const isActive = active === index;
-      const transform = `translateY(${start}px)`;
-      const isSelected = iSelectedList.includes(value);
-
-      return (
-        <div
-          key={key}
-          ref={ifnot(measure && measureElement)}
-          aria-posinset={index + 1}
-          aria-selected={isActive}
-          aria-setsize={count}
-          className={styles.item}
-          data-index={index}
-          role="option"
-          style={{ transform }}
-          onClick={() => {
-            iChange(element.value);
-            onSelect?.(index, iSelectedList);
-          }}
-        >
-          {(render?.option ?? iOptionRender)(element, {
-            isActive,
-            isSelected,
-            index,
-          })}
-        </div>
-      );
-    };
-
     return (
-      <div
+      <menu
         ref={container}
         className={classNames(styles.wrap, className)}
-        style={{ maxHeight }}
         onClick={onClick}
-        onScroll={onScroll}
         {...others}
       >
-        <div style={{ height: getTotalSize() }}>{items.map(iRender)}</div>
-      </div>
+        {isEmpty(options) && (render?.empty ?? iEmptyRender)({}, states)}
+        {options?.map((option, index) => (
+          <Fragment key={option.value?.toString()}>
+            {(render?.option ?? iOptionRender)(
+              {
+                index,
+                option,
+                onChange,
+                onSelect,
+              },
+              states
+            )}
+          </Fragment>
+        ))}
+      </menu>
     );
   }
 );
 
-export { estimateSize } from './helpers';
 export type { IMenuProps, IMenuRef } from './models';

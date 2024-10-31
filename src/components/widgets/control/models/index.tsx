@@ -2,9 +2,10 @@ import type React from 'react';
 import type { FocusEvent } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
 
+import type { Nil } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 
-import type { ReactInputProps, ReactRender } from '@/models';
+import type { ReactRender } from '@/models';
 
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';
@@ -25,7 +26,9 @@ export type ControlPattern =
 /** 控件校验状态 */
 export type ControlUIStatus = 'vaildating' | 'danger' | 'warn' | 'success';
 
-export type ControlValue = ReactInputProps['value'] | null;
+export type ControlValue = React.Key | null | undefined;
+
+export type ControlValues = Exclude<ControlValue, Nil>[];
 
 export type ControlOption = {
   value: React.Key;

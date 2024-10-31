@@ -26,7 +26,7 @@ export type IPickerRootRender = ReactRender<ReactWrapProps, IPickerState>;
 export interface IPickerProps
   extends OmitOf<
     HTMLMotionProps<'div'>,
-    'title' | 'onChange' | 'defaultValue'
+    'title' | 'onChange' | 'onSelect' | 'defaultValue'
   > {
   open?: boolean;
   root?: ReactTargetType;
@@ -39,5 +39,6 @@ export interface IPickerProps
     root?: IPickerRootRender;
   };
   onChange?: (value?: ControlOption['value'][]) => void;
+  onSelect?: (value?: ControlOption['value'][]) => void;
   onOpenChange?: (open?: boolean) => void;
 }

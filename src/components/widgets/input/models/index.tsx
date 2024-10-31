@@ -2,14 +2,14 @@ import { type OmitOf } from '@busymango/utils';
 
 import type { ReactInputProps } from '@/models';
 
-import type { ControlPattern, ControlValue } from '../../control';
+import type { ControlPattern } from '../../control';
 
 export interface IInputProps
-  extends OmitOf<ReactInputProps, 'value' | 'width'> {
-  /** 控件是否跟随文本宽度 */
+  extends OmitOf<ReactInputProps, 'value' | 'width' | 'size'> {
+  /** 控件宽度 */
   width?: React.CSSProperties['width'];
   /** 控件值 */
-  value?: ControlValue;
+  value?: ReactInputProps['value'] | null;
   /** 控件交互模式 */
   pattern?: ControlPattern;
   /** 回车事件 */

@@ -38,32 +38,33 @@ const iItemRender: ISegmentItemRender = (
   },
   { readOnly }
 ) => (
-  <div className={styles.itemWrap}>
+  <motion.div
+    className={styles.itemWrap}
+    whileHover={{
+      backgroundColor: iThemeVariable('--fill-color-hover'),
+    }}
+  >
+    {thumb}
     <button
       {...others}
       tabIndex={0}
       onClick={(event) => {
         onClick?.(event);
         if (!readOnly && !disabled) {
-          onChange(value);
+          onChange(value!);
         }
       }}
       onKeyDown={iPressEvent(() => {
         if (!readOnly && !disabled) {
-          onChange(value);
+          onChange(value!);
         }
       }, onKeyDown)}
     >
-      <span>
-        <AnimatePresence>
-          {icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>}
-        </AnimatePresence>
-        {label}
-      </span>
+      <AnimatePresence>{icon && <ISVGWrap>{icon}</ISVGWrap>}</AnimatePresence>
+      {label}
       {extra}
     </button>
-    {thumb}
-  </div>
+  </motion.div>
 );
 
 const iThumbRender: ISegmentThumbRender = ({
@@ -103,7 +104,11 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
 
   const layoutId = useId();
 
-  const [value, onChange] = useControlState(props);
+  const [value, onChange] = useControlState({
+    defaultValue,
+    value: _value,
+    onChange: _onChange,
+  });
 
   const states: ISegmentState = {
     isFullWidth,
@@ -127,7 +132,7 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
         className
       ),
       segments: options?.map((item) => (
-        <Fragment key={item.value}>
+        <Fragment key={item.value?.toString()}>
           {(render?.item ?? iItemRender)(
             {
               ...item,

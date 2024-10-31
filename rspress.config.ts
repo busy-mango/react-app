@@ -34,7 +34,14 @@ export default defineConfig({
   icon: '/favicon.svg',
   logo: '/mango.png',
   logoText: 'react-app',
-  plugins: [pluginPreview()],
+  plugins: [
+    pluginPreview({
+      iframeOptions: {
+        position: 'follow',
+        framework: 'react',
+      },
+    }),
+  ],
   globalStyles: join(dir.docs, 'index.css'),
   globalUIComponents: [join(dir.docs, 'effects.tsx')],
   route: {
@@ -56,6 +63,12 @@ export default defineConfig({
             resourceQuery: /react/,
             options: { icon: false, typescript: true },
           });
+
+        if (config.watchOptions) {
+          config.watchOptions.ignored = /node_modules/;
+        } else {
+          config.watchOptions = { ignored: /node_modules/ };
+        }
 
         config.plugins?.push(
           new ForkTsCheckerWebpackPlugin({

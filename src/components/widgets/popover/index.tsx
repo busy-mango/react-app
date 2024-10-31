@@ -8,38 +8,38 @@ import {
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-import { isFalse, isHTMLElement } from '@busymango/is-esm';
-import { compact, iArray, ifnot } from '@busymango/utils';
-import {
-  autoUpdate,
-  FloatingArrow,
-  FloatingPortal,
-  useFloating,
-} from '@floating-ui/react';
+import { isHTMLElement } from '@busymango/is-esm';
+import { compact, iArray } from '@busymango/utils';
+import { autoUpdate, FloatingArrow, useFloating } from '@floating-ui/react';
 
 import { container } from '@/init';
 import { iFindElement, iPropagation, isOverflow } from '@/utils';
 
 import { useControlState } from '../control';
-import {
-  ARROW_HEIGHT,
-  ARROW_RADIUS,
-  iFill,
-  iFloatingMotion,
-  middlewares,
-} from './helpers';
+import { IFloating } from '../floating';
+import { ARROW_HEIGHT, ARROW_RADIUS, iFill, middlewares } from './helpers';
 import { useInterax } from './hooks';
-import type { IPopoverProps, IPopoverRef, IPopoverState } from './models';
+import type {
+  IPopoverProps,
+  IPopoverRef,
+  IPopoverReferenceRender,
+  IPopoverState,
+} from './models';
 
 import * as styles from './index.scss';
+
+const iReferenceRender: IPopoverReferenceRender = (props) => (
+  <motion.span {...props} />
+);
 
 export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
   function IPopover(props, ref) {
     const {
       root,
+      render,
       content,
+      children,
       open: iOpen,
-      padding = 5,
       timing = 'alway',
       trigger = 'click',
       transform = false,
@@ -47,7 +47,7 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
       placement: _placement,
       onOpenChange: iOpenChange,
       onApplyFloatingStyle,
-      children,
+      ...others
     } = props;
 
     const events = compact(iArray(trigger));
@@ -60,8 +60,8 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
     });
 
     const middleware = useMemo(
-      () => middlewares({ iArrow, padding, root, onApplyFloatingStyle }),
-      [onApplyFloatingStyle, padding, root]
+      () => middlewares({ iArrow, variant, root, onApplyFloatingStyle }),
+      [onApplyFloatingStyle, root, variant]
     );
 
     const { refs, context, placement, floatingStyles } = useFloating({
@@ -81,34 +81,39 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
 
     const states: IPopoverState = { open: context.open, placement };
 
-    const isReferenceOverflow = useMemo(() => {
-      if (timing === 'overflow') {
-        return isOverflow(ifnot(isHTMLElement(reference) && reference));
+    const mount = useMemo(() => {
+      if (!isHTMLElement(reference)) {
+        return false;
       }
+      if (timing === 'overflow') {
+        return isOverflow(reference);
+      }
+      return true;
     }, [reference, timing]);
-
-    const iRoot = iFindElement(root) ?? container;
 
     return (
       <Fragment>
-        {children?.(
+        {(render?.reference ?? iReferenceRender)(
           {
+            children,
             ref: refs.setReference,
             ...interax.getReferenceProps(),
+            ...others,
           },
           states
         )}
-        {context.open && !isFalse(isReferenceOverflow) && (
-          <FloatingPortal key={String(context.open)} root={iRoot}>
-            <motion.div
-              ref={refs.setFloating}
-              className={classNames(styles.wrap, styles[variant])}
-              {...interax.getFloatingProps({
-                onClick: iPropagation,
-              })}
-              {...iFloatingMotion(floatingStyles)}
-            >
-              <div className={styles.content}>{content}</div>
+        {mount && (
+          <IFloating
+            className={classNames(styles.wrap, styles[variant])}
+            context={context}
+            portal={{ root: iFindElement(root) ?? container }}
+            style={floatingStyles}
+            {...interax.getFloatingProps({
+              onClick: iPropagation,
+            })}
+          >
+            <div className={styles.content}>{content}</div>
+            {variant !== 'card' && (
               <FloatingArrow
                 ref={iArrow}
                 context={context}
@@ -116,8 +121,8 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
                 height={ARROW_HEIGHT}
                 tipRadius={ARROW_RADIUS}
               />
-            </motion.div>
-          </FloatingPortal>
+            )}
+          </IFloating>
         )}
       </Fragment>
     );

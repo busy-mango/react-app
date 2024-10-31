@@ -9,7 +9,10 @@
   margin: 0;
   max-width: 100%;
   word-break: break-all;
-  margin-bottom: 0.35em;
+
+  &.margin {
+    margin-bottom: 0.35em;
+  }
 }
 
 .h1,
@@ -19,10 +22,11 @@
 .h5,
 .h6,
 .body,
-.inherit,
 .subtitle {
   display: initial;
   display: -webkit-box;
+
+  border-radius: var(--border-radius-02);
 
   width: max-content;
   height: max-content;
@@ -39,7 +43,7 @@
 
 .h1,
 .h2 {
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .h3,
@@ -100,10 +104,16 @@
 }
 
 .inherit {
+  display: inline-flex;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
   letter-spacing: inherit;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .measure {

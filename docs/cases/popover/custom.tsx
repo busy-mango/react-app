@@ -29,28 +29,31 @@ const App: React.FC = () => {
               'right-end',
               'right-start',
             ] satisfies Placement[]
-          ).map((value) => ({
-            value,
-          }))}
+          ).map((value) => ({ value }))}
           value={placement}
           onChange={(v) => setPlacement(v as Placement)}
         />
       </IFlex>
-      <IFlex ref={ref} centered style={{ padding: iThemeVariable('--gap-10') }}>
+      <IFlex
+        ref={ref}
+        centered
+        style={{ position: 'relative', padding: iThemeVariable('--gap-10') }}
+      >
         <IPopover
           open
           content={placement}
           placement={placement}
+          render={{
+            reference: (props) => (
+              <IButton size="huge" tabIndex={0} {...props}>
+                {placement}
+              </IButton>
+            ),
+          }}
           root={ref}
           trigger={'click'}
           variant="tooltip"
-        >
-          {(props) => (
-            <IButton size="huge" tabIndex={0} {...props}>
-              {placement}
-            </IButton>
-          )}
-        </IPopover>
+        />
       </IFlex>
     </IFlex>
   );

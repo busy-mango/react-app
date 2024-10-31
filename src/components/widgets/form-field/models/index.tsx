@@ -22,7 +22,7 @@ export type IFieldGridMode =
 export interface IFieldCellProps
   extends OmitOf<ReactWrapProps, 'title' | 'children'> {
   /** 字段标题对齐方式 */
-  align?: 'start' | 'end';
+  align?: IFlexProps['align'];
   /** 是否开启外间距 */
   margin?: boolean | 'feedback';
   /** 是否显示必填标识 */
@@ -60,7 +60,7 @@ export interface IFieldCellProps
 export interface IFieldGridContextVal
   extends PartialPick<
     IFieldCellProps,
-    'size' | 'colon' | 'mode' | 'margin' | 'forceRenderTitle'
+    'size' | 'colon' | 'mode' | 'margin' | 'forceRenderTitle' | 'align'
   > {}
 
 export interface IFieldGridProps extends IFlexProps, IFieldGridContextVal {

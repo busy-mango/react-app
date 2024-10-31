@@ -1,23 +1,32 @@
-.wrap {
-  flex-grow: 0;
+.thumb {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: inherit;
 
-  &.is-full-width {
-    width: 100%;
-    .item {
-      flex-grow: 1;
-    }
-  }
-  &:not(.is-full-width) {
-    width: max-content;
-    .item {
-      flex-grow: 0;
-    }
-  }
+  box-shadow: var(--shadow-03);
+  background-color: var(--bg-color-float);
+}
 
-  padding: var(--gap-01);
-  font-size: var(--font-size-03);
-  border-radius: var(--border-radius-03);
-  background-color: var(--bg-color-widgets);
+.item {
+  z-index: 1;
+  width: 100%;
+
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: unset;
+
+  gap: var(--gap-02);
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.item-wrap {
+  position: relative;
+  display: inline-flex;
+  border-radius: inherit;
 }
 
 .mini {
@@ -46,7 +55,6 @@
   padding: var(--gap-02);
   font-size: var(--font-size-04);
   border-radius: var(--border-radius-03);
-
   .item {
     min-height: var(--control-size-06);
     padding: var(--gap-01) var(--gap-03);
@@ -54,48 +62,7 @@
 }
 
 .vertical {
-  .item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-
-.item-wrap {
-  position: relative;
-  display: inline-flex;
-  border-radius: inherit;
-}
-
-.item {
-  z-index: 1;
-  cursor: pointer;
-  border-radius: inherit;
-  background-color: unset;
-
-  &::before {
-    z-index: 0;
-
-    inset: 0;
-    content: "";
-    position: absolute;
-    border-radius: inherit;
-    background-color: transparent;
-
-    transition-duration: 200ms;
-    transition-property: all;
-    transition-timing-function: var(--ease-in-out-cubic);
-  }
-
-  &:not(.disabled):hover {
-    &::before {
-      background-color: var(--fill-color-hover);
-    }
-  }
-}
-
-.icon {
-  margin-right: var(--gap-02);
+  cursor: inherit;
 }
 
 .disabled {
@@ -107,16 +74,23 @@
   cursor: unset;
 }
 
-.thumb {
-  inset: 0;
-  z-index: 0;
+.wrap {
+  background-color: var(--bg-color-widgets);
 
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: inherit;
+  &.is-full-width {
+    width: 100%;
+    flex-grow: 1;
 
-  box-shadow: var(--shadow-03);
+    .item-wrap {
+      flex-grow: 1;
+    }
+  }
+  &:not(.is-full-width) {
+    flex-grow: 0;
+    width: max-content;
 
-  background-color: var(--bg-color-float);
+    .item-wrap {
+      flex-grow: 0;
+    }
+  }
 }

@@ -11,11 +11,13 @@ export const useIFieldGridContext = (): IFieldGridContextVal | undefined => {
 };
 
 export const IFieldGridProvider: ReactCFC<IFieldGridContextVal> = (props) => {
-  const { forceRenderTitle, children, margin, mode, size, colon } = props;
+  const { forceRenderTitle, align, children, margin, mode, size, colon } =
+    props;
 
   const {
     mode: _mode,
     size: _size,
+    align: _align,
     colon: _colon,
     margin: _margin,
     forceRenderTitle: _forceRenderTitle,
@@ -27,11 +29,14 @@ export const IFieldGridProvider: ReactCFC<IFieldGridContextVal> = (props) => {
         () => ({
           mode: mode ?? _mode,
           size: size ?? _size,
+          align: align ?? _align,
           colon: colon ?? _colon,
           margin: margin ?? _margin,
           forceRenderTitle: forceRenderTitle ?? _forceRenderTitle,
         }),
         [
+          align,
+          _align,
           colon,
           _colon,
           size,

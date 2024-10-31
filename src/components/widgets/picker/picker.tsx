@@ -12,7 +12,6 @@ import {
 } from '@floating-ui/react';
 
 import { useMemoFunc, useToggle } from '@/hooks';
-import { iFindElement } from '@/utils';
 
 import { IBackdrop } from '../backdrop';
 import { IButton } from '../button';
@@ -43,6 +42,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
     defaultValue: iDefaultValue,
     onOpenChange: iOpenChange,
     onChange: iChange,
+    onSelect,
     render,
     ...others
   } = props;
@@ -63,7 +63,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
 
   const { refs, context } = useFloating({ open, onOpenChange });
 
-  const focus = useRef(columns?.map((e, i) => value?.[i] ?? e[0].value));
+  const focus = useRef(columns?.map((e, i) => value?.[i] ?? e?.[0]?.value));
 
   const { getFloatingProps, getReferenceProps } = useInteractions([
     useClick(context),
@@ -104,7 +104,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
         scroll
         className={styles.overlay}
         open={context.open || isPlaying}
-        root={iFindElement(root)}
+        root={root}
       >
         <AnimatePresence>
           {context.open && (
@@ -148,6 +148,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
                       focus.current = focus.current?.map(
                         (e, i) => (i === index ? val : e) ?? e
                       );
+                      onSelect?.(focus.current);
                     }}
                   />
                 ))}

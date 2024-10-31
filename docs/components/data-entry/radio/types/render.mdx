@@ -1,0 +1,43 @@
+
+```ts
+import type { HTMLMotionProps } from 'framer-motion';
+
+import type { PlainObject } from '@busymango/is-esm';
+
+import type { ReactWrapProps } from '@/models';
+
+import type { ControlOption } from '../../control';
+
+/** 通用自定义渲染函数 */
+interface IRender<P = PlainObject, E = unknown> {
+  (props: P, state: IRadioState & E): React.ReactNode;
+}
+
+type IRadioRootRender = IRender<
+  ReactWrapProps<HTMLSpanElement> & {
+    radio: React.ReactNode;
+    label: React.ReactNode;
+  }
+>;
+
+type IRadioRadioRender = IRender<
+  HTMLMotionProps<'i'> & { input: React.ReactNode }
+>;
+
+type IRadioInputRender = IRender<
+  InputProps & {
+    ref: React.RefObject<HTMLInputElement>;
+  },
+  IRadioState
+>;
+
+type IRadioRenders = {
+  root?: IRadioRootRender;
+  radio?: IRadioRadioRender;
+  input?: IRadioInputRender;
+};
+
+interface IRadioChange {
+  (value?: ControlOption['value'] | null, option?: ControlOption): void;
+}
+```

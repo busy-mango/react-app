@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 
-import { isTrue } from '@busymango/is-esm';
+import { isFalse, isTrue } from '@busymango/is-esm';
 import { FloatingPortal } from '@floating-ui/react';
 
 import type { ReactCFC } from '@/models';
+import { iFindElement } from '@/utils';
 
 import type { IBackdropProps } from './models';
 import { IOverlay } from './overlay';
@@ -22,12 +23,14 @@ export const IBackdrop: ReactCFC<IBackdropProps> = ({
   const [mounted, setMount] = useState(false);
 
   useEffect(() => {
-    isTrue(open) && setMount(true);
-  }, [open]);
+    if (isFalse(mounted)) {
+      isTrue(open) && setMount(true);
+    }
+  }, [open, mounted]);
 
   if (isTrue(mounted)) {
     return (
-      <FloatingPortal root={root}>
+      <FloatingPortal root={iFindElement(root)}>
         <AnimatePresence>
           {open && (
             <IOverlay

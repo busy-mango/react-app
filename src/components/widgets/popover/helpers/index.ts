@@ -1,17 +1,7 @@
-import type { Target } from 'framer-motion';
+import { capitalize, compact } from '@busymango/utils';
+import type { Placement } from '@floating-ui/react';
+import { arrow, flip, hide, offset, shift, size } from '@floating-ui/react';
 
-import { capitalize } from '@busymango/utils';
-import type { Padding, Placement } from '@floating-ui/react';
-import {
-  arrow,
-  autoPlacement,
-  hide,
-  offset,
-  shift,
-  size,
-} from '@floating-ui/react';
-
-import type { ReactTargetType } from '@/models';
 import { iFindElement } from '@/utils';
 
 import type { ApplyFloatingStyle, IPopoverProps } from '../models';
@@ -22,14 +12,10 @@ export const ARROW_HEIGHT = 8;
 
 export const ARROW_RADIUS = 2;
 
-const OFFSET = ARROW_HEIGHT + GAP;
-
 type MiddlewareOpts = {
-  padding?: Padding;
-  root?: ReactTargetType | undefined;
   iArrow: React.RefObject<SVGSVGElement>;
   onApplyFloatingStyle?: ApplyFloatingStyle;
-};
+} & Pick<IPopoverProps, 'variant' | 'root'>;
 
 const isVertical = (placement: Placement) => {
   switch (placement) {
@@ -69,12 +55,12 @@ export const iFloatingMaxSize = (
   mode: 'width' | 'height' = 'width'
 ) => {
   const name = capitalize(mode);
-  const { elements, rects, placement } = params;
+  const { rects, placement } = params;
+  const { floating } = params.elements;
 
   const referenceSize = rects.reference[mode];
   const availableSize = params[`available${name}`];
   const rootSize = root?.[`client${name}`] ?? Infinity;
-  const scrollSize = elements.floating[`scroll${name}`];
   const effectiveSize = Math.max(availableSize, referenceSize);
 
   const isMainAxis = isVertical(placement)
@@ -86,6 +72,7 @@ export const iFloatingMaxSize = (
       return Math.min(rootSize, effectiveSize);
     }
     if (isMainAxis) {
+      const scrollSize = floating[`scroll${name}`];
       if (effectiveSize < scrollSize) {
         return effectiveSize;
       }
@@ -97,42 +84,36 @@ export const iFloatingMaxSize = (
 export const middlewares = ({
   root,
   iArrow,
-  padding,
+  variant,
   onApplyFloatingStyle,
-}: MiddlewareOpts) => [
-  offset({ mainAxis: OFFSET }),
-  shift({ elementContext: 'reference' }),
-  autoPlacement({
-    padding,
-    crossAxis: true,
-    elementContext: 'reference',
-  }),
-  size({
-    padding,
-    elementContext: 'reference',
-    apply(params) {
-      const element = iFindElement(root);
-      Object.assign(
-        params.elements.floating.style,
-        onApplyFloatingStyle?.(params) ?? {
-          maxWidth: iFloatingMaxSize(params, element, 'width') + 'px',
-          maxHeight: iFloatingMaxSize(params, element, 'height') + 'px',
-        }
-      );
-    },
-  }),
-  arrow({ element: iArrow, padding }),
-  hide({ strategy: 'escaped', padding, elementContext: 'reference' }),
-];
-
-export const iFloatingMotion = (floatingStyles: React.CSSProperties) => {
-  const { left, top, ...style } = floatingStyles;
-  const initial: Target = { opacity: 0, left, top, scale: 0 };
-  return {
-    style,
-    initial,
-    exit: initial,
-    transition: { type: 'keyframes' },
-    animate: { top, left, opacity: 1, scale: 1 },
-  };
+}: MiddlewareOpts) => {
+  return [
+    offset({
+      mainAxis: compact([variant !== 'card' && ARROW_HEIGHT, GAP]).reduce(
+        (acc, cur) => acc + cur,
+        0
+      ),
+    }),
+    shift({ elementContext: 'reference' }),
+    flip({
+      crossAxis: true,
+      elementContext: 'reference',
+    }),
+    size({
+      elementContext: 'reference',
+      apply(params) {
+        const element = iFindElement(root);
+        Object.assign(
+          params.elements.floating.style,
+          onApplyFloatingStyle?.(params) ?? {
+            minWidth: params.rects.reference.width + 'px',
+            maxWidth: iFloatingMaxSize(params, element, 'width') + 'px',
+            maxHeight: iFloatingMaxSize(params, element, 'height') + 'px',
+          }
+        );
+      },
+    }),
+    arrow({ element: iArrow }),
+    hide({ strategy: 'escaped', elementContext: 'reference' }),
+  ];
 };

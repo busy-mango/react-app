@@ -1,4 +1,4 @@
-import type { RefObject } from 'react';
+import type { ChangeEventHandler, RefObject } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
 
 import type { OmitOf } from '@busymango/utils';
@@ -10,16 +10,26 @@ import type {
   ReactTargetFunc,
   ReactWrapProps,
 } from '@/models';
+import type { RecipeModel } from '@/utils';
 
 import type {
   ControlOption,
   ControlPattern,
   ControlValue,
+  ControlValues,
   IControlWrapProps,
 } from '../../control';
 import type { IEmptyWrapProps } from '../../empty';
 import type { IInputProps } from '../../input';
 import type { IMenuProps, IMenuRef } from '../../menu';
+
+export type ISelectorChangeFunc = (
+  current?: ControlValue | ControlValues
+) => void;
+
+export type ISelectorChangeHandle = (
+  next: RecipeModel<ControlValue | ControlValues>
+) => void;
 
 export type ISelectorState = Pick<
   IControlWrapProps,
@@ -56,13 +66,15 @@ export type ISelectorState = Pick<
   /**
    * 选中的值
    */
-  value?: React.Key[] | React.Key | null;
+  value?: ControlValue | ControlValues;
 };
 
-export type ISelectorChipRender = ReactRender<
+export type ISelectorChipsRender = ReactRender<
   {
-    option?: ControlOption;
-    onClose?: () => void;
+    handleChange: ISelectorChangeHandle;
+    options?: ControlOption[];
+    separator?: React.ReactNode;
+    values?: React.Key[] | null;
   },
   ISelectorState
 >;
@@ -74,6 +86,7 @@ export type ISelectorOptionRender = ReactRender<
     isActive: boolean;
     isSelected: boolean;
     option: ControlOption;
+    handleChange: ISelectorChangeHandle;
   },
   ISelectorState
 >;
@@ -101,7 +114,7 @@ export type ISelectorRootRender = ReactRender<
     search?: React.ReactNode;
     prefix?: React.ReactNode;
     suffix?: React.ReactNode;
-    onChange?: (current?: React.Key | React.Key[]) => void;
+    handleChange: ISelectorChangeHandle;
   },
   ISelectorState
 >;
@@ -110,7 +123,7 @@ interface ISelectorRenders {
   /** 根元素渲染方法 */
   root?: ISelectorRootRender;
   /** 选中项的渲染方法 */
-  chip?: ISelectorChipRender;
+  chips?: ISelectorChipsRender;
   /** 空数据渲染方法 */
   empty?: ISelectorEmptyRender;
   /** 检索区渲染方法 */
@@ -147,18 +160,8 @@ export interface QueryFloatingRootFunc {
 export interface ISelectorProps
   extends OmitOf<ISelectorState, 'isFocus' | 'isHover'>,
     OmitOf<ReactWrapProps, 'onFocus' | 'onBlur' | 'prefix' | 'onScroll'>,
-    Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur' | 'autoFocus'>,
-    Pick<
-      IMenuProps,
-      | 'maxHeight'
-      | 'options'
-      | 'multiple'
-      | 'value'
-      | 'onChange'
-      | 'measure'
-      | 'onScroll'
-      | 'onSelect'
-    > {
+    Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur' | 'autoFocus'> {
+  options?: ControlOption[];
   /**
    * 控件默认选中的值。
    */
@@ -187,8 +190,9 @@ export interface ISelectorProps
    * 控件render方法
    */
   render?: ISelectorRenders;
+  onChange?: ISelectorChangeFunc;
   /** 搜索值变更回调 */
-  onSearch?: (value?: string) => void;
+  onSearch?: ChangeEventHandler<HTMLInputElement>;
   /**
    * 控件浮层选单展开、收起时触发的回调。
    */

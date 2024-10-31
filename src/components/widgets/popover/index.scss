@@ -11,16 +11,21 @@
     border-radius: var(--border-radius-03);
   }
 
-  &.card,
   &.confirm {
     background-color: var(--bg-color-float);
   }
 
+  &.card {
+    width: max-content;
+    height: max-content;
+    background-color: transparent;
+  }
+
   &.tooltip {
+    width: max-content;
+
     color: var(--font-color-b8);
     font-size: var(--font-size-03);
-
-    width: calc(100vw - var(--gap-03) * 2);
 
     .content {
       padding: var(--gap-03) var(--gap-04);

@@ -1,0 +1,54 @@
+```ts pure
+import type { OmitOf } from '@busymango/utils';
+
+import type { ReactButtonProps, ReactRender } from '@/models';
+
+import type { ControlUISize } from '../../control';
+import type { IFlexProps } from '../../flex';
+
+export interface ISegmentState {
+  /**
+   * 控制控件是否禁用状态。
+   */
+  disabled?: boolean;
+  /**
+   * 控制控件是否只读状态。
+   */
+  readOnly?: boolean;
+  /**
+   * 将宽度调整为父元素宽度的选项
+   */
+  isFullWidth?: boolean;
+  /**
+   * 控件尺寸
+   */
+  size?: ControlUISize;
+  /**
+   * 控件的值
+   */
+  value?: ControlOption['value'];
+}
+
+export interface ISegmentChangeFunc {
+  (value: React.Key): void;
+}
+
+export type ISegmentRootRender = ReactRender<
+  OmitOf<IFlexProps, 'children'> & {
+    segments: React.ReactNode;
+  },
+  ISegmentState
+>;
+
+export type ISegmentItemRender = ReactRender<
+  ReactButtonProps & {
+    onChange: (next: React.Key) => void;
+  } & ControlOption,
+  ISegmentState
+>;
+
+type ISegmentRenders = {
+  root?: ISegmentRootRender;
+  item?: ISegmentItemRender;
+};
+```

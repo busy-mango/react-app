@@ -38,7 +38,7 @@ export const ICard: React.FC<ICardProps> = forwardRef<
       header: (
         <IFlex align="center" justify="space-between">
           {title}
-          {extra}
+          <i>{extra}</i>
         </IFlex>
       ),
       ...others,

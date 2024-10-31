@@ -1,23 +1,29 @@
 import type {
   MiddlewareState,
-  Padding,
   UseFloatingOptions,
   UseFloatingReturn,
 } from '@floating-ui/react';
 
-import type { ReactTargetType } from '@/models';
+import type { ReactRender, ReactTargetType, ReactWrapProps } from '@/models';
 
 import type { InteractionProps } from '../../control';
 
-type FloatingOptions = Required<UseFloatingOptions>;
+type FloatingOptions = Required<
+  Pick<UseFloatingOptions, 'open' | 'onOpenChange' | 'placement' | 'transform'>
+>;
 
 export type IPopoverRef = UseFloatingReturn['refs'];
 
 export type IPopoverEvent = 'click' | 'focus' | 'hover';
 
-export type IPopoverState = Pick<UseFloatingOptions, 'open' | 'placement'>;
+export type IPopoverState = Pick<FloatingOptions, 'open' | 'placement'>;
 
 export type IPopoverOpenChangeFunc = FloatingOptions['onOpenChange'];
+
+export type IPopoverReferenceRender = ReactRender<
+  React.PropsWithChildren<InteractionProps>,
+  IPopoverState
+>;
 
 export interface ApplyFloatingStyle {
   (
@@ -29,16 +35,16 @@ export interface ApplyFloatingStyle {
 }
 
 export interface IPopoverProps
-  extends Pick<
-    UseFloatingOptions,
-    'open' | 'onOpenChange' | 'placement' | 'transform'
-  > {
+  extends ReactWrapProps,
+    React.PropsWithChildren,
+    Partial<FloatingOptions> {
   root?: ReactTargetType;
   content?: React.ReactNode;
-  padding?: Padding;
   timing?: 'alway' | 'overflow';
   variant?: 'tooltip' | 'card' | 'confirm';
   trigger?: IPopoverEvent | IPopoverEvent[];
   onApplyFloatingStyle?: ApplyFloatingStyle;
-  children?: (props: InteractionProps, state: IPopoverState) => React.ReactNode;
+  render?: {
+    reference?: IPopoverReferenceRender;
+  };
 }

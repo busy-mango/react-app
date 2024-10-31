@@ -4,9 +4,11 @@
 
 .option {
   height: 100%;
-  padding: calc(var(--gap-01) + var(--gap-02)) var(--gap-03);
+  cursor: pointer;
+
   font-size: var(--font-size-05);
   line-height: var(--control-size-03);
+  padding: calc(var(--gap-01) + var(--gap-02)) var(--gap-03);
 
   &.active,
   &:hover {
@@ -14,7 +16,7 @@
     background-color: var(--fill-color-hover);
   }
 
-  &.selected {
+  &.selected:not(.active) {
     color: var(--primary-color-active);
     background-color: var(--fill-color-active);
   }
@@ -24,15 +26,13 @@
   overflow: hidden;
   border-radius: var(--border-radius-03);
 
-  .scrollable {
-    width: 100%;
+  width: 100%;
 
-    outline: none;
-    padding: var(--gap-03) 0;
-    box-shadow: var(--shadow-02);
-    font-size: var(--font-size-03);
-    background-color: var(--bg-color-menu);
-  }
+  outline: none;
+  padding: var(--gap-03) 0;
+  box-shadow: var(--shadow-02);
+  font-size: var(--font-size-03);
+  background-color: var(--bg-color-menu);
 }
 
 .chip {

@@ -1,0 +1,34 @@
+# Picker 滚轮拾取器
+
+> 展开有序的数据轮盘提供给用户选择。
+
+使用 `import { IPicker } from "@/components";`
+
+源码 `components/widgets/picker`
+
+## 何时使用
+
+* 移动端、触摸屏场景。
+
+* Picker 展示区域有限，大部分选项会被隐藏，最好是当用户对所有选项都比较熟悉、有预期的时候，才使用 Picker。
+
+## 代码演示
+
+### 基本用法
+
+<code src='./demos/basic' />
+
+### DatePicker
+
+<code src='./demos/date.picker' />
+
+## API
+
+### 组件属性
+
+| 参数 | 类型 | 默认值 | 描述 |
+| ---------------- | -------------------------------------- | ------------ | ------------ |
+| `width`          | `\'auto\'` \| `CSSProperties['width']` | `-`          | 控制控件宽度，当值为`'atuo'`的时候，控件宽度会跟随文本。|
+| `value`          | `ControlValue`                         | `-`          | 控件值，额外支持`null`。|
+| `pattern`        | `ControlPattern`                       | `-`          | 控制控件交互模式。|
+| `onPressEnter`   | `ReactInputProps['onKeyDown']`         | `-`          | 控件回车事件。|

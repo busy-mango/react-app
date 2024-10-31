@@ -1,9 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-import { isArray, isHTMLElement, isNil } from '@busymango/is-esm';
-import { FRAME2MS } from '@busymango/utils';
+import {
+  isArray,
+  isHTMLElement,
+  isNil,
+  isNonEmptyArray,
+} from '@busymango/is-esm';
+import { FRAME2MS, isEqual } from '@busymango/utils';
 
 import { useDebounceFunc, useEffectOnce } from '@/hooks';
 import type { ReactCFC } from '@/models';
@@ -33,22 +38,16 @@ const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
     offset: ['end end', 'start start'],
   });
 
-  const scaleY = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
-
   const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -15]);
 
   return (
     <motion.div
       ref={target}
-      animate={{
-        scaleY: scaleY.get(),
-        rotateX: rotateX.get(),
-      }}
+      animate={{ rotateX: rotateX.get(), scale: 1 }}
       className={classNames(styles.option, isFocus && styles.focus)}
-      exit={{ opacity: 0 }}
-      initial={{ opacity: 0.88 }}
-      transition={{ ease: 'linear', duration: 0 }}
-      whileInView={{ opacity: 1 }}
+      exit={{ opacity: 0.36, scale: 0 }}
+      initial={{ opacity: 0.88, scale: 0 }}
+      transition={{ ease: 'linear', duration: 0.128 }}
       onClick={() => {
         iScrollIntoView(target);
       }}
@@ -59,7 +58,7 @@ const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
   );
 };
 
-export const IWheel: React.FC<IWheelProps> = (props) => {
+const Wheel: React.FC<IWheelProps> = (props) => {
   const { options, isScrollSnape = isSupportSnape() } = props;
 
   const view = useRef<string>();
@@ -108,8 +107,8 @@ export const IWheel: React.FC<IWheelProps> = (props) => {
   }, 1 * FRAME2MS);
 
   useEffect(() => {
-    iScroll.starer();
-  }, [iScroll, iScroll.starer]);
+    isNonEmptyArray(options) && iScroll.starer();
+  }, [iScroll, options]);
 
   useEffectOnce(
     () => {
@@ -136,7 +135,7 @@ export const IWheel: React.FC<IWheelProps> = (props) => {
         const id = identified(option?.value, index);
         return (
           <IWheelOption
-            key={option.value}
+            key={id}
             container={container}
             isFocus={focus === id}
             {...{ [WHEEL_ITEM_ID_NAME]: id }}
@@ -151,3 +150,5 @@ export const IWheel: React.FC<IWheelProps> = (props) => {
     </div>
   );
 };
+
+export const IWheel = memo(Wheel, isEqual);

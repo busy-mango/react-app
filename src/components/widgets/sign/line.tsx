@@ -8,10 +8,9 @@ import { IMagnifierPath } from './magnifier';
 import type { ISignLineProps } from './models';
 
 export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
-  function SignLine(
-    { type, rect, ring, style, animate, trigon, ...others },
-    iForwardRef
-  ) {
+  function SignLine(props, iForwardRef) {
+    const { type, ring, style, animate, trigon, inline, ...others } = props;
+
     const ref = useRef<SVGSVGElement>(null);
 
     useImperativeHandle(iForwardRef, () => ref.current!, [ref]);
@@ -21,7 +20,7 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
         ref={ref}
         animate={{
           ...animate,
-          scale: ring || rect || trigon ? 1 : 1.325,
+          scale: inline || ring || trigon ? 1 : 1.325,
         }}
         data-sign-icon={type}
         fill="none"
@@ -29,11 +28,8 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={64}
-        style={{
-          ...style,
-          cursor: 'inherit',
-        }}
+        strokeWidth={96}
+        style={{ ...style, cursor: 'inherit' }}
         version="1.1"
         viewBox="0 0 1024 1024"
         width="1em"
@@ -45,29 +41,16 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
               key="circle"
               cx={512}
               cy={512}
-              r={480}
+              r={464}
               transition={transition}
             />
           )}
           {trigon && (
             <motion.path
               key="trigon"
-              animate={{
-                d: iTrigon(512, 512, 480),
-              }}
+              animate={{ d: iTrigon(512, 512, 464) }}
               exit={initial}
               initial={initial}
-            />
-          )}
-          {rect && (
-            <motion.rect
-              key="rect"
-              height={960}
-              rx={256}
-              transition={transition}
-              width={960}
-              x={32}
-              y={32}
             />
           )}
         </AnimatePresence>

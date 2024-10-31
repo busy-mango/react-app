@@ -9,7 +9,7 @@ import type { ControlOption } from '../../control';
 export const WHEEL_ITEM_ID_NAME = 'data-ui-wheel-option';
 
 export const identified = (value: ControlOption['value'], index: number) => {
-  return compact([value, index.toString()]).join('-');
+  return compact([index.toString(), value]).join('.');
 };
 
 export const iTarget = ({

@@ -1,0 +1,37 @@
+[
+  {
+    "type": "file",
+    "name": "button/index",
+    "label": "Button 按钮"
+  },
+  {
+    "type": "file",
+    "name": "checkbox/index",
+    "label": "Checkbox 多选框"
+  },
+  {
+    "type": "file",
+    "name": "input/index",
+    "label": "Input 输入框"
+  },
+  {
+    "type": "file",
+    "name": "picker/index",
+    "label": "Picker 选择器"
+  },
+  {
+    "type": "file",
+    "name": "radio/index",
+    "label": "Radio 单选框"
+  },
+  {
+    "type": "file",
+    "name": "segment/index",
+    "label": "Segment 分段控制器"
+  },
+  {
+    "type": "file",
+    "name": "selector/index",
+    "label": "Selector 选择框"
+  }
+]

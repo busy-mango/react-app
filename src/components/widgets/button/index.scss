@@ -166,6 +166,7 @@
     background-color: var(--fill-color-warp);
 
     &:hover {
+      color: var(--font-color-info);
       background-color: var(--fill-color-hover);
     }
     &:focus-within {
@@ -173,8 +174,8 @@
     }
   }
   &.danger:not(.disabled) {
-    color: var(--font-color-danger);
     &:hover {
+      color: var(--font-color-danger);
       background-color: var(--fill-color-hover);
     }
     &:focus-within {
@@ -185,7 +186,7 @@
     color: var(--danger-color-disabled);
   }
   &.disabled:not(.danger) {
-    color: var(--primary-color-disabled);
+    color: var(--font-color-disabled);
   }
 }
 

@@ -6,6 +6,10 @@ import { iCSSVariable } from '@busymango/utils';
 /** 文档根节点：通常是HTML元素 */
 export const { documentElement: iThemeRoot } = document;
 
+type ColorDisc<T> = T extends `--${infer N}-color-100` ? N : never;
+
+export type ThemeColorToken = ColorDisc<keyof React.CSSVarProps>;
+
 /**
  * 获取主题样式标签
  */

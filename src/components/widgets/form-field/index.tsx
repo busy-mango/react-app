@@ -24,6 +24,7 @@ export const IFieldGrid: ReactCFC<IFieldGridProps> = (props) => {
   const {
     size,
     mode,
+    align,
     colon,
     margin,
     children,
@@ -61,6 +62,7 @@ export const IFieldGrid: ReactCFC<IFieldGridProps> = (props) => {
       {...others}
     >
       <IFieldGridProvider
+        align={align}
         colon={colon}
         forceRenderTitle={forceRenderTitle}
         margin={margin}
@@ -87,13 +89,13 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     className,
     description,
     column = 1,
-    align = 'start',
     status = 'success',
     pattern = 'editable',
     colon = ctx?.colon ?? ':',
     size = ctx?.size ?? 'medium',
     margin = ctx?.margin ?? false,
     mode = ctx?.mode ?? 'horizontal',
+    align = ctx?.align ?? 'flex-start',
     forceRenderTitle = ctx?.forceRenderTitle,
     children,
     ...others
@@ -127,11 +129,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
         )}
       >
         {showTitle && (
-          <IFlex
-            align="flex-start"
-            className={styles.title}
-            justify={`flex-${align}`}
-          >
+          <IFlex align="flex-start" className={styles.title} justify={align}>
             <IMarker className={styles.marker} required={required}>
               {title}
               {description && <ISignLine ring type="helper" />}

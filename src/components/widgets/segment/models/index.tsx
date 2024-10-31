@@ -2,7 +2,7 @@ import type { OmitOf } from '@busymango/utils';
 
 import type { ReactButtonProps, ReactRender } from '@/models';
 
-import type { ControlOption, ControlUISize } from '../../control';
+import type { ControlOption, ControlUISize, ControlValue } from '../../control';
 import type { IFlexProps } from '../../flex';
 
 export interface ISegmentState {
@@ -25,7 +25,7 @@ export interface ISegmentState {
   /**
    * 控件的值
    */
-  value?: ControlOption['value'];
+  value?: ControlValue;
 }
 
 export interface ISegmentChangeFunc {

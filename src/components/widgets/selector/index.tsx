@@ -1,5 +1,5 @@
 export type {
-  ISelectorChipRender,
+  ISelectorChipsRender,
   ISelectorEmptyRender,
   ISelectorOptionRender,
   ISelectorPredicate,

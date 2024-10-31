@@ -1,42 +1,39 @@
-import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
+import {
+  forwardRef,
+  Fragment,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { isEmpty, isNonEmptyString } from '@busymango/is-esm';
-import { iArray, ifnot } from '@busymango/utils';
-import { FloatingPortal } from '@floating-ui/react';
+import { isEmpty } from '@busymango/is-esm';
+import { compact, iArray, ifnot, omit } from '@busymango/utils';
 
-import {
-  iFocusParams,
-  iHoverParams,
-  useEventState,
-  useMemoFunc,
-} from '@/hooks';
-import { container } from '@/init';
+import { iFocusParams, iHoverParams, useEventState } from '@/hooks';
 import { iCompact } from '@/utils';
 
 import { IChip } from '../chip';
-import { IControlWrap, useControlState } from '../control';
+import { IControlWrap, onInputCatch, useControlState } from '../control';
 import { IFlex } from '../flex';
+import { IFloating } from '../floating';
 import { IInput } from '../input';
-import type { IMenuRef } from '../menu';
-import { IMenu } from '../menu';
-import type { IMenuEmptyRender } from '../menu/models';
 import { ISignLine } from '../sign';
+import { IVirtualizer } from '../virtualizer';
 import { iSignType } from './helpers';
 import {
+  useArrowKeyDown,
   useFilterOptions,
   useIFloating,
   useIInteractions,
-  useIMotion,
 } from './hooks';
 import type {
-  ISelectorChipRender,
+  ISelectorChipsRender,
   ISelectorOptionRender,
   ISelectorProps,
   ISelectorRef,
   ISelectorRootRender,
-  ISelectorScrollableRender,
   ISelectorSearchRender,
   ISelectorState,
 } from './models';
@@ -44,25 +41,10 @@ import { Presence } from './presence';
 
 import * as styles from './selector.scss';
 
-const iChipRender: ISelectorChipRender = (
-  { option, onClose },
+const iOptionRender: ISelectorOptionRender = (
+  { option, isActive, isSelected, handleChange },
   { multiple }
 ) => (
-  <Fragment>
-    {!multiple && (option?.label ?? option?.value?.toLocaleString())}
-    {multiple && (
-      <IChip closeable size="mini" variant="filled" onClose={onClose}>
-        {option?.label ?? option?.value?.toLocaleString()}
-      </IChip>
-    )}
-  </Fragment>
-);
-
-const iOptionRender: ISelectorOptionRender = ({
-  option,
-  isActive,
-  isSelected,
-}) => (
   <IFlex
     align="center"
     className={classNames(styles.option, {
@@ -70,6 +52,18 @@ const iOptionRender: ISelectorOptionRender = ({
       [styles.selected]: isSelected,
     })}
     justify="space-between"
+    onClick={() => {
+      const { value } = option;
+      if (!multiple) handleChange(value);
+      if (multiple && isSelected) {
+        handleChange((pre) =>
+          compact(iArray(pre)).filter((val) => val === value)
+        );
+      }
+      if (multiple && !isSelected) {
+        handleChange((pre) => compact(iArray(pre)).concat([value]));
+      }
+    }}
   >
     {option?.label ?? option?.value?.toLocaleString()}
     <AnimatePresence>
@@ -78,21 +72,40 @@ const iOptionRender: ISelectorOptionRender = ({
   </IFlex>
 );
 
-const iScrollableRender: ISelectorScrollableRender = ({
-  className,
-  ...props
-}) => (
-  <div className={className}>
-    <IMenu {...props} />
-  </div>
-);
-
 const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
   <IInput width="auto" {...props} pattern={pattern} />
 );
 
+const iChipListRender: ISelectorChipsRender = (
+  { values, options, separator, handleChange },
+  { multiple }
+) =>
+  values?.map((inner, index) => {
+    const option = options?.find(({ value }) => value === inner);
+    return (
+      <Fragment key={inner.toLocaleString()}>
+        {index !== 0 && separator}
+        <Presence className={styles.chip}>
+          {!multiple && (option?.label ?? option?.value?.toLocaleString())}
+          {multiple && (
+            <IChip
+              closeable
+              size="mini"
+              variant="filled"
+              onClose={() => {
+                handleChange(values.filter((v) => v !== inner));
+              }}
+            >
+              {option?.label ?? option?.value?.toLocaleString()}
+            </IChip>
+          )}
+        </Presence>
+      </Fragment>
+    );
+  });
+
 const iRootRender: ISelectorRootRender = (
-  { ref, onChange, chips, search, prefix, suffix, ...others },
+  { ref, handleChange, chips, search, prefix, suffix, ...others },
   {
     clearable,
     isLoading,
@@ -128,7 +141,7 @@ const iRootRender: ISelectorRootRender = (
     suffix={pattern !== 'readPretty' && suffix}
     variant={variant}
     onSuffixClick={() => {
-      clearable && onChange?.(undefined);
+      clearable && handleChange?.(undefined);
     }}
     {...others}
   >
@@ -150,24 +163,22 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       status,
       prefix,
       options,
-      measure,
       multiple,
-      maxHeight,
       autoFocus,
       isLoading,
       separator,
       className,
       placeholder,
-      open: _open,
+      open: iOpen,
       filter = true,
       clearable = true,
-      keyword: _keyword,
+      keyword: word,
       iFloatingClassName,
       variant = 'bordered',
       pattern = 'editable',
       size: _size = 'medium',
-      onOpenChange: _onOpenChange,
-      onSearch: _onSearch,
+      onOpenChange: iOpenChange,
+      onSearch,
       iFloatingRoot,
       onFocus,
       onClick,
@@ -176,30 +187,29 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
 
     const input = useRef<HTMLInputElement>(null);
 
-    const scrollable = useRef<IMenuRef>(null);
+    const [active, setActive] = useState<number>();
 
-    const [value, onChange] = useControlState(props);
+    const [value, handleChange] = useControlState(props);
 
-    const [keyword, onSearch] = useControlState({
-      value: _keyword,
-      onChange: _onSearch,
+    const [keyword, handleSearch] = useControlState({
+      value: word,
+      onChange: onSearch,
+      onCatch: onInputCatch,
     });
 
     const [open, onOpenChange] = useControlState({
-      value: _open,
-      onChange: _onOpenChange,
+      value: iOpen,
+      onChange: iOpenChange,
     });
 
     const iSelectedList = iCompact(iArray(value) ?? []);
 
-    const filtered = useFilterOptions(options, { filter, keyword });
+    const { refs, context, floatingStyles } = useIFloating({
+      open,
+      onOpenChange,
+    });
 
-    const {
-      refs,
-      context,
-      floatingStyles,
-      isPositioned = false,
-    } = useIFloating({ open, onOpenChange });
+    const { getReferenceProps, getFloatingProps } = useIInteractions(context);
 
     const current = refs.reference.current as HTMLDivElement;
 
@@ -217,101 +227,50 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       [refs, input]
     );
 
-    const { transition, initial } = useIMotion(context);
+    const filtered = useFilterOptions(options, { filter, keyword });
 
-    const { getReferenceProps, getFloatingProps } = useIInteractions(context);
-
-    const iChange = useMemoFunc((current?: React.Key | React.Key[]) => {
-      input.current?.focus();
-      onChange?.(current ?? undefined);
+    const handleArrowKeyDown = useArrowKeyDown({
+      active,
+      multiple,
+      options: filtered,
+      values: iSelectedList,
+      onChange: handleChange,
+      setActive,
     });
-
-    const iClick = useMemoFunc((event: React.MouseEvent<HTMLDivElement>) => {
-      input.current?.focus();
-      onClick?.(event);
-    });
-
-    const iSearch = useMemoFunc(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        onSearch?.(event.target.value?.toLocaleString());
-      }
-    );
-
-    const iArrowKeyDown = useMemoFunc(
-      ({ code }: React.KeyboardEvent<HTMLInputElement>) => {
-        const { active, select } = scrollable.current ?? {};
-        switch (code) {
-          case 'Enter':
-            select?.();
-            break;
-          case 'ArrowDown':
-            active?.((current) => current + 1);
-            break;
-          case 'ArrowUp':
-            active?.((current) => current - 1);
-            break;
-          default:
-            break;
-        }
-      }
-    );
-
-    const iKeyDown = useMemoFunc(
-      (event: React.KeyboardEvent<HTMLInputElement>) => {
-        iArrowKeyDown(event);
-        event.stopPropagation();
-        if (multiple && !isNonEmptyString(keyword)) {
-          if (event.code === 'Backspace') {
-            iChange(iSelectedList.slice(0, -1));
-          }
-        }
-      }
-    );
 
     const states: ISelectorState = {
       open: context.open,
       size: _size,
       clearable,
+      isLoading,
       isFocus,
       isHover,
-      isLoading,
       keyword,
       multiple,
+      variant,
       pattern,
       prefix,
       status,
-      variant,
       value,
     };
-
-    const iEmptyRender: IMenuEmptyRender = (props) => {
-      return render?.empty!(props, states);
-    };
-
-    const iChipListRender = (inners?: React.Key[]) =>
-      inners?.map((inner, index) => {
-        const onClose = () => {
-          iChange?.(inners.filter((v) => v !== inner));
-        };
-        const option = options?.find(({ value }) => value === inner);
-        return (
-          <Fragment key={inner.toLocaleString()}>
-            {index !== 0 && separator}
-            <Presence className={styles.chip}>
-              {(render?.chip ?? iChipRender)({ option, onClose }, states)}
-            </Presence>
-          </Fragment>
-        );
-      });
 
     return (
       <Fragment>
         {(render?.root ?? iRootRender)(
           {
+            style,
             prefix,
-            onChange: iChange,
+            handleChange,
             ref: refs.setReference,
-            chips: iChipListRender(iSelectedList),
+            chips: iChipListRender(
+              {
+                options,
+                separator,
+                handleChange,
+                values: iSelectedList,
+              },
+              states
+            ),
             search: (render?.search ?? iSearchRender)(
               {
                 ref: input,
@@ -319,8 +278,8 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                 value: keyword,
                 className: styles.search,
                 placeholder: ifnot(isEmpty(iSelectedList) && placeholder),
-                onChange: iSearch,
-                onKeyDown: iKeyDown,
+                onChange: handleSearch,
+                onKeyDown: handleArrowKeyDown,
                 onFocus,
                 onBlur,
               },
@@ -329,71 +288,58 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
             className: classNames(
               styles.reference,
               styles[pattern],
-              {
-                [styles.multiple]: multiple,
-              },
+              { [styles.multiple]: multiple },
               className
             ),
             suffix: <ISignLine type={iSignType(states)} />,
-            ...getReferenceProps({ onClick: iClick, style }),
+            ...getReferenceProps({
+              onClick: (event: React.MouseEvent<HTMLDivElement>) => {
+                input.current?.focus();
+                onClick?.(event);
+              },
+            }),
           },
           states
         )}
-        <FloatingPortal root={iFloatingRoot?.(refs.reference) ?? container}>
-          <AnimatePresence>
-            {context.open && pattern === 'editable' && (
-              <motion.div
-                ref={refs.setFloating}
-                animate={{
-                  y: 0,
-                  scaleY: 1,
-                  opacity: 1,
-                }}
-                exit={initial}
-                initial={initial}
-                transition={transition}
-                {...getFloatingProps({
-                  style: floatingStyles,
-                  onKeyDown: iArrowKeyDown,
-                  className: classNames(styles.floating, iFloatingClassName),
-                })}
-              >
-                {(render?.scrollable ?? iScrollableRender)(
-                  {
-                    value,
-                    isLoading,
-                    isPositioned,
-                    maxHeight,
-                    measure,
-                    multiple,
-                    ref: scrollable,
-                    options: filtered,
-                    className: styles.scrollable,
-                    render: {
-                      empty: ifnot(render?.empty && iEmptyRender),
-                      option: (option, { isActive, isSelected, index }) =>
-                        (render?.option ?? iOptionRender)(
-                          {
-                            option,
-                            className: classNames(styles.option, {
-                              [styles.active]: isActive,
-                              [styles.selected]: isSelected,
-                            }),
-                            index,
-                            isActive,
-                            isSelected,
-                          },
-                          states
-                        ),
-                    },
-                    onChange: iChange,
-                  },
-                  states
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </FloatingPortal>
+        {pattern === 'editable' && (
+          <IFloating
+            context={context}
+            portal={{ root: iFloatingRoot?.(refs.reference) }}
+            style={floatingStyles}
+            onKeyDown={handleArrowKeyDown}
+            {...getFloatingProps()}
+            className={classNames(styles.floating, iFloatingClassName)}
+          >
+            <IVirtualizer
+              data={filtered}
+              estimateSize={() => 32}
+              render={(item, { Container }) => {
+                const { index } = item;
+                const option = filtered![index];
+                const isActive = active === index;
+                const isSelected = iSelectedList.includes(option.value);
+                return (
+                  <Container {...omit(item, ['key'])}>
+                    {(render?.option ?? iOptionRender)(
+                      {
+                        index,
+                        option,
+                        isActive,
+                        isSelected,
+                        handleChange,
+                        className: classNames(styles.option, {
+                          [styles.active]: isActive,
+                          [styles.selected]: isSelected,
+                        }),
+                      },
+                      states
+                    )}
+                  </Container>
+                );
+              }}
+            />
+          </IFloating>
+        )}
       </Fragment>
     );
   }

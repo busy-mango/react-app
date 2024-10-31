@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 
 import { ifnot } from '@busymango/utils';
 
+import { iThemeVariable } from '@/utils';
+
 import type { ITypographyElement, ITypographyProps } from './models';
 
 import * as styles from './index.scss';
@@ -12,10 +14,11 @@ import * as styles from './index.scss';
 export const ITypography = forwardRef<ITypographyElement, ITypographyProps>(
   function ITypography(props, iForwardRef) {
     const {
-      color,
+      mark,
       align,
+      margin = true,
       maxRow = undefined,
-      variant = 'inherit',
+      variant = 'body',
       className,
       style,
       ...others
@@ -29,21 +32,36 @@ export const ITypography = forwardRef<ITypographyElement, ITypographyProps>(
 
     const attrs = {
       layoutId,
-      className: classNames(styles[variant], className),
+      className: classNames(
+        styles[variant],
+        margin && styles.margin,
+        className
+      ),
       style: {
         WebkitLineClamp: ifnot(maxRow !== Infinity && maxRow),
+        backgroundColor: ifnot(
+          mark && `rgb(${iThemeVariable(`--${mark}-color-500`)}/ 1)`
+        ),
         textAlign: align,
         ...style,
       } satisfies React.CSSProperties,
     };
 
     const Component = motion[
-      variant === 'inherit' || variant === 'subtitle' || variant === 'body'
-        ? 'p'
-        : variant
+      (() => {
+        switch (variant) {
+          case 'inherit':
+            return 'span';
+          case 'subtitle':
+          case 'body':
+            return 'p';
+          default:
+            return variant;
+        }
+      })()
     ] as ForwardRefComponent<
       HTMLDivElement,
-      HTMLMotionProps<'p'> & HTMLMotionProps<'h1'>
+      HTMLMotionProps<'p'> & HTMLMotionProps<'h1'> & HTMLMotionProps<'span'>
     >;
 
     return (

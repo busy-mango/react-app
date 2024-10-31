@@ -40,7 +40,7 @@ export const iTrigon = (x: number, y: number, r: number) => {
 export const iCirclePath = (
   x: number = 512,
   y: number = 512,
-  r: number = 480
+  r: number = 464
 ) => {
   return `M ${x} ${y - r} A ${r} ${r} 0 1 1 ${x} ${y + r} A ${r} ${r} 0 1 1 ${x} ${y - r}`;
 };
@@ -55,8 +55,23 @@ export const transition: Transition = {
   ease: 'easeIn',
 };
 
+const vertice = (() => {
+  const adjacent = iTrigonAdjacent(464, 45);
+  return {
+    quadrant1: `${512 + adjacent} ${512 - adjacent}`,
+    quadrant2: `${512 - adjacent} ${512 - adjacent}`,
+    quadrant3: `${512 - adjacent} ${512 + adjacent}`,
+    quadrant4: `${512 + adjacent} ${512 + adjacent}`,
+  };
+})();
+
 export const iAnimateLine = (type?: ISignType): Target[] => {
   switch (type) {
+    case 'ban':
+      return [
+        { d: `M${vertice.quadrant2} L512 512 L${vertice.quadrant4}` },
+        { d: `M${vertice.quadrant2} L512 512 L${vertice.quadrant4}` },
+      ];
     case 'arrowTop':
       return [
         { d: `M256 614.4 L512 358.4 L768 614.4` },

@@ -11,12 +11,14 @@ import * as styles from './index.scss';
 
 export interface IEmptyWrapProps extends Partial<IFlexProps> {
   isLoading?: boolean;
+  isEmpty?: boolean;
 }
 
 export const IEmptyWrap: React.FC<IEmptyWrapProps> = ({
   isLoading,
   className,
   children,
+  isEmpty,
   ...others
 }) => (
   <IFlex
@@ -26,11 +28,13 @@ export const IEmptyWrap: React.FC<IEmptyWrapProps> = ({
     {...others}
   >
     <ISuspense isLoading={isLoading}>
-      {children ?? (
+      {isEmpty ? (
         <Fragment>
           <EmptySVG className={styles.icon} />
           <span className={styles.text}>暂无数据</span>
         </Fragment>
+      ) : (
+        children
       )}
     </ISuspense>
   </IFlex>

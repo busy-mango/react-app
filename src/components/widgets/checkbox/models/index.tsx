@@ -1,7 +1,3 @@
-// ┌────────────────────────────── 说明 ─────────────────────────────────┐
-//   React Checkbox 组件的 API 参考文档。了解此导出模块的 props、CSS 和其他 API.
-// └────────────────────────────────────────────────────────────────────┘
-
 import type { HTMLMotionProps, SVGMotionProps } from 'framer-motion';
 
 import type { PlainObject } from '@busymango/is-esm';
@@ -67,8 +63,10 @@ export type ICheckRootRender = IRender<
 
 export type ICheckBoxRender = IRender<
   {
+    wave?: boolean;
     icon?: React.ReactNode;
     input?: React.ReactNode;
+    inputRef: React.RefObject<HTMLInputElement>;
   } & HTMLMotionProps<'i'>
 >;
 
@@ -79,10 +77,7 @@ export type ICheckInputRender = IRender<
 >;
 
 export type ICheckIconRender = IRender<
-  Pick<SVGMotionProps<SVGSVGElement>, 'className'> & {
-    wave?: boolean;
-    inputRef: React.RefObject<HTMLInputElement>;
-  }
+  Pick<SVGMotionProps<SVGSVGElement>, 'className'>
 >;
 
 export interface ICheckboxRenders {

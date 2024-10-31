@@ -22,6 +22,13 @@
   },
   {
     "type": "dir",
+    "name": "navigation",
+    "label": "导航",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
     "name": "typesetting",
     "label": "排版布局",
     "collapsible": true,

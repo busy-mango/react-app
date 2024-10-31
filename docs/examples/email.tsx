@@ -104,11 +104,16 @@ const App: React.FC = () => (
       style={{ padding: 8, height: '100%', width: '100%' }}
     >
       <IFlex gap={iThemeVariable('--gap-03')} style={{ fontSize: 16 }}>
-        <IPopover content="archive" trigger="hover" variant="tooltip">
-          {(props) => (
-            <IButton {...props} icon={<ArchiveSVG />} variant="text" />
-          )}
-        </IPopover>
+        <IPopover
+          content="archive"
+          render={{
+            reference: (props) => (
+              <IButton {...props} icon={<ArchiveSVG />} variant="text" />
+            ),
+          }}
+          trigger="hover"
+          variant="tooltip"
+        />
         <IButton icon={<JunkSVG />} variant="text" />
         <IButton icon={<TrashSVG />} variant="text" />
         <IDivider vertical />
@@ -187,9 +192,9 @@ const App: React.FC = () => (
       />
     </IFlex>
     <EmailList />
-    <p style={{ height: '100%' }}>
+    <div style={{ height: '100%' }}>
       <EmialBody />
-    </p>
+    </div>
   </ISafeArea>
 );
 

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 
-import { isUndefined } from '@busymango/is-esm';
+import { isFunction, isUndefined } from '@busymango/is-esm';
 
 import { useMemoFunc } from '@/hooks';
 import { isInputElement, isTextAreaElement } from '@/utils';
@@ -71,10 +71,11 @@ export function useControlState<
     if (isControl && !current) setInner(value);
   }, [value, isControl]);
 
-  const iChange = useMemoFunc((next: E, ...args: Args) => {
-    setInner(onCatch(next));
-    onChange?.(next, ...args);
+  const handler = useMemoFunc((next: E | ((pre?: T) => E), ...args: Args) => {
+    const val = isFunction(next) ? next(control) : next;
+    setInner(onCatch(val));
+    onChange?.(val, ...args);
   });
 
-  return [control, iChange] as const;
+  return [control, handler] as const;
 }
