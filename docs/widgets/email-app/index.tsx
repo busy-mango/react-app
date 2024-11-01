@@ -1,3 +1,11 @@
+import ArchiveSVG from 'docs/icons/archive.svg?react';
+import CloudSVG from 'docs/icons/cloud.svg?react';
+import DarftSVG from 'docs/icons/darft.svg?react';
+import GmailSVG from 'docs/icons/gmail.svg?react';
+import InboxSVG from 'docs/icons/inbox.svg?react';
+import JunkSVG from 'docs/icons/junk.svg?react';
+import SentSVG from 'docs/icons/sent.svg?react';
+import TrashSVG from 'docs/icons/trash.svg?react';
 import { EmailList } from 'docs/widgets';
 import { EmialBody } from 'docs/widgets/email-body';
 
@@ -20,17 +28,7 @@ import {
 } from '@/components';
 import { iThemeVariable } from '@/utils';
 
-import { configure } from '../cases/widgets';
-import ArchiveSVG from '../icons/archive.svg?react';
-import CloudSVG from '../icons/cloud.svg?react';
-import DarftSVG from '../icons/darft.svg?react';
-import GmailSVG from '../icons/gmail.svg?react';
-import InboxSVG from '../icons/inbox.svg?react';
-import JunkSVG from '../icons/junk.svg?react';
-import SentSVG from '../icons/sent.svg?react';
-import TrashSVG from '../icons/trash.svg?react';
-
-import * as styles from './email.scss';
+import * as styles from './index.scss';
 
 const options: ControlOption[] = [
   {
@@ -78,7 +76,7 @@ const Count: React.FC<{ type?: string }> = ({ type }) => {
   return <ISuspense isLoading={isLoading}>{data}</ISuspense>;
 };
 
-const App: React.FC = () => (
+export const EmailApp: React.FC = () => (
   <ISafeArea className={styles.area}>
     <div>
       <ISelector
@@ -197,10 +195,3 @@ const App: React.FC = () => (
     </div>
   </ISafeArea>
 );
-
-export default configure(App);
-
-export const frontmatter = {
-  // 声明布局类型
-  outline: false,
-};

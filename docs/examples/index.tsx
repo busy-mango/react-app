@@ -1,7 +1,5 @@
+import { Algorithm, configure, EmailApp } from 'docs/widgets';
 import { Tab, Tabs } from 'rspress/theme';
-
-import { Algorithm } from './algorithm';
-import Email from './email';
 
 import * as styles from './index.scss';
 
@@ -9,7 +7,7 @@ const App: React.FC = () => (
   <article className={styles.wrap}>
     <Tabs tabContainerClassName={styles.tabs}>
       <Tab label="邮件">
-        <Email />
+        <EmailApp />
       </Tab>
       <Tab label="算法">
         <Algorithm />
@@ -18,6 +16,6 @@ const App: React.FC = () => (
   </article>
 );
 
-export default App;
+export default configure(App);
 
 export const frontmatter = { pageType: 'custom' };
