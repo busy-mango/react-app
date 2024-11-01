@@ -22,6 +22,7 @@ import type {
 import type { IEmptyWrapProps } from '../../empty';
 import type { IInputProps } from '../../input';
 import type { IMenuProps, IMenuRef } from '../../menu';
+import type { Presence } from '../presence';
 
 export type ISelectorChangeFunc = (
   current?: ControlValue | ControlValues
@@ -71,6 +72,7 @@ export type ISelectorState = Pick<
 
 export type ISelectorChipsRender = ReactRender<
   {
+    Container: typeof Presence;
     handleChange: ISelectorChangeHandle;
     options?: ControlOption[];
     separator?: React.ReactNode;
@@ -186,6 +188,7 @@ export interface ISelectorProps
    * 分隔符
    */
   separator?: React.ReactNode;
+  measure?: boolean;
   /**
    * 控件render方法
    */

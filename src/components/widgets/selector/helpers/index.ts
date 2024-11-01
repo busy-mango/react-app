@@ -1,9 +1,9 @@
 import { isEmpty, isNonEmptyString, isString } from '@busymango/is-esm';
-import { ifnot } from '@busymango/utils';
+import { compact, iArray, ifnot } from '@busymango/utils';
 
 import type { ControlOption } from '../../control';
 import type { ISignType } from '../../sign';
-import type { ISelectorState } from '../models';
+import type { ISelectorChangeHandle, ISelectorState } from '../models';
 
 export const iSignType = ({
   clearable,
@@ -29,4 +29,25 @@ export const iPredicate = (
   if (!isNonEmptyString(keyword)) return true;
   const text = title ?? ifnot(isString(label) && label);
   return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
+};
+
+export const iSelectorChangeHandler = (
+  option: ControlOption,
+  handleChange: ISelectorChangeHandle,
+  {
+    multiple,
+    isSelected,
+  }: {
+    multiple?: boolean;
+    isSelected?: boolean;
+  }
+) => {
+  const { value } = option;
+  if (!multiple) handleChange(value);
+  if (multiple && isSelected) {
+    handleChange((pre) => compact(iArray(pre)).filter((val) => val !== value));
+  }
+  if (multiple && !isSelected) {
+    handleChange((pre) => compact(iArray(pre)).concat([value]));
+  }
 };

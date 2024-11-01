@@ -2,6 +2,7 @@
   box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
+  z-index: var(--z-index-float);
 
   .content {
     overflow: auto;
@@ -12,7 +13,12 @@
   }
 
   &.confirm {
-    background-color: var(--bg-color-float);
+    width: max-content;
+    height: max-content;
+
+    .content {
+      background-color: var(--bg-color-float);
+    }
   }
 
   &.card {
@@ -23,6 +29,7 @@
 
   &.tooltip {
     width: max-content;
+    z-index: var(--z-index-tip);
 
     color: var(--font-color-b8);
     font-size: var(--font-size-03);

@@ -8,7 +8,7 @@ import {
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-import { isHTMLElement } from '@busymango/is-esm';
+import { isElement, isHTMLElement } from '@busymango/is-esm';
 import { compact, iArray } from '@busymango/utils';
 import { autoUpdate, FloatingArrow, useFloating } from '@floating-ui/react';
 
@@ -81,15 +81,12 @@ export const IPopover = forwardRef<IPopoverRef, IPopoverProps>(
 
     const states: IPopoverState = { open: context.open, placement };
 
-    const mount = useMemo(() => {
-      if (!isHTMLElement(reference)) {
-        return false;
-      }
-      if (timing === 'overflow') {
+    const mount = (() => {
+      if (timing === 'overflow' && isHTMLElement(reference)) {
         return isOverflow(reference);
       }
-      return true;
-    }, [reference, timing]);
+      return isElement(reference);
+    })();
 
     return (
       <Fragment>

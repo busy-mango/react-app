@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { isEmpty } from '@busymango/is-esm';
-import { compact, iArray, ifnot, omit } from '@busymango/utils';
+import { iArray, ifnot, omit } from '@busymango/utils';
 
 import { iFocusParams, iHoverParams, useEventState } from '@/hooks';
 import { iCompact } from '@/utils';
@@ -21,7 +21,7 @@ import { IFloating } from '../floating';
 import { IInput } from '../input';
 import { ISignLine } from '../sign';
 import { IVirtualizer } from '../virtualizer';
-import { iSignType } from './helpers';
+import { iSelectorChangeHandler, iSignType } from './helpers';
 import {
   useArrowKeyDown,
   useFilterOptions,
@@ -53,16 +53,10 @@ const iOptionRender: ISelectorOptionRender = (
     })}
     justify="space-between"
     onClick={() => {
-      const { value } = option;
-      if (!multiple) handleChange(value);
-      if (multiple && isSelected) {
-        handleChange((pre) =>
-          compact(iArray(pre)).filter((val) => val === value)
-        );
-      }
-      if (multiple && !isSelected) {
-        handleChange((pre) => compact(iArray(pre)).concat([value]));
-      }
+      iSelectorChangeHandler(option, handleChange, {
+        multiple,
+        isSelected,
+      });
     }}
   >
     {option?.label ?? option?.value?.toLocaleString()}
@@ -77,16 +71,15 @@ const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
 );
 
 const iChipListRender: ISelectorChipsRender = (
-  { values, options, separator, handleChange },
+  { values, options, separator, Container, handleChange },
   { multiple }
 ) =>
   values?.map((inner, index) => {
     const option = options?.find(({ value }) => value === inner);
     return (
-      <Fragment key={inner.toLocaleString()}>
-        {index !== 0 && separator}
-        <Presence className={styles.chip}>
-          {!multiple && (option?.label ?? option?.value?.toLocaleString())}
+      <Fragment key={inner.toString()}>
+        <Container separator={index !== 0 && separator}>
+          {!multiple && (option?.label ?? option?.value?.toString())}
           {multiple && (
             <IChip
               closeable
@@ -96,10 +89,10 @@ const iChipListRender: ISelectorChipsRender = (
                 handleChange(values.filter((v) => v !== inner));
               }}
             >
-              {option?.label ?? option?.value?.toLocaleString()}
+              {option?.label ?? option?.value?.toString()}
             </IChip>
           )}
-        </Presence>
+        </Container>
       </Fragment>
     );
   });
@@ -163,16 +156,17 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       status,
       prefix,
       options,
+      measure,
       multiple,
       autoFocus,
       isLoading,
-      separator,
       className,
       placeholder,
       open: iOpen,
+      keyword: word,
       filter = true,
       clearable = true,
-      keyword: word,
+      separator = true,
       iFloatingClassName,
       variant = 'bordered',
       pattern = 'editable',
@@ -262,11 +256,12 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
             prefix,
             handleChange,
             ref: refs.setReference,
-            chips: iChipListRender(
+            chips: (render?.chips ?? iChipListRender)(
               {
                 options,
                 separator,
                 handleChange,
+                Container: Presence,
                 values: iSelectedList,
               },
               states
@@ -311,15 +306,19 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
             className={classNames(styles.floating, iFloatingClassName)}
           >
             <IVirtualizer
+              className={styles.virtualizer}
               data={filtered}
               estimateSize={() => 32}
-              render={(item, { Container }) => {
+              render={(item, { Container, measureElement }) => {
                 const { index } = item;
                 const option = filtered![index];
                 const isActive = active === index;
                 const isSelected = iSelectedList.includes(option.value);
                 return (
-                  <Container {...omit(item, ['key'])}>
+                  <Container
+                    ref={ifnot(measure && measureElement)}
+                    {...omit(item, ['key'])}
+                  >
                     {(render?.option ?? iOptionRender)(
                       {
                         index,
@@ -327,6 +326,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                         isActive,
                         isSelected,
                         handleChange,
+
                         className: classNames(styles.option, {
                           [styles.active]: isActive,
                           [styles.selected]: isSelected,

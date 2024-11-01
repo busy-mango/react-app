@@ -26,7 +26,6 @@
     z-index: 1;
     cursor: pointer;
     padding: 0 0.4em;
-    margin-right: -0.8em;
   }
 }
 
@@ -40,22 +39,35 @@
 
 /** size */
 .mini {
+  height: auto;
   font-size: inherit;
   line-height: inherit;
   border-radius: var(--border-radius-02);
   padding: 0 var(--gap-02);
+
+  .close {
+    margin-right: -0.4em;
+  }
 }
 .medium {
   padding: 0 var(--gap-05);
   height: var(--control-size-05);
   font-size: var(--font-size-04);
   border-radius: var(--border-radius-03);
+
+  .close {
+    margin-right: -0.8em;
+  }
 }
 .huge {
   border-radius: var(--border-radius-04);
   font-size: var(--font-size-04);
   height: var(--control-size-06);
   padding: 0 var(--gap-06);
+
+  .close {
+    margin-right: -0.8em;
+  }
 }
 
 /** variant */

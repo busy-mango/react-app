@@ -1,3 +1,4 @@
+export { iSelectorChangeHandler } from './helpers';
 export type {
   ISelectorChipsRender,
   ISelectorEmptyRender,

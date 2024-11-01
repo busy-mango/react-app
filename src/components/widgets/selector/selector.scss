@@ -22,9 +22,14 @@
   }
 }
 
+.virtualizer {
+  max-height: calc(var(--control-size-06) * 8);
+}
+
 .floating {
   overflow: hidden;
   border-radius: var(--border-radius-03);
+  z-index: var(--z-index-dropdown);
 
   width: 100%;
 
@@ -35,11 +40,6 @@
   background-color: var(--bg-color-menu);
 }
 
-.chip {
-  width: max-content;
-  max-width: 100%;
-}
-
 .wrap {
   display: flex;
   flex-wrap: wrap;
@@ -48,7 +48,6 @@
 
   position: relative;
 
-  gap: var(--gap-02);
   box-sizing: border-box;
   justify-content: flex-start;
 

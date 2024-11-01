@@ -43,7 +43,7 @@
     }
     &.medium {
       font-size: var(--font-size-04);
-      padding: var(--gap-02) var(--gap-04);
+      padding: var(--gap-00) var(--gap-04);
       min-height: var(--control-size-06);
 
       .icon-wrap {
@@ -61,7 +61,7 @@
     &.huge {
       font-size: var(--font-size-05);
       min-height: var(--control-size-08);
-      padding: var(--gap-02) var(--gap-04);
+      padding: var(--gap-00) var(--gap-04);
 
       .icon-wrap {
         font-size: var(--font-size-06);

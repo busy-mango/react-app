@@ -15,6 +15,6 @@ const names = [
 
 const options = names.map((value) => ({ value, label: value }));
 
-const App = () => <ISelector multiple options={options} separator="," />;
+const App = () => <ISelector multiple options={options} />;
 
 export default App;
