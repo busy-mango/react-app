@@ -1,0 +1,40 @@
+# Chip 标签
+
+标签组件允许用户展示信息、进行选择、过滤内容或触发操作。
+
+使用 `import { IChip } from "@/components";`
+
+源码 `components/widgets/chip`
+
+## 何时使用
+
+> Chips 通常是小而圆的视觉元素，可以包含文本、图标，甚至动作（如删除）。
+
+* 用于标记事物的属性和维度。
+
+## 代码演示
+
+### 基本用法
+
+<code src='./demos/basic' />
+
+### 标签组
+
+<code src='./demos/group' />
+
+## API
+
+* 通用属性-`Input`
+
+| 参数 | 类型 | 默认值 | 描述 |
+| ---------------- | -------------------------- | ------------ | ------------ |
+| `closeable`      | `boolean`                  | `-`          | 控制是否呈现关闭按钮。|
+| `clickable`      | `boolean`                  | `-`          | 控制是否呈现可点击样式（与是否定义`onClick`无关）。|
+| `disabled`       | `boolean`                  | `-`          | 控制是否呈现禁用样式。|
+| `icon`           | `React.ReactNode`          | `-`          | 控制组件前缀图标。|
+| `isLoading`      | `boolean`                  | `-`          | 控制是否呈现加载中样式。|
+| `variant`        | `'filled'` \| `'bordered'` | `editable`   | 控制控件的呈现方式。|
+| `size`           | `ControlUISize`            | `medium`     | 控制控件的尺寸大小。|
+| `status`         | `ControlUIStatus`          | `success`    | 控制控件的校验状态。|
+| `render`         | `ISwitchRenders`           | `-`          | 自定义控件UI。|
+| `onClose`        | `IChipCloseFunc`           | `-`          | 点击关闭按钮的回调事件。|

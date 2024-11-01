@@ -1,0 +1,22 @@
+[
+  {
+    "type": "file",
+    "name": "divider/index",
+    "label": "Divider 分割线"
+  },
+  {
+    "type": "file",
+    "name": "flex/index",
+    "label": "Flex 弹性布局"
+  },
+  {
+    "type": "file",
+    "name": "svg-wrap/index",
+    "label": "SVGWrap 图标盒子"
+  },
+  {
+    "type": "file",
+    "name": "typography/index",
+    "label": "Typography 弹性布局"
+  }
+]

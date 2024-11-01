@@ -1,4 +1,5 @@
 export * from './algorithm';
+export * from './baseline-wrap';
 export * from './color-disc';
 export * from './configure';
 export * from './email-app';

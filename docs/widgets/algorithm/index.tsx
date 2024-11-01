@@ -9,7 +9,7 @@ import {
 import { IFlex } from '@/components';
 
 export const Algorithm: React.FC = () => (
-  <IFlex vertical gap={'var(--gap-04)'} style={{ padding: 'var(--gap-04) 0' }}>
+  <IFlex wrap gap={'var(--gap-04)'} style={{ padding: 'var(--gap-04) 0' }}>
     <SortAlgorithm
       reset={(data) => bubble(data, (x, y) => x.val > y.val)}
       title="冒泡排序"

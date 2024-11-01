@@ -1,0 +1,22 @@
+[
+  {
+    "type": "file",
+    "name": "backdrop/index",
+    "label": "Backdrop 遮罩层"
+  },
+  {
+    "type": "file",
+    "name": "directive/index",
+    "label": "Directive 指示"
+  },
+  {
+    "type": "file",
+    "name": "spinner/index",
+    "label": "Spinner 加载中"
+  },
+  {
+    "type": "file",
+    "name": "wave/index",
+    "label": "Wave 指示"
+  }
+]

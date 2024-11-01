@@ -33,5 +33,15 @@
     "type": "file",
     "name": "selector/index",
     "label": "Selector 选择框"
+  },
+  {
+    "type": "file",
+    "name": "switch/index",
+    "label": "Switch 开关"
+  },
+  {
+    "type": "file",
+    "name": "textarea/index",
+    "label": "Textarea 开关"
   }
 ]

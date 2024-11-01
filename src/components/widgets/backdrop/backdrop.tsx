@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import { isFalse, isTrue } from '@busymango/is-esm';
 import { FloatingPortal } from '@floating-ui/react';
 
+import { container } from '@/init';
 import type { ReactCFC } from '@/models';
 import { iFindElement } from '@/utils';
 
@@ -30,7 +31,7 @@ export const IBackdrop: ReactCFC<IBackdropProps> = ({
 
   if (isTrue(mounted)) {
     return (
-      <FloatingPortal root={iFindElement(root)}>
+      <FloatingPortal root={iFindElement(root) ?? container}>
         <AnimatePresence>
           {open && (
             <IOverlay

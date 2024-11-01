@@ -9,7 +9,8 @@ import type {
   ControlUISize,
   ControlUIStatus,
 } from '@/components';
-import { ICard, IFlex, IRadioGroup } from '@/components';
+import { ICard, IFlex, IRadioGroup, ISwitch } from '@/components';
+import { useToggle } from '@/hooks';
 
 type ControlWidth = 'auto-width' | 'full-width';
 
@@ -18,11 +19,14 @@ interface Props<T extends string = never> {
   sizeable?: boolean;
   alignable?: boolean;
   widthable?: boolean;
+  switchable?: boolean;
   statusable?: boolean;
   patternable?: boolean;
   directionable?: boolean;
   children: (props: {
     wrap: HTMLDivElement;
+    toggle: (value?: boolean) => void;
+    open?: boolean;
     size?: ControlUISize;
     align?: ControlAlign;
     status?: ControlUIStatus;
@@ -41,6 +45,7 @@ export function Variants<T extends string = never>(
     sizeable = false,
     alignable = false,
     widthable = false,
+    switchable = false,
     statusable = false,
     patternable = false,
     directionable = false,
@@ -48,6 +53,8 @@ export function Variants<T extends string = never>(
   } = props;
 
   const wrap = useRef<HTMLDivElement>(null);
+
+  const [open, { toggle }] = useToggle();
 
   const [variant, setVariant] = useState(variants?.[0]);
 
@@ -67,6 +74,12 @@ export function Variants<T extends string = never>(
     <IFlex ref={wrap} vertical gap={16}>
       {Object.keys(props).some((key) => key.endsWith('able')) && (
         <ICard>
+          {switchable && (
+            <ISwitch
+              checked={open}
+              onChange={({ currentTarget }) => toggle(currentTarget.checked)}
+            />
+          )}
           {widthable && (
             <IFlex gap={8}>
               <IRadioGroup
@@ -171,6 +184,7 @@ export function Variants<T extends string = never>(
       <ICard>
         {children({
           size,
+          open,
           align,
           width,
           status,
@@ -178,6 +192,7 @@ export function Variants<T extends string = never>(
           pattern,
           direction,
           wrap: wrap.current!,
+          toggle,
         })}
       </ICard>
     </IFlex>

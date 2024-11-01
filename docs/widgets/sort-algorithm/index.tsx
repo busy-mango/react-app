@@ -13,7 +13,7 @@ type NodeModel = {
 };
 
 const source = shuffle(
-  Array.from({ length: 20 }, (_, i) => ({
+  Array.from({ length: 15 }, (_, i) => ({
     val: i + 1,
     id: nanoid(),
   }))

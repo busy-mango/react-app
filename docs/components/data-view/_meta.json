@@ -1,0 +1,12 @@
+[
+  {
+    "type": "file",
+    "name": "chip/index",
+    "label": "Chip 标签"
+  },
+  {
+    "type": "file",
+    "name": "popover/index",
+    "label": "Popover 气泡浮层"
+  }
+]

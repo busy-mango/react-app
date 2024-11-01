@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
-
-import { VariantControl } from '@cases/widgets';
+import { Variants } from 'docs/widgets';
 
 import {
   IButton,
@@ -16,7 +15,7 @@ const App: React.FC = () => {
   const [checked, { iCheck }] = useToggle();
 
   return (
-    <VariantControl sizeable>
+    <Variants sizeable>
       {({ size }) => (
         <Fragment>
           <IFieldGrid responsive>
@@ -53,7 +52,7 @@ const App: React.FC = () => {
           </IFlex>
         </Fragment>
       )}
-    </VariantControl>
+    </Variants>
   );
 };
 
