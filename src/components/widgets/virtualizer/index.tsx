@@ -81,9 +81,9 @@ export const IVirtualizer = <T,>(props: IVirtualizerProps<T>) => {
       {...others}
     >
       <div style={{ height: getTotalSize() }}>
-        {items.map((item: VirtualItem) => (
-          <Fragment key={item.key}>
-            {render(item, {
+        {items.map(({ key, ...others }: VirtualItem) => (
+          <Fragment key={key}>
+            {render(others, {
               Container,
               measure,
               scrollToIndex,

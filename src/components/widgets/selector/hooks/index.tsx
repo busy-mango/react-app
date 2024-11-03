@@ -123,6 +123,7 @@ export const useArrowKeyDown = ({
 }) =>
   useMemoFunc((event: React.KeyboardEvent<HTMLInputElement>) => {
     const { code } = event;
+    event.preventDefault();
     event.stopPropagation();
     if (!isEmpty(options)) {
       switch (code) {

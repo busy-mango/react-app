@@ -1,0 +1,27 @@
+.color-disc-warp {
+  width: 12.5em;
+  padding: 0.5em;
+}
+
+.color-warp {
+  width: 1em;
+  height: 1em;
+  border-width: 1;
+  border-style: solid;
+  border-radius: var(--border-radius-02);
+}
+
+.search-creator {
+  width: 100%;
+  padding: var(--gap-03) var(--gap-05);
+  background-color: var(--bg-color-control);
+  border-bottom: 1px solid var(--border-color-3);
+  margin-bottom: var(--gap-03);
+}
+
+.creator {
+  height: auto;
+  gap: var(--gap-05);
+  cursor: pointer;
+  padding: 0 var(--gap-05);
+}

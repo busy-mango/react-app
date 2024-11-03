@@ -6,8 +6,6 @@ import InboxSVG from 'docs/icons/inbox.svg?react';
 import JunkSVG from 'docs/icons/junk.svg?react';
 import SentSVG from 'docs/icons/sent.svg?react';
 import TrashSVG from 'docs/icons/trash.svg?react';
-import { EmailList } from 'docs/widgets';
-import { EmialBody } from 'docs/widgets/email-body';
 
 import { sleep } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -27,6 +25,9 @@ import {
   ISVGWrap,
 } from '@/components';
 import { iThemeVariable } from '@/utils';
+
+import { EmialBody } from '../email-body';
+import { EmailList } from '../email-list';
 
 import * as styles from './index.scss';
 

@@ -1,12 +1,9 @@
-import type { OmitOf } from '@busymango/utils';
-import type { ReferenceType } from '@floating-ui/react';
+```ts pure
+import type { HTMLMotionProps } from 'framer-motion';
 
-import type {
-  ReactInputProps,
-  ReactRender,
-  ReactTargetFunc,
-  ReactWrapProps,
-} from '@/models';
+import type { OmitOf } from '@busymango/utils';
+
+import type { ReactInputProps, ReactRender } from '@/models';
 import type { RecipeModel } from '@/utils';
 
 import type {
@@ -17,7 +14,6 @@ import type {
   IControlWrapProps,
 } from '../../control';
 import type { IFloatingProps } from '../../floating';
-import type { IInputProps } from '../../input';
 import type { Presence } from '../presence';
 
 export type ISelectorChangeFunc = (
@@ -106,7 +102,7 @@ export type ISelectorFloatingRender = ReactRender<
 >;
 
 export type ISelectorRootRender = ReactRender<
-  OmitOf<ReactWrapProps, 'prefix'> & {
+  OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'onChange'> & {
     ref: (node: HTMLDivElement | null) => void;
     input?: HTMLInputElement | null;
     chips?: React.ReactNode;
@@ -130,74 +126,4 @@ interface ISelectorRenders {
   /** 下拉菜单的渲染方法 */
   floating?: ISelectorFloatingRender;
 }
-
-export interface ISelectorPredicate {
-  (option: ControlOption, keyword?: string): boolean;
-}
-
-export type ISelectorRef = {
-  input?: HTMLInputElement | null;
-  floating: React.MutableRefObject<ReferenceType | null>;
-  reference: React.MutableRefObject<ReferenceType | null>;
-};
-
-export interface ISelectorFilterParams {
-  /** 过滤方式 */
-  predicate?: ISelectorPredicate;
-  /** 是否排序过滤结果 */
-  compare?: ((cur: ControlValue, pre: ControlValue) => number) | boolean;
-}
-
-export interface QueryFloatingRootFunc {
-  (
-    reference: React.MutableRefObject<ReferenceType | null>
-  ): ReturnType<ReactTargetFunc> | undefined;
-}
-
-export interface ISelectorProps
-  extends OmitOf<ISelectorState, 'isFocus' | 'isHover'>,
-    OmitOf<ReactWrapProps, 'onFocus' | 'onBlur' | 'prefix' | 'onScroll'>,
-    Pick<IInputProps, 'placeholder' | 'onFocus' | 'onBlur' | 'autoFocus'> {
-  maxHeight?: React.CSSProperties['maxHeight'];
-  options?: ControlOption[];
-  /**
-   * 控件默认选中的值。
-   */
-  defaultValue?: React.Key[] | React.Key;
-  /**
-   * 控件选项过滤配置。
-   */
-  filter?: ISelectorFilterParams | boolean;
-  /**
-   * 控件浮层样式。
-   */
-  iFloatingClassName?: string;
-  /**
-   * 浮层默认渲染到 root 上，也可以使用此方法指定根节点。
-   */
-  iFloatingRoot?: QueryFloatingRootFunc;
-  /**
-   * 是否默认打开
-   */
-  initialOpen?: boolean;
-  /**
-   * 分隔符
-   */
-  separator?: React.ReactNode;
-  measure?: boolean;
-  /**
-   * 控件render方法
-   */
-  render?: ISelectorRenders;
-  /**
-   * 估算选项高度
-   */
-  estimateSize?: (index: number) => number;
-  onChange?: ISelectorChangeFunc;
-  /** 搜索值变更回调 */
-  onSearch?: React.ChangeEventHandler<HTMLInputElement>;
-  /**
-   * 控件浮层选单展开、收起时触发的回调。
-   */
-  onOpenChange?: (open?: boolean) => void;
-}
+```

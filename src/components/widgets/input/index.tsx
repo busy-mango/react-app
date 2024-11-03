@@ -44,7 +44,7 @@ export const IInput = forwardRef<HTMLInputElement, IInputProps>(
 
     const isComposing = useEventState(iComposingParams(target));
 
-    const [value, iChange] = useControlState(
+    const [value, handler] = useControlState(
       {
         defaultValue,
         value: iValue,
@@ -76,7 +76,7 @@ export const IInput = forwardRef<HTMLInputElement, IInputProps>(
           placeholder={placeholder}
           readOnly={isReadOnly || isReadPretty}
           value={value ?? ''}
-          onChange={iChange}
+          onChange={handler}
         />
         <span
           ref={shadow}

@@ -9,13 +9,14 @@ import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { isEmpty } from '@busymango/is-esm';
-import { iArray, ifnot, omit } from '@busymango/utils';
+import { iArray, ifnot } from '@busymango/utils';
 
 import { iFocusParams, iHoverParams, useEventState } from '@/hooks';
 import { iCompact } from '@/utils';
 
 import { IChip } from '../chip';
 import { IControlWrap, onInputCatch, useControlState } from '../control';
+import { IEmptyWrap } from '../empty';
 import { IFlex } from '../flex';
 import { IFloating } from '../floating';
 import { IInput } from '../input';
@@ -30,6 +31,7 @@ import {
 } from './hooks';
 import type {
   ISelectorChipsRender,
+  ISelectorFloatingRender,
   ISelectorOptionRender,
   ISelectorProps,
   ISelectorRef,
@@ -67,7 +69,15 @@ const iOptionRender: ISelectorOptionRender = (
 );
 
 const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
-  <IInput width="auto" {...props} pattern={pattern} />
+  <IInput
+    pattern={pattern}
+    width="auto"
+    {...props}
+    onChange={(e) => {
+      props.onChange(e);
+      console.log(e.currentTarget.value);
+    }}
+  />
 );
 
 const iChipListRender: ISelectorChipsRender = (
@@ -98,7 +108,7 @@ const iChipListRender: ISelectorChipsRender = (
   });
 
 const iRootRender: ISelectorRootRender = (
-  { ref, handleChange, chips, search, prefix, suffix, ...others },
+  { ref, handleChange, chips, search, prefix, suffix, input, ...others },
   {
     clearable,
     isLoading,
@@ -123,6 +133,7 @@ const iRootRender: ISelectorRootRender = (
         clearable: clearable,
         isFocus,
         isHover,
+        keyword,
         value,
         open,
       }) === 'cross'
@@ -134,7 +145,7 @@ const iRootRender: ISelectorRootRender = (
     suffix={pattern !== 'readPretty' && suffix}
     variant={variant}
     onSuffixClick={() => {
-      clearable && handleChange?.(undefined);
+      handleChange(undefined);
     }}
     {...others}
   >
@@ -146,6 +157,17 @@ const iRootRender: ISelectorRootRender = (
       {search}
     </motion.div>
   </IControlWrap>
+);
+
+const iFloatingRender: ISelectorFloatingRender = (
+  { virtualizer, ...others },
+  { isLoading, filtered }
+) => (
+  <IFloating {...others}>
+    <IEmptyWrap isEmpty={isEmpty(filtered)} isLoading={isLoading}>
+      {virtualizer}
+    </IEmptyWrap>
+  </IFloating>
 );
 
 export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
@@ -161,6 +183,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       autoFocus,
       isLoading,
       className,
+      maxHeight,
       placeholder,
       open: iOpen,
       keyword: word,
@@ -172,8 +195,9 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       pattern = 'editable',
       size: _size = 'medium',
       onOpenChange: iOpenChange,
-      onSearch,
+      estimateSize = () => 32,
       iFloatingRoot,
+      onSearch,
       onFocus,
       onClick,
       onBlur,
@@ -235,6 +259,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
     const states: ISelectorState = {
       open: context.open,
       size: _size,
+      filtered,
       clearable,
       isLoading,
       isFocus,
@@ -255,6 +280,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
             style,
             prefix,
             handleChange,
+            input: input.current,
             ref: refs.setReference,
             chips: (render?.chips ?? iChipListRender)(
               {
@@ -296,50 +322,52 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
           },
           states
         )}
-        {pattern === 'editable' && (
-          <IFloating
-            context={context}
-            portal={{ root: iFloatingRoot?.(refs.reference) }}
-            style={floatingStyles}
-            onKeyDown={handleArrowKeyDown}
-            {...getFloatingProps()}
-            className={classNames(styles.floating, iFloatingClassName)}
-          >
-            <IVirtualizer
-              className={styles.virtualizer}
-              data={filtered}
-              estimateSize={() => 32}
-              render={(item, { Container, measureElement }) => {
-                const { index } = item;
-                const option = filtered![index];
-                const isActive = active === index;
-                const isSelected = iSelectedList.includes(option.value);
-                return (
-                  <Container
-                    ref={ifnot(measure && measureElement)}
-                    {...omit(item, ['key'])}
-                  >
-                    {(render?.option ?? iOptionRender)(
-                      {
-                        index,
-                        option,
-                        isActive,
-                        isSelected,
-                        handleChange,
-
-                        className: classNames(styles.option, {
-                          [styles.active]: isActive,
-                          [styles.selected]: isSelected,
-                        }),
-                      },
-                      states
-                    )}
-                  </Container>
-                );
-              }}
-            />
-          </IFloating>
-        )}
+        {pattern === 'editable' &&
+          (render?.floating ?? iFloatingRender)(
+            {
+              context,
+              style: floatingStyles,
+              portal: { root: iFloatingRoot?.(refs.reference) },
+              className: classNames(styles.floating, iFloatingClassName),
+              ...getFloatingProps({ onKeyDown: handleArrowKeyDown }),
+              virtualizer: (
+                <IVirtualizer
+                  className={styles.virtualizer}
+                  data={filtered}
+                  estimateSize={estimateSize}
+                  render={(item, { Container, measureElement }) => {
+                    const { index } = item;
+                    const option = filtered![index];
+                    const isActive = active === index;
+                    const isSelected = iSelectedList.includes(option.value);
+                    return (
+                      <Container
+                        ref={ifnot(measure && measureElement)}
+                        {...item}
+                      >
+                        {(render?.option ?? iOptionRender)(
+                          {
+                            index,
+                            option,
+                            isActive,
+                            isSelected,
+                            handleChange,
+                            className: classNames(styles.option, {
+                              [styles.active]: isActive,
+                              [styles.selected]: isSelected,
+                            }),
+                          },
+                          states
+                        )}
+                      </Container>
+                    );
+                  }}
+                  style={{ maxHeight }}
+                />
+              ),
+            },
+            states
+          )}
       </Fragment>
     );
   }

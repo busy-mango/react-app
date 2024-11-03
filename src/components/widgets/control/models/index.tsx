@@ -1,11 +1,10 @@
 import type React from 'react';
 import type { FocusEvent } from 'react';
-import type { HTMLMotionProps } from 'framer-motion';
 
 import type { Nil } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 
-import type { ReactRender } from '@/models';
+import type { ReactRender, ReactWrapProps } from '@/models';
 
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';
@@ -67,7 +66,7 @@ export type IControlWrapState = {
 };
 
 export type IControlWrapRootRender = ReactRender<
-  OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'children'> & {
+  OmitOf<ReactWrapProps, 'prefix' | 'children'> & {
     ref: React.RefObject<HTMLDivElement>;
     prefix: React.ReactNode;
     suffix: React.ReactNode;
@@ -79,7 +78,7 @@ export type IControlWrapRootRender = ReactRender<
 export interface IControlWrapProps
   extends React.PropsWithChildren,
     OmitOf<IControlWrapState, 'isFocus'>,
-    OmitOf<HTMLMotionProps<'div'>, 'prefix' | 'children'> {
+    OmitOf<ReactWrapProps, 'prefix' | 'children'> {
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   render?: {

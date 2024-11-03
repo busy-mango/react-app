@@ -3,10 +3,11 @@ import { Variants } from 'docs/widgets';
 import type { IControlWrapProps, IControlWrapRootRender } from '@/components';
 import { IControlWrap, ITextArea } from '@/components';
 
-const root: IControlWrapRootRender = ({ className }, { pattern }) => (
+const root: IControlWrapRootRender = ({ className, style }, { pattern }) => (
   <ITextArea
     className={className}
     readOnly={pattern === 'readOnly' || pattern === 'readPretty'}
+    style={style}
   />
 );
 
@@ -29,6 +30,7 @@ const App: React.FC = () => (
         render={{ root }}
         size={size}
         status={status}
+        style={{ padding: 'var(--gap-03) var(--gap-04)' }}
         variant={variant}
       />
     )}

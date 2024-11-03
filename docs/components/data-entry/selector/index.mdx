@@ -1,3 +1,5 @@
+import RenderMDX from './types/render.mdx';
+
 # Selector 选择器
 
 > 选择组件用于从选项列表中收集用户提供的信息。
@@ -66,7 +68,7 @@ Selector 组件可以处理多个选择。与单选一样，您可以通过访�
 | `size`               | `ControlUISize`                           | `"medium"`   | 控制控件的尺寸大小。|
 | `status`             | `ControlUIStatus`                         | `"success"`  | 控制控件的校验状态。 |
 | `suffix`             | `ReactNode`                               | `-`          | 控件后缀节点，用于替换选择器默认的箭头、关闭按钮交互。|
-| `value`              | `React.Key[]` \| `React.Key` \| `null`    | `-`          | 控件当前选中项，支持`null`值。|
+| `value`              | `ControlValue` \| `ControlValues`         | `-`          | 控件当前选中项，支持`null`值。|
 | `variant`            | `"filled"` \| `"standard"` \| `"bordered"`| `"bordered"` | 控制控件呈现的形态变体。|
 | `render`             | `ISelectorRenders`                        | `-`          | 自定义控件UI样式。|
 | `onChange`           | `ScrollableChangeFunc`                    | `-`          | 控件选中选单选项时触发的回调。 <br/> ⚠️这是通用事件，不是`ChangeEvent`，除非是由浏览器自动填充引起的。 |
@@ -74,5 +76,9 @@ Selector 组件可以处理多个选择。与单选一样，您可以通过访�
 | `onScroll`           | `React.UIEventHandler<HTMLDivElement>`    | `-`          | 浮层选单滚动时的触发的回调。|
 | `onSearch`           | `(value?: string) => void`                | `-`          | 控件搜索文本变更触发的回调。|
 | `onSelect`           | `ScrollableSelectFunc`                    | `-`          | 选项选中时触发的回调。|
+
+### 自定义 render
+
+<RenderMDX />
 
 {/* ## 常见问题 */}

@@ -60,6 +60,7 @@
   min-width: 1em;
   max-width: 100%;
   line-height: inherit;
+  margin: var(--gap-02) 0;
 
   &::placeholder {
     color: var(--font-color-4);

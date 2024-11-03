@@ -9,17 +9,18 @@ export const iSignType = ({
   clearable,
   isFocus,
   isHover,
+  keyword,
   value,
   open,
 }: Pick<
   ISelectorState,
-  'open' | 'isFocus' | 'isHover' | 'clearable' | 'value'
+  'open' | 'isFocus' | 'isHover' | 'clearable' | 'value' | 'keyword'
 >): ISignType => {
   const iArrow: ISignType = open ? 'arrowTop' : 'arrowBottom';
 
   const isShowClear = clearable && (isFocus || isHover || open);
 
-  return isShowClear && !isEmpty(value) ? 'cross' : iArrow;
+  return isShowClear && !isEmpty(value || keyword) ? 'cross' : iArrow;
 };
 
 export const iPredicate = (

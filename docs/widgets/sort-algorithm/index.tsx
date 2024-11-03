@@ -82,3 +82,5 @@ export const SortAlgorithm: React.FC<{
     </ICard>
   );
 };
+
+export * as sort from './functions';

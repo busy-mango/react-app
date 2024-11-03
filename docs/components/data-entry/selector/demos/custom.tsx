@@ -3,31 +3,32 @@ import { motion } from 'framer-motion';
 import { produce } from 'immer';
 import { create } from 'zustand';
 
-import { isNonEmptyString, isString } from '@busymango/is-esm';
+import { isEmpty, isNonEmptyString, isString } from '@busymango/is-esm';
 import { iArray, ifnot } from '@busymango/utils';
 
 import type {
   ControlOption,
   ISelectorChipsRender,
-  ISelectorEmptyRender,
+  ISelectorFloatingRender,
   ISelectorOptionRender,
   ISelectorPredicate,
-  ISelectorScrollableRender,
 } from '@/components';
 import {
   IChip,
+  IEmptyWrap,
   IFlex,
+  IFloating,
   IHighLighter,
   IInput,
-  IMenu,
   IPopover,
   ISelector,
   iSelectorChangeHandler,
   ISignLine,
   IWaveShell,
 } from '@/components';
-import { useToggle } from '@/hooks';
 import { iCompact, iPropagation, iThemeVariable } from '@/utils';
+
+import * as styles from './custom.scss';
 
 const iColorDisc = iCompact(
   (
@@ -146,14 +147,7 @@ const iOptionRender: ISelectorOptionRender = (
     </span>
     <IPopover
       content={
-        <IFlex
-          wrap
-          gap={'0.75em'}
-          style={{
-            width: '12.5em',
-            padding: '0.5em',
-          }}
-        >
+        <IFlex wrap className={styles.colorDiscWarp} gap={'0.75em'}>
           {iColorDisc.map((color) => (
             <motion.div
               key={color}
@@ -181,13 +175,7 @@ const iOptionRender: ISelectorOptionRender = (
                         option.color === color && 'var(--border-color-active)'
                       ),
                     }}
-                    style={{
-                      width: '1em',
-                      height: '1em',
-                      borderWidth: 1,
-                      borderStyle: 'solid',
-                      borderRadius: 'var(--border-radius-02)',
-                    }}
+                    className={styles.colorWarp}
                   />
                 )}
               </IWaveShell>
@@ -199,9 +187,7 @@ const iOptionRender: ISelectorOptionRender = (
         reference: ({ onClick, ref, ...props }, { open }) => (
           <ISignLine
             ref={ref}
-            animate={{
-              color: option.color,
-            }}
+            animate={{ color: option.color }}
             type={open ? 'arrowDoubleTop' : 'arrowDoubleBottom'}
             onClick={(event) => {
               iPropagation?.(event);
@@ -217,53 +203,51 @@ const iOptionRender: ISelectorOptionRender = (
   </IFlex>
 );
 
-const iEmptyRender: ISelectorEmptyRender = (_, { keyword }) => (
-  <IFlex
-    gap={10}
-    style={{ padding: 'var(--gap-03) var(--gap-05)', cursor: 'pointer' }}
-    onClick={() => {
-      if (keyword) {
-        useSelectorStore.getState().creator({
-          value: keyword,
-          label: keyword,
-        });
-      }
-    }}
-  >
-    创建选项
-    <b style={{ color: 'var(--font-color-10)' }}> {keyword}</b>
-  </IFlex>
-);
-
 const App: React.FC = () => {
-  const [open, { toggle }] = useToggle();
-
   const [keyword, setKeyword] = useState<string>();
 
   const [value, setValue] = useState<React.Key[]>(['unknown']);
 
   const options = useSelectorStore(({ options }) => options);
 
-  const iScrollableRender: ISelectorScrollableRender = ({
-    className,
-    ...others
-  }) => (
-    <IFlex vertical align="center" className={className} style={{ padding: 0 }}>
+  const iFloatingRender: ISelectorFloatingRender = (
+    { virtualizer, ...props },
+    { filtered, isLoading }
+  ) => (
+    <IFloating {...props}>
       <IInput
+        className={styles.searchCreator}
         placeholder="查找或者创建选项"
-        style={{
-          width: '100%',
-          padding: 'var(--gap-03) var(--gap-05)',
-          backgroundColor: 'var(--bg-color-control)',
-          borderBottom: '1px solid var(--border-color-3)',
-        }}
         value={keyword}
         onChange={({ target }) => {
           setKeyword(target.value);
         }}
       />
-      <IMenu {...others} />
-    </IFlex>
+      <IEmptyWrap
+        fallback={
+          <IFlex
+            className={styles.creator}
+            justify="flex-start"
+            vertical={false}
+            onClick={() => {
+              if (keyword) {
+                useSelectorStore.getState().creator({
+                  value: keyword,
+                  label: keyword,
+                });
+              }
+            }}
+          >
+            创建选项
+            <b style={{ color: 'var(--font-color-10)' }}>{keyword}</b>
+          </IFlex>
+        }
+        isEmpty={isEmpty(filtered)}
+        isLoading={isLoading}
+      >
+        {virtualizer}
+      </IEmptyWrap>
+    </IFloating>
   );
 
   const predicate: ISelectorPredicate = ({ label, title }) => {
@@ -278,21 +262,18 @@ const App: React.FC = () => {
       multiple
       filter={{ predicate }}
       keyword={keyword}
-      open={open}
       options={options}
       render={{
         search: () => null,
         chips: iChipListRender,
         option: iOptionRender,
-        empty: iEmptyRender,
-        scrollable: iScrollableRender,
+        floating: iFloatingRender,
       }}
       style={{ width: 300 }}
       value={value}
       onChange={(current) => {
         setValue(iCompact(iArray(current)));
       }}
-      onOpenChange={toggle}
     />
   );
 };

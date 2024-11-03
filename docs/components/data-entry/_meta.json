@@ -42,6 +42,6 @@
   {
     "type": "file",
     "name": "textarea/index",
-    "label": "Textarea 开关"
+    "label": "Textarea 文本域"
   }
 ]

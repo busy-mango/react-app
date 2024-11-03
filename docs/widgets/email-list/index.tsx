@@ -9,13 +9,13 @@ import {
   ICard,
   IChip,
   IControlWrap,
+  IEmptyWrap,
   IFlex,
   IInput,
   ISignLine,
   ITypography,
   IVirtualizer,
 } from '@/components';
-import { IEmptyWrap } from '@/components/widgets/empty';
 import { iThemeVariable } from '@/utils';
 
 import { emails } from '../data';
@@ -47,48 +47,50 @@ export const EmailList: React.FC = () => {
       <IControlWrap prefix={<ISignLine type="magnifier" />} variant="bordered">
         <IInput />
       </IControlWrap>
-      <IEmptyWrap
-        isEmpty={isEmpty(data)}
-        isLoading={isLoading}
+      <div
         style={{
           height: '100%',
           padding: `${iThemeVariable('--gap-03')} 0`,
         }}
       >
-        <IVirtualizer
-          data={data}
-          estimateSize={() => 150}
-          gap={8}
-          render={(item, { Container, measureElement }) => {
-            const email = data![item.index];
-            return (
-              <Container {...item} ref={measureElement}>
-                <ICard
-                  extra={
-                    <ITypography variant="subtitle">
-                      {dayjs(email.sendeTime).fromNow()}
+        <IEmptyWrap isEmpty={isEmpty(data)} isLoading={isLoading}>
+          <IVirtualizer
+            data={data}
+            estimateSize={() => 150}
+            gap={8}
+            render={(item, { Container, measureElement }) => {
+              const email = data![item.index];
+              return (
+                <Container {...item} ref={measureElement}>
+                  <ICard
+                    extra={
+                      <ITypography variant="subtitle">
+                        {dayjs(email.sendeTime).fromNow()}
+                      </ITypography>
+                    }
+                    footer={
+                      <IFlex gap={iThemeVariable('--gap-02')}>
+                        <IChip>会议</IChip>
+                        <IChip>工作</IChip>
+                        <IChip>重要</IChip>
+                      </IFlex>
+                    }
+                    title={
+                      <ITypography variant="h6">
+                        {email.sender.name}
+                      </ITypography>
+                    }
+                  >
+                    <ITypography maxRow={3} variant="body">
+                      {email.content}
                     </ITypography>
-                  }
-                  footer={
-                    <IFlex gap={iThemeVariable('--gap-02')}>
-                      <IChip>会议</IChip>
-                      <IChip>工作</IChip>
-                      <IChip>重要</IChip>
-                    </IFlex>
-                  }
-                  title={
-                    <ITypography variant="h6">{email.sender.name}</ITypography>
-                  }
-                >
-                  <ITypography maxRow={3} variant="body">
-                    {email.content}
-                  </ITypography>
-                </ICard>
-              </Container>
-            );
-          }}
-        />
-      </IEmptyWrap>
+                  </ICard>
+                </Container>
+              );
+            }}
+          />
+        </IEmptyWrap>
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ export type IVirtualizerItemWrap = React.ForwardRefExoticComponent<
 >;
 
 export type IVirtualizerItemRender = ReactRender<
-  VirtualItem,
+  Omit<VirtualItem, 'key'>,
   Pick<
     Virtualizer<HTMLElement, HTMLElement>,
     'measure' | 'measureElement' | 'scrollToIndex' | 'getOffsetForIndex'
