@@ -1,28 +1,30 @@
 import { sort } from 'docs/widgets';
-import { SortAlgorithm } from 'docs/widgets/';
+import { AlgorithmSort } from 'docs/widgets/';
 
 import { IFlex } from '@/components';
 
+const compare = (x: number, y: number) => x - y;
+
 export const Algorithm: React.FC = () => (
   <IFlex wrap gap={'var(--gap-04)'} style={{ padding: 'var(--gap-04) 0' }}>
-    <SortAlgorithm
-      reset={(data) => sort.bubble(data, (x, y) => x.val > y.val)}
+    <AlgorithmSort
+      reset={(data) => sort.bubble(data, compare)}
       title="冒泡排序"
     />
-    <SortAlgorithm
-      reset={(data) => sort.selection(data, (x, y) => x.val > y.val)}
+    <AlgorithmSort
+      reset={(data) => sort.selection(data, compare)}
       title="选择排序"
     />
-    <SortAlgorithm
-      reset={(data) => sort.insert(data, (x, y) => x.val > y.val)}
+    <AlgorithmSort
+      reset={(data) => sort.insert(data, compare)}
       title="插入排序"
     />
-    <SortAlgorithm
-      reset={(data) => sort.shell(data, (x, y) => x.val > y.val)}
+    <AlgorithmSort
+      reset={(data) => sort.shell(data, compare)}
       title="希尔排序"
     />
-    <SortAlgorithm
-      reset={(data) => sort.quick(data, (x, y) => x.val > y.val)}
+    <AlgorithmSort
+      reset={(data) => sort.quick(data, compare)}
       title="快速排序"
     />
   </IFlex>
