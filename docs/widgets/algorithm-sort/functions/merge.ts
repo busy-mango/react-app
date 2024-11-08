@@ -3,7 +3,9 @@
 //   compare: (pre: T, cur: T) => boolean,
 //   size = source.length
 // ): Generator<T[]> {
-//   if (size === 1) return;
+//   if (size === 2) {
+//     compare()
+//   };
 
 //   const prefix: T[] = [];
 //   const suffix: T[] = [];

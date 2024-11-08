@@ -27,5 +27,6 @@ export const Algorithm: React.FC = () => (
       reset={(data) => sort.quick(data, compare)}
       title="快速排序"
     />
+    <AlgorithmSort reset={(data) => sort.heap(data, compare)} title="堆排序" />
   </IFlex>
 );
