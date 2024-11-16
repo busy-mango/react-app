@@ -1,6 +1,6 @@
 import { isNil } from '@busymango/is-esm';
 
-function* swim<T>(
+function* sink<T>(
   data: T[],
   compare: (pre: T, cur: T) => number,
   start = 0,
@@ -30,7 +30,7 @@ function* building<T>(data: T[], compare: (pre: T, cur: T) => number) {
   const end = data.length - 1;
   let index = Math.floor((end - 1) / 2);
   while (index >= 0) {
-    yield* swim(data, compare, index);
+    yield* sink(data, compare, index);
     index--;
   }
 }
@@ -41,7 +41,7 @@ export function* heap<T>(data: T[], compare: (pre: T, cur: T) => number) {
   for (let index = data.length - 1; index >= 1; index--) {
     [data[index], data[0]] = [data[0], data[index]];
     yield structuredClone(data);
-    if (index > 0) yield* swim(data, compare, 0, index - 1);
+    if (index > 0) yield* sink(data, compare, 0, index - 1);
   }
 
   return;

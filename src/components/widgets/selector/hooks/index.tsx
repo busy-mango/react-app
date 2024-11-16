@@ -123,7 +123,6 @@ export const useArrowKeyDown = ({
 }) =>
   useMemoFunc((event: React.KeyboardEvent<HTMLInputElement>) => {
     const { code } = event;
-    event.preventDefault();
     event.stopPropagation();
     if (!isEmpty(options)) {
       switch (code) {
@@ -149,9 +148,11 @@ export const useArrowKeyDown = ({
           }
           break;
         case 'ArrowDown':
+          event.preventDefault();
           setActive((cur) => (cur ?? -1) + 1);
           break;
         case 'ArrowUp':
+          event.preventDefault();
           setActive?.((cur) => (cur ?? options.length) - 1);
           break;
         default:

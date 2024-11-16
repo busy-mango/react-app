@@ -131,3 +131,10 @@ export function isNotFoundModule(error: unknown) {
 export function isLoadingChunkFailed(error: unknown): boolean {
   return /^Loading chunk.*failed$/.test(catchMsg(error) ?? '');
 }
+
+export function isTouchDevice() {
+  return (
+    window.matchMedia('(pointer: coarse)').matches ||
+    ('ontouchstart' in window && typeof TouchEvent !== 'undefined')
+  );
+}

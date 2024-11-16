@@ -1,4 +1,5 @@
 import { Algorithm, configure, EmailApp } from 'docs/widgets';
+import { VioceChat } from 'docs/widgets/voice-chat';
 import { Tab, Tabs } from 'rspress/theme';
 
 import * as styles from './index.scss';
@@ -11,6 +12,9 @@ const App: React.FC = () => (
       </Tab>
       <Tab label="算法">
         <Algorithm />
+      </Tab>
+      <Tab label="聊天">
+        <VioceChat />
       </Tab>
     </Tabs>
   </article>
