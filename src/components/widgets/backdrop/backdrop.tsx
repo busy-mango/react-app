@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 
 import { isFalse, isTrue } from '@busymango/is-esm';
 import { FloatingPortal } from '@floating-ui/react';
@@ -15,6 +15,7 @@ import { IOverlay } from './overlay';
 import * as styles from './backdrop.scss';
 
 export const IBackdrop: ReactCFC<IBackdropProps> = ({
+  ref,
   root,
   open,
   children,
@@ -35,6 +36,7 @@ export const IBackdrop: ReactCFC<IBackdropProps> = ({
         <AnimatePresence>
           {open && (
             <IOverlay
+              ref={ref}
               className={classNames(styles.wrap, className)}
               {...others}
             >

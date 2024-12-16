@@ -16,7 +16,11 @@ import '@/styles/normalize.css';
 import '@/styles/transition.css';
 import '@/styles/atom.global.scss';
 
-const root = createRoot(container);
+const root = createRoot(container, {
+  onUncaughtError: () => {
+    // handler...
+  },
+});
 
 const { userAgent } = window.navigator;
 

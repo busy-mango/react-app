@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'motion/react';
 
 import {
   isArray,
@@ -61,7 +61,7 @@ const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
 const Wheel: React.FC<IWheelProps> = (props) => {
   const { options, isScrollSnape = isSupportSnape() } = props;
 
-  const view = useRef<string>();
+  const view = useRef<string>('');
 
   const [focus, setFocus] = useState<string>();
 

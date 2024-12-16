@@ -1,4 +1,4 @@
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
 
 import type { OmitOf } from '@busymango/utils';
 
@@ -8,7 +8,7 @@ import type { ControlOption } from '../../control';
 
 export interface IWheelOptionProps {
   isFocus?: boolean;
-  container: React.RefObject<HTMLDivElement>;
+  container: React.RefObject<HTMLDivElement | null>;
 }
 
 export interface IWheelProps {

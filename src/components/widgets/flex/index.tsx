@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { isFalse, isTrue } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';

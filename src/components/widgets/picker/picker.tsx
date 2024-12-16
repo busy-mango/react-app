@@ -1,7 +1,7 @@
 import { Fragment, useMemo, useRef } from 'react';
 import classNames from 'classnames';
-import type { AnimationDefinition } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
+import type { AnimationDefinition } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { compact, isEqual } from '@busymango/utils';
 import {

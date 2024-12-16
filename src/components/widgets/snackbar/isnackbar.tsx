@@ -5,8 +5,8 @@ import type {
   AnimationProps,
   Target,
   Transition,
-} from 'framer-motion';
-import { motion } from 'framer-motion';
+} from 'motion/react';
+import { motion } from 'motion/react';
 
 import { isFinite, isObject, isTrue } from '@busymango/is-esm';
 import { isEqual } from '@busymango/utils';

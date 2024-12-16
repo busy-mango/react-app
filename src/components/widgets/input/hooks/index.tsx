@@ -10,8 +10,8 @@ export const useWidth = ({
   target,
   isReadPretty,
 }: {
-  target: React.RefObject<HTMLInputElement>;
-  shadow: React.RefObject<HTMLInputElement>;
+  target: React.RefObject<HTMLInputElement | null>;
+  shadow: React.RefObject<HTMLInputElement | null>;
   width?: React.CSSProperties['width'];
   isReadPretty?: boolean;
 }) => {

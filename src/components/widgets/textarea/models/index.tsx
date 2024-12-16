@@ -2,7 +2,7 @@ import type { OmitOf } from '@busymango/utils';
 
 import type { ControlPattern } from '../../control';
 
-export type ITextareaRef = React.RefObject<HTMLTextAreaElement>;
+export type ITextareaRef = React.RefObject<HTMLTextAreaElement | null>;
 
 export type ITextAreaEvent = React.ChangeEvent<HTMLTextAreaElement>;
 

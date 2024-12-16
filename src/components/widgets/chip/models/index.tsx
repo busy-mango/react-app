@@ -1,4 +1,4 @@
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
 
 import type { COLOR_DISC } from '@/constants';
 import type { ReactRender } from '@/models';

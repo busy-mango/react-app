@@ -1,5 +1,5 @@
-import type { SVGMotionProps, Target } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { SVGMotionProps, Target } from 'motion/react';
+import { motion } from 'motion/react';
 
 export interface ISpinnerProps extends SVGMotionProps<SVGSVGElement> {
   animate?: Target;

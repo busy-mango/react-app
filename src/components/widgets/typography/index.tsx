@@ -1,7 +1,7 @@
 import { forwardRef, useId, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
-import type { ForwardRefComponent, HTMLMotionProps } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { ForwardRefComponent, HTMLMotionProps } from 'motion/react';
+import { motion } from 'motion/react';
 
 import { ifnot } from '@busymango/utils';
 

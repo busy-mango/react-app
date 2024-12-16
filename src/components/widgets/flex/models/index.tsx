@@ -1,4 +1,4 @@
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
 
 export interface IFlexProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;

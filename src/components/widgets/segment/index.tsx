@@ -1,6 +1,6 @@
 import { Fragment, useId } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { iPressEvent, iThemeVariable } from '@/utils';
 
@@ -51,12 +51,12 @@ const iItemRender: ISegmentItemRender = (
       onClick={(event) => {
         onClick?.(event);
         if (!readOnly && !disabled) {
-          onChange(value!);
+          onChange(value);
         }
       }}
       onKeyDown={iPressEvent(() => {
         if (!readOnly && !disabled) {
-          onChange(value!);
+          onChange(value);
         }
       }, onKeyDown)}
     >

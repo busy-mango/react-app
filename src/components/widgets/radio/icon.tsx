@@ -1,5 +1,5 @@
-import type { Transition } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { Transition } from 'motion/react';
+import { motion } from 'motion/react';
 
 const transition: Transition = {
   duration: 0.2,

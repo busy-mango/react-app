@@ -1,39 +1,21 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
-import type { HTMLMotionProps } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
-import { isNumber, isTrue } from '@busymango/is-esm';
-import { FRAME2MS, type OmitOf } from '@busymango/utils';
+import { isEmpty, isNumber, isTrue } from '@busymango/is-esm';
+import { FRAME2MS } from '@busymango/utils';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { iPropagation } from '@/utils';
 
-import type { ControlUISize } from '../control';
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
+import type { IButtonProps } from './models';
 
 import * as styles from './index.scss';
 
-export interface IButtonProps
-  extends React.PropsWithChildren,
-    OmitOf<HTMLMotionProps<'button'>, 'children'> {
-  capsule?: boolean;
-  danger?: boolean;
-  debounce?: boolean | number;
-  icon?: React.ReactNode;
-  isFullWidth?: boolean;
-  isLoading?: boolean;
-  size?: ControlUISize;
-  variant?: 'filled' | 'bordered' | 'text';
-  wave?: boolean;
-}
-
-export const IButton: React.FC<IButtonProps> = forwardRef<
-  HTMLButtonElement,
-  IButtonProps
->(function IButton(props, iForwardRef) {
+export const IButton: React.FC<IButtonProps> = (props) => {
   const {
     icon,
     danger,
@@ -47,6 +29,7 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
     wave: iWave,
     size = 'medium',
     variant = 'bordered',
+    ref: iForwardRef,
     onPointerDownCapture,
     onClick,
     ...others
@@ -104,7 +87,12 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
       {wave && <IWave target={ref} />}
       <AnimatePresence>
         {(isLoading || icon) && (
-          <ISVGWrap className={classNames(styles.icon, children && styles.gap)}>
+          <ISVGWrap
+            className={classNames(
+              styles.icon,
+              !isEmpty(children) && styles.gap
+            )}
+          >
             {isLoading ? <ISpinner /> : icon}
           </ISVGWrap>
         )}
@@ -112,4 +100,6 @@ export const IButton: React.FC<IButtonProps> = forwardRef<
       {children && <span>{children}</span>}
     </motion.button>
   );
-});
+};
+
+export type { IButtonProps } from './models';

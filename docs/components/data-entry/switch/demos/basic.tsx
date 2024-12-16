@@ -1,5 +1,5 @@
 import { Variants } from 'docs/widgets';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 
 import type { ISwitchIconRender, ISwitchLabelRender } from '@/components';
 import { IFlex, ISignLine, ISVGWrap, ISwitch } from '@/components';

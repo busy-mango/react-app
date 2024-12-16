@@ -8,7 +8,7 @@ const iterator = <T>(source: ArrayLike<T>) => ({ length: sizeOf(source) });
  * @param target
  * @returns
  */
-const iInitDP = (source: string, target: string) =>
+const init = (source: string, target: string) =>
   (Array(sizeOf(source) + 1).fill(null) as null[]).map(
     () => Array(sizeOf(target) + 1).fill(0) as number[]
   );
@@ -25,7 +25,7 @@ export function iLCSubStr(
   target: string,
   compare = Object.is
 ): string {
-  const dp = iInitDP(source, target);
+  const dp = init(source, target);
   const { max, end } = Array.from(iterator(source), (_, i) =>
     Array.from(iterator(target), (_, j) => ({
       i: i + 1,
@@ -58,7 +58,7 @@ const table = (
   target: string,
   compare: typeof Object.is
 ): number[][] => {
-  const dp = iInitDP(source, target);
+  const dp = init(source, target);
 
   Array.from(iterator(source)).forEach((_, i) => {
     Array.from(iterator(target)).forEach((_, j) => {

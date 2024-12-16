@@ -1,4 +1,4 @@
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
 
 import type { OmitOf } from '@busymango/utils';
 
@@ -55,7 +55,7 @@ export type ISwitchRootRender = ReactRender<
     thumb?: React.ReactNode;
     input?: React.ReactNode;
     label?: React.ReactNode;
-    ref: React.RefObject<HTMLDivElement>;
+    ref: React.RefObject<HTMLDivElement | null>;
   },
   ISwitchStatus
 >;
@@ -71,7 +71,7 @@ export type ISwitchThumbRender = ReactRender<
 
 export type ISwitchInputRender = ReactRender<
   ISwitchInputProps & {
-    ref: React.RefObject<HTMLInputElement>;
+    ref: React.RefObject<HTMLInputElement | null>;
   },
   ISwitchStatus
 >;

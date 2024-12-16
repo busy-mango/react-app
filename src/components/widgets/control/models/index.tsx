@@ -67,7 +67,7 @@ export type IControlWrapState = {
 
 export type IControlWrapRootRender = ReactRender<
   OmitOf<ReactWrapProps, 'prefix' | 'children'> & {
-    ref: React.RefObject<HTMLDivElement>;
+    ref: React.RefObject<HTMLDivElement | null>;
     prefix: React.ReactNode;
     suffix: React.ReactNode;
     children?: React.ReactNode;

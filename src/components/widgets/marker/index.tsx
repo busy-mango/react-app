@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { isFinite } from '@busymango/is-esm';
 

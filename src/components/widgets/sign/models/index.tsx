@@ -1,4 +1,4 @@
-import type { SVGMotionProps, Target } from 'framer-motion';
+import type { SVGMotionProps, Target } from 'motion/react';
 
 import type { OmitOf } from '@busymango/utils';
 

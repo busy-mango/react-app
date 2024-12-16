@@ -1,4 +1,4 @@
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
 
 import type { OmitOf } from '@busymango/utils';
 import type { FloatingPortalProps } from '@floating-ui/react';
@@ -11,6 +11,7 @@ export interface IOverlayProps extends HTMLMotionProps<'div'> {
    * @default false
    */
   scroll?: boolean;
+  ref?: React.ForwardedRef<HTMLDivElement>;
 }
 
 export interface IBackdropProps

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { produce } from 'immer';
+import { motion } from 'motion/react';
 import { create } from 'zustand';
 
 import { isEmpty, isNonEmptyString, isString } from '@busymango/is-esm';

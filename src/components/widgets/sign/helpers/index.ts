@@ -1,4 +1,4 @@
-import type { Target, Transition } from 'framer-motion';
+import type { Target, Transition } from 'motion/react';
 
 import type { ISignType } from '../models';
 

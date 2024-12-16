@@ -1,5 +1,5 @@
-import type { HTMLMotionProps, Target, Transition } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { HTMLMotionProps, Target, Transition } from 'motion/react';
+import { motion } from 'motion/react';
 
 import type { ReactCFC } from '@/models';
 

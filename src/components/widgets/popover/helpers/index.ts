@@ -4,18 +4,17 @@ import { arrow, flip, hide, offset, shift, size } from '@floating-ui/react';
 
 import { iFindElement } from '@/utils';
 
-import type { ApplyFloatingStyle, IPopoverProps } from '../models';
+import type {
+  ApplyFloatingStyle,
+  IPopoverProps,
+  MiddlewareOpts,
+} from '../models';
 
 const GAP = 2;
 
 export const ARROW_HEIGHT = 8;
 
 export const ARROW_RADIUS = 2;
-
-type MiddlewareOpts = {
-  iArrow: React.RefObject<SVGSVGElement>;
-  onApplyFloatingStyle?: ApplyFloatingStyle;
-} & Pick<IPopoverProps, 'variant' | 'root'>;
 
 const isVertical = (placement: Placement) => {
   switch (placement) {

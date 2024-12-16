@@ -1,6 +1,6 @@
-import { forwardRef, useId, useLayoutEffect } from 'react';
+import { useId, useLayoutEffect } from 'react';
 import classNames from 'classnames';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { isIOS } from '@/utils';
 
@@ -21,11 +21,8 @@ const iScrollbarWidth = () => {
   return window.innerWidth - document.documentElement.clientWidth;
 };
 
-export const IOverlay = forwardRef(function IOverlay(
-  props: IOverlayProps,
-  ref: React.ForwardedRef<HTMLDivElement>
-) {
-  const { scroll = false, className, ...rest } = props;
+export const IOverlay: React.FC<IOverlayProps> = (props) => {
+  const { ref, scroll = false, className, ...rest } = props;
 
   const id = useId();
 
@@ -98,4 +95,4 @@ export const IOverlay = forwardRef(function IOverlay(
       {...rest}
     />
   );
-});
+};

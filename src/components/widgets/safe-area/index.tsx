@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import type { HTMLMotionProps } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 
 import type { ReactCFC } from '@/models';
 
@@ -14,6 +14,7 @@ export interface ISafeAreaProps extends HTMLMotionProps<'article'> {
 }
 
 export const ISafeArea: ReactCFC<ISafeAreaProps> = ({
+  ref,
   children,
   className,
   background,
@@ -21,6 +22,7 @@ export const ISafeArea: ReactCFC<ISafeAreaProps> = ({
   ...others
 }) => (
   <motion.article
+    ref={ref}
     data-page
     animate={{ opacity: 1 }}
     className={styles.page}

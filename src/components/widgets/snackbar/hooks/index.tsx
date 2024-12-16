@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import type { AnimationScope } from 'framer-motion';
-import { useAnimate } from 'framer-motion';
 import { produce } from 'immer';
+import type { AnimationScope } from 'motion/react';
+import { useAnimate } from 'motion/react';
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
 

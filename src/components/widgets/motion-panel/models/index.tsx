@@ -1,11 +1,11 @@
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
 
 import type { ReactRender, ReactWrapProps } from '@/models';
 
 export type IMotionPanelRender = ReactRender<
   React.PropsWithChildren<
     ReactWrapProps & {
-      ref: React.RefObject<HTMLDivElement>;
+      ref: React.RefObject<HTMLDivElement | null>;
     }
   >,
   { record?: React.ReactNode }

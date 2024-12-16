@@ -1,5 +1,5 @@
-import { AnimatePresence } from 'framer-motion';
 import { produce } from 'immer';
+import { AnimatePresence } from 'motion/react';
 import { create } from 'zustand';
 
 import { isNonEmptyString } from '@busymango/is-esm';

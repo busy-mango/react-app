@@ -4,8 +4,8 @@
 
 import { useRef } from 'react';
 import classNames from 'classnames';
-import type { Target, Transition } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
+import type { Target, Transition } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { useRecord } from '@/hooks';
 import type { ReactCFC } from '@/models';

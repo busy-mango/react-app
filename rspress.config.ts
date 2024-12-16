@@ -25,7 +25,7 @@ const dotenv = assign<{
 }>(
   process.env,
   parse(readFileSync(resolve(dir.envs, 'comm.env'))),
-  parse(readFileSync(resolve(dir.envs, `prod.env`)))
+  parse(readFileSync(resolve(dir.envs, 'prod.env')))
 );
 
 export default defineConfig({

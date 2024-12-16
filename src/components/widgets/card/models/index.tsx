@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
 
 import type { OmitOf } from '@busymango/utils';
 
@@ -9,7 +9,7 @@ export interface ICardState {}
 
 export type ICardRootRender = ReactRender<
   HTMLMotionProps<'div'> & {
-    ref: React.RefObject<HTMLDivElement>;
+    ref: React.RefObject<HTMLDivElement | null>;
     header: React.ReactNode;
     footer?: React.ReactNode;
     children?: React.ReactNode;

@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { IFlex } from '../flex';
 import type { ICardProps, ICardRootRender } from './models';

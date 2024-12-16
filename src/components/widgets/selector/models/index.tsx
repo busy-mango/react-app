@@ -95,7 +95,7 @@ export type ISelectorOptionRender = ReactRender<
 
 export type ISelectorSearchRender = ReactRender<
   OmitOf<ReactInputProps, 'pattern' | 'onChange'> & {
-    ref: React.RefObject<HTMLInputElement>;
+    ref: React.RefObject<HTMLInputElement | null>;
   } & Pick<Required<ReactInputProps>, 'onChange'>,
   ISelectorState
 >;

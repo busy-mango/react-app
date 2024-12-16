@@ -2,7 +2,7 @@ import type { ControlOption } from '../../control';
 
 export interface IWheelOptionProps {
   isFocus?: boolean;
-  container: React.RefObject<HTMLDivElement>;
+  container: React.RefObject<HTMLDivElement | null>;
 }
 
 export interface IWheelProps {

@@ -1,7 +1,7 @@
 import type {
   MiddlewareState,
+  ReferenceType,
   UseFloatingOptions,
-  UseFloatingReturn,
 } from '@floating-ui/react';
 
 import type { ReactRender, ReactTargetType, ReactWrapProps } from '@/models';
@@ -12,7 +12,12 @@ type FloatingOptions = Required<
   Pick<UseFloatingOptions, 'open' | 'onOpenChange' | 'placement' | 'transform'>
 >;
 
-export type IPopoverRef = UseFloatingReturn['refs'];
+export type IPopoverRef = {
+  reference: React.RefObject<ReferenceType | null>;
+  floating: React.RefObject<HTMLElement | null>;
+  setReference: (node: ReferenceType | null) => void;
+  setFloating: (node: HTMLElement | null) => void;
+};
 
 export type IPopoverEvent = 'click' | 'focus' | 'hover';
 
@@ -38,6 +43,7 @@ export interface IPopoverProps
   extends ReactWrapProps,
     React.PropsWithChildren,
     Partial<FloatingOptions> {
+  ref?: React.RefObject<IPopoverRef>;
   root?: ReactTargetType;
   content?: React.ReactNode;
   timing?: 'alway' | 'overflow';
@@ -48,3 +54,8 @@ export interface IPopoverProps
     reference?: IPopoverReferenceRender;
   };
 }
+
+export type MiddlewareOpts = {
+  iArrow: React.RefObject<SVGSVGElement | null>;
+  onApplyFloatingStyle?: ApplyFloatingStyle;
+} & Pick<IPopoverProps, 'variant' | 'root'>;

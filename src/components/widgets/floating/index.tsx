@@ -1,5 +1,5 @@
-import type { HTMLMotionProps } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
+import type { HTMLMotionProps } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { isElement } from '@busymango/is-esm';
 import type { FloatingContext, FloatingPortalProps } from '@floating-ui/react';

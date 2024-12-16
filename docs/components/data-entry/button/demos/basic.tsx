@@ -1,4 +1,4 @@
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 
 import { IButton, IFlex, ISignLine, ISwitch } from '@/components';
 import { useToggle } from '@/hooks';

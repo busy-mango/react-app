@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { isEmpty } from '@busymango/is-esm';
 import { iArray, ifnot } from '@busymango/utils';

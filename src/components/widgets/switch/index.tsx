@@ -1,7 +1,7 @@
 import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
-import type { Transition } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { Transition } from 'motion/react';
+import { motion } from 'motion/react';
 
 import { ifnot } from '@busymango/utils';
 
