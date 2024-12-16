@@ -28,7 +28,7 @@
     "@rspack/core": "1.0.13",
     "@rspack/dev-server": "1.0.9",
     "@rspack/plugin-react-refresh": "1.0.0",
-    "@rspress/plugin-preview": "^1.35.1",
+    "@rspress/plugin-preview": "^1.38.0",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/eslint-plugin-query": "^5.62.1",
     "@types/js-cookie": "^3.0.6",
@@ -56,7 +56,7 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "react-refresh": "^0.16.0",
-    "rspress": "^1.35.1",
+    "rspress": "^1.38.0",
     "sass-embedded": "^1.79.3",
     "sass-loader": "^16.0.0",
     "tsx": "^4.19.1",
@@ -88,6 +88,11 @@
     "react-router-dom": "^6.28.0",
     "smooth-scroll-into-view-if-needed": "^2.0.2",
     "use-immer": "^0.11.0",
-    "zustand": "5.0.0-rc.2"
+    "zustand": "5.0.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "use-sync-external-store": "1.4.0"
+    }
   }
 }

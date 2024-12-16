@@ -1,8 +1,8 @@
 import { isNonEmptyString } from '@busymango/is-esm';
 import { useQuery } from '@tanstack/react-query';
 
-import type { BullionsPriceModel } from '@/service';
-import { iBullionsPrice } from '@/service/server';
+import type { BullionsPriceModel } from '@/services';
+import { iBullionsPrice } from '@/services/server';
 
 export const BullionsPriceCard: React.FC<{
   id?: string;

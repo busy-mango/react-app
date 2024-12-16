@@ -5,8 +5,8 @@ import { MIN2MS } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import { IChip, IFlex, ISignLine } from '@/components';
-import { BULLIONS_PRICE_INFO_API } from '@/service';
-import { iBullionsPrice } from '@/service/server';
+import { BULLIONS_PRICE_INFO_API } from '@/services';
+import { iBullionsPrice } from '@/services/server';
 import { size2px } from '@/utils';
 
 /** 盎司转克 */

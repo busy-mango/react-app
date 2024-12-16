@@ -4,17 +4,11 @@ import { join, resolve } from 'path';
 import { defineConfig } from 'rspress/config';
 
 import { isObject, isRegExp } from '@busymango/is-esm';
-import type { FalseValue } from '@busymango/utils';
 import { assign, or } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
-import type { RuleSetRule } from '@rspack/core';
 import { pluginPreview } from '@rspress/plugin-preview';
 
 import { dir } from './config';
-
-const isRuleSetRule = (
-  rule: FalseValue | '...' | RuleSetRule
-): rule is RuleSetRule => isObject(rule);
 
 const dotenv = assign<{
   THEME: string;
@@ -56,7 +50,7 @@ export default defineConfig({
     tools: {
       rspack: (config) => {
         config.module?.rules
-          ?.filter(isRuleSetRule)
+          ?.filter((rule) => isObject(rule))
           ?.find(({ test }) => isRegExp(test) && test.test('.svg'))
           ?.oneOf?.unshift({
             loader: '@svgr/webpack',

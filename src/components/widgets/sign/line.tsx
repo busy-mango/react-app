@@ -48,7 +48,7 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
           {trigon && (
             <motion.path
               key="trigon"
-              animate={{ d: iTrigon(512, 512, 464) }}
+              animate={{ d: iTrigon(512, 512 + 128, 464 + 64) }}
               exit={initial}
               initial={initial}
             />

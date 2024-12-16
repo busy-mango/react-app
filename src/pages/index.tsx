@@ -3,7 +3,7 @@
  */
 
 import { useEffect } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 
 import {
   BoundaryFallbackCard,
@@ -31,48 +31,27 @@ const HalloWorld: React.FC = () => (
   </span>
 );
 
-const Welcome: React.FC = () => {
-  const { t } = useTranslation();
+const Danger: React.FC<{ depth?: number }> = ({ depth }) => {
+  const [isError, { on }] = useToggle();
 
+  useEffect(() => {
+    if (isError) console.info(`Danger depth 2`);
+  });
+
+  return <IButton onClick={on}>Throw Error {depth}</IButton>;
+};
+
+const Welcome: React.FC = () => {
   useEffectOnce(() => {
     snackbar.warn({ children: <HalloWorld /> });
   });
 
   return (
     <ISafeArea className={styles.page}>
-      <div className={styles.area}>{t('common:Confirm')}</div>
-      <div className={styles.area}>{t('common:Confirm')}</div>
-    </ISafeArea>
-  );
-};
-
-const Danger: React.FC<{ depth?: number }> = ({ depth }) => {
-  const [isError, { on }] = useToggle();
-
-  useEffect(() => {
-    console.info('render', depth);
-    if (isError) {
-      throw new Error(`error from ${depth?.toString()}`);
-    }
-  });
-
-  return (
-    <IButton
-      onClick={() => {
-        on();
-      }}
-    >
-      Throw Error {depth}
-    </IButton>
-  );
-};
-
-const Test: React.FC = () => {
-  return (
-    <ISafeArea className={styles.page}>
       <QueryBoundary fallback={<BoundaryFallbackPage />}>
         <Danger depth={1} />
         <QueryBoundary fallback={<BoundaryFallbackCard />}>
+          {/* <div className={styles.area}>{t('common:Confirm')}</div> */}
           <Danger depth={2} />
         </QueryBoundary>
       </QueryBoundary>
@@ -80,4 +59,4 @@ const Test: React.FC = () => {
   );
 };
 
-export default Test;
+export default Welcome;
