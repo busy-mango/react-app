@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { produce } from 'immer';
-import type { AnimationScope } from 'motion/react';
 import { useAnimate } from 'motion/react';
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
@@ -96,10 +95,7 @@ export const useSnackbars = create<ISnackbarStore & ISnackbarActions>(
   })
 );
 
-export const useShakeAnimate = <T extends Element = HTMLDivElement>(): [
-  AnimationScope<T>,
-  () => Promise<void>,
-] => {
+export const useShakeAnimate = <T extends Element = HTMLDivElement>() => {
   const [scope, animate] = useAnimate<T>();
 
   const iShakeAnimate = useMemoFunc(async () => {
@@ -110,5 +106,5 @@ export const useShakeAnimate = <T extends Element = HTMLDivElement>(): [
     );
   });
 
-  return useMemo(() => [scope, iShakeAnimate], [scope, iShakeAnimate]);
+  return useMemo(() => [scope, iShakeAnimate] as const, [scope, iShakeAnimate]);
 };
