@@ -25,7 +25,7 @@
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.31.0",
     "@rsdoctor/rspack-plugin": "^0.4.11",
-    "@rspack/core": "1.1.6",
+    "@rspack/core": "1.1.4",
     "@rspack/dev-server": "1.0.10",
     "@rspack/plugin-react-refresh": "1.0.1",
     "@rspress/plugin-preview": "^1.38.0",
@@ -92,8 +92,7 @@
   },
   "pnpm": {
     "overrides": {
-      "qrcode.react": "4.2.0",
-      "use-sync-external-store": "1.4.0"
+      "qrcode.react": "4.2.0"
     }
   }
 }

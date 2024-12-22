@@ -4,13 +4,16 @@
 
 import { useEffect } from 'react';
 import { Trans } from 'react-i18next';
+import { t } from 'i18next';
 
 import {
   BoundaryFallbackCard,
   BoundaryFallbackPage,
   IButton,
   IChip,
+  IHighLighter,
   ISafeArea,
+  ITypography,
   QueryBoundary,
   snackbar,
 } from '@/components';
@@ -35,7 +38,7 @@ const Danger: React.FC<{ depth?: number }> = ({ depth }) => {
   const [isError, { on }] = useToggle();
 
   useEffect(() => {
-    if (isError) console.info(`Danger depth 2`);
+    if (isError) throw new Error(`Danger depth ${depth}`);
   });
 
   return <IButton onClick={on}>Throw Error {depth}</IButton>;
@@ -48,6 +51,14 @@ const Welcome: React.FC = () => {
 
   return (
     <ISafeArea className={styles.page}>
+      <ITypography>
+        <IHighLighter
+          content={t('common:Confirm')}
+          keyword="确"
+          mode="sub-sequence"
+        />
+      </ITypography>
+
       <QueryBoundary fallback={<BoundaryFallbackPage />}>
         <Danger depth={1} />
         <QueryBoundary fallback={<BoundaryFallbackCard />}>

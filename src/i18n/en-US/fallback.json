@@ -1,0 +1,7 @@
+{
+  "server no response": "Server has no response",
+  "session expired": "Session has expired",
+  "method not allowed": "Method not allowed: {{instruction}}",
+  "server maintenance": "Server is under maintenance",
+  "network error": "Network error"
+}

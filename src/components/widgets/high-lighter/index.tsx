@@ -27,12 +27,22 @@ const StrLighter: React.FC<LighterProps> = (props) => {
     [content, keyword, compare]
   );
 
-  return content.split(word).map((text, index) => (
-    <Fragment key={index}>
-      {index !== 0 && render(word)}
-      {text}
-    </Fragment>
-  ));
+  if (word) {
+    const parts = content.split(word);
+
+    return (
+      <Fragment>
+        {parts.map((text, index) => (
+          <Fragment key={index}>
+            {index !== 0 && render(word)}
+            {text}
+          </Fragment>
+        ))}
+      </Fragment>
+    );
+  }
+
+  return content;
 };
 
 const SeqLighter: React.FC<LighterProps> = (props) => {
@@ -52,9 +62,9 @@ const SeqLighter: React.FC<LighterProps> = (props) => {
         ({ node, idxs }, word, index) => {
           const normal = <Fragment key={index}>{word}</Fragment>;
           const marked = <Fragment key={index}>{render(word)}</Fragment>;
-          if (index === indices[idxs][0]) {
+          if (index === indices[idxs]?.[0]) {
             return { node: node.concat([marked]), idxs: idxs + 1 };
-          } else if (word === keyword[indices[idxs][1]]) {
+          } else if (word === keyword[indices[idxs]?.[1]]) {
             return { node: node.concat([marked]), idxs };
           } else {
             return { node: node.concat([normal]), idxs };
@@ -70,13 +80,13 @@ const SeqLighter: React.FC<LighterProps> = (props) => {
 
 export interface IHighLighterProps extends Partial<LighterProps> {
   /** 比对算法: `str`最长公共子串; `seq`最长公共子序列 */
-  mode?: 'str' | 'seq';
+  mode?: 'sub-string' | 'sub-sequence';
 }
 
 export const IHighLighter: React.FC<IHighLighterProps> = ({
   content,
   keyword,
-  mode = 'str',
+  mode = 'sub-string',
   render = iRender,
   compare = Object.is,
 }) => (
@@ -84,7 +94,7 @@ export const IHighLighter: React.FC<IHighLighterProps> = ({
     {!(content && keyword) && content}
     {content && keyword && (
       <Fragment>
-        {mode === 'str' && (
+        {mode === 'sub-string' && (
           <StrLighter
             compare={compare}
             content={content}
@@ -92,7 +102,7 @@ export const IHighLighter: React.FC<IHighLighterProps> = ({
             render={render}
           />
         )}
-        {mode === 'seq' && (
+        {mode === 'sub-sequence' && (
           <SeqLighter
             compare={compare}
             content={content}

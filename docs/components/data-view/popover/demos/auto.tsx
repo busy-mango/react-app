@@ -11,13 +11,13 @@ const App: React.FC = () => {
         ref={ref}
         style={{
           width: '40vw',
-          height: '30vw',
+          height: '10vw',
           overflow: 'scroll',
           position: 'relative',
           backgroundColor: 'var(--fill-color-warp)',
         }}
       >
-        <IFlex centered style={{ width: '120vw', height: '90vw' }}>
+        <IFlex centered style={{ width: '80vw', height: '20vw' }}>
           <IPopover
             content="我是文本"
             render={{

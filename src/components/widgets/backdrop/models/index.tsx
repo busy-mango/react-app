@@ -18,5 +18,6 @@ export interface IBackdropProps
   extends IOverlayProps,
     OmitOf<FloatingPortalProps, 'children' | 'root'> {
   root?: ReactTargetType;
+  relative?: boolean;
   open?: boolean;
 }

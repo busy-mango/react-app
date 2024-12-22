@@ -1,0 +1,7 @@
+{
+  "server no response": "服务端失去响应",
+  "session expired": "登录态已过期",
+  "method not allowed": "请求方式异常: {{instruction}}",
+  "server maintenance": "服务端维护中",
+  "network error": "网络异常"
+}

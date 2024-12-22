@@ -26,26 +26,20 @@ export function iLCSubStr(
   compare = Object.is
 ): string {
   const dp = init(source, target);
-  const { max, end } = Array.from(iterator(source), (_, i) =>
-    Array.from(iterator(target), (_, j) => ({
-      i: i + 1,
-      j: j + 1,
-      match: compare(source[i], target[j]),
-    }))
-  )
-    .flat()
-    .reduce(
-      (acc, { i, j, match }) => {
-        if (match) {
-          dp[i][j] = dp[i - 1][j - 1] + 1;
-          if (dp[i][j] > acc.max) {
-            return { max: dp[i][j], end: i - 1 };
-          }
+  let max = 0;
+  let end = 0;
+
+  for (let i = 1; i <= source.length; i++) {
+    for (let j = 1; j <= target.length; j++) {
+      if (compare(source[i - 1], target[j - 1])) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+        if (dp[i][j] > max) {
+          max = dp[i][j];
+          end = i - 1;
         }
-        return acc;
-      },
-      { max: 0, end: 0 }
-    );
+      }
+    }
+  }
 
   return source.substring(end - max + 1, end + 1);
 }
@@ -119,3 +113,6 @@ export const iLCSubSeq = (
     [sizeOf(source), sizeOf(target)],
     compare
   );
+
+// TODO: 检查iLCSubSeq方法的性能，特别是在处理长字符串时可能会有性能问题。
+// TODO: 确保table和run函数在所有情况下都能正确处理边界条件，例如空字符串或非常短的字符串。

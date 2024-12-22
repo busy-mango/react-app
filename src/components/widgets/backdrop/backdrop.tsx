@@ -18,6 +18,7 @@ export const IBackdrop: ReactCFC<IBackdropProps> = ({
   ref,
   root,
   open,
+  relative,
   children,
   className,
   ...others
@@ -37,7 +38,11 @@ export const IBackdrop: ReactCFC<IBackdropProps> = ({
           {open && (
             <IOverlay
               ref={ref}
-              className={classNames(styles.wrap, className)}
+              className={classNames(
+                styles.wrap,
+                relative && styles.relative,
+                className
+              )}
               {...others}
             >
               {children}
