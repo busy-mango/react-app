@@ -70,14 +70,10 @@
   },
   "include": [
     "config/**/*",
-    "docs/**/*.ts",
-    "docs/**/*.tsx",
-    "examples/**/*",
     "helpers/**/*",
     "scripts/**/*",
     "src/**/*",
     "test/**/*",
-    "global.d.ts",
-    "rspress.config.ts"
+    "global.d.ts"
   ]
 }

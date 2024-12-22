@@ -2,8 +2,6 @@
  * @description react app configuration
  */
 
-import { useEffect } from 'react';
-
 import { S2MS } from '@busymango/utils';
 import {
   QueryCache,
@@ -11,14 +9,6 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-import {
-  BoundaryFallbackPage,
-  ISnackbarPortal,
-  ISuspense,
-  QueryBoundary,
-  ReactQueryDevtools,
-} from '@/components';
-import { useAppAction, useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { catchMsg } from '@/utils';
 
@@ -50,27 +40,5 @@ export const client = new QueryClient({
 export const Configure: ReactCFC = (props) => {
   const { children } = props;
 
-  const set = useAppAction();
-
-  const listener = useMemoFunc(() => {
-    set({ display: document.visibilityState });
-  });
-
-  useEffect(() => {
-    const type = 'visibilitychange';
-    document.addEventListener(type, listener);
-    return () => {
-      document.removeEventListener(type, listener);
-    };
-  }, [listener]);
-
-  return (
-    <QueryClientProvider client={client}>
-      <QueryBoundary fallback={<BoundaryFallbackPage />}>
-        <ISuspense>{children}</ISuspense>
-      </QueryBoundary>
-      <ISnackbarPortal />
-      {ReactQueryDevtools && <ReactQueryDevtools />}
-    </QueryClientProvider>
-  );
+  return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 };
