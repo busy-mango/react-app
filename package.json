@@ -24,14 +24,11 @@
   "packageManager": "pnpm@9.4.0",
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.31.0",
-    "@rsdoctor/rspack-plugin": "^0.4.11",
-    "@rspack/core": "1.1.4",
+    "@rspack/core": "1.1.5",
     "@rspack/dev-server": "1.0.10",
     "@rspack/plugin-react-refresh": "1.0.1",
-    "@rspress/plugin-preview": "^1.38.0",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/eslint-plugin-query": "^5.62.1",
-    "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.0.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
@@ -56,7 +53,6 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "react-refresh": "^0.16.0",
-    "rspress": "^1.38.0",
     "sass-embedded": "^1.79.3",
     "sass-loader": "^16.0.0",
     "tsx": "^4.19.1",
@@ -64,35 +60,16 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@busymango/fetch-driver": "^0.3.0",
     "@busymango/is-esm": "^0.2.3",
     "@busymango/utils": "^0.2.4",
-    "@floating-ui/react": "^0.27.0",
-    "@tanstack/react-form": "^0.40.2",
     "@tanstack/react-query": "^5.62.1",
-    "@tanstack/react-query-devtools": "^5.62.1",
-    "@tanstack/react-virtual": "^3.11.0",
-    "change-case": "^5.4.4",
-    "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "i18next": "^24.1.0",
     "immer": "^10.1.1",
-    "js-cookie": "^3.0.5",
     "mime": "^4.0.4",
-    "motion": "11.14.4",
     "nanoid": "^5.0.7",
-    "rc-cascader": "^3.27.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-i18next": "^15.2.0",
-    "react-router-dom": "^6.28.0",
-    "smooth-scroll-into-view-if-needed": "^2.0.2",
-    "use-immer": "^0.11.0",
-    "zustand": "5.0.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "qrcode.react": "4.2.0"
-    }
+    "react-router-dom": "^6.28.0"
   }
 }

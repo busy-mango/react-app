@@ -2,15 +2,10 @@
  * @description 应用初始化
  */
 
-import { initReactI18next } from 'react-i18next';
-import dayjs from 'dayjs';
-import type { InitOptions } from 'i18next';
-import i18n, { t } from 'i18next';
+import { t } from 'i18next';
 
 import { isHTMLElement, isString } from '@busymango/is-esm';
 import { dom, ifnot, omit } from '@busymango/utils';
-
-import { iThemeDefault, iThemeRoot } from './utils';
 
 import 'dayjs/locale/zh-cn';
 
@@ -56,35 +51,9 @@ Object.entries(omit(env, ['version'])).forEach(([key, val]) => {
   }
 });
 
-iThemeRoot.classList.add(iThemeDefault());
-
 const existing = document.querySelector(`#${env.root}`);
 
 /** 创建应用容器 */
 export const container =
   ifnot(isHTMLElement(existing) && existing) ??
   dom.create('div', { id: env.root }, document.body);
-
-export const i18nInit = async () => {
-  const ns: InitOptions['ns'] = ['common'];
-
-  const { i18nResourcesLoad } = await import('./plugins');
-
-  const supportedLngs: InitOptions['supportedLngs'] = ['zh-CN', 'en-US'];
-
-  await i18n
-    .use(initReactI18next)
-    .use(i18nResourcesLoad)
-    .init({
-      ns,
-      nsSeparator: ':',
-      defaultNS: ns[0],
-      fallbackNS: ns[0],
-      supportedLngs,
-      lng: navigator.language,
-      fallbackLng: supportedLngs[0],
-      interpolation: { escapeValue: false },
-    } satisfies InitOptions);
-
-  dayjs.locale(i18n.language.toLocaleLowerCase());
-};

@@ -25,9 +25,3 @@ export function i18nAsync<L extends string = string, N extends string = string>(
     Record<string, string>
   >;
 }
-
-/** 动态导入ReactQueryDevtools */
-export const devtoolAsync = async () => {
-  const component = import('@tanstack/react-query-devtools');
-  return { default: (await component).ReactQueryDevtools };
-};

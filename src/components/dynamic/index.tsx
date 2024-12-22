@@ -2,13 +2,9 @@
  * @description 动态组件
  */
 
-import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'motion/react';
 
-import { AppEnv, env } from '@/init';
 import type { ReactSvgProps } from '@/models';
-import { devtoolAsync } from '@/utils';
 
 import Picture from '@/icons/picture.svg?react';
 
@@ -39,13 +35,5 @@ export const DynamicIcon: React.FC<DynamicIconProps> = (props) => {
 export const DynamicPage: React.FC = () => {
   const { pathname } = useLocation();
 
-  return (
-    <AnimatePresence mode="wait">
-      <Loadable route={pathname} />
-    </AnimatePresence>
-  );
+  return <Loadable route={pathname} />;
 };
-
-export const isNonProd = env.name !== AppEnv.Prod;
-
-export const ReactQueryDevtools = isNonProd && lazy(devtoolAsync);

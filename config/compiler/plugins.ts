@@ -8,7 +8,6 @@ import { join, resolve } from 'path';
 
 import { assign, compact } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
-import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 import type {
   RspackPluginFunction,
   RspackPluginInstance,
@@ -28,11 +27,6 @@ type RspackPlugin =
   | undefined
   | RspackPluginInstance
   | RspackPluginFunction;
-
-const doctor = new RsdoctorRspackPlugin({
-  supports: { generateTileGraph: true },
-  linter: { rules: { 'ecma-version-check': 'off' } },
-});
 
 export const iPlugins = (
   env: 'dev' | 'test' | 'prod' = 'dev'
@@ -85,7 +79,6 @@ export const iPlugins = (
         mode: 'write-references',
       },
     }),
-    env === 'test' && doctor,
     env === 'dev' &&
       new CSSVarTSEmitPlugin({
         includes: ['dark.css'],
