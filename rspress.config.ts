@@ -1,7 +1,7 @@
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 import { defineConfig } from 'rspress/config';
+import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
 import { isObject, isRegExp } from '@busymango/is-esm';
 import { assign, or } from '@busymango/utils';
@@ -65,7 +65,7 @@ export default defineConfig({
         }
 
         config.plugins?.push(
-          new ForkTsCheckerWebpackPlugin({
+          new TsCheckerRspackPlugin({
             typescript: {
               build: config.mode !== 'development',
               mode: 'write-references',

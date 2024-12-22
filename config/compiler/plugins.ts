@@ -2,9 +2,9 @@
  * @description 公共配置
  */
 
-import ForkTSCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { readdirSync, readFileSync } from 'fs';
 import { join, resolve } from 'path';
+import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
 import { assign, compact } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
@@ -79,7 +79,7 @@ export const iPlugins = (
         )
       ),
     }),
-    new ForkTSCheckerWebpackPlugin({
+    new TsCheckerRspackPlugin({
       typescript: {
         build: env !== 'dev',
         mode: 'write-references',
