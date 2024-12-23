@@ -6,7 +6,8 @@ import { readdirSync, readFileSync } from 'fs';
 import { join, resolve } from 'path';
 import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
-import { assign, compact } from '@busymango/utils';
+import type { PlainObject } from '@busymango/is-esm';
+import { compact } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
 import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 import type {
@@ -34,20 +35,22 @@ const doctor = new RsdoctorRspackPlugin({
   linter: { rules: { 'ecma-version-check': 'off' } },
 });
 
-export const iPlugins = (
-  env: 'dev' | 'test' | 'prod' = 'dev'
+export const iPlugins = <T extends PlainObject>(
+  env: 'dev' | 'test' | 'prod' = 'dev',
+  params?: T
 ): (RspackPlugin | WebpackPluginInstance)[] => {
-  const dotenv = assign<{
-    THEME: string;
-    ENV_NAME: string;
-    CONTAINER_ID: string;
-    SERVER_DOMAIN?: string;
-    SERVER_PREFIX?: string;
-  }>(
-    process.env,
-    parse(readFileSync(resolve(dir.envs, 'comm.env'))),
-    parse(readFileSync(resolve(dir.envs, `${env}.env`)))
-  );
+  const dotenv = {
+    ...process.env,
+    ...parse(readFileSync(resolve(dir.envs, 'comm.env'))),
+    ...parse(readFileSync(resolve(dir.envs, `${env}.env`))),
+    ...Object.entries(params ?? {}).reduce(
+      (acc, [key, val]) => ({
+        ...acc,
+        [key.toUpperCase()]: val,
+      }),
+      {}
+    ),
+  };
 
   return compact([
     new rspack.HtmlRspackPlugin({

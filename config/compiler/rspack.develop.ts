@@ -10,17 +10,20 @@ import { AssetsRule, SassRule, SVGRule, TSDevRule } from './loaders';
 import { iPlugins } from './plugins';
 import common from './rspack.common';
 
-const config: Configuration = {
+type AppDevParams = { scan?: boolean };
+
+const create = (parms: { scan?: boolean } = {}): Configuration => ({
   cache: false,
   mode: 'development',
   devtool: 'cheap-module-source-map',
   optimization: {
     minimize: false,
   },
-  plugins: iPlugins(),
+  plugins: iPlugins('dev', parms),
   module: {
     rules: [AssetsRule, SassRule, SVGRule, TSDevRule],
   },
-};
+});
 
-export default merge(common, config);
+export const iCreateRspackDevelop = (params: AppDevParams) =>
+  merge(common, create(params));

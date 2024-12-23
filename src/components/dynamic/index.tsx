@@ -6,7 +6,7 @@ import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 
-import { AppEnv, env } from '@/init';
+import { isNonProd } from '@/init';
 import type { ReactSvgProps } from '@/models';
 import { devtoolAsync } from '@/utils';
 
@@ -45,7 +45,5 @@ export const DynamicPage: React.FC = () => {
     </AnimatePresence>
   );
 };
-
-export const isNonProd = env.name !== AppEnv.Prod;
 
 export const ReactQueryDevtools = isNonProd && lazy(devtoolAsync);

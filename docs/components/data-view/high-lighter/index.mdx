@@ -1,0 +1,24 @@
+# HighLighter 文本高亮器
+
+高亮文本中的关键词。
+
+使用 `import { IHighLighter } from "@/components";`
+
+源码 `components/widgets/high-lighter`
+
+## 代码演示
+
+### 基本用法
+
+<code src='./demos/basic' />
+
+## API
+
+* 通用属性-`Input`
+
+| 参数 | 类型 | 默认值 | 描述 |
+| ---------------- | -------------------------- | ------------ | ------------ |
+| `content`      | `boolean`                  | `-`          | 控制是否呈现关闭按钮。|
+| `keyword`      | `boolean`                  | `-`          | 控制是否呈现可点击样式（与是否定义`onClick`无关）。|
+| `compare`           | `React.ReactNode`          | `-`          | 控制组件前缀图标。|
+| `render`         | `ISwitchRenders`           | `-`          | 自定义控件UI。|

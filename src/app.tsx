@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { t } from 'i18next';
 
-import { container, i18nInit } from '@/init';
+import { container, env, i18nInit, isNonProd } from '@/init';
 
 import { catchMsg } from './utils';
 
@@ -26,6 +26,11 @@ const { userAgent } = window.navigator;
 
 try {
   await i18nInit();
+
+  if (isNonProd && env?.sacn === true) {
+    const { scan } = await import('react-scan');
+    scan({ enabled: true, log: true });
+  }
 
   const { IRoutes } = await import('./routes');
 

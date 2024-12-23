@@ -41,4 +41,9 @@ const server = new RspackDevServer(options, rspack(config));
 
 process.once('exit', server.stop);
 
-server.start();
+await server.start();
+
+if (opts.scan === true) {
+  const src = `${opts.host}:${opts.port}`;
+  exec(`pnpm dlx react-scan@latest ${src}`);
+}

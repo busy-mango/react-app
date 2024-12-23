@@ -1,5 +1,7 @@
 declare namespace NodeJS {
   interface ProcessEnv {
+    /** 是否启用 ReactScan */
+    SCAN?: boolean;
     /** 客户端默认主题样式 */
     THEME: string;
     /** 当前环境名称 */

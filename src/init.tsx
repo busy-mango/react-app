@@ -47,16 +47,20 @@ export const env = {
   root: process.env.CONTAINER_ID,
   /** 项目版本号 */
   version: meta?.content,
+  /** 是否启用 ReactScan */
+  sacn: process.env.SCAN,
 };
 
+export const isNonProd = env.name !== AppEnv.Prod;
+
 /** 检查环境变量是否填写 */
-Object.entries(omit(env, ['version'])).forEach(([key, val]) => {
+Object.entries(omit(env, ['sacn', 'version'])).forEach(([key, val]) => {
   if (!isString(val)) {
     console.error(key, t('common:Environment variables not found'));
   }
 });
 
-iThemeRoot.classList.add(iThemeDefault());
+iThemeRoot?.classList?.add(iThemeDefault());
 
 const existing = document.querySelector(`#${env.root}`);
 

@@ -6,6 +6,11 @@
   },
   {
     "type": "file",
+    "name": "high-lighter/index",
+    "label": "HighLighter 文本高亮"
+  },
+  {
+    "type": "file",
     "name": "popover/index",
     "label": "Popover 气泡浮层"
   }
