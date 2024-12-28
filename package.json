@@ -23,12 +23,13 @@
   "license": "ISC",
   "packageManager": "pnpm@9.4.0",
   "devDependencies": {
-    "@dotenvx/dotenvx": "^1.31.0",
+    "@dotenvx/dotenvx": "^1.32.0",
     "@rsdoctor/rspack-plugin": "^0.4.11",
-    "@rspack/core": "1.1.4",
+    "@rspack/core": "1.1.8",
     "@rspack/dev-server": "1.0.10",
     "@rspack/plugin-react-refresh": "1.0.1",
-    "@rspress/plugin-preview": "^1.38.0",
+    "@rspress/plugin-preview": "^1.39.3",
+    "@rspress/shared": "^1.39.3",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/eslint-plugin-query": "^5.62.1",
     "@types/js-cookie": "^3.0.6",
@@ -55,10 +56,10 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "react-refresh": "^0.16.0",
-    "rspress": "^1.38.0",
+    "rspress": "^1.39.3",
     "sass-embedded": "^1.79.3",
     "sass-loader": "^16.0.0",
-    "ts-checker-rspack-plugin": "^1.0.3",
+    "ts-checker-rspack-plugin": "^1.1.0",
     "tsx": "^4.19.1",
     "typescript": "^5.7.2",
     "webpack-merge": "^6.0.1"
@@ -93,7 +94,11 @@
   },
   "pnpm": {
     "overrides": {
-      "qrcode.react": "4.2.0"
+      "qrcode.react": "4.2.0",
+      "@rspress/shared": "1.39.3"
+    },
+    "patchedDependencies": {
+      "@rspress/shared@1.39.3": "patches/@rspress__shared@1.39.3.patch"
     }
   }
 }
