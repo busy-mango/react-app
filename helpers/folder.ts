@@ -12,7 +12,7 @@ import {
   readdirSync,
   statSync,
 } from 'fs';
-import { join, resolve } from 'path';
+import { join, normalize, resolve } from 'path';
 
 import { isFalse } from '@busymango/is-esm';
 
@@ -56,4 +56,14 @@ export function expands(dirpath?: string): string[] {
     const isDirectory = statSync(cur).isDirectory();
     return isDirectory ? expands(cur) : cur;
   });
+}
+
+/**
+ * 判断 path1 是否是 path2 的子目录
+ * @param path1
+ * @param path2
+ * @returns
+ */
+export function isSubdirectory(path1: string, path2: string) {
+  return normalize(path1).endsWith(normalize(path2));
 }

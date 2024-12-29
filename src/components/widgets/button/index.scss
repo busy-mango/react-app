@@ -163,7 +163,7 @@
   &:not(.disabled):not(.danger) {
     color: var(--font-size-06);
 
-    background-color: var(--fill-color-warp);
+    background-color: var(--bg-color-warp);
 
     &:hover {
       color: var(--font-color-info);

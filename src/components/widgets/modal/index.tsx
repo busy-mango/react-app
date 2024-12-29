@@ -1,9 +1,6 @@
-import { forwardRef, useImperativeHandle } from 'react';
+import { useImperativeHandle } from 'react';
 import classNames from 'classnames';
 
-import { isTrue, type PlainObject } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
-import type { UseFloatingReturn } from '@floating-ui/react';
 import {
   FloatingFocusManager,
   useClick,
@@ -13,110 +10,194 @@ import {
 } from '@floating-ui/react';
 
 import { container } from '@/init';
-import type { ReactWrapProps } from '@/models';
 
 import { IBackdrop } from '../backdrop';
 import { IButton } from '../button';
 import { IFlex } from '../flex';
+import { ISignLine } from '../sign';
+import { ISpinner } from '../spinners';
+import { ISVGWrap } from '../svg-wrap';
+import { ITypography } from '../typography';
+import type {
+  IModalCancelRender,
+  IModalCloseRender,
+  IModalConfirmRender,
+  IModalContentRender,
+  IModalFooterRender,
+  IModalHeaderRender,
+  IModalProps,
+  IModalState,
+} from './models';
 
 import * as styles from './index.scss';
 
-export type IModalRef = UseFloatingReturn['refs'] & {
-  getReferenceProps: (props?: React.HTMLProps<Element>) => PlainObject;
-};
-
-interface IModalProps extends OmitOf<ReactWrapProps, 'title'> {
-  open?: boolean;
-  isLoading?: boolean;
-  initialOpen?: boolean;
-  icon?: React.ReactNode;
-  close?: React.ReactNode;
-  title?: React.ReactNode;
-  confirmText?: React.ReactNode;
-  cancelText?: React.ReactNode;
-  onConfirm?: React.MouseEventHandler<HTMLButtonElement>;
-  onCancel?: React.MouseEventHandler<HTMLButtonElement>;
-  onOpenChange?: (open: boolean) => void;
-}
-
 const iDismissProps = { outsidePressEvent: 'mousedown' } as const;
 
-export const IModal = forwardRef<IModalRef, IModalProps>(
-  function DialogContent(props, ref) {
-    const {
-      icon,
-      close,
-      title,
-      style,
-      initialOpen,
-      children,
-      className,
-      cancelText,
-      confirmText,
-      onConfirm,
-      onCancel,
-      ...others
-    } = props;
+const iHeaderRender: IModalHeaderRender = (_, { icon, title }) =>
+  (icon || title) && (
+    <h2 className={styles.header}>
+      <IFlex align="center" gap={'var(--gap-03)'} justify="flex-start">
+        {icon && <ISVGWrap className={styles.icon}>{icon}</ISVGWrap>}
+        <ITypography className={styles.title} margin={false} variant="h6">
+          {title}
+        </ITypography>
+      </IFlex>
+    </h2>
+  );
 
-    const isControl = 'open' in others;
+const iCloseRender: IModalCloseRender = (
+  { className, onOpenChange },
+  { closable, isLoading }
+) =>
+  closable && (
+    <IButton
+      className={className}
+      disabled={isLoading}
+      icon={isLoading ? <ISpinner /> : <ISignLine type="cross" />}
+      variant="text"
+      onClick={({ nativeEvent }) => {
+        onOpenChange(false, nativeEvent, 'click');
+      }}
+    />
+  );
 
-    const { refs, context } = useFloating({
-      onOpenChange: others.onOpenChange,
-      open: isControl ? others.open : initialOpen,
-    });
-
-    const click = useClick(context);
-
-    const dismiss = useDismiss(context, iDismissProps);
-
-    const { getFloatingProps, getReferenceProps } = useInteractions([
-      click,
-      dismiss,
-    ]);
-
-    useImperativeHandle(ref, () => ({ ...refs, getReferenceProps }), [
-      refs,
-      getReferenceProps,
-    ]);
-
-    return (
-      <IBackdrop className={styles.mask} open={context.open} root={container}>
-        <FloatingFocusManager context={context}>
-          <div
-            ref={refs.setFloating}
-            className={classNames(styles.wrap, className)}
-            {...getFloatingProps({ style })}
-          >
-            {(icon || title) && (
-              <h2 className={styles.header}>
-                <IFlex align="center" justify="flex-start">
-                  <span>{icon}</span>
-                  <span>{title}</span>
-                </IFlex>
-              </h2>
-            )}
-            <div className={styles.close}>
-              {isTrue(close) ? 'close' : close}
-            </div>
-            <div className={styles.content}>{children}</div>
-            <IFlex align="center" className={styles.footer} justify="flex-end">
-              <IButton
-                variant="bordered"
-                onClick={(event) => {
-                  const { nativeEvent } = event;
-                  onCancel?.(event);
-                  context.onOpenChange?.(false, nativeEvent, 'click');
-                }}
-              >
-                {cancelText ?? '取消'}
-              </IButton>
-              <IButton variant="filled" onClick={onConfirm}>
-                {confirmText ?? '确认'}
-              </IButton>
-            </IFlex>
-          </div>
-        </FloatingFocusManager>
-      </IBackdrop>
-    );
-  }
+const iContentRender: IModalContentRender = ({ children }) => (
+  <div className={styles.content}>{children}</div>
 );
+
+const iCancelRender: IModalCancelRender = (
+  { onCancel, onOpenChange },
+  { isLoading }
+) => (
+  <IButton
+    disabled={isLoading}
+    tabIndex={-1}
+    variant="bordered"
+    onClick={async (event) => {
+      const { nativeEvent } = event;
+      await onCancel?.(event);
+      onOpenChange(false, nativeEvent, 'click');
+    }}
+  >
+    取消
+  </IButton>
+);
+
+const iConfirmRender: IModalConfirmRender = (
+  { onConfirm, onOpenChange },
+  { isLoading }
+) => (
+  <IButton
+    isLoading={isLoading}
+    variant="filled"
+    onClick={async (event) => {
+      const { nativeEvent } = event;
+      await onConfirm?.(event);
+      onOpenChange(false, nativeEvent, 'click');
+    }}
+  >
+    确认
+  </IButton>
+);
+
+const iFooterRender: IModalFooterRender = ({ confirm, cancel }) => (
+  <IFlex align="center" className={styles.footer} justify="flex-end">
+    {cancel}
+    {confirm}
+  </IFlex>
+);
+
+export const IModal: React.FC<IModalProps> = (props) => {
+  const {
+    ref,
+    icon,
+    title,
+    style,
+    closable,
+    children,
+    className,
+    isLoading,
+    initialOpen,
+    open: iOpen,
+    renders,
+    onOpenChange: iOpenChange,
+    onConfirm,
+    onCancel,
+    ...others
+  } = props;
+
+  const isControl = 'open' in props;
+
+  const { refs, context } = useFloating({
+    onOpenChange: iOpenChange,
+    open: isControl ? iOpen : initialOpen,
+  });
+
+  const click = useClick(context);
+
+  const dismiss = useDismiss(context, iDismissProps);
+
+  const { getFloatingProps, getReferenceProps } = useInteractions([
+    click,
+    dismiss,
+  ]);
+
+  useImperativeHandle(ref, () => ({ ...refs, getReferenceProps }), [
+    refs,
+    getReferenceProps,
+  ]);
+
+  const { open, onOpenChange } = context;
+
+  const state: IModalState = {
+    icon,
+    open,
+    title,
+    closable,
+    isLoading,
+  };
+
+  return (
+    <IBackdrop className={styles.mask} open={context.open} root={container}>
+      <FloatingFocusManager context={context}>
+        <div
+          ref={refs.setFloating}
+          className={classNames(styles.wrap, className)}
+          {...getFloatingProps({ style })}
+          {...others}
+        >
+          {(renders?.header ?? iHeaderRender)(null, state)}
+          {(renders?.close ?? iCloseRender)(
+            { className: styles.close, onOpenChange },
+            state
+          )}
+          {(renders?.content ?? iContentRender)({ children }, state)}
+          {(renders?.footer ?? iFooterRender)(
+            {
+              confirm: (renders?.confirm ?? iConfirmRender)(
+                { onConfirm, onOpenChange },
+                state
+              ),
+              cancel: (renders?.cancel ?? iCancelRender)(
+                { onCancel, onOpenChange },
+                state
+              ),
+            },
+            state
+          )}
+        </div>
+      </FloatingFocusManager>
+    </IBackdrop>
+  );
+};
+
+export type {
+  IModalCancelRender,
+  IModalCloseRender,
+  IModalConfirmRender,
+  IModalContentRender,
+  IModalFooterRender,
+  IModalHeaderRender,
+  IModalProps,
+  IModalRef,
+} from './models';

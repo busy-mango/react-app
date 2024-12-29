@@ -14,7 +14,7 @@ const App: React.FC = () => {
           height: '10vw',
           overflow: 'scroll',
           position: 'relative',
-          backgroundColor: 'var(--fill-color-warp)',
+          backgroundColor: 'var(--bg-color-warp)',
         }}
       >
         <IFlex centered style={{ width: '80vw', height: '20vw' }}>

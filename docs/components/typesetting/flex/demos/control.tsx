@@ -12,8 +12,8 @@ const App: React.FC = () => {
     <IFlex vertical gap={16}>
       <IControlWrap suffix="px" variant="bordered">
         <IInput
-          style={{ width: '100%' }}
           value={gap}
+          width="100%"
           onChange={({ target }) => {
             const num = Number(target.value);
             setGap(isFinite(num) ? num : 0);

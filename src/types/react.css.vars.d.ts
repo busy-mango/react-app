@@ -188,10 +188,10 @@ type CSSVarModel = {
   '--fill-color-active': string;
   '--fill-color-select': string;
   '--fill-color-disabled': string;
-  '--fill-color-warp': string;
   '--bg-color-normal': string;
   '--bg-color-navbar': string;
   '--bg-color-mask': string;
+  '--bg-color-warp': string;
   '--bg-color-menu': string;
   '--bg-color-control': string;
   '--bg-color-widgets': string;

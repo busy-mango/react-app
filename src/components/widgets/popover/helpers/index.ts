@@ -44,7 +44,7 @@ export const iFill = (variant?: IPopoverProps['variant']) => {
     case 'confirm':
       return 'var(--bg-color-tip)';
     default:
-      return 'var(--fill-color-warp)';
+      return 'var(--bg-color-warp)';
   }
 };
 

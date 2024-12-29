@@ -91,7 +91,7 @@ export const iPlugins = <T extends PlainObject>(
     env === 'test' && doctor,
     env === 'dev' &&
       new CSSVarTSEmitPlugin({
-        includes: ['dark.css'],
+        includes: ['themes\\dark.css'],
         dirname: join(dir.src, 'types'),
       }),
     env === 'dev' && new ReactRefreshRspackPlugin({}),

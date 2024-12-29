@@ -11,12 +11,17 @@
   },
   {
     "type": "file",
+    "name": "modal/index",
+    "label": "Modal 模态弹窗"
+  },
+  {
+    "type": "file",
     "name": "spinner/index",
     "label": "Spinner 加载中"
   },
   {
     "type": "file",
     "name": "wave/index",
-    "label": "Wave 指示"
+    "label": "Wave 波纹"
   }
 ]

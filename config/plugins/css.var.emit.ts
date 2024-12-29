@@ -7,6 +7,8 @@ import { isNonEmptyArray } from '@busymango/is-esm';
 import { dedup } from '@busymango/utils';
 import type { Compiler, RspackPluginInstance } from '@rspack/core';
 
+import { isSubdirectory } from '../../helpers';
+
 type PluginOptions = {
   dirname: string;
   filename?: string;
@@ -39,10 +41,11 @@ export class CSSVarTSEmitPlugin implements RspackPluginInstance {
       filename = 'react.css.vars.d.ts',
     } = this.options;
 
-    hooks.emit.tap(PLUGIN_NAME, (compilation) => {
+    hooks.emit.tap(PLUGIN_NAME, async (compilation) => {
       const names: string[] = [];
+      const assets = compilation.getAssets();
 
-      const recursion = (node: ChildNode) => {
+      const recursion = async (node: ChildNode) => {
         if (node.type === 'rule') {
           node.nodes?.forEach((node) => {
             if (node.type === 'decl' && node.variable) {
@@ -51,16 +54,23 @@ export class CSSVarTSEmitPlugin implements RspackPluginInstance {
           });
         }
         if (node.type === 'atrule') {
-          node.nodes?.forEach(recursion);
+          await Promise.all(node.nodes?.map(recursion) ?? []);
         }
       };
 
-      includes?.forEach((name) => {
-        const selector = `themes\\${name}`;
-        const asset = compilation.getAsset(selector);
-        const source = asset?.source.source().toString();
-        (source ? parse(source) : null)?.nodes?.forEach(recursion);
-      });
+      await Promise.all(
+        assets
+          .filter(({ name }) => name.endsWith('.css'))
+          .flatMap(({ name, source }) =>
+            includes?.map((include) => {
+              if (isSubdirectory(name, include)) {
+                const { nodes } = parse(source.source());
+                return nodes?.map(recursion);
+              }
+              return [];
+            })
+          )
+      );
 
       if (isNonEmptyArray(names)) {
         writeFileSync(join(dirname, filename), iTemp(dedup(names)));
