@@ -6,10 +6,9 @@ import type {
   ControlPattern,
   ControlUIDirection,
   ControlUISize,
+  ControlUIStatus,
 } from '../../control';
 import type { IFlexProps } from '../../flex/models';
-
-export type IFieldStatus = 'danger' | 'success' | 'warn';
 
 export type IFieldGridMode =
   | ControlUIDirection
@@ -52,7 +51,7 @@ export interface IFieldCellProps
   /** 字段交互方式 */
   pattern?: ControlPattern;
   /** 字段校验状态 */
-  status?: IFieldStatus;
+  status?: ControlUIStatus;
   /** 字段UI大小 */
   size?: ControlUISize;
 }

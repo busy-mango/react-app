@@ -141,7 +141,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
           </IFlex>
         )}
         {isReactChildren(children) && (
-          <IFlex vertical className={styles.control}>
+          <IFlex layout vertical className={styles.control}>
             <IFlex
               vertical
               align={mode === 'between' ? 'flex-end' : 'flex-start'}

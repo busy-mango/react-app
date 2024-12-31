@@ -2,9 +2,15 @@ import { Fragment, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { motion, useAnimate } from 'motion/react';
 
+import { isString } from '@busymango/is-esm';
 import { compact, FRAME2MS } from '@busymango/utils';
 
-import { useEventState, useMemoFunc, useResizeObserver } from '@/hooks';
+import {
+  useAppTheme,
+  useEventState,
+  useMemoFunc,
+  useResizeObserver,
+} from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { iThemeVariable } from '@/utils';
 
@@ -16,6 +22,8 @@ export const IWave: React.FC<IWaveProps> = (props) => {
   const { className, target, measure, placeholder, ...others } = props;
 
   const memo = useRef(false);
+
+  const theme = useAppTheme();
 
   const [scope, animate] = useAnimate<HTMLDivElement>();
 
@@ -63,8 +71,10 @@ export const IWave: React.FC<IWaveProps> = (props) => {
   );
 
   useEffect(() => {
-    (isClick || isTouch) && !memo.current && animation();
-  }, [animation, isClick, isTouch]);
+    if ((isClick || isTouch) && isString(theme)) {
+      !memo.current && animation();
+    }
+  }, [animation, isClick, isTouch, theme]);
 
   return (
     <Fragment>
@@ -77,7 +87,7 @@ export const IWave: React.FC<IWaveProps> = (props) => {
         <motion.div
           className={styles.wave}
           initial={{
-            boxShadow: `0 0 0 4px ${iThemeVariable(`--wave-color-0`)}`,
+            boxShadow: `0 0 0 4px ${iThemeVariable(`--wave-color-1`)}`,
           }}
         />
       )}

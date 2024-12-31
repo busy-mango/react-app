@@ -79,3 +79,7 @@ export interface ReactTargetFunc {
 
 /** React target ref type */
 export type ReactTargetType = ReactTargetFunc | ReturnType<ReactTargetFunc>;
+
+export type ReactHTMLRef<T extends HTMLElement> =
+  | React.RefObject<T | null>
+  | ((node: T | null) => void);

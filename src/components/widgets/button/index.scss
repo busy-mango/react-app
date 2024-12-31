@@ -102,9 +102,9 @@
     &:hover {
       background-color: var(--fill-color-hover);
     }
-    &:focus-within {
-      background-color: var(--fill-color-active);
-    }
+    // &:focus-within {
+    //   background-color: var(--fill-color-active);
+    // }
   }
   &.danger:not(.disabled) {
     color: var(--font-color-danger);

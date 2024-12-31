@@ -68,17 +68,10 @@ const iOptionRender: ISelectorOptionRender = (
   </IFlex>
 );
 
-const iSearchRender: ISelectorSearchRender = (props, { pattern }) => (
-  <IInput
-    pattern={pattern}
-    width="auto"
-    {...props}
-    onChange={(e) => {
-      props.onChange(e);
-      console.log(e.currentTarget.value);
-    }}
-  />
-);
+const iSearchRender: ISelectorSearchRender = (
+  { onChange, ...props },
+  { pattern }
+) => <IInput pattern={pattern} width="auto" {...props} onChange={onChange} />;
 
 const iChipListRender: ISelectorChipsRender = (
   { values, options, separator, Container, handleChange },

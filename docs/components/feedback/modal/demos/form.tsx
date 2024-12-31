@@ -1,17 +1,22 @@
+import { isEmpty } from '@busymango/is-esm';
 import { ifnot, sleep } from '@busymango/utils';
 import { useForm } from '@tanstack/react-form';
 
+import type { ControlUIStatus } from '@/components';
 import {
   IButton,
   ICard,
   IControlWrap,
+  IFieldCell,
   IFlex,
   IFormWrap,
   IInput,
   IModal,
   ITypography,
+  onInputCatch,
 } from '@/components';
 import { useToggle } from '@/hooks';
+import { isEmailString } from '@/utils';
 
 const App: React.FC = () => {
   const [open, { on, toggle }] = useToggle();
@@ -27,7 +32,7 @@ const App: React.FC = () => {
 
   return (
     <ICard>
-      <IButton onClick={on}>对话框</IButton>
+      <IButton onClick={on}>表单弹窗</IButton>
       <Subscribe>
         {({ isSubmitting, canSubmit }) => (
           <IModal
@@ -59,22 +64,45 @@ const App: React.FC = () => {
                 要订阅该网站，请在此处输入您的电子邮件地址。我们会偶尔发送更新。
               </ITypography>
               <IFormWrap>
-                <Field name="email">
-                  {({ state, handleBlur, handleChange }) => (
-                    <IControlWrap variant="bordered">
-                      <IInput
-                        pattern={ifnot(isSubmitting && 'readOnly')}
-                        placeholder="电子邮件地址"
-                        type="email"
-                        value={state.value}
-                        width="100%"
-                        onBlur={handleBlur}
-                        onChange={({ currentTarget }) => {
-                          handleChange(currentTarget.value);
-                        }}
-                      />
-                    </IControlWrap>
-                  )}
+                <Field
+                  name="email"
+                  validators={{
+                    onBlur: ({ value }) => {
+                      if (!isEmailString(value)) {
+                        return '请输入有效的电子邮件地址';
+                      }
+                    },
+                    onChange: ({ value, fieldApi }) => {
+                      if (isEmpty(value)) return '请输入您的电子邮件地址';
+                      const { isBlurred } = fieldApi.state.meta;
+                      if (isBlurred) fieldApi.validate('blur');
+                    },
+                  }}
+                >
+                  {({ state: { meta, value }, handleBlur, handleChange }) => {
+                    const { errors, isDirty } = meta;
+                    const isError = isDirty && errors.length > 0;
+                    const status: ControlUIStatus = ifnot(isError && 'danger');
+                    return (
+                      <IFieldCell
+                        feedback={isError && meta.errors.join(', ')}
+                        status={status}
+                      >
+                        <IControlWrap status={status} variant="bordered">
+                          <IInput
+                            placeholder="电子邮件地址"
+                            type="email"
+                            value={value}
+                            width="100%"
+                            onBlur={handleBlur}
+                            onChange={(event) => {
+                              handleChange(onInputCatch(event));
+                            }}
+                          />
+                        </IControlWrap>
+                      </IFieldCell>
+                    );
+                  }}
                 </Field>
               </IFormWrap>
             </IFlex>

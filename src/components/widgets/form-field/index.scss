@@ -20,7 +20,6 @@
 
 .cell {
   width: 100%;
-  line-height: 16px;
 
   .grid {
     display: grid;
@@ -98,11 +97,17 @@
     margin: unset;
   }
 
-  &.danger,
   &.warn,
+  &.danger,
   &.success,
-  &.waiting {
+  &.vaildating {
     font-size: var(--font-size-04);
+  }
+
+  &.danger {
+    .feedback {
+      color: var(--font-color-danger);
+    }
   }
 
   &.show-title {
@@ -206,14 +211,18 @@
   }
 
   &.mini {
+    line-height: var(--control-size-02);
     .feedback {
+      font-size: var(--font-size-01);
       &.with-margin {
         min-height: var(--control-size-01);
       }
     }
   }
   &.medium {
+    line-height: var(--control-size-03);
     .feedback {
+      font-size: var(--font-size-01);
       &.with-margin {
         min-height: var(--control-size-02);
       }
@@ -221,6 +230,7 @@
   }
   &.huge {
     .feedback {
+      font-size: var(--font-size-02);
       &.with-margin {
         min-height: var(--control-size-03);
       }

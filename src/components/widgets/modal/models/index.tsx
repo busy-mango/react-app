@@ -87,7 +87,7 @@ interface IModalRenders {
 export interface IModalProps
   extends IModalState,
     OmitOf<ReactWrapProps, 'title'> {
-  ref?: React.Ref<IModalRef>;
+  ref?: React.RefObject<IModalRef>;
   initialOpen?: boolean;
   renders?: IModalRenders;
   onCancel?: IModalButtonEvent;

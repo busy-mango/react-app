@@ -5,12 +5,10 @@
 .wrap {
   max-width: 80vw;
   min-width: 20vw;
-
-  border-radius: var(--border-radius-03);
-
-  background-color: var(--bg-color-float);
-
   position: relative;
+  border-radius: var(--border-radius-03);
+  background-color: var(--bg-color-normal);
+  box-shadow: var(--shadow-12);
 }
 
 .header,

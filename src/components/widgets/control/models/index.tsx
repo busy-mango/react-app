@@ -4,7 +4,7 @@ import type { FocusEvent } from 'react';
 import type { Nil } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 
-import type { ReactRender, ReactWrapProps } from '@/models';
+import type { ReactHTMLRef, ReactRender, ReactWrapProps } from '@/models';
 
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';
@@ -79,6 +79,7 @@ export interface IControlWrapProps
   extends React.PropsWithChildren,
     OmitOf<IControlWrapState, 'isFocus'>,
     OmitOf<ReactWrapProps, 'prefix' | 'children'> {
+  ref?: ReactHTMLRef<HTMLDivElement>;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   render?: {

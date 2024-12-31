@@ -24,7 +24,6 @@ export const IFormWrap: ReactCFC<IFormWrapProps> = ({
   ...others
 }) => (
   <motion.form
-    layout
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0 }}
     initial={{ scale: 0.64, opacity: 0 }}

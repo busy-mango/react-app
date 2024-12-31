@@ -48,7 +48,7 @@ export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
           {...others}
         >
           {(render ?? iRender)(
-            { ref: target, className: styles.content },
+            { ref: target, className: styles.content, children },
             { record }
           )}
         </motion.div>

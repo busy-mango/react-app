@@ -148,3 +148,8 @@ export const isTextAreaElement = (
 ): target is HTMLInputElement => {
   return target instanceof HTMLTextAreaElement;
 };
+
+export const isEmailString = (data: unknown): data is string => {
+  if (!isString(data)) return false;
+  return /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(data);
+};

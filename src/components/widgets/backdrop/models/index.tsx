@@ -11,7 +11,7 @@ export interface IOverlayProps extends HTMLMotionProps<'div'> {
    * @default false
    */
   scroll?: boolean;
-  ref?: React.ForwardedRef<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }
 
 export interface IBackdropProps

@@ -8,7 +8,7 @@
   .content {
     width: 100%;
     padding: var(--gap-01) 0;
-    font-size: var(--font-size-04);
+    font-size: inherit;
     white-space: pre-wrap;
     height: max-content;
   }
