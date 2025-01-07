@@ -6,7 +6,6 @@ import { ifnot } from '@busymango/utils';
 
 import { useEventState } from '@/hooks';
 
-import { useIFieldGridContext } from '../form-field/hooks';
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
@@ -33,8 +32,6 @@ const iRootRender: IControlWrapRootRender = (
 );
 
 export const IControlWrap: React.FC<IControlWrapProps> = (props) => {
-  const ctx = useIFieldGridContext();
-
   const {
     ref,
     prefix,
@@ -48,7 +45,7 @@ export const IControlWrap: React.FC<IControlWrapProps> = (props) => {
     status = 'success',
     variant = 'standard',
     pattern = 'editable',
-    size = ctx?.size ?? 'medium',
+    size = 'medium',
     onSuffixClick,
     onPrefixClick,
     render,

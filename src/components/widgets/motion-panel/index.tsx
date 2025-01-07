@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useRecord } from '@/hooks';
 import type { ReactCFC } from '@/models';
 
-import type { IMotionPanelProps, IMotionPanelRender } from './models';
+import type { IPanelProps, IPanelRender } from './models';
 
 import * as styles from './index.scss';
 
@@ -18,11 +18,11 @@ const initial: Target = { opacity: 0, height: 0 };
 
 const transition: Transition = { ease: 'circIn' };
 
-const iRender: IMotionPanelRender = ({ children, ...others }, { record }) => (
+const iRender: IPanelRender = ({ children, ...others }, { record }) => (
   <div {...others}>{children || record}</div>
 );
 
-export const IMotionPanel: ReactCFC<IMotionPanelProps> = (props) => {
+export const IPanel: ReactCFC<IPanelProps> = (props) => {
   const {
     children,
     className,

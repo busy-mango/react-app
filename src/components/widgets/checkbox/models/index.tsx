@@ -1,4 +1,4 @@
-import type { HTMLMotionProps, SVGMotionProps } from 'motion/react';
+import type { SVGMotionProps } from 'motion/react';
 
 import type { PlainObject } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
@@ -67,7 +67,7 @@ export type ICheckBoxRender = IRender<
     icon?: React.ReactNode;
     input?: React.ReactNode;
     inputRef: React.RefObject<HTMLInputElement | null>;
-  } & HTMLMotionProps<'i'>
+  } & ReactWrapProps
 >;
 
 export type ICheckInputRender = IRender<

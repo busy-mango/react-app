@@ -11,6 +11,11 @@
   },
   {
     "type": "file",
+    "name": "form/index",
+    "label": "Form 表单容器"
+  },
+  {
+    "type": "file",
     "name": "svg-wrap/index",
     "label": "SVGWrap 图标盒子"
   },

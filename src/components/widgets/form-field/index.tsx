@@ -1,156 +1,104 @@
-import { useRef, useState } from 'react';
 import classNames from 'classnames';
+import { motion } from 'motion/react';
 
 import { isTrue } from '@busymango/is-esm';
 
-import { useResizeObserver } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { isReactChildren, isReactNode } from '@/utils';
 
 import { IFlex } from '../flex';
 import { IMarker } from '../marker';
-import { IMotionPanel } from '../motion-panel';
-import { ISignLine } from '../sign';
-import { IFieldGridProvider, useIFieldGridContext } from './hooks';
-import type {
-  IFieldCellProps,
-  IFieldGridMode,
-  IFieldGridProps,
-} from './models';
+import { IPanel } from '../motion-panel';
+import { IFieldProvider, useIFieldCellContext } from './hooks';
+import type { IFieldCellProps, IFieldStackProps } from './models';
 
 import * as styles from './index.scss';
 
-export const IFieldGrid: ReactCFC<IFieldGridProps> = (props) => {
-  const {
-    size,
-    mode,
-    align,
-    colon,
-    margin,
-    children,
-    className,
-    responsive,
-    forceRenderTitle,
-    ...others
-  } = props;
-
-  const ref = useRef(null);
-
-  const [iMode, setIMode] = useState<IFieldGridMode>();
-
-  useResizeObserver(
-    ref,
-    ({ target: { scrollWidth } }) => {
-      if (scrollWidth <= 260) {
-        setIMode('vertical');
-      } else if (scrollWidth <= 430) {
-        setIMode('horizontal');
-      } else {
-        setIMode(mode);
-      }
-    },
-    { enabled: responsive }
-  );
-
-  return (
-    <IFlex
-      ref={ref}
-      vertical
-      wrap
-      className={classNames(styles.wrap, className)}
-      data-ui-ifield-grid=""
-      {...others}
-    >
-      <IFieldGridProvider
-        align={align}
-        colon={colon}
-        forceRenderTitle={forceRenderTitle}
-        margin={margin}
-        mode={responsive ? iMode : mode}
-        size={size}
-      >
-        {children}
-      </IFieldGridProvider>
-    </IFlex>
-  );
-};
+export const IFieldStack: ReactCFC<IFieldStackProps> = ({
+  cell,
+  children,
+  className,
+  ...others
+}) => (
+  <IFlex
+    vertical
+    wrap
+    className={classNames(styles.wrap, className)}
+    data-ui="field-stack"
+    {...others}
+  >
+    <IFieldProvider {...cell}>{children}</IFieldProvider>
+  </IFlex>
+);
 
 export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
-  const ctx = useIFieldGridContext();
+  const ctx = useIFieldCellContext();
 
   const {
-    note,
+    grid,
     title,
-    offset,
-    occupy,
     address,
     feedback,
     required,
     className,
-    description,
-    column = 1,
     status = 'success',
     pattern = 'editable',
     colon = ctx?.colon ?? ':',
     size = ctx?.size ?? 'medium',
     margin = ctx?.margin ?? false,
-    mode = ctx?.mode ?? 'horizontal',
     align = ctx?.align ?? 'flex-start',
     forceRenderTitle = ctx?.forceRenderTitle,
     children,
     ...others
   } = props;
 
-  const showTitle = isTrue(forceRenderTitle) || isReactNode(title);
+  const showTitle = forceRenderTitle || isReactNode(title);
 
   return (
     <div
-      data-ui-ifield-cell
       className={classNames(
         styles.cell,
         styles[size],
         styles[status],
         {
           [styles.margin]: isTrue(margin),
-          [styles.showTitle]: showTitle,
           [styles.readPretty]: pattern === 'readPretty',
         },
         className
       )}
       data-address={address}
+      data-ui="field-cell"
       {...others}
     >
       <div
-        data-ui-ifield-grid
-        className={classNames(
-          styles.grid,
-          styles[mode],
-          styles[`column${column}`]
-        )}
+        className={classNames(styles.grid)}
+        data-ui="field-cell-grid"
+        style={{
+          gridTemplateRows: grid?.rows ?? 'repeat(2, max-content)',
+          gridTemplateColumns: grid?.cols ?? '1fr',
+        }}
       >
-        {showTitle && (
-          <IFlex align="flex-start" className={styles.title} justify={align}>
-            <IMarker className={styles.marker} required={required}>
-              {title}
-              {description && <ISignLine ring type="helper" />}
-              {note && <ISignLine ring type="informer" />}
-            </IMarker>
-            {colon && isReactNode(title) && (
-              <div className={styles.colon}>{colon}</div>
-            )}
-          </IFlex>
-        )}
+        <motion.label
+          className={styles.title}
+          style={{
+            justifyContent: align,
+            width: showTitle ? 'auto' : 0,
+            height: showTitle ? 'auto' : 0,
+          }}
+        >
+          <IMarker className={styles.marker} required={required}>
+            {title}
+          </IMarker>
+          {colon && isReactNode(title) && (
+            <div className={styles.colon}>{colon}</div>
+          )}
+        </motion.label>
         {isReactChildren(children) && (
           <IFlex layout vertical className={styles.control}>
-            <IFlex
-              vertical
-              align={mode === 'between' ? 'flex-end' : 'flex-start'}
-              className={styles.wrapper}
-              justify="center"
-            >
+            <IFlex vertical className={styles.wrapper} justify="center">
               {children}
             </IFlex>
-            <IMotionPanel
+            <IPanel
               className={classNames(
                 styles.feedback,
                 margin === 'feedback' && styles.withMargin
@@ -158,7 +106,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
               visible={isReactChildren(feedback)}
             >
               {feedback}
-            </IMotionPanel>
+            </IPanel>
           </IFlex>
         )}
       </div>
@@ -166,4 +114,4 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
   );
 };
 
-export type { IFieldCellProps, IFieldGridProps } from './models';
+export type { IFieldCellProps, IFieldStackProps } from './models';

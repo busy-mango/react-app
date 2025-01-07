@@ -63,7 +63,7 @@ type ISegmentRenders = {
 
 export interface ISegmentProps
   extends ISegmentState,
-    OmitOf<IFlexProps, 'children' | 'defaultValue' | 'onChange'> {
+    OmitOf<IFlexProps, 'children'> {
   /**
    *
    */

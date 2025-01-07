@@ -8,7 +8,7 @@ import { iPropsAreEqual } from '@/utils';
 
 import { useControlState } from '../control';
 import { IFlex } from '../flex';
-import { IMotionPanel } from '../motion-panel';
+import { IPanel } from '../motion-panel';
 import { ISignLine } from '../sign';
 import type {
   ICollapseGroupProps,
@@ -53,9 +53,9 @@ const Collapsible: React.FC<ICollapsibleProps> = ({
           )}
         </div>
       </IFlex>
-      <IMotionPanel visible={iOpen}>
+      <IPanel visible={iOpen}>
         <div className={styles.content}>{children}</div>
-      </IMotionPanel>
+      </IPanel>
     </div>
   );
 };

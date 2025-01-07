@@ -13,7 +13,10 @@ export function iFindElement(target?: ReactTargetType) {
 }
 
 /** 防止冒泡 */
-export function iPropagation(event?: React.UIEvent, stop = true) {
+export function iPropagation(
+  event?: React.UIEvent | React.FormEvent,
+  stop = true
+) {
   if (isTrue(stop)) {
     event?.stopPropagation();
     event?.preventDefault();

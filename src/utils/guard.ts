@@ -11,6 +11,7 @@ import {
   isNil,
   isString,
 } from '@busymango/is-esm';
+import { iArray } from '@busymango/utils';
 
 import type { ReactTargetType } from '@/models';
 
@@ -46,7 +47,8 @@ export function isScrollable(target?: ReactTargetType) {
  * 断言目标变量为React子组件
  */
 export function isReactChildren(source?: unknown) {
-  return Children.count(source) > 0;
+  const nodes = iArray(source).filter(isReactNode);
+  return Children.count(nodes) > 0 && !Children.toArray(nodes).some(isFalse);
 }
 
 /**

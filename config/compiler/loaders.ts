@@ -28,8 +28,8 @@ export const SassRule: RuleSetRule = {
 
 export const SVGRule: RuleSetRule = {
   test: /\.svg$/i,
-  issuer: /\.[jt]sx?$/,
   use: '@svgr/webpack',
+  resourceQuery: /react/,
   options: { icon: false, typescript: true },
 };
 

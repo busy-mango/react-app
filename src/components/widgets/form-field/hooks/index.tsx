@@ -2,32 +2,29 @@ import { createContext, useContext, useMemo } from 'react';
 
 import type { ReactCFC } from '@/models';
 
-import type { IFieldGridContextVal } from '../models';
+import type { IFieldCellContextVal } from '../models';
 
-const IFieldGridContext = createContext<IFieldGridContextVal>(null!);
+const IFieldCellContext = createContext<IFieldCellContextVal>(null!);
 
-export const useIFieldGridContext = (): IFieldGridContextVal | undefined => {
-  return useContext(IFieldGridContext) ?? undefined;
+export const useIFieldCellContext = (): IFieldCellContextVal | undefined => {
+  return useContext(IFieldCellContext) ?? undefined;
 };
 
-export const IFieldGridProvider: ReactCFC<IFieldGridContextVal> = (props) => {
-  const { forceRenderTitle, align, children, margin, mode, size, colon } =
-    props;
+export const IFieldProvider: ReactCFC<IFieldCellContextVal> = (props) => {
+  const { forceRenderTitle, align, children, margin, size, colon } = props;
 
   const {
-    mode: _mode,
     size: _size,
     align: _align,
     colon: _colon,
     margin: _margin,
     forceRenderTitle: _forceRenderTitle,
-  } = useIFieldGridContext() ?? {};
+  } = useIFieldCellContext() ?? {};
 
   return (
-    <IFieldGridContext.Provider
+    <IFieldCellContext.Provider
       value={useMemo(
         () => ({
-          mode: mode ?? _mode,
           size: size ?? _size,
           align: align ?? _align,
           colon: colon ?? _colon,
@@ -41,8 +38,6 @@ export const IFieldGridProvider: ReactCFC<IFieldGridContextVal> = (props) => {
           _colon,
           size,
           _size,
-          mode,
-          _mode,
           margin,
           _margin,
           forceRenderTitle,
@@ -51,6 +46,6 @@ export const IFieldGridProvider: ReactCFC<IFieldGridContextVal> = (props) => {
       )}
     >
       {children}
-    </IFieldGridContext.Provider>
+    </IFieldCellContext.Provider>
   );
 };

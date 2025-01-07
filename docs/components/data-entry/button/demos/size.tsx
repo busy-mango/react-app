@@ -4,7 +4,7 @@ import { Variants } from 'docs/widgets';
 import {
   IButton,
   IFieldCell,
-  IFieldGrid,
+  IFieldStack,
   IFlex,
   ISignLine,
   ISwitch,
@@ -18,11 +18,11 @@ const App: React.FC = () => {
     <Variants sizeable>
       {({ size }) => (
         <Fragment>
-          <IFieldGrid responsive>
+          <IFieldStack responsive>
             <IFieldCell title="isFullWidth">
               <ISwitch checked={checked} onChange={iCheck} />
             </IFieldCell>
-          </IFieldGrid>
+          </IFieldStack>
           <IFlex wrap gap={8}>
             <IButton isFullWidth={checked} size={size} variant="filled">
               主要按钮

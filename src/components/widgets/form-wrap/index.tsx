@@ -7,29 +7,37 @@ import type { OmitOf } from '@busymango/utils';
 
 import { useToggle } from '@/hooks';
 import type { ReactCFC } from '@/models';
+import { iPressEvent } from '@/utils';
 
 import type { IFlexProps } from '../flex';
 import { IFlex } from '../flex';
-import { IFieldGrid } from '../form-field';
+import { IFieldStack } from '../form-field';
+import type { IFieldCellContextVal } from '../form-field/models';
 import { IMarker } from '../marker';
-import { IMotionPanel } from '../motion-panel';
+import { IPanel } from '../motion-panel';
 import { ISignLine } from '../sign';
 
 import * as styles from './index.scss';
 
-export interface IFormWrapProps extends HTMLMotionProps<'form'> {}
+export interface IFormWrapProps extends HTMLMotionProps<'form'> {
+  cell?: IFieldCellContextVal;
+}
 
 export const IFormWrap: ReactCFC<IFormWrapProps> = ({
+  cell,
   children,
+  onKeyPress,
+  onSubmit,
   ...others
 }) => (
   <motion.form
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0 }}
     initial={{ scale: 0.64, opacity: 0 }}
+    onKeyPress={iPressEvent(onSubmit, onKeyPress)}
     {...others}
   >
-    <IFieldGrid>{children}</IFieldGrid>
+    <IFieldStack cell={cell}>{children}</IFieldStack>
   </motion.form>
 );
 
@@ -73,13 +81,13 @@ export const IFormCard: ReactCFC<IFormCardProps> = ({
           />
         </IFlex>
       )}
-      <IMotionPanel visible={visible}>
+      <IPanel visible={visible}>
         <IFlex vertical className={styles.content}>
           {parts?.map((section, index) => (
             <IFormPart {...section} key={index} />
           ))}
         </IFlex>
-      </IMotionPanel>
+      </IPanel>
       {children}
     </IFlex>
   );

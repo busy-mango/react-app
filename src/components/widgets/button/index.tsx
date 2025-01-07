@@ -1,12 +1,12 @@
-import { useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { isEmpty, isNumber, isTrue } from '@busymango/is-esm';
-import { FRAME2MS } from '@busymango/utils';
+import { isNumber, isTrue } from '@busymango/is-esm';
+import { FRAME2MS, ifnot } from '@busymango/utils';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
-import { iPropagation } from '@/utils';
+import { iPropagation, isReactChildren } from '@/utils';
 
 import { ISpinner } from '../spinners';
 import { ISVGWrap } from '../svg-wrap';
@@ -56,6 +56,10 @@ export const IButton: React.FC<IButtonProps> = (props) => {
     }
   );
 
+  const isNonEmptyChild = isReactChildren(children);
+
+  const animate = useMemo(() => ({ opacity: isLoading ? 0 : 1 }), [isLoading]);
+
   return (
     <motion.button
       ref={ref}
@@ -84,20 +88,25 @@ export const IButton: React.FC<IButtonProps> = (props) => {
       }}
       {...others}
     >
-      {wave && <IWave target={ref} />}
       <AnimatePresence>
-        {(isLoading || icon) && (
-          <ISVGWrap
-            className={classNames(
-              styles.icon,
-              !isEmpty(children) && styles.gap
-            )}
-          >
-            {isLoading ? <ISpinner /> : icon}
+        {wave && <IWave target={ref} />}
+        {isLoading && (
+          <ISVGWrap className={styles.spin}>
+            <ISpinner />
           </ISVGWrap>
         )}
+        {icon && (
+          <ISVGWrap
+            animate={animate}
+            className={ifnot(isNonEmptyChild && styles.gap)}
+          >
+            {icon}
+          </ISVGWrap>
+        )}
+        {isNonEmptyChild && (
+          <motion.span animate={animate}>{children}</motion.span>
+        )}
       </AnimatePresence>
-      {children && <span>{children}</span>}
     </motion.button>
   );
 };

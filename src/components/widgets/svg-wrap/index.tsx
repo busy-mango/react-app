@@ -1,12 +1,9 @@
-import type { HTMLMotionProps, Target, Transition } from 'motion/react';
+import type { Target, Transition } from 'motion/react';
 import { motion } from 'motion/react';
 
 import type { ReactCFC } from '@/models';
 
-export interface ISVGWrapProps extends HTMLMotionProps<'i'> {
-  x?: string | number;
-  y?: string | number;
-}
+import type { ISVGWrapProps } from './models';
 
 const transition: Transition = { ease: 'easeOut' };
 
@@ -24,27 +21,33 @@ const iInitial = ({ x = 0, y = 0 }: Partial<Target>): Target => ({
   y,
 });
 
-export const ISVGWrap: ReactCFC<ISVGWrapProps> = (props) => {
-  const { x = 0, y = 0, children, className, style, ...others } = props;
+export const ISVGWrap: ReactCFC<ISVGWrapProps> = ({
+  x = 0,
+  y = '0.05em',
+  children,
+  className,
+  animate,
+  style,
+  ...others
+}) => (
+  <motion.i
+    animate={{ ...iAnimate({ x, y }), ...animate }}
+    className={className}
+    exit={iInitial({ x, y })}
+    initial={iInitial({ x, y })}
+    style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      flexShrink: 0,
+      ...style,
+    }}
+    transition={transition}
+    {...others}
+  >
+    {/* ZWSP(zero-width space) */}
+    {'\u200b'}
+    {children}
+  </motion.i>
+);
 
-  return (
-    <motion.i
-      animate={iAnimate({ x, y })}
-      className={className}
-      exit={iInitial({ x, y })}
-      initial={iInitial({ x, y })}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        flexShrink: 0,
-        ...style,
-      }}
-      transition={transition}
-      {...others}
-    >
-      {/* ZWSP(zero-width space) */}
-      {'\u200b'}
-      {children}
-    </motion.i>
-  );
-};
+export type { ISVGWrapProps } from './models';

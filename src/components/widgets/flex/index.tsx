@@ -1,72 +1,70 @@
-import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import classNames from 'classnames';
 import { motion } from 'motion/react';
 
 import { isFalse, isTrue } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
 
-import type { IFlexProps } from './models';
+import type { IFlexProps, IFlexRootRender } from './models';
 
 import * as styles from './index.scss';
 
-export const IFlex = forwardRef<HTMLDivElement, IFlexProps>(
-  function Flex(props, ref) {
-    const {
-      gap,
-      flex,
-      wrap,
-      align,
-      style,
-      inline,
-      justify,
-      reverse,
+const iRootRender: IFlexRootRender = (props) => <motion.div {...props} />;
+
+export const IFlex: React.FC<IFlexProps> = (props) => {
+  const {
+    ref,
+    gap,
+    flex,
+    wrap,
+    align,
+    style,
+    inline,
+    justify,
+    reverse,
+    children,
+    centered,
+    className,
+    direction,
+    vertical = false,
+    renders,
+    ...others
+  } = props;
+
+  const flexWrap = isTrue(wrap) ? 'wrap' : wrap;
+
+  const alignItems = align ?? ifnot(centered && 'center');
+
+  const justifyContent = justify ?? ifnot(centered && 'center');
+
+  return (renders?.root ?? iRootRender)(
+    {
+      ref,
       children,
-      centered,
-      className,
-      direction,
-      vertical = false,
-      ...others
-    } = props;
+      style: useMemo(
+        () => ({
+          ...style,
+          flex,
+          flexWrap,
+          alignItems,
+          justifyContent,
+          flexDirection: direction,
+          gap,
+        }),
+        [style, flex, alignItems, justifyContent, flexWrap, gap, direction]
+      ),
+      className: classNames(
+        styles.wrap,
+        reverse && styles.reverse,
+        isTrue(inline) && styles.inline,
+        isTrue(vertical) && styles.vertical,
+        isFalse(vertical) && styles.horizontal,
+        className
+      ),
+      ...others,
+    },
+    { inline, reverse, vertical, centered }
+  );
+};
 
-    const iRef = useRef<HTMLDivElement>(null);
-
-    useImperativeHandle(ref, () => iRef.current!, [iRef]);
-
-    const flexWrap = isTrue(wrap) ? 'wrap' : wrap;
-
-    const alignItems = align ?? ifnot(centered && 'center');
-
-    const justifyContent = justify ?? ifnot(centered && 'center');
-
-    return (
-      <motion.div
-        ref={iRef}
-        className={classNames(
-          styles.wrap,
-          reverse && styles.reverse,
-          isTrue(inline) && styles.inline,
-          isTrue(vertical) && styles.vertical,
-          isFalse(vertical) && styles.horizontal,
-          className
-        )}
-        style={useMemo(
-          () => ({
-            ...style,
-            flex,
-            flexWrap,
-            alignItems,
-            justifyContent,
-            flexDirection: direction,
-            gap,
-          }),
-          [style, flex, alignItems, justifyContent, flexWrap, gap, direction]
-        )}
-        {...others}
-      >
-        {children}
-      </motion.div>
-    );
-  }
-);
-
-export * from './models';
+export type { IFlexProps, IFlexRootRender } from './models';

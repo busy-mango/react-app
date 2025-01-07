@@ -7,7 +7,7 @@ export function routeAsync(route: string) {
 
 /** 动态导入图标chunk */
 export function iconAsync(route: string) {
-  return import(`../icons${route}`) as Promise<ReactComponentAsync>;
+  return import(`../icons${route}?react`) as Promise<ReactComponentAsync>;
 }
 
 /** 动态导入案例chunk */

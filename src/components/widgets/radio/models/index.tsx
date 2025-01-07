@@ -1,5 +1,3 @@
-import type { HTMLMotionProps } from 'motion/react';
-
 import type { OmitOf } from '@busymango/utils';
 
 import type { ReactInputProps, ReactRender, ReactWrapProps } from '@/models';
@@ -49,7 +47,7 @@ export type IRadioRootRender = ReactRender<
 >;
 
 export type IRadioRadioRender = ReactRender<
-  HTMLMotionProps<'i'> & {
+  ReactWrapProps & {
     input: React.ReactNode;
     inputRef: React.RefObject<HTMLInputElement | null>;
   },

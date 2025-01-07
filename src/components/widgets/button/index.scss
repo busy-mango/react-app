@@ -190,8 +190,10 @@
   }
 }
 
-.icon {
-  &.gap {
-    margin-right: var(--gap-02);
-  }
+.gap {
+  margin-right: var(--gap-02);
+}
+
+.spin {
+  position: absolute;
 }

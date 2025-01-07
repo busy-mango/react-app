@@ -3,9 +3,9 @@ import { join } from 'path';
 import type { ChildNode } from 'postcss';
 import { parse } from 'postcss';
 
-import { isNonEmptyArray } from '@busymango/is-esm';
+import { isNonEmptyArray, isString } from '@busymango/is-esm';
 import { dedup } from '@busymango/utils';
-import type { Compiler, RspackPluginInstance } from '@rspack/core';
+import type { Asset, Compiler, RspackPluginInstance } from '@rspack/core';
 
 import { isSubdirectory } from '../../helpers';
 
@@ -17,7 +17,7 @@ type PluginOptions = {
 
 const PLUGIN_NAME = 'CSSVarTSEmitPlugin';
 
-const iTemp = (names: string[]) => `import 'react';\n
+const template = (names: string[]) => `import 'react';\n
 type CSSVarModel = {
   ${names.map((name) => `'${name}': string;`).join(`\n${' '.repeat(2)}`)}
 };\n
@@ -27,6 +27,39 @@ declare module 'react' {
 }
 `;
 
+const compile = async (assets: readonly Asset[], includes?: string[]) => {
+  const names: string[] = [];
+
+  const recursion = async (node: ChildNode) => {
+    if (node.type === 'rule') {
+      node.nodes?.forEach((node) => {
+        if (node.type === 'decl' && node.variable) {
+          names.push(node.prop);
+        }
+      });
+    }
+    if (node.type === 'atrule') {
+      await Promise.all(node.nodes?.map(recursion) ?? []);
+    }
+  };
+
+  await Promise.all(
+    assets
+      .filter(({ name }) => name.endsWith('.css'))
+      .flatMap(({ name, source }) =>
+        includes?.map((include) => {
+          if (isSubdirectory(name, include)) {
+            const { nodes } = parse(source.source());
+            return nodes?.map(recursion);
+          }
+          return [];
+        })
+      )
+  );
+
+  return isNonEmptyArray(names) && template(dedup(names));
+};
+
 export class CSSVarTSEmitPlugin implements RspackPluginInstance {
   private options: PluginOptions;
 
@@ -34,47 +67,25 @@ export class CSSVarTSEmitPlugin implements RspackPluginInstance {
     this.options = options;
   }
 
-  apply({ hooks }: Compiler) {
+  apply({ hooks: { thisCompilation } }: Compiler) {
     const {
       dirname,
       includes,
       filename = 'react.css.vars.d.ts',
     } = this.options;
 
-    hooks.emit.tap(PLUGIN_NAME, async (compilation) => {
-      const names: string[] = [];
-      const assets = compilation.getAssets();
+    const record: { data: null | string } = { data: null };
 
-      const recursion = async (node: ChildNode) => {
-        if (node.type === 'rule') {
-          node.nodes?.forEach((node) => {
-            if (node.type === 'decl' && node.variable) {
-              names.push(node.prop);
-            }
-          });
+    thisCompilation.tap(PLUGIN_NAME, async (compilation) => {
+      const { afterProcessAssets } = compilation.hooks;
+      afterProcessAssets.tap({ name: PLUGIN_NAME }, async () => {
+        const assets = compilation.getAssets();
+        const data = await compile(assets, includes);
+        if (isString(data) && data !== record.data) {
+          writeFileSync(join(dirname, filename), data);
+          record.data = data;
         }
-        if (node.type === 'atrule') {
-          await Promise.all(node.nodes?.map(recursion) ?? []);
-        }
-      };
-
-      await Promise.all(
-        assets
-          .filter(({ name }) => name.endsWith('.css'))
-          .flatMap(({ name, source }) =>
-            includes?.map((include) => {
-              if (isSubdirectory(name, include)) {
-                const { nodes } = parse(source.source());
-                return nodes?.map(recursion);
-              }
-              return [];
-            })
-          )
-      );
-
-      if (isNonEmptyArray(names)) {
-        writeFileSync(join(dirname, filename), iTemp(dedup(names)));
-      }
+      });
     });
   }
 }

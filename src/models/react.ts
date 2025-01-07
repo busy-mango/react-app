@@ -2,6 +2,16 @@
  * @description My React Type Define
  */
 
+import type {
+  AnimationProps,
+  DraggableProps,
+  FocusHandlers,
+  HoverHandlers,
+  LayoutProps,
+  MotionAdvancedProps,
+  TapHandlers,
+} from 'motion/react';
+
 import type { PlainObject } from '@busymango/is-esm';
 import type { OmitOf } from '@busymango/utils';
 
@@ -55,7 +65,19 @@ export type ReactWrapProps<T extends HTMLElement = HTMLElement> = OmitOf<
   | 'onDragStart'
   | 'onDragEnd'
   | 'onDrag'
+  | 'onCopy'
 >;
+
+/** React framer motion props */
+export interface ReactMotionProps
+  extends MotionAdvancedProps,
+    DraggableProps,
+    ReactWrapProps,
+    AnimationProps,
+    HoverHandlers,
+    FocusHandlers,
+    LayoutProps,
+    TapHandlers {}
 
 /** React native button props */
 export type ReactButtonProps = OmitOf<

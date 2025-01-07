@@ -2,13 +2,7 @@ import { isTrue } from '@busymango/is-esm';
 import { theLast } from '@busymango/utils';
 import { useForm } from '@tanstack/react-form';
 
-import {
-  ICheckbox,
-  IFieldCell,
-  IFieldGrid,
-  IFormPart,
-  IFormWrap,
-} from '@/components';
+import { ICheckbox, IFieldCell, IFormPart, IFormWrap } from '@/components';
 
 type FormData = {
   childs: boolean[];
@@ -43,28 +37,26 @@ const App: React.FC = () => {
           </Subscribe>
         }
       >
-        <IFieldGrid mode="horizontal" style={{ padding: '0 1em' }}>
-          <Field name="childs">
-            {({ state }) =>
-              state.value?.map((_, i) => (
-                <IFieldCell key={i}>
-                  <Field name={`childs[${i}]`}>
-                    {({ state, handleBlur, handleChange }) => (
-                      <ICheckbox
-                        checked={state.value}
-                        label={i + 1}
-                        onBlur={handleBlur}
-                        onChange={({ target }) => {
-                          handleChange(target.checked);
-                        }}
-                      />
-                    )}
-                  </Field>
-                </IFieldCell>
-              ))
-            }
-          </Field>
-        </IFieldGrid>
+        <Field name="childs">
+          {({ state }) =>
+            state.value?.map((_, i) => (
+              <IFieldCell key={i}>
+                <Field name={`childs[${i}]`}>
+                  {({ state, handleBlur, handleChange }) => (
+                    <ICheckbox
+                      checked={state.value}
+                      label={i + 1}
+                      onBlur={handleBlur}
+                      onChange={({ target }) => {
+                        handleChange(target.checked);
+                      }}
+                    />
+                  )}
+                </Field>
+              </IFieldCell>
+            ))
+          }
+        </Field>
       </IFormPart>
     </IFormWrap>
   );
