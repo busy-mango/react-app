@@ -8,7 +8,7 @@ export type IPanelRender = ReactRender<
       ref: React.RefObject<HTMLDivElement | null>;
     }
   >,
-  { record?: React.ReactNode }
+  never
 >;
 
 export interface IPanelProps extends HTMLMotionProps<'div'> {

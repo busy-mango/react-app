@@ -8,7 +8,7 @@ import { iPropsAreEqual } from '@/utils';
 
 import { useControlState } from '../control';
 import { IFlex } from '../flex';
-import { IPanel } from '../motion-panel';
+import { IPanel } from '../panel';
 import { ISignLine } from '../sign';
 import type {
   ICollapseGroupProps,

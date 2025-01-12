@@ -4,13 +4,7 @@ import { Variants } from 'docs/widgets';
 import { isEmpty } from '@busymango/is-esm';
 
 import type { IControlWrapProps, IInputProps } from '@/components';
-import {
-  IControlWrap,
-  IInput,
-  ISignLine,
-  onInputCatch,
-  useControlState,
-} from '@/components';
+import { IInput, ISignLine, onInputCatch, useControlState } from '@/components';
 
 import AccountSVG from '@/icons/account.svg?react';
 
@@ -41,27 +35,21 @@ const Input: React.FC<
 
   const isSuffixClickable = !isEmpty(text);
 
+  //    <IInput ref={ref} pattern={pattern} {...others} />
   return (
-    <IControlWrap
+    <IInput
       isSuffixClickable={isSuffixClickable}
       pattern={pattern}
+      placeholder="占位文本"
       prefix={<AccountSVG />}
       size={size}
       status={status}
       suffix={isSuffixClickable && <ISignLine type="cross" />}
+      value={text}
       variant={variant}
+      onChange={handler}
       onSuffixClick={onClear}
-    >
-      <IInput
-        ref={ref}
-        pattern={pattern}
-        placeholder="占位文本"
-        value={text}
-        width="100%"
-        onChange={handler}
-        {...others}
-      />
-    </IControlWrap>
+    />
   );
 };
 

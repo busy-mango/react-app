@@ -137,8 +137,8 @@ export interface ISelectorPredicate {
 
 export type ISelectorRef = {
   input?: HTMLInputElement | null;
-  floating: React.MutableRefObject<ReferenceType | null>;
-  reference: React.MutableRefObject<ReferenceType | null>;
+  floating: React.RefObject<ReferenceType | null>;
+  reference: React.RefObject<ReferenceType | null>;
 };
 
 export interface ISelectorFilterParams {
@@ -150,7 +150,7 @@ export interface ISelectorFilterParams {
 
 export interface QueryFloatingRootFunc {
   (
-    reference: React.MutableRefObject<ReferenceType | null>
+    reference: React.RefObject<ReferenceType | null>
   ): ReturnType<ReactTargetFunc> | undefined;
 }
 

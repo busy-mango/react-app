@@ -19,7 +19,7 @@ import { IControlWrap, onInputCatch, useControlState } from '../control';
 import { IEmptyWrap } from '../empty';
 import { IFlex } from '../flex';
 import { IFloating } from '../floating';
-import { IInput } from '../input';
+import { IInputCore } from '../input';
 import { ISignLine } from '../sign';
 import { IVirtualizer } from '../virtualizer';
 import { iSelectorChangeHandler, iSignType } from './helpers';
@@ -71,7 +71,9 @@ const iOptionRender: ISelectorOptionRender = (
 const iSearchRender: ISelectorSearchRender = (
   { onChange, ...props },
   { pattern }
-) => <IInput pattern={pattern} width="auto" {...props} onChange={onChange} />;
+) => (
+  <IInputCore pattern={pattern} width="auto" {...props} onChange={onChange} />
+);
 
 const iChipListRender: ISelectorChipsRender = (
   { values, options, separator, Container, handleChange },

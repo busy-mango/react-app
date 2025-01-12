@@ -20,7 +20,7 @@ export * from './input';
 export * from './marker';
 export * from './menu';
 export * from './modal';
-export * from './motion-panel';
+export * from './panel';
 export * from './picker';
 export * from './popover';
 export * from './radio';

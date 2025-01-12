@@ -23,13 +23,20 @@
   white-space: pre-wrap;
 }
 
+.title,
+.extra {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: inherit;
+}
+
 .title {
   z-index: 0;
-  line-height: inherit;
-  padding: 8px 6px 8px 0;
+  grid-area: title;
 
   display: flex;
   align-items: flex-start;
+  padding-right: 0.16em;
 
   & > .colon {
     flex-grow: 0;
@@ -41,6 +48,7 @@
 }
 
 .control {
+  grid-area: control;
   position: relative;
 
   & > .wrapper {
@@ -49,16 +57,15 @@
   }
 }
 
+.extra {
+  grid-area: extra;
+}
+
 .cell {
   width: 100%;
 
   .grid {
     display: grid;
-
-    &.vertical {
-      grid-template-columns: 100%;
-      grid-template-rows: repeat(2, max-content);
-    }
   }
 
   &.margin {
@@ -106,7 +113,7 @@
   &.medium {
     line-height: var(--control-size-03);
     .feedback {
-      font-size: var(--font-size-01);
+      font-size: var(--font-size-02);
       &.with-margin {
         min-height: var(--control-size-02);
       }
@@ -114,7 +121,7 @@
   }
   &.huge {
     .feedback {
-      font-size: var(--font-size-02);
+      font-size: var(--font-size-03);
       &.with-margin {
         min-height: var(--control-size-03);
       }

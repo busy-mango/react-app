@@ -2,10 +2,11 @@ import { type OmitOf } from '@busymango/utils';
 
 import type { ReactInputProps } from '@/models';
 
-import type { ControlPattern } from '../../control';
+import type { ControlPattern, IControlWrapProps } from '../../control';
 
-export interface IInputProps
+export interface IInputCoreProps
   extends OmitOf<ReactInputProps, 'value' | 'width' | 'size'> {
+  ref?: React.RefObject<HTMLInputElement | null>;
   /** 控件宽度 */
   width?: React.CSSProperties['width'];
   /** 控件值 */
@@ -14,4 +15,27 @@ export interface IInputProps
   pattern?: ControlPattern;
   /** 回车事件 */
   onPressEnter?: ReactInputProps['onKeyDown'];
+}
+
+export interface IInputRef {
+  wrap: HTMLElement;
+  input: HTMLInputElement;
+}
+
+export interface IInputProps
+  extends Pick<
+      IControlWrapProps,
+      | 'size'
+      | 'status'
+      | 'prefix'
+      | 'suffix'
+      | 'render'
+      | 'variant'
+      | 'pattern'
+      | 'onPrefixClick'
+      | 'onSuffixClick'
+      | 'isSuffixClickable'
+    >,
+    OmitOf<IInputCoreProps, 'width' | 'ref' | 'prefix'> {
+  ref?: React.RefObject<IInputRef | null>;
 }

@@ -8,7 +8,8 @@ import { isReactChildren, isReactNode } from '@/utils';
 
 import { IFlex } from '../flex';
 import { IMarker } from '../marker';
-import { IPanel } from '../motion-panel';
+import { IPanel } from '../panel';
+import { iCellGrid } from './helpers';
 import { IFieldProvider, useIFieldCellContext } from './hooks';
 import type { IFieldCellProps, IFieldStackProps } from './models';
 
@@ -35,14 +36,15 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
   const ctx = useIFieldCellContext();
 
   const {
-    grid,
     title,
+    extra,
     address,
     feedback,
     required,
     className,
     status = 'success',
     pattern = 'editable',
+    grid = ctx?.grid,
     colon = ctx?.colon ?? ':',
     size = ctx?.size ?? 'medium',
     margin = ctx?.margin ?? false,
@@ -73,10 +75,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
       <div
         className={classNames(styles.grid)}
         data-ui="field-cell-grid"
-        style={{
-          gridTemplateRows: grid?.rows ?? 'repeat(2, max-content)',
-          gridTemplateColumns: grid?.cols ?? '1fr',
-        }}
+        style={iCellGrid(grid)}
       >
         <motion.label
           className={styles.title}
@@ -109,6 +108,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
             </IPanel>
           </IFlex>
         )}
+        <div className={styles.extra}>{extra}</div>
       </div>
     </div>
   );

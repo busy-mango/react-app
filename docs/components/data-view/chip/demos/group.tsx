@@ -7,7 +7,7 @@ import { isEmpty } from '@busymango/is-esm';
 import { sizeOf } from '@busymango/utils';
 
 import type { IChipCloseFunc, IChipProps } from '@/components';
-import { IChip, IFlex, IInput, ISignLine } from '@/components';
+import { IChip, IFlex, IInputCore, ISignLine } from '@/components';
 import { COLOR_DISC } from '@/constants';
 import { isInputElement } from '@/utils';
 
@@ -80,7 +80,7 @@ const onPressEnter: React.KeyboardEventHandler<HTMLInputElement> = ({
 
 const Creator: React.FC = () => (
   <IChip icon={<ISignLine type="plus" />} variant="filled">
-    <IInput
+    <IInputCore
       placeholder="新增标签"
       value={useChipGroup(({ keyword }) => keyword)}
       width="auto"

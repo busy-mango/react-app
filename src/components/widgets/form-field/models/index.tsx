@@ -8,11 +8,7 @@ import type {
   ControlUIStatus,
 } from '../../control';
 import type { IFlexProps } from '../../flex/models';
-
-export type IFieldGrid = {
-  rows?: React.CSSProperties['gridTemplateRows'];
-  cols?: React.CSSProperties['gridTemplateColumns'];
-};
+import type { ICellGridModel } from '../helpers';
 
 export interface IFieldCellProps
   extends OmitOf<ReactWrapProps, 'title' | 'children'> {
@@ -39,13 +35,15 @@ export interface IFieldCellProps
   /** 字段UI大小 */
   size?: ControlUISize;
   /** 字段栅格布局 */
-  grid?: IFieldGrid;
+  grid?: ICellGridModel;
+  /** 字段额外空间 */
+  extra?: React.ReactNode;
 }
 
 export interface IFieldCellContextVal
   extends PartialPick<
     IFieldCellProps,
-    'size' | 'colon' | 'align' | 'margin' | 'forceRenderTitle'
+    'grid' | 'size' | 'colon' | 'align' | 'margin' | 'forceRenderTitle'
   > {}
 
 export interface IFieldStackProps extends IFlexProps {

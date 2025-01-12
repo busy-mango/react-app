@@ -97,6 +97,7 @@
 
 /** variant */
 .text {
+  flex-shrink: 0;
   &:not(.disabled):not(.danger) {
     color: inherit;
     &:hover {
@@ -195,5 +196,6 @@
 }
 
 .spin {
+  z-index: 9;
   position: absolute;
 }

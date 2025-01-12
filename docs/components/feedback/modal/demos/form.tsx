@@ -6,7 +6,6 @@ import type { ControlUIStatus } from '@/components';
 import {
   IButton,
   ICard,
-  IControlWrap,
   IFieldCell,
   IFlex,
   IFormWrap,
@@ -88,18 +87,17 @@ const App: React.FC = () => {
                         feedback={isError && meta.errors.join(', ')}
                         status={status}
                       >
-                        <IControlWrap status={status} variant="bordered">
-                          <IInput
-                            placeholder="电子邮件地址"
-                            type="email"
-                            value={value}
-                            width="100%"
-                            onBlur={handleBlur}
-                            onChange={(event) => {
-                              handleChange(onInputCatch(event));
-                            }}
-                          />
-                        </IControlWrap>
+                        <IInput
+                          placeholder="电子邮件地址"
+                          status={status}
+                          type="email"
+                          value={value}
+                          variant="bordered"
+                          onBlur={handleBlur}
+                          onChange={(event) => {
+                            handleChange(onInputCatch(event));
+                          }}
+                        />
                       </IFieldCell>
                     );
                   }}

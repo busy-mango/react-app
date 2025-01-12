@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import type { IFlexProps } from '@/components';
-import { IChip, IControlWrap, IFlex, IInput, IRadioGroup } from '@/components';
+import { IChip, IFlex, IInput, IRadioGroup } from '@/components';
 
 const App: React.FC = () => {
   const [gap, setGap] = useState<number>(8);
@@ -10,16 +10,15 @@ const App: React.FC = () => {
 
   return (
     <IFlex vertical gap={16}>
-      <IControlWrap suffix="px" variant="bordered">
-        <IInput
-          value={gap}
-          width="100%"
-          onChange={({ target }) => {
-            const num = Number(target.value);
-            setGap(isFinite(num) ? num : 0);
-          }}
-        />
-      </IControlWrap>
+      <IInput
+        suffix="px"
+        value={gap}
+        variant="bordered"
+        onChange={({ target }) => {
+          const num = Number(target.value);
+          setGap(isFinite(num) ? num : 0);
+        }}
+      />
       <IFlex gap={8}>
         <IRadioGroup
           options={[

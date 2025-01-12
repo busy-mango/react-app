@@ -8,7 +8,6 @@ import { useQuery } from '@tanstack/react-query';
 import {
   ICard,
   IChip,
-  IControlWrap,
   IEmptyWrap,
   IFlex,
   IInput,
@@ -44,9 +43,7 @@ export const EmailList: React.FC = () => {
         gridTemplateRows: 'max-content minmax(0, 1fr)',
       }}
     >
-      <IControlWrap prefix={<ISignLine type="magnifier" />} variant="bordered">
-        <IInput />
-      </IControlWrap>
+      <IInput prefix={<ISignLine type="magnifier" />} variant="bordered" />
       <div
         style={{
           height: '100%',

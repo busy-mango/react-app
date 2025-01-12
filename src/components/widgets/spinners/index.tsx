@@ -12,7 +12,6 @@ export const ISpinner: React.FC<ISpinnerProps> = ({
   ...others
 }) => (
   <motion.svg
-    layout
     animate={{
       rotate: [0, 180, 360],
       transition: {
@@ -23,9 +22,7 @@ export const ISpinner: React.FC<ISpinnerProps> = ({
       ...animate,
     }}
     className={className}
-    exit={{ x: 0, y: 0 }}
     height="1em"
-    initial={{ x: 0, y: 0 }}
     stroke="currentColor"
     style={{ lineHeight: '1em', ...style }}
     viewBox={'22 22 44 44'}

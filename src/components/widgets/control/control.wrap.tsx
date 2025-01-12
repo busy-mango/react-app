@@ -1,6 +1,6 @@
 import { useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence } from 'motion/react';
 
 import { ifnot } from '@busymango/utils';
 
@@ -21,14 +21,14 @@ const iRootRender: IControlWrapRootRender = (
   { ref, prefix, suffix, children, ...others },
   { variant, pattern, isFocus }
 ) => (
-  <motion.div ref={ref} data-ui-control-wrap {...others}>
+  <div ref={ref} data-ui-control-wrap {...others}>
     {pattern === 'editable' && variant === 'bordered' && (
       <IWave placeholder={variant === 'bordered' && isFocus} target={ref} />
     )}
     {prefix}
     {children}
     {suffix}
-  </motion.div>
+  </div>
 );
 
 export const IControlWrap: React.FC<IControlWrapProps> = (props) => {

@@ -19,7 +19,7 @@ import {
   IFlex,
   IFloating,
   IHighLighter,
-  IInput,
+  IInputCore,
   IPopover,
   ISelector,
   iSelectorChangeHandler,
@@ -215,7 +215,7 @@ const App: React.FC = () => {
     { filtered, isLoading }
   ) => (
     <IFloating {...props}>
-      <IInput
+      <IInputCore
         className={styles.searchCreator}
         placeholder="查找或者创建选项"
         value={keyword}

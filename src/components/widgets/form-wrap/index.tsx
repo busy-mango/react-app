@@ -1,43 +1,39 @@
 import { Fragment } from 'react';
 import classNames from 'classnames';
-import type { HTMLMotionProps } from 'motion/react';
 import { motion } from 'motion/react';
 
 import type { OmitOf } from '@busymango/utils';
 
 import { useToggle } from '@/hooks';
-import type { ReactCFC } from '@/models';
+import type { ReactCFC, ReactWrapProps } from '@/models';
 import { iPressEvent } from '@/utils';
 
 import type { IFlexProps } from '../flex';
 import { IFlex } from '../flex';
-import { IFieldStack } from '../form-field';
 import type { IFieldCellContextVal } from '../form-field/models';
 import { IMarker } from '../marker';
-import { IPanel } from '../motion-panel';
+import { IPanel } from '../panel';
 import { ISignLine } from '../sign';
 
 import * as styles from './index.scss';
 
-export interface IFormWrapProps extends HTMLMotionProps<'form'> {
+export interface IFormWrapProps extends ReactWrapProps<HTMLFormElement> {
   cell?: IFieldCellContextVal;
 }
 
 export const IFormWrap: ReactCFC<IFormWrapProps> = ({
   cell,
   children,
-  onKeyPress,
+  onKeyDown,
   onSubmit,
   ...others
 }) => (
   <motion.form
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0 }}
-    initial={{ scale: 0.64, opacity: 0 }}
-    onKeyPress={iPressEvent(onSubmit, onKeyPress)}
+    onKeyDown={iPressEvent(onSubmit, onKeyDown)}
+    onSubmit={onSubmit}
     {...others}
   >
-    <IFieldStack cell={cell}>{children}</IFieldStack>
+    {children}
   </motion.form>
 );
 

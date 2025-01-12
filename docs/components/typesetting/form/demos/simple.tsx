@@ -1,124 +1,118 @@
-import { Fragment } from 'react';
-
-import { isEmpty } from '@busymango/is-esm';
-import { ifnot, sleep } from '@busymango/utils';
+import { isEmpty, isNonEmptyArray } from '@busymango/is-esm';
+import { sleep } from '@busymango/utils';
+import type { FieldMeta, FieldState, Updater } from '@tanstack/react-form';
 import { useForm } from '@tanstack/react-form';
 
-import type { ControlUIStatus } from '@/components';
+import type { IFieldCellProps } from '@/components';
 import {
   IButton,
   ICard,
-  IControlWrap,
   IFieldCell,
+  IFieldStack,
   IFlex,
   IFormWrap,
   IInput,
-  IPopover,
-  ISignLine,
-  ISVGWrap,
-  onInputCatch,
 } from '@/components';
-import { isEmailString } from '@/utils';
+import { iPropagation } from '@/utils';
+
+const iFeedback = ({
+  isValidating,
+  isTouched,
+  errors,
+}: FieldMeta): Pick<IFieldCellProps, 'status' | 'feedback'> => ({
+  status: isValidating
+    ? 'vaildating'
+    : isNonEmptyArray(errors)
+      ? 'danger'
+      : 'success',
+  feedback: isTouched && errors?.[0]?.toString(),
+});
+
+const render = (
+  {
+    name,
+    state,
+    handleBlur,
+    handleChange,
+  }: {
+    name: string;
+    state: FieldState<string>;
+    handleBlur: () => void;
+    handleChange: (updater: Updater<string>) => void;
+  },
+  title: React.ReactNode
+) => (
+  <IFieldCell {...iFeedback(state.meta)} title={title}>
+    <IInput
+      id={name}
+      name={name}
+      value={state.value}
+      variant="bordered"
+      onBlur={handleBlur}
+      onChange={({ target }) => handleChange(target.value)}
+    />
+  </IFieldCell>
+);
 
 const App: React.FC = () => {
-  const { Field, handleSubmit, Subscribe } = useForm<{
-    email?: string;
-  }>({
+  const { Field, Subscribe, reset, handleSubmit } = useForm({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+    },
     onSubmit: async ({ value }) => {
       console.info(value);
-      await sleep(3000);
     },
   });
 
   return (
     <ICard>
-      <IFormWrap cell={{ margin: true }} onSubmit={handleSubmit}>
-        <Field
-          name="email"
-          validators={{
-            onBlur: ({ value }) => {
-              if (isEmpty(value)) {
-                return;
-              }
-              if (!isEmailString(value)) {
-                return '请输入有效的电子邮件地址';
-              }
-            },
-            onSubmit: ({ fieldApi }) => {
-              fieldApi.validate('blur');
-              fieldApi.validate('change');
-              return undefined;
-            },
-            onChange: ({ value, fieldApi }) => {
-              if (isEmpty(value)) {
-                return '请输入您的电子邮件地址';
-              }
-              const { isBlurred } = fieldApi.state.meta;
-              if (isBlurred) fieldApi.validate('blur');
-            },
-          }}
-        >
-          {({ state: { meta, value }, handleBlur, handleChange }) => {
-            const { errors } = meta;
-            const isError = errors.length > 0;
-            const status: ControlUIStatus = ifnot(isError && 'danger');
-            return (
-              <IFieldCell
-                feedback={isError && errors.join(', ')}
-                status={status}
-                title={
-                  <Fragment>
-                    邮箱
-                    <IPopover
-                      content="您的电子邮件地址将用于登录和找回密码。"
-                      placement="top"
-                      render={{
-                        reference: (props) => (
-                          <ISVGWrap
-                            style={{
-                              cursor: 'help',
-                              padding: '0 var(--gap-01)',
-                            }}
-                            {...props}
-                          >
-                            <ISignLine ring type="helper" />
-                          </ISVGWrap>
-                        ),
-                      }}
-                      trigger="hover"
-                    />
-                  </Fragment>
-                }
-              >
-                <IControlWrap status={status} variant="bordered">
-                  <IInput
-                    placeholder="电子邮件地址"
-                    type="email"
-                    value={value}
-                    width="100%"
-                    onBlur={handleBlur}
-                    onChange={(event) => {
-                      handleChange(onInputCatch(event));
-                    }}
-                  />
-                </IControlWrap>
-              </IFieldCell>
-            );
-          }}
-        </Field>
-        <IFlex justify="flex-end">
-          <Subscribe>
-            {({ canSubmit, isSubmitting }) => (
-              <IButton
-                disabled={!canSubmit}
-                isLoading={isSubmitting}
-                type="button"
-              >
-                提交
-              </IButton>
-            )}
-          </Subscribe>
-        </IFlex>
+      <IFormWrap
+        onSubmit={(event) => {
+          iPropagation(event);
+          handleSubmit();
+        }}
+      >
+        <IFieldStack cell={{ margin: true, align: 'end' }}>
+          <Field
+            name="firstName"
+            validators={{
+              onChange: ({ value }) => isEmpty(value) && '该字段必填',
+              onChangeAsyncDebounceMs: 500,
+              onChangeAsync: async ({ value }) => {
+                await sleep(1000);
+                return value.includes('?') && '不允许输入特殊字符';
+              },
+            }}
+          >
+            {(api) => render(api, '名字')}
+          </Field>
+          <Field name="lastName">{(api) => render(api, '姓氏')}</Field>
+          <IFieldCell>
+            <Subscribe
+              selector={({ canSubmit, isSubmitting }) => ({
+                canSubmit,
+                isSubmitting,
+              })}
+            >
+              {({ canSubmit, isSubmitting }) => (
+                <IFlex gap={'var(--gap-04)'} justify="end">
+                  <IButton
+                    key={1}
+                    disabled={!canSubmit}
+                    isLoading={isSubmitting}
+                    type="submit"
+                  >
+                    提交
+                  </IButton>
+                  <IButton key={2} type="reset" onClick={() => reset()}>
+                    重置
+                  </IButton>
+                </IFlex>
+              )}
+            </Subscribe>
+          </IFieldCell>
+        </IFieldStack>
       </IFormWrap>
     </ICard>
   );

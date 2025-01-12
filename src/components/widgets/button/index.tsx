@@ -9,7 +9,6 @@ import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { iPropagation, isReactChildren } from '@/utils';
 
 import { ISpinner } from '../spinners';
-import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import type { IButtonProps } from './models';
 
@@ -17,6 +16,7 @@ import * as styles from './index.scss';
 
 export const IButton: React.FC<IButtonProps> = (props) => {
   const {
+    ref,
     icon,
     danger,
     capsule,
@@ -29,7 +29,6 @@ export const IButton: React.FC<IButtonProps> = (props) => {
     wave: iWave,
     size = 'medium',
     variant = 'bordered',
-    ref: iForwardRef,
     onPointerDownCapture,
     onClick,
     ...others
@@ -39,7 +38,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
 
   const clickable = !isLoading && !disabled;
 
-  const ref = useRef<HTMLButtonElement>(null);
+  const button = useRef<HTMLButtonElement>(null);
 
   const wave = iWave ?? (variant === 'filled' && !danger);
 
@@ -47,7 +46,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
 
   const { starer } = useDebounceFunc(onClick, wait);
 
-  useImperativeHandle(iForwardRef, () => ref.current!, [ref]);
+  useImperativeHandle(ref, () => button.current!, [button]);
 
   const onTap = useMemoFunc<React.MouseEventHandler<HTMLButtonElement>>(
     (event) => {
@@ -62,7 +61,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
 
   return (
     <motion.button
-      ref={ref}
+      ref={button}
       className={classNames(
         styles.wrap,
         styles[size],
@@ -88,23 +87,32 @@ export const IButton: React.FC<IButtonProps> = (props) => {
       }}
       {...others}
     >
+      {wave && <IWave target={button} />}
       <AnimatePresence>
-        {wave && <IWave target={ref} />}
-        {isLoading && (
-          <ISVGWrap className={styles.spin}>
-            <ISpinner />
-          </ISVGWrap>
-        )}
         {icon && (
-          <ISVGWrap
+          <motion.i
             animate={animate}
             className={ifnot(isNonEmptyChild && styles.gap)}
           >
             {icon}
-          </ISVGWrap>
+          </motion.i>
         )}
+      </AnimatePresence>
+      <AnimatePresence>
         {isNonEmptyChild && (
           <motion.span animate={animate}>{children}</motion.span>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isLoading && (
+          <motion.i
+            animate={{ scale: 1 }}
+            className={styles.spin}
+            exit={{ scale: 0 }}
+            initial={{ scale: 0 }}
+          >
+            <ISpinner />
+          </motion.i>
         )}
       </AnimatePresence>
     </motion.button>

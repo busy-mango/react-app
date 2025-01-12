@@ -30,9 +30,9 @@ export interface ReactValueChangeFunc {
 }
 
 /** React通用渲染方法 */
-export interface ReactRender<P = PlainObject, S = never> {
-  (props: P, state: S): React.ReactNode;
-}
+export type ReactRender<P = PlainObject, S = never> = [S] extends [never]
+  ? (props: P) => React.ReactNode
+  : (props: P, state: S) => React.ReactNode;
 
 /** React SetStateAction */
 export type ReactAction<T> = React.Dispatch<React.SetStateAction<T>>;

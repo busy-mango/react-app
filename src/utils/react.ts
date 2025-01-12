@@ -18,8 +18,8 @@ export function iPropagation(
   stop = true
 ) {
   if (isTrue(stop)) {
-    event?.stopPropagation();
     event?.preventDefault();
+    event?.stopPropagation();
   }
 }
 

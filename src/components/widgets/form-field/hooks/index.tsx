@@ -11,9 +11,11 @@ export const useIFieldCellContext = (): IFieldCellContextVal | undefined => {
 };
 
 export const IFieldProvider: ReactCFC<IFieldCellContextVal> = (props) => {
-  const { forceRenderTitle, align, children, margin, size, colon } = props;
+  const { forceRenderTitle, align, children, margin, size, colon, grid } =
+    props;
 
   const {
+    grid: _grid,
     size: _size,
     align: _align,
     colon: _colon,
@@ -25,6 +27,7 @@ export const IFieldProvider: ReactCFC<IFieldCellContextVal> = (props) => {
     <IFieldCellContext.Provider
       value={useMemo(
         () => ({
+          grid: grid ?? _grid,
           size: size ?? _size,
           align: align ?? _align,
           colon: colon ?? _colon,
@@ -32,6 +35,8 @@ export const IFieldProvider: ReactCFC<IFieldCellContextVal> = (props) => {
           forceRenderTitle: forceRenderTitle ?? _forceRenderTitle,
         }),
         [
+          grid,
+          _grid,
           align,
           _align,
           colon,
