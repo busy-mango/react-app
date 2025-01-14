@@ -47,8 +47,8 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     grid = ctx?.grid,
     colon = ctx?.colon ?? ':',
     size = ctx?.size ?? 'medium',
-    margin = ctx?.margin ?? false,
-    align = ctx?.align ?? 'flex-start',
+    margin = ctx?.margin ?? true,
+    align = ctx?.align ?? 'flex-end',
     forceRenderTitle = ctx?.forceRenderTitle,
     children,
     ...others
@@ -114,4 +114,5 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
   );
 };
 
+export { IFieldProvider } from './hooks';
 export type { IFieldCellProps, IFieldStackProps } from './models';

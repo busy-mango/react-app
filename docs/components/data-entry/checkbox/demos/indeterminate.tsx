@@ -2,7 +2,7 @@ import { isTrue } from '@busymango/is-esm';
 import { theLast } from '@busymango/utils';
 import { useForm } from '@tanstack/react-form';
 
-import { ICheckbox, IFieldCell, IFormPart, IFormWrap } from '@/components';
+import { ICheckbox, IFlex, IFormWrap } from '@/components';
 
 type FormData = {
   childs: boolean[];
@@ -11,7 +11,7 @@ type FormData = {
 const App: React.FC = () => {
   const api = useForm<FormData>({
     defaultValues: {
-      childs: [false, false],
+      childs: [false, false, false],
     },
   });
 
@@ -19,45 +19,38 @@ const App: React.FC = () => {
 
   return (
     <IFormWrap>
-      <IFormPart
-        title={
-          <Subscribe selector={({ values }) => values.childs}>
-            {(childs) => (
-              <ICheckbox
-                checked={childs.every(isTrue)}
-                indeterminate={childs.some((val) => val !== theLast(childs))}
-                label="全选"
-                onChange={({ target }) => {
-                  setFieldValue('childs', (pre) =>
-                    pre.map(() => target.checked)
-                  );
-                }}
-              />
-            )}
-          </Subscribe>
-        }
-      >
+      <Subscribe selector={({ values }) => values.childs}>
+        {(childs) => (
+          <ICheckbox
+            checked={childs.every(isTrue)}
+            indeterminate={childs.some((val) => val !== theLast(childs))}
+            label="全选"
+            onChange={({ target }) => {
+              setFieldValue('childs', (pre) => pre.map(() => target.checked));
+            }}
+          />
+        )}
+      </Subscribe>
+      <IFlex>
         <Field name="childs">
           {({ state }) =>
             state.value?.map((_, i) => (
-              <IFieldCell key={i}>
-                <Field name={`childs[${i}]`}>
-                  {({ state, handleBlur, handleChange }) => (
-                    <ICheckbox
-                      checked={state.value}
-                      label={i + 1}
-                      onBlur={handleBlur}
-                      onChange={({ target }) => {
-                        handleChange(target.checked);
-                      }}
-                    />
-                  )}
-                </Field>
-              </IFieldCell>
+              <Field key={i} name={`childs[${i}]`}>
+                {({ state, handleBlur, handleChange }) => (
+                  <ICheckbox
+                    checked={state.value}
+                    label={i + 1}
+                    onBlur={handleBlur}
+                    onChange={({ target }) => {
+                      handleChange(target.checked);
+                    }}
+                  />
+                )}
+              </Field>
             ))
           }
         </Field>
-      </IFormPart>
+      </IFlex>
     </IFormWrap>
   );
 };

@@ -1,9 +1,8 @@
-import { isEmpty, isNonEmptyArray } from '@busymango/is-esm';
+import { isEmpty } from '@busymango/is-esm';
 import { sleep } from '@busymango/utils';
-import type { FieldMeta, FieldState, Updater } from '@tanstack/react-form';
+import type { FieldState, Updater } from '@tanstack/react-form';
 import { useForm } from '@tanstack/react-form';
 
-import type { IFieldCellProps } from '@/components';
 import {
   IButton,
   ICard,
@@ -13,20 +12,8 @@ import {
   IFormWrap,
   IInput,
 } from '@/components';
+import { iTanstackFieldCellAdapter } from '@/helpers';
 import { iPropagation } from '@/utils';
-
-const iFeedback = ({
-  isValidating,
-  isTouched,
-  errors,
-}: FieldMeta): Pick<IFieldCellProps, 'status' | 'feedback'> => ({
-  status: isValidating
-    ? 'vaildating'
-    : isNonEmptyArray(errors)
-      ? 'danger'
-      : 'success',
-  feedback: isTouched && errors?.[0]?.toString(),
-});
 
 const render = (
   {
@@ -42,7 +29,7 @@ const render = (
   },
   title: React.ReactNode
 ) => (
-  <IFieldCell {...iFeedback(state.meta)} title={title}>
+  <IFieldCell title={title} {...iTanstackFieldCellAdapter(state.meta)}>
     <IInput
       id={name}
       name={name}
@@ -97,6 +84,9 @@ const App: React.FC = () => {
             >
               {({ canSubmit, isSubmitting }) => (
                 <IFlex gap={'var(--gap-04)'} justify="end">
+                  <IButton key={2} type="reset" onClick={() => reset()}>
+                    重置
+                  </IButton>
                   <IButton
                     key={1}
                     disabled={!canSubmit}
@@ -104,9 +94,6 @@ const App: React.FC = () => {
                     type="submit"
                   >
                     提交
-                  </IButton>
-                  <IButton key={2} type="reset" onClick={() => reset()}>
-                    重置
                   </IButton>
                 </IFlex>
               )}

@@ -1,30 +1,28 @@
 import { z } from 'zod';
 
-import type { FieldApi } from '@tanstack/react-form';
 import { standardSchemaValidator, useForm } from '@tanstack/react-form';
 
-function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
-  return (
-    <>
-      {field.state.meta.isTouched && field.state.meta.errors.length ? (
-        <em>{field.state.meta.errors.join(',')}</em>
-      ) : null}
-      {field.state.meta.isValidating ? 'Validating...' : null}
-    </>
-  );
-}
+import {
+  IButton,
+  ICard,
+  IFieldCell,
+  IFlex,
+  IFormWrap,
+  IInput,
+} from '@/components';
+import { iTanstackFieldCellAdapter } from '@/helpers';
 
 const userSchema = z.object({
-  firstName: z.string().refine((val) => val !== 'John', {
-    message: '[Form] First name cannot be John',
+  firstName: z.string().refine((val) => val !== '张三', {
+    message: '[Form] 名称不能为张三',
   }),
-  lastName: z.string().min(3, '[Form] Last name must be at least 3 characters'),
+  lastName: z.string().min(4, '[Form] 姓氏不得多于4个字符'),
 });
 
 type User = z.infer<typeof userSchema>;
 
 export default function App() {
-  const form = useForm({
+  const { Field, Subscribe, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -41,80 +39,78 @@ export default function App() {
   });
 
   return (
-    <div>
-      <h1>Zod Form Example</h1>
-      <form
+    <ICard>
+      <IFormWrap
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          form.handleSubmit();
+          handleSubmit();
         }}
       >
-        <div>
-          {/* A type-safe field component*/}
-          <form.Field
-            name="firstName"
-            validators={{
-              onChange: z
-                .string()
-                .min(3, '[Field] First name must be at least 3 characters'),
-              onChangeAsyncDebounceMs: 500,
-              onChangeAsync: z.string().refine(
-                async (value) => {
-                  await new Promise((resolve) => setTimeout(resolve, 1000));
-                  return !value.includes('error');
-                },
-                {
-                  message: "[Field] No 'error' allowed in first name",
-                }
-              ),
-            }}
-          >
-            {(field) => {
-              // Avoid hasty abstractions. Render props are great!
-              return (
-                <>
-                  <label htmlFor={field.name}>First Name:</label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                  <FieldInfo field={field} />
-                </>
-              );
-            }}
-          </form.Field>
-        </div>
-        <div>
-          <form.Field name="lastName">
-            {(field) => (
-              <>
-                <label htmlFor={field.name}>Last Name:</label>
-                <input
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-                <FieldInfo field={field} />
-              </>
-            )}
-          </form.Field>
-        </div>
-        <form.Subscribe
-          selector={(state) => [state.canSubmit, state.isSubmitting]}
+        <Field
+          name="firstName"
+          validators={{
+            onChange: z.string().min(4, '[Field] 名称不能多于4个字符'),
+            onChangeAsyncDebounceMs: 500,
+            onChangeAsync: z.string().refine(
+              async (value) => {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                return !value.includes('错误');
+              },
+              { message: '[Field] 不能使用【错误】作为名称' }
+            ),
+          }}
         >
-          {([canSubmit, isSubmitting]) => (
-            <button disabled={!canSubmit} type="submit">
-              {isSubmitting ? '...' : 'Submit'}
-            </button>
+          {({ name, state, handleBlur, handleChange }) => (
+            <IFieldCell title="名称" {...iTanstackFieldCellAdapter(state.meta)}>
+              <IInput
+                id={name}
+                name={name}
+                value={state.value}
+                variant="bordered"
+                onBlur={handleBlur}
+                onChange={({ target }) => handleChange(target.value)}
+              />
+            </IFieldCell>
           )}
-        </form.Subscribe>
-      </form>
-    </div>
+        </Field>
+        <Field name="lastName">
+          {({ name, state, handleBlur, handleChange }) => (
+            <IFieldCell title="姓氏" {...iTanstackFieldCellAdapter(state.meta)}>
+              <IInput
+                id={name}
+                name={name}
+                value={state.value}
+                variant="bordered"
+                onBlur={handleBlur}
+                onChange={({ target }) => handleChange(target.value)}
+              />
+            </IFieldCell>
+          )}
+        </Field>
+        <Subscribe
+          selector={({ canSubmit, isSubmitting }) => ({
+            canSubmit,
+            isSubmitting,
+          })}
+        >
+          {({ canSubmit, isSubmitting }) => (
+            <IFlex gap={'var(--gap-04)'} justify="end">
+              <IButton key={2} type="reset" onClick={() => reset()}>
+                重置
+              </IButton>
+              <IButton
+                key={1}
+                disabled={!canSubmit}
+                isLoading={isSubmitting}
+                type="submit"
+              >
+                提交
+              </IButton>
+            </IFlex>
+          )}
+        </Subscribe>
+      </IFormWrap>
+    </ICard>
   );
 }

@@ -24,10 +24,16 @@
 }
 
 .title,
+.extra,
+.control {
+  min-height: var(--control-size-06);
+}
+
+.title,
 .extra {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  line-height: inherit;
+  line-height: var(--control-size-03);
+  padding-top: calc((var(--control-size-06) - var(--control-size-03)) / 2);
+  padding-bottom: calc((var(--control-size-06) - var(--control-size-03)) / 2);
 }
 
 .title {
@@ -70,11 +76,11 @@
 
   &.margin {
     &.read-pretty {
-      margin-bottom: var(--gap-04);
+      margin-bottom: var(--gap-02);
     }
 
     &:not(.read-pretty) {
-      margin-bottom: var(--gap-06);
+      margin-bottom: var(--gap-04);
     }
   }
 

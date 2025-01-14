@@ -44,7 +44,12 @@ try {
 
   root.render(
     <StrictMode>
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: false,
+          v7_relativeSplatPath: false,
+        }}
+      >
         <Configure>
           <IRoutes />
         </Configure>

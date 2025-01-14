@@ -1,7 +1,8 @@
 .card {
   overflow: hidden;
-  border: 1px solid #dbdbdb;
+  // border: 1px solid #dbdbdb;
   border-radius: var(--border-radius-03);
+  padding: var(--gap-05);
 
   &:not(:first-of-type) {
     margin-top: var(--gap-05);
@@ -16,9 +17,4 @@
   .content {
     padding: var(--gap-02) var(--gap-05);
   }
-}
-
-.part-title {
-  height: var(--control-size-06);
-  font-weight: 500;
 }

@@ -1,19 +1,20 @@
-import type { FieldApi } from '@tanstack/react-form';
+import { configure } from 'docs/widgets';
+
 import { useForm } from '@tanstack/react-form';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
-  return (
-    <>
-      {field.state.meta.isTouched && field.state.meta.errors.length ? (
-        <em>{field.state.meta.errors.join(',')}</em>
-      ) : null}
-      {field.state.meta.isValidating ? 'Validating...' : null}
-    </>
-  );
-}
+import {
+  IButton,
+  ICard,
+  IFieldCell,
+  IFlex,
+  IFormWrap,
+  IInput,
+  ISuspense,
+} from '@/components';
+import { iTanstackFieldCellAdapter } from '@/helpers';
 
-export default function App() {
+const App: React.FC = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['data'],
     queryFn: async () => {
@@ -30,7 +31,7 @@ export default function App() {
     },
   });
 
-  const form = useForm({
+  const { Field, Subscribe, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: data?.firstName ?? '',
       lastName: data?.lastName ?? '',
@@ -41,21 +42,17 @@ export default function App() {
     },
   });
 
-  if (isLoading) return <p>Loading..</p>;
-
   return (
-    <div>
-      <h1>Simple Form Example</h1>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          form.handleSubmit();
-        }}
-      >
-        <div>
-          {/* A type-safe field component*/}
-          <form.Field
+    <ICard>
+      <ISuspense isLoading={isLoading}>
+        <IFormWrap
+          onSubmit={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleSubmit();
+          }}
+        >
+          <Field
             name="firstName"
             validators={{
               onChange: ({ value }) =>
@@ -73,56 +70,66 @@ export default function App() {
               },
             }}
           >
-            {(field) => {
-              // Avoid hasty abstractions. Render props are great!
-              return (
-                <>
-                  <label htmlFor={field.name}>First Name:</label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                  <FieldInfo field={field} />
-                </>
-              );
-            }}
-          </form.Field>
-        </div>
-        <div>
-          <form.Field name="lastName">
-            {(field) => (
-              <>
-                <label htmlFor={field.name}>Last Name:</label>
-                <input
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
+            {({ name, state, handleBlur, handleChange }) => (
+              <IFieldCell
+                title="名称"
+                {...iTanstackFieldCellAdapter(state.meta)}
+              >
+                <IInput
+                  id={name}
+                  name={name}
+                  value={state.value}
+                  variant="bordered"
+                  onBlur={handleBlur}
+                  onChange={({ target }) => handleChange(target.value)}
                 />
-                <FieldInfo field={field} />
-              </>
+              </IFieldCell>
             )}
-          </form.Field>
-        </div>
-        <form.Subscribe
-          selector={(state) => [state.canSubmit, state.isSubmitting]}
-        >
-          {([canSubmit, isSubmitting]) => (
-            <>
-              <button disabled={!canSubmit} type="submit">
-                {isSubmitting ? '...' : 'Submit'}
-              </button>
-              <button type="reset" onClick={() => form.reset()}>
-                Reset
-              </button>
-            </>
-          )}
-        </form.Subscribe>
-      </form>
-    </div>
+          </Field>
+          <Field name="lastName">
+            {({ name, state, handleBlur, handleChange }) => (
+              <IFieldCell
+                title="姓氏"
+                {...iTanstackFieldCellAdapter(state.meta)}
+              >
+                <IInput
+                  id={name}
+                  name={name}
+                  value={state.value}
+                  variant="bordered"
+                  onBlur={handleBlur}
+                  onChange={({ target }) => handleChange(target.value)}
+                />
+              </IFieldCell>
+            )}
+          </Field>
+          <IFieldCell>
+            <Subscribe
+              selector={({ canSubmit, isSubmitting }) => ({
+                canSubmit,
+                isSubmitting,
+              })}
+            >
+              {({ canSubmit, isSubmitting }) => (
+                <IFlex gap={'var(--gap-04)'} justify="flex-end">
+                  <IButton type="reset" onClick={() => reset()}>
+                    重置
+                  </IButton>
+                  <IButton
+                    disabled={!canSubmit}
+                    isLoading={isSubmitting}
+                    type="submit"
+                  >
+                    提交
+                  </IButton>
+                </IFlex>
+              )}
+            </Subscribe>
+          </IFieldCell>
+        </IFormWrap>
+      </ISuspense>
+    </ICard>
   );
-}
+};
+
+export default configure(App);

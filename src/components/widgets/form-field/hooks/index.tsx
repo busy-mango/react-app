@@ -6,13 +6,19 @@ import type { IFieldCellContextVal } from '../models';
 
 const IFieldCellContext = createContext<IFieldCellContextVal>(null!);
 
-export const useIFieldCellContext = (): IFieldCellContextVal | undefined => {
-  return useContext(IFieldCellContext) ?? undefined;
-};
+export const useIFieldCellContext = (): IFieldCellContextVal | undefined =>
+  useContext(IFieldCellContext) ?? undefined;
 
 export const IFieldProvider: ReactCFC<IFieldCellContextVal> = (props) => {
-  const { forceRenderTitle, align, children, margin, size, colon, grid } =
-    props;
+  const {
+    grid,
+    size,
+    colon,
+    align,
+    margin,
+    children,
+    forceRenderTitle = false,
+  } = props;
 
   const {
     grid: _grid,
