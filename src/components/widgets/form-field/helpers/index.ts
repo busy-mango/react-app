@@ -1,34 +1,42 @@
-import { isNumber } from '@busymango/is-esm';
+import type { RequiredPick } from '@busymango/utils';
+import { compact } from '@busymango/utils';
 
-export type ICellGridModel = {
-  vertical?: boolean;
-  control?: number | string;
-  label?: number | string;
-  extra?: number | string;
-};
+import type { ICellGridModel, IFieldCellProps } from '../models';
+
+export type ICellGridParams = ICellGridModel &
+  RequiredPick<IFieldCellProps, 'columns' | 'span'>;
 
 export const iCellGrid = ({
+  span,
+  columns,
   vertical,
-  control = 8,
-  label = 2,
-  extra = 2,
-}: ICellGridModel = {}): Pick<
+  control = 3,
+  label = 1,
+  extra = 1,
+}: ICellGridParams): Pick<
   React.CSSProperties,
-  'gridTemplateRows' | 'gridTemplateColumns' | 'gridTemplateAreas'
+  'width' | 'gridTemplateRows' | 'gridTemplateColumns' | 'gridTemplateAreas'
 > => {
+  const iSpan = Math.min(span, columns);
+
+  const width = `calc(${iSpan}00% / ${columns})`;
+
+  const iControl = label * (iSpan - 1) + extra * (iSpan - 1) + control * iSpan;
+
+  const rows = compact([vertical && 'max-content', 'max-content']).join(' ');
+
+  const areas = vertical
+    ? ['"title extra"', '"control control"'].join('\n')
+    : '"title control extra"';
+
+  const cols = compact([label, !vertical && iControl, extra])
+    .map((num = 1) => `${num}fr`)
+    .join(' ');
+
   return {
-    gridTemplateAreas: vertical
-      ? ['"title extra"', '"control control"'].join('\n')
-      : '"title control extra"',
-    gridTemplateRows: vertical
-      ? ['max-content', 'max-content'].join(' ')
-      : 'max-content',
-    gridTemplateColumns: vertical
-      ? [label, extra]
-          .map((num = '1fr') => (isNumber(num) ? num + 'fr' : num))
-          .join(' ')
-      : [label, control, extra]
-          .map((num = '1fr') => (isNumber(num) ? num + 'fr' : num))
-          .join(' '),
+    width,
+    gridTemplateRows: rows,
+    gridTemplateAreas: areas,
+    gridTemplateColumns: cols,
   };
 };

@@ -39,6 +39,7 @@ export type ControlOption = {
 } & Pick<React.CSSProperties, 'color'>;
 
 export interface InteractionProps {
+  style?: React.CSSProperties;
   ref: (node: HTMLElement | SVGElement | null) => void;
   onBlur?(e: React.FocusEvent): void;
   onFocus?(e: React.FocusEvent): void;

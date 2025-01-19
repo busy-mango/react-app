@@ -8,7 +8,13 @@ import type {
   ControlUIStatus,
 } from '../../control';
 import type { IFlexProps } from '../../flex/models';
-import type { ICellGridModel } from '../helpers';
+
+export type ICellGridModel = {
+  vertical?: boolean;
+  control?: number;
+  label?: number;
+  extra?: number;
+};
 
 export interface IFieldCellProps
   extends OmitOf<ReactWrapProps, 'title' | 'children'> {
@@ -34,20 +40,29 @@ export interface IFieldCellProps
   status?: ControlUIStatus;
   /** 字段UI大小 */
   size?: ControlUISize;
-  /** 字段栅格布局 */
-  grid?: ICellGridModel;
   /** 字段额外空间 */
   extra?: React.ReactNode;
+  /** 字段跨越多少列 */
+  span?: number;
+  /** 字段所在布局的列数 */
+  columns?: number;
+  /** 字段栅格布局（控制Label、Control、Extra的占比） */
+  grid?: ICellGridModel;
 }
 
 export interface IFieldCellContextVal
   extends PartialPick<
     IFieldCellProps,
-    'grid' | 'size' | 'colon' | 'align' | 'margin' | 'forceRenderTitle'
+    | 'span'
+    | 'grid'
+    | 'size'
+    | 'colon'
+    | 'align'
+    | 'margin'
+    | 'columns'
+    | 'forceRenderTitle'
   > {}
 
 export interface IFieldStackProps extends IFlexProps {
-  cell?: IFieldCellContextVal;
-  /** 是否响应区域宽度以决定布局模式 */
-  responsive?: boolean;
+  cell?: IFieldCellContextVal | ((width?: number) => IFieldCellContextVal);
 }

@@ -1,8 +1,10 @@
+import { useDeferredValue, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { motion } from 'motion/react';
 
-import { isTrue } from '@busymango/is-esm';
+import { isFunction, isTrue } from '@busymango/is-esm';
 
+import { useResizeObserver } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { isReactChildren, isReactNode } from '@/utils';
 
@@ -20,17 +22,41 @@ export const IFieldStack: ReactCFC<IFieldStackProps> = ({
   children,
   className,
   ...others
-}) => (
-  <IFlex
-    vertical
-    wrap
-    className={classNames(styles.wrap, className)}
-    data-ui="field-stack"
-    {...others}
-  >
-    <IFieldProvider {...cell}>{children}</IFieldProvider>
-  </IFlex>
-);
+}) => {
+  const isResponsive = isFunction(cell);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [width, setWidth] = useState<number | undefined>(
+    ref.current?.getBoundingClientRect()?.width
+  );
+
+  const deferred = useDeferredValue(width);
+
+  useResizeObserver(
+    ref,
+    ({ contentRect }) => {
+      if (contentRect.width) {
+        setWidth(contentRect.width);
+      }
+    },
+    { enabled: isResponsive }
+  );
+
+  return (
+    <IFlex
+      ref={ref}
+      wrap
+      className={classNames(styles.stack, className)}
+      data-ui="field-stack"
+      {...others}
+    >
+      <IFieldProvider {...(isResponsive ? cell(deferred) : cell)}>
+        {children}
+      </IFieldProvider>
+    </IFlex>
+  );
+};
 
 export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
   const ctx = useIFieldCellContext();
@@ -38,6 +64,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
   const {
     title,
     extra,
+    style,
     address,
     feedback,
     required,
@@ -45,16 +72,20 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
     status = 'success',
     pattern = 'editable',
     grid = ctx?.grid,
+    span = ctx?.span ?? 1,
+    columns = ctx?.columns ?? 1,
     colon = ctx?.colon ?? ':',
     size = ctx?.size ?? 'medium',
     margin = ctx?.margin ?? true,
-    align = ctx?.align ?? 'flex-end',
+    align = ctx?.align ?? 'flex-start',
     forceRenderTitle = ctx?.forceRenderTitle,
     children,
     ...others
   } = props;
 
   const showTitle = forceRenderTitle || isReactNode(title);
+
+  const { width, ...grids } = iCellGrid({ span, columns, ...grid });
 
   return (
     <div
@@ -70,12 +101,13 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
       )}
       data-address={address}
       data-ui="field-cell"
+      style={{ width, ...style }}
       {...others}
     >
       <div
         className={classNames(styles.grid)}
         data-ui="field-cell-grid"
-        style={iCellGrid(grid)}
+        style={grids}
       >
         <motion.label
           className={styles.title}
@@ -115,4 +147,8 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
 };
 
 export { IFieldProvider } from './hooks';
-export type { IFieldCellProps, IFieldStackProps } from './models';
+export type {
+  IFieldCellContextVal,
+  IFieldCellProps,
+  IFieldStackProps,
+} from './models';

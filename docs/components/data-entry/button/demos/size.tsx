@@ -18,7 +18,7 @@ const App: React.FC = () => {
     <Variants sizeable>
       {({ size }) => (
         <Fragment>
-          <IFieldStack responsive>
+          <IFieldStack>
             <IFieldCell title="启用大按钮">
               <ISwitch checked={checked} onChange={iCheck} />
             </IFieldCell>
