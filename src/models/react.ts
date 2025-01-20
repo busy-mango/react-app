@@ -79,6 +79,19 @@ export interface ReactMotionProps
     LayoutProps,
     TapHandlers {}
 
+/** React img props */
+export type ReactImgProps<T extends HTMLElement = HTMLImageElement> = OmitOf<
+  React.ImgHTMLAttributes<T>,
+  | 'content'
+  | 'defaultValue'
+  | 'onChange'
+  | 'onSelect'
+  | 'onAnimationStart'
+  | 'onDragStart'
+  | 'onDragEnd'
+  | 'onDrag'
+>;
+
 /** React native button props */
 export type ReactButtonProps = OmitOf<
   React.ButtonHTMLAttributes<HTMLButtonElement>,

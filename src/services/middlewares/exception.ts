@@ -37,7 +37,7 @@ export const exception: DriveMiddleware = async (context, next) => {
   }
 
   if (!isTrue(ok)) {
-    console.info('Context:', context);
+    console.error('Context:', context);
     const msg = catchMsg(body) || t('fallback:network error');
     throw new FetchError(msg, { context });
   }

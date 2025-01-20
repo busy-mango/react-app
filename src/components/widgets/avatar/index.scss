@@ -1,0 +1,45 @@
+.img {
+  object-fit: cover;
+  text-align: center;
+  color: transparent; // Hide alt text.
+  text-indent: 10000; // Hide the image broken icon, only works on Chrome.
+}
+
+.img,
+.wrap {
+  flex-shrink: 0;
+  user-select: none;
+  background-color: var(--bg-color-widgets);
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 1;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.mini {
+  width: var(--control-size-06);
+  height: var(--control-size-06);
+}
+.medium {
+  width: var(--control-size-07);
+  height: var(--control-size-07);
+}
+.huge {
+  width: var(--control-size-08);
+  height: var(--control-size-08);
+}
+
+.circular {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: var(--border-radius-06);
+}
