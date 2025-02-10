@@ -28,6 +28,7 @@ const config: Configuration = {
   },
   experiments: {
     css: true,
+    incremental: false,
   },
   performance: {
     hints: false,

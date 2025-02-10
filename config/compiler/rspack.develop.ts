@@ -19,6 +19,9 @@ const create = (parms: { scan?: boolean } = {}): Configuration => ({
   optimization: {
     minimize: false,
   },
+  experiments: {
+    incremental: true,
+  },
   plugins: iPlugins('dev', parms),
   module: {
     rules: [AssetsRule, SassRule, SVGRule, TSDevRule],
